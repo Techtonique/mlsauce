@@ -23,7 +23,11 @@ Statistical/Machine learning using gradient descent optimization.
 Installation
 -------
 
-loren ipsum
+- Currently from Github:
+
+```bash
+pip install git+https://github.com/thierrymoudiki/adaopt.git
+```
 
 Package description
 -------
