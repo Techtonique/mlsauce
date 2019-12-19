@@ -29,11 +29,6 @@ Installation
 pip install git+https://github.com/thierrymoudiki/adaopt.git
 ```
 
-Package description
--------
-
-loren ipsum
-
 Quickstart
 -------
 
@@ -54,7 +49,7 @@ black --line-length=60 file_submitted_for_pr.py
 Tests
 -------
 
-Tests for ``'s features are located [here](adaopt/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
+Tests for `adaopt`'s features are located [here](adaopt/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
 
 - Install packages required for testing: 
 
