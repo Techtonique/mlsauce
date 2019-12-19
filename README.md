@@ -18,7 +18,7 @@ adaopt
      :target: https://pyup.io/repos/github/thierrymoudiki/adaopt/
      :alt: Updates
 
-Statistical/Machine learning using gradient descent optimization. 
+Statistical/Machine learning using gradient descent optimization and nearest neighbors. 
 
 Installation
 -------
@@ -49,7 +49,7 @@ black --line-length=60 file_submitted_for_pr.py
 Tests
 -------
 
-Tests for `adaopt`'s features are located [here](adaopt/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
+Tests for `adaopt`'s features are located [here](https://github.com/thierrymoudiki/adaopt/tree/master/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
 
 - Install packages required for testing: 
 
