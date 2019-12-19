@@ -1,6 +1,5 @@
-======
 adaopt
-======
+--------
 
 
 .. image:: https://img.shields.io/pypi/v/adaopt.svg
@@ -23,14 +22,56 @@ adaopt
 Statistical/Machine learning using gradients
 
 
-* Free software: BSD license
-* Documentation: https://adaopt.readthedocs.io.
+Tests
+-------
+
+Tests for ``'s features are located [here](adaopt/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
+
+- Install packages required for testing: 
+
+```bash
+pip install nose2
+pip install coverage
+```
+
+- Run tests and print coverage:
+
+```bash
+git clone https://github.com/thierrymoudiki/adaopt.git
+cd adaopt
+nose2 --with-coverage
+```
+
+- Obtain coverage reports:
+
+At the command line:
+
+```bash
+coverage report -m
+```
+
+or an html report:
+
+```bash
+coverage html
+```
 
 
-Features
---------
 
-* TODO
+Dependencies 
+-------
+
+- Numpy
+- Scipy
+- Cython
+
+
+License
+-------
+
+[BSD 3-Clause](LICENSE) © Thierry Moudiki, 2019. 
+
+
 
 Credits
 -------
