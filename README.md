@@ -1,6 +1,7 @@
 adaopt
 --------
 
+<hr>
 
 .. image:: https://img.shields.io/pypi/v/adaopt.svg
         :target: https://pypi.python.org/pypi/adaopt
@@ -17,10 +18,34 @@ adaopt
      :target: https://pyup.io/repos/github/thierrymoudiki/adaopt/
      :alt: Updates
 
+Statistical/Machine learning using gradient descent optimization. 
 
+Installation
+-------
 
-Statistical/Machine learning using gradients
+loren ipsum
 
+Package description
+-------
+
+loren ipsum
+
+Quickstart
+-------
+
+loren ipsum
+
+Contributing
+-------
+
+Your contributions are welcome, and valuable. Please, make sure to __read__ the [Code of Conduct](CONTRIBUTING.md) first.
+
+In Pull Requests, let's strive to use [`black`](https://black.readthedocs.io/en/stable/) for formatting: 
+
+```bash
+pip install black
+black --line-length=60 file_submitted_for_pr.py
+```
 
 Tests
 -------
