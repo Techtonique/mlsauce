@@ -1,3 +1,3 @@
-from .adaopt import AdaOpt 
+from .adaopt import AdaOpt
 
 __all__ = [AdaOpt]

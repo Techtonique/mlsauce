@@ -1,6 +1,8 @@
 mlsauce
 --------
 
+Statistical/Machine learning using gradient descent optimization. 
+
 ![teller logo](the-mlsauce.png)
 
 <hr>
@@ -20,7 +22,6 @@ mlsauce
      :target: https://pyup.io/repos/github/thierrymoudiki/mlsauce/
      :alt: Updates
 
-Statistical/Machine learning using gradient descent optimization. 
 
 Installation
 -------
