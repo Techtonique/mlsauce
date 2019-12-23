@@ -1,24 +1,24 @@
-adaopt
+mlsauce
 --------
 
 <hr>
 
-.. image:: https://img.shields.io/pypi/v/adaopt.svg
-        :target: https://pypi.python.org/pypi/adaopt
+.. image:: https://img.shields.io/pypi/v/mlsauce.svg
+        :target: https://pypi.python.org/pypi/mlsauce
 
-.. image:: https://img.shields.io/travis/thierrymoudiki/adaopt.svg
-        :target: https://travis-ci.org/thierrymoudiki/adaopt
+.. image:: https://img.shields.io/travis/thierrymoudiki/mlsauce.svg
+        :target: https://travis-ci.org/thierrymoudiki/mlsauce
 
-.. image:: https://readthedocs.org/projects/adaopt/badge/?version=latest
-        :target: https://adaopt.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/mlsauce/badge/?version=latest
+        :target: https://mlsauce.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 
-.. image:: https://pyup.io/repos/github/thierrymoudiki/adaopt/shield.svg
-     :target: https://pyup.io/repos/github/thierrymoudiki/adaopt/
+.. image:: https://pyup.io/repos/github/thierrymoudiki/mlsauce/shield.svg
+     :target: https://pyup.io/repos/github/thierrymoudiki/mlsauce/
      :alt: Updates
 
-Statistical/Machine learning using gradient descent optimization and nearest neighbors. 
+Statistical/Machine learning using gradient descent optimization. 
 
 Installation
 -------
@@ -26,7 +26,7 @@ Installation
 - Currently from Github:
 
 ```bash
-pip install git+https://github.com/thierrymoudiki/adaopt.git
+pip install git+https://github.com/thierrymoudiki/mlsauce.git
 ```
 
 Quickstart
@@ -43,13 +43,13 @@ In Pull Requests, let's strive to use [`black`](https://black.readthedocs.io/en/
 
 ```bash
 pip install black
-black --line-length=60 file_submitted_for_pr.py
+black --line-length=80 file_submitted_for_pr.py
 ```
 
 Tests
 -------
 
-Tests for `adaopt`'s features are located [here](https://github.com/thierrymoudiki/adaopt/tree/master/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
+Tests for `mlsauce`'s features are located [here](https://github.com/thierrymoudiki/mlsauce/tree/master/tests). In order to run them and obtain tests' coverage (using [`nose2`](https://nose2.readthedocs.io/en/latest/)), do: 
 
 - Install packages required for testing: 
 
@@ -61,8 +61,8 @@ pip install coverage
 - Run tests and print coverage:
 
 ```bash
-git clone https://github.com/thierrymoudiki/adaopt.git
-cd adaopt
+git clone https://github.com/thierrymoudiki/mlsauce.git
+cd mlsauce
 nose2 --with-coverage
 ```
 

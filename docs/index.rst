@@ -1,4 +1,4 @@
-Welcome to adaopt's documentation!
+Welcome to mlsauce's documentation!
 ======================================
 
 .. toctree::

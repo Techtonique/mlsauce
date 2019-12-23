@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use adaopt in a project::
+To use mlsauce in a project::
 
-    import adaopt
+    import mlsauce

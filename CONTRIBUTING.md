@@ -1,4 +1,4 @@
-# `adaopt` Code of Conduct
+# `mlsauce` Code of Conduct
 
 ## 1. Purpose
 

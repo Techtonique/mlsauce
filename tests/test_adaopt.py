@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-"""Tests for `adaopt` package."""
+"""Tests for `mlsauce` package."""
 
 
 import unittest
 
-from adaopt import adaopt
+from mlsauce import mlsauce
 
 
-class TestAdaopt(unittest.TestCase):
-    """Tests for `adaopt` package."""
+class Testmlsauce(unittest.TestCase):
+    """Tests for `mlsauce` package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""
