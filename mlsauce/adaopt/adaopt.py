@@ -1,8 +1,11 @@
 import numpy as np
 from ..utils import adaopt as ao
+from sklearn.base import BaseEstimator
+from sklearn.base import ClassifierMixin
 
 
-class AdaOpt:
+class AdaOpt(BaseEstimator, ClassifierMixin):
+    
     def __init__(
         self,
         n_iterations=50,
@@ -34,6 +37,7 @@ class AdaOpt:
         self.type_dist = type_dist
         self.seed = seed
 
+
     def fit(self, X, y, **kwargs):
 
         n, p = X.shape
@@ -64,6 +68,7 @@ class AdaOpt:
 
         return self
 
+
     def predict(self, X, type_dist="euclidean", **kwargs):
         """Predict test data X.
         
@@ -82,8 +87,10 @@ class AdaOpt:
         """
 
         return np.argmax(
-            self.predict_proba(X, type_dist=self.type_dist, **kwargs), axis=1
+            self.predict_proba(X, type_dist=self.type_dist, 
+                               **kwargs), axis=1
         )
+
 
     def predict_proba(self, X, **kwargs):
         """Predict probabilities for test data X.

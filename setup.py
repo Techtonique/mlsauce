@@ -10,7 +10,8 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [ ]
+requirements = ["numpy >= 1.13.0", "scipy >= 0.19.0", 
+                "scikit-learn >= 0.18.0"]
 
 setup_requirements = [ ]
 
@@ -33,7 +34,7 @@ setup(
     ],
     description="Statistical/Machine Learning",
     install_requires=requirements,
-    license="BSD license",
+    license="BSD3 Clear license",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='mlsauce',
