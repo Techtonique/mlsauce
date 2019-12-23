@@ -1,6 +1,8 @@
 mlsauce
 --------
 
+![teller logo](the-mlsauce.png)
+
 <hr>
 
 .. image:: https://img.shields.io/pypi/v/mlsauce.svg
