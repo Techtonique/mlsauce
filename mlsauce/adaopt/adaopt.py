@@ -97,6 +97,9 @@ class AdaOpt():
         probability estimates for test data: {array-like}        
         """    
         
+        assert type_dist in ("euclidean", "euclidean-f", "cosine"),\
+        "must have: `type_dist` in ('euclidean', 'euclidean-f', 'cosine') "
+        
         n_train = self.scaled_X_train.shape[0]
         
         n_test = X.shape[0]
