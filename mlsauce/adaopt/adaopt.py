@@ -15,7 +15,9 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         eta=0.01,
         gamma=0.01,
         k=3,
-        tolerance=1e-3,
+        tolerance=0,
+        n_clusters=0,
+        batch_size=100,
         type_dist="euclidean",
         seed=123,
     ):
@@ -34,6 +36,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.gamma = gamma
         self.k = k
         self.tolerance = tolerance
+        self.n_clusters = n_clusters
+        self.batch_size = batch_size
         self.type_dist = type_dist
         self.seed = seed
 
@@ -69,7 +73,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         return self
 
 
-    def predict(self, X, type_dist="euclidean", **kwargs):
+    def predict(self, X, **kwargs):
         """Predict test data X.
         
         Parameters
@@ -86,10 +90,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         model predictions: {array-like}
         """
 
-        return np.argmax(
-            self.predict_proba(X, type_dist=self.type_dist, 
-                               **kwargs), axis=1
-        )
+        return np.argmax(self.predict_proba(X, **kwargs), 
+                         axis=1)
 
 
     def predict_proba(self, X, **kwargs):
@@ -112,13 +114,12 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_train = self.scaled_X_train.shape[0]
 
         n_test = X.shape[0]
-
-        return ao.predict_proba(
-            X_test=X,
-            scaled_X_train=self.scaled_X_train,
-            n_test=n_test,
-            n_train=n_train,
-            probs_train=self.probs_training,
-            k=self.k,
-            type_dist=self.type_dist,
-        )
+        
+        return ao.predict_proba(X_test=X, 
+                                scaled_X_train=self.scaled_X_train,
+                                n_test=n_test, n_train=n_train,
+                                probs_train=self.probs_training,
+                                k=self.k, n_clusters=self.n_clusters,
+                                batch_size=self.batch_size, 
+                                type_dist=self.type_dist, 
+                                seed=self.seed)
