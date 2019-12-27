@@ -92,7 +92,8 @@ obj = ms.AdaOpt(n_iterations=50,
            reg_alpha=0.5,
            eta=0.01,
            gamma=0.01, 
-           tolerance=1e-4)
+           tolerance=1e-4,
+           k=1)
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
