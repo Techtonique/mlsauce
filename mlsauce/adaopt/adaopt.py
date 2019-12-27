@@ -19,6 +19,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_clusters=0,
         batch_size=100,
         type_dist="euclidean",
+        cache=True,
         seed=123,
     ):
 
@@ -39,6 +40,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.n_clusters = n_clusters
         self.batch_size = batch_size
         self.type_dist = type_dist
+        self.cache = cache
         self.seed = seed
 
 
@@ -122,4 +124,5 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
                                 k=self.k, n_clusters=self.n_clusters,
                                 batch_size=self.batch_size, 
                                 type_dist=self.type_dist, 
+                                cache=self.cache,
                                 seed=self.seed)
