@@ -1,7 +1,7 @@
 mlsauce
 --------
 
-Statistical/Machine learning using gradient descent optimization. 
+Miscellaneous Statistical/Machine learning stuff.  
 
 ![teller logo](the-mlsauce.png)
 
