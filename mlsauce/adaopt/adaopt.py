@@ -1,7 +1,10 @@
 import numpy as np
-from ..utils import adaopt as ao
+import pickle
+from .adaoptc import fit_adaopt, predict_adaopt, predict_proba_adaopt
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
+from ..utils import subsample
+
 
 
 class AdaOpt(BaseEstimator, ClassifierMixin):
@@ -18,7 +21,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         tolerance=0,
         n_clusters=0,
         batch_size=100,
-        type_dist="euclidean",
+        row_sample=0.8, 
+        type_dist="euclidean-f",
         cache=True,
         seed=123,
     ):
@@ -39,21 +43,32 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.tolerance = tolerance
         self.n_clusters = n_clusters
         self.batch_size = batch_size
+        self.row_sample = row_sample        
         self.type_dist = type_dist
         self.cache = cache
         self.seed = seed
 
 
     def fit(self, X, y, **kwargs):
+        
+        if self.row_sample < 1:
+            index_subsample = subsample(y, row_sample=self.row_sample, 
+                                       seed=self.seed)
+            y_ = y[index_subsample]
+            X_ = X[index_subsample, :]
+        else:
+            y_ = pickle.loads(pickle.dumps(y, -1))
+            X_ = pickle.loads(pickle.dumps(X, -1))
+        
+        n, p = X_.shape
+            
+        n_classes = len(np.unique(y_))
 
-        n, p = X.shape
-        n_classes = len(np.unique(y))
+        assert n == len(y_), "must have X.shape[0] == len(y)"
 
-        assert n == len(y), "must have X.shape[0] == len(y)"
-
-        res = ao.fit(
-            X=X,
-            y=y,
+        res = fit_adaopt(
+            X=X_,
+            y=y_,
             n_iterations=self.n_iterations,
             n_X=n,
             p_X=p,
@@ -117,7 +132,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         n_test = X.shape[0]
         
-        return ao.predict_proba(X_test=X, 
+        return predict_proba_adaopt(X_test=X, 
                                 scaled_X_train=self.scaled_X_train,
                                 n_test=n_test, n_train=n_train,
                                 probs_train=self.probs_training,
