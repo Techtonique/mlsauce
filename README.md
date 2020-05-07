@@ -7,21 +7,6 @@ Statistical/Machine learning using gradient descent optimization.
 
 <hr>
 
-.. image:: https://img.shields.io/pypi/v/mlsauce.svg
-        :target: https://pypi.python.org/pypi/mlsauce
-
-.. image:: https://img.shields.io/travis/thierrymoudiki/mlsauce.svg
-        :target: https://travis-ci.org/thierrymoudiki/mlsauce
-
-.. image:: https://readthedocs.org/projects/mlsauce/badge/?version=latest
-        :target: https://mlsauce.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-
-.. image:: https://pyup.io/repos/github/thierrymoudiki/mlsauce/shield.svg
-     :target: https://pyup.io/repos/github/thierrymoudiki/mlsauce/
-     :alt: Updates
-
 
 Installation
 -------
