@@ -16,7 +16,7 @@ ext_modules = []
 
 if use_cython:
     
-    ext_modules += [Extension("adaopt.adaoptc", 
+    ext_modules += [Extension("mlsauce.adaopt.adaoptc", 
                 ["adaoptc.pyx"],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
@@ -25,7 +25,7 @@ if use_cython:
     
 else:
     
-    ext_modules += [Extension("adaopt.adaoptc", 
+    ext_modules += [Extension("mlsauce.adaopt.adaoptc", 
                 ["adaoptc.pyx"],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
