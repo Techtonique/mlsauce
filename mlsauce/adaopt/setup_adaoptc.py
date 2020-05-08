@@ -1,20 +1,37 @@
+import numpy
 from distutils.core import setup
 from distutils.extension import Extension
-from Cython.Distutils import build_ext
 
-import numpy
+try:
+    from Cython.Distutils import build_ext
+except ImportError:
+    use_cython = False
+else:
+    use_cython = True
 
-ext = Extension("adaoptc", 
+
+cmdclass = {}
+ext_modules = []
+
+
+if use_cython:
+    
+    ext_modules += [Extension("adaopt.adaoptc", 
                 ["adaoptc.pyx"],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
-                include_dirs=[numpy.get_include()])
+                include_dirs=[numpy.get_include()])]
+    cmdclass.update({'build_ext': build_ext})
+    
+else:
+    
+    ext_modules += [Extension("adaopt.adaoptc", 
+                ["adaoptc.pyx"],
+                libraries=["m"],
+                extra_compile_args=["-ffast-math"],
+                include_dirs=[numpy.get_include()])]
 
-setup(ext_modules=[ext],
-      cmdclass = {'build_ext': build_ext})
-
-#from distutils.core import setup
-#from Cython.Build import cythonize
-#
-#setup(name="adaopt", 
-#      ext_modules=cythonize("adaopt.pyx"))
+    
+setup(names="adaoptc",
+      cmdclass=cmdclass,
+      ext_modules=ext_modules)
