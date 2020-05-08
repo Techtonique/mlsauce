@@ -5,7 +5,7 @@ from Cython.Distutils import build_ext
 import numpy
 
 ext = Extension("adaoptc", 
-                ["adaopt.pyx"],
+                ["adaoptc.pyx"],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
                 include_dirs=[numpy.get_include()])
