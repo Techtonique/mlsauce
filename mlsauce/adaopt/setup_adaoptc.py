@@ -16,7 +16,7 @@ ext_modules = []
 
 if use_cython:
     
-    ext_modules += [Extension("mlsauce.adaopt.adaoptc", 
+    ext_modules += [Extension("adaoptc", 
                 ["adaoptc.pyx"],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
@@ -25,13 +25,13 @@ if use_cython:
     
 else:
     
-    ext_modules += [Extension("mlsauce.adaopt.adaoptc", 
-                ["adaoptc.pyx"],
+    ext_modules += [Extension("adaoptc", 
+                ["adaoptc.c"],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
                 include_dirs=[numpy.get_include()])]
 
     
-setup(names="adaoptc",
+setup(names="mlsauce",
       cmdclass=cmdclass,
       ext_modules=ext_modules)
