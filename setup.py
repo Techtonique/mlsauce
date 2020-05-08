@@ -9,7 +9,6 @@ USE_CYTHON = True
 
 from distutils.extension import Extension
 from setuptools import setup, find_packages
-from distutils.core import setup as setup_cython
 
 # cython
 
@@ -56,9 +55,6 @@ else:
                 extra_compile_args=["-ffast-math"]),
     ]
 
-setup_cython(names="adaoptc",
-      cmdclass=cmdclass,
-      ext_modules=ext_modules)
 
 setup(
     author="T. Moudiki",
