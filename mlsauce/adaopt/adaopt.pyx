@@ -142,17 +142,9 @@ cdef mydoubletuple calculate_diff_proba(long int n_obs,
     
         w_new_ = max_c(w_new[misclass_index], 
                        2.220446049250313e-16) 
-        
-#        print("w_new_")
-#        print(w_new_)
-#        print("\n")
-    
+            
         w_prev_ = w_prev[misclass_index]   
-        
-#        print("w_prev_")
-#        print(w_prev_)
-#        print("\n")
-        
+                
         v_new = (w_new_ - w_prev_)
                                                           
         return mydoubletuple(-(v_prev*gamma - v_new)/eta, v_new)                                                     
