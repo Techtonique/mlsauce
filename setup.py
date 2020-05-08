@@ -7,7 +7,6 @@
 # from the C file.
 USE_CYTHON = True
 
-import numpy
 from distutils.extension import Extension
 from setuptools import setup, find_packages
 from distutils.core import setup as setup_cython
@@ -47,16 +46,14 @@ if USE_CYTHON:
     ext_modules += [
         Extension("mlsauce.adaopt.adaoptc", [ "adaopt/adaoptc.pyx" ],
                 libraries=["m"],
-                extra_compile_args=["-ffast-math"],
-                include_dirs=[numpy.get_include()]),
+                extra_compile_args=["-ffast-math"]),
     ]
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
         Extension("mlsauce.adaopt.adaoptc", [ "adaopt/adaoptc.c" ],
                 libraries=["m"],
-                extra_compile_args=["-ffast-math"],
-                include_dirs=[numpy.get_include()]),
+                extra_compile_args=["-ffast-math"]),
     ]
 
 setup_cython(names="adaoptc",
