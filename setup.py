@@ -7,7 +7,6 @@
 # from the C file.
 USE_CYTHON = True
 
-import sys
 from distutils.extension import Extension
 from setuptools import setup, find_packages
 
