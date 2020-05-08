@@ -19,8 +19,9 @@ with open('README.md') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
     
-requirements = ["numpy >= 1.13.0", "scipy >= 0.19.0", 
-                "scikit-learn >= 0.18.0", "Cython >= 0.29.13"]
+requirements = ["Cython >= 0.29.13", 
+                "numpy >= 1.13.0", "scipy >= 0.19.0", 
+                "scikit-learn >= 0.18.0"]
 
 setup_requirements = [ ]
 
@@ -46,14 +47,16 @@ if USE_CYTHON:
     ext_modules += [
         Extension("mlsauce.adaopt.adaoptc", [ "adaopt/adaoptc.pyx" ],
                 libraries=["m"],
-                extra_compile_args=["-ffast-math"]),
+                extra_compile_args=["-ffast-math"],
+                include_dirs=[numpy.get_include()]),
     ]
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
         Extension("mlsauce.adaopt.adaoptc", [ "adaopt/adaoptc.c" ],
                 libraries=["m"],
-                extra_compile_args=["-ffast-math"]),
+                extra_compile_args=["-ffast-math"],
+                include_dirs=[numpy.get_include()]),
     ]
 
 
