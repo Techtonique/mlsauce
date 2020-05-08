@@ -1,11 +1,16 @@
 mlsauce
 --------
 
-Miscellaneous Statistical/Machine learning stuff.  
+
 
 ![teller logo](the-mlsauce.png)
 
 <hr>
+
+Miscellaneous Statistical/Machine learning stuff.  
+
+![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/thierrymoudiki/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce)
+[![Documentation Status](https://readthedocs.org/projects/mlsauce/badge/?version=latest)](https://mlsauce.readthedocs.io/en/latest/?badge=latest)
 
 
 Installation
