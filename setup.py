@@ -45,7 +45,7 @@ ext_modules = [ ]
 
 if USE_CYTHON:
     ext_modules += [
-        Extension("mlsauce.adaopt.adaoptc", [ "adaopt/adaoptc.pyx" ],
+        Extension("adaoptc", [ "adaopt/adaoptc.pyx" ],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
                 include_dirs=[numpy.get_include()]),
@@ -53,7 +53,7 @@ if USE_CYTHON:
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
-        Extension("mlsauce.adaopt.adaoptc", [ "adaopt/adaoptc.c" ],
+        Extension("adaoptc", [ "adaopt/adaoptc.c" ],
                 libraries=["m"],
                 extra_compile_args=["-ffast-math"],
                 include_dirs=[numpy.get_include()]),
