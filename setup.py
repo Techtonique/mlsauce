@@ -12,8 +12,6 @@ from distutils.extension import Extension
 from setuptools import setup, find_packages
 from distutils.core import setup as setup_cython
 
-
-
 # cython
 
 with open('README.md') as readme_file:
