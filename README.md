@@ -19,7 +19,7 @@ Installation
 - From Pypi (stable):
 
 ```bash
-pip install git+https://github.com/thierrymoudiki/mlsauce.git
+pip install mlsauce
 ```
 
 - From Github (development):
