@@ -8,7 +8,7 @@
 
 import functools
 import numpy as np
-#cimport numpy as np
+cimport numpy as np
 cimport cython
 import gc
 
