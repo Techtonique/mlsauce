@@ -23,7 +23,7 @@ test_requirements = [ ]
 
 
 extensions = [
-    Extension(name="adaoptc", 
+    Extension(name="mlsauce.adaopt_cython.adaoptc", 
               sources=[ "mlsauce/adaopt_cython/adaoptc.c" ],
               include_dirs = [numpy.get_include()],
               libraries=["m"],
