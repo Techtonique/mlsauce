@@ -32,6 +32,6 @@ else:
                 include_dirs=[numpy.get_include()])]
 
     
-setup(names="mlsauce",
+setup(name="adaoptc",
       cmdclass=cmdclass,
       ext_modules=ext_modules)
