@@ -4,6 +4,9 @@ __author__ = """T. Moudiki"""
 __email__ = "thierry.moudiki@gmail.com"
 __version__ = "__version__ = '0.2.2'"
 
+
+from .adaopt_cython import fit_adaopt, predict_proba_adaopt
 from .adaopt.adaopt import AdaOpt
 
-__all__ = ["AdaOpt"]
+
+__all__ = ["AdaOpt", "fit_adaopt", "predict_proba_adaopt"]

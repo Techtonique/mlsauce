@@ -1,9 +1,9 @@
 import numpy as np
 import pickle
-from .adaoptc import fit_adaopt, predict_proba_adaopt
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from ..utils import subsample
+from ..adaopt_cython import fit_adaopt, predict_proba_adaopt
 
 
 
