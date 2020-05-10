@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
-#import numpy
-from setuptools import setup, find_packages
+import numpy
+from setuptools import dist, setup, find_packages
 from setuptools.extension import Extension
+
+
+dist.Distribution().fetch_build_eggs(["Cython >= 0.29.13", "numpy >= 1.13.0"])
 
 
 with open('README.md') as readme_file:
@@ -25,7 +28,7 @@ test_requirements = [ ]
 extensions = [
     Extension(name="mlsauce.adaopt_cython.adaoptc", 
               sources=[ "mlsauce/adaopt_cython/adaoptc.c" ],
-#              include_dirs = [numpy.get_include()],
+              include_dirs = [numpy.get_include()],
               libraries=["m"],
               extra_compile_args=["-ffast-math"]),
 ]
