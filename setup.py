@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-import numpy
 from setuptools import dist, setup, find_packages
-from setuptools.extension import Extension
-
 
 dist.Distribution().fetch_build_eggs(["Cython >= 0.29.13", "numpy >= 1.13.0"])
+
+import numpy
+from setuptools.extension import Extension
+
 
 
 with open('README.md') as readme_file:
