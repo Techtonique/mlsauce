@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import numpy
+#import numpy
 from setuptools import setup, find_packages
 from setuptools.extension import Extension
 
@@ -25,7 +25,7 @@ test_requirements = [ ]
 extensions = [
     Extension(name="mlsauce.adaopt_cython.adaoptc", 
               sources=[ "mlsauce/adaopt_cython/adaoptc.c" ],
-              include_dirs = [numpy.get_include()],
+#              include_dirs = [numpy.get_include()],
               libraries=["m"],
               extra_compile_args=["-ffast-math"]),
 ]
