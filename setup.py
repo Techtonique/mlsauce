@@ -14,7 +14,7 @@ with open('HISTORY.rst') as history_file:
     
 requirements = ["Cython >= 0.29.13", 
                 "numpy >= 1.13.0", "scipy >= 0.19.0", 
-                "scikit-learn >= 0.18.0"]
+                "scikit-learn >= 0.18.0", "tqdm>=4.46.0"]
 
 
 setup_requirements = [ ]
