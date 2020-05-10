@@ -1,0 +1,21 @@
+Metadata-Version: 1.2
+Name: mlsauce
+Version: 0.2.3
+Summary: Miscellaneous Statistical/Machine Learning tools
+Home-page: https://github.com/thierrymoudiki/mlsauce
+Author: T. Moudiki
+Author-email: thierry.moudiki@gmail.com
+License: BSD3 Clear license
+Description: Miscellaneous Statistical/Machine Learning stuff
+Keywords: mlsauce
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.5

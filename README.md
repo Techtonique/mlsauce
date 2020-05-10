@@ -16,7 +16,13 @@ Miscellaneous Statistical/Machine learning stuff.
 Installation
 -------
 
-- Currently from Github:
+- From Pypi (stable):
+
+```bash
+pip install git+https://github.com/thierrymoudiki/mlsauce.git
+```
+
+- From Github (development):
 
 ```bash
 pip install git+https://github.com/thierrymoudiki/mlsauce.git
