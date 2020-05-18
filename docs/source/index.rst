@@ -26,7 +26,6 @@ This package contains miscellaneous Statistical/Machine Learning tools.
    :maxdepth: 2
    :caption: Contents:
 
-   readme
    installation   
    usage
    apidocumentation
