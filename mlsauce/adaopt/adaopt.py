@@ -125,8 +125,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         assert n == len(y_), "must have X.shape[0] == len(y)"
 
         res = fit_adaopt(
-            X=X_,
-            y=y_,
+            X=np.asarray(X_),
+            y=np.asarray(y_),
             n_iterations=self.n_iterations,
             n_X=n,
             p_X=p,
@@ -190,8 +190,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         n_test = X.shape[0]
         
-        return predict_proba_adaopt(X_test=X, 
-                                scaled_X_train=self.scaled_X_train,
+        return predict_proba_adaopt(X_test=np.asarray(X, order='C'), 
+                                scaled_X_train=np.asarray(self.scaled_X_train, order='C'),
                                 n_test=n_test, n_train=n_train,
                                 probs_train=self.probs_training,
                                 k=self.k, n_clusters=self.n_clusters,
