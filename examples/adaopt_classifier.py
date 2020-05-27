@@ -7,7 +7,7 @@ from os import chdir
 from sklearn import metrics
 
 
-wd="/Users/moudiki/Documents/Python_Packages/mlsauce"
+wd="/workspace/mlsauce/mlsauce/examples"
 
 chdir(wd)
 
