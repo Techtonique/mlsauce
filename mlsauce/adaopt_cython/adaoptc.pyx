@@ -12,6 +12,7 @@ cimport numpy as np
 cimport cython
 import gc
 
+from cython.parallel cimport prange
 from libc.math cimport log, exp, sqrt
 from numpy.linalg import lstsq
 from numpy.linalg import norm
@@ -208,7 +209,7 @@ def outer_sum_dot(A, B):
     return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*np.dot(A, B.T)
     
 
-cdef double norm_c(double[:] x, long int n):
+cdef double norm_c(double[:] x, long int n) nogil:
     
     cdef double res = 0
     
@@ -220,7 +221,7 @@ cdef double norm_c(double[:] x, long int n):
 
 cdef double euclidean_distance_c(double[:] x, 
                                  double[:] y,  
-                                 long int n):
+                                 long int n) nogil:
     
     cdef double res = 0
     
@@ -232,7 +233,7 @@ cdef double euclidean_distance_c(double[:] x,
 
 cdef double cosine_similarity_c(double[:] x, 
                                 double[:] y,  
-                                long int n):
+                                long int n) nogil:
     
     cdef double dotprod = 0
     
@@ -244,8 +245,8 @@ cdef double cosine_similarity_c(double[:] x,
 
 # distance of vector to matrix rows
 # keep numpy arrays x, B    
-cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x, nparray_double[:,:] B, 
-                    method="euclidean"):
+cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x, 
+                   nparray_double[:,:] B):
     
     cdef long int i
     cdef long int n_B = B.shape[0]
@@ -253,7 +254,7 @@ cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x, nparray_do
     cdef nparray_double[:] res = np.zeros(n_B)
     
     # calculates euclidean_distance
-    for i in range(n_B):
+    for i in prange(n_B, nogil=True):
 
         res[i] = euclidean_distance_c(x, B[i, :], p_B)
                                 
@@ -262,8 +263,8 @@ cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x, nparray_do
 
 # distance of vector to matrix rows
 # keep numpy arrays x, B    
-cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x, nparray_double[:,:] B, 
-                    method="euclidean"):
+cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x, 
+                   nparray_double[:,:] B):
     
     cdef long int i
     cdef long int n_B = B.shape[0]
@@ -271,7 +272,7 @@ cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x, nparray_doubl
     cdef nparray_double[:] res = np.zeros(n_B)
     
     # cosine_similarity vector x matrix
-    for i in range(n_B):
+    for i in range(n_B, nogil=True):
 
         res[i] = cosine_similarity_c(x, B[i, :], p_B)        
                             
@@ -283,7 +284,7 @@ cdef long int find_elt_list(double elt,
                             double[:] x, 
                             long int n_x):
     
-    cdef int j = 0
+    cdef long int j = 0
     
     for j in range(n_x):
         
@@ -576,8 +577,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
             for i in range(n_test):        
 
                 dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:], 
-                                               scaled_X_train, 
-                                               method=type_dist)        
+                                               scaled_X_train)        
 
                 kmin_test_i = find_kmin_x(dists_test_i, 
                                           n_x=n_train, 
@@ -607,8 +607,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
             for i in range(n_test):        
 
                 dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
-                                               scaled_X_train, 
-                                               method=type_dist)        
+                                               scaled_X_train)        
 
                 kmin_test_i = find_kmin_x(dists_test_i, 
                                           n_x=n_train, 
@@ -705,8 +704,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
         for i in range(n_test):        
 
             dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:], 
-                                           scaled_X_train, 
-                                           method=type_dist)        
+                                           scaled_X_train)        
 
             kmin_test_i = find_kmin_x(dists_test_i, 
                                       n_x=n_train, 
@@ -736,8 +734,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
         for i in range(n_test):        
 
             dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
-                                           scaled_X_train, 
-                                           method=type_dist)        
+                                           scaled_X_train)        
 
             kmin_test_i = find_kmin_x(dists_test_i, 
                                       n_x=n_train, 

@@ -19,7 +19,8 @@ if use_cython:
     ext_modules += [Extension("adaoptc", 
                 ["adaoptc.pyx"],
                 libraries=["m"],
-                extra_compile_args=["-ffast-math"],
+                extra_compile_args=["-ffast-math", "-fopenmp"],
+                extra_link_args=["-fopenmp"],
                 include_dirs=[numpy.get_include()])]
     cmdclass.update({'build_ext': build_ext})
     
@@ -28,7 +29,8 @@ else:
     ext_modules += [Extension("adaoptc", 
                 ["adaoptc.c"],
                 libraries=["m"],
-                extra_compile_args=["-ffast-math"],
+                extra_compile_args=["-ffast-math", "-fopenmp"],
+                extra_link_args=["-fopenmp"],
                 include_dirs=[numpy.get_include()])]
 
     
