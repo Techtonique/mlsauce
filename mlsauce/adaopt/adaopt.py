@@ -70,9 +70,10 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         assert type_dist in (
             "euclidean",
+            "manhattan",
             "euclidean-f",
             "cosine",
-        ), "must have: `type_dist` in ('euclidean', 'euclidean-f', 'cosine') "
+        ), "must have: `type_dist` in ('euclidean', 'manhattan', 'euclidean-f', 'cosine') "
 
         self.n_iterations = n_iterations
         self.learning_rate = learning_rate

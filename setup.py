@@ -31,7 +31,8 @@ extensions = [
               sources=[ "mlsauce/adaopt_cython/adaoptc.c" ],
               include_dirs = [numpy.get_include()],
               libraries=["m"],
-              extra_compile_args=["-ffast-math"]),
+              extra_compile_args=["-ffast-math", "-fopenmp"], 
+              extra_link_args=["-fopenmp"]),
 ]
 
 
