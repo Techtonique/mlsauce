@@ -11,3 +11,9 @@ History
 2. Version 0.2.0 (2020-05-08)
 
 * First release on PyPI.
+
+
+3. Version 0.3.0 (2020-05-31)
+
+* Include cython parallel processing Pt.1
+* Include manhattan distance
