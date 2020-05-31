@@ -286,7 +286,7 @@ cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x,
     cdef nparray_double[:] res = np.zeros(n_B)
     
 
-    for i in range(n_B, nogil=True):
+    for i in prange(n_B, nogil=True):
 
         res[i] = cosine_similarity_c(x, B[i, :], p_B)        
                             
@@ -304,7 +304,7 @@ cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x,
     cdef nparray_double[:] res = np.zeros(n_B)
     
 
-    for i in range(n_B, nogil=True):
+    for i in prange(n_B, nogil=True):
 
         res[i] = manhattan_distance_c(x, B[i, :], p_B)        
                             
