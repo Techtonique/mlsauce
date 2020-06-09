@@ -1,4 +1,4 @@
 from .adaopt import AdaOpt
 
-__all__ = [AdaOpt]
+__all__ = ["AdaOpt"]
 

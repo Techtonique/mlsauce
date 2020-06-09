@@ -27,7 +27,6 @@ This package contains miscellaneous Statistical/Machine Learning tools.
    :caption: Contents:
 
    installation   
-   usage
    apidocumentation
    modules
    contributing   

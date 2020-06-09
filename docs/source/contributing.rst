@@ -1,7 +1,7 @@
 
-============
+================================================
 Contributors code of conduct (on GitHub)
-============
+================================================
 
 
 1. Purpose
@@ -74,7 +74,7 @@ thierry.moudiki  AT  gmail.com
 
 8. License and attribution
 
-Portions of text derived from the **Citizen Code of Conduct**(http://citizencodeofconduct.org/).
+Portions of text derived from the Citizen Code of Conduct (http://citizencodeofconduct.org/).
 
 
 
