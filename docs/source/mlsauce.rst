@@ -7,8 +7,6 @@ Subpackages
 .. toctree::
 
    mlsauce.adaopt
-   mlsauce.adaopt_cython
-   mlsauce.utils
 
 Module contents
 ---------------
