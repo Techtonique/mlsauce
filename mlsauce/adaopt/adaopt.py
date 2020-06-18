@@ -43,6 +43,10 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
          distance used for finding the nearest neighbors; currently `euclidean-f`
          (euclidean distances calculated as whole), `euclidean` (euclidean distances 
          calculated row by row), `cosine` (cosine distance).
+     n_jobs: int
+         number of cpus for parallel processing (default: None)
+     verbose: int
+         progress bar for parallel processing (yes = 1) or not (no = 0)
      cache: boolean
          if the nearest neighbors are cached or not, for faster retrieval in 
          subsequent calls.
@@ -65,7 +69,9 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         batch_size=100,
         row_sample=0.8, 
         type_dist="euclidean-f",
-        cache=True,
+        n_jobs=None,
+        verbose=0,        
+        cache=True,        
         seed=123,
     ):
 
@@ -88,7 +94,9 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.batch_size = batch_size
         self.row_sample = row_sample        
         self.type_dist = type_dist
+        self.n_jobs = n_jobs,
         self.cache = cache
+        self.verbose = verbose
         self.seed = seed
 
 
@@ -199,5 +207,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
                                 k=self.k, n_clusters=self.n_clusters,
                                 batch_size=self.batch_size, 
                                 type_dist=self.type_dist, 
+                                n_jobs=self.n_jobs,
+                                verbose=self.verbose,
                                 cache=self.cache,
                                 seed=self.seed)

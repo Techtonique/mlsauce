@@ -20,6 +20,9 @@ from scipy.special import expit
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
+from multiprocessing import Pool
+from tqdm import tqdm
+
 from ..utils import subsample
 
 
@@ -541,6 +544,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
                   int batch_size = 100,
                   type_dist="euclidean",    
                   n_jobs=None,
+                  verbose=0,
                   cache=True):
     
     cdef int n_classes = probs_train.shape[1]        
@@ -726,7 +730,88 @@ def predict_proba_adaopt(double[:,::1] X_test,
             gc.collect()
 
             return np.asarray(out_probs_)
+    
+    # if n_jobs is not None
+
+    # main loops -----
+    
+    pool = Pool(processes=n_jobs) 
+
+    if type_dist == "euclidean":
         
+        def multiproc_func(i):
+            
+            dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:], 
+                                           scaled_X_train)        
+
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache) 
+
+            weights_test_i = calculate_weights(kmin_test_i[0])
+
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_)  
+
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
+
+            return avg_probs_i
+                                      
+
+    if type_dist == "cosine":
+        
+        def multiproc_func(i):
+            
+            dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
+                                           scaled_X_train)        
+
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache) 
+
+            weights_test_i = calculate_weights(kmin_test_i[0])
+
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_)  
+
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
+
+            return avg_probs_i
+                        
+
+    if type_dist == "manhattan":
+        
+        def multiproc_func(i):
+            
+            dists_test_i = distance_to_mat_manhattan(scaled_X_test[i,:], 
+                                           scaled_X_train)        
+
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache) 
+
+            weights_test_i = calculate_weights(kmin_test_i[0])
+
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_)  
+
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
+
+            return avg_probs_i
+                        
+    if verbose == 1:
+        out_probs = np.asarray(pool.map(multiproc_func, tqdm(range(n_test))))        
+    else:
+        out_probs = np.asarray(pool.map(multiproc_func, range(n_test)))        
+
+    out_probs_ = expit(out_probs)    
+    out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
+    
+    return np.asarray(out_probs_)
+   
     
 def predict_adaopt(double[:,::1] X_test, 
             double[:,::1] scaled_X_train,
