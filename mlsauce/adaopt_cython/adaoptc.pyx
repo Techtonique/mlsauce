@@ -280,6 +280,24 @@ cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x,
 
 # distance of vector to matrix rows
 # keep numpy arrays x, B    
+cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x, 
+                   nparray_double[:,:] B):
+    
+    cdef long int i
+    cdef long int n_B = B.shape[0]
+    cdef long int p_B = B.shape[1]
+    cdef nparray_double[:] res = np.zeros(n_B)
+    
+
+    for i in prange(n_B, nogil=True):
+
+        res[i] = manhattan_distance_c(x, B[i, :], p_B)
+                                
+    return np.asarray(res)
+
+
+# distance of vector to matrix rows
+# keep numpy arrays x, B    
 cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x, 
                    nparray_double[:,:] B):
     
@@ -298,21 +316,18 @@ cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x,
 
 # distance of vector to matrix rows
 # keep numpy arrays x, B    
-cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x, 
-                   nparray_double[:,:] B):
+cdef double[:] distance_to_mat_manhattan2(nparray_double[:] x, 
+                   nparray_double[:,:] B, double[:] res, 
+                   long int n_B, long int p_B) nogil:
     
     cdef long int i
-    cdef long int n_B = B.shape[0]
-    cdef long int p_B = B.shape[1]
-    cdef nparray_double[:] res = np.zeros(n_B)
-    
 
     for i in prange(n_B, nogil=True):
 
-        res[i] = manhattan_distance_c(x, B[i, :], p_B)        
+        res[i] = manhattan_distance_c(x, B[i, :], p_B)
                             
-    return np.asarray(res)
-    
+    return res
+        
     
 # find elt in list 
 cdef long int find_elt_list(double elt, 
@@ -543,7 +558,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
                   int n_clusters, int seed,                   
                   int batch_size = 100,
                   type_dist="euclidean",    
-                  n_jobs=None,
+                  n_jobs=0,
                   verbose=0,
                   cache=True):
     
@@ -574,7 +589,7 @@ def predict_proba_adaopt(double[:,::1] X_test,
     
     # probabilities on training set -----
     
-    if n_jobs is None: 
+    if n_jobs <= 0: 
     
         if n_clusters <= 0: 
 
@@ -732,85 +747,28 @@ def predict_proba_adaopt(double[:,::1] X_test,
             return np.asarray(out_probs_)
     
     # if n_jobs is not None
-
-    # main loops -----
     
-    pool = Pool(processes=n_jobs) 
-
     if type_dist == "euclidean":
+    
+        for i in range(n_test):    # parallel, return dists    
         
-        def multiproc_func(i):
-            
             dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:], 
                                            scaled_X_train)        
-
-            kmin_test_i = find_kmin_x(dists_test_i, 
-                                      n_x=n_train, 
-                                      k=k, cache=cache) 
-
-            weights_test_i = calculate_weights(kmin_test_i[0])
-
-            probs_test_i = calculate_probs(kmin_test_i[1], 
-                                           probs_train_)  
-
-            avg_probs_i = average_probs(probs=probs_test_i, 
-                                        weights=weights_test_i)
-
-            return avg_probs_i
-                                      
-
-    if type_dist == "cosine":
+    
+    if type_dist == "cosine":   # parallel, return dists
+    
+        for i in range(n_test):        
         
-        def multiproc_func(i):
-            
             dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
                                            scaled_X_train)        
-
-            kmin_test_i = find_kmin_x(dists_test_i, 
-                                      n_x=n_train, 
-                                      k=k, cache=cache) 
-
-            weights_test_i = calculate_weights(kmin_test_i[0])
-
-            probs_test_i = calculate_probs(kmin_test_i[1], 
-                                           probs_train_)  
-
-            avg_probs_i = average_probs(probs=probs_test_i, 
-                                        weights=weights_test_i)
-
-            return avg_probs_i
-                        
-
-    if type_dist == "manhattan":
+    
+    if type_dist == "manhattan":   # parallel, return dists
+    
+        for i in range(n_test):        
         
-        def multiproc_func(i):
-            
             dists_test_i = distance_to_mat_manhattan(scaled_X_test[i,:], 
                                            scaled_X_train)        
 
-            kmin_test_i = find_kmin_x(dists_test_i, 
-                                      n_x=n_train, 
-                                      k=k, cache=cache) 
-
-            weights_test_i = calculate_weights(kmin_test_i[0])
-
-            probs_test_i = calculate_probs(kmin_test_i[1], 
-                                           probs_train_)  
-
-            avg_probs_i = average_probs(probs=probs_test_i, 
-                                        weights=weights_test_i)
-
-            return avg_probs_i
-                        
-    if verbose == 1:
-        out_probs = np.asarray(pool.map(multiproc_func, tqdm(range(n_test))))        
-    else:
-        out_probs = np.asarray(pool.map(multiproc_func, range(n_test)))        
-
-    out_probs_ = expit(out_probs)    
-    out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
-    
-    return np.asarray(out_probs_)
    
     
 def predict_adaopt(double[:,::1] X_test, 
@@ -820,7 +778,8 @@ def predict_adaopt(double[:,::1] X_test,
             int n_clusters, int seed,                   
             int batch_size = 100,
             type_dist="euclidean",
-            n_jobs=-1,
+            n_jobs=0,
+            verbose=0,
             cache=True):            
     
     return np.asarray(predict_proba_adaopt(X_test, scaled_X_train,
@@ -828,5 +787,6 @@ def predict_adaopt(double[:,::1] X_test,
                                     probs_train, k, 
                                     n_clusters, seed,
                                     batch_size, type_dist,
-                                    n_jobs,
+                                    n_jobs, verbose,
                                     cache)).argmax(axis=1)
+    

@@ -69,7 +69,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         batch_size=100,
         row_sample=0.8, 
         type_dist="euclidean-f",
-        n_jobs=None,
+        n_jobs=0,
         verbose=0,        
         cache=True,        
         seed=123,
@@ -94,7 +94,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.batch_size = batch_size
         self.row_sample = row_sample        
         self.type_dist = type_dist
-        self.n_jobs = n_jobs,
+        self.n_jobs = n_jobs
         self.cache = cache
         self.verbose = verbose
         self.seed = seed
