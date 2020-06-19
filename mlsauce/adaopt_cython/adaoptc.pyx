@@ -20,6 +20,9 @@ from scipy.special import expit
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
+from multiprocessing import Pool
+from tqdm import tqdm
+
 from ..utils import subsample
 
 
@@ -277,6 +280,24 @@ cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x,
 
 # distance of vector to matrix rows
 # keep numpy arrays x, B    
+cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x, 
+                   nparray_double[:,:] B):
+    
+    cdef long int i
+    cdef long int n_B = B.shape[0]
+    cdef long int p_B = B.shape[1]
+    cdef nparray_double[:] res = np.zeros(n_B)
+    
+
+    for i in prange(n_B, nogil=True):
+
+        res[i] = manhattan_distance_c(x, B[i, :], p_B)
+                                
+    return np.asarray(res)
+
+
+# distance of vector to matrix rows
+# keep numpy arrays x, B    
 cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x, 
                    nparray_double[:,:] B):
     
@@ -295,21 +316,48 @@ cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x,
 
 # distance of vector to matrix rows
 # keep numpy arrays x, B    
-cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x, 
-                   nparray_double[:,:] B):
+def distance_to_mat_euclidean2(nparray_double[:] x, 
+                   nparray_double[:,:] B, double[:] res, 
+                   long int n_B, long int p_B):
     
     cdef long int i
-    cdef long int n_B = B.shape[0]
-    cdef long int p_B = B.shape[1]
-    cdef nparray_double[:] res = np.zeros(n_B)
-    
 
-    for i in prange(n_B, nogil=True):
+    for i in range(n_B):
 
-        res[i] = manhattan_distance_c(x, B[i, :], p_B)        
+        res[i] = euclidean_distance_c(x, B[i, :], p_B)
                             
-    return np.asarray(res)
+    return res
+
+
+# distance of vector to matrix rows
+# keep numpy arrays x, B    
+def distance_to_mat_manhattan2(nparray_double[:] x, 
+                   nparray_double[:,:] B, double[:] res, 
+                   long int n_B, long int p_B):
     
+    cdef long int i
+
+    for i in range(n_B):
+
+        res[i] = manhattan_distance_c(x, B[i, :], p_B)
+                            
+    return res
+        
+
+# distance of vector to matrix rows
+# keep numpy arrays x, B    
+def distance_to_mat_cosine2(nparray_double[:] x, 
+                   nparray_double[:,:] B, double[:] res, 
+                   long int n_B, long int p_B):
+    
+    cdef long int i
+
+    for i in range(n_B):
+
+        res[i] = cosine_similarity_c(x, B[i, :], p_B)
+                            
+    return res
+
     
 # find elt in list 
 cdef long int find_elt_list(double elt, 
@@ -540,7 +588,6 @@ def predict_proba_adaopt(double[:,::1] X_test,
                   int n_clusters, int seed,                   
                   int batch_size = 100,
                   type_dist="euclidean",    
-                  n_jobs=None,
                   cache=True):
     
     cdef int n_classes = probs_train.shape[1]        
@@ -570,163 +617,161 @@ def predict_proba_adaopt(double[:,::1] X_test,
     
     # probabilities on training set -----
     
-    if n_jobs is None: 
-    
-        if n_clusters <= 0: 
+    if n_clusters <= 0: 
 
-            # whole training set 
-            probs_train_ = probs_train
+        # whole training set 
+        probs_train_ = probs_train
 
-        else: 
+    else: 
 
-            # clustered training set 
-            probs_train_ = np.zeros((n_clusters, n_classes), 
-                                     dtype=np.double)
+        # clustered training set 
+        probs_train_ = np.zeros((n_clusters, n_classes), 
+                                 dtype=np.double)
 
-            kmeans = MiniBatchKMeans(n_clusters=n_clusters,
-                                     batch_size=batch_size, 
-                                     random_state=seed).fit(scaled_X_train)
+        kmeans = MiniBatchKMeans(n_clusters=n_clusters,
+                                 batch_size=batch_size, 
+                                 random_state=seed).fit(scaled_X_train)
 
-            scaled_X_train = kmeans.cluster_centers_                        
+        scaled_X_train = kmeans.cluster_centers_                        
 
-            for m in range(n_clusters):
+        for m in range(n_clusters):
 
-                index_train = np.where(kmeans.labels_ == m)[0]
+            index_train = np.where(kmeans.labels_ == m)[0]
 
-                avg_probs = np.average(calculate_probs(index_train, 
-                                                       probs_train), 
-                                       axis=0)
+            avg_probs = np.average(calculate_probs(index_train, 
+                                                   probs_train), 
+                                   axis=0)
 
-                for j in range(n_classes):
+            for j in range(n_classes):
 
-                    probs_train_[m, j] = avg_probs[j]            
+                probs_train_[m, j] = avg_probs[j]            
 
 
-        # main loops -----
+    # main loops -----
 
-        if type_dist == "euclidean":
+    if type_dist == "euclidean":
 
-            for i in range(n_test):        
+        for i in range(n_test):        
 
-                dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:], 
-                                               scaled_X_train)        
+            dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:], 
+                                           scaled_X_train)        
 
-                kmin_test_i = find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=k, cache=cache) 
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache) 
 
-                weights_test_i = calculate_weights(kmin_test_i[0])
+            weights_test_i = calculate_weights(kmin_test_i[0])
 
-                probs_test_i = calculate_probs(kmin_test_i[1], 
-                                               probs_train_)  
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_)  
 
-                avg_probs_i = average_probs(probs=probs_test_i, 
-                                            weights=weights_test_i)
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
 
-                for j in range(n_classes):
+            for j in range(n_classes):
 
-                    out_probs[i, j] = avg_probs_i[j]
+                out_probs[i, j] = avg_probs_i[j]
 
-            out_probs_ = expit(out_probs)  
+        out_probs_ = expit(out_probs)  
 
-            out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
+        out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
 
-            return np.asarray(out_probs_)
+        return np.asarray(out_probs_)
 
 
-        if type_dist == "cosine":
+    if type_dist == "cosine":
 
-            for i in range(n_test):        
+        for i in range(n_test):        
 
-                dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
-                                               scaled_X_train)        
+            dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
+                                           scaled_X_train)        
 
-                kmin_test_i = find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=k, cache=cache) 
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache) 
 
-                weights_test_i = calculate_weights(kmin_test_i[0])
+            weights_test_i = calculate_weights(kmin_test_i[0])
 
-                probs_test_i = calculate_probs(kmin_test_i[1], 
-                                               probs_train_)  
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_)  
 
-                avg_probs_i = average_probs(probs=probs_test_i, 
-                                            weights=weights_test_i)
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
 
-                for j in range(n_classes):
+            for j in range(n_classes):
 
-                    out_probs[i, j] = avg_probs_i[j]
+                out_probs[i, j] = avg_probs_i[j]
 
-            out_probs_ = expit(out_probs)  
+        out_probs_ = expit(out_probs)  
 
-            out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
+        out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
 
-            return np.asarray(out_probs_)
+        return np.asarray(out_probs_)
 
 
-        if type_dist == "manhattan":
+    if type_dist == "manhattan":
 
-            for i in range(n_test):        
+        for i in range(n_test):        
 
-                dists_test_i = distance_to_mat_manhattan(scaled_X_test[i,:], 
-                                               scaled_X_train)        
+            dists_test_i = distance_to_mat_manhattan(scaled_X_test[i,:], 
+                                           scaled_X_train)        
 
-                kmin_test_i = find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=k, cache=cache) 
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache) 
 
-                weights_test_i = calculate_weights(kmin_test_i[0])
+            weights_test_i = calculate_weights(kmin_test_i[0])
 
-                probs_test_i = calculate_probs(kmin_test_i[1], 
-                                               probs_train_)  
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_)  
 
-                avg_probs_i = average_probs(probs=probs_test_i, 
-                                            weights=weights_test_i)
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
 
-                for j in range(n_classes):
+            for j in range(n_classes):
 
-                    out_probs[i, j] = avg_probs_i[j]
+                out_probs[i, j] = avg_probs_i[j]
 
-            out_probs_ = expit(out_probs)  
+        out_probs_ = expit(out_probs)  
 
-            out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
+        out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
 
-            return np.asarray(out_probs_)
+        return np.asarray(out_probs_)
 
 
-        if type_dist == "euclidean-f":                
+    if type_dist == "euclidean-f":                
 
-            dist_mat = outer_sum_dot(np.asarray(scaled_X_test), 
-                                     np.asarray(scaled_X_train))        
+        dist_mat = outer_sum_dot(np.asarray(scaled_X_test), 
+                                 np.asarray(scaled_X_train))        
 
-            for i in range(n_test):        
+        for i in range(n_test):        
 
-                dists_test_i = dist_mat[i, :]
+            dists_test_i = dist_mat[i, :]
 
-                kmin_test_i = find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=k, cache=cache)    
+            kmin_test_i = find_kmin_x(dists_test_i, 
+                                      n_x=n_train, 
+                                      k=k, cache=cache)    
 
-                weights_test_i = calculate_weights(kmin_test_i[0])
+            weights_test_i = calculate_weights(kmin_test_i[0])
 
-                probs_test_i = calculate_probs(kmin_test_i[1], 
-                                               probs_train_) 
+            probs_test_i = calculate_probs(kmin_test_i[1], 
+                                           probs_train_) 
 
-                avg_probs_i = average_probs(probs=probs_test_i, 
-                                            weights=weights_test_i)
+            avg_probs_i = average_probs(probs=probs_test_i, 
+                                        weights=weights_test_i)
 
-                for j in range(n_classes):
+            for j in range(n_classes):
 
-                    out_probs[i, j] = avg_probs_i[j]
+                out_probs[i, j] = avg_probs_i[j]
 
-            out_probs_ = expit(out_probs)    
-            out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
+        out_probs_ = expit(out_probs)    
+        out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
 
-            del dist_mat
-            gc.collect()
+        del dist_mat
+        gc.collect()
 
-            return np.asarray(out_probs_)
-        
+        return np.asarray(out_probs_)    
+   
     
 def predict_adaopt(double[:,::1] X_test, 
             double[:,::1] scaled_X_train,
@@ -735,7 +780,6 @@ def predict_adaopt(double[:,::1] X_test,
             int n_clusters, int seed,                   
             int batch_size = 100,
             type_dist="euclidean",
-            n_jobs=-1,
             cache=True):            
     
     return np.asarray(predict_proba_adaopt(X_test, scaled_X_train,
@@ -743,5 +787,5 @@ def predict_adaopt(double[:,::1] X_test,
                                     probs_train, k, 
                                     n_clusters, seed,
                                     batch_size, type_dist,
-                                    n_jobs,
                                     cache)).argmax(axis=1)
+    

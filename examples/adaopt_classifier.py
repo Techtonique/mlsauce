@@ -7,9 +7,9 @@ from os import chdir
 from sklearn import metrics
 
 
-wd="/workspace/mlsauce/mlsauce/examples"
-
-chdir(wd)
+#wd="/workspace/mlsauce/mlsauce/examples"
+#
+#chdir(wd)
 
 import mlsauce as ms
 
@@ -25,7 +25,8 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-obj = ms.AdaOpt()
+obj = ms.AdaOpt(n_jobs=4, type_dist="euclidean", verbose=1)
+#obj = ms.AdaOpt()
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -85,7 +86,8 @@ obj = ms.AdaOpt(n_iterations=50,
            gamma=0.01, 
            tolerance=1e-4,
            row_sample=1, 
-           k=1)
+           k=1, 
+           n_jobs=3, type_dist="euclidean", verbose=1)
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)

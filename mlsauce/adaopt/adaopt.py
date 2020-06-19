@@ -1,10 +1,18 @@
 import numpy as np
 import pickle
+from joblib.externals.loky import set_loky_pickler
+from joblib import parallel_backend
+from joblib import Parallel, delayed
+from joblib import wrap_non_picklable_objects
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
+from scipy.special import expit
+from numpy.linalg import norm
+from tqdm import tqdm
 from ..utils import subsample
 from ..adaopt_cython import fit_adaopt, predict_proba_adaopt
-
+from ..adaopt_cython import find_kmin_x, calculate_weights, calculate_probs, average_probs, \
+distance_to_mat_euclidean2, distance_to_mat_manhattan2, distance_to_mat_cosine2
 
 
 class AdaOpt(BaseEstimator, ClassifierMixin):
@@ -43,6 +51,10 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
          distance used for finding the nearest neighbors; currently `euclidean-f`
          (euclidean distances calculated as whole), `euclidean` (euclidean distances 
          calculated row by row), `cosine` (cosine distance).
+     n_jobs: int
+         number of cpus for parallel processing (default: None)
+     verbose: int
+         progress bar for parallel processing (yes = 1) or not (no = 0)
      cache: boolean
          if the nearest neighbors are cached or not, for faster retrieval in 
          subsequent calls.
@@ -65,7 +77,9 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         batch_size=100,
         row_sample=0.8, 
         type_dist="euclidean-f",
-        cache=True,
+        n_jobs=None,
+        verbose=0,        
+        cache=True,        
         seed=123,
     ):
 
@@ -88,7 +102,9 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.batch_size = batch_size
         self.row_sample = row_sample        
         self.type_dist = type_dist
+        self.n_jobs = n_jobs
         self.cache = cache
+        self.verbose = verbose
         self.seed = seed
 
 
@@ -188,16 +204,115 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         probability estimates for test data: {array-like}        
         """
 
-        n_train = self.scaled_X_train.shape[0]
-
+        n_train, p_train = self.scaled_X_train.shape
         n_test = X.shape[0]
         
-        return predict_proba_adaopt(X_test=np.asarray(X, order='C'), 
-                                scaled_X_train=np.asarray(self.scaled_X_train, order='C'),
-                                n_test=n_test, n_train=n_train,
-                                probs_train=self.probs_training,
-                                k=self.k, n_clusters=self.n_clusters,
-                                batch_size=self.batch_size, 
-                                type_dist=self.type_dist, 
-                                cache=self.cache,
-                                seed=self.seed)
+        if self.n_jobs is None:
+        
+            return predict_proba_adaopt(X_test=np.asarray(X, order='C'), 
+                                    scaled_X_train=np.asarray(self.scaled_X_train, order='C'),
+                                    n_test=n_test, n_train=n_train,
+                                    probs_train=self.probs_training,
+                                    k=self.k, n_clusters=self.n_clusters,
+                                    batch_size=self.batch_size, 
+                                    type_dist=self.type_dist, 
+                                    cache=self.cache,
+                                    seed=self.seed)
+       
+        # parallel: self.n_jobs is not None
+        assert self.type_dist in (
+            "euclidean",
+            "manhattan",
+            "cosine",
+        ), "must have: `self.type_dist` in ('euclidean', 'manhattan', 'cosine') "
+                
+        scaled_X_test = X/norm(X, ord=2, axis=1)[:, None]
+        
+        if self.type_dist == "euclidean": 
+
+            @delayed
+            @wrap_non_picklable_objects            
+            def multiproc_func(i):
+    
+                dists_test_i = distance_to_mat_euclidean2(np.asarray(scaled_X_test, order='C')[i,:], 
+                                                          np.asarray(self.scaled_X_train, order='C'),
+                                                          np.zeros(n_train),
+                                                          n_train,
+                                                          p_train)        
+    
+                kmin_test_i = find_kmin_x(dists_test_i, 
+                                          n_x=n_train, 
+                                          k=self.k, 
+                                          cache=self.cache) 
+    
+                weights_test_i = calculate_weights(kmin_test_i[0])
+    
+                probs_test_i = calculate_probs(kmin_test_i[1], 
+                                               self.probs_training)  
+    
+                return average_probs(probs=probs_test_i, 
+                                     weights=weights_test_i)
+        
+        if self.type_dist == "manhattan": 
+            
+            @delayed
+            @wrap_non_picklable_objects
+            def multiproc_func(i):
+    
+                dists_test_i = distance_to_mat_manhattan2(np.asarray(scaled_X_test, order='C')[i,:], 
+                                                          np.asarray(self.scaled_X_train, order='C'),
+                                                          np.zeros(n_train),
+                                                          n_train,
+                                                          p_train)        
+    
+                kmin_test_i = find_kmin_x(dists_test_i, 
+                                          n_x=n_train, 
+                                          k=self.k, 
+                                          cache=self.cache) 
+    
+                weights_test_i = calculate_weights(kmin_test_i[0])
+    
+                probs_test_i = calculate_probs(kmin_test_i[1], 
+                                               self.probs_training)  
+    
+                return average_probs(probs=probs_test_i, 
+                                     weights=weights_test_i)
+
+        if self.type_dist == "cosine": 
+            
+            @delayed
+            @wrap_non_picklable_objects
+            def multiproc_func(i, *args):
+    
+                dists_test_i = distance_to_mat_cosine2(np.asarray(scaled_X_test, order='C')[i,:], 
+                                                       np.asarray(self.scaled_X_train, order='C'),
+                                                       np.zeros(n_train),
+                                                       n_train,
+                                                       p_train)        
+    
+                kmin_test_i = find_kmin_x(dists_test_i, 
+                                          n_x=n_train, 
+                                          k=self.k, 
+                                          cache=self.cache) 
+    
+                weights_test_i = calculate_weights(kmin_test_i[0])
+    
+                probs_test_i = calculate_probs(kmin_test_i[1], 
+                                               self.probs_training)  
+    
+                return average_probs(probs=probs_test_i, 
+                                     weights=weights_test_i)
+
+        if self.verbose == 1:    
+            
+            res = Parallel(n_jobs=self.n_jobs, prefer="threads")(
+                    (multiproc_func)(m) for m in tqdm(range(n_test)))   
+        
+        else: 
+            
+            res = Parallel(n_jobs=self.n_jobs, prefer="threads")(
+                    (multiproc_func)(m) for m in range(n_test))   
+        
+            
+        return np.asarray(res)
+         
