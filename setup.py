@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2007-2009 Cournapeau David <cournape@gmail.com>
 #               2010 Fabian Pedregosa <fabian.pedregosa@inria.fr>
-#               
+#               2020 T. Moudiki <thierry.moudiki@gmail.com>
 # License: 3-clause BSD
 
 import sys
@@ -39,7 +39,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-VERSION = mlsauce.__version__
+VERSION = '0.3.0'
 
 if platform.python_implementation() == 'PyPy':
     SCIPY_MIN_VERSION = '1.1.0'
