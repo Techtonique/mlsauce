@@ -17,7 +17,7 @@ ext_modules = []
 if use_cython:
     
     ext_modules += [Extension("stumpc", 
-                ["stump.pyx"],
+                ["stumpc.pyx"],
                 libraries=["m"],
                 #extra_compile_args=["-ffast-math", "-fopenmp"],
                 #extra_link_args=["-fopenmp"],
