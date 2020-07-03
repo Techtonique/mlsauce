@@ -831,7 +831,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "stump.pyx",
+  "stumpc.pyx",
   "__init__.pxd",
   "stringsource",
   "type.pxd",
@@ -1201,7 +1201,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_t_6stumpc_mydoubletuple;
 
-/* "stump.pyx":35
+/* "stumpc.pyx":35
  * 
  * # a tuple of doubles
  * cdef struct mydoubletuple:             # <<<<<<<<<<<<<<
@@ -2330,7 +2330,6 @@ static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_raw_probs[] = "raw_probs";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_res_class[] = "res_class";
-static const char __pyx_k_stump_pyx[] = "stump.pyx";
 static const char __pyx_k_temp_prob[] = "temp_prob";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
@@ -2341,6 +2340,7 @@ static const char __pyx_k_error_rate[] = "error_rate";
 static const char __pyx_k_itemgetter[] = "itemgetter";
 static const char __pyx_k_pyx_result[] = "__pyx_result";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static const char __pyx_k_stumpc_pyx[] = "stumpc.pyx";
 static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
@@ -2561,8 +2561,8 @@ static PyObject *__pyx_kp_s_strided_and_direct_or_indirect;
 static PyObject *__pyx_kp_s_strided_and_indirect;
 static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_struct;
-static PyObject *__pyx_kp_s_stump_pyx;
 static PyObject *__pyx_n_s_stumpc;
+static PyObject *__pyx_kp_s_stumpc_pyx;
 static PyObject *__pyx_n_s_sum;
 static PyObject *__pyx_n_s_temp_prob;
 static PyObject *__pyx_n_s_test;
@@ -2682,7 +2682,7 @@ static PyObject *__pyx_codeobj__36;
 static PyObject *__pyx_codeobj__43;
 /* Late includes */
 
-/* "stump.pyx":52
+/* "stumpc.pyx":52
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -2773,7 +2773,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
   Py_ssize_t __pyx_t_13;
   __Pyx_RefNannySetupContext("one_hot_encode", 0);
 
-  /* "stump.pyx":56
+  /* "stumpc.pyx":56
  * 
  *     cdef long int i
  *     cdef long int n_obs = len(y)             # <<<<<<<<<<<<<<
@@ -2783,7 +2783,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_y); 
   __pyx_v_n_obs = __pyx_t_1;
 
-  /* "stump.pyx":57
+  /* "stumpc.pyx":57
  *     cdef long int i
  *     cdef long int n_obs = len(y)
  *     cdef double[:,::1] res = np.zeros((n_obs, n_classes))             # <<<<<<<<<<<<<<
@@ -2829,7 +2829,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "stump.pyx":59
+  /* "stumpc.pyx":59
  *     cdef double[:,::1] res = np.zeros((n_obs, n_classes))
  * 
  *     for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -2841,7 +2841,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "stump.pyx":60
+    /* "stumpc.pyx":60
  * 
  *     for i in range(n_obs):
  *         res[i, y[i]] = 1             # <<<<<<<<<<<<<<
@@ -2854,7 +2854,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
     *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_res.data + __pyx_t_12 * __pyx_v_res.strides[0]) )) + __pyx_t_13)) )) = 1.0;
   }
 
-  /* "stump.pyx":62
+  /* "stumpc.pyx":62
  *         res[i, y[i]] = 1
  * 
  *     return np.asarray(res)             # <<<<<<<<<<<<<<
@@ -2889,7 +2889,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "stump.pyx":52
+  /* "stumpc.pyx":52
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -2915,7 +2915,7 @@ static PyObject *__pyx_pf_6stumpc_one_hot_encode(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "stump.pyx":69
+/* "stumpc.pyx":69
  * 
  * 
  * def fit_stump_classifier(double[:,::1] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -3075,7 +3075,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   int __pyx_t_28;
   __Pyx_RefNannySetupContext("fit_stump_classifier", 0);
 
-  /* "stump.pyx":89
+  /* "stumpc.pyx":89
  * 
  * 
  *   n = X.shape[0]             # <<<<<<<<<<<<<<
@@ -3084,7 +3084,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_n = (__pyx_v_X.shape[0]);
 
-  /* "stump.pyx":90
+  /* "stumpc.pyx":90
  * 
  *   n = X.shape[0]
  *   p = X.shape[1]             # <<<<<<<<<<<<<<
@@ -3093,7 +3093,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_p = (__pyx_v_X.shape[1]);
 
-  /* "stump.pyx":91
+  /* "stumpc.pyx":91
  *   n = X.shape[0]
  *   p = X.shape[1]
  *   n_classes = len(np.unique(y))             # <<<<<<<<<<<<<<
@@ -3127,7 +3127,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_n_classes = __pyx_t_5;
 
-  /* "stump.pyx":92
+  /* "stumpc.pyx":92
  *   p = X.shape[1]
  *   n_classes = len(np.unique(y))
  *   res_class = {}             # <<<<<<<<<<<<<<
@@ -3139,7 +3139,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __pyx_v_res_class = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "stump.pyx":93
+  /* "stumpc.pyx":93
  *   n_classes = len(np.unique(y))
  *   res_class = {}
  *   error_rate = 10000.0             # <<<<<<<<<<<<<<
@@ -3148,7 +3148,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_error_rate = 10000.0;
 
-  /* "stump.pyx":94
+  /* "stumpc.pyx":94
  *   res_class = {}
  *   error_rate = 10000.0
  *   error_rate_cur = 10000.0             # <<<<<<<<<<<<<<
@@ -3157,7 +3157,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_error_rate_cur = 10000.0;
 
-  /* "stump.pyx":95
+  /* "stumpc.pyx":95
  *   error_rate = 10000.0
  *   error_rate_cur = 10000.0
  *   best_cutpoint = 0.0             # <<<<<<<<<<<<<<
@@ -3166,7 +3166,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_best_cutpoint = 0.0;
 
-  /* "stump.pyx":96
+  /* "stumpc.pyx":96
  *   error_rate_cur = 10000.0
  *   best_cutpoint = 0.0
  *   i = 0             # <<<<<<<<<<<<<<
@@ -3175,7 +3175,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_i = 0;
 
-  /* "stump.pyx":97
+  /* "stumpc.pyx":97
  *   best_cutpoint = 0.0
  *   i = 0
  *   j = 0             # <<<<<<<<<<<<<<
@@ -3184,7 +3184,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_j = 0;
 
-  /* "stump.pyx":98
+  /* "stumpc.pyx":98
  *   i = 0
  *   j = 0
  *   k = 0             # <<<<<<<<<<<<<<
@@ -3193,7 +3193,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   __pyx_v_k = 0;
 
-  /* "stump.pyx":100
+  /* "stumpc.pyx":100
  *   k = 0
  * 
  *   X_ = np.asarray(X).T.tolist()             # <<<<<<<<<<<<<<
@@ -3247,7 +3247,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __pyx_v_X_ = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "stump.pyx":102
+  /* "stumpc.pyx":102
  *   X_ = np.asarray(X).T.tolist()
  * 
  *   if n_classes <= 2:             # <<<<<<<<<<<<<<
@@ -3257,7 +3257,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __pyx_t_7 = ((__pyx_v_n_classes <= 2) != 0);
   if (__pyx_t_7) {
 
-    /* "stump.pyx":104
+    /* "stumpc.pyx":104
  *   if n_classes <= 2:
  * 
  *     for j in range(p):             # <<<<<<<<<<<<<<
@@ -3269,7 +3269,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
     for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
       __pyx_v_j = __pyx_t_10;
 
-      /* "stump.pyx":106
+      /* "stumpc.pyx":106
  *     for j in range(p):
  * 
  *       X_j = np.asarray(X_[j])             # <<<<<<<<<<<<<<
@@ -3302,7 +3302,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       __Pyx_XDECREF_SET(__pyx_v_X_j, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "stump.pyx":108
+      /* "stumpc.pyx":108
  *       X_j = np.asarray(X_[j])
  * 
  *       cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)             # <<<<<<<<<<<<<<
@@ -3334,7 +3334,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       __pyx_t_11.memview = NULL;
       __pyx_t_11.data = NULL;
 
-      /* "stump.pyx":109
+      /* "stumpc.pyx":109
  * 
  *       cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
  *       n_cutpoints = len(cutpoints)             # <<<<<<<<<<<<<<
@@ -3344,7 +3344,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       __pyx_t_12 = __Pyx_MemoryView_Len(__pyx_v_cutpoints); 
       __pyx_v_n_cutpoints = __pyx_t_12;
 
-      /* "stump.pyx":111
+      /* "stumpc.pyx":111
  *       n_cutpoints = len(cutpoints)
  * 
  *       for i in range(n_cutpoints):             # <<<<<<<<<<<<<<
@@ -3356,7 +3356,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
         __pyx_v_i = __pyx_t_15;
 
-        /* "stump.pyx":115
+        /* "stumpc.pyx":115
  *         #try:
  * 
  *         cutpoint_i = cutpoints[i]             # <<<<<<<<<<<<<<
@@ -3366,7 +3366,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __pyx_t_16 = __pyx_v_i;
         __pyx_v_cutpoint_i = (*((double *) ( /* dim=0 */ (__pyx_v_cutpoints.data + __pyx_t_16 * __pyx_v_cutpoints.strides[0]) )));
 
-        /* "stump.pyx":116
+        /* "stumpc.pyx":116
  * 
  *         cutpoint_i = cutpoints[i]
  *         index_up = (X_j <= cutpoint_i)             # <<<<<<<<<<<<<<
@@ -3380,7 +3380,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __Pyx_XDECREF_SET(__pyx_v_index_up, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "stump.pyx":117
+        /* "stumpc.pyx":117
  *         cutpoint_i = cutpoints[i]
  *         index_up = (X_j <= cutpoint_i)
  *         y_up = np.asarray(y)[index_up]             # <<<<<<<<<<<<<<
@@ -3416,7 +3416,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __Pyx_XDECREF_SET(__pyx_v_y_up, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "stump.pyx":118
+        /* "stumpc.pyx":118
  *         index_up = (X_j <= cutpoint_i)
  *         y_up = np.asarray(y)[index_up]
  *         counter_up = dict(Counter(y_up))             # <<<<<<<<<<<<<<
@@ -3446,7 +3446,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __Pyx_XDECREF_SET(__pyx_v_counter_up, ((PyObject*)__pyx_t_3));
         __pyx_t_3 = 0;
 
-        /* "stump.pyx":119
+        /* "stumpc.pyx":119
  *         y_up = np.asarray(y)[index_up]
  *         counter_up = dict(Counter(y_up))
  *         class_up = max(counter_up.items(),             # <<<<<<<<<<<<<<
@@ -3461,7 +3461,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "stump.pyx":120
+        /* "stumpc.pyx":120
  *         counter_up = dict(Counter(y_up))
  *         class_up = max(counter_up.items(),
  *                        key=operator.itemgetter(1))[0] # majority vote             # <<<<<<<<<<<<<<
@@ -3493,7 +3493,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-        /* "stump.pyx":119
+        /* "stumpc.pyx":119
  *         y_up = np.asarray(y)[index_up]
  *         counter_up = dict(Counter(y_up))
  *         class_up = max(counter_up.items(),             # <<<<<<<<<<<<<<
@@ -3505,7 +3505,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "stump.pyx":120
+        /* "stumpc.pyx":120
  *         counter_up = dict(Counter(y_up))
  *         class_up = max(counter_up.items(),
  *                        key=operator.itemgetter(1))[0] # majority vote             # <<<<<<<<<<<<<<
@@ -3519,7 +3519,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_v_class_up = __pyx_t_17;
 
-        /* "stump.pyx":122
+        /* "stumpc.pyx":122
  *                        key=operator.itemgetter(1))[0] # majority vote
  * 
  *         preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)             # <<<<<<<<<<<<<<
@@ -3564,7 +3564,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __Pyx_XDECREF_SET(__pyx_v_preds, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "stump.pyx":124
+        /* "stumpc.pyx":124
  *         preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
  * 
  *         error_rate_cur = np.mean(preds != y) if sample_weight is None else np.average(a = (preds != y)*1,             # <<<<<<<<<<<<<<
@@ -3618,7 +3618,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_a, __pyx_t_3) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "stump.pyx":125
+          /* "stumpc.pyx":125
  * 
  *         error_rate_cur = np.mean(preds != y) if sample_weight is None else np.average(a = (preds != y)*1,
  *                                                                                       weights = np.asarray(sample_weight))/np.sum(np.asarray(sample_weight))             # <<<<<<<<<<<<<<
@@ -3651,7 +3651,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_weights, __pyx_t_3) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "stump.pyx":124
+          /* "stumpc.pyx":124
  *         preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
  * 
  *         error_rate_cur = np.mean(preds != y) if sample_weight is None else np.average(a = (preds != y)*1,             # <<<<<<<<<<<<<<
@@ -3663,7 +3663,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "stump.pyx":125
+          /* "stumpc.pyx":125
  * 
  *         error_rate_cur = np.mean(preds != y) if sample_weight is None else np.average(a = (preds != y)*1,
  *                                                                                       weights = np.asarray(sample_weight))/np.sum(np.asarray(sample_weight))             # <<<<<<<<<<<<<<
@@ -3724,7 +3724,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         }
         __pyx_v_error_rate_cur = __pyx_t_18;
 
-        /* "stump.pyx":127
+        /* "stumpc.pyx":127
  *                                                                                       weights = np.asarray(sample_weight))/np.sum(np.asarray(sample_weight))
  * 
  *         if error_rate_cur <= error_rate:             # <<<<<<<<<<<<<<
@@ -3734,7 +3734,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
         __pyx_t_7 = ((__pyx_v_error_rate_cur <= __pyx_v_error_rate) != 0);
         if (__pyx_t_7) {
 
-          /* "stump.pyx":129
+          /* "stumpc.pyx":129
  *         if error_rate_cur <= error_rate:
  *           # print(error_rate_cur)
  *           best_col = j             # <<<<<<<<<<<<<<
@@ -3743,7 +3743,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
           __pyx_v_best_col = __pyx_v_j;
 
-          /* "stump.pyx":130
+          /* "stumpc.pyx":130
  *           # print(error_rate_cur)
  *           best_col = j
  *           best_cutpoint = cutpoint_i             # <<<<<<<<<<<<<<
@@ -3752,7 +3752,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
           __pyx_v_best_cutpoint = __pyx_v_cutpoint_i;
 
-          /* "stump.pyx":131
+          /* "stumpc.pyx":131
  *           best_col = j
  *           best_cutpoint = cutpoint_i
  *           error_rate = error_rate_cur             # <<<<<<<<<<<<<<
@@ -3761,7 +3761,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
           __pyx_v_error_rate = __pyx_v_error_rate_cur;
 
-          /* "stump.pyx":132
+          /* "stumpc.pyx":132
  *           best_cutpoint = cutpoint_i
  *           error_rate = error_rate_cur
  *           best_class = class_up             # <<<<<<<<<<<<<<
@@ -3770,7 +3770,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
           __pyx_v_best_class = __pyx_v_class_up;
 
-          /* "stump.pyx":127
+          /* "stumpc.pyx":127
  *                                                                                       weights = np.asarray(sample_weight))/np.sum(np.asarray(sample_weight))
  * 
  *         if error_rate_cur <= error_rate:             # <<<<<<<<<<<<<<
@@ -3781,7 +3781,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       }
     }
 
-    /* "stump.pyx":138
+    /* "stumpc.pyx":138
  *         #  pass
  * 
  *     return best_col, best_cutpoint, best_class             # <<<<<<<<<<<<<<
@@ -3810,7 +3810,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "stump.pyx":102
+    /* "stumpc.pyx":102
  *   X_ = np.asarray(X).T.tolist()
  * 
  *   if n_classes <= 2:             # <<<<<<<<<<<<<<
@@ -3819,7 +3819,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
   }
 
-  /* "stump.pyx":143
+  /* "stumpc.pyx":143
  * # if n_classes > 2:
  * 
  *   Y = one_hot_encode(y, n_classes)             # <<<<<<<<<<<<<<
@@ -3884,7 +3884,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __pyx_v_Y = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "stump.pyx":144
+  /* "stumpc.pyx":144
  * 
  *   Y = one_hot_encode(y, n_classes)
  *   Y_ = Y.T.tolist()             # <<<<<<<<<<<<<<
@@ -3914,7 +3914,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __pyx_v_Y_ = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "stump.pyx":146
+  /* "stumpc.pyx":146
  *   Y_ = Y.T.tolist()
  * 
  *   for k in range(n_classes):             # <<<<<<<<<<<<<<
@@ -3926,7 +3926,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_k = __pyx_t_10;
 
-    /* "stump.pyx":148
+    /* "stumpc.pyx":148
  *   for k in range(n_classes):
  * 
  *     y_ = np.asarray(Y_[k])             # <<<<<<<<<<<<<<
@@ -3959,7 +3959,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
     __Pyx_XDECREF_SET(__pyx_v_y_, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "stump.pyx":149
+    /* "stumpc.pyx":149
  * 
  *     y_ = np.asarray(Y_[k])
  *     best_col = 0             # <<<<<<<<<<<<<<
@@ -3968,7 +3968,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
     __pyx_v_best_col = 0;
 
-    /* "stump.pyx":150
+    /* "stumpc.pyx":150
  *     y_ = np.asarray(Y_[k])
  *     best_col = 0
  *     best_cutpoint = 0.0             # <<<<<<<<<<<<<<
@@ -3977,7 +3977,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
     __pyx_v_best_cutpoint = 0.0;
 
-    /* "stump.pyx":151
+    /* "stumpc.pyx":151
  *     best_col = 0
  *     best_cutpoint = 0.0
  *     best_class = 0             # <<<<<<<<<<<<<<
@@ -3986,7 +3986,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
     __pyx_v_best_class = 0;
 
-    /* "stump.pyx":152
+    /* "stumpc.pyx":152
  *     best_cutpoint = 0.0
  *     best_class = 0
  *     error_rate = 10000.0             # <<<<<<<<<<<<<<
@@ -3995,7 +3995,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
     __pyx_v_error_rate = 10000.0;
 
-    /* "stump.pyx":153
+    /* "stumpc.pyx":153
  *     best_class = 0
  *     error_rate = 10000.0
  *     error_rate_cur = 10000.0             # <<<<<<<<<<<<<<
@@ -4004,7 +4004,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
     __pyx_v_error_rate_cur = 10000.0;
 
-    /* "stump.pyx":154
+    /* "stumpc.pyx":154
  *     error_rate = 10000.0
  *     error_rate_cur = 10000.0
  *     best_cutpoint = 0.0             # <<<<<<<<<<<<<<
@@ -4013,7 +4013,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
     __pyx_v_best_cutpoint = 0.0;
 
-    /* "stump.pyx":156
+    /* "stumpc.pyx":156
  *     best_cutpoint = 0.0
  * 
  *     for j in range(p):             # <<<<<<<<<<<<<<
@@ -4025,7 +4025,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
     for (__pyx_t_23 = 0; __pyx_t_23 < __pyx_t_22; __pyx_t_23+=1) {
       __pyx_v_j = __pyx_t_23;
 
-      /* "stump.pyx":158
+      /* "stumpc.pyx":158
  *     for j in range(p):
  * 
  *       X_j = np.asarray(X_[j])             # <<<<<<<<<<<<<<
@@ -4058,7 +4058,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       __Pyx_XDECREF_SET(__pyx_v_X_j, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "stump.pyx":160
+      /* "stumpc.pyx":160
  *       X_j = np.asarray(X_[j])
  * 
  *       cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)             # <<<<<<<<<<<<<<
@@ -4090,7 +4090,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       __pyx_t_11.memview = NULL;
       __pyx_t_11.data = NULL;
 
-      /* "stump.pyx":161
+      /* "stumpc.pyx":161
  * 
  *       cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
  *       n_cutpoints = len(cutpoints)             # <<<<<<<<<<<<<<
@@ -4100,7 +4100,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       __pyx_t_12 = __Pyx_MemoryView_Len(__pyx_v_cutpoints); 
       __pyx_v_n_cutpoints = __pyx_t_12;
 
-      /* "stump.pyx":164
+      /* "stumpc.pyx":164
  * 
  * 
  *       for i in range(n_cutpoints):             # <<<<<<<<<<<<<<
@@ -4112,7 +4112,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
         __pyx_v_i = __pyx_t_15;
 
-        /* "stump.pyx":166
+        /* "stumpc.pyx":166
  *       for i in range(n_cutpoints):
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -4128,7 +4128,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
           __Pyx_XGOTREF(__pyx_t_26);
           /*try:*/ {
 
-            /* "stump.pyx":168
+            /* "stumpc.pyx":168
  *         try:
  * 
  *           cutpoint_i = cutpoints[i]             # <<<<<<<<<<<<<<
@@ -4138,7 +4138,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __pyx_t_27 = __pyx_v_i;
             __pyx_v_cutpoint_i = (*((double *) ( /* dim=0 */ (__pyx_v_cutpoints.data + __pyx_t_27 * __pyx_v_cutpoints.strides[0]) )));
 
-            /* "stump.pyx":169
+            /* "stumpc.pyx":169
  * 
  *           cutpoint_i = cutpoints[i]
  *           index_up = (X_j <= cutpoint_i)             # <<<<<<<<<<<<<<
@@ -4152,7 +4152,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __Pyx_XDECREF_SET(__pyx_v_index_up, __pyx_t_3);
             __pyx_t_3 = 0;
 
-            /* "stump.pyx":170
+            /* "stumpc.pyx":170
  *           cutpoint_i = cutpoints[i]
  *           index_up = (X_j <= cutpoint_i)
  *           y_up = y_[index_up]             # <<<<<<<<<<<<<<
@@ -4164,7 +4164,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __Pyx_XDECREF_SET(__pyx_v_y_up, __pyx_t_3);
             __pyx_t_3 = 0;
 
-            /* "stump.pyx":171
+            /* "stumpc.pyx":171
  *           index_up = (X_j <= cutpoint_i)
  *           y_up = y_[index_up]
  *           counter_up = dict(Counter(y_up))             # <<<<<<<<<<<<<<
@@ -4194,7 +4194,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __Pyx_XDECREF_SET(__pyx_v_counter_up, ((PyObject*)__pyx_t_6));
             __pyx_t_6 = 0;
 
-            /* "stump.pyx":172
+            /* "stumpc.pyx":172
  *           y_up = y_[index_up]
  *           counter_up = dict(Counter(y_up))
  *           class_up = max(counter_up.items(),             # <<<<<<<<<<<<<<
@@ -4209,7 +4209,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
             __pyx_t_6 = 0;
 
-            /* "stump.pyx":173
+            /* "stumpc.pyx":173
  *           counter_up = dict(Counter(y_up))
  *           class_up = max(counter_up.items(),
  *                          key=operator.itemgetter(1))[0] # majority vote             # <<<<<<<<<<<<<<
@@ -4241,7 +4241,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 173, __pyx_L15_error)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "stump.pyx":172
+            /* "stumpc.pyx":172
  *           y_up = y_[index_up]
  *           counter_up = dict(Counter(y_up))
  *           class_up = max(counter_up.items(),             # <<<<<<<<<<<<<<
@@ -4253,7 +4253,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-            /* "stump.pyx":173
+            /* "stumpc.pyx":173
  *           counter_up = dict(Counter(y_up))
  *           class_up = max(counter_up.items(),
  *                          key=operator.itemgetter(1))[0] # majority vote             # <<<<<<<<<<<<<<
@@ -4267,7 +4267,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_v_class_up = __pyx_t_28;
 
-            /* "stump.pyx":175
+            /* "stumpc.pyx":175
  *                          key=operator.itemgetter(1))[0] # majority vote
  * 
  *           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)             # <<<<<<<<<<<<<<
@@ -4312,7 +4312,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __Pyx_XDECREF_SET(__pyx_v_preds, __pyx_t_3);
             __pyx_t_3 = 0;
 
-            /* "stump.pyx":177
+            /* "stumpc.pyx":177
  *           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
  * 
  *           error_rate_cur = np.mean(preds != y_) if sample_weight is None else np.average(a = (preds != y_)*1,             # <<<<<<<<<<<<<<
@@ -4360,7 +4360,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
               if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_a, __pyx_t_6) < 0) __PYX_ERR(0, 177, __pyx_L15_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-              /* "stump.pyx":178
+              /* "stumpc.pyx":178
  * 
  *           error_rate_cur = np.mean(preds != y_) if sample_weight is None else np.average(a = (preds != y_)*1,
  *                                                                                         weights = sample_weight)             # <<<<<<<<<<<<<<
@@ -4372,7 +4372,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
               if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_weights, __pyx_t_6) < 0) __PYX_ERR(0, 177, __pyx_L15_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-              /* "stump.pyx":177
+              /* "stumpc.pyx":177
  *           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
  * 
  *           error_rate_cur = np.mean(preds != y_) if sample_weight is None else np.average(a = (preds != y_)*1,             # <<<<<<<<<<<<<<
@@ -4389,7 +4389,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             }
             __pyx_v_error_rate_cur = __pyx_t_18;
 
-            /* "stump.pyx":180
+            /* "stumpc.pyx":180
  *                                                                                         weights = sample_weight)
  * 
  *           if error_rate_cur <= error_rate:             # <<<<<<<<<<<<<<
@@ -4399,7 +4399,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
             __pyx_t_7 = ((__pyx_v_error_rate_cur <= __pyx_v_error_rate) != 0);
             if (__pyx_t_7) {
 
-              /* "stump.pyx":182
+              /* "stumpc.pyx":182
  *           if error_rate_cur <= error_rate:
  *             # print(error_rate_cur)
  *             best_col = j             # <<<<<<<<<<<<<<
@@ -4408,7 +4408,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
               __pyx_v_best_col = __pyx_v_j;
 
-              /* "stump.pyx":183
+              /* "stumpc.pyx":183
  *             # print(error_rate_cur)
  *             best_col = j
  *             best_cutpoint = cutpoint_i             # <<<<<<<<<<<<<<
@@ -4417,7 +4417,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
               __pyx_v_best_cutpoint = __pyx_v_cutpoint_i;
 
-              /* "stump.pyx":184
+              /* "stumpc.pyx":184
  *             best_col = j
  *             best_cutpoint = cutpoint_i
  *             error_rate = error_rate_cur             # <<<<<<<<<<<<<<
@@ -4426,7 +4426,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
               __pyx_v_error_rate = __pyx_v_error_rate_cur;
 
-              /* "stump.pyx":185
+              /* "stumpc.pyx":185
  *             best_cutpoint = cutpoint_i
  *             error_rate = error_rate_cur
  *             best_class = class_up             # <<<<<<<<<<<<<<
@@ -4435,7 +4435,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
               __pyx_v_best_class = __pyx_v_class_up;
 
-              /* "stump.pyx":180
+              /* "stumpc.pyx":180
  *                                                                                         weights = sample_weight)
  * 
  *           if error_rate_cur <= error_rate:             # <<<<<<<<<<<<<<
@@ -4444,7 +4444,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
  */
             }
 
-            /* "stump.pyx":166
+            /* "stumpc.pyx":166
  *       for i in range(n_cutpoints):
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -4466,7 +4466,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "stump.pyx":187
+          /* "stumpc.pyx":187
  *             best_class = class_up
  * 
  *         except:             # <<<<<<<<<<<<<<
@@ -4487,7 +4487,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
       }
     }
 
-    /* "stump.pyx":191
+    /* "stumpc.pyx":191
  *           pass
  * 
  *     res_class[k] = (best_col, best_cutpoint, best_class)             # <<<<<<<<<<<<<<
@@ -4518,7 +4518,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
 
-  /* "stump.pyx":193
+  /* "stumpc.pyx":193
  *     res_class[k] = (best_col, best_cutpoint, best_class)
  * 
  *   return res_class             # <<<<<<<<<<<<<<
@@ -4530,7 +4530,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   __pyx_r = __pyx_v_res_class;
   goto __pyx_L0;
 
-  /* "stump.pyx":69
+  /* "stumpc.pyx":69
  * 
  * 
  * def fit_stump_classifier(double[:,::1] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -4570,7 +4570,7 @@ static PyObject *__pyx_pf_6stumpc_2fit_stump_classifier(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "stump.pyx":199
+/* "stumpc.pyx":199
  * # 2 - predict -----
  * 
  * def predict_proba_twoclass(double[:,::1] X,             # <<<<<<<<<<<<<<
@@ -4677,7 +4677,7 @@ static PyObject *__pyx_pf_6stumpc_4predict_proba_twoclass(CYTHON_UNUSED PyObject
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("predict_proba_twoclass", 0);
 
-  /* "stump.pyx":203
+  /* "stumpc.pyx":203
  *                              double best_cutpoint,
  *                              int best_class):
  *     X_ = np.asarray(X).T.tolist()             # <<<<<<<<<<<<<<
@@ -4731,7 +4731,7 @@ static PyObject *__pyx_pf_6stumpc_4predict_proba_twoclass(CYTHON_UNUSED PyObject
   __pyx_v_X_ = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "stump.pyx":204
+  /* "stumpc.pyx":204
  *                              int best_class):
  *     X_ = np.asarray(X).T.tolist()
  *     X_j = np.asarray(X_[best_col])             # <<<<<<<<<<<<<<
@@ -4764,7 +4764,7 @@ static PyObject *__pyx_pf_6stumpc_4predict_proba_twoclass(CYTHON_UNUSED PyObject
   __pyx_v_X_j = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "stump.pyx":205
+  /* "stumpc.pyx":205
  *     X_ = np.asarray(X).T.tolist()
  *     X_j = np.asarray(X_[best_col])
  *     preds = (X_j <= best_cutpoint)*best_class + (X_j > best_cutpoint)*(1 - best_class)             # <<<<<<<<<<<<<<
@@ -4798,7 +4798,7 @@ static PyObject *__pyx_pf_6stumpc_4predict_proba_twoclass(CYTHON_UNUSED PyObject
   __pyx_v_preds = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "stump.pyx":206
+  /* "stumpc.pyx":206
  *     X_j = np.asarray(X_[best_col])
  *     preds = (X_j <= best_cutpoint)*best_class + (X_j > best_cutpoint)*(1 - best_class)
  *     return (np.asarray(one_hot_encode(preds, 2)))             # <<<<<<<<<<<<<<
@@ -4878,7 +4878,7 @@ static PyObject *__pyx_pf_6stumpc_4predict_proba_twoclass(CYTHON_UNUSED PyObject
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "stump.pyx":199
+  /* "stumpc.pyx":199
  * # 2 - predict -----
  * 
  * def predict_proba_twoclass(double[:,::1] X,             # <<<<<<<<<<<<<<
@@ -4906,7 +4906,7 @@ static PyObject *__pyx_pf_6stumpc_4predict_proba_twoclass(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "stump.pyx":208
+/* "stumpc.pyx":208
  *     return (np.asarray(one_hot_encode(preds, 2)))
  * 
  * def predict_proba_stump_classifier(object obj, double[:,::1] X):             # <<<<<<<<<<<<<<
@@ -5012,7 +5012,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   Py_ssize_t __pyx_t_24;
   __Pyx_RefNannySetupContext("predict_proba_stump_classifier", 0);
 
-  /* "stump.pyx":217
+  /* "stumpc.pyx":217
  * 
  *   # if n_classes <= 2
  *   if (isinstance(obj, dict) == False):             # <<<<<<<<<<<<<<
@@ -5023,7 +5023,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   __pyx_t_2 = ((__pyx_t_1 == 0) != 0);
   if (__pyx_t_2) {
 
-    /* "stump.pyx":218
+    /* "stumpc.pyx":218
  *   # if n_classes <= 2
  *   if (isinstance(obj, dict) == False):
  *     return (predict_proba_twoclass(X, obj[0], obj[1], obj[2]))             # <<<<<<<<<<<<<<
@@ -5104,7 +5104,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "stump.pyx":217
+    /* "stumpc.pyx":217
  * 
  *   # if n_classes <= 2
  *   if (isinstance(obj, dict) == False):             # <<<<<<<<<<<<<<
@@ -5113,7 +5113,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
  */
   }
 
-  /* "stump.pyx":222
+  /* "stumpc.pyx":222
  * 
  *   # else: n_classes > 2
  *   n_obs = X.shape[0]             # <<<<<<<<<<<<<<
@@ -5122,7 +5122,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
  */
   __pyx_v_n_obs = (__pyx_v_X.shape[0]);
 
-  /* "stump.pyx":223
+  /* "stumpc.pyx":223
  *   # else: n_classes > 2
  *   n_obs = X.shape[0]
  *   n_classes = len(obj)             # <<<<<<<<<<<<<<
@@ -5132,7 +5132,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   __pyx_t_12 = PyObject_Length(__pyx_v_obj); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 223, __pyx_L1_error)
   __pyx_v_n_classes = __pyx_t_12;
 
-  /* "stump.pyx":224
+  /* "stumpc.pyx":224
  *   n_obs = X.shape[0]
  *   n_classes = len(obj)
  *   raw_probs = np.zeros((n_obs, n_classes))             # <<<<<<<<<<<<<<
@@ -5178,7 +5178,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "stump.pyx":227
+  /* "stumpc.pyx":227
  * 
  * 
  *   for k in range(n_classes):             # <<<<<<<<<<<<<<
@@ -5190,7 +5190,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
     __pyx_v_k = __pyx_t_15;
 
-    /* "stump.pyx":230
+    /* "stumpc.pyx":230
  *     # print(f"class {k}")
  *     # print(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]))
  *     temp_prob = np.argmax(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]),             # <<<<<<<<<<<<<<
@@ -5286,7 +5286,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "stump.pyx":231
+    /* "stumpc.pyx":231
  *     # print(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]))
  *     temp_prob = np.argmax(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]),
  *                               axis=1)             # <<<<<<<<<<<<<<
@@ -5297,7 +5297,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
     __Pyx_GOTREF(__pyx_t_3);
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
 
-    /* "stump.pyx":230
+    /* "stumpc.pyx":230
  *     # print(f"class {k}")
  *     # print(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]))
  *     temp_prob = np.argmax(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]),             # <<<<<<<<<<<<<<
@@ -5316,7 +5316,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
     __pyx_t_18.memview = NULL;
     __pyx_t_18.data = NULL;
 
-    /* "stump.pyx":232
+    /* "stumpc.pyx":232
  *     temp_prob = np.argmax(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]),
  *                               axis=1)
  *     for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -5328,7 +5328,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
     for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
       __pyx_v_i = __pyx_t_21;
 
-      /* "stump.pyx":233
+      /* "stumpc.pyx":233
  *                               axis=1)
  *     for i in range(n_obs):
  *       raw_probs[i, k] = temp_prob[i]             # <<<<<<<<<<<<<<
@@ -5342,7 +5342,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
     }
   }
 
-  /* "stump.pyx":237
+  /* "stumpc.pyx":237
  *   # print("raw_probs")
  *   # print(np.asarray(raw_probs))
  *   expit_raw_probs = expit(raw_probs)             # <<<<<<<<<<<<<<
@@ -5372,7 +5372,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   __pyx_v_expit_raw_probs = __pyx_t_17;
   __pyx_t_17 = 0;
 
-  /* "stump.pyx":239
+  /* "stumpc.pyx":239
  *   expit_raw_probs = expit(raw_probs)
  * 
  *   return (expit_raw_probs/expit_raw_probs.sum(axis=1)[:, None])             # <<<<<<<<<<<<<<
@@ -5399,7 +5399,7 @@ static PyObject *__pyx_pf_6stumpc_6predict_proba_stump_classifier(CYTHON_UNUSED 
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "stump.pyx":208
+  /* "stumpc.pyx":208
  *     return (np.asarray(one_hot_encode(preds, 2)))
  * 
  * def predict_proba_stump_classifier(object obj, double[:,::1] X):             # <<<<<<<<<<<<<<
@@ -21548,8 +21548,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_strided_and_indirect, __pyx_k_strided_and_indirect, sizeof(__pyx_k_strided_and_indirect), 0, 0, 1, 0},
   {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
   {&__pyx_n_s_struct, __pyx_k_struct, sizeof(__pyx_k_struct), 0, 0, 1, 1},
-  {&__pyx_kp_s_stump_pyx, __pyx_k_stump_pyx, sizeof(__pyx_k_stump_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_stumpc, __pyx_k_stumpc, sizeof(__pyx_k_stumpc), 0, 0, 1, 1},
+  {&__pyx_kp_s_stumpc_pyx, __pyx_k_stumpc_pyx, sizeof(__pyx_k_stumpc_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_sum, __pyx_k_sum, sizeof(__pyx_k_sum), 0, 0, 1, 1},
   {&__pyx_n_s_temp_prob, __pyx_k_temp_prob, sizeof(__pyx_k_temp_prob), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
@@ -21589,7 +21589,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "stump.pyx":239
+  /* "stumpc.pyx":239
  *   expit_raw_probs = expit(raw_probs)
  * 
  *   return (expit_raw_probs/expit_raw_probs.sum(axis=1)[:, None])             # <<<<<<<<<<<<<<
@@ -21861,7 +21861,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
 
-  /* "stump.pyx":29
+  /* "stumpc.pyx":29
  * # 0 - utils -----
  * 
  * warnings.filterwarnings("ignore")             # <<<<<<<<<<<<<<
@@ -21872,7 +21872,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
 
-  /* "stump.pyx":52
+  /* "stumpc.pyx":52
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -21882,9 +21882,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__29 = PyTuple_Pack(5, __pyx_n_s_y, __pyx_n_s_n_classes, __pyx_n_s_i, __pyx_n_s_n_obs, __pyx_n_s_res); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stump_pyx, __pyx_n_s_one_hot_encode, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stumpc_pyx, __pyx_n_s_one_hot_encode, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 52, __pyx_L1_error)
 
-  /* "stump.pyx":69
+  /* "stumpc.pyx":69
  * 
  * 
  * def fit_stump_classifier(double[:,::1] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -21894,9 +21894,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__31 = PyTuple_Pack(33, __pyx_n_s_X, __pyx_n_s_y, __pyx_n_s_sample_weight, __pyx_n_s_bins, __pyx_n_s_n, __pyx_n_s_n_up, __pyx_n_s_n_down, __pyx_n_s_p, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_best_col, __pyx_n_s_cutpoints, __pyx_n_s_cutpoint_i, __pyx_n_s_best_cutpoint, __pyx_n_s_n_cutpoints, __pyx_n_s_error_rate, __pyx_n_s_error_rate_cur, __pyx_n_s_error_rate_down, __pyx_n_s_error_rate_up, __pyx_n_s_best_class, __pyx_n_s_class_up, __pyx_n_s_n_classes, __pyx_n_s_res_class, __pyx_n_s_X_2, __pyx_n_s_X_j, __pyx_n_s_index_up, __pyx_n_s_y_up, __pyx_n_s_counter_up, __pyx_n_s_preds, __pyx_n_s_Y, __pyx_n_s_Y_2, __pyx_n_s_y_2); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(4, 0, 33, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stump_pyx, __pyx_n_s_fit_stump_classifier, 69, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(4, 0, 33, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stumpc_pyx, __pyx_n_s_fit_stump_classifier, 69, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 69, __pyx_L1_error)
 
-  /* "stump.pyx":199
+  /* "stumpc.pyx":199
  * # 2 - predict -----
  * 
  * def predict_proba_twoclass(double[:,::1] X,             # <<<<<<<<<<<<<<
@@ -21906,9 +21906,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__33 = PyTuple_Pack(7, __pyx_n_s_X, __pyx_n_s_best_col, __pyx_n_s_best_cutpoint, __pyx_n_s_best_class, __pyx_n_s_X_2, __pyx_n_s_X_j, __pyx_n_s_preds); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(4, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stump_pyx, __pyx_n_s_predict_proba_twoclass, 199, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(4, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stumpc_pyx, __pyx_n_s_predict_proba_twoclass, 199, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 199, __pyx_L1_error)
 
-  /* "stump.pyx":208
+  /* "stumpc.pyx":208
  *     return (np.asarray(one_hot_encode(preds, 2)))
  * 
  * def predict_proba_stump_classifier(object obj, double[:,::1] X):             # <<<<<<<<<<<<<<
@@ -21918,7 +21918,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__35 = PyTuple_Pack(9, __pyx_n_s_obj, __pyx_n_s_X, __pyx_n_s_n_obs, __pyx_n_s_n_classes, __pyx_n_s_raw_probs, __pyx_n_s_temp_prob, __pyx_n_s_k, __pyx_n_s_i, __pyx_n_s_expit_raw_probs); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stump_pyx, __pyx_n_s_predict_proba_stump_classifier, 208, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stumpc_pyx, __pyx_n_s_predict_proba_stump_classifier, 208, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 208, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -22363,7 +22363,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "stump.pyx":9
+  /* "stumpc.pyx":9
  * # License: BSD 3 Clause Clear
  * 
  * import functools             # <<<<<<<<<<<<<<
@@ -22375,7 +22375,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_functools, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":10
+  /* "stumpc.pyx":10
  * 
  * import functools
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -22387,7 +22387,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":13
+  /* "stumpc.pyx":13
  * cimport numpy as np
  * cimport cython
  * import gc             # <<<<<<<<<<<<<<
@@ -22399,7 +22399,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gc, __pyx_t_1) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":14
+  /* "stumpc.pyx":14
  * cimport cython
  * import gc
  * import operator             # <<<<<<<<<<<<<<
@@ -22411,7 +22411,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_operator, __pyx_t_1) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":15
+  /* "stumpc.pyx":15
  * import gc
  * import operator
  * import warnings             # <<<<<<<<<<<<<<
@@ -22423,7 +22423,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_warnings, __pyx_t_1) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":16
+  /* "stumpc.pyx":16
  * import operator
  * import warnings
  * import pickle             # <<<<<<<<<<<<<<
@@ -22435,7 +22435,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pickle, __pyx_t_1) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":18
+  /* "stumpc.pyx":18
  * import pickle
  * 
  * from collections import Counter             # <<<<<<<<<<<<<<
@@ -22456,7 +22456,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "stump.pyx":21
+  /* "stumpc.pyx":21
  * from cython.parallel cimport prange
  * from libc.math cimport log, exp, sqrt, fabs
  * from numpy.linalg import lstsq             # <<<<<<<<<<<<<<
@@ -22477,7 +22477,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":22
+  /* "stumpc.pyx":22
  * from libc.math cimport log, exp, sqrt, fabs
  * from numpy.linalg import lstsq
  * from numpy.linalg import norm             # <<<<<<<<<<<<<<
@@ -22498,7 +22498,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "stump.pyx":23
+  /* "stumpc.pyx":23
  * from numpy.linalg import lstsq
  * from numpy.linalg import norm
  * from scipy.special import expit             # <<<<<<<<<<<<<<
@@ -22519,7 +22519,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":29
+  /* "stumpc.pyx":29
  * # 0 - utils -----
  * 
  * warnings.filterwarnings("ignore")             # <<<<<<<<<<<<<<
@@ -22536,7 +22536,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":52
+  /* "stumpc.pyx":52
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -22548,7 +22548,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_one_hot_encode, __pyx_t_1) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":70
+  /* "stumpc.pyx":70
  * 
  * def fit_stump_classifier(double[:,::1] X, long int[:] y,
  *                          double[:] sample_weight=None,             # <<<<<<<<<<<<<<
@@ -22560,7 +22560,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_3.memview = NULL;
   __pyx_t_3.data = NULL;
 
-  /* "stump.pyx":69
+  /* "stumpc.pyx":69
  * 
  * 
  * def fit_stump_classifier(double[:,::1] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -22572,7 +22572,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_fit_stump_classifier, __pyx_t_1) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":199
+  /* "stumpc.pyx":199
  * # 2 - predict -----
  * 
  * def predict_proba_twoclass(double[:,::1] X,             # <<<<<<<<<<<<<<
@@ -22584,7 +22584,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_predict_proba_twoclass, __pyx_t_1) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":208
+  /* "stumpc.pyx":208
  *     return (np.asarray(one_hot_encode(preds, 2)))
  * 
  * def predict_proba_stump_classifier(object obj, double[:,::1] X):             # <<<<<<<<<<<<<<
@@ -22596,7 +22596,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_predict_proba_stump_classifier, __pyx_t_1) < 0) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "stump.pyx":1
+  /* "stumpc.pyx":1
  * # cython: wraparound=False             # <<<<<<<<<<<<<<
  * # cython: boundscheck=False
  * # cython: nonecheck=False
