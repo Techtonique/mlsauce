@@ -25,8 +25,8 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-obj = ms.LSBoostClassifier()
-#obj = ms.LSBoostClassifier()
+obj = ms.AdaOpt(n_jobs=4, type_dist="euclidean", verbose=1)
+#obj = ms.AdaOpt()
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -43,7 +43,7 @@ np.random.seed(879423)
 X_train, X_test, y_train, y_test = train_test_split(Z, t, 
                                                     test_size=0.2)
 
-obj = ms.LSBoostClassifier()
+obj = ms.AdaOpt()
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -61,7 +61,7 @@ X_train, X_test, y_train, y_test = train_test_split(Z, t,
                                                     test_size=0.2)
 
 
-obj = ms.LSBoostClassifier()
+obj = ms.AdaOpt()
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -78,7 +78,16 @@ np.random.seed(13239)
 X_train, X_test, y_train, y_test = train_test_split(Z, t, 
                                                     test_size=0.2)
 
-obj = ms.LSBoostClassifier()
+obj = ms.AdaOpt(n_iterations=50,
+           learning_rate=0.3,
+           reg_lambda=0.1,            
+           reg_alpha=0.5,
+           eta=0.01,
+           gamma=0.01, 
+           tolerance=1e-4,
+           row_sample=1, 
+           k=1, 
+           n_jobs=3, type_dist="euclidean", verbose=1)
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -87,7 +96,7 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 # with clustering
-obj = ms.LSBoostClassifier(n_clusters=25, k=1)
+obj = ms.AdaOpt(n_clusters=25, k=1)
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -109,7 +118,7 @@ y_test = data_test.y.values
 X_train =  np.ascontiguousarray(np.delete(data_train.values, 0, axis=1))
 X_test =  np.ascontiguousarray(np.delete(data_test.values, 0, axis=1))
 
-obj = ms.LSBoostClassifier(type_dist="euclidean-f",
+obj = ms.AdaOpt(type_dist="euclidean-f",
                 k=1, row_sample=1)
 start = time()
 obj.fit(X_train, y_train)
@@ -135,7 +144,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size=0.3)
 
 
-obj = ms.LSBoostClassifier(type_dist="euclidean-f",
+obj = ms.AdaOpt(type_dist="euclidean-f",
                 k=1, row_sample=1)
 start = time()
 obj.fit(X_train, y_train)

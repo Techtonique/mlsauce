@@ -1,4 +1,4 @@
-from .stump_classifier import StumpClassifier
+from ._stump_classifier import StumpClassifier
 
 __all__ = ["StumpClassifier"]
 

@@ -1,16 +1,7 @@
 import numpy as np
-import pickle
-from joblib.externals.loky import set_loky_pickler
-from joblib import parallel_backend
-from joblib import Parallel, delayed
-from joblib import wrap_non_picklable_objects
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
-from scipy.special import expit
-from numpy.linalg import norm
-from tqdm import tqdm
-from ..utils import subsample
-from ..booster_cython import fit_booster_classifier, predict_proba_booster_classifier
+from . import _boosterc as boosterc 
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
@@ -92,7 +83,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         self: object.
         """
         
-        self.obj = fit_booster_classifier(np.asarray(X, order='C'), 
+        self.obj = boosterc.fit_booster_classifier(np.asarray(X, order='C'), 
                                           np.asarray(y, order='C'), 
                                           n_estimators=self.n_estimators, 
                                           learning_rate=self.learning_rate, 
@@ -147,5 +138,5 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         probability estimates for test data: {array-like}        
         """
 
-        return(predict_proba_booster_classifier(self.obj, 
+        return(boosterc.predict_proba_booster_classifier(self.obj, 
                                                 np.asarray(X, order='C')))
