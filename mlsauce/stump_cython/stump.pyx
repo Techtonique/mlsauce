@@ -1,0 +1,244 @@
+# cython: wraparound=False
+# cython: boundscheck=False
+# cython: nonecheck=False
+
+# Authors: T. Moudiki
+#
+# License: BSD 3 Clause Clear
+
+import functools
+import numpy as np
+cimport numpy as np
+cimport cython
+import gc
+import operator
+import warnings
+import pickle
+
+from collections import Counter
+from cython.parallel cimport prange
+from libc.math cimport log, exp, sqrt, fabs
+from numpy.linalg import lstsq
+from numpy.linalg import norm
+from scipy.special import expit
+
+
+
+# 0 - utils -----
+
+warnings.filterwarnings("ignore")
+
+
+# 0 - 1 data structures & funcs -----
+
+# a tuple of doubles
+cdef struct mydoubletuple:
+    double elt1
+    double elt2
+
+ctypedef fused nparray_int:
+    int
+    
+ctypedef fused nparray_double:    
+    double
+    
+ctypedef fused nparray_long:
+    long long
+
+
+# 0 - 2 data structures & funcs -----
+
+# one-hot encoder for discrete response
+def one_hot_encode(long int[:] y, 
+                   int n_classes):
+    
+    cdef long int i 
+    cdef long int n_obs = len(y)
+    cdef double[:,::1] res = np.zeros((n_obs, n_classes))        
+
+    for i in range(n_obs):
+        res[i, y[i]] = 1
+
+    return np.asarray(res)
+    
+    
+    
+# 1 - fitting -----    
+
+
+def fit_stump_classifier(double[:,::1] X, long int[:] y, 
+                         double[:] sample_weight=None, 
+                         bins="auto"):
+
+  cdef long int n
+  cdef long int n_up 
+  cdef long int n_down 
+  cdef int p
+  cdef long int i
+  cdef int j, k
+  cdef int best_col
+  cdef double[:] cutpoints
+  cdef double cutpoint_i
+  cdef double best_cutpoint
+  cdef long int n_cutpoints
+  cdef double error_rate, error_rate_cur, error_rate_down, error_rate_up
+  cdef int best_class, class_up, n_classes
+  cdef dict res_class
+
+
+  n = X.shape[0]
+  p = X.shape[1]
+  n_classes = len(np.unique(y))
+  res_class = {}
+  error_rate = 10000.0
+  error_rate_cur = 10000.0
+  best_cutpoint = 0.0
+  i = 0
+  j = 0
+  k = 0
+  
+  X_ = np.asarray(X).T.tolist()
+  
+  if n_classes <= 2:
+  
+    for j in range(p):
+    
+      X_j = np.asarray(X_[j])
+      
+      cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
+      n_cutpoints = len(cutpoints)
+      
+      for i in range(n_cutpoints):
+        
+        #try:
+        
+        cutpoint_i = cutpoints[i] 
+        index_up = (X_j <= cutpoint_i)
+        y_up = np.asarray(y)[index_up]
+        counter_up = dict(Counter(y_up))
+        class_up = max(counter_up.items(), 
+                       key=operator.itemgetter(1))[0] # majority vote
+
+        preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
+        
+        error_rate_cur = np.mean(preds != y) if sample_weight is None else np.average(a = (preds != y)*1, 
+                                                                                      weights = np.asarray(sample_weight))/np.sum(np.asarray(sample_weight))
+        
+        if error_rate_cur <= error_rate:
+          # print(error_rate_cur)
+          best_col = j
+          best_cutpoint = cutpoint_i
+          error_rate = error_rate_cur
+          best_class = class_up
+  
+        #except:
+        
+        #  pass
+        
+    return best_col, best_cutpoint, best_class
+
+
+# if n_classes > 2:
+
+  Y = one_hot_encode(y, n_classes)
+  Y_ = Y.T.tolist()
+  
+  for k in range(n_classes):
+  
+    y_ = np.asarray(Y_[k])
+    best_col = 0
+    best_cutpoint = 0.0
+    best_class = 0
+    error_rate = 10000.0
+    error_rate_cur = 10000.0
+    best_cutpoint = 0.0
+  
+    for j in range(p):
+    
+      X_j = np.asarray(X_[j])
+      
+      cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
+      n_cutpoints = len(cutpoints)
+      
+ 
+      for i in range(n_cutpoints):
+        
+        try:
+        
+          cutpoint_i = cutpoints[i] 
+          index_up = (X_j <= cutpoint_i)
+          y_up = y_[index_up]
+          counter_up = dict(Counter(y_up))
+          class_up = max(counter_up.items(), 
+                         key=operator.itemgetter(1))[0] # majority vote
+  
+          preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
+          
+          error_rate_cur = np.mean(preds != y_) if sample_weight is None else np.average(a = (preds != y_)*1, 
+                                                                                        weights = sample_weight)
+          
+          if error_rate_cur <= error_rate:
+            # print(error_rate_cur)
+            best_col = j
+            best_cutpoint = cutpoint_i
+            error_rate = error_rate_cur
+            best_class = class_up
+  
+        except:
+        
+          pass
+    
+    res_class[k] = (best_col, best_cutpoint, best_class)
+        
+  return res_class
+  
+  
+  
+# 2 - predict -----   
+
+def predict_proba_twoclass(double[:,::1] X, 
+                             int best_col, 
+                             double best_cutpoint, 
+                             int best_class):
+    X_ = np.asarray(X).T.tolist()
+    X_j = np.asarray(X_[best_col])
+    preds = (X_j <= best_cutpoint)*best_class + (X_j > best_cutpoint)*(1 - best_class)
+    return (np.asarray(one_hot_encode(preds, 2)))
+
+def predict_proba_stump_classifier(object obj, double[:,::1] X):
+  
+  cdef long int n_obs
+  cdef int n_classes
+  cdef double[:,:] raw_probs
+  cdef long int[:] temp_prob
+
+
+  # if n_classes <= 2  
+  if (isinstance(obj, dict) == False):
+    return (predict_proba_twoclass(X, obj[0], obj[1], obj[2]))
+    
+    
+  # else: n_classes > 2
+  n_obs = X.shape[0]
+  n_classes = len(obj)
+  raw_probs = np.zeros((n_obs, n_classes))
+  
+  
+  for k in range(n_classes):
+    # print(f"class {k}")
+    # print(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]))
+    temp_prob = np.argmax(predict_proba_twoclass(X, obj[k][0], obj[k][1], obj[k][2]), 
+                              axis=1)
+    for i in range(n_obs):
+      raw_probs[i, k] = temp_prob[i]
+  
+  # print("raw_probs")
+  # print(np.asarray(raw_probs))
+  expit_raw_probs = expit(raw_probs)
+  
+  return (expit_raw_probs/expit_raw_probs.sum(axis=1)[:, None])
+  
+  
+  
+    
+  
