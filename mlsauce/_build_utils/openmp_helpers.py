@@ -1,6 +1,6 @@
 """Helpers for OpenMP support during the build."""
 
-# This code is adapted for a large part from the astropy openmp helpers, which
+# This code is adapted for a large part from sklearn and the astropy openmp helpers, which
 # can be found at: https://github.com/astropy/astropy-helpers/blob/master/astropy_helpers/openmp_helpers.py  # noqa
 
 
@@ -81,7 +81,7 @@ def check_openmp_support():
         openmp_supported = False
 
     if not openmp_supported:
-        if os.getenv("SKLEARN_FAIL_NO_OPENMP"):
+        if os.getenv("MLSAUCE_FAIL_NO_OPENMP"):
             raise CompileError("Failed to build with OpenMP")
         else:
             message = textwrap.dedent(
@@ -91,16 +91,16 @@ def check_openmp_support():
                                 * WARNING *
                                 ***********
 
-                It seems that scikit-learn cannot be built with OpenMP.
+                It seems that mlsauce cannot be built with OpenMP.
 
                 - Make sure you have followed the installation instructions:
 
-                    https://scikit-learn.org/dev/developers/advanced_installation.html
+                    https://github.com/thierrymoudiki/mlsauce 
 
                 - If your compiler supports OpenMP but you still see this
                   message, please submit a bug report at:
 
-                    https://github.com/scikit-learn/scikit-learn/issues
+                    https://github.com/thierrymoudiki/mlsauce/issues
 
                 - The build will continue with OpenMP-based parallelism
                   disabled. Note however that some estimators will run in

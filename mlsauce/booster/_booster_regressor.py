@@ -1,11 +1,11 @@
 import numpy as np
 from sklearn.base import BaseEstimator
-from sklearn.base import ClassifierMixin
+from sklearn.base import RegressorMixin
 from . import _boosterc as boosterc 
 
 
-class LSBoostClassifier(BaseEstimator, ClassifierMixin):
-    """ LSBoost classifier.
+class LSBoostRegressor(BaseEstimator, RegressorMixin):
+    """ LSBoost regressor.
         
      Parameters
      ----------
@@ -65,7 +65,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
 
     def fit(self, X, y, **kwargs):
-        """Fit Booster (classifier) to training data (X, y)
+        """Fit Booster (regressor) to training data (X, y)
         
         Parameters
         ----------
@@ -82,9 +82,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         -------
         self: object.
         """
-        
-        self.obj = boosterc.fit_booster_classifier(np.asarray(X, order='C'), 
-                                          np.asarray(y, order='C'), 
+                
+        self.obj = boosterc.fit_booster_regressor(X=np.asarray(X, order='C'), 
+                                          y=np.asarray(y, order='C'), 
                                           n_estimators=self.n_estimators, 
                                           learning_rate=self.learning_rate, 
                                           n_hidden_features=self.n_hidden_features, 
@@ -101,27 +101,6 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
 
     def predict(self, X, **kwargs):
-        """Predict test data X.
-        
-        Parameters
-        ----------
-        X: {array-like}, shape = [n_samples, n_features]
-            Training vectors, where n_samples is the number 
-            of samples and n_features is the number of features.
-        
-        **kwargs: additional parameters to be passed to `predict_proba`
-                
-               
-        Returns
-        -------
-        model predictions: {array-like}
-        """
-
-        return np.argmax(self.predict_proba(X, **kwargs), 
-                         axis=1)
-
-
-    def predict_proba(self, X, **kwargs):
         """Predict probabilities for test data X.
         
         Parameters
@@ -137,6 +116,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         -------
         probability estimates for test data: {array-like}        
         """
+        
+        
 
-        return(boosterc.predict_proba_booster_classifier(self.obj, 
-                                                np.asarray(X, order='C')))
+        return(boosterc.predict_booster_regressor(self.obj, 
+                                                  np.asarray(X, order='C')))

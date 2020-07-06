@@ -200,14 +200,14 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
 # 2 - regressor -----   
 
 # 2 - 1 fit regressor -----
-
+  
 def fit_booster_regressor(double[:,::1] X, double[:] y, 
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
                            double row_sample=1, double col_sample=1,
                            double dropout=0, double tolerance=1e-4, 
-                           int direct_link=1, int bias=1, 
-                           int seed=123, int verbose=1): 
+                           int direct_link=1, int verbose=1, 
+                           int seed=123): 
   
   cdef long int n
   cdef int p, n_cols_h_i, n_cols_hh_i

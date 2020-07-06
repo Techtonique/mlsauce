@@ -61,13 +61,11 @@ if __MLSAUCE_SETUP__:
 else:
     
     from .adaopt import AdaOpt
-    from .booster import LSBoostClassifier
+    from .booster import LSBoostClassifier, LSBoostRegressor
     from .stump import StumpClassifier
-    #from .utils import subsample, merge_two_dicts, flatten, is_float, is_factor
     
-    __all__ = ['AdaOpt', 'LSBoostClassifier', 'StumpClassifier', 
-               #"subsample", "merge_two_dicts", "flatten", "is_float", "is_factor",               
-               'utils',
+    __all__ = ['AdaOpt', 'LSBoostClassifier', 'StumpClassifier', \
+               'LSBoostRegressor',
                # Non-modules:
                'get_config', 'set_config', 'config_context']
 

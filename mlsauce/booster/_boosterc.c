@@ -2285,7 +2285,6 @@ static const char __pyx_k_xsd[] = "xsd";
 static const char __pyx_k_X_iy[] = "X_iy";
 static const char __pyx_k_axis[] = "axis";
 static const char __pyx_k_base[] = "base";
-static const char __pyx_k_bias[] = "bias";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_hh_i[] = "hh_i";
 static const char __pyx_k_iter[] = "iter";
@@ -2492,7 +2491,6 @@ static PyObject *__pyx_n_s_b;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_beta_i;
 static PyObject *__pyx_n_u_beta_i;
-static PyObject *__pyx_n_s_bias;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_u_c;
 static PyObject *__pyx_n_s_choice;
@@ -2656,7 +2654,7 @@ static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_dropout_func(CYTHON_UNUSE
 static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_2one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_classes); /* proto */
 static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_4fit_booster_classifier(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_estimators, double __pyx_v_learning_rate, int __pyx_v_n_hidden_features, double __pyx_v_reg_lambda, double __pyx_v_row_sample, double __pyx_v_col_sample, double __pyx_v_dropout, double __pyx_v_tolerance, int __pyx_v_direct_link, int __pyx_v_verbose, int __pyx_v_seed); /* proto */
 static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_6predict_proba_booster_classifier(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj, __Pyx_memviewslice __pyx_v_X); /* proto */
-static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_8fit_booster_regressor(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_estimators, double __pyx_v_learning_rate, int __pyx_v_n_hidden_features, double __pyx_v_reg_lambda, double __pyx_v_row_sample, double __pyx_v_col_sample, double __pyx_v_dropout, double __pyx_v_tolerance, int __pyx_v_direct_link, CYTHON_UNUSED int __pyx_v_bias, int __pyx_v_seed, int __pyx_v_verbose); /* proto */
+static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_8fit_booster_regressor(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_estimators, double __pyx_v_learning_rate, int __pyx_v_n_hidden_features, double __pyx_v_reg_lambda, double __pyx_v_row_sample, double __pyx_v_col_sample, double __pyx_v_dropout, double __pyx_v_tolerance, int __pyx_v_direct_link, int __pyx_v_verbose, int __pyx_v_seed); /* proto */
 static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_10predict_booster_regressor(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj, __Pyx_memviewslice __pyx_v_X); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
@@ -6842,21 +6840,18 @@ static PyObject *__pyx_pw_7mlsauce_7booster_9_boosterc_9fit_booster_regressor(Py
   double __pyx_v_dropout;
   double __pyx_v_tolerance;
   int __pyx_v_direct_link;
-  CYTHON_UNUSED int __pyx_v_bias;
-  int __pyx_v_seed;
   int __pyx_v_verbose;
+  int __pyx_v_seed;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("fit_booster_regressor (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_y,&__pyx_n_s_n_estimators,&__pyx_n_s_learning_rate,&__pyx_n_s_n_hidden_features,&__pyx_n_s_reg_lambda,&__pyx_n_s_row_sample,&__pyx_n_s_col_sample,&__pyx_n_s_dropout,&__pyx_n_s_tolerance,&__pyx_n_s_direct_link,&__pyx_n_s_bias,&__pyx_n_s_seed,&__pyx_n_s_verbose,0};
-    PyObject* values[14] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_y,&__pyx_n_s_n_estimators,&__pyx_n_s_learning_rate,&__pyx_n_s_n_hidden_features,&__pyx_n_s_reg_lambda,&__pyx_n_s_row_sample,&__pyx_n_s_col_sample,&__pyx_n_s_dropout,&__pyx_n_s_tolerance,&__pyx_n_s_direct_link,&__pyx_n_s_verbose,&__pyx_n_s_seed,0};
+    PyObject* values[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
-        case 14: values[13] = PyTuple_GET_ITEM(__pyx_args, 13);
-        CYTHON_FALLTHROUGH;
         case 13: values[12] = PyTuple_GET_ITEM(__pyx_args, 12);
         CYTHON_FALLTHROUGH;
         case 12: values[11] = PyTuple_GET_ITEM(__pyx_args, 11);
@@ -6895,7 +6890,7 @@ static PyObject *__pyx_pw_7mlsauce_7booster_9_boosterc_9fit_booster_regressor(Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("fit_booster_regressor", 0, 2, 14, 1); __PYX_ERR(0, 204, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("fit_booster_regressor", 0, 2, 13, 1); __PYX_ERR(0, 204, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -6954,7 +6949,7 @@ static PyObject *__pyx_pw_7mlsauce_7booster_9_boosterc_9fit_booster_regressor(Py
         CYTHON_FALLTHROUGH;
         case 11:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_bias);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_verbose);
           if (value) { values[11] = value; kw_args--; }
         }
         CYTHON_FALLTHROUGH;
@@ -6963,20 +6958,12 @@ static PyObject *__pyx_pw_7mlsauce_7booster_9_boosterc_9fit_booster_regressor(Py
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seed);
           if (value) { values[12] = value; kw_args--; }
         }
-        CYTHON_FALLTHROUGH;
-        case 13:
-        if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_verbose);
-          if (value) { values[13] = value; kw_args--; }
-        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "fit_booster_regressor") < 0)) __PYX_ERR(0, 204, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case 14: values[13] = PyTuple_GET_ITEM(__pyx_args, 13);
-        CYTHON_FALLTHROUGH;
         case 13: values[12] = PyTuple_GET_ITEM(__pyx_args, 12);
         CYTHON_FALLTHROUGH;
         case 12: values[11] = PyTuple_GET_ITEM(__pyx_args, 11);
@@ -7053,37 +7040,32 @@ static PyObject *__pyx_pw_7mlsauce_7booster_9_boosterc_9fit_booster_regressor(Py
       __pyx_v_direct_link = ((int)1);
     }
     if (values[11]) {
-      __pyx_v_bias = __Pyx_PyInt_As_int(values[11]); if (unlikely((__pyx_v_bias == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
+      __pyx_v_verbose = __Pyx_PyInt_As_int(values[11]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
     } else {
-      __pyx_v_bias = ((int)1);
+      __pyx_v_verbose = ((int)1);
     }
     if (values[12]) {
       __pyx_v_seed = __Pyx_PyInt_As_int(values[12]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((int)0x7B);
     }
-    if (values[13]) {
-      __pyx_v_verbose = __Pyx_PyInt_As_int(values[13]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L3_error)
-    } else {
-      __pyx_v_verbose = ((int)1);
-    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("fit_booster_regressor", 0, 2, 14, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 204, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("fit_booster_regressor", 0, 2, 13, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 204, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mlsauce.booster._boosterc.fit_booster_regressor", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_7booster_9_boosterc_8fit_booster_regressor(__pyx_self, __pyx_v_X, __pyx_v_y, __pyx_v_n_estimators, __pyx_v_learning_rate, __pyx_v_n_hidden_features, __pyx_v_reg_lambda, __pyx_v_row_sample, __pyx_v_col_sample, __pyx_v_dropout, __pyx_v_tolerance, __pyx_v_direct_link, __pyx_v_bias, __pyx_v_seed, __pyx_v_verbose);
+  __pyx_r = __pyx_pf_7mlsauce_7booster_9_boosterc_8fit_booster_regressor(__pyx_self, __pyx_v_X, __pyx_v_y, __pyx_v_n_estimators, __pyx_v_learning_rate, __pyx_v_n_hidden_features, __pyx_v_reg_lambda, __pyx_v_row_sample, __pyx_v_col_sample, __pyx_v_dropout, __pyx_v_tolerance, __pyx_v_direct_link, __pyx_v_verbose, __pyx_v_seed);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_8fit_booster_regressor(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_estimators, double __pyx_v_learning_rate, int __pyx_v_n_hidden_features, double __pyx_v_reg_lambda, double __pyx_v_row_sample, double __pyx_v_col_sample, double __pyx_v_dropout, double __pyx_v_tolerance, int __pyx_v_direct_link, CYTHON_UNUSED int __pyx_v_bias, int __pyx_v_seed, int __pyx_v_verbose) {
+static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_8fit_booster_regressor(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_estimators, double __pyx_v_learning_rate, int __pyx_v_n_hidden_features, double __pyx_v_reg_lambda, double __pyx_v_row_sample, double __pyx_v_col_sample, double __pyx_v_dropout, double __pyx_v_tolerance, int __pyx_v_direct_link, int __pyx_v_verbose, int __pyx_v_seed) {
   long __pyx_v_n;
   int __pyx_v_p;
   int __pyx_v_n_cols_h_i;
@@ -25992,7 +25974,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_beta_i, __pyx_k_beta_i, sizeof(__pyx_k_beta_i), 0, 0, 1, 1},
   {&__pyx_n_u_beta_i, __pyx_k_beta_i, sizeof(__pyx_k_beta_i), 0, 1, 0, 1},
-  {&__pyx_n_s_bias, __pyx_k_bias, sizeof(__pyx_k_bias), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_u_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 1, 0, 1},
   {&__pyx_n_s_choice, __pyx_k_choice, sizeof(__pyx_k_choice), 0, 0, 1, 1},
@@ -26520,10 +26501,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                            int n_estimators=100, double learning_rate=0.1,
  *                            int n_hidden_features=5, double reg_lambda=0.1,
  */
-  __pyx_tuple__36 = PyTuple_Pack(37, __pyx_n_s_X, __pyx_n_s_y, __pyx_n_s_n_estimators, __pyx_n_s_learning_rate, __pyx_n_s_n_hidden_features, __pyx_n_s_reg_lambda, __pyx_n_s_row_sample, __pyx_n_s_col_sample, __pyx_n_s_dropout, __pyx_n_s_tolerance, __pyx_n_s_direct_link, __pyx_n_s_bias, __pyx_n_s_seed, __pyx_n_s_verbose, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_n_cols_h_i, __pyx_n_s_n_cols_hh_i, __pyx_n_s_n_classes, __pyx_n_s_iter, __pyx_n_s_res, __pyx_n_s_ym, __pyx_n_s_xm, __pyx_n_s_xsd, __pyx_n_s_e, __pyx_n_s_X_2, __pyx_n_s_W_i, __pyx_n_s_h_i, __pyx_n_s_hh_i, __pyx_n_s_hidden_layer_i, __pyx_n_s_hhidden_layer_i, __pyx_n_s_iterator, __pyx_n_s_iy, __pyx_n_s_X_iy, __pyx_n_s_ix, __pyx_n_s_X_iy_ix, __pyx_n_s_beta_i); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(36, __pyx_n_s_X, __pyx_n_s_y, __pyx_n_s_n_estimators, __pyx_n_s_learning_rate, __pyx_n_s_n_hidden_features, __pyx_n_s_reg_lambda, __pyx_n_s_row_sample, __pyx_n_s_col_sample, __pyx_n_s_dropout, __pyx_n_s_tolerance, __pyx_n_s_direct_link, __pyx_n_s_verbose, __pyx_n_s_seed, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_n_cols_h_i, __pyx_n_s_n_cols_hh_i, __pyx_n_s_n_classes, __pyx_n_s_iter, __pyx_n_s_res, __pyx_n_s_ym, __pyx_n_s_xm, __pyx_n_s_xsd, __pyx_n_s_e, __pyx_n_s_X_2, __pyx_n_s_W_i, __pyx_n_s_h_i, __pyx_n_s_hh_i, __pyx_n_s_hidden_layer_i, __pyx_n_s_hhidden_layer_i, __pyx_n_s_iterator, __pyx_n_s_iy, __pyx_n_s_X_iy, __pyx_n_s_ix, __pyx_n_s_X_iy_ix, __pyx_n_s_beta_i); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__36);
   __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(14, 0, 37, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_booster__boosterc_pyx, __pyx_n_s_fit_booster_regressor, 204, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(13, 0, 36, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_booster__boosterc_pyx, __pyx_n_s_fit_booster_regressor, 204, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 204, __pyx_L1_error)
 
   /* "mlsauce/booster/_boosterc.pyx":294
  * # 2 - 2 predict regressor -----

@@ -39,7 +39,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-VERSION = 'version='0.4.0''
+VERSION = '0.4.0'
 
 if platform.python_implementation() == 'PyPy':
     SCIPY_MIN_VERSION = '1.1.0'
@@ -63,6 +63,7 @@ SETUPTOOLS_COMMANDS = {
     '--single-version-externally-managed',
 }
 if SETUPTOOLS_COMMANDS.intersection(sys.argv):
+    
     import setuptools
 
     extra_setuptools_args = dict(
@@ -75,7 +76,9 @@ if SETUPTOOLS_COMMANDS.intersection(sys.argv):
             ),
         },
     )
+        
 else:
+    
     extra_setuptools_args = dict()
 
 
