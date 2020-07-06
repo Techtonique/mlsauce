@@ -1,18 +1,13 @@
 import numpy as np
 import pickle
-from joblib.externals.loky import set_loky_pickler
-from joblib import parallel_backend
 from joblib import Parallel, delayed
 from joblib import wrap_non_picklable_objects
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
-from scipy.special import expit
 from numpy.linalg import norm
 from tqdm import tqdm
 from ..utils import subsample
-from ..adaopt_cython import fit_adaopt, predict_proba_adaopt
-from ..adaopt_cython import find_kmin_x, calculate_weights, calculate_probs, average_probs, \
-distance_to_mat_euclidean2, distance_to_mat_manhattan2, distance_to_mat_cosine2
+from . import _adaoptc as adaoptc
 
 
 class AdaOpt(BaseEstimator, ClassifierMixin):
@@ -142,7 +137,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         assert n == len(y_), "must have X.shape[0] == len(y)"
 
-        res = fit_adaopt(
+        res = adaoptc.fit_adaopt(
             X=np.asarray(X_),
             y=np.asarray(y_),
             n_iterations=self.n_iterations,
@@ -209,7 +204,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         
         if self.n_jobs is None:
         
-            return predict_proba_adaopt(X_test=np.asarray(X, order='C'), 
+            return adaoptc.predict_proba_adaopt(X_test=np.asarray(X, order='C'), 
                                     scaled_X_train=np.asarray(self.scaled_X_train, order='C'),
                                     n_test=n_test, n_train=n_train,
                                     probs_train=self.probs_training,
@@ -234,23 +229,23 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             @wrap_non_picklable_objects            
             def multiproc_func(i):
     
-                dists_test_i = distance_to_mat_euclidean2(np.asarray(scaled_X_test, order='C')[i,:], 
+                dists_test_i = adaoptc.distance_to_mat_euclidean2(np.asarray(scaled_X_test, order='C')[i,:], 
                                                           np.asarray(self.scaled_X_train, order='C'),
                                                           np.zeros(n_train),
                                                           n_train,
                                                           p_train)        
     
-                kmin_test_i = find_kmin_x(dists_test_i, 
+                kmin_test_i = adaoptc.find_kmin_x(dists_test_i, 
                                           n_x=n_train, 
                                           k=self.k, 
                                           cache=self.cache) 
     
-                weights_test_i = calculate_weights(kmin_test_i[0])
+                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
     
-                probs_test_i = calculate_probs(kmin_test_i[1], 
+                probs_test_i = adaoptc.calculate_probs(kmin_test_i[1], 
                                                self.probs_training)  
     
-                return average_probs(probs=probs_test_i, 
+                return adaoptc.average_probs(probs=probs_test_i, 
                                      weights=weights_test_i)
         
         if self.type_dist == "manhattan": 
@@ -259,23 +254,23 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             @wrap_non_picklable_objects
             def multiproc_func(i):
     
-                dists_test_i = distance_to_mat_manhattan2(np.asarray(scaled_X_test, order='C')[i,:], 
+                dists_test_i = adaoptc.distance_to_mat_manhattan2(np.asarray(scaled_X_test, order='C')[i,:], 
                                                           np.asarray(self.scaled_X_train, order='C'),
                                                           np.zeros(n_train),
                                                           n_train,
                                                           p_train)        
     
-                kmin_test_i = find_kmin_x(dists_test_i, 
+                kmin_test_i = adaoptc.find_kmin_x(dists_test_i, 
                                           n_x=n_train, 
                                           k=self.k, 
                                           cache=self.cache) 
     
-                weights_test_i = calculate_weights(kmin_test_i[0])
+                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
     
-                probs_test_i = calculate_probs(kmin_test_i[1], 
+                probs_test_i = adaoptc.calculate_probs(kmin_test_i[1], 
                                                self.probs_training)  
     
-                return average_probs(probs=probs_test_i, 
+                return adaoptc.average_probs(probs=probs_test_i, 
                                      weights=weights_test_i)
 
         if self.type_dist == "cosine": 
@@ -284,23 +279,23 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             @wrap_non_picklable_objects
             def multiproc_func(i, *args):
     
-                dists_test_i = distance_to_mat_cosine2(np.asarray(scaled_X_test, order='C')[i,:], 
+                dists_test_i = adaoptc.distance_to_mat_cosine2(np.asarray(scaled_X_test, order='C')[i,:], 
                                                        np.asarray(self.scaled_X_train, order='C'),
                                                        np.zeros(n_train),
                                                        n_train,
                                                        p_train)        
     
-                kmin_test_i = find_kmin_x(dists_test_i, 
+                kmin_test_i = adaoptc.find_kmin_x(dists_test_i, 
                                           n_x=n_train, 
                                           k=self.k, 
                                           cache=self.cache) 
     
-                weights_test_i = calculate_weights(kmin_test_i[0])
+                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
     
-                probs_test_i = calculate_probs(kmin_test_i[1], 
+                probs_test_i = adaoptc.calculate_probs(kmin_test_i[1], 
                                                self.probs_training)  
     
-                return average_probs(probs=probs_test_i, 
+                return adaoptc.average_probs(probs=probs_test_i, 
                                      weights=weights_test_i)
 
         if self.verbose == 1:    

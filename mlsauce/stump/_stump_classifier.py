@@ -1,40 +1,28 @@
 import numpy as np
-import pickle
-from joblib.externals.loky import set_loky_pickler
-from joblib import parallel_backend
-from joblib import Parallel, delayed
-from joblib import wrap_non_picklable_objects
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
-from scipy.special import expit
-from numpy.linalg import norm
-from tqdm import tqdm
-from ..utils import subsample
-from ..stump_cython import fit_stump_classifier, predict_proba_stump_classifier
+from . import _stumpc as stumpc
 
 
-class Stump(BaseEstimator, ClassifierMixin):
+class StumpClassifier(BaseEstimator, ClassifierMixin):
     """Stump classifier.
         
      Parameters
      ----------
      bins: int
-         As in numpy.histogram.        
-     sample_weight: array_like
-         Observations weights.                                    
+         Number of histogram bins; as in numpy.histogram.        
     """
     
     def __init__(
         self,
         bins="auto",
-        sample_weight=None
     ):
 
         self.bins = bins
         self.obj = None
 
     def fit(self, X, y, 
-            sample_weight=None, **kwargs):
+            sample_weight=None):
         """Fit Stump to training data (X, y)
         
         Parameters
@@ -45,21 +33,16 @@ class Stump(BaseEstimator, ClassifierMixin):
         
         y: array-like, shape = [n_samples]
                Target values.
-    
-        **kwargs: additional parameters to be passed to self.cook_training_set.
                
+        sample_weight: array_like, shape = [n_samples]
+         Observations weights.                                    
+                      
         Returns
         -------
         self: object.
         """
-                
-        n, p = X.shape
-            
-        n_classes = len(np.unique(y_))
-
-        assert n == len(y), "must have X.shape[0] == len(y)"
-                
-        self.obj = fit_stump_classifier(X=np.asarray(X, order='C'), 
+                                
+        self.obj = stumpc.fit_stump_classifier(X=np.asarray(X, order='C'), 
                                         y=np.asarray(y, order='C'), 
                                         sample_weight=sample_weight, 
                                         bins=self.bins)                   
@@ -106,15 +89,5 @@ class Stump(BaseEstimator, ClassifierMixin):
         """
 
         
-        return predict_proba_stump_classifier(X_test=np.asarray(X, order='C'), 
-                                    scaled_X_train=np.asarray(self.scaled_X_train, order='C'),
-                                    n_test=n_test, n_train=n_train,
-                                    probs_train=self.probs_training,
-                                    k=self.k, n_clusters=self.n_clusters,
-                                    batch_size=self.batch_size, 
-                                    type_dist=self.type_dist, 
-                                    cache=self.cache,
-                                    seed=self.seed)
-          
-        return np.asarray(res)
-         
+        return stumpc.predict_proba_stump_classifier(self.obj, 
+                                              np.asarray(X, order='C'))         
