@@ -1,5 +1,4 @@
 import numpy as np 
-import pandas as pd
 from sklearn.datasets import load_digits, load_breast_cancer, load_wine, load_iris
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from time import time
