@@ -28,7 +28,7 @@ start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
 start = time()
-print(obj.score(X_test, y_test))
+print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 
 
