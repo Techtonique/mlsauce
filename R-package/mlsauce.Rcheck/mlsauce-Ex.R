@@ -67,10 +67,10 @@ p <- dim(X)[2]
 set.seed(21341)
 train_index <- sample(x = 1:n, size = floor(0.8*n), replace = TRUE)
 test_index <- -train_index
-X_train <- as.matrix(iris[train_index, 1:4])
-y_train <- as.integer(iris[train_index, 5]) - 1L
-X_test <- as.matrix(iris[test_index, 1:4])
-y_test <- as.integer(iris[test_index, 5]) - 1L
+X_train <- as.matrix(X[train_index, ])
+y_train <- as.integer(y[train_index])
+X_test <- as.matrix(X[test_index, ])
+y_test <- as.integer(y[test_index])
 
 obj <- mlsauce::LSBoostClassifier()
 
@@ -107,9 +107,9 @@ set.seed(21341)
 train_index <- sample(x = 1:n, size = floor(0.8*n), replace = TRUE)
 test_index <- -train_index
 X_train <- as.matrix(X[train_index, ])
-y_train <- as.integer(y[train_index, ])
+y_train <- as.double(y[train_index])
 X_test <- as.matrix(X[test_index, ])
-y_test <- as.integer(y[test_index])
+y_test <- as.double(y[test_index])
 
 obj <- mlsauce::LSBoostRegressor()
 

@@ -44,4 +44,4 @@ StumpClassifier <- function(bins="auto")
 
 
 #' Stump Regressor
-#'
+#' Not implemented yet

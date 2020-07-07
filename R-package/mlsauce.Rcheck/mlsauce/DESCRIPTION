@@ -13,5 +13,5 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-07-07 14:22:39 UTC; rstudio-user
-Built: R 4.0.0; ; 2020-07-07 14:22:51 UTC; unix
+Packaged: 2020-07-07 14:41:03 UTC; rstudio-user
+Built: R 4.0.0; ; 2020-07-07 14:41:15 UTC; unix

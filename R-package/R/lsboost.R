@@ -106,9 +106,9 @@ LSBoostClassifier <- function(n_estimators=100L,
 #' train_index <- sample(x = 1:n, size = floor(0.8*n), replace = TRUE)
 #' test_index <- -train_index
 #' X_train <- as.matrix(X[train_index, ])
-#' y_train <- as.integer(y[train_index])
+#' y_train <- as.double(y[train_index])
 #' X_test <- as.matrix(X[test_index, ])
-#' y_test <- as.integer(y[test_index])
+#' y_test <- as.double(y[test_index])
 #'
 #' obj <- mlsauce::LSBoostRegressor()
 #'
