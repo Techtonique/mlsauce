@@ -1,3 +1,4 @@
 AdaOpt	AdaOpt
 LSBoostClassifier	LSBoostClassifier
 LSBoostRegressor	LSBoostRegressor
+StumpClassifier	StumpClassifier

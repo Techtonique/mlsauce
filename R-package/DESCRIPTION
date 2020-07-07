@@ -7,7 +7,7 @@ Description: Miscellaneous Statistical/Machine Learning stuff.
 License: BSD_3_clause Clear + file LICENSE
 Imports: reticulate, R6, Rcpp
 Suggests: reticulate, R6, Rcpp 
-Collate: 'zzz.R' 'adaopt.R' 'lsboost.R'
+Collate: 'zzz.R' 'adaopt.R' 'lsboost.R' 'stump.R'
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
