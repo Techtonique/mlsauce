@@ -45,7 +45,7 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
                                 
         self.obj = stumpc.fit_stump_classifier(X=np.asarray(X, order='C'), 
                                         y=np.asarray(y, order='C'), 
-                                        sample_weight=sample_weight, 
+                                        sample_weight=np.ravel(sample_weight, order='C'), 
                                         bins=self.bins)                   
       
         return self
