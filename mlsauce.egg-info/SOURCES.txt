@@ -31,6 +31,8 @@ mlsauce/stump/__init__.py
 mlsauce/stump/_stump_classifier.py
 mlsauce/stump/_stumpc.c
 mlsauce/stump/setup.py
+mlsauce/tests/__init__.py
+mlsauce/tests/test_adaopt.py
 mlsauce/utils/__init__.py
 mlsauce/utils/memoryuse/__init__.py
 mlsauce/utils/memoryuse/mem_usage.py

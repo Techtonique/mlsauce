@@ -30,7 +30,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
          indicates whether the original features are included (True) in model's 
          fitting or not (False).
      verbose: int
-         progress bar for parallel processing (yes = 1) or not (no = 0) (currently).
+         progress bar (yes = 1) or not (no = 0) (currently).
      seed: int 
          reproducibility seed for nodes_sim=='uniform', clustering and dropout.
          

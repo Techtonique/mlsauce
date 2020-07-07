@@ -22,7 +22,8 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
         self.obj = None
 
     def fit(self, X, y, 
-            sample_weight=None):
+            sample_weight=None, 
+            **kwargs):
         """Fit Stump to training data (X, y)
         
         Parameters
