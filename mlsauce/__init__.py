@@ -63,9 +63,12 @@ else:
     from .adaopt import AdaOpt
     from .booster import LSBoostClassifier, LSBoostRegressor
     from .stump import StumpClassifier
+    from .encoders import corrtarget_encoder
     
     __all__ = ['AdaOpt', 'LSBoostClassifier', 'StumpClassifier', \
                'LSBoostRegressor',
+               # Other imports
+               'corrtarget_encoder',
                # Non-modules:
                'get_config', 'set_config', 'config_context']
 

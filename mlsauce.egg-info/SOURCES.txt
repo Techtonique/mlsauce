@@ -27,6 +27,8 @@ mlsauce/booster/_booster_classifier.py
 mlsauce/booster/_booster_regressor.py
 mlsauce/booster/_boosterc.c
 mlsauce/booster/setup.py
+mlsauce/encoders/__init__.py
+mlsauce/encoders/target_encoders.py
 mlsauce/stump/__init__.py
 mlsauce/stump/_stump_classifier.py
 mlsauce/stump/_stumpc.c

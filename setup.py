@@ -28,6 +28,8 @@ except ImportError:
 builtins.__MLSAUCE_SETUP__ = True
 
 
+__version__ = '0.4.2'
+
 DISTNAME = 'mlsauce'
 DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
 LONG_DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
@@ -39,7 +41,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-VERSION = '0.4.2'
+VERSION = __version__
 
 if platform.python_implementation() == 'PyPy':
     SCIPY_MIN_VERSION = '1.1.0'
