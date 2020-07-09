@@ -28,8 +28,6 @@ except ImportError:
 builtins.__MLSAUCE_SETUP__ = True
 
 
-__version__ = '0.4.2'
-
 DISTNAME = 'mlsauce'
 DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
 LONG_DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
@@ -41,7 +39,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-VERSION = __version__
+VERSION = '0.4.2'
 
 if platform.python_implementation() == 'PyPy':
     SCIPY_MIN_VERSION = '1.1.0'
@@ -53,6 +51,8 @@ else:
 JOBLIB_MIN_VERSION = '0.14.0'
 SKLEARN_MIN_VERSION = '0.18.0'
 THREADPOOLCTL_MIN_VERSION = '2.0.0'
+PANDAS_MIN_VERSION = '0.25.3'
+QUERIER_MIN_VERSION = '0.4.0'
 
 # Optional setuptools features
 # We need to import setuptools early, if we want setuptools features,
@@ -245,7 +245,9 @@ def setup_package():
                         'scipy>={}'.format(SCIPY_MIN_VERSION),
                         'joblib>={}'.format(JOBLIB_MIN_VERSION),
                         'scikit-learn'.format(SKLEARN_MIN_VERSION),
-                        'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION)
+                        'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION),
+                        'pandas>={}'.format(PANDAS_MIN_VERSION),
+                        'querier>={}'.format(QUERIER_MIN_VERSION)
                     ],
                     package_data={'': ['*.pxd']},
                     **extra_setuptools_args)
