@@ -39,7 +39,9 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-VERSION = '0.4.2'
+__version__ = '0.4.2'
+
+VERSION = __version__
 
 if platform.python_implementation() == 'PyPy':
     SCIPY_MIN_VERSION = '1.1.0'
