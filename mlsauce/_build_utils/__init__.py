@@ -16,19 +16,20 @@ from .pre_build_helpers import basic_check_build
 from .openmp_helpers import check_openmp_support
 
 
-DEFAULT_ROOT = 'mlsauce'
+DEFAULT_ROOT = "mlsauce"
 
 # The following places need to be in sync with regard to Cython version:
 # - .circleci config file
 # - mlsauce/_build_utils/__init__.py
 # - advanced installation guide
-CYTHON_MIN_VERSION = '0.29.13'
+CYTHON_MIN_VERSION = "0.29.13"
 
 
 def _check_cython_version():
-    message = ('Please install Cython with a version >= {0} in order '
-               'to build a mlsauce from source.').format(
-                    CYTHON_MIN_VERSION)
+    message = (
+        "Please install Cython with a version >= {0} in order "
+        "to build a mlsauce from source."
+    ).format(CYTHON_MIN_VERSION)
     try:
         import Cython
     except ModuleNotFoundError:
@@ -36,8 +37,9 @@ def _check_cython_version():
         raise ModuleNotFoundError(message)
 
     if LooseVersion(Cython.__version__) < CYTHON_MIN_VERSION:
-        message += (' The current version of Cython is {} installed in {}.'
-                    .format(Cython.__version__, Cython.__path__))
+        message += " The current version of Cython is {} installed in {}.".format(
+            Cython.__version__, Cython.__path__
+        )
         raise ValueError(message)
 
 
@@ -67,6 +69,7 @@ def cythonize_extensions(top_path, config):
     n_jobs = 1
     with contextlib.suppress(ImportError):
         import joblib
+
         if LooseVersion(joblib.__version__) > LooseVersion("0.13.0"):
             # earlier joblib versions don't account for CPU affinity
             # constraints, and may over-estimate the number of available
@@ -77,8 +80,10 @@ def cythonize_extensions(top_path, config):
         config.ext_modules,
         nthreads=n_jobs,
         compile_time_env={
-            'MLSAUCE_OPENMP_PARALLELISM_ENABLED': mlsauce._OPENMP_SUPPORTED},
-        compiler_directives={'language_level': 3})
+            "MLSAUCE_OPENMP_PARALLELISM_ENABLED": mlsauce._OPENMP_SUPPORTED
+        },
+        compiler_directives={"language_level": 3},
+    )
 
 
 def gen_from_templates(templates, top_path):
@@ -87,11 +92,13 @@ def gen_from_templates(templates, top_path):
     from Cython import Tempita
 
     for template in templates:
-        outfile = template.replace('.tp', '')
+        outfile = template.replace(".tp", "")
 
         # if the template is not updated, no need to output the cython file
-        if not (os.path.exists(outfile) and
-                os.stat(template).st_mtime < os.stat(outfile).st_mtime):
+        if not (
+            os.path.exists(outfile)
+            and os.stat(template).st_mtime < os.stat(outfile).st_mtime
+        ):
 
             with open(template, "r") as f:
                 tmpl = f.read()

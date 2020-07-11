@@ -57,7 +57,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
          reproducibility seed for nodes_sim=='uniform', clustering and dropout.
          
     """
-    
+
     def __init__(
         self,
         n_iterations=50,
@@ -70,11 +70,11 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         tolerance=0,
         n_clusters=0,
         batch_size=100,
-        row_sample=0.8, 
+        row_sample=0.8,
         type_dist="euclidean-f",
         n_jobs=None,
-        verbose=0,        
-        cache=True,        
+        verbose=0,
+        cache=True,
         seed=123,
     ):
 
@@ -95,13 +95,12 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.tolerance = tolerance
         self.n_clusters = n_clusters
         self.batch_size = batch_size
-        self.row_sample = row_sample        
+        self.row_sample = row_sample
         self.type_dist = type_dist
         self.n_jobs = n_jobs
         self.cache = cache
         self.verbose = verbose
         self.seed = seed
-
 
     def fit(self, X, y, **kwargs):
         """Fit AdaOpt to training data (X, y)
@@ -121,18 +120,19 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         -------
         self: object.
         """
-        
+
         if self.row_sample < 1:
-            index_subsample = subsample(y, row_sample=self.row_sample, 
-                                       seed=self.seed)
+            index_subsample = subsample(
+                y, row_sample=self.row_sample, seed=self.seed
+            )
             y_ = y[index_subsample]
             X_ = X[index_subsample, :]
         else:
             y_ = pickle.loads(pickle.dumps(y, -1))
             X_ = pickle.loads(pickle.dumps(X, -1))
-        
+
         n, p = X_.shape
-            
+
         n_classes = len(np.unique(y_))
 
         assert n == len(y_), "must have X.shape[0] == len(y)"
@@ -160,7 +160,6 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         return self
 
-
     def predict(self, X, **kwargs):
         """Predict test data X.
         
@@ -178,9 +177,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         model predictions: {array-like}
         """
 
-        return np.argmax(self.predict_proba(X, **kwargs), 
-                         axis=1)
-
+        return np.argmax(self.predict_proba(X, **kwargs), axis=1)
 
     def predict_proba(self, X, **kwargs):
         """Predict probabilities for test data X.
@@ -201,113 +198,126 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         n_train, p_train = self.scaled_X_train.shape
         n_test = X.shape[0]
-        
+
         if self.n_jobs is None:
-        
-            return adaoptc.predict_proba_adaopt(X_test=np.asarray(X, order='C'), 
-                                    scaled_X_train=np.asarray(self.scaled_X_train, order='C'),
-                                    n_test=n_test, n_train=n_train,
-                                    probs_train=self.probs_training,
-                                    k=self.k, n_clusters=self.n_clusters,
-                                    batch_size=self.batch_size, 
-                                    type_dist=self.type_dist, 
-                                    cache=self.cache,
-                                    seed=self.seed)
-       
+
+            return adaoptc.predict_proba_adaopt(
+                X_test=np.asarray(X, order="C"),
+                scaled_X_train=np.asarray(self.scaled_X_train, order="C"),
+                n_test=n_test,
+                n_train=n_train,
+                probs_train=self.probs_training,
+                k=self.k,
+                n_clusters=self.n_clusters,
+                batch_size=self.batch_size,
+                type_dist=self.type_dist,
+                cache=self.cache,
+                seed=self.seed,
+            )
+
         # parallel: self.n_jobs is not None
         assert self.type_dist in (
             "euclidean",
             "manhattan",
             "cosine",
         ), "must have: `self.type_dist` in ('euclidean', 'manhattan', 'cosine') "
-                
-        scaled_X_test = X/norm(X, ord=2, axis=1)[:, None]
-        
-        if self.type_dist == "euclidean": 
 
-            @delayed
-            @wrap_non_picklable_objects            
-            def multiproc_func(i):
-    
-                dists_test_i = adaoptc.distance_to_mat_euclidean2(np.asarray(scaled_X_test, order='C')[i,:], 
-                                                          np.asarray(self.scaled_X_train, order='C'),
-                                                          np.zeros(n_train),
-                                                          n_train,
-                                                          p_train)        
-    
-                kmin_test_i = adaoptc.find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=self.k, 
-                                          cache=self.cache) 
-    
-                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
-    
-                probs_test_i = adaoptc.calculate_probs(kmin_test_i[1], 
-                                               self.probs_training)  
-    
-                return adaoptc.average_probs(probs=probs_test_i, 
-                                     weights=weights_test_i)
-        
-        if self.type_dist == "manhattan": 
-            
+        scaled_X_test = X / norm(X, ord=2, axis=1)[:, None]
+
+        if self.type_dist == "euclidean":
+
             @delayed
             @wrap_non_picklable_objects
             def multiproc_func(i):
-    
-                dists_test_i = adaoptc.distance_to_mat_manhattan2(np.asarray(scaled_X_test, order='C')[i,:], 
-                                                          np.asarray(self.scaled_X_train, order='C'),
-                                                          np.zeros(n_train),
-                                                          n_train,
-                                                          p_train)        
-    
-                kmin_test_i = adaoptc.find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=self.k, 
-                                          cache=self.cache) 
-    
-                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
-    
-                probs_test_i = adaoptc.calculate_probs(kmin_test_i[1], 
-                                               self.probs_training)  
-    
-                return adaoptc.average_probs(probs=probs_test_i, 
-                                     weights=weights_test_i)
 
-        if self.type_dist == "cosine": 
-            
+                dists_test_i = adaoptc.distance_to_mat_euclidean2(
+                    np.asarray(scaled_X_test, order="C")[i, :],
+                    np.asarray(self.scaled_X_train, order="C"),
+                    np.zeros(n_train),
+                    n_train,
+                    p_train,
+                )
+
+                kmin_test_i = adaoptc.find_kmin_x(
+                    dists_test_i, n_x=n_train, k=self.k, cache=self.cache
+                )
+
+                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
+
+                probs_test_i = adaoptc.calculate_probs(
+                    kmin_test_i[1], self.probs_training
+                )
+
+                return adaoptc.average_probs(
+                    probs=probs_test_i, weights=weights_test_i
+                )
+
+        if self.type_dist == "manhattan":
+
+            @delayed
+            @wrap_non_picklable_objects
+            def multiproc_func(i):
+
+                dists_test_i = adaoptc.distance_to_mat_manhattan2(
+                    np.asarray(scaled_X_test, order="C")[i, :],
+                    np.asarray(self.scaled_X_train, order="C"),
+                    np.zeros(n_train),
+                    n_train,
+                    p_train,
+                )
+
+                kmin_test_i = adaoptc.find_kmin_x(
+                    dists_test_i, n_x=n_train, k=self.k, cache=self.cache
+                )
+
+                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
+
+                probs_test_i = adaoptc.calculate_probs(
+                    kmin_test_i[1], self.probs_training
+                )
+
+                return adaoptc.average_probs(
+                    probs=probs_test_i, weights=weights_test_i
+                )
+
+        if self.type_dist == "cosine":
+
             @delayed
             @wrap_non_picklable_objects
             def multiproc_func(i, *args):
-    
-                dists_test_i = adaoptc.distance_to_mat_cosine2(np.asarray(scaled_X_test, order='C')[i,:], 
-                                                       np.asarray(self.scaled_X_train, order='C'),
-                                                       np.zeros(n_train),
-                                                       n_train,
-                                                       p_train)        
-    
-                kmin_test_i = adaoptc.find_kmin_x(dists_test_i, 
-                                          n_x=n_train, 
-                                          k=self.k, 
-                                          cache=self.cache) 
-    
-                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
-    
-                probs_test_i = adaoptc.calculate_probs(kmin_test_i[1], 
-                                               self.probs_training)  
-    
-                return adaoptc.average_probs(probs=probs_test_i, 
-                                     weights=weights_test_i)
 
-        if self.verbose == 1:    
-            
+                dists_test_i = adaoptc.distance_to_mat_cosine2(
+                    np.asarray(scaled_X_test, order="C")[i, :],
+                    np.asarray(self.scaled_X_train, order="C"),
+                    np.zeros(n_train),
+                    n_train,
+                    p_train,
+                )
+
+                kmin_test_i = adaoptc.find_kmin_x(
+                    dists_test_i, n_x=n_train, k=self.k, cache=self.cache
+                )
+
+                weights_test_i = adaoptc.calculate_weights(kmin_test_i[0])
+
+                probs_test_i = adaoptc.calculate_probs(
+                    kmin_test_i[1], self.probs_training
+                )
+
+                return adaoptc.average_probs(
+                    probs=probs_test_i, weights=weights_test_i
+                )
+
+        if self.verbose == 1:
+
             res = Parallel(n_jobs=self.n_jobs, prefer="threads")(
-                    (multiproc_func)(m) for m in tqdm(range(n_test)))   
-        
-        else: 
-            
+                (multiproc_func)(m) for m in tqdm(range(n_test))
+            )
+
+        else:
+
             res = Parallel(n_jobs=self.n_jobs, prefer="threads")(
-                    (multiproc_func)(m) for m in range(n_test))   
-        
-            
+                (multiproc_func)(m) for m in range(n_test)
+            )
+
         return np.asarray(res)
-         

@@ -3,7 +3,6 @@
 # License: BSD 3
 
 
-
 import numpy as np
 from ..misc import misc as mx
 

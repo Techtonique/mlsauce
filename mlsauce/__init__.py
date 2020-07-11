@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 # Dev branch marker is: 'X.Y.dev' or 'X.Y.devN' where N is an integer.
 # 'X.Y.dev0' is the canonical version of 'X.Y.dev'
 #
-__version__ = '0.4.0'
+__version__ = "0.4.0"
 
 
 # On OSX, we can get a runtime error due to multiple OpenMP libraries loaded
@@ -53,24 +53,30 @@ except NameError:
     __MLSAUCE_SETUP__ = False
 
 if __MLSAUCE_SETUP__:
-    
-    sys.stderr.write('Partial import of mlsauce during the build process.\n')
+
+    sys.stderr.write("Partial import of mlsauce during the build process.\n")
     # We are not importing the rest of scikit-learn during the build
     # process, as it may not be compiled yet
-    
+
 else:
-    
+
     from .adaopt import AdaOpt
     from .booster import LSBoostClassifier, LSBoostRegressor
     from .stump import StumpClassifier
     from .encoders import corrtarget_encoder
-    
-    __all__ = ['AdaOpt', 'LSBoostClassifier', 'StumpClassifier', \
-               'LSBoostRegressor',
-               # Other imports
-               'corrtarget_encoder',
-               # Non-modules:
-               'get_config', 'set_config', 'config_context']
+
+    __all__ = [
+        "AdaOpt",
+        "LSBoostClassifier",
+        "StumpClassifier",
+        "LSBoostRegressor",
+        # Other imports
+        "corrtarget_encoder",
+        # Non-modules:
+        "get_config",
+        "set_config",
+        "config_context",
+    ]
 
 
 def setup_module(module):
@@ -80,7 +86,7 @@ def setup_module(module):
     import random
 
     # Check if a random seed exists in the environment, if not create one.
-    _random_seed = os.environ.get('MLSAUCE_SEED', None)
+    _random_seed = os.environ.get("MLSAUCE_SEED", None)
     if _random_seed is None:
         _random_seed = np.random.uniform() * np.iinfo(np.int32).max
     _random_seed = int(_random_seed)

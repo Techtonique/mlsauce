@@ -23,33 +23,40 @@ def compile_test_program(code, extra_preargs=[], extra_postargs=[]):
     if callable(extra_postargs):
         extra_postargs = extra_postargs(ccompiler)
 
-    start_dir = os.path.abspath('.')
+    start_dir = os.path.abspath(".")
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         try:
             os.chdir(tmp_dir)
 
             # Write test program
-            with open('test_program.c', 'w') as f:
+            with open("test_program.c", "w") as f:
                 f.write(code)
 
-            os.mkdir('objects')
+            os.mkdir("objects")
 
             # Compile, test program
-            ccompiler.compile(['test_program.c'], output_dir='objects',
-                              extra_postargs=extra_postargs)
+            ccompiler.compile(
+                ["test_program.c"],
+                output_dir="objects",
+                extra_postargs=extra_postargs,
+            )
 
             # Link test program
             objects = glob.glob(
-                os.path.join('objects', '*' + ccompiler.obj_extension))
-            ccompiler.link_executable(objects, 'test_program',
-                                      extra_preargs=extra_preargs,
-                                      extra_postargs=extra_postargs)
+                os.path.join("objects", "*" + ccompiler.obj_extension)
+            )
+            ccompiler.link_executable(
+                objects,
+                "test_program",
+                extra_preargs=extra_preargs,
+                extra_postargs=extra_postargs,
+            )
 
             # Run test program
             # will raise a CalledProcessError if return code was non-zero
-            output = subprocess.check_output('./test_program')
-            output = output.decode(sys.stdout.encoding or 'utf-8').splitlines()
+            output = subprocess.check_output("./test_program")
+            output = output.decode(sys.stdout.encoding or "utf-8").splitlines()
         except Exception:
             raise
         finally:
@@ -66,5 +73,6 @@ def basic_check_build():
         int main(void) {
         return 0;
         }
-        """)
+        """
+    )
     compile_test_program(code)
