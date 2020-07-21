@@ -129,7 +129,8 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       res['col_index_i'][iter] = iy                     
       X_iy = np.asarray(X_)[:, iy] # must be X_!
       W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy, W_i), 0), drop_prob=dropout, seed=seed)
+      hhidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy, W_i), 0), 
+                                     drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
       if row_sample < 1:
@@ -139,7 +140,8 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), drop_prob=dropout, seed=seed)
+        hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), 
+                                      drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
         beta_i = np.linalg.lstsq(a = np.vstack((h_i, sqrt(reg_lambda)*np.identity(h_i.shape[1]))), 
                                  b = np.vstack((np.asarray(E)[ix,:], np.zeros((h_i.shape[1], n_classes)))), 
@@ -255,7 +257,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
       res['col_index_i'][iter] = iy                     
       X_iy = np.asarray(X_)[:, iy] # must be X_!
       W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy, W_i), 0), drop_prob=dropout, seed=seed)
+      hhidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy, W_i), 0), 
+                                     drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
       if row_sample < 1:
@@ -265,7 +268,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), drop_prob=dropout, seed=seed)
+        hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), 
+                                      drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
         n_cols_h_i = h_i.shape[1]
         beta_i = np.linalg.lstsq(a = np.vstack((h_i, sqrt(reg_lambda)*np.identity(n_cols_h_i))), 

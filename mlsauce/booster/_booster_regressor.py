@@ -1,8 +1,15 @@
 import numpy as np
+import jax.numpy as jnp
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from . import _boosterc as boosterc
 
+
+def fit_booster_regressor():
+    return None
+
+def predict_booster_regressor()
+    return None
 
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
     """ LSBoost regressor.
@@ -33,7 +40,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
          progress bar (yes = 1) or not (no = 0) (currently).
      seed: int 
          reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-         
+     backend: str    
+         type of backend; must be in ('cpu', 'gpu', 'tpu') 
     """
 
     def __init__(
@@ -49,6 +57,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         direct_link=1,
         verbose=1,
         seed=123,
+        backend="cpu"
     ):
         self.n_estimators = n_estimators
         self.learning_rate = learning_rate
@@ -61,6 +70,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.direct_link = direct_link
         self.verbose = verbose
         self.seed = seed
+        self.backend = backend
         self.obj = None
 
     def fit(self, X, y, **kwargs):
@@ -82,21 +92,30 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self: object.
         """
 
-        self.obj = boosterc.fit_booster_regressor(
-            X=np.asarray(X, order="C"),
-            y=np.asarray(y, order="C"),
-            n_estimators=self.n_estimators,
-            learning_rate=self.learning_rate,
-            n_hidden_features=self.n_hidden_features,
-            reg_lambda=self.reg_lambda,
-            row_sample=self.row_sample,
-            col_sample=self.col_sample,
-            dropout=self.dropout,
-            tolerance=self.tolerance,
-            direct_link=self.direct_link,
-            verbose=self.verbose,
-            seed=self.seed,
-        )
+        assert self.backend in ("cpu", "gpu", "tpu"),\
+             "`backend` must be in ('cpu', 'gpu', 'tpu')"
+
+        if self.backend == "cpu":
+
+            self.obj = boosterc.fit_booster_regressor(
+                X=np.asarray(X, order="C"),
+                y=np.asarray(y, order="C"),
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+            )
+
+        if  self.backend == "gpu" or self.backend == "tpu":   
+
+            self.obj = None
 
         return self
 
