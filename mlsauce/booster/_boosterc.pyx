@@ -105,7 +105,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['n_estimators'] = n_estimators
   res['learning_rate'] = learning_rate
   res['W_i'] = {}
-  res['beta_i'] = {}
+  res['beta_i'] = {} # use res['ridge_obj'] instead (pickle obj)
   res['col_index_i'] = {}
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
@@ -152,11 +152,11 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                                  b = np.vstack((np.asarray(E), np.zeros((hh_i.shape[1], n_classes)))), 
                                  rcond = None)[0] 
       
-      E -= learning_rate*np.dot(hh_i, beta_i)
+      E -= learning_rate*np.dot(hh_i, beta_i) # use predict
       
       res['W_i'][iter] = np.asarray(W_i)
       
-      res['beta_i'][iter] = beta_i
+      res['beta_i'][iter] = beta_i # use res['ridge_obj'] instead (pickle obj)
       
       if np.linalg.norm(E, ord='fro') <= tolerance:
         res['n_estimators'] = iter

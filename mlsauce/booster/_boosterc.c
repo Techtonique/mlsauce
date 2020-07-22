@@ -3915,7 +3915,7 @@ static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_4fit_booster_classifier(C
  *   res['n_estimators'] = n_estimators
  *   res['learning_rate'] = learning_rate             # <<<<<<<<<<<<<<
  *   res['W_i'] = {}
- *   res['beta_i'] = {}
+ *   res['beta_i'] = {} # use res['ridge_obj'] instead (pickle obj)
  */
   __pyx_t_1 = PyFloat_FromDouble(__pyx_v_learning_rate); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3926,7 +3926,7 @@ static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_4fit_booster_classifier(C
  *   res['n_estimators'] = n_estimators
  *   res['learning_rate'] = learning_rate
  *   res['W_i'] = {}             # <<<<<<<<<<<<<<
- *   res['beta_i'] = {}
+ *   res['beta_i'] = {} # use res['ridge_obj'] instead (pickle obj)
  *   res['col_index_i'] = {}
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
@@ -3937,7 +3937,7 @@ static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_4fit_booster_classifier(C
   /* "mlsauce/booster/_boosterc.pyx":108
  *   res['learning_rate'] = learning_rate
  *   res['W_i'] = {}
- *   res['beta_i'] = {}             # <<<<<<<<<<<<<<
+ *   res['beta_i'] = {} # use res['ridge_obj'] instead (pickle obj)             # <<<<<<<<<<<<<<
  *   res['col_index_i'] = {}
  * 
  */
@@ -3948,7 +3948,7 @@ static PyObject *__pyx_pf_7mlsauce_7booster_9_boosterc_4fit_booster_classifier(C
 
   /* "mlsauce/booster/_boosterc.pyx":109
  *   res['W_i'] = {}
- *   res['beta_i'] = {}
+ *   res['beta_i'] = {} # use res['ridge_obj'] instead (pickle obj)
  *   res['col_index_i'] = {}             # <<<<<<<<<<<<<<
  * 
  *   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
@@ -5389,7 +5389,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *                                  b = np.vstack((np.asarray(E), np.zeros((hh_i.shape[1], n_classes)))),
  *                                  rcond = None)[0]             # <<<<<<<<<<<<<<
  * 
- *       E -= learning_rate*np.dot(hh_i, beta_i)
+ *       E -= learning_rate*np.dot(hh_i, beta_i) # use predict
  */
     /*else*/ {
 
@@ -5573,7 +5573,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *                                  b = np.vstack((np.asarray(E), np.zeros((hh_i.shape[1], n_classes)))),
  *                                  rcond = None)[0]             # <<<<<<<<<<<<<<
  * 
- *       E -= learning_rate*np.dot(hh_i, beta_i)
+ *       E -= learning_rate*np.dot(hh_i, beta_i) # use predict
  */
       if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_rcond, Py_None) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
 
@@ -5594,7 +5594,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *                                  b = np.vstack((np.asarray(E), np.zeros((hh_i.shape[1], n_classes)))),
  *                                  rcond = None)[0]             # <<<<<<<<<<<<<<
  * 
- *       E -= learning_rate*np.dot(hh_i, beta_i)
+ *       E -= learning_rate*np.dot(hh_i, beta_i) # use predict
  */
       __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_4, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
@@ -5607,7 +5607,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
     /* "mlsauce/booster/_boosterc.pyx":155
  *                                  rcond = None)[0]
  * 
- *       E -= learning_rate*np.dot(hh_i, beta_i)             # <<<<<<<<<<<<<<
+ *       E -= learning_rate*np.dot(hh_i, beta_i) # use predict             # <<<<<<<<<<<<<<
  * 
  *       res['W_i'][iter] = np.asarray(W_i)
  */
@@ -5685,11 +5685,11 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
     __pyx_t_7.data = NULL;
 
     /* "mlsauce/booster/_boosterc.pyx":157
- *       E -= learning_rate*np.dot(hh_i, beta_i)
+ *       E -= learning_rate*np.dot(hh_i, beta_i) # use predict
  * 
  *       res['W_i'][iter] = np.asarray(W_i)             # <<<<<<<<<<<<<<
  * 
- *       res['beta_i'][iter] = beta_i
+ *       res['beta_i'][iter] = beta_i # use res['ridge_obj'] instead (pickle obj)
  */
     __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -5723,7 +5723,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
     /* "mlsauce/booster/_boosterc.pyx":159
  *       res['W_i'][iter] = np.asarray(W_i)
  * 
- *       res['beta_i'][iter] = beta_i             # <<<<<<<<<<<<<<
+ *       res['beta_i'][iter] = beta_i # use res['ridge_obj'] instead (pickle obj)             # <<<<<<<<<<<<<<
  * 
  *       if np.linalg.norm(E, ord='fro') <= tolerance:
  */
@@ -5733,7 +5733,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
     __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
     /* "mlsauce/booster/_boosterc.pyx":161
- *       res['beta_i'][iter] = beta_i
+ *       res['beta_i'][iter] = beta_i # use res['ridge_obj'] instead (pickle obj)
  * 
  *       if np.linalg.norm(E, ord='fro') <= tolerance:             # <<<<<<<<<<<<<<
  *         res['n_estimators'] = iter
@@ -5793,7 +5793,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
       goto __pyx_L4_break;
 
       /* "mlsauce/booster/_boosterc.pyx":161
- *       res['beta_i'][iter] = beta_i
+ *       res['beta_i'][iter] = beta_i # use res['ridge_obj'] instead (pickle obj)
  * 
  *       if np.linalg.norm(E, ord='fro') <= tolerance:             # <<<<<<<<<<<<<<
  *         res['n_estimators'] = iter

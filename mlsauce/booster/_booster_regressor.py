@@ -1,15 +1,11 @@
 import numpy as np
 import jax.numpy as jnp
+import platform
+import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from . import _boosterc as boosterc
 
-
-def fit_booster_regressor():
-    return None
-
-def predict_booster_regressor()
-    return None
 
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
     """ LSBoost regressor.
@@ -59,6 +55,16 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         seed=123,
         backend="cpu"
     ):
+
+        assert backend in ("cpu", "gpu", "tpu"),\
+             "`backend` must be in ('cpu', 'gpu', 'tpu')"
+
+        sys_platform = platform.system()
+
+        if (sys_platform == "Windows") and (backend in ("gpu", "tpu")):
+            warnings.warn("No GPU/TPU computing on Windows yet, backend set to 'cpu'")
+            backend = "cpu"          
+
         self.n_estimators = n_estimators
         self.learning_rate = learning_rate
         self.n_hidden_features = n_hidden_features
@@ -90,10 +96,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         Returns
         -------
         self: object.
-        """
-
-        assert self.backend in ("cpu", "gpu", "tpu"),\
-             "`backend` must be in ('cpu', 'gpu', 'tpu')"
+        """        
 
         if self.backend == "cpu":
 
@@ -113,7 +116,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 seed=self.seed,
             )
 
-        if  self.backend == "gpu" or self.backend == "tpu":   
+        if  self.backend in ("gpu", "tpu"):       
 
             self.obj = None
 

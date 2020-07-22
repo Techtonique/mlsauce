@@ -38,12 +38,20 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
         self: object.
         """
 
+        if sample_weight is None:
+
+            self.obj = stumpc.fit_stump_classifier(
+            X=np.asarray(X, order="C"),
+            y=np.asarray(y, order="C"),
+            bins=self.bins)
+
+            return self
+
         self.obj = stumpc.fit_stump_classifier(
             X=np.asarray(X, order="C"),
             y=np.asarray(y, order="C"),
             sample_weight=np.ravel(sample_weight, order="C"),
-            bins=self.bins,
-        )
+            bins=self.bins)
 
         return self
 

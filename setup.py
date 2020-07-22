@@ -231,7 +231,7 @@ def setup_package():
                         'numpy>={}'.format(NUMPY_MIN_VERSION),
                         'scipy>={}'.format(SCIPY_MIN_VERSION),
                         'joblib>={}'.format(JOBLIB_MIN_VERSION),
-                        'scikit-learn'.format(SKLEARN_MIN_VERSION),
+                        'scikit-learn>={}'.format(SKLEARN_MIN_VERSION),
                         'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION),
                         'pandas>={}'.format(PANDAS_MIN_VERSION),
                         'querier>={}'.format(QUERIER_MIN_VERSION)
@@ -241,7 +241,7 @@ def setup_package():
                             'jax>={}'.format(JAX_MIN_VERSION), 
                             'jaxlib>={}'.format(JAXLIB_MIN_VERSION)
                             ] if platform.system() in ('Linux', 'Darwin') else []
-                            
+
     install_requires = [item for sublist in [install_jax_requires, install_all_requires] for item in sublist]
 
     metadata = dict(name=DISTNAME,

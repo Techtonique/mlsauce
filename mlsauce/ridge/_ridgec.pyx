@@ -11,7 +11,6 @@ cimport numpy as np
 cimport cython
 
 import platform
-from .memoize import memoize
 from jax import device_put
 from scipy import sparse
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
@@ -32,13 +31,7 @@ def cbind(x, y, backend="cpu"):
 
 # center... response
 def center_response(y):
-    # case with higher dimensions
-    # case with higher dimensions
-    # case with higher dimensions
-    # case with higher dimensions
-    # case with higher dimensions
-    # case with higher dimensions
-    if (len(y.shape==1)): 
+    if (len(y.shape)==1): 
         y_mean = np.mean(y)
         return y_mean, (y - y_mean)
     y_mean = np.asarray(y).mean(axis=0)    

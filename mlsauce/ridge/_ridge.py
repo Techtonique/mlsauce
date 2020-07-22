@@ -1,20 +1,23 @@
 import numpy as np
 import platform
 import warnings
+from sklearn.base import BaseEstimator
+from sklearn.base import RegressorMixin
 from numpy.linalg import pinv
-from . import _matrixopsc as mo
+from . import _ridgec as mo
 if platform.system() in ('Linux', 'Darwin'):
     import jax.numpy as jnp
     from jax import device_put
     from jax.numpy.linalg import pinv as jpinv
 
-class Ridge():
+
+class RidgeRegressor(BaseEstimator, RegressorMixin):
     """ Ridge.
         
      Parameters
      ----------
-     seed: int 
-         reproducibility seed for nodes_sim=='uniform', clustering and dropout.
+     reg_lambda: float
+         regularization parameter.
      backend: str    
          type of backend; must be in ('cpu', 'gpu', 'tpu')          
     """
@@ -25,14 +28,16 @@ class Ridge():
         backend="cpu"
     ):
 
+        assert backend in ("cpu", "gpu", "tpu"),\
+             "`backend` must be in ('cpu', 'gpu', 'tpu')"
+
         sys_platform = platform.system()
 
         if (sys_platform == "Windows") and (backend in ("gpu", "tpu")):
             warnings.warn("No GPU/TPU computing on Windows yet, backend set to 'cpu'")
             backend = "cpu"
 
-        self.reg_lambda = reg_lambda
-        self.seed = seed
+        self.reg_lambda = reg_lambda    
         self.backend = backend
         
 
@@ -53,34 +58,24 @@ class Ridge():
         Returns
         -------
         self: object.
-        """
-
-        assert self.backend in ("cpu", "gpu", "tpu"),\
-             "`backend` must be in ('cpu', 'gpu', 'tpu')"
-
+        """        
         
         self.ym, centered_y  = mo.center_response(y)                                   
-        self.xm = np.asarray(X).mean(axis=0)
-        self.xsd = np.asarray(X).std(axis=0)
-        X_ = (X - self.xm[None, :])/self.xsd[None, :]
-        n, p = X_.shape()
+        self.xm = X.mean(axis=0)
+        self.xsd = X.std(axis=0)
+        X_ = (X - self.xm[None, :])/self.xsd[None, :]        
 
         if self.backend == "cpu":
 
-            x = pinv(mo.crossprod(X_) + self.reg_lambda*np.diag(p)))
-            z = X_.T
-            hat_matrix = np.dot(x, z))
+            x = pinv(mo.crossprod(X_) + self.reg_lambda*np.eye(X_.shape[1]))
+            hat_matrix = np.dot(x, X_.T)
             self.beta = np.dot(hat_matrix, centered_y)
 
-        else:    
+            return self        
 
-            x = device_put(jpinv(mo.crossprod(X_, backend=self.backend) + self.reg_lambda*jnp.diag(p)))
-            z = device_put(jnp.transpose(X_)) 
-            hat_matrix = jnp.dot(x, z).block_until_ready()
-
-            hat_matrix = device_put(hat_matrix)
-            centered_y = device_put(centered_y)
-            self.beta = jnp.dot(hat_matrix, centered_y).block_until_ready()
+        x = device_put(jpinv(mo.crossprod(X_, backend=self.backend) + self.reg_lambda*jnp.eye(X_.shape[1])))
+        hat_matrix = jnp.dot(x, device_put(jnp.transpose(X_))).block_until_ready()
+        self.beta = jnp.dot(device_put(hat_matrix), device_put(centered_y)).block_until_ready()
 
         return self
 
@@ -101,13 +96,13 @@ class Ridge():
         model predictions: {array-like}
         """
         X_ = (X - self.xm[None, :])/self.xsd[None, :]
-
+    
         if self.backend == "cpu":
-            if (len(self.ym) == 1):
+            if (isinstance(self.ym, float)):
                 return self.ym + np.dot(X_, self.beta)    
             return self.ym[None, :] + np.dot(X_, self.beta)
 
         # if self.backend in ("gpu", "tpu"):
-        if (len(self.ym) == 1):
-            return self.ym + jnp.dot(X_, self.beta)                                
-        return self.ym[None, :] + jnp.dot(X_, self.beta)
+        if (isinstance(self.ym, float)):
+            return self.ym + jnp.dot(device_put(X_), device_put(self.beta)).block_until_ready()
+        return self.ym[None, :] + jnp.dot(device_put(X_), device_put(self.beta)).block_until_ready()
