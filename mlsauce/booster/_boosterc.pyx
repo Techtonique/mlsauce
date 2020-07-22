@@ -7,11 +7,13 @@
 # License: BSD 3 Clause Clear
 
 import functools
+import pickle
 import numpy as np
 cimport numpy as np
 cimport cython
 import gc
 
+from ..ridge import RidgeRegressor
 from cython.parallel cimport prange
 from libc.math cimport log, exp, sqrt
 from numpy.linalg import lstsq
@@ -80,7 +82,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                            double row_sample=1, double col_sample=1,
                            double dropout=0, double tolerance=1e-4, 
                            int direct_link=1, int verbose=1,
-                           int seed=123): 
+                           int seed=123, str backend="cpu"): 
   
   cdef long int n
   cdef int p, n_cols_h_i, n_cols_hh_i
@@ -105,7 +107,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['n_estimators'] = n_estimators
   res['learning_rate'] = learning_rate
   res['W_i'] = {}
-  res['beta_i'] = {} # use res['ridge_obj'] instead (pickle obj)
+  res['ridge_obj_i'] = {} 
   res['col_index_i'] = {}
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
@@ -117,6 +119,8 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['Ym'] = Ym
   E = Y - Ym
   iterator = tqdm(range(n_estimators)) if verbose else range(n_estimators)
+
+  ridge_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
 
   for iter in iterator:
       
@@ -143,20 +147,17 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
         hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
-        beta_i = np.linalg.lstsq(a = np.vstack((h_i, sqrt(reg_lambda)*np.identity(h_i.shape[1]))), 
-                                 b = np.vstack((np.asarray(E)[ix,:], np.zeros((h_i.shape[1], n_classes)))), 
-                                 rcond = None)[0] 
+        ridge_obj.fit(X = np.asarray(h_i), y = np.asarray(E)[ix,:])
+                                 
       else:
       
-        beta_i = np.linalg.lstsq(a = np.vstack((hh_i, sqrt(reg_lambda)*np.identity(hh_i.shape[1]))), 
-                                 b = np.vstack((np.asarray(E), np.zeros((hh_i.shape[1], n_classes)))), 
-                                 rcond = None)[0] 
-      
-      E -= learning_rate*np.dot(hh_i, beta_i) # use predict
+        ridge_obj.fit(X = np.asarray(hh_i), y = np.asarray(E))
+            
+      E = E - learning_rate*np.asarray(ridge_obj.predict(np.asarray(hh_i)))
       
       res['W_i'][iter] = np.asarray(W_i)
-      
-      res['beta_i'][iter] = beta_i # use res['ridge_obj'] instead (pickle obj)
+            
+      res['ridge_obj_i'][iter] = pickle.loads(pickle.dumps(ridge_obj, -1))
       
       if np.linalg.norm(E, ord='fro') <= tolerance:
         res['n_estimators'] = iter
@@ -190,11 +191,11 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
     hh_i = np.hstack((X_iy, np.maximum(np.dot(X_iy, W_i), 0))) if direct_link else np.maximum(np.dot(X_iy, W_i), 0)
-    preds_sum = preds_sum + learning_rate*np.dot(hh_i, obj['beta_i'][iter])
+    preds_sum = preds_sum + learning_rate*np.asarray(obj['ridge_obj_i'][iter].predict(np.asarray(hh_i)))
   
   out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(preds_sum))
   
-  out_probs /= np.sum(out_probs, axis=1)[:, None]
+  out_probs = out_probs/np.sum(out_probs, axis=1)[:, None]
 
   return np.asarray(out_probs)
   
@@ -209,7 +210,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            double row_sample=1, double col_sample=1,
                            double dropout=0, double tolerance=1e-4, 
                            int direct_link=1, int verbose=1, 
-                           int seed=123): 
+                           int seed=123, str backend="cpu"): 
   
   cdef long int n
   cdef int p, n_cols_h_i, n_cols_hh_i
@@ -234,7 +235,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['n_estimators'] = n_estimators
   res['learning_rate'] = learning_rate
   res['W_i'] = {}
-  res['beta_i'] = {}
+  res['ridge_obj_i'] = {} 
   res['col_index_i'] = {}
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
@@ -245,6 +246,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['ym'] = ym
   e = y - np.repeat(ym, n)
   iterator = tqdm(range(n_estimators)) if verbose else range(n_estimators)
+
+  ridge_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
 
   for iter in iterator:
       
@@ -272,20 +275,17 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
         n_cols_h_i = h_i.shape[1]
-        beta_i = np.linalg.lstsq(a = np.vstack((h_i, sqrt(reg_lambda)*np.identity(n_cols_h_i))), 
-                                 b = np.concatenate((np.asarray(e)[ix], np.zeros((n_cols_h_i)))), 
-                                 rcond = None)[0] 
+        ridge_obj.fit(X = np.asarray(h_i), y = np.asarray(e)[ix,:])
+
       else:
       
-        beta_i = np.linalg.lstsq(a = np.vstack((hh_i, sqrt(reg_lambda)*np.identity(hh_i.shape[1]))), 
-                                 b = np.concatenate((np.asarray(e), np.zeros((hh_i.shape[1])))), 
-                                 rcond = None)[0] 
-      
-      e -= learning_rate*np.dot(hh_i, beta_i)
-      
+        ridge_obj.fit(X = np.asarray(hh_i), y = np.asarray(e))
+            
+      e = e - learning_rate*np.asarray(ridge_obj.predict(np.asarray(hh_i)))
+
       res['W_i'][iter] = np.asarray(W_i)
       
-      res['beta_i'][iter] = beta_i
+      res['ridge_obj_i'][iter] = pickle.loads(pickle.dumps(ridge_obj, -1))
       
       if np.linalg.norm(e) <= tolerance:
         res['n_estimators'] = iter
@@ -314,8 +314,7 @@ def predict_booster_regressor(object obj, double[:,::1] X):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, np.maximum(np.dot(X_iy, W_i), 0))) if direct_link else np.maximum(np.dot(X_iy, W_i), 0)
-    
-    preds_sum = preds_sum + learning_rate*np.dot(hh_i, obj['beta_i'][iter])
+    hh_i = np.hstack((X_iy, np.maximum(np.dot(X_iy, W_i), 0))) if direct_link else np.maximum(np.dot(X_iy, W_i), 0)    
+    preds_sum = preds_sum + learning_rate*np.asarray(obj['ridge_obj_i'][iter].predict(np.asarray(hh_i)))
   
   return np.asarray(obj['ym'] + np.asarray(preds_sum))

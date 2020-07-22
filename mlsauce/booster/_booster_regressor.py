@@ -98,27 +98,22 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self: object.
         """        
 
-        if self.backend == "cpu":
-
-            self.obj = boosterc.fit_booster_regressor(
-                X=np.asarray(X, order="C"),
-                y=np.asarray(y, order="C"),
-                n_estimators=self.n_estimators,
-                learning_rate=self.learning_rate,
-                n_hidden_features=self.n_hidden_features,
-                reg_lambda=self.reg_lambda,
-                row_sample=self.row_sample,
-                col_sample=self.col_sample,
-                dropout=self.dropout,
-                tolerance=self.tolerance,
-                direct_link=self.direct_link,
-                verbose=self.verbose,
-                seed=self.seed,
-            )
-
-        if  self.backend in ("gpu", "tpu"):       
-
-            self.obj = None
+        self.obj = boosterc.fit_booster_regressor(
+            X=np.asarray(X, order="C"),
+            y=np.asarray(y, order="C"),
+            n_estimators=self.n_estimators,
+            learning_rate=self.learning_rate,
+            n_hidden_features=self.n_hidden_features,
+            reg_lambda=self.reg_lambda,
+            row_sample=self.row_sample,
+            col_sample=self.col_sample,
+            dropout=self.dropout,
+            tolerance=self.tolerance,
+            direct_link=self.direct_link,
+            verbose=self.verbose,
+            seed=self.seed,
+            backend=self.backend
+        )
 
         return self
 
