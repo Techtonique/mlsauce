@@ -3,4 +3,5 @@
 export(AdaOpt)
 export(LSBoostClassifier)
 export(LSBoostRegressor)
+export(Ridge)
 export(StumpClassifier)
