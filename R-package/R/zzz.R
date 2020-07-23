@@ -64,10 +64,10 @@ install_packages <- function(pip = TRUE) {
     reticulate::py_install("tqdm", pip = pip)
 
   if (has_mlsauce == FALSE)
-    reticulate::py_install("git+https://github.com/thierrymoudiki/mlsauce.git@try-jax",
-                           pip = pip, pip_ignore_installed = TRUE)
-    #reticulate::py_install("mlsauce --upgrade", pip = pip,
-    #                       pip_ignore_installed = TRUE)
+    reticulate::py_install("mlsauce", pip = pip,
+                           pip_ignore_installed = TRUE)
+    #reticulate::py_install("git+https://github.com/thierrymoudiki/mlsauce.git",
+    #                       pip = pip, pip_ignore_installed = TRUE)
 }
 
 
