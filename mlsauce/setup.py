@@ -23,7 +23,7 @@ def configuration(parent_package="", top_path=None):
     # submodules which do not have their own setup.py
     # we must manually add sub-submodules & tests
     config.add_subpackage("encoders")
-    config.add_subpackage("utils")
+    config.add_subpackage("utils")    
     config.add_subpackage("utils/memoryuse")
     config.add_subpackage("utils/misc")
     config.add_subpackage("utils/sampling")
@@ -31,6 +31,7 @@ def configuration(parent_package="", top_path=None):
     # submodules which have their own setup.py
     config.add_subpackage("adaopt")
     config.add_subpackage("booster")
+    config.add_subpackage("ridge")
     config.add_subpackage("stump")
 
     # add the test directory

@@ -39,7 +39,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.5.0'
+__version__ = '0.6.0'
 
 VERSION = __version__
 
@@ -55,6 +55,9 @@ SKLEARN_MIN_VERSION = '0.18.0'
 THREADPOOLCTL_MIN_VERSION = '2.0.0'
 PANDAS_MIN_VERSION = '0.25.3'
 QUERIER_MIN_VERSION = '0.4.0'
+if platform.system() in ('Linux', 'Darwin'):
+    JAX_MIN_VERSION = '0.1.72'
+    JAXLIB_MIN_VERSION = '0.1.51'
 
 # Optional setuptools features
 # We need to import setuptools early, if we want setuptools features,
@@ -223,6 +226,24 @@ def check_package_status(package, min_version):
 
 
 def setup_package():
+
+    install_all_requires = [
+                        'numpy>={}'.format(NUMPY_MIN_VERSION),
+                        'scipy>={}'.format(SCIPY_MIN_VERSION),
+                        'joblib>={}'.format(JOBLIB_MIN_VERSION),
+                        'scikit-learn>={}'.format(SKLEARN_MIN_VERSION),
+                        'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION),
+                        'pandas>={}'.format(PANDAS_MIN_VERSION),
+                        'querier>={}'.format(QUERIER_MIN_VERSION)
+                    ]
+
+    install_jax_requires = [
+                            'jax>={}'.format(JAX_MIN_VERSION), 
+                            'jaxlib>={}'.format(JAXLIB_MIN_VERSION)
+                            ] if platform.system() in ('Linux', 'Darwin') else []
+
+    install_requires = [item for sublist in [install_jax_requires, install_all_requires] for item in sublist]
+
     metadata = dict(name=DISTNAME,
                     maintainer=MAINTAINER,
                     maintainer_email=MAINTAINER_EMAIL,
@@ -242,15 +263,7 @@ def setup_package():
                                  ],
                     cmdclass=cmdclass,
                     python_requires=">=3.5",
-                    install_requires=[
-                        'numpy>={}'.format(NUMPY_MIN_VERSION),
-                        'scipy>={}'.format(SCIPY_MIN_VERSION),
-                        'joblib>={}'.format(JOBLIB_MIN_VERSION),
-                        'scikit-learn'.format(SKLEARN_MIN_VERSION),
-                        'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION),
-                        'pandas>={}'.format(PANDAS_MIN_VERSION),
-                        'querier>={}'.format(QUERIER_MIN_VERSION)
-                    ],
+                    install_requires=install_requires,
                     package_data={'': ['*.pxd']},
                     **extra_setuptools_args)
 

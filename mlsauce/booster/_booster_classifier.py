@@ -1,4 +1,7 @@
 import numpy as np
+import jax.numpy as jnp
+import platform
+import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from . import _boosterc as boosterc
@@ -33,7 +36,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
          progress bar (yes = 1) or not (no = 0) (currently).
      seed: int 
          reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-         
+     backend: str    
+         type of backend; must be in ('cpu', 'gpu', 'tpu')          
     """
 
     def __init__(
@@ -49,7 +53,18 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         direct_link=1,
         verbose=1,
         seed=123,
+        backend="cpu"
     ):
+
+        assert backend in ("cpu", "gpu", "tpu"),\
+             "`backend` must be in ('cpu', 'gpu', 'tpu')"
+
+        sys_platform = platform.system()
+
+        if (sys_platform == "Windows") and (backend in ("gpu", "tpu")):
+            warnings.warn("No GPU/TPU computing on Windows yet, backend set to 'cpu'")
+            backend = "cpu"     
+
         self.n_estimators = n_estimators
         self.learning_rate = learning_rate
         self.n_hidden_features = n_hidden_features
@@ -61,6 +76,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         self.direct_link = direct_link
         self.verbose = verbose
         self.seed = seed
+        self.backend = backend
         self.obj = None
 
     def fit(self, X, y, **kwargs):
@@ -80,7 +96,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         Returns
         -------
         self: object.
-        """
+        """        
 
         self.obj = boosterc.fit_booster_classifier(
             np.asarray(X, order="C"),
@@ -96,6 +112,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             direct_link=self.direct_link,
             verbose=self.verbose,
             seed=self.seed,
+            backend=self.backend
         )
 
         return self

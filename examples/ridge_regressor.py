@@ -22,26 +22,23 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-obj = ms.LSBoostRegressor()
-print(obj.get_params())
+obj = ms.RidgeRegressor(backend="cpu")
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
-print(obj)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 
-# MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-obj = ms.LSBoostRegressor(backend="gpu")
-print(obj.get_params())
+obj = ms.RidgeRegressor(backend="gpu")
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
-print(obj)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
+
+
 
 # data 2
 diabetes = load_diabetes()
@@ -52,7 +49,7 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-obj = ms.LSBoostRegressor()
+obj = ms.RidgeRegressor(backend="cpu")
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
@@ -61,8 +58,7 @@ start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 
-# MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-obj = ms.LSBoostRegressor(backend="gpu")
+obj = ms.RidgeRegressor(backend="gpu")
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
@@ -70,9 +66,6 @@ print(time()-start)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
-
-
-
 
 
 
