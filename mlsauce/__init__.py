@@ -62,6 +62,7 @@ else:
 
     from .adaopt import AdaOpt
     from .booster import LSBoostClassifier, LSBoostRegressor
+    from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
     from .stump import StumpClassifier
     from .encoders import corrtarget_encoder
@@ -70,6 +71,7 @@ else:
         "AdaOpt",
         "LSBoostClassifier",
         "StumpClassifier",
+        "LassoRegressor",
         "LSBoostRegressor",
         "RidgeRegressor",
         # Other imports
