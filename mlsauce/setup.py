@@ -31,6 +31,7 @@ def configuration(parent_package="", top_path=None):
     # submodules which have their own setup.py
     config.add_subpackage("adaopt")
     config.add_subpackage("booster")
+    config.add_subpackage("lasso")
     config.add_subpackage("ridge")
     config.add_subpackage("stump")
 

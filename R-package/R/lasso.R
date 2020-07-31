@@ -1,11 +1,13 @@
 
 
 
-#' Ridge regressor
+#' Lasso regressor
 #'
-#' @param reg_lambda L2 regularization parameter
+#' @param reg_lambda L1 regularization parameter
+#' @param max_iter number of iterations of lasso shooting algorithm.
+#' @param tol tolerance for convergence of lasso shooting algorithm.
 #'
-#' @return An object of class Ridge
+#' @return An object of class Lasso
 #' @export
 #'
 #' @examples
@@ -25,7 +27,7 @@
 #' X_test <- as.matrix(X[test_index, ])
 #' y_test <- as.double(y[test_index])
 #'
-#' obj <- mlsauce::Ridge()
+#' obj <- mlsauce::Lasso()
 #'
 #' print(obj$get_params())
 #'
@@ -33,8 +35,8 @@
 #'
 #' print(obj$score(X_test, y_test))
 #'
-Ridge <- function(reg_lambda=0.1)
+Lasso <- function(reg_lambda=0.1, max_iter=10L, tol=1e-3)
 {
 
-  ms$Ridge(reg_lambda=reg_lambda)
+  ms$Lasso(reg_lambda=reg_lambda, max_iter=max_iter, tol=tol)
 }
