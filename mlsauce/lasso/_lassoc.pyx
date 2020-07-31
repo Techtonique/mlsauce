@@ -14,6 +14,7 @@ cimport cython
 import pickle
 import platform
 from jax import device_put
+from numpy import linalg as LA
 from scipy import sparse
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.cluster import KMeans
@@ -21,18 +22,6 @@ from sklearn.mixture import GaussianMixture
 if platform.system() in ('Linux', 'Darwin'):
     import jax.numpy as jnp
 
-
-def copy_val(double[:] x):
-
-    cdef int i, n
-    cdef double[:] y
-
-    n = len(x)
-    y = np.zeros(n)
-    for i in range(n):
-        y[i] = x[i]
-
-    return np.asarray(y)
 
 # column bind
 def cbind(x, y, backend="cpu"):
@@ -94,43 +83,66 @@ def dropout(x, drop_prob=0, seed=123):
 # compute coeff in lasso
 # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
 # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
-def get_beta(double[:] beta0, double[:,:] XX2, 
-             double[:] Xy2, double reg_lambda,
-             int max_iter = 1000, 
-             double tol = 1e-5):
+def get_beta_1D(double[:] beta0, double[:,::1] XX2, 
+                double[:] Xy2, double reg_lambda,
+                int max_iter = 1000, 
+                double tol = 1e-5):
 
-    cdef int j, p, converged, iteration
+    cdef int j, k, n_classes, p, converged, iteration
     cdef double aj, cj, err
-    cdef double[:] beta_opt, beta_prev
     
     converged = 0
     err = 10000
     iteration = 0 
     p = len(beta0)
-    beta_opt = copy_val(beta0)
+    beta_opt = np.asarray(beta0)
 
     while (converged != 1 and iteration < max_iter):
-        beta_prev = copy_val(beta_opt)
+        beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
         for j in range(p):
             aj = XX2[j, j]
             cj = Xy2[j] - np.dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj
             beta_opt[j] = soft_thres(cj/aj, reg_lambda/aj)
         err = np.sum(np.abs(np.asarray(beta_prev) - np.asarray(beta_opt))) 
-        #print("err")
-        #print(err)
-        #print("\n")   
         converged = (err <= tol)*1            
         iteration += 1  
 
-    print("# iterations")    
-    print(iteration)    
-    print("\n")    
-    print("err")    
-    print(err)    
-    print("\n")    
+    return np.asarray(beta_opt), iteration, err                    
 
-    return np.asarray(beta_opt)
-        
+
+# compute coeff in lasso
+def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2, 
+                double[:,::1] Xy2, double reg_lambda,
+                int max_iter = 1000, 
+                double tol = 1e-5):
+
+    cdef int j, k, n_classes, p, converged, iteration
+    cdef double aj, cj, err
+    cdef list ajs
+    
+    converged = 0
+    err = 10000
+    iteration = 0 
+    p = len(beta0)
+    beta_opt = np.asarray(beta0)
+
+    # if len(beta0.shape) > 1: (multitask learner)
+    n_classes = beta_opt.shape[1]
+    ajs = [XX2[j, j] for j in range(p)]
+    while (converged != 1 and iteration < max_iter):
+        beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
+        for k in range(n_classes):       
+            beta_opt_k = np.asarray(beta_opt[:,k])                     
+            for j in range(p):  
+                aj = ajs[j]                         
+                cj = Xy2[j, k] - np.dot(np.asarray(XX2)[j, :], beta_opt_k) + beta_opt_k[j]*aj
+                beta_opt[j, k] = soft_thres(cj/aj, reg_lambda/aj)
+        err = np.sqrt(np.sum(np.square(np.asarray(beta_prev) - np.asarray(beta_opt))))
+        converged = (err <= tol)*1            
+        iteration += 1  
+
+    return np.asarray(beta_opt), iteration, err
+
 
 # one-hot encoding
 def one_hot_encode(x_clusters, n_clusters):

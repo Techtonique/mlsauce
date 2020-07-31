@@ -12,6 +12,7 @@ from sklearn import metrics
 
 import mlsauce as ms
 
+# ridge
 
 # data 1
 boston = load_boston()
@@ -37,7 +38,7 @@ print(time()-start)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
-
+print(obj.beta)
 
 
 # data 2
@@ -57,6 +58,7 @@ print(time()-start)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
+print(obj.beta)
 
 obj = ms.RidgeRegressor(backend="gpu")
 print(obj.get_params())
@@ -66,7 +68,5 @@ print(time()-start)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
-
-
 
 

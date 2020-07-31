@@ -18,15 +18,21 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
      Parameters
      ----------
      reg_lambda: float
-         regularization parameter.
+         L1 regularization parameter.
+     max_iter: int
+         number of iterations of lasso shooting algorithm.
+     tol: float          
+         tolerance for convergence of lasso shooting algorithm.
      backend: str    
-         type of backend; must be in ('cpu', 'gpu', 'tpu')          
+         type of backend; must be in ('cpu', 'gpu', 'tpu').
     """
 
     def __init__(
         self,        
         reg_lambda=0.1,
-        backend="cpu"
+        max_iter=10,
+        tol=1e-3,
+        backend="cpu",
     ):
 
         assert backend in ("cpu", "gpu", "tpu"),\
@@ -38,7 +44,9 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
             warnings.warn("No GPU/TPU computing on Windows yet, backend set to 'cpu'")
             backend = "cpu"
 
-        self.reg_lambda = reg_lambda    
+        self.reg_lambda = reg_lambda 
+        self.max_iter = max_iter
+        self.tol = tol    
         self.backend = backend
         
 
@@ -71,24 +79,49 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         Xy2 = 2*Xy 
 
         if self.backend == "cpu":
+
             invXX = inv(XX + self.reg_lambda*np.eye(X_.shape[1]))            
             beta0 = mo.safe_sparse_dot(invXX, Xy)
-            self.beta = mo.get_beta(beta0 = np.asarray(beta0), 
-                                    XX2 = np.asarray(XX2), 
-                                    Xy2 = np.asarray(Xy2), 
-                                    reg_lambda = self.reg_lambda,
-                                    max_iter = 10000, 
-                                    tol = 1e-5)                
+
+            if len(y.shape) == 1:
+                res = mo.get_beta_1D(beta0 = np.asarray(beta0), 
+                                     XX2 = np.asarray(XX2), 
+                                     Xy2 = np.asarray(Xy2), 
+                                     reg_lambda = self.reg_lambda,
+                                     max_iter = self.max_iter, 
+                                     tol = self.tol)
+                self.beta = res[0]
+                return self                                             
+            
+            res = mo.get_beta_2D(beta0 = np.asarray(beta0), 
+                                 XX2 = np.asarray(XX2), 
+                                 Xy2 = np.asarray(Xy2), 
+                                 reg_lambda = self.reg_lambda,
+                                 max_iter = self.max_iter, 
+                                 tol = self.tol)                                         
+            self.beta = res[0]
             return self        
 
         invXX = jinv(XX + self.reg_lambda*jnp.eye(X_.shape[1]))           
-        beta0 = mo.safe_sparse_dot(invXX, Xy, backend=self.backend)
-        self.beta = mo.get_beta(beta0 = np.asarray(beta0), 
-                                XX2 = np.asarray(XX2), 
-                                Xy2 = np.asarray(Xy2), 
-                                reg_lambda = self.reg_lambda,
-                                max_iter = 10000, 
-                                tol = 1e-5)                
+        beta0 = mo.safe_sparse_dot(invXX, Xy, 
+                                   backend=self.backend)
+        if len(y.shape) == 1:
+            res = mo.get_beta_1D(beta0 = np.asarray(beta0), 
+                                 XX2 = np.asarray(XX2), 
+                                 Xy2 = np.asarray(Xy2), 
+                                 reg_lambda = self.reg_lambda,
+                                 max_iter = self.max_iter, 
+                                 tol = self.tol)
+            self.beta = res[0]
+            return self                       
+        
+        res = mo.get_beta_2D(beta0 = np.asarray(beta0), 
+                             XX2 = np.asarray(XX2), 
+                             Xy2 = np.asarray(Xy2), 
+                             reg_lambda = self.reg_lambda,
+                             max_iter = self.max_iter, 
+                             tol = self.tol)                                                                          
+        self.beta = res[0]
         return self        
         
 

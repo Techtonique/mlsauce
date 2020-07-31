@@ -37,7 +37,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
      seed: int 
          reproducibility seed for nodes_sim=='uniform', clustering and dropout.
      backend: str    
-         type of backend; must be in ('cpu', 'gpu', 'tpu')          
+         type of backend; must be in ('cpu', 'gpu', 'tpu')     
+     solver: str
+         type of 'weak' learner; currently in ('ridge', 'lasso')         
     """
 
     def __init__(
@@ -53,11 +55,15 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         direct_link=1,
         verbose=1,
         seed=123,
-        backend="cpu"
+        backend="cpu",
+        solver="ridge"
     ):
 
         assert backend in ("cpu", "gpu", "tpu"),\
              "`backend` must be in ('cpu', 'gpu', 'tpu')"
+
+        assert solver in ("ridge", "lasso"), \
+             "`solver` must be in ('ridge', 'lasso')"          
 
         sys_platform = platform.system()
 
@@ -78,6 +84,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         self.seed = seed
         self.backend = backend
         self.obj = None
+        self.solver = solver
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (classifier) to training data (X, y)
@@ -112,7 +119,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             direct_link=self.direct_link,
             verbose=self.verbose,
             seed=self.seed,
-            backend=self.backend
+            backend=self.backend,
+            solver=self.solver
         )
 
         return self
