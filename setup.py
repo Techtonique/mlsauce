@@ -39,7 +39,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.7.0'
+__version__ = '0.7.1'
 
 VERSION = __version__
 
