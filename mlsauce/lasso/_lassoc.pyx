@@ -34,7 +34,7 @@ def cbind(x, y, backend="cpu"):
 
 # center... response
 def center_response(y):
-    if (len(y.shape)==1): 
+    if (len(np.asarray(y).shape)==1): 
         y_mean = np.mean(y)
         return y_mean, (y - y_mean)
     y_mean = np.asarray(y).mean(axis=0)    
