@@ -27,7 +27,7 @@
 #' X_test <- as.matrix(X[test_index, ])
 #' y_test <- as.double(y[test_index])
 #'
-#' obj <- mlsauce::Lasso()
+#' obj <- mlsauce::LassoRegressor()
 #'
 #' print(obj$get_params())
 #'
@@ -35,8 +35,8 @@
 #'
 #' print(obj$score(X_test, y_test))
 #'
-Lasso <- function(reg_lambda=0.1, max_iter=10L, tol=1e-3)
+LassoRegressor <- function(reg_lambda=0.1, max_iter=10L, tol=1e-3)
 {
 
-  ms$Lasso(reg_lambda=reg_lambda, max_iter=max_iter, tol=tol)
+  ms$LassoRegressor(reg_lambda=reg_lambda, max_iter=max_iter, tol=tol)
 }

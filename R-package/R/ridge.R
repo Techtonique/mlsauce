@@ -25,7 +25,7 @@
 #' X_test <- as.matrix(X[test_index, ])
 #' y_test <- as.double(y[test_index])
 #'
-#' obj <- mlsauce::Ridge()
+#' obj <- mlsauce::RidgeRegressor()
 #'
 #' print(obj$get_params())
 #'
@@ -33,8 +33,8 @@
 #'
 #' print(obj$score(X_test, y_test))
 #'
-Ridge <- function(reg_lambda=0.1)
+RidgeRegressor <- function(reg_lambda=0.1)
 {
 
-  ms$Ridge(reg_lambda=reg_lambda)
+  ms$RidgeRegressor(reg_lambda=reg_lambda)
 }

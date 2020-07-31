@@ -15,7 +15,8 @@ LSBoostClassifier(
   tolerance = 1e-04,
   direct_link = 1L,
   verbose = 1L,
-  seed = 123L
+  seed = 123L,
+  solver = c("ridge", "lasso")
 )
 }
 \arguments{
@@ -42,6 +43,8 @@ LSBoostClassifier(
 \item{verbose:}{int, progress bar (yes = 1) or not (no = 0) (currently).}
 
 \item{seed:}{int, reproducibility seed for nodes_sim=='uniform', clustering and dropout.}
+
+\item{solver:}{str, type of 'weak' learner; currently in ('ridge', 'lasso')}
 }
 \value{
 An object of class LSBoostClassifier

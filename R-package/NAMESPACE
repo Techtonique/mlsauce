@@ -3,5 +3,6 @@
 export(AdaOpt)
 export(LSBoostClassifier)
 export(LSBoostRegressor)
-export(Ridge)
+export(LassoRegressor)
+export(RidgeRegressor)
 export(StumpClassifier)
