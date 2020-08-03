@@ -39,7 +39,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.7.2'
+__version__ = '0.7.3'
 
 VERSION = __version__
 
@@ -242,7 +242,9 @@ def setup_package():
                             'jaxlib>={}'.format(JAXLIB_MIN_VERSION)
                             ] if platform.system() in ('Linux', 'Darwin') else []
 
-    install_requires = [item for sublist in [install_jax_requires, install_all_requires] for item in sublist]
+    other_requirements = ["tqdm==4.48.1", "pymongo >= 3.10.1", "SQLAlchemy >= 1.3.18"]                        
+
+    install_requires = [item for sublist in [install_jax_requires, install_all_requires, other_requirements] for item in sublist]
 
     metadata = dict(name=DISTNAME,
                     maintainer=MAINTAINER,
