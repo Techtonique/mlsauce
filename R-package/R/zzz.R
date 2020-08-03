@@ -10,20 +10,21 @@ ms <- NULL
 
 install_miniconda_ <- function(silent = TRUE)
 {
-  try(reticulate::install_miniconda(), silent = TRUE)
+  try(reticulate::install_miniconda(),
+      silent = silent)
 }
 
 uninstall_mlsauce <- function(foo = NULL) {
-  python <- reticulate:::.globals$py_config$python
-  packages <- "mlsauce"
-  args <- c("pip", "uninstall", "--yes", packages)
-  result <- system2(python, args)
-  if (result != 0L) {
-    pkglist <- paste(shQuote(packages), collapse = ", ")
-    msg <- paste("Error removing package(s):", pkglist)
-    stop(msg, call. = FALSE)
-  }
-  packages
+    python <- reticulate:::.globals$py_config$python
+    packages <- "mlsauce"
+    args <- c("pip", "uninstall", "--yes", packages)
+    result <- system2(python, args)
+    if (result != 0L) {
+      pkglist <- paste(shQuote(packages), collapse = ", ")
+      msg <- paste("Error removing package(s):", pkglist)
+      stop(msg, call. = FALSE)
+    }
+    packages
 }
 
 install_packages <- function(pip = TRUE) {
@@ -33,11 +34,10 @@ install_packages <- function(pip = TRUE) {
   has_scipy <- reticulate::py_module_available("scipy")
   has_sklearn <- reticulate::py_module_available("sklearn")
   has_tqdm <- reticulate::py_module_available("tqdm")
-  has_mlsauce <- reticulate::py_module_available("mlsauce")
   has_pymongo <- reticulate::py_module_available("pymongo")
   has_querier <- reticulate::py_module_available("querier")
   has_sqlalchemy <- reticulate::py_module_available("sqlalchemy")
-
+  #has_mlsauce <- reticulate::py_module_available("mlsauce")
 
   if (has_cython == FALSE)
     reticulate::py_install("cython", pip = pip)
@@ -63,17 +63,15 @@ install_packages <- function(pip = TRUE) {
   if (has_tqdm == FALSE)
     reticulate::py_install("tqdm", pip = pip)
 
-  if (has_mlsauce == FALSE)
-    reticulate::py_install("mlsauce", pip = pip,
-                           pip_ignore_installed = TRUE)
-    #reticulate::py_install("git+https://github.com/thierrymoudiki/mlsauce.git",
-    #                       pip = pip, pip_ignore_installed = TRUE)
+  reticulate::py_install("mlsauce", pip = pip,
+                         pip_ignore_installed = TRUE)
 }
 
 
 .onLoad <- function(libname, pkgname) {
 
-  do.call("uninstall_mlsauce", list(foo=NULL))
+  try(do.call("uninstall_mlsauce", list(foo=NULL)),
+      silent = TRUE)
 
   do.call("install_miniconda_", list(silent=TRUE))
 
@@ -89,5 +87,4 @@ install_packages <- function(pip = TRUE) {
   sklearn <<- reticulate::import("sklearn", delay_load = TRUE)
   tqdm <<- reticulate::import("tqdm", delay_load = TRUE)
   ms <<- reticulate::import("mlsauce", delay_load = TRUE)
-
 }

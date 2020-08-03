@@ -83,7 +83,7 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
             invXX = inv(XX + self.reg_lambda*np.eye(X_.shape[1]))            
             beta0 = mo.safe_sparse_dot(invXX, Xy)
 
-            if len(y.shape) == 1:
+            if len(np.asarray(y).shape) == 1:
                 res = mo.get_beta_1D(beta0 = np.asarray(beta0), 
                                      XX2 = np.asarray(XX2), 
                                      Xy2 = np.asarray(Xy2), 
@@ -105,7 +105,7 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         invXX = jinv(XX + self.reg_lambda*jnp.eye(X_.shape[1]))           
         beta0 = mo.safe_sparse_dot(invXX, Xy, 
                                    backend=self.backend)
-        if len(y.shape) == 1:
+        if len(np.asarray(y).shape) == 1:
             res = mo.get_beta_1D(beta0 = np.asarray(beta0), 
                                  XX2 = np.asarray(XX2), 
                                  Xy2 = np.asarray(Xy2), 
