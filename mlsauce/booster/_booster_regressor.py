@@ -56,20 +56,27 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         verbose=1,
         seed=123,
         backend="cpu",
-        solver="ridge"
+        solver="ridge",
     ):
 
-        assert backend in ("cpu", "gpu", "tpu"),\
-             "`backend` must be in ('cpu', 'gpu', 'tpu')"
+        assert backend in (
+            "cpu",
+            "gpu",
+            "tpu",
+        ), "`backend` must be in ('cpu', 'gpu', 'tpu')"
 
-        assert solver in ("ridge", "lasso"), \
-             "`solver` must be in ('ridge', 'lasso')"     
+        assert solver in (
+            "ridge",
+            "lasso",
+        ), "`solver` must be in ('ridge', 'lasso')"
 
         sys_platform = platform.system()
 
         if (sys_platform == "Windows") and (backend in ("gpu", "tpu")):
-            warnings.warn("No GPU/TPU computing on Windows yet, backend set to 'cpu'")
-            backend = "cpu"          
+            warnings.warn(
+                "No GPU/TPU computing on Windows yet, backend set to 'cpu'"
+            )
+            backend = "cpu"
 
         self.n_estimators = n_estimators
         self.learning_rate = learning_rate
@@ -103,7 +110,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         Returns
         -------
         self: object.
-        """        
+        """
 
         self.obj = boosterc.fit_booster_regressor(
             X=np.asarray(X, order="C"),
@@ -120,7 +127,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             verbose=self.verbose,
             seed=self.seed,
             backend=self.backend,
-            solver=self.solver
+            solver=self.solver,
         )
 
         return self
