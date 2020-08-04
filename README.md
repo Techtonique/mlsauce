@@ -60,8 +60,8 @@ Miscellaneous Statistical/Machine learning stuff. See next section.
 
 ## Quick start
 
-- [AdaOpt: probabilistic classifier based on a mix of multivariable optimization and a nearest neighbors algorithm](https://thierrymoudiki.github.io/blog/2020/05/29/python/r/adaopt-classifier-3)
-- [LSBoost: Gradient Boosted randomized networks using Least Squares](https://thierrymoudiki.github.io/blog/2020/07/31/python/r/misc/xai-boosting-2)
+- [AdaOpt: probabilistic classifier based on a mix of multivariable optimization and a nearest neighbors algorithm](https://thierrymoudiki.github.io/blog/#AdaOpt)
+- [LSBoost: Gradient Boosted randomized networks using Least Squares](https://thierrymoudiki.github.io/blog/#LSBoost)
 
 
 ## Contributing
