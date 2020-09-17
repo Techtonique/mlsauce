@@ -1,4 +1,4 @@
-site_name: mlsauce
+site_name: Techtonique/mlsauce
 theme:
   name: darkly # sandstone # slate # lux # darkly
   nav_style: dark
@@ -22,5 +22,5 @@ nav:
     - Contributing: CONTRIBUTING.md  
     - License: LICENSE.md  
     - References: REFERENCES.md
-    - Techtonique: ../../
+    - Techtonique: ../
     
