@@ -20,6 +20,7 @@ Miscellaneous Statistical/Machine learning stuff.
  [Dependencies](#dependencies) |
  [Citing `mlsauce`](#Citation) |
  [API Documentation](#api-documentation) |
+ [References](#References) |
  [License](#License) 
 
 
@@ -137,6 +138,12 @@ note={BSD 3-Clause Clear License. Version 0.x.x.},
 year={2019--2020}
 }
 ```
+
+## References
+
+- Moudiki, T. (2020). AdaOpt: Multivariable optimization for classification. 
+    Available at: 
+    https://www.researchgate.net/publication/341409169_AdaOpt_Multivariable_optimization_for_classification
 
 ## License
 
