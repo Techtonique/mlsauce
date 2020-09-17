@@ -2,8 +2,6 @@
 
 _In alphabetical order_
 
-All models possess methods `fit`, `predict`, `predict_proba`, and `score`. For scoring metrics, refer to [scoring metrics](scoring_metrics.md).
-
 <span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/adaopt/_adaopt.py#L13)</span>
 
 ### AdaOpt

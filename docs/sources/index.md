@@ -48,6 +48,8 @@ Plus examples of use:
 
 - For [regression](examples/regression.md)
 
+- Some R examples can be found in this post: [https://thierrymoudiki.github.io/blog/#LSBoost](https://thierrymoudiki.github.io/blog/#LSBoost)
+
 ## Documentation
 
 The documentation for each model can be found (work in progress) here:
