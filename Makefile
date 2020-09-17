@@ -2,7 +2,7 @@
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
-import os, webbrowser, sys
+import os, webbrowser, sys, mkdocs
 
 from urllib.request import pathname2url
 
@@ -62,16 +62,14 @@ coverage: ## check code coverage quickly with the default Python
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/source/mlsauce.rst
-	rm -f docs/source/modules.rst
-	sphinx-apidoc -f -o docs/source mlsauce
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/build/html/index.html
+docs: ## generate mkdocs
+	 rm -rf docs/sources
+	 make install	 
+	 python3 docs/autogen.py	 
 
 servedocs: docs ## compile the docs watching for changes
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+	cd docs&&mkdocs serve
+	cd ..
 
 release: dist ## package and upload a release
 	twine upload dist/*
@@ -83,3 +81,8 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
+
+build-site: docs
+	cd docs&&mkdocs build
+	cp -rf docs/site/* ../../Pro_Website/Techtonique.github.io/mlsauce
+	cd ..

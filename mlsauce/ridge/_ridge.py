@@ -15,12 +15,14 @@ if platform.system() in ("Linux", "Darwin"):
 class RidgeRegressor(BaseEstimator, RegressorMixin):
     """ Ridge.
         
-     Parameters
-     ----------
-     reg_lambda: float
-         regularization parameter.
-     backend: str    
-         type of backend; must be in ('cpu', 'gpu', 'tpu')          
+    Attributes:
+     
+        reg_lambda: float
+            regularization parameter.
+
+        backend: str    
+            type of backend; must be in ('cpu', 'gpu', 'tpu') 
+                     
     """
 
     def __init__(self, reg_lambda=0.1, backend="cpu"):
@@ -43,22 +45,23 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
         self.backend = backend
 
     def fit(self, X, y, **kwargs):
-        """Fit matrixops (classifier) to training data (X, y)
+        """ Fit matrixops (classifier) to training data (X, y)
         
-        Parameters
-        ----------
-        X: {array-like}, shape = [n_samples, n_features]
-            Training vectors, where n_samples is the number 
-            of samples and n_features is the number of features.
+        Args:
         
-        y: array-like, shape = [n_samples]
-               Target values.
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number 
+                of samples and n_features is the number of features.
+        
+            y: array-like, shape = [n_samples]
+                Target values.
     
-        **kwargs: additional parameters to be passed to self.cook_training_set.
+            **kwargs: additional parameters to be passed to self.cook_training_set.
                
-        Returns
-        -------
-        self: object.
+        Returns:
+        
+            self: object.
+
         """
 
         self.ym, centered_y = mo.center_response(y)
@@ -83,20 +86,20 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
         return self
 
     def predict(self, X, **kwargs):
-        """Predict test data X.
+        """ Predict test data X.
         
-        Parameters
-        ----------
-        X: {array-like}, shape = [n_samples, n_features]
-            Training vectors, where n_samples is the number 
-            of samples and n_features is the number of features.
+        Args:
         
-        **kwargs: additional parameters to be passed to `predict_proba`
-                
-               
-        Returns
-        -------
-        model predictions: {array-like}
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number 
+                of samples and n_features is the number of features.
+        
+            **kwargs: additional parameters to be passed to `predict_proba`
+                               
+        Returns: 
+        
+            model predictions: {array-like}
+
         """
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
 

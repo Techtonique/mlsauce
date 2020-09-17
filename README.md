@@ -8,7 +8,7 @@ mlsauce
 Miscellaneous Statistical/Machine learning stuff.  
 
 ![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/thierrymoudiki/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce)
-[![Documentation Status](https://readthedocs.org/projects/mlsauce/badge/?version=latest)](https://mlsauce.readthedocs.io/en/latest/?badge=latest)
+[![Documentation](https://img.shields.io/badge/documentation-is_here-green)](https://techtonique.github.io/mlsauce/)
 
 
 ## Contents 
@@ -20,6 +20,7 @@ Miscellaneous Statistical/Machine learning stuff.
  [Dependencies](#dependencies) |
  [Citing `mlsauce`](#Citation) |
  [API Documentation](#api-documentation) |
+ [References](#References) |
  [License](#License) 
 
 
@@ -117,7 +118,7 @@ coverage html
 
 ## API Documentation
 
-- TBD
+- https://techtonique.github.io/mlsauce/
 
 ## Dependencies 
 
@@ -137,6 +138,12 @@ note={BSD 3-Clause Clear License. Version 0.x.x.},
 year={2019--2020}
 }
 ```
+
+## References
+
+- Moudiki, T. (2020). AdaOpt: Multivariable optimization for classification. 
+    Available at: 
+    https://www.researchgate.net/publication/341409169_AdaOpt_Multivariable_optimization_for_classification
 
 ## License
 

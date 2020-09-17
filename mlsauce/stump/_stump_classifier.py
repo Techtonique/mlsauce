@@ -7,10 +7,10 @@ from . import _stumpc as stumpc
 class StumpClassifier(BaseEstimator, ClassifierMixin):
     """Stump classifier.
         
-     Parameters
-     ----------
-     bins: int
-         Number of histogram bins; as in numpy.histogram.        
+    Attributes:
+    
+        bins: int
+            Number of histogram bins; as in numpy.histogram.        
     """
 
     def __init__(self, bins="auto"):
@@ -21,21 +21,21 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
     def fit(self, X, y, sample_weight=None, **kwargs):
         """Fit Stump to training data (X, y)
         
-        Parameters
-        ----------
-        X: {array-like}, shape = [n_samples, n_features]
-            Training vectors, where n_samples is the number 
-            of samples and n_features is the number of features.
+        Args:
         
-        y: array-like, shape = [n_samples]
-               Target values.
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number 
+                of samples and n_features is the number of features.
+        
+            y: array-like, shape = [n_samples]
+                Target values.
                
-        sample_weight: array_like, shape = [n_samples]
-         Observations weights.                                    
+            sample_weight: array_like, shape = [n_samples]
+                Observations weights.                                    
                       
-        Returns
-        -------
-        self: object.
+        Returns:
+        
+            self: object.
         """
 
         if sample_weight is None:
@@ -60,18 +60,18 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
     def predict(self, X, **kwargs):
         """Predict test data X.
         
-        Parameters
-        ----------
-        X: {array-like}, shape = [n_samples, n_features]
-            Training vectors, where n_samples is the number 
-            of samples and n_features is the number of features.
+        Args:
         
-        **kwargs: additional parameters to be passed to `predict_proba`
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number 
+                of samples and n_features is the number of features.
+        
+            **kwargs: additional parameters to be passed to `predict_proba`
                 
                
-        Returns
-        -------
-        model predictions: {array-like}
+        Returns: 
+        
+            model predictions: {array-like}
         """
 
         return np.argmax(self.predict_proba(X, **kwargs), axis=1)
@@ -79,18 +79,18 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
     def predict_proba(self, X, **kwargs):
         """Predict probabilities for test data X.
         
-        Parameters
-        ----------
-        X: {array-like}, shape = [n_samples, n_features]
-            Training vectors, where n_samples is the number 
-            of samples and n_features is the number of features.
+        Args:
         
-        **kwargs: additional parameters to be passed to 
-                  self.cook_test_set
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number 
+                of samples and n_features is the number of features.
+        
+            **kwargs: additional parameters to be passed to 
+                self.cook_test_set
                
-        Returns
-        -------
-        probability estimates for test data: {array-like}        
+        Returns: 
+        
+            probability estimates for test data: {array-like}        
         """
 
         return stumpc.predict_proba_stump_classifier(
