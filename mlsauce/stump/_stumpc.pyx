@@ -128,6 +128,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
   cdef long int n
   cdef long int n_up 
   cdef long int n_down 
+  cdef long int n_preds
   cdef int n_bins 
   cdef int p
   cdef long int i
@@ -156,10 +157,11 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
     n_bins = -1
   else: 
     n_bins = bins  
+  n_preds = len(y)  
   
   X_ = np.asarray(X).T.tolist()
   
-  if n_classes <= 2:
+  if n_classes <= 2:    
   
     for j in range(p):
     
@@ -181,7 +183,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
         preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)                
 
         if sample_weight is None:
-          error_rate_cur = cython_average((preds != y)*1.0, np.repeat(1/len(preds), len(preds))) 
+          error_rate_cur = cython_average((preds != y)*1.0, np.repeat(1/n_preds, n_preds)) 
         else:
           error_rate_cur = cython_average((preds != y)*1.0, sample_weight)  
         
@@ -231,7 +233,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
           
           if sample_weight is None:            
-            error_rate_cur = cython_average((preds != y_)*1.0, np.repeat(1/len(preds), len(preds))) 
+            error_rate_cur = cython_average((preds != y_)*1.0, np.repeat(1/n_preds, n_preds)) 
           else:
             error_rate_cur = cython_average((preds != y_)*1.0, sample_weight) 
           
