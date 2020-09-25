@@ -112,6 +112,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
   cdef long int n
   cdef long int n_up 
   cdef long int n_down 
+  cdef int n_bins 
   cdef int p
   cdef long int i
   cdef int j, k
@@ -135,6 +136,10 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
   i = 0
   j = 0
   k = 0
+  if bins == "auto":
+    n_bins = -1
+  else: 
+    n_bins = bins  
   
   X_ = np.asarray(X).T.tolist()
   
@@ -146,7 +151,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
       
       # cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
 
-      cutpoints = histogram_bins(X_j, bins) 
+      cutpoints = histogram_bins(X_j, n_bins) 
 
       n_cutpoints = len(cutpoints)
       
@@ -201,7 +206,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
       
       # cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
 
-      cutpoints = histogram_bins(X_j, bins) 
+      cutpoints = histogram_bins(X_j, n_bins) 
 
       n_cutpoints = len(cutpoints)      
  
