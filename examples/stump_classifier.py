@@ -22,7 +22,7 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-obj = ms.StumpClassifier()
+obj = ms.StumpClassifier(bins=-1)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
@@ -40,7 +40,7 @@ np.random.seed(879423)
 X_train, X_test, y_train, y_test = train_test_split(Z, t, 
                                                     test_size=0.2)
 
-obj = ms.StumpClassifier()
+obj = ms.StumpClassifier(bins=-1)
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
@@ -58,7 +58,7 @@ X_train, X_test, y_train, y_test = train_test_split(Z, t,
                                                     test_size=0.2)
 
 
-obj = ms.StumpClassifier()
+obj = ms.StumpClassifier(bins=-1)
 start = time()
 obj.fit(X_train, y_train)
 print(time()-start)
