@@ -28,6 +28,18 @@ from scipy.special import expit
 
 warnings.filterwarnings("ignore")
 
+# returns min(x, y)
+cdef double min_c(double x, double y):
+    if (x < y):
+        return x 
+    return y
+
+# returns max(x, y)
+cdef double max_c(double x, double y):
+    if (x > y):
+        return x 
+    return y
+
 
 # 0 - 1 data structures & funcs -----
 
@@ -60,9 +72,36 @@ def one_hot_encode(long int[:] y,
         res[i, y[i]] = 1
 
     return np.asarray(res)
+
+        
+def histogram_bins(double[:] x, long int n_bins = -1):
     
+    cdef long int i, n    
+    cdef long int n_classes, n_bins_1 
+    cdef double freq     
+    cdef double[:] res
+    cdef double min_x, max_x
+
+    n = len(x)
+    res = np.zeros(n_bins_1)
+
+    if n_bins == -1:
+      n_bins = int(sqrt(n))    
+
+    min_x = np.min(x)    
+    max_x = np.max(x)
+
+    freq = (max_x - min_x)/n_bins
     
-    
+    n_bins_1 = n_bins + 1
+
+    for i in range(n_bins_1):
+
+      res[i] = min_x + i*freq
+                                
+    return np.asarray(res)
+
+   
 # 1 - fitting -----    
 
 
@@ -105,7 +144,10 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
     
       X_j = np.asarray(X_[j])
       
-      cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
+      # cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
+
+      cutpoints = histogram_bins(X_j, bins) 
+
       n_cutpoints = len(cutpoints)
       
       for i in range(n_cutpoints):
@@ -157,9 +199,11 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
     
       X_j = np.asarray(X_[j])
       
-      cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
-      n_cutpoints = len(cutpoints)
-      
+      # cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
+
+      cutpoints = histogram_bins(X_j, bins) 
+
+      n_cutpoints = len(cutpoints)      
  
       for i in range(n_cutpoints):
         
