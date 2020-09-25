@@ -177,10 +177,8 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
                
         cutpoint_i = cutpoints[i] 
         index_up = (X_j <= cutpoint_i)
-        y_up = np.asarray(y)[index_up]
-        counter_up = dict(Counter(y_up))
-        class_up = max(counter_up.items(), 
-                       key=operator.itemgetter(1))[0] # majority vote
+        y_up = np.asarray(y)[index_up]        
+        class_up = Counter(y_up.tolist()).most_common(1)[0][0] # majority vote # majority vote
 
         preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)                
 
@@ -227,10 +225,8 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
         
           cutpoint_i = cutpoints[i] 
           index_up = (X_j <= cutpoint_i)
-          y_up = y_[index_up]
-          counter_up = dict(Counter(y_up))
-          class_up = max(counter_up.items(), 
-                         key=operator.itemgetter(1))[0] # majority vote
+          y_up = y_[index_up]          
+          class_up = Counter(y_up.tolist()).most_common(1)[0][0] # majority vote
   
           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
           
