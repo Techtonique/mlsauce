@@ -28,6 +28,18 @@ from scipy.special import expit
 
 warnings.filterwarnings("ignore")
 
+# returns min(x, y)
+cdef double min_c(double x, double y):
+    if (x < y):
+        return x 
+    return y
+
+# returns max(x, y)
+cdef double max_c(double x, double y):
+    if (x > y):
+        return x 
+    return y
+
 
 # 0 - 1 data structures & funcs -----
 
@@ -60,9 +72,52 @@ def one_hot_encode(long int[:] y,
         res[i, y[i]] = 1
 
     return np.asarray(res)
+
+# average stuff
+cdef double cython_average(double[:] x, double[:] weights):
     
+    cdef long int i, n 
+    cdef double sum_x    
+    cdef double[:] sum_out 
     
+    n = len(x)
+    sum_x = 0 
+
+    for i in range(n):        
+      sum_x += x[i]*weights[i]        
     
+    return sum_x
+
+# obtain histogram bins        
+def histogram_bins(double[:] x, long int n_bins = -1):
+    
+    cdef long int i, n    
+    cdef long int n_classes, n_bins_1 
+    cdef double freq     
+    cdef double[:] res
+    cdef double min_x, max_x
+
+    n = len(x)    
+
+    if n_bins == -1:
+      n_bins = int(sqrt(n))    
+
+    min_x = np.min(x)    
+    max_x = np.max(x)
+
+    freq = (max_x - min_x)/n_bins
+    
+    n_bins_1 = n_bins + 1
+
+    res = np.zeros(n_bins_1)
+
+    for i in range(n_bins_1):
+
+      res[i] = min_x + i*freq
+                                
+    return np.asarray(res)
+
+   
 # 1 - fitting -----    
 
 
@@ -73,6 +128,8 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
   cdef long int n
   cdef long int n_up 
   cdef long int n_down 
+  cdef long int n_preds
+  cdef int n_bins 
   cdef int p
   cdef long int i
   cdef int j, k
@@ -84,6 +141,7 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
   cdef double error_rate, error_rate_cur, error_rate_down, error_rate_up
   cdef int best_class, class_up, n_classes
   cdef dict res_class
+  cdef double[:] equal_weights
 
 
   n = X.shape[0]
@@ -96,33 +154,35 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
   i = 0
   j = 0
   k = 0
+  if bins == "auto":
+    n_bins = -1
+  else: 
+    n_bins = bins  
+  n_preds = len(y)  
+  equal_weights = np.repeat(1/n_preds, n_preds)
   
   X_ = np.asarray(X).T.tolist()
   
-  if n_classes <= 2:
+  if n_classes <= 2:    
   
     for j in range(p):
     
       X_j = np.asarray(X_[j])
       
-      cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
+      cutpoints = histogram_bins(X_j, n_bins) 
+
       n_cutpoints = len(cutpoints)
       
       for i in range(n_cutpoints):
-        
-        #try:
-        
+               
         cutpoint_i = cutpoints[i] 
         index_up = (X_j <= cutpoint_i)
-        y_up = np.asarray(y)[index_up]
-        counter_up = dict(Counter(y_up))
-        class_up = max(counter_up.items(), 
-                       key=operator.itemgetter(1))[0] # majority vote
+        y_up = np.asarray(y)[index_up]        
+        class_up = Counter(y_up.tolist()).most_common(1)[0][0] # majority vote # majority vote
 
-        preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
+        preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)                
         
-        error_rate_cur = np.mean(preds != y) if sample_weight is None else np.average(a = (preds != y)*1, 
-                                                                                      weights = np.asarray(sample_weight))/np.sum(np.asarray(sample_weight))
+        error_rate_cur = cython_average((preds != y)*1.0, equal_weights) if sample_weight is None else cython_average((preds != y)*1.0, sample_weight)           
         
         if error_rate_cur <= error_rate:
           # print(error_rate_cur)
@@ -130,13 +190,8 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
           best_cutpoint = cutpoint_i
           error_rate = error_rate_cur
           best_class = class_up
-  
-        #except:
-        
-        #  pass
-        
+         
     return best_col, best_cutpoint, best_class
-
 
 # if n_classes > 2:
 
@@ -156,10 +211,10 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
     for j in range(p):
     
       X_j = np.asarray(X_[j])
-      
-      cutpoints = np.histogram_bin_edges(X_j, bins=bins) # np.unique(X_j)
-      n_cutpoints = len(cutpoints)
-      
+           
+      cutpoints = histogram_bins(X_j, n_bins) 
+
+      n_cutpoints = len(cutpoints)      
  
       for i in range(n_cutpoints):
         
@@ -167,15 +222,12 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
         
           cutpoint_i = cutpoints[i] 
           index_up = (X_j <= cutpoint_i)
-          y_up = y_[index_up]
-          counter_up = dict(Counter(y_up))
-          class_up = max(counter_up.items(), 
-                         key=operator.itemgetter(1))[0] # majority vote
+          y_up = y_[index_up]          
+          class_up = Counter(y_up.tolist()).most_common(1)[0][0] # majority vote
   
           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
-          
-          error_rate_cur = np.mean(preds != y_) if sample_weight is None else np.average(a = (preds != y_)*1, 
-                                                                                        weights = sample_weight)
+                     
+          error_rate_cur = cython_average((preds != y_)*1.0, equal_weights) if sample_weight is None else cython_average((preds != y_)*1.0, sample_weight)                     
           
           if error_rate_cur <= error_rate:
             # print(error_rate_cur)
