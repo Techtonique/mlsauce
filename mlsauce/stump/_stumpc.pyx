@@ -181,11 +181,8 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
         class_up = Counter(y_up.tolist()).most_common(1)[0][0] # majority vote # majority vote
 
         preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)                
-
-        if sample_weight is None:
-          error_rate_cur = cython_average((preds != y)*1.0, equal_weights) 
-        else:
-          error_rate_cur = cython_average((preds != y)*1.0, sample_weight)  
+        
+        error_rate_cur = cython_average((preds != y)*1.0, equal_weights) if sample_weight is None else cython_average((preds != y)*1.0, sample_weight)           
         
         if error_rate_cur <= error_rate:
           # print(error_rate_cur)
@@ -229,11 +226,8 @@ def fit_stump_classifier(double[:,::1] X, long int[:] y,
           class_up = Counter(y_up.tolist()).most_common(1)[0][0] # majority vote
   
           preds = class_up*index_up + (1 - class_up)*np.logical_not(index_up)
-          
-          if sample_weight is None:            
-            error_rate_cur = cython_average((preds != y_)*1.0, equal_weights) 
-          else:
-            error_rate_cur = cython_average((preds != y_)*1.0, sample_weight) 
+                     
+          error_rate_cur = cython_average((preds != y_)*1.0, equal_weights) if sample_weight is None else cython_average((preds != y_)*1.0, sample_weight)                     
           
           if error_rate_cur <= error_rate:
             # print(error_rate_cur)
