@@ -63,8 +63,14 @@ install_packages <- function(pip = TRUE) {
   if (has_tqdm == FALSE)
     reticulate::py_install("tqdm", pip = pip)
 
-  reticulate::py_install("mlsauce", pip = pip,
-                         pip_ignore_installed = TRUE)
+  foo <- try(reticulate::py_install("mlsauce", pip = pip,
+                         pip_ignore_installed = TRUE), 
+                         silent=TRUE)
+  if (class(foo) == "try-error")                       
+  {
+    reticulate::py_install("git+https://github.com/thierrymoudiki/mlsauce.git",
+                           pip = pip, pip_ignore_installed = TRUE)                       
+  }  
 }
 
 
