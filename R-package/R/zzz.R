@@ -8,6 +8,7 @@ tqdm <- NULL
 ms <- NULL
 
 
+
 install_miniconda_ <- function(silent = TRUE)
 {
   try(reticulate::install_miniconda(),
@@ -64,13 +65,13 @@ install_packages <- function(pip = TRUE) {
     reticulate::py_install("tqdm", pip = pip)
 
   foo <- try(reticulate::py_install("mlsauce", pip = pip,
-                         pip_ignore_installed = TRUE), 
+                         pip_ignore_installed = TRUE),
                          silent=TRUE)
-  if (class(foo) == "try-error")                       
+  if (class(foo) == "try-error")
   {
-    reticulate::py_install("git+https://github.com/thierrymoudiki/mlsauce.git",
-                           pip = pip, pip_ignore_installed = TRUE)                       
-  }  
+    reticulate::py_install("git+https://github.com/Techtonique/mlsauce.git",
+                           pip = pip, pip_ignore_installed = TRUE)
+  }
 }
 
 
