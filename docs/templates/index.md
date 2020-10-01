@@ -1,7 +1,7 @@
 
 # mlsauce
 
-![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/thierrymoudiki/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce)
+![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/thierrymoudiki/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce) [![Last Commit](https://img.shields.io/github/last-commit/Techtonique/mlsauce)](https://github.com/Techtonique/mlsauce)
 
 
 Welcome to __mlsauce__'s website.
@@ -24,7 +24,7 @@ pip install mlsauce
 - __2nd method__: from Github, for the development version
 
 ```bash
-pip install git+https://github.com/thierrymoudiki/mlsauce.git
+pip install git+https://github.com/Techtonique/mlsauce.git
 ```
 
 ### R 
@@ -33,7 +33,7 @@ pip install git+https://github.com/thierrymoudiki/mlsauce.git
 
 ```r
 library(devtools)
-devtools::install_github("thierrymoudiki/mlsauce/R-package")
+devtools::install_github("Techtonique/mlsauce/R-package")
 library(mlsauce)
 ```
 
