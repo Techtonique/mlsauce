@@ -1,5 +1,5 @@
 
-# mlsauce | <a class="github-button" href="https://github.com/Techtonique/mlsauce/stargazers" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Star dask/dask on GitHub">Star</a>
+# mlsauce | <a class="github-button" href="https://github.com/Techtonique/mlsauce/stargazers" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Star mlsauce/mlsauce on GitHub">Star</a>
 
 ![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/thierrymoudiki/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce) [![Last Commit](https://img.shields.io/github/last-commit/Techtonique/mlsauce)](https://github.com/Techtonique/mlsauce)
 

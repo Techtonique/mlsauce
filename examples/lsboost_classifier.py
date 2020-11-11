@@ -36,6 +36,8 @@ start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
 
+print(obj.obj['loss'])
+
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 obj = ms.LSBoostClassifier(backend="gpu")
 print(obj.get_params())
@@ -45,6 +47,8 @@ print(time()-start)
 start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
+
+print(obj.obj['loss'])
 
 # data 2
 wine = load_wine()
@@ -63,6 +67,8 @@ start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
 
+print(obj.obj['loss'])
+
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 obj = ms.LSBoostClassifier(backend="gpu")
 print(obj.get_params())
@@ -72,6 +78,8 @@ print(time()-start)
 start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
+
+print(obj.obj['loss'])
 
 # data 3
 iris = load_iris()
@@ -90,6 +98,8 @@ print(time()-start)
 start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
+
+print(obj.obj['loss'])
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 obj = ms.LSBoostClassifier(backend="gpu")

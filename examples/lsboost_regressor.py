@@ -1,4 +1,5 @@
 import numpy as np 
+import matplotlib.pyplot as plt
 from sklearn.datasets import load_boston, load_diabetes
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from time import time
@@ -37,6 +38,8 @@ start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 
+print(obj.obj['loss'])
+
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 obj = ms.LSBoostRegressor(backend="gpu")
 print(obj.get_params())
@@ -65,6 +68,8 @@ print(time()-start)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
+
+print(obj.obj['loss'])
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 obj = ms.LSBoostRegressor(backend="gpu")
@@ -103,6 +108,8 @@ start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 
+print(obj.obj['loss'])
+
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 # obj = ms.LSBoostRegressor(backend="gpu", solver="lasso")
 # print(obj.get_params())
@@ -131,6 +138,8 @@ print(time()-start)
 start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
+
+print(obj.obj['loss'])
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 # obj = ms.LSBoostRegressor(backend="gpu", solver="lasso")

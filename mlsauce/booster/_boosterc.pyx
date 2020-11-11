@@ -94,11 +94,13 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   cdef double ym
   cdef double[:] xm, xsd
   cdef double[:,::1] Y, X_, E, W_i, h_i, hh_i, hidden_layer_i, hhidden_layer_i
+  cdef double current_error
   
   
   n = X.shape[0]
   p = X.shape[1]
   res = {}
+  current_error = 1000000.0
   
   xm = np.asarray(X).mean(axis=0)
   xsd = np.asarray(X).std(axis=0)
@@ -111,6 +113,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['W_i'] = {}
   res['fit_obj_i'] = {} 
   res['col_index_i'] = {}
+  res['loss'] = []
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
@@ -162,8 +165,12 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       res['W_i'][iter] = np.asarray(W_i)
             
       res['fit_obj_i'][iter] = pickle.loads(pickle.dumps(fit_obj, -1))
+
+      current_error = np.linalg.norm(E, ord='fro')
+
+      res['loss'].append(current_error)
       
-      if np.linalg.norm(E, ord='fro') <= tolerance:
+      if current_error <= tolerance:
         res['n_estimators'] = iter
         break
       
@@ -225,11 +232,13 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   cdef double ym
   cdef double[:] xm, xsd, e
   cdef double[:,::1] X_, W_i, h_i, hh_i, hidden_layer_i, hhidden_layer_i
+  cdef double current_error
   
   
   n = X.shape[0]
   p = X.shape[1]
   res = {}
+  current_error = 1000000.0
   
   xm = np.asarray(X).mean(axis=0)
   xsd = np.asarray(X).std(axis=0)
@@ -242,6 +251,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['W_i'] = {}
   res['fit_obj_i'] = {} 
   res['col_index_i'] = {}
+  res['loss'] = []
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
@@ -293,8 +303,12 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
       res['W_i'][iter] = np.asarray(W_i)
       
       res['fit_obj_i'][iter] = pickle.loads(pickle.dumps(fit_obj, -1))
+
+      current_error = np.linalg.norm(e)
+
+      res['loss'].append(current_error)
       
-      if np.linalg.norm(e) <= tolerance:
+      if current_error <= tolerance:
         res['n_estimators'] = iter
         break
       
