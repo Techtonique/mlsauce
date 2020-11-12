@@ -81,7 +81,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
                            double row_sample=1, double col_sample=1,
-                           double dropout=0, double tolerance=1e-4, 
+                           double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1,
                            int seed=123, str backend="cpu", 
                            str solver="ridge"): 
@@ -170,9 +170,12 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
 
       res['loss'].append(current_error)
       
-      if current_error <= tolerance:
-        res['n_estimators'] = iter
-        break
+      try:
+        if np.diff(res['loss'])[-1] <= tolerance:
+          res['n_estimators'] = iter
+          break
+      except:
+        pass
       
   return res
   
@@ -219,7 +222,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
                            double row_sample=1, double col_sample=1,
-                           double dropout=0, double tolerance=1e-4, 
+                           double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1, 
                            int seed=123, str backend="cpu", 
                            str solver="ridge"): 
@@ -308,9 +311,12 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
 
       res['loss'].append(current_error)
       
-      if current_error <= tolerance:
-        res['n_estimators'] = iter
-        break
+      try: 
+        if np.diff(res['loss'])[-1] <= tolerance:
+          res['n_estimators'] = iter
+          break
+      except:
+        pass
       
   return res
   
