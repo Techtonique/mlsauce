@@ -171,7 +171,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       res['loss'].append(current_error)
       
       try:
-        if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
+        if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
           res['n_estimators'] = iter
           break
       except:
@@ -309,12 +309,12 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
 
       current_error = np.linalg.norm(e)
 
-      res['loss'].append(current_error)
-      
-      try: 
-        if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
+      res['loss'].append(current_error)      
+
+      try:              
+        if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
           res['n_estimators'] = iter
-          break
+          break      
       except:
         pass
       

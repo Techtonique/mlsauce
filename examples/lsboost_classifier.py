@@ -27,7 +27,7 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-obj = ms.LSBoostClassifier()
+obj = ms.LSBoostClassifier(tolerance=1e-2)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
