@@ -2287,6 +2287,7 @@ static const char __pyx_k_xm[] = "xm";
 static const char __pyx_k_ym[] = "ym";
 static const char __pyx_k_W_i[] = "W_i";
 static const char __pyx_k_X_2[] = "X_";
+static const char __pyx_k_abs[] = "abs";
 static const char __pyx_k_cpu[] = "cpu";
 static const char __pyx_k_dot[] = "dot";
 static const char __pyx_k_fit[] = "fit";
@@ -2504,6 +2505,7 @@ static PyObject *__pyx_n_s_Y;
 static PyObject *__pyx_n_s_Ym;
 static PyObject *__pyx_n_u_Ym;
 static PyObject *__pyx_n_s_a;
+static PyObject *__pyx_n_s_abs;
 static PyObject *__pyx_n_s_allocate_buffer;
 static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_asarray;
@@ -5734,7 +5736,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *       res['loss'].append(current_error)
  * 
  *       try:             # <<<<<<<<<<<<<<
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  */
     {
@@ -5749,59 +5751,80 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
         /* "mlsauce/booster/_boosterc.pyx":174
  * 
  *       try:
- *         if np.diff(res['loss'])[-1] <= tolerance:             # <<<<<<<<<<<<<<
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:             # <<<<<<<<<<<<<<
  *           res['n_estimators'] = iter
  *           break
  */
         __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_diff); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_abs); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_res, __pyx_n_u_loss); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_np); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_16);
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_n_s_diff); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+        __pyx_t_16 = __Pyx_PyDict_GetItem(__pyx_v_res, __pyx_n_u_loss); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_16);
+        __pyx_t_17 = NULL;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_9))) {
+          __pyx_t_17 = PyMethod_GET_SELF(__pyx_t_9);
+          if (likely(__pyx_t_17)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_9);
+            __Pyx_INCREF(__pyx_t_17);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_9, function);
+          }
+        }
+        __pyx_t_2 = (__pyx_t_17) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_17, __pyx_t_16) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_16);
+        __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
+        __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_16 = NULL;
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_2, -1L, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_2 = NULL;
         if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-          __pyx_t_16 = PyMethod_GET_SELF(__pyx_t_4);
-          if (likely(__pyx_t_16)) {
+          __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+          if (likely(__pyx_t_2)) {
             PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-            __Pyx_INCREF(__pyx_t_16);
+            __Pyx_INCREF(__pyx_t_2);
             __Pyx_INCREF(function);
             __Pyx_DECREF_SET(__pyx_t_4, function);
           }
         }
-        __pyx_t_11 = (__pyx_t_16) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_16, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_2);
-        __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_11 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_2, __pyx_t_9) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_9);
+        __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_11, -1L, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_tolerance); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_9 = PyObject_RichCompare(__pyx_t_11, __pyx_t_4, Py_LE); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyFloat_FromDouble(__pyx_v_tolerance); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 174, __pyx_L6_error)
-        __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_2 = PyObject_RichCompare(__pyx_t_4, __pyx_t_11, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L6_error)
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_19 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_19 < 0)) __PYX_ERR(0, 174, __pyx_L6_error)
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_19 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_19 < 0)) __PYX_ERR(0, 174, __pyx_L6_error)
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         if (__pyx_t_19) {
 
           /* "mlsauce/booster/_boosterc.pyx":175
  *       try:
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter             # <<<<<<<<<<<<<<
  *           break
  *       except:
  */
-          __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_iter); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L6_error)
-          __Pyx_GOTREF(__pyx_t_2);
-          if (unlikely(PyDict_SetItem(__pyx_v_res, __pyx_n_u_n_estimators, __pyx_t_2) < 0)) __PYX_ERR(0, 175, __pyx_L6_error)
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __pyx_t_9 = PyInt_FromSsize_t(__pyx_v_iter); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 175, __pyx_L6_error)
+          __Pyx_GOTREF(__pyx_t_9);
+          if (unlikely(PyDict_SetItem(__pyx_v_res, __pyx_n_u_n_estimators, __pyx_t_9) < 0)) __PYX_ERR(0, 175, __pyx_L6_error)
+          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
           /* "mlsauce/booster/_boosterc.pyx":176
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  *           break             # <<<<<<<<<<<<<<
  *       except:
@@ -5812,7 +5835,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
           /* "mlsauce/booster/_boosterc.pyx":174
  * 
  *       try:
- *         if np.diff(res['loss'])[-1] <= tolerance:             # <<<<<<<<<<<<<<
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:             # <<<<<<<<<<<<<<
  *           res['n_estimators'] = iter
  *           break
  */
@@ -5822,7 +5845,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *       res['loss'].append(current_error)
  * 
  *       try:             # <<<<<<<<<<<<<<
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  */
       }
@@ -5863,7 +5886,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *       res['loss'].append(current_error)
  * 
  *       try:             # <<<<<<<<<<<<<<
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  */
       __Pyx_XGIVEREF(__pyx_t_23);
@@ -9250,7 +9273,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *       res['loss'].append(current_error)
  * 
  *       try:             # <<<<<<<<<<<<<<
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  */
     {
@@ -9265,59 +9288,80 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
         /* "mlsauce/booster/_boosterc.pyx":315
  * 
  *       try:
- *         if np.diff(res['loss'])[-1] <= tolerance:             # <<<<<<<<<<<<<<
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:             # <<<<<<<<<<<<<<
  *           res['n_estimators'] = iter
  *           break
  */
         __Pyx_GetModuleGlobalName(__pyx_t_17, __pyx_n_s_np); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_diff); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_abs); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyDict_GetItem(__pyx_v_res, __pyx_n_u_loss); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_13, __pyx_n_s_np); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_13);
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_diff); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __pyx_t_13 = __Pyx_PyDict_GetItem(__pyx_v_res, __pyx_n_u_loss); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_13);
+        __pyx_t_18 = NULL;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+          __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_2);
+          if (likely(__pyx_t_18)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+            __Pyx_INCREF(__pyx_t_18);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_2, function);
+          }
+        }
+        __pyx_t_17 = (__pyx_t_18) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_18, __pyx_t_13) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_13);
+        __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
+        __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+        if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_13 = NULL;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_17, -1L, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+        __pyx_t_17 = NULL;
         if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-          __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_3);
-          if (likely(__pyx_t_13)) {
+          __pyx_t_17 = PyMethod_GET_SELF(__pyx_t_3);
+          if (likely(__pyx_t_17)) {
             PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-            __Pyx_INCREF(__pyx_t_13);
+            __Pyx_INCREF(__pyx_t_17);
             __Pyx_INCREF(function);
             __Pyx_DECREF_SET(__pyx_t_3, function);
           }
         }
-        __pyx_t_1 = (__pyx_t_13) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_13, __pyx_t_17) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_17);
-        __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+        __pyx_t_1 = (__pyx_t_17) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_17, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
+        __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, -1L, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_tolerance); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L6_error)
-        __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_17 = PyObject_RichCompare(__pyx_t_3, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_17); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 315, __pyx_L6_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_20 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_20 < 0)) __PYX_ERR(0, 315, __pyx_L6_error)
-        __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+        __pyx_t_20 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_20 < 0)) __PYX_ERR(0, 315, __pyx_L6_error)
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         if (__pyx_t_20) {
 
           /* "mlsauce/booster/_boosterc.pyx":316
  *       try:
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter             # <<<<<<<<<<<<<<
  *           break
  *       except:
  */
-          __pyx_t_17 = PyInt_FromSsize_t(__pyx_v_iter); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 316, __pyx_L6_error)
-          __Pyx_GOTREF(__pyx_t_17);
-          if (unlikely(PyDict_SetItem(__pyx_v_res, __pyx_n_u_n_estimators, __pyx_t_17) < 0)) __PYX_ERR(0, 316, __pyx_L6_error)
-          __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+          __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_iter); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L6_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          if (unlikely(PyDict_SetItem(__pyx_v_res, __pyx_n_u_n_estimators, __pyx_t_2) < 0)) __PYX_ERR(0, 316, __pyx_L6_error)
+          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
           /* "mlsauce/booster/_boosterc.pyx":317
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  *           break             # <<<<<<<<<<<<<<
  *       except:
@@ -9328,7 +9372,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
           /* "mlsauce/booster/_boosterc.pyx":315
  * 
  *       try:
- *         if np.diff(res['loss'])[-1] <= tolerance:             # <<<<<<<<<<<<<<
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:             # <<<<<<<<<<<<<<
  *           res['n_estimators'] = iter
  *           break
  */
@@ -9338,7 +9382,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *       res['loss'].append(current_error)
  * 
  *       try:             # <<<<<<<<<<<<<<
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  */
       }
@@ -9379,7 +9423,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_6, 2, (PyObject *(*)(char *)) __p
  *       res['loss'].append(current_error)
  * 
  *       try:             # <<<<<<<<<<<<<<
- *         if np.diff(res['loss'])[-1] <= tolerance:
+ *         if np.abs(np.diff(res['loss'])[-1]) <= tolerance:
  *           res['n_estimators'] = iter
  */
       __Pyx_XGIVEREF(__pyx_t_23);
@@ -24875,6 +24919,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Ym, __pyx_k_Ym, sizeof(__pyx_k_Ym), 0, 0, 1, 1},
   {&__pyx_n_u_Ym, __pyx_k_Ym, sizeof(__pyx_k_Ym), 0, 1, 0, 1},
   {&__pyx_n_s_a, __pyx_k_a, sizeof(__pyx_k_a), 0, 0, 1, 1},
+  {&__pyx_n_s_abs, __pyx_k_abs, sizeof(__pyx_k_abs), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_asarray, __pyx_k_asarray, sizeof(__pyx_k_asarray), 0, 0, 1, 1},
