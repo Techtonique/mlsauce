@@ -142,6 +142,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             solver=self.solver,
         )
 
+        self.n_estimators = self.obj['n_estimators']
+
         return self
 
     def predict(self, X, **kwargs):
