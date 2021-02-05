@@ -132,8 +132,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             y=np.asarray(y, order="C"),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
-            n_hidden_features=self.n_hidden_features,
-            activation = self.activation,
+            n_hidden_features=self.n_hidden_features,            
             reg_lambda=self.reg_lambda,
             row_sample=self.row_sample,
             col_sample=self.col_sample,
@@ -144,6 +143,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             seed=self.seed,
             backend=self.backend,
             solver=self.solver,
+            activation = self.activation
         )
 
         self.n_estimators = self.obj['n_estimators']
