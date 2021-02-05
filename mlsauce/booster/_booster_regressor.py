@@ -70,6 +70,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         seed=123,
         backend="cpu",
         solver="ridge",
+        activation="relu"
     ):
 
         assert backend in (
@@ -105,6 +106,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.backend = backend
         self.obj = None
         self.solver = solver
+        self.activation = activation
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)
@@ -131,6 +133,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,
+            activation = self.activation,
             reg_lambda=self.reg_lambda,
             row_sample=self.row_sample,
             col_sample=self.col_sample,

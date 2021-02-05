@@ -72,6 +72,24 @@ def one_hot_encode(long int[:] y,
 
     return np.asarray(res)
  
+# 0 - 3 activation functions ----- 
+
+def relu_activation(x):
+    return np.maximum(x, 0)
+
+
+def sigmoid_activation(x):
+    return 1/(1 + np.exp(-x))
+
+
+def activation_choice(x):
+  activation_options = {
+                "relu": relu_activation,
+                "tanh": np.tanh,
+                "sigmoid": sigmoid_activation
+            }
+  return activation_options[x]  
+
 
 # 1 - classifier ----- 
 
@@ -84,7 +102,9 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                            double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1,
                            int seed=123, str backend="cpu", 
-                           str solver="ridge"): 
+                           str solver="ridge", 
+                           str activation="relu"
+                           ): 
   
   cdef long int n
   cdef int p, n_cols_h_i, n_cols_hh_i
@@ -114,6 +134,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['fit_obj_i'] = {} 
   res['col_index_i'] = {}
   res['loss'] = []
+  res['activation'] = activation
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
@@ -140,7 +161,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       res['col_index_i'][iter] = iy                     
       X_iy = np.asarray(X_)[:, iy] # must be X_!
       W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy, W_i), 0), 
+      hhidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy, W_i)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
@@ -151,7 +172,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), 
+        hidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy_ix, W_i)), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
         fit_obj.fit(X = np.asarray(h_i), y = np.asarray(E)[ix,:])
@@ -193,6 +214,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
   direct_link = obj['direct_link']
   n_estimators = obj['n_estimators']
   learning_rate = obj['learning_rate']
+  activation = obj['activation']
   X_ = (X - obj['xm'][None, :])/obj['xsd'][None, :]
   n_row_preds = X.shape[0]
   preds_sum = np.zeros((n_row_preds, n_classes))
@@ -204,7 +226,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, np.maximum(np.dot(X_iy, W_i), 0))) if direct_link else np.maximum(np.dot(X_iy, W_i), 0)
+    hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
   out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(preds_sum))
@@ -225,7 +247,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1, 
                            int seed=123, str backend="cpu", 
-                           str solver="ridge"): 
+                           str solver="ridge", str activation="relu"): 
   
   cdef long int n
   cdef int p, n_cols_h_i, n_cols_hh_i
@@ -251,6 +273,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['xsd'] = np.asarray(xsd)
   res['n_estimators'] = n_estimators
   res['learning_rate'] = learning_rate
+  res['activation'] = activation
   res['W_i'] = {}
   res['fit_obj_i'] = {} 
   res['col_index_i'] = {}
@@ -280,7 +303,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
       res['col_index_i'][iter] = iy                     
       X_iy = np.asarray(X_)[:, iy] # must be X_!
       W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy, W_i), 0), 
+      hhidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy, W_i)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
@@ -291,7 +314,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=np.maximum(np.dot(X_iy_ix, W_i), 0), 
+        hidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy_ix, W_i)), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
         n_cols_h_i = h_i.shape[1]
@@ -333,6 +356,7 @@ def predict_booster_regressor(object obj, double[:,::1] X):
   direct_link = obj['direct_link']
   n_estimators = obj['n_estimators']
   learning_rate = obj['learning_rate']
+  activation = obj['activation']
   X_ = (X - obj['xm'][None, :])/obj['xsd'][None, :]
   preds_sum = np.zeros(X.shape[0])
   
@@ -341,7 +365,7 @@ def predict_booster_regressor(object obj, double[:,::1] X):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, np.maximum(np.dot(X_iy, W_i), 0))) if direct_link else np.maximum(np.dot(X_iy, W_i), 0)    
+    hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))    
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
   return np.asarray(obj['ym'] + np.asarray(preds_sum))
