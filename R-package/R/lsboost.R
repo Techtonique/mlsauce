@@ -16,7 +16,8 @@
 #' @param direct_link: bool, indicates whether the original features are included (True) in model's fitting or not (False).
 #' @param verbose: int, progress bar (yes = 1) or not (no = 0) (currently).
 #' @param seed: int, reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-#' @param solver: str, type of 'weak' learner; currently in ('ridge', 'lasso')         
+#' @param solver: str, type of 'weak' learner; currently in ('ridge', 'lasso')  
+#' @param activation: str, activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'                 
 #'
 #' @return An object of class LSBoostClassifier
 #' @export
@@ -57,7 +58,8 @@ LSBoostClassifier <- function(n_estimators=100L,
                               direct_link=1L,
                               verbose=1L,
                               seed=123L, 
-                              solver=c("ridge", "lasso"))
+                              solver=c("ridge", "lasso"), 
+                              activation="relu")
 {
 
   ms$LSBoostClassifier(n_estimators=n_estimators,
@@ -71,7 +73,8 @@ LSBoostClassifier <- function(n_estimators=100L,
                        direct_link=direct_link,
                        verbose=verbose,
                        seed=seed, 
-                       solver=match.arg(solver))
+                       solver=match.arg(solver), 
+                       activation=activation)
 }
 
 
@@ -93,6 +96,7 @@ LSBoostClassifier <- function(n_estimators=100L,
 #' @param verbose: int, progress bar (yes = 1) or not (no = 0) (currently).
 #' @param seed: int, reproducibility seed for nodes_sim=='uniform', clustering and dropout.
 #' @param solver: str, type of 'weak' learner; currently in ('ridge', 'lasso')  
+#' @param activation: str, activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'                 
 #'
 #' @return An object of class LSBoostRegressor
 #' @export
@@ -133,7 +137,8 @@ LSBoostRegressor <- function(n_estimators=100L,
                               direct_link=1L,
                               verbose=1L,
                               seed=123L, 
-                              solver=c("ridge", "lasso"))
+                              solver=c("ridge", "lasso"),
+                              activation="relu")
 {
 
   ms$LSBoostRegressor(n_estimators=n_estimators,
@@ -147,6 +152,7 @@ LSBoostRegressor <- function(n_estimators=100L,
                        direct_link=direct_link,
                        verbose=verbose,
                        seed=seed, 
-                       solver=match.arg(solver))
+                       solver=match.arg(solver)
+                       activation=activation)
 }
 

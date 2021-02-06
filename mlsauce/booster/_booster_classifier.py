@@ -51,7 +51,11 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             type of backend; must be in ('cpu', 'gpu', 'tpu')     
 
         solver: str
-            type of 'weak' learner; currently in ('ridge', 'lasso')         
+            type of 'weak' learner; currently in ('ridge', 'lasso')     
+
+        activation: str
+            activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'          
+        
     """
 
     def __init__(

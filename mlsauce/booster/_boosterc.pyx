@@ -77,14 +77,16 @@ def one_hot_encode(long int[:] y,
 def relu_activation(x):
     return np.maximum(x, 0)
 
+def relu6_activation(x):
+    return np.minimum(np.maximum(x, 0), 6)
 
 def sigmoid_activation(x):
     return 1/(1 + np.exp(-x))
 
-
 def activation_choice(x):
   activation_options = {
                 "relu": relu_activation,
+                "relu6": relu6_activation,
                 "tanh": np.tanh,
                 "sigmoid": sigmoid_activation
             }
