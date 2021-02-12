@@ -110,6 +110,7 @@ mlsauce.LSBoostRegressor(
     seed=123,
     backend="cpu",
     solver="ridge",
+    activation="relu",
 )
 ```
 
@@ -157,12 +158,15 @@ Attributes:
         type of backend; must be in ('cpu', 'gpu', 'tpu') 
 
     solver: str    
-        type of 'weak' learner; currently in ('ridge', 'lasso')         
+        type of 'weak' learner; currently in ('ridge', 'lasso')   
+
+    activation: str
+        activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'          
 
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L109)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L114)</span>
 
 ### fit
 
@@ -192,7 +196,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L148)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L156)</span>
 
 ### predict
 

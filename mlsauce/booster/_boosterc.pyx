@@ -202,6 +202,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       
   return res
   
+  
 # 1 - 2 predict classifier ----- 
 
 def predict_proba_booster_classifier(object obj, double[:,::1] X):

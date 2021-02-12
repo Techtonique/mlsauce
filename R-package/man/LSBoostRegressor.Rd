@@ -16,7 +16,8 @@ LSBoostRegressor(
   direct_link = 1L,
   verbose = 1L,
   seed = 123L,
-  solver = c("ridge", "lasso")
+  solver = c("ridge", "lasso"),
+  activation = "relu"
 )
 }
 \arguments{
@@ -45,6 +46,8 @@ LSBoostRegressor(
 \item{seed:}{int, reproducibility seed for nodes_sim=='uniform', clustering and dropout.}
 
 \item{solver:}{str, type of 'weak' learner; currently in ('ridge', 'lasso')}
+
+\item{activation:}{str, activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'}
 }
 \value{
 An object of class LSBoostRegressor
