@@ -22,7 +22,7 @@ def configuration(parent_package="", top_path=None):
 
     # submodules which do not have their own setup.py
     # we must manually add sub-submodules & tests
-    config.add_subpackage("demo")
+    # config.add_subpackage("demo")
     config.add_subpackage("encoders")
     config.add_subpackage("utils")
     config.add_subpackage("utils/memoryuse")
