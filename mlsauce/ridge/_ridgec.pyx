@@ -11,12 +11,12 @@ cimport numpy as np
 cimport cython
 
 import platform
-from jax import device_put
 from scipy import sparse
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 if platform.system() in ('Linux', 'Darwin'):
+    from jax import device_put
     import jax.numpy as jnp
 
 

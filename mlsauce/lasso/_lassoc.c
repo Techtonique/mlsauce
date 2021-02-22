@@ -25458,7 +25458,7 @@ if (!__Pyx_RefNanny) {
  * 
  * import pickle             # <<<<<<<<<<<<<<
  * import platform
- * from jax import device_put
+ * from numpy import linalg as LA
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_pickle, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -25469,8 +25469,8 @@ if (!__Pyx_RefNanny) {
  * 
  * import pickle
  * import platform             # <<<<<<<<<<<<<<
- * from jax import device_put
  * from numpy import linalg as LA
+ * from scipy import sparse
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_platform, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -25480,167 +25480,167 @@ if (!__Pyx_RefNanny) {
   /* "mlsauce/lasso/_lassoc.pyx":16
  * import pickle
  * import platform
- * from jax import device_put             # <<<<<<<<<<<<<<
- * from numpy import linalg as LA
+ * from numpy import linalg as LA             # <<<<<<<<<<<<<<
  * from scipy import sparse
+ * from sklearn.preprocessing import StandardScaler, MinMaxScaler
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s_device_put);
-  __Pyx_GIVEREF(__pyx_n_s_device_put);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_device_put);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_jax, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_INCREF(__pyx_n_s_linalg);
+  __Pyx_GIVEREF(__pyx_n_s_linalg);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_linalg);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_numpy, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_device_put); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_linalg); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_device_put, __pyx_t_1) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LA, __pyx_t_1) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "mlsauce/lasso/_lassoc.pyx":17
  * import platform
- * from jax import device_put
- * from numpy import linalg as LA             # <<<<<<<<<<<<<<
- * from scipy import sparse
- * from sklearn.preprocessing import StandardScaler, MinMaxScaler
- */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_linalg);
-  __Pyx_GIVEREF(__pyx_n_s_linalg);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_linalg);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_linalg); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LA, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "mlsauce/lasso/_lassoc.pyx":18
- * from jax import device_put
  * from numpy import linalg as LA
  * from scipy import sparse             # <<<<<<<<<<<<<<
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler
  * from sklearn.cluster import KMeans
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_sparse);
   __Pyx_GIVEREF(__pyx_n_s_sparse);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_sparse);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_scipy, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_sparse); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_sparse);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_scipy, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sparse, __pyx_t_1) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_sparse); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sparse, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":19
+  /* "mlsauce/lasso/_lassoc.pyx":18
  * from numpy import linalg as LA
  * from scipy import sparse
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler             # <<<<<<<<<<<<<<
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture
  */
-  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_StandardScaler);
   __Pyx_GIVEREF(__pyx_n_s_StandardScaler);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_StandardScaler);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_StandardScaler);
   __Pyx_INCREF(__pyx_n_s_MinMaxScaler);
   __Pyx_GIVEREF(__pyx_n_s_MinMaxScaler);
-  PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_MinMaxScaler);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sklearn_preprocessing, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_StandardScaler); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_MinMaxScaler);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sklearn_preprocessing, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_StandardScaler, __pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_MinMaxScaler); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MinMaxScaler, __pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_StandardScaler); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_StandardScaler, __pyx_t_1) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_MinMaxScaler); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_MinMaxScaler, __pyx_t_1) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":20
+  /* "mlsauce/lasso/_lassoc.pyx":19
  * from scipy import sparse
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler
  * from sklearn.cluster import KMeans             # <<<<<<<<<<<<<<
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_KMeans);
   __Pyx_GIVEREF(__pyx_n_s_KMeans);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_KMeans);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sklearn_cluster, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_KMeans); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_KMeans);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sklearn_cluster, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_KMeans, __pyx_t_1) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_KMeans); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_KMeans, __pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":21
+  /* "mlsauce/lasso/_lassoc.pyx":20
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture             # <<<<<<<<<<<<<<
  * if platform.system() in ('Linux', 'Darwin'):
- *     import jax.numpy as jnp
+ *     from jax import device_put
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_GaussianMixture);
   __Pyx_GIVEREF(__pyx_n_s_GaussianMixture);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_GaussianMixture);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sklearn_mixture, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_GaussianMixture); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_GaussianMixture);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sklearn_mixture, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GaussianMixture, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_GaussianMixture); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GaussianMixture, __pyx_t_1) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":22
+  /* "mlsauce/lasso/_lassoc.pyx":21
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):             # <<<<<<<<<<<<<<
+ *     from jax import device_put
  *     import jax.numpy as jnp
- * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_platform); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_platform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = (__Pyx_PyUnicode_Equals(__pyx_t_2, __pyx_n_u_Linux, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 21, __pyx_L1_error)
   if (!__pyx_t_4) {
   } else {
     __pyx_t_3 = __pyx_t_4;
     goto __pyx_L3_bool_binop_done;
   }
-  __pyx_t_4 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PyUnicode_Equals(__pyx_t_2, __pyx_n_u_Darwin, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_t_3 = __pyx_t_4;
   __pyx_L3_bool_binop_done:;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":23
+    /* "mlsauce/lasso/_lassoc.pyx":22
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):
+ *     from jax import device_put             # <<<<<<<<<<<<<<
+ *     import jax.numpy as jnp
+ * 
+ */
+    __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_n_s_device_put);
+    __Pyx_GIVEREF(__pyx_n_s_device_put);
+    PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_device_put);
+    __pyx_t_1 = __Pyx_Import(__pyx_n_s_jax, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_device_put); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (PyDict_SetItem(__pyx_d, __pyx_n_s_device_put, __pyx_t_2) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "mlsauce/lasso/_lassoc.pyx":23
+ * if platform.system() in ('Linux', 'Darwin'):
+ *     from jax import device_put
  *     import jax.numpy as jnp             # <<<<<<<<<<<<<<
  * 
  * 
@@ -25656,12 +25656,12 @@ if (!__Pyx_RefNanny) {
     if (PyDict_SetItem(__pyx_d, __pyx_n_s_jnp, __pyx_t_2) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":22
+    /* "mlsauce/lasso/_lassoc.pyx":21
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):             # <<<<<<<<<<<<<<
+ *     from jax import device_put
  *     import jax.numpy as jnp
- * 
  */
   }
 
