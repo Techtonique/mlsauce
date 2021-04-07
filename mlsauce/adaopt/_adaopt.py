@@ -12,21 +12,21 @@ from . import _adaoptc as adaoptc
 
 class AdaOpt(BaseEstimator, ClassifierMixin):
     """AdaOpt classifier.
-        
-    Attributes:    
+
+    Attributes:
 
         n_iterations: int
             number of iterations of the optimizer at training time.
 
         learning_rate: float
-            controls the speed of the optimizer at training time.  
+            controls the speed of the optimizer at training time.
 
         reg_lambda: float
-            L2 regularization parameter for successive errors in the optimizer 
+            L2 regularization parameter for successive errors in the optimizer
             (at training time).
 
         reg_alpha: float
-            L1 regularization parameter for successive errors in the optimizer 
+            L1 regularization parameter for successive errors in the optimizer
             (at training time).
 
         eta: float
@@ -39,38 +39,38 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             number of nearest neighbors selected at test time for classification.
 
         tolerance: float
-            controls early stopping in gradient descent (at training time). 
+            controls early stopping in gradient descent (at training time).
 
         n_clusters: int
-            number of clusters, if MiniBatch k-means is used at test time 
+            number of clusters, if MiniBatch k-means is used at test time
             (for faster prediction).
 
         batch_size: int
-            size of the batch, if MiniBatch k-means is used at test time 
+            size of the batch, if MiniBatch k-means is used at test time
             (for faster prediction).
 
         row_sample: float
-            percentage of rows chosen from training set (by stratified subsampling, 
+            percentage of rows chosen from training set (by stratified subsampling,
             for faster prediction).
 
         type_dist: str
-            distance used for finding the nearest neighbors; currently `euclidean-f` 
-            (euclidean distances calculated as whole), `euclidean` (euclidean distances 
+            distance used for finding the nearest neighbors; currently `euclidean-f`
+            (euclidean distances calculated as whole), `euclidean` (euclidean distances
             calculated row by row), `cosine` (cosine distance).
 
-        n_jobs: int 
+        n_jobs: int
             number of cpus for parallel processing (default: None)
 
         verbose: int
             progress bar for parallel processing (yes = 1) or not (no = 0)
 
         cache: boolean
-            if the nearest neighbors are cached or not, for faster retrieval in 
+            if the nearest neighbors are cached or not, for faster retrieval in
             subsequent calls.
 
-        seed: int 
+        seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-         
+
     """
 
     def __init__(
@@ -119,22 +119,22 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
     def fit(self, X, y, **kwargs):
         """Fit AdaOpt to training data (X, y)
-        
+
         Args:
 
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
+
             y: array-like, shape = [n_samples]
                 Target values.
-    
+
             **kwargs: additional parameters to be passed to self.cook_training_set.
-               
+
         Returns:
 
             self: object.
-        
+
         """
 
         if self.row_sample < 1:
@@ -154,8 +154,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         assert n == len(y_), "must have X.shape[0] == len(y)"
 
         res = adaoptc.fit_adaopt(
-            X=np.asarray(X_),
-            y=np.asarray(y_),
+            X=np.asarray(X_).astype(np.float64),
+            y=np.asarray(y_).astype(np.int64),
             n_iterations=self.n_iterations,
             n_X=n,
             p_X=p,
@@ -172,22 +172,22 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.training_accuracy = res["training_accuracy"]
         self.alphas = res["alphas"]
         self.n_iterations = res["n_iterations"]
-        self.scaled_X_train = res["scaled_X_train"]
+        self.scaled_X_train = res["scaled_X_train"].astype(np.float64)
 
         return self
 
     def predict(self, X, **kwargs):
         """Predict test data X.
-        
+
         Args:
 
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
-            **kwargs: additional parameters to be passed to `predict_proba`                
-               
-        Returns: 
+
+            **kwargs: additional parameters to be passed to `predict_proba`
+
+        Returns:
 
             model predictions: {array-like}
 
@@ -197,19 +197,19 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
     def predict_proba(self, X, **kwargs):
         """Predict probabilities for test data X.
-        
+
         Args:
 
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
-            **kwargs: additional parameters to be passed to 
-                self.cook_test_set
-               
-        Returns:        
 
-            probability estimates for test data: {array-like}        
+            **kwargs: additional parameters to be passed to
+                self.cook_test_set
+
+        Returns:
+
+            probability estimates for test data: {array-like}
 
         """
 
@@ -219,8 +219,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         if self.n_jobs is None:
 
             return adaoptc.predict_proba_adaopt(
-                X_test=np.asarray(X, order="C"),
-                scaled_X_train=np.asarray(self.scaled_X_train, order="C"),
+                X_test=np.asarray(X, order="C").astype(np.float64),
+                scaled_X_train=np.asarray(self.scaled_X_train, order="C").astype(np.float64),
                 n_test=n_test,
                 n_train=n_train,
                 probs_train=self.probs_training,
@@ -248,8 +248,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             def multiproc_func(i):
 
                 dists_test_i = adaoptc.distance_to_mat_euclidean2(
-                    np.asarray(scaled_X_test, order="C")[i, :],
-                    np.asarray(self.scaled_X_train, order="C"),
+                    np.asarray(scaled_X_test.astype(np.float64), order="C")[i, :],
+                    np.asarray(self.scaled_X_train.astype(np.float64), order="C"),
                     np.zeros(n_train),
                     n_train,
                     p_train,
@@ -276,8 +276,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             def multiproc_func(i):
 
                 dists_test_i = adaoptc.distance_to_mat_manhattan2(
-                    np.asarray(scaled_X_test, order="C")[i, :],
-                    np.asarray(self.scaled_X_train, order="C"),
+                    np.asarray(scaled_X_test.astype(np.float64), order="C")[i, :],
+                    np.asarray(self.scaled_X_train.astype(np.float64), order="C"),
                     np.zeros(n_train),
                     n_train,
                     p_train,
@@ -304,8 +304,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             def multiproc_func(i, *args):
 
                 dists_test_i = adaoptc.distance_to_mat_cosine2(
-                    np.asarray(scaled_X_test, order="C")[i, :],
-                    np.asarray(self.scaled_X_train, order="C"),
+                    np.asarray(scaled_X_test.astype(np.float64), order="C")[i, :],
+                    np.asarray(self.scaled_X_train.astype(np.float64), order="C"),
                     np.zeros(n_train),
                     n_train,
                     p_train,
