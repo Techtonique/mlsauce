@@ -172,7 +172,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.training_accuracy = res["training_accuracy"]
         self.alphas = res["alphas"]
         self.n_iterations = res["n_iterations"]
-        self.scaled_X_train = res["scaled_X_train"].astype(np.float64)
+        self.scaled_X_train = np.array(res["scaled_X_train"], dtype=np.float64)
 
         return self
 
