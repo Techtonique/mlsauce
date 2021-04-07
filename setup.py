@@ -37,13 +37,13 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.8.3'
+__version__ = '0.8.4'
 
 VERSION = __version__
 
 if platform.python_implementation() == 'PyPy':
     SCIPY_MIN_VERSION = '1.1.0'
-    NUMPY_MIN_VERSION = '1.14.0'    
+    NUMPY_MIN_VERSION = '1.14.0'
 else:
     SCIPY_MIN_VERSION = '0.19.0'
     NUMPY_MIN_VERSION = '1.13.0'
@@ -68,7 +68,7 @@ SETUPTOOLS_COMMANDS = {
     '--single-version-externally-managed',
 }
 if SETUPTOOLS_COMMANDS.intersection(sys.argv):
-    
+
     import setuptools
 
     extra_setuptools_args = dict(
@@ -81,9 +81,9 @@ if SETUPTOOLS_COMMANDS.intersection(sys.argv):
             ),
         },
     )
-        
+
 else:
-    
+
     extra_setuptools_args = dict()
 
 
@@ -236,11 +236,11 @@ def setup_package():
                     ]
 
     install_jax_requires = [
-                            'jax>={}'.format(JAX_MIN_VERSION), 
+                            'jax>={}'.format(JAX_MIN_VERSION),
                             'jaxlib>={}'.format(JAXLIB_MIN_VERSION)
                             ] if platform.system() in ('Linux', 'Darwin') else []
 
-    other_requirements = ["tqdm==4.48.1", "pymongo >= 3.10.1", "SQLAlchemy >= 1.3.18"]                        
+    other_requirements = ["tqdm==4.48.1", "pymongo >= 3.10.1", "SQLAlchemy >= 1.3.18"]
 
     install_requires = [item for sublist in [install_jax_requires, install_all_requires, other_requirements] for item in sublist]
 
