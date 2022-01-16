@@ -61,9 +61,7 @@ Miscellaneous Statistical/Machine learning stuff. See next section.
 
 ## Quick start
 
-- [AdaOpt: probabilistic classifier based on a mix of multivariable optimization and a nearest neighbors algorithm](https://thierrymoudiki.github.io/blog/#AdaOpt)
-- [LSBoost: Gradient Boosted randomized networks using Least Squares](https://thierrymoudiki.github.io/blog/#LSBoost)
-
+Examples can be found [here on GitHub](https://github.com/Techtonique/mlsauce/tree/master/examples). You can also read about this package [here](https://thierrymoudiki.github.io/blog/), and in particular for `LSBoost`: [https://thierrymoudiki.github.io/blog/#LSBoost](https://thierrymoudiki.github.io/blog/#LSBoost).
 
 ## Contributing
 
