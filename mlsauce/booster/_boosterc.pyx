@@ -319,9 +319,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
         X_iy_ix = X_iy[ix,:]       
         hidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy_ix, W_i)), 
                                       drop_prob=dropout, seed=seed)
-        h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
-        n_cols_h_i = h_i.shape[1]
-        fit_obj.fit(X = np.asarray(h_i), y = np.asarray(e)[ix,:])
+        h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i        
+        fit_obj.fit(X = np.asarray(h_i), y = np.asarray(e)[ix])
 
       else:
       
