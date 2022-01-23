@@ -109,7 +109,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                            ): 
   
   cdef long int n
-  cdef int p, n_cols_h_i, n_cols_hh_i
+  cdef int p
   cdef int n_classes
   cdef Py_ssize_t iter
   cdef dict res
@@ -253,7 +253,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            str solver="ridge", str activation="relu"): 
   
   cdef long int n
-  cdef int p, n_cols_h_i, n_cols_hh_i
+  cdef int p
   cdef int n_classes
   cdef Py_ssize_t iter
   cdef dict res
