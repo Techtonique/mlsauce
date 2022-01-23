@@ -1,3 +1,6 @@
+# version 0.8.7
+- Fix `row_sample` in `LSBoostRegressor`
+
 # version 0.3.0
 
 - include cython parallel processing Pt.1
