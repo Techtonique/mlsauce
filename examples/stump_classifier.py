@@ -1,6 +1,6 @@
 import numpy as np 
 from sklearn.datasets import load_digits, load_breast_cancer, load_wine, load_iris
-from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+from sklearn.model_selection import train_test_split
 from time import time
 from os import chdir
 from sklearn import metrics
@@ -65,3 +65,23 @@ print(time()-start)
 start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
+
+
+# data 4
+digits = load_digits()
+X = digits.data
+y = digits.target
+# split data into training test and test set
+np.random.seed(15029)
+X_train, X_test, y_train, y_test = train_test_split(X, y, 
+                                                    test_size=0.2)
+
+obj = ms.StumpClassifier(bins=-1)
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print(time()-start)
+
