@@ -1,3 +1,6 @@
+# version 0.8.8
+- Avoid division by 0 in scaling
+
 # version 0.8.7
 - Fix `row_sample` in `LSBoostRegressor`
 

@@ -76,6 +76,7 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         self.ym, centered_y = mo.center_response(y)
         self.xm = X.mean(axis=0)
         self.xsd = X.std(axis=0)
+        assert (0 not in self.xsd), "\nRemove columns having standard deviation equal to 0"
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
         XX = mo.crossprod(X_, backend=self.backend)
         Xy = mo.crossprod(X_, centered_y, backend=self.backend)

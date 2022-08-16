@@ -126,6 +126,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   
   xm = np.asarray(X).mean(axis=0)
   xsd = np.asarray(X).std(axis=0)
+  assert (0 not in xsd), "\nRemove columns having standard deviation equal to 0"    
   
   res['direct_link'] = direct_link
   res['xm'] = np.asarray(xm)
@@ -270,6 +271,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   
   xm = np.asarray(X).mean(axis=0)
   xsd = np.asarray(X).std(axis=0)
+  assert (0 not in xsd), "\nRemove columns having standard deviation equal to 0"
   
   res['direct_link'] = direct_link
   res['xm'] = np.asarray(xm)

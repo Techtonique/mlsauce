@@ -242,6 +242,12 @@ def safe_sparse_dot(a, b, backend="cpu", dense_output=False):
 # scale... covariates
 def scale_covariates(X, choice="std", training=True, scaler=None):
 
+    if choice == "std":
+        assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
+    
+    if choice == "minmax":
+        assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"
+
     scaling_options = {
         "std": StandardScaler(copy=True, with_mean=True, with_std=True),
         "minmax": MinMaxScaler(),

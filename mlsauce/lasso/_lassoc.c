@@ -1685,6 +1685,12 @@ static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *, PyObject *);
 /* HasAttr.proto */
 static CYTHON_INLINE int __Pyx_HasAttr(PyObject *, PyObject *);
 
+/* PySequenceContains.proto */
+static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* seq, int eq) {
+    int result = PySequence_Contains(seq, item);
+    return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
+}
+
 /* DictGetItem.proto */
 #if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
 static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
@@ -2279,6 +2285,7 @@ static const char __pyx_k_gpu[] = "gpu";
 static const char __pyx_k_jax[] = "jax";
 static const char __pyx_k_jnp[] = "jnp";
 static const char __pyx_k_max[] = "max";
+static const char __pyx_k_min[] = "min";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_res[] = "res";
@@ -2446,7 +2453,9 @@ static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %
 static const char __pyx_k_mlsauce_lasso__lassoc_pyx[] = "mlsauce/lasso/_lassoc.pyx";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
+static const char __pyx_k_Remove_columns_having_standard[] = "\nRemove columns having standard deviation equal to 0";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
+static const char __pyx_k_Remove_columns_having_0s_in_max[] = "\nRemove columns having 0s in max-min";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
@@ -2490,6 +2499,8 @@ static PyObject *__pyx_n_s_MinMaxScaler;
 static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
 static PyObject *__pyx_n_s_PickleError;
+static PyObject *__pyx_kp_u_Remove_columns_having_0s_in_max;
+static PyObject *__pyx_kp_u_Remove_columns_having_standard;
 static PyObject *__pyx_n_s_StandardScaler;
 static PyObject *__pyx_n_s_T;
 static PyObject *__pyx_n_s_TypeError;
@@ -2578,6 +2589,7 @@ static PyObject *__pyx_n_s_max;
 static PyObject *__pyx_n_s_max_iter;
 static PyObject *__pyx_n_s_mean;
 static PyObject *__pyx_n_s_memview;
+static PyObject *__pyx_n_s_min;
 static PyObject *__pyx_n_u_minmax;
 static PyObject *__pyx_n_s_mlsauce_lasso__lassoc;
 static PyObject *__pyx_kp_s_mlsauce_lasso__lassoc_pyx;
@@ -2648,6 +2660,7 @@ static PyObject *__pyx_n_s_sqrt;
 static PyObject *__pyx_n_s_square;
 static PyObject *__pyx_n_s_squared_norm;
 static PyObject *__pyx_n_s_start;
+static PyObject *__pyx_n_s_std;
 static PyObject *__pyx_n_u_std;
 static PyObject *__pyx_n_s_step;
 static PyObject *__pyx_n_s_stop;
@@ -7785,7 +7798,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
  * 
- *     scaling_options = {
+ *     if choice == "std":
  */
 
 /* Python wrapper */
@@ -7888,121 +7901,254 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   PyObject *__pyx_v_scaled_X = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("scale_covariates", 0);
   __Pyx_INCREF(__pyx_v_scaler);
 
-  /* "mlsauce/lasso/_lassoc.pyx":246
+  /* "mlsauce/lasso/_lassoc.pyx":245
+ * def scale_covariates(X, choice="std", training=True, scaler=None):
+ * 
+ *     if choice == "std":             # <<<<<<<<<<<<<<
+ *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
+ * 
+ */
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_choice, __pyx_n_u_std, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 245, __pyx_L1_error)
+  if (__pyx_t_1) {
+
+    /* "mlsauce/lasso/_lassoc.pyx":246
+ * 
+ *     if choice == "std":
+ *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"             # <<<<<<<<<<<<<<
+ * 
+ *     if choice == "minmax":
+ */
+    #ifndef CYTHON_WITHOUT_ASSERTIONS
+    if (unlikely(!Py_OptimizeFlag)) {
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_std); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_INCREF(__pyx_v_X);
+      __Pyx_GIVEREF(__pyx_v_X);
+      PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_X);
+      __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_axis, __pyx_int_0) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_int_0, __pyx_t_5, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      if (unlikely(!(__pyx_t_1 != 0))) {
+        PyErr_SetObject(PyExc_AssertionError, __pyx_kp_u_Remove_columns_having_standard);
+        __PYX_ERR(0, 246, __pyx_L1_error)
+      }
+    }
+    #endif
+
+    /* "mlsauce/lasso/_lassoc.pyx":245
+ * def scale_covariates(X, choice="std", training=True, scaler=None):
+ * 
+ *     if choice == "std":             # <<<<<<<<<<<<<<
+ *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
+ * 
+ */
+  }
+
+  /* "mlsauce/lasso/_lassoc.pyx":248
+ *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
+ * 
+ *     if choice == "minmax":             # <<<<<<<<<<<<<<
+ *         assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"
+ * 
+ */
+  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_choice, __pyx_n_u_minmax, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 248, __pyx_L1_error)
+  if (__pyx_t_1) {
+
+    /* "mlsauce/lasso/_lassoc.pyx":249
+ * 
+ *     if choice == "minmax":
+ *         assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"             # <<<<<<<<<<<<<<
+ * 
+ *     scaling_options = {
+ */
+    #ifndef CYTHON_WITHOUT_ASSERTIONS
+    if (unlikely(!Py_OptimizeFlag)) {
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_INCREF(__pyx_v_X);
+      __Pyx_GIVEREF(__pyx_v_X);
+      PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_X);
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_axis, __pyx_int_0) < 0) __PYX_ERR(0, 249, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_min); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_INCREF(__pyx_v_X);
+      __Pyx_GIVEREF(__pyx_v_X);
+      PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_X);
+      __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_axis, __pyx_int_0) < 0) __PYX_ERR(0, 249, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_4 = PyNumber_Subtract(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_int_0, __pyx_t_4, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 249, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!(__pyx_t_1 != 0))) {
+        PyErr_SetObject(PyExc_AssertionError, __pyx_kp_u_Remove_columns_having_0s_in_max);
+        __PYX_ERR(0, 249, __pyx_L1_error)
+      }
+    }
+    #endif
+
+    /* "mlsauce/lasso/_lassoc.pyx":248
+ *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
+ * 
+ *     if choice == "minmax":             # <<<<<<<<<<<<<<
+ *         assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"
+ * 
+ */
+  }
+
+  /* "mlsauce/lasso/_lassoc.pyx":252
  * 
  *     scaling_options = {
  *         "std": StandardScaler(copy=True, with_mean=True, with_std=True),             # <<<<<<<<<<<<<<
  *         "minmax": MinMaxScaler(),
  *     }
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 246, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_StandardScaler); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_copy, Py_True) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_with_mean, Py_True) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_with_std, Py_True) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_StandardScaler); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_copy, Py_True) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_with_mean, Py_True) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_with_std, Py_True) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_std, __pyx_t_4) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_u_std, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":247
+  /* "mlsauce/lasso/_lassoc.pyx":253
  *     scaling_options = {
  *         "std": StandardScaler(copy=True, with_mean=True, with_std=True),
  *         "minmax": MinMaxScaler(),             # <<<<<<<<<<<<<<
  *     }
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_MinMaxScaler); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_MinMaxScaler); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = NULL;
+  __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_2)) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  __pyx_t_4 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 247, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_minmax, __pyx_t_4) < 0) __PYX_ERR(0, 246, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_v_scaling_options = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_u_minmax, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_scaling_options = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":250
+  /* "mlsauce/lasso/_lassoc.pyx":256
  *     }
  * 
  *     if training == True:             # <<<<<<<<<<<<<<
  *         # scaler must be not None
  *         scaler = scaling_options[choice]
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_training, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 250, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_5) {
+  __pyx_t_4 = PyObject_RichCompare(__pyx_v_training, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__pyx_t_1) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":252
+    /* "mlsauce/lasso/_lassoc.pyx":258
  *     if training == True:
  *         # scaler must be not None
  *         scaler = scaling_options[choice]             # <<<<<<<<<<<<<<
  *         scaled_X = scaler.fit_transform(X)
  *         return scaler, scaled_X
  */
-    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_scaling_options, __pyx_v_choice); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF_SET(__pyx_v_scaler, __pyx_t_1);
-    __pyx_t_1 = 0;
+    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_scaling_options, __pyx_v_choice); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 258, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF_SET(__pyx_v_scaler, __pyx_t_4);
+    __pyx_t_4 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":253
+    /* "mlsauce/lasso/_lassoc.pyx":259
  *         # scaler must be not None
  *         scaler = scaling_options[choice]
  *         scaled_X = scaler.fit_transform(X)             # <<<<<<<<<<<<<<
  *         return scaler, scaled_X
  * 
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_scaler, __pyx_n_s_fit_transform); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 253, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_scaler, __pyx_n_s_fit_transform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
       if (likely(__pyx_t_3)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
         __Pyx_INCREF(__pyx_t_3);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_2, function);
       }
     }
-    __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_3, __pyx_v_X) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_X);
+    __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_X) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_X);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_v_scaled_X = __pyx_t_1;
-    __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_v_scaled_X = __pyx_t_4;
+    __pyx_t_4 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":254
+    /* "mlsauce/lasso/_lassoc.pyx":260
  *         scaler = scaling_options[choice]
  *         scaled_X = scaler.fit_transform(X)
  *         return scaler, scaled_X             # <<<<<<<<<<<<<<
@@ -8010,19 +8156,19 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  *     # training == False:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 254, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 260, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_scaler);
     __Pyx_GIVEREF(__pyx_v_scaler);
-    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_scaler);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_scaler);
     __Pyx_INCREF(__pyx_v_scaled_X);
     __Pyx_GIVEREF(__pyx_v_scaled_X);
-    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_scaled_X);
-    __pyx_r = __pyx_t_1;
-    __pyx_t_1 = 0;
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_scaled_X);
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":250
+    /* "mlsauce/lasso/_lassoc.pyx":256
  *     }
  * 
  *     if training == True:             # <<<<<<<<<<<<<<
@@ -8031,7 +8177,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":258
+  /* "mlsauce/lasso/_lassoc.pyx":264
  *     # training == False:
  *     # scaler must be not None
  *     return scaler.transform(X)             # <<<<<<<<<<<<<<
@@ -8039,25 +8185,25 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  * def soft_thres(double x, double y):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_scaler, __pyx_n_s_transform); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 258, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_scaler, __pyx_n_s_transform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_3, __pyx_v_X) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_X);
+  __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_X) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_X);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 258, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_r = __pyx_t_4;
+  __pyx_t_4 = 0;
   goto __pyx_L0;
 
   /* "mlsauce/lasso/_lassoc.pyx":243
@@ -8065,15 +8211,16 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
  * 
- *     scaling_options = {
+ *     if choice == "std":
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_AddTraceback("mlsauce.lasso._lassoc.scale_covariates", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -8085,7 +8232,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":260
+/* "mlsauce/lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
@@ -8128,11 +8275,11 @@ static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_23soft_thres(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("soft_thres", 1, 2, 2, 1); __PYX_ERR(0, 260, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("soft_thres", 1, 2, 2, 1); __PYX_ERR(0, 266, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "soft_thres") < 0)) __PYX_ERR(0, 260, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "soft_thres") < 0)) __PYX_ERR(0, 266, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -8140,12 +8287,12 @@ static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_23soft_thres(PyObject *__pyx_
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 260, __pyx_L3_error)
-    __pyx_v_y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 260, __pyx_L3_error)
+    __pyx_v_x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 266, __pyx_L3_error)
+    __pyx_v_y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 266, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("soft_thres", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 260, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("soft_thres", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 266, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mlsauce.lasso._lassoc.soft_thres", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -8174,7 +8321,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("soft_thres", 0);
 
-  /* "mlsauce/lasso/_lassoc.pyx":261
+  /* "mlsauce/lasso/_lassoc.pyx":267
  * 
  * def soft_thres(double x, double y):
  *     return np.sign(x)*np.max(np.abs(x) - y, 0)             # <<<<<<<<<<<<<<
@@ -8182,12 +8329,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
  * # from sklearn.utils.exmath
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sign); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sign); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -8202,20 +8349,20 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_abs); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_abs); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -8230,12 +8377,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   __pyx_t_2 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_7, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyNumber_Subtract(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_Subtract(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -8254,7 +8401,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_5, __pyx_int_0};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -8263,14 +8410,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_5, __pyx_int_0};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else
   #endif
   {
-    __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -8281,12 +8428,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
     __Pyx_GIVEREF(__pyx_int_0);
     PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_8, __pyx_int_0);
     __pyx_t_5 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8294,7 +8441,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":260
+  /* "mlsauce/lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
@@ -8319,7 +8466,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":264
+/* "mlsauce/lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -8368,7 +8515,7 @@ static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_25squared_norm(PyObject *__py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "squared_norm") < 0)) __PYX_ERR(0, 264, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "squared_norm") < 0)) __PYX_ERR(0, 270, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -8384,7 +8531,7 @@ static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_25squared_norm(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("squared_norm", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 264, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("squared_norm", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 270, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mlsauce.lasso._lassoc.squared_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -8416,16 +8563,16 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __Pyx_RefNannySetupContext("squared_norm", 0);
   __Pyx_INCREF(__pyx_v_x);
 
-  /* "mlsauce/lasso/_lassoc.pyx":279
+  /* "mlsauce/lasso/_lassoc.pyx":285
  *         is a matrix (2-d array).
  *     """
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = np.ravel(x, order="K")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_platform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_platform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -8440,13 +8587,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 279, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 285, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":280
+  /* "mlsauce/lasso/_lassoc.pyx":286
  *     """
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -8455,13 +8602,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 286, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_5 = __pyx_t_6;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 286, __pyx_L1_error)
   __pyx_t_5 = __pyx_t_6;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8473,13 +8620,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 286, __pyx_L1_error)
   if (!__pyx_t_5) {
   } else {
     __pyx_t_6 = __pyx_t_5;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 286, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_5;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8488,27 +8635,27 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":281
+    /* "mlsauce/lasso/_lassoc.pyx":287
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = np.ravel(x, order="K")             # <<<<<<<<<<<<<<
  *         x = device_put(x)
  *         return jnp.dot(x, x).block_until_ready()
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_ravel); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_ravel); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_v_x);
     __Pyx_GIVEREF(__pyx_v_x);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_x);
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 281, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 281, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8516,14 +8663,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":282
+    /* "mlsauce/lasso/_lassoc.pyx":288
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = np.ravel(x, order="K")
  *         x = device_put(x)             # <<<<<<<<<<<<<<
  *         return jnp.dot(x, x).block_until_ready()
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_device_put); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 282, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_device_put); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 288, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -8537,13 +8684,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     }
     __pyx_t_7 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_v_x) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_x);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 282, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 288, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":283
+    /* "mlsauce/lasso/_lassoc.pyx":289
  *         x = np.ravel(x, order="K")
  *         x = device_put(x)
  *         return jnp.dot(x, x).block_until_ready()             # <<<<<<<<<<<<<<
@@ -8551,9 +8698,9 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  *     x = np.ravel(x, order="K")
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_jnp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_jnp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dot); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 283, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dot); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -8571,7 +8718,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_x, __pyx_v_x};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 283, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_2);
     } else
@@ -8579,13 +8726,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_x, __pyx_v_x};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 283, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_2);
     } else
     #endif
     {
-      __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 283, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 289, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -8596,12 +8743,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
       __Pyx_INCREF(__pyx_v_x);
       __Pyx_GIVEREF(__pyx_v_x);
       PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_v_x);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 283, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_block_until_ready); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 283, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_block_until_ready); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -8616,14 +8763,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     }
     __pyx_t_7 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 283, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 289, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_r = __pyx_t_7;
     __pyx_t_7 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":280
+    /* "mlsauce/lasso/_lassoc.pyx":286
  *     """
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -8632,27 +8779,27 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":285
+  /* "mlsauce/lasso/_lassoc.pyx":291
  *         return jnp.dot(x, x).block_until_ready()
  * 
  *     x = np.ravel(x, order="K")             # <<<<<<<<<<<<<<
  *     return np.dot(x, x)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_ravel); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_ravel); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_v_x);
   __Pyx_GIVEREF(__pyx_v_x);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_x);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 285, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 285, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -8660,7 +8807,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_9);
   __pyx_t_9 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":286
+  /* "mlsauce/lasso/_lassoc.pyx":292
  * 
  *     x = np.ravel(x, order="K")
  *     return np.dot(x, x)             # <<<<<<<<<<<<<<
@@ -8668,9 +8815,9 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_dot); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_dot); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -8688,7 +8835,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_7)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_x, __pyx_v_x};
-    __pyx_t_9 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_9);
   } else
@@ -8696,13 +8843,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_x, __pyx_v_x};
-    __pyx_t_9 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_9);
   } else
   #endif
   {
-    __pyx_t_3 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -8713,7 +8860,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     __Pyx_INCREF(__pyx_v_x);
     __Pyx_GIVEREF(__pyx_v_x);
     PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_8, __pyx_v_x);
-    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
@@ -8722,7 +8869,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __pyx_t_9 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":264
+  /* "mlsauce/lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -8747,7 +8894,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":290
+/* "mlsauce/lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -8805,7 +8952,7 @@ static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_27tcrossprod(PyObject *__pyx_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tcrossprod") < 0)) __PYX_ERR(0, 290, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tcrossprod") < 0)) __PYX_ERR(0, 296, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -8824,7 +8971,7 @@ static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_27tcrossprod(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("tcrossprod", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 290, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("tcrossprod", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 296, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mlsauce.lasso._lassoc.tcrossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -8858,16 +9005,16 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __Pyx_INCREF(__pyx_v_x);
   __Pyx_INCREF(__pyx_v_y);
 
-  /* "mlsauce/lasso/_lassoc.pyx":292
+  /* "mlsauce/lasso/_lassoc.pyx":298
  * def tcrossprod(x, y=None, backend="cpu"):
  *     # assert on dimensions
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_platform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_platform); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 292, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -8882,13 +9029,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":293
+  /* "mlsauce/lasso/_lassoc.pyx":299
  *     # assert on dimensions
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -8897,13 +9044,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 299, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_5 = __pyx_t_6;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 299, __pyx_L1_error)
   __pyx_t_5 = __pyx_t_6;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8915,13 +9062,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 299, __pyx_L1_error)
   if (!__pyx_t_5) {
   } else {
     __pyx_t_6 = __pyx_t_5;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 299, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_5;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8930,14 +9077,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":294
+    /* "mlsauce/lasso/_lassoc.pyx":300
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)             # <<<<<<<<<<<<<<
  *         if y is None:
  *             return jnp.dot(x, x.T).block_until_ready()
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_device_put); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_device_put); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_2 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -8951,13 +9098,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     }
     __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_x) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_x);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":295
+    /* "mlsauce/lasso/_lassoc.pyx":301
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  *         if y is None:             # <<<<<<<<<<<<<<
@@ -8968,7 +9115,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __pyx_t_5 = (__pyx_t_4 != 0);
     if (__pyx_t_5) {
 
-      /* "mlsauce/lasso/_lassoc.pyx":296
+      /* "mlsauce/lasso/_lassoc.pyx":302
  *         x = device_put(x)
  *         if y is None:
  *             return jnp.dot(x, x.T).block_until_ready()             # <<<<<<<<<<<<<<
@@ -8976,12 +9123,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  *         return jnp.dot(x, y.T).block_until_ready()
  */
       __Pyx_XDECREF(__pyx_r);
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_jnp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_jnp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_dot); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 296, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_dot); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_x, __pyx_n_s_T); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_x, __pyx_n_s_T); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_8 = NULL;
       __pyx_t_9 = 0;
@@ -8998,7 +9145,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_7)) {
         PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_v_x, __pyx_t_2};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 296, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -9007,14 +9154,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
         PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_v_x, __pyx_t_2};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 296, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       } else
       #endif
       {
-        __pyx_t_10 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 296, __pyx_L1_error)
+        __pyx_t_10 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 302, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         if (__pyx_t_8) {
           __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -9025,12 +9172,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
         __Pyx_GIVEREF(__pyx_t_2);
         PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_9, __pyx_t_2);
         __pyx_t_2 = 0;
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 296, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       }
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_block_until_ready); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 296, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_block_until_ready); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_3 = NULL;
@@ -9045,14 +9192,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
       }
       __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":295
+      /* "mlsauce/lasso/_lassoc.pyx":301
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  *         if y is None:             # <<<<<<<<<<<<<<
@@ -9061,14 +9208,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":297
+    /* "mlsauce/lasso/_lassoc.pyx":303
  *         if y is None:
  *             return jnp.dot(x, x.T).block_until_ready()
  *         y = device_put(y)             # <<<<<<<<<<<<<<
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_device_put); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 297, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_device_put); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 303, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -9082,13 +9229,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     }
     __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_3, __pyx_v_y) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_y);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF_SET(__pyx_v_y, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":298
+    /* "mlsauce/lasso/_lassoc.pyx":304
  *             return jnp.dot(x, x.T).block_until_ready()
  *         y = device_put(y)
  *         return jnp.dot(x, y.T).block_until_ready()             # <<<<<<<<<<<<<<
@@ -9096,12 +9243,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  *         return np.dot(x, x.transpose())
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_jnp); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 298, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_jnp); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_dot); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_dot); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_y, __pyx_n_s_T); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 298, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_y, __pyx_n_s_T); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_2 = NULL;
     __pyx_t_9 = 0;
@@ -9118,7 +9265,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_10)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_x, __pyx_t_3};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 298, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9127,14 +9274,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_10)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_x, __pyx_t_3};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 298, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 298, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -9145,12 +9292,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_9, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 298, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_block_until_ready); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_block_until_ready); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = NULL;
@@ -9165,14 +9312,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     }
     __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_10);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 298, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":293
+    /* "mlsauce/lasso/_lassoc.pyx":299
  *     # assert on dimensions
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -9181,7 +9328,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":299
+  /* "mlsauce/lasso/_lassoc.pyx":305
  *         y = device_put(y)
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:             # <<<<<<<<<<<<<<
@@ -9192,7 +9339,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_t_4 = (__pyx_t_5 != 0);
   if (__pyx_t_4) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":300
+    /* "mlsauce/lasso/_lassoc.pyx":306
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:
  *         return np.dot(x, x.transpose())             # <<<<<<<<<<<<<<
@@ -9200,12 +9347,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_np); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 300, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_np); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_dot); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 300, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_dot); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_x, __pyx_n_s_transpose); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 300, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_x, __pyx_n_s_transpose); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
@@ -9219,7 +9366,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     }
     __pyx_t_10 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_8);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 300, __pyx_L1_error)
+    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = NULL;
@@ -9237,7 +9384,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_7)) {
       PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_v_x, __pyx_t_10};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -9246,14 +9393,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
       PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_v_x, __pyx_t_10};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     } else
     #endif
     {
-      __pyx_t_3 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 306, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (__pyx_t_8) {
         __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -9264,7 +9411,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
       __Pyx_GIVEREF(__pyx_t_10);
       PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_9, __pyx_t_10);
       __pyx_t_10 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
@@ -9273,7 +9420,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":299
+    /* "mlsauce/lasso/_lassoc.pyx":305
  *         y = device_put(y)
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:             # <<<<<<<<<<<<<<
@@ -9282,7 +9429,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":301
+  /* "mlsauce/lasso/_lassoc.pyx":307
  *     if y is None:
  *         return np.dot(x, x.transpose())
  *     return np.dot(x, y.transpose())             # <<<<<<<<<<<<<<
@@ -9290,12 +9437,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_dot); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_dot); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_y, __pyx_n_s_transpose); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_y, __pyx_n_s_transpose); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_8 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_10))) {
@@ -9309,7 +9456,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   }
   __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_8) : __Pyx_PyObject_CallNoArg(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 301, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __pyx_t_10 = NULL;
@@ -9327,7 +9474,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_v_x, __pyx_t_7};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -9336,14 +9483,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_v_x, __pyx_t_7};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   } else
   #endif
   {
-    __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 301, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 307, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     if (__pyx_t_10) {
       __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -9354,7 +9501,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __Pyx_GIVEREF(__pyx_t_7);
     PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_9, __pyx_t_7);
     __pyx_t_7 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
@@ -9363,7 +9510,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":290
+  /* "mlsauce/lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -9390,7 +9537,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":305
+/* "mlsauce/lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
@@ -9423,18 +9570,18 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_np_array", 0);
 
-  /* "mlsauce/lasso/_lassoc.pyx":306
+  /* "mlsauce/lasso/_lassoc.pyx":312
  * # convert vector to numpy array
  * def to_np_array(X):
  *     return np.array(X.copy(), ndmin=2)             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 306, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_copy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 306, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_copy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -9448,18 +9595,18 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED P
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 306, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ndmin, __pyx_int_2) < 0) __PYX_ERR(0, 306, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 306, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ndmin, __pyx_int_2) < 0) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9468,7 +9615,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED P
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":305
+  /* "mlsauce/lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
@@ -24138,6 +24285,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
+  {&__pyx_kp_u_Remove_columns_having_0s_in_max, __pyx_k_Remove_columns_having_0s_in_max, sizeof(__pyx_k_Remove_columns_having_0s_in_max), 0, 1, 0, 0},
+  {&__pyx_kp_u_Remove_columns_having_standard, __pyx_k_Remove_columns_having_standard, sizeof(__pyx_k_Remove_columns_having_standard), 0, 1, 0, 0},
   {&__pyx_n_s_StandardScaler, __pyx_k_StandardScaler, sizeof(__pyx_k_StandardScaler), 0, 0, 1, 1},
   {&__pyx_n_s_T, __pyx_k_T, sizeof(__pyx_k_T), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
@@ -24226,6 +24375,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_max_iter, __pyx_k_max_iter, sizeof(__pyx_k_max_iter), 0, 0, 1, 1},
   {&__pyx_n_s_mean, __pyx_k_mean, sizeof(__pyx_k_mean), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
+  {&__pyx_n_s_min, __pyx_k_min, sizeof(__pyx_k_min), 0, 0, 1, 1},
   {&__pyx_n_u_minmax, __pyx_k_minmax, sizeof(__pyx_k_minmax), 0, 1, 0, 1},
   {&__pyx_n_s_mlsauce_lasso__lassoc, __pyx_k_mlsauce_lasso__lassoc, sizeof(__pyx_k_mlsauce_lasso__lassoc), 0, 0, 1, 1},
   {&__pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_k_mlsauce_lasso__lassoc_pyx, sizeof(__pyx_k_mlsauce_lasso__lassoc_pyx), 0, 0, 1, 0},
@@ -24296,6 +24446,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_square, __pyx_k_square, sizeof(__pyx_k_square), 0, 0, 1, 1},
   {&__pyx_n_s_squared_norm, __pyx_k_squared_norm, sizeof(__pyx_k_squared_norm), 0, 0, 1, 1},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
+  {&__pyx_n_s_std, __pyx_k_std, sizeof(__pyx_k_std), 0, 0, 1, 1},
   {&__pyx_n_u_std, __pyx_k_std, sizeof(__pyx_k_std), 0, 1, 0, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
   {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
@@ -24716,59 +24867,59 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
  * 
- *     scaling_options = {
+ *     if choice == "std":
  */
   __pyx_tuple__45 = PyTuple_Pack(6, __pyx_n_s_X, __pyx_n_s_choice, __pyx_n_s_training, __pyx_n_s_scaler, __pyx_n_s_scaling_options, __pyx_n_s_scaled_X); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
   __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_scale_covariates, 243, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 243, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":260
+  /* "mlsauce/lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
  *     return np.sign(x)*np.max(np.abs(x) - y, 0)
  * 
  */
-  __pyx_tuple__47 = PyTuple_Pack(2, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(2, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_soft_thres, 260, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_soft_thres, 266, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 266, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":264
+  /* "mlsauce/lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
  *     """Squared Euclidean or Frobenius norm of x.
  * 
  */
-  __pyx_tuple__49 = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_backend, __pyx_n_s_sys_platform); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_backend, __pyx_n_s_sys_platform); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__49);
   __Pyx_GIVEREF(__pyx_tuple__49);
-  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_squared_norm, 264, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_squared_norm, 270, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 270, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":290
+  /* "mlsauce/lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
  *     # assert on dimensions
  *     sys_platform = platform.system()
  */
-  __pyx_tuple__51 = PyTuple_Pack(4, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_backend, __pyx_n_s_sys_platform); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(4, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_backend, __pyx_n_s_sys_platform); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__51);
   __Pyx_GIVEREF(__pyx_tuple__51);
-  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_tcrossprod, 290, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_tcrossprod, 296, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 296, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":305
+  /* "mlsauce/lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
  *     return np.array(X.copy(), ndmin=2)
  */
-  __pyx_tuple__53 = PyTuple_Pack(1, __pyx_n_s_X); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __pyx_tuple__53 = PyTuple_Pack(1, __pyx_n_s_X); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__53);
   __Pyx_GIVEREF(__pyx_tuple__53);
-  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_to_np_array, 305, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_to_np_array, 311, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 311, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -25580,58 +25731,58 @@ if (!__Pyx_RefNanny) {
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
  * 
- *     scaling_options = {
+ *     if choice == "std":
  */
   __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_21scale_covariates, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_scale_covariates, __pyx_t_2) < 0) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":260
+  /* "mlsauce/lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
  *     return np.sign(x)*np.max(np.abs(x) - y, 0)
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_23soft_thres, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_23soft_thres, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_soft_thres, __pyx_t_2) < 0) __PYX_ERR(0, 260, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_soft_thres, __pyx_t_2) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":264
+  /* "mlsauce/lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
  *     """Squared Euclidean or Frobenius norm of x.
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_25squared_norm, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_25squared_norm, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_squared_norm, __pyx_t_2) < 0) __PYX_ERR(0, 264, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_squared_norm, __pyx_t_2) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":290
+  /* "mlsauce/lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
  *     # assert on dimensions
  *     sys_platform = platform.system()
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_27tcrossprod, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_27tcrossprod, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_tcrossprod, __pyx_t_2) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_tcrossprod, __pyx_t_2) < 0) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":305
+  /* "mlsauce/lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
  *     return np.array(X.copy(), ndmin=2)
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_29to_np_array, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_29to_np_array, NULL, __pyx_n_s_mlsauce_lasso__lassoc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_to_np_array, __pyx_t_2) < 0) __PYX_ERR(0, 305, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_to_np_array, __pyx_t_2) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "mlsauce/lasso/_lassoc.pyx":1
