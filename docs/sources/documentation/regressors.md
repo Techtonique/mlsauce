@@ -2,7 +2,7 @@
 
 _In alphabetical order_
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/lasso/_lasso.py#L16)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/lasso/_lasso.py#L16)</span>
 
 ### LassoRegressor
 
@@ -31,7 +31,7 @@ Attributes:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/lasso/_lasso.py#L56)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/lasso/_lasso.py#L56)</span>
 
 ### fit
 
@@ -61,7 +61,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/lasso/_lasso.py#L138)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/lasso/_lasso.py#L139)</span>
 
 ### predict
 
@@ -90,7 +90,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L10)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_regressor.py#L9)</span>
 
 ### LSBoostRegressor
 
@@ -166,7 +166,7 @@ Attributes:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L114)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_regressor.py#L113)</span>
 
 ### fit
 
@@ -196,7 +196,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_regressor.py#L156)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_regressor.py#L155)</span>
 
 ### predict
 
@@ -224,7 +224,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/ridge/_ridge.py#L15)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/ridge/_ridge.py#L15)</span>
 
 ### RidgeRegressor
 
@@ -248,7 +248,7 @@ Attributes:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/ridge/_ridge.py#L47)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/ridge/_ridge.py#L47)</span>
 
 ### fit
 
@@ -278,7 +278,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/ridge/_ridge.py#L88)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/ridge/_ridge.py#L89)</span>
 
 ### predict
 

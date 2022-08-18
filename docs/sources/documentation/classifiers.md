@@ -2,7 +2,7 @@
 
 _In alphabetical order_
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/adaopt/_adaopt.py#L13)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/adaopt/_adaopt.py#L13)</span>
 
 ### AdaOpt
 
@@ -30,21 +30,21 @@ mlsauce.AdaOpt(
 
 
 AdaOpt classifier.
-    
-Attributes:    
+
+Attributes:
 
     n_iterations: int
         number of iterations of the optimizer at training time.
 
     learning_rate: float
-        controls the speed of the optimizer at training time.  
+        controls the speed of the optimizer at training time.
 
     reg_lambda: float
-        L2 regularization parameter for successive errors in the optimizer 
+        L2 regularization parameter for successive errors in the optimizer
         (at training time).
 
     reg_alpha: float
-        L1 regularization parameter for successive errors in the optimizer 
+        L1 regularization parameter for successive errors in the optimizer
         (at training time).
 
     eta: float
@@ -57,43 +57,42 @@ Attributes:
         number of nearest neighbors selected at test time for classification.
 
     tolerance: float
-        controls early stopping in gradient descent (at training time). 
+        controls early stopping in gradient descent (at training time).
 
     n_clusters: int
-        number of clusters, if MiniBatch k-means is used at test time 
+        number of clusters, if MiniBatch k-means is used at test time
         (for faster prediction).
 
     batch_size: int
-        size of the batch, if MiniBatch k-means is used at test time 
+        size of the batch, if MiniBatch k-means is used at test time
         (for faster prediction).
 
     row_sample: float
-        percentage of rows chosen from training set (by stratified subsampling, 
+        percentage of rows chosen from training set (by stratified subsampling,
         for faster prediction).
 
     type_dist: str
-        distance used for finding the nearest neighbors; currently `euclidean-f` 
-        (euclidean distances calculated as whole), `euclidean` (euclidean distances 
+        distance used for finding the nearest neighbors; currently `euclidean-f`
+        (euclidean distances calculated as whole), `euclidean` (euclidean distances
         calculated row by row), `cosine` (cosine distance).
 
-    n_jobs: int 
+    n_jobs: int
         number of cpus for parallel processing (default: None)
 
     verbose: int
         progress bar for parallel processing (yes = 1) or not (no = 0)
 
     cache: boolean
-        if the nearest neighbors are cached or not, for faster retrieval in 
+        if the nearest neighbors are cached or not, for faster retrieval in
         subsequent calls.
 
-    seed: int 
+    seed: int
         reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-     
 
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/adaopt/_adaopt.py#L120)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/adaopt/_adaopt.py#L120)</span>
 
 ### fit
 
@@ -108,14 +107,14 @@ Fit AdaOpt to training data (X, y)
 Args:
 
     X: {array-like}, shape = [n_samples, n_features]
-        Training vectors, where n_samples is the number 
+        Training vectors, where n_samples is the number
         of samples and n_features is the number of features.
 
     y: array-like, shape = [n_samples]
         Target values.
 
     **kwargs: additional parameters to be passed to self.cook_training_set.
-       
+
 Returns:
 
     self: object.
@@ -123,7 +122,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/adaopt/_adaopt.py#L179)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/adaopt/_adaopt.py#L179)</span>
 
 ### predict
 
@@ -138,19 +137,19 @@ Predict test data X.
 Args:
 
     X: {array-like}, shape = [n_samples, n_features]
-        Training vectors, where n_samples is the number 
+        Training vectors, where n_samples is the number
         of samples and n_features is the number of features.
 
-    **kwargs: additional parameters to be passed to `predict_proba`                
-       
-Returns: 
+    **kwargs: additional parameters to be passed to `predict_proba`
+
+Returns:
 
     model predictions: {array-like}
 
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/adaopt/_adaopt.py#L198)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/adaopt/_adaopt.py#L198)</span>
 
 ### predict_proba
 
@@ -165,20 +164,20 @@ Predict probabilities for test data X.
 Args:
 
     X: {array-like}, shape = [n_samples, n_features]
-        Training vectors, where n_samples is the number 
+        Training vectors, where n_samples is the number
         of samples and n_features is the number of features.
 
-    **kwargs: additional parameters to be passed to 
+    **kwargs: additional parameters to be passed to
         self.cook_test_set
-       
-Returns:        
 
-    probability estimates for test data: {array-like}        
+Returns:
+
+    probability estimates for test data: {array-like}
 
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_classifier.py#L10)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_classifier.py#L9)</span>
 
 ### LSBoostClassifier
 
@@ -255,7 +254,7 @@ Attributes:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_classifier.py#L114)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_classifier.py#L113)</span>
 
 ### fit
 
@@ -285,7 +284,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_classifier.py#L156)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_classifier.py#L155)</span>
 
 ### predict
 
@@ -313,7 +312,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/booster/_booster_classifier.py#L175)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/booster/_booster_classifier.py#L174)</span>
 
 ### predict_proba
 
@@ -341,7 +340,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/stump/_stump_classifier.py#L7)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/stump/_stump_classifier.py#L7)</span>
 
 ### StumpClassifier
 
@@ -361,7 +360,7 @@ Attributes:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/stump/_stump_classifier.py#L21)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/stump/_stump_classifier.py#L21)</span>
 
 ### fit
 
@@ -392,7 +391,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/stump/_stump_classifier.py#L60)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/stump/_stump_classifier.py#L60)</span>
 
 ### predict
 
@@ -420,7 +419,7 @@ Returns:
 
 ----
 
-<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/mlsauce/stump/_stump_classifier.py#L79)</span>
+<span style="float:right;">[[source]](https://github.com/Techtonique/mlsauce/blob/master/mlsauce/stump/_stump_classifier.py#L79)</span>
 
 ### predict_proba
 

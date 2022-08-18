@@ -39,7 +39,7 @@ def generate(dest_dir):
 
     doc_generator = keras_autodoc.DocumentationGenerator(
         PAGES,
-        'https://github.com/Techtonique/mlsauce',
+        'https://github.com/Techtonique/mlsauce/blob/master',
         template_dir,
         #mlsauce_dir / 'examples'
     )
