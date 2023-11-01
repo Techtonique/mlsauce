@@ -65,7 +65,7 @@ else:
     from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
     from .stump import StumpClassifier
-    from .encoders import corrtarget_encoder
+    #from .encoders import corrtarget_encoder
 
     __all__ = [
         "AdaOpt",
@@ -75,7 +75,7 @@ else:
         "LSBoostRegressor",
         "RidgeRegressor",
         # Other imports
-        "corrtarget_encoder",
+        #"corrtarget_encoder",
         # Non-modules:
         "get_config",
         "set_config",
