@@ -64,7 +64,7 @@ def cythonize_extensions(top_path, config):
     #   cython build-time variable passed to the cythonize() call.
     # - Then in the build_ext subclass defined in the top-level setup.py file
     #   to actually build the compiled extensions with OpenMP flags if needed.
-    mlsauce._OPENMP_SUPPORTED = check_openmp_support()
+    #mlsauce._OPENMP_SUPPORTED = check_openmp_support()
 
     n_jobs = 1
     with contextlib.suppress(ImportError):

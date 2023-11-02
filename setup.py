@@ -127,14 +127,14 @@ try:
 
     class build_ext_subclass(build_ext):
         def build_extensions(self):
-            from mlsauce._build_utils.openmp_helpers import get_openmp_flag
+            # from mlsauce._build_utils.openmp_helpers import get_openmp_flag
 
-            if mlsauce._OPENMP_SUPPORTED:
-                openmp_flag = get_openmp_flag(self.compiler)
+            # if mlsauce._OPENMP_SUPPORTED:
+            #     openmp_flag = get_openmp_flag(self.compiler)
 
-                for e in self.extensions:
-                    e.extra_compile_args += openmp_flag
-                    e.extra_link_args += openmp_flag
+            #     for e in self.extensions:
+            #         e.extra_compile_args += openmp_flag
+            #         e.extra_link_args += openmp_flag
 
             build_ext.build_extensions(self)
 
