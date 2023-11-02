@@ -20,6 +20,8 @@ except ImportError:
     import __builtin__ as builtins
 
 subprocess.run(['pip', 'install', 'numpy>= 1.13.0'])
+subprocess.run(['pip', 'install', 'scipy>= 0.19.0'])
+subprocess.run(['pip', 'install', 'Cython==0.29.21'])
 
 builtins.__MLSAUCE_SETUP__ = True
 
