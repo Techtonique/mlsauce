@@ -267,7 +267,7 @@ def setup_package():
                     cmdclass=cmdclass,
                     python_requires=">=3.5",
                     install_requires=install_requires,
-                    setup_requires=["numpy"],
+                    setup_requires=["numpy>= 1.13.0"],
                     package_data={'': ['*.pxd']},
                     **extra_setuptools_args)
 
