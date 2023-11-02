@@ -1,55 +1,17 @@
+import mlsauce as ms
 import numpy as np 
 import matplotlib.pyplot as plt
-from sklearn.datasets import load_boston, load_diabetes
+from sklearn.datasets import load_diabetes
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from time import time
 from os import chdir
 from sklearn import metrics
-
-
-#wd="/workspace/mlsauce/mlsauce/examples"
-#
-#chdir(wd)
-
-import mlsauce as ms
 
 # ridge
 
 print("\n")
 print("ridge -----")
 print("\n")
-
-# data 1
-boston = load_boston()
-X = boston.data
-y = boston.target
-# split data into training test and test set
-np.random.seed(15029)
-X_train, X_test, y_train, y_test = train_test_split(X, y, 
-                                                    test_size=0.2)
-
-obj = ms.LSBoostRegressor(tolerance=5e-2, activation="relu6", col_sample=0.9, row_sample=0.9)
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-print(obj)
-start = time()
-print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
-print(time()-start)
-
-print(obj.obj['loss'])
-
-# MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-obj = ms.LSBoostRegressor(backend="gpu")
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-print(obj)
-start = time()
-print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
-print(time()-start)
 
 # data 2
 diabetes = load_diabetes()
@@ -88,38 +50,6 @@ print(time()-start)
 print("\n")
 print("lasso -----")
 print("\n")
-
-# data 1
-boston = load_boston()
-X = boston.data
-y = boston.target
-# split data into training test and test set
-np.random.seed(15029)
-X_train, X_test, y_train, y_test = train_test_split(X, y, 
-                                                    test_size=0.2)
-
-obj = ms.LSBoostRegressor(solver="lasso")
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-print(obj)
-start = time()
-print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
-print(time()-start)
-
-print(obj.obj['loss'])
-
-# MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-# obj = ms.LSBoostRegressor(backend="gpu", solver="lasso")
-# print(obj.get_params())
-# start = time()
-# obj.fit(X_train, y_train)
-# print(time()-start)
-# print(obj)
-# start = time()
-# print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
-# print(time()-start)
 
 # data 2
 diabetes = load_diabetes()
