@@ -236,8 +236,8 @@ def setup_package():
                     ]
 
     install_jax_requires = [
-                            'jax>={}'.format(JAX_MIN_VERSION),
-                            'jaxlib>={}'.format(JAXLIB_MIN_VERSION)
+                            'jax',
+                            'jaxlib'
                             ] if platform.system() in ('Linux', 'Darwin') else []
 
     other_requirements = ["tqdm==4.48.1", 
