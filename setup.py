@@ -3,12 +3,14 @@
 # Copyright (C) 2020 T. Moudiki <thierry.moudiki@gmail.com>
 # License: 3-clause BSD
 
+import subprocess
 import sys
 import os
 import platform
 import shutil
 from distutils.command.clean import clean as Clean
 from pkg_resources import parse_version
+from setuptools import find_packages
 import traceback
 import importlib
 try:
@@ -17,12 +19,8 @@ except ImportError:
     # Python 2 compat: just to be able to declare that Python >=3.5 is needed.
     import __builtin__ as builtins
 
-# This is a bit (!) hackish: we are setting a global variable so that the
-# main mlsauce __init__ can detect if it is being loaded by the setup
-# routine, to avoid attempting to load components that aren't built yet:
-# the numpy distutils extensions that are used by mlsauce to
-# recursively build the compiled extensions in sub-packages is based on the
-# Python import machinery.
+subprocess.run(['pip', 'install', 'numpy>= 1.13.0'])
+
 builtins.__MLSAUCE_SETUP__ = True
 
 
@@ -269,6 +267,7 @@ def setup_package():
                     install_requires=install_requires,
                     setup_requires=["numpy>= 1.13.0"],
                     package_data={'': ['*.pxd']},
+                    packages=find_packages(),
                     **extra_setuptools_args)
 
     if len(sys.argv) == 1 or (
