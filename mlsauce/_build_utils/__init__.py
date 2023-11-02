@@ -79,9 +79,9 @@ def cythonize_extensions(top_path, config):
     config.ext_modules = cythonize(
         config.ext_modules,
         nthreads=n_jobs,
-        compile_time_env={
-            "MLSAUCE_OPENMP_PARALLELISM_ENABLED": mlsauce._OPENMP_SUPPORTED
-        },
+        #compile_time_env={
+        #    "MLSAUCE_OPENMP_PARALLELISM_ENABLED": mlsauce._OPENMP_SUPPORTED
+        #},
         compiler_directives={"language_level": 3},
     )
 
