@@ -34,7 +34,7 @@ cdef struct mydoubletuple:
 
 DTYPE_double = np.double
 
-DTYPE_int = np.int
+DTYPE_int = np.int32
 
 ctypedef np.double_t DTYPE_double_t
 
@@ -158,7 +158,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       np.random.seed(seed + iter*1000)
     
       iy = np.sort(np.random.choice(a=range(p), 
-                                    size=np.int(p*col_sample), 
+                                    size=np.int32(p*col_sample), 
                                     replace=False), 
                    kind='quicksort')
       res['col_index_i'][iter] = iy                     
@@ -171,7 +171,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       if row_sample < 1:
       
         ix = np.sort(np.random.choice(a=range(n), 
-                                    size=np.int(n*row_sample), 
+                                    size=np.int32(n*row_sample), 
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
@@ -302,7 +302,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
       np.random.seed(seed + iter*1000)
     
       iy = np.sort(np.random.choice(a=range(p), 
-                                    size=np.int(p*col_sample), 
+                                    size=np.int32(p*col_sample), 
                                     replace=False), 
                    kind='quicksort')
       res['col_index_i'][iter] = iy                     
@@ -315,7 +315,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
       if row_sample < 1:
       
         ix = np.sort(np.random.choice(a=range(n), 
-                                    size=np.int(n*row_sample), 
+                                    size=np.int32(n*row_sample), 
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
