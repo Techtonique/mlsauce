@@ -140,6 +140,10 @@ year={2019--2020}
 
 ## References
 
+- Moudiki, T. (2020). LSBoost, gradient boosted penalized nonlinear least squares.
+    Available at: 
+  https://www.researchgate.net/publication/346059361_LSBoost_gradient_boosted_penalized_nonlinear_least_squares
+
 - Moudiki, T. (2020). AdaOpt: Multivariable optimization for classification. 
     Available at: 
     https://www.researchgate.net/publication/341409169_AdaOpt_Multivariable_optimization_for_classification
