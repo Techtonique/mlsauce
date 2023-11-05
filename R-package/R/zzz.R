@@ -1,6 +1,5 @@
 # global reference to scipy (will be initialized in .onLoad)
 ms <- NULL
-sklearn <- NULL
 
 .onLoad <- function(libname, pkgname) {
   utils::install.packages("reticulate",
@@ -9,16 +8,18 @@ sklearn <- NULL
       silent = TRUE)
   try(reticulate::use_virtualenv('./r-reticulate'),
       silent = TRUE)
-  try(reticulate::py_install(
-    "mlsauce",
-    envname = "r-reticulate",
-    pip = TRUE,
-    pip_options = "--upgrade",
-    pip_ignore_installed = TRUE
-  ),
-  silent = TRUE)
+  # reticulate::py_install(
+  #   "mlsauce",
+  #   envname = "r-reticulate",
+  #   pip = TRUE,
+  #   pip_options = "--upgrade",
+  #   pip_ignore_installed = TRUE
+  # )
+  reticulate::py_install("git+https://github.com/Techtonique/mlsauce.git",
+                         pip = TRUE,
+                         envname = "r-reticulate",
+                         pip_options = "--upgrade",
+                         pip_ignore_installed = TRUE)
   # use superassignment to update global reference to package
   ms <<- reticulate::import("mlsauce", delay_load = TRUE)
-  sklearn <<- reticulate::import("sklearn", delay_load = TRUE)
 }
-.onLoad <- memoise::memoise(.onLoad)
