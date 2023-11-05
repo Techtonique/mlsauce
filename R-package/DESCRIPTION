@@ -5,6 +5,7 @@ Author: T. Moudiki
 Maintainer: T. Moudiki <thierry.moudiki@gmail.com>
 Description: Miscellaneous Statistical/Machine Learning stuff.
 License: BSD_3_clause Clear + file LICENSE
+Depends: reticulate
 Suggests: Rcpp 
 Encoding: UTF-8
 LazyData: true
