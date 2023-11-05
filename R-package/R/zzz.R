@@ -5,7 +5,8 @@ ms <- NULL
 
   if(is_package_available("reticulate") == FALSE)
   {
-    install.packages("reticulate")
+    install.packages("reticulate",
+                     repos = c(CRAN="https://cloud.r-project.org"))
   }
 
   require("reticulate")
