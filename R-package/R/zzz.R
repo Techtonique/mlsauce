@@ -15,11 +15,14 @@ ms <- NULL
   #   pip_options = "--upgrade",
   #   pip_ignore_installed = TRUE
   # )
-  reticulate::virtualenv_install(packages = "git+https://github.com/Techtonique/mlsauce.git",
+  reticulate::virtualenv_install(packages = "numpy",
                                  pip = TRUE,
                                  envname = "r-reticulate",
-                                 pip_options = "--upgrade",
+                                 pip_options = ">=1.13.0",
                                  pip_ignore_installed = TRUE)
+  reticulate::virtualenv_install(packages = "git+https://github.com/Techtonique/mlsauce.git",
+                                 envname = "r-reticulate",
+                                 pip_options = "--upgrade")
   # use superassignment to update global reference to package
   ms <<- reticulate::import("mlsauce", delay_load = TRUE)
 }
