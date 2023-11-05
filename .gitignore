@@ -158,4 +158,7 @@ R-package/mlsauce.Rproj
 R-package/r-reticulate/
 R-package/renv.lock
 R-package/renv/
+R-package/.Rbuildignore
+R-package/.Rhistory
+R-package/.Rprofile
 
