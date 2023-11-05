@@ -2,8 +2,6 @@
 ms <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  utils::install.packages("reticulate",
-                          repos = list(CRAN = "https://cloud.r-project.org"))
   try(reticulate::virtualenv_create('./r-reticulate'),
       silent = TRUE)
   try(reticulate::use_virtualenv('./r-reticulate'),

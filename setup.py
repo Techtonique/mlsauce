@@ -19,9 +19,12 @@ except ImportError:
     # Python 2 compat: just to be able to declare that Python >=3.5 is needed.
     import __builtin__ as builtins
 
-subprocess.run(['pip', 'install', 'numpy>= 1.13.0'])
-subprocess.run(['pip', 'install', 'scipy>= 0.19.0'])
-subprocess.run(['pip', 'install', 'Cython==0.29.21'])
+try: 
+    subprocess.run(['pip', 'install', 'numpy>= 1.13.0'], check=False)
+    subprocess.run(['pip', 'install', 'scipy>= 0.19.0'], check=False)
+    subprocess.run(['pip', 'install', 'Cython>=0.29.21'], check=False)
+except Exception:
+    pass 
 
 builtins.__MLSAUCE_SETUP__ = True
 
