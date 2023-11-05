@@ -20,6 +20,11 @@ ms <- NULL
                                  envname = "r-reticulate",
                                  pip_options = ">=1.13.0",
                                  pip_ignore_installed = TRUE)
+  reticulate::virtualenv_install(packages = "scipy",
+                                 pip = TRUE,
+                                 envname = "r-reticulate",
+                                 pip_options = ">=0.19.0",
+                                 pip_ignore_installed = TRUE)
   reticulate::virtualenv_install(packages = "git+https://github.com/Techtonique/mlsauce.git",
                                  envname = "r-reticulate",
                                  pip_options = "--upgrade")
