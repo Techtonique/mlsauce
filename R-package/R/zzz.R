@@ -4,38 +4,23 @@ ms <- NULL
 .onLoad <- function(libname, pkgname) {
 
   if(is_package_available("reticulate") == FALSE)
-    install.packages("reticulate",
-                     repos = c(CRAN = "https://cloud.r-project.org"))
+  {
+    install.packages("reticulate")
+  }
 
-  try(reticulate::virtualenv_create('./r-reticulate'),
+  require("reticulate")
+
+  try(reticulate::virtualenv_create('./r-reticulate',
+                                    packages = c('numpy',
+                                                 'scipy',
+                                                 'Cython')),
       silent = TRUE)
 
   try(reticulate::use_virtualenv('./r-reticulate'),
       silent = TRUE)
 
-  try(reticulate::virtualenv_install(packages = "numpy",
-                                 pip = TRUE,
-                                 envname = "r-reticulate",
-                                 pip_options = ">=1.13.0",
-                                 pip_ignore_installed = TRUE),
-      silent = TRUE)
-
-  try(reticulate::virtualenv_install(packages = "scipy",
-                                 pip = TRUE,
-                                 envname = "r-reticulate",
-                                 pip_options = ">=0.19.0",
-                                 pip_ignore_installed = TRUE),
-      silent = TRUE)
-
-  try(reticulate::virtualenv_install(packages = "Cython",
-                                 pip = TRUE,
-                                 envname = "r-reticulate",
-                                 pip_options = ">=0.29.21",
-                                 pip_ignore_installed = TRUE),
-      silent = TRUE)
-
   reticulate::virtualenv_install(packages = "git+https://github.com/Techtonique/mlsauce.git",
-                                 envname = "r-reticulate",
+                                 envname = "./r-reticulate",
                                  pip_options = "--upgrade")
 
   # use superassignment to update global reference to package
