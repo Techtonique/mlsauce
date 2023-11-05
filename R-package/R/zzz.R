@@ -28,7 +28,7 @@ ms <- NULL
   reticulate::virtualenv_install(packages = "Cython",
                                  pip = TRUE,
                                  envname = "r-reticulate",
-                                 pip_options = "==0.29.21",
+                                 pip_options = ">=0.29.21",
                                  pip_ignore_installed = TRUE)
   reticulate::virtualenv_install(packages = "git+https://github.com/Techtonique/mlsauce.git",
                                  envname = "r-reticulate",
