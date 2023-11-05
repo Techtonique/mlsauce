@@ -7,7 +7,6 @@ Description: Miscellaneous Statistical/Machine Learning stuff.
 License: BSD_3_clause Clear + file LICENSE
 Depends: reticulate
 Suggests: reticulate, Rcpp 
-Collate: 'zzz.R' 'adaopt.R' 'lasso.R' 'lsboost.R' 'ridge.R' 'stump.R'
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

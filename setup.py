@@ -9,7 +9,7 @@ import os
 import platform
 import shutil
 from distutils.command.clean import clean as Clean
-from pkg_resources import parse_version
+#from pkg_resources import parse_version
 from setuptools import find_packages
 import traceback
 import importlib
@@ -190,40 +190,40 @@ def configuration(parent_package='', top_path=None):
     return config
 
 
-def check_package_status(package, min_version):
-    """
-    Returns a dictionary containing a boolean specifying whether given package
-    is up-to-date, along with the version string (empty string if
-    not installed).
-    """
-    package_status = {}
-    try:
-        module = importlib.import_module(package)
-        package_version = module.__version__
-        package_status['up_to_date'] = parse_version(
-            package_version) >= parse_version(min_version)
-        package_status['version'] = package_version
-    except ImportError:
-        traceback.print_exc()
-        package_status['up_to_date'] = False
-        package_status['version'] = ""
+# def check_package_status(package, min_version):
+#     """
+#     Returns a dictionary containing a boolean specifying whether given package
+#     is up-to-date, along with the version string (empty string if
+#     not installed).
+#     """
+#     package_status = {}
+#     try:
+#         module = importlib.import_module(package)
+#         package_version = module.__version__
+#         package_status['up_to_date'] = parse_version(
+#             package_version) >= parse_version(min_version)
+#         package_status['version'] = package_version
+#     except ImportError:
+#         traceback.print_exc()
+#         package_status['up_to_date'] = False
+#         package_status['version'] = ""
 
-    req_str = "mlsauce requires {} >= {}.\n".format(
-        package, min_version)
+#     req_str = "mlsauce requires {} >= {}.\n".format(
+#         package, min_version)
 
-    instructions = ("Installation instructions are available on the "
-                    "mlsauce GitHub repo: ")
+#     instructions = ("Installation instructions are available on the "
+#                     "mlsauce GitHub repo: ")
 
-    if package_status['up_to_date'] is False:
-        if package_status['version']:
-            raise ImportError("Your installation of {} "
-                              "{} is out-of-date.\n{}{}"
-                              .format(package, package_status['version'],
-                                      req_str, instructions))
-        else:
-            raise ImportError("{} is not "
-                              "installed.\n{}{}"
-                              .format(package, req_str, instructions))
+#     if package_status['up_to_date'] is False:
+#         if package_status['version']:
+#             raise ImportError("Your installation of {} "
+#                               "{} is out-of-date.\n{}{}"
+#                               .format(package, package_status['version'],
+#                                       req_str, instructions))
+#         else:
+#             raise ImportError("{} is not "
+#                               "installed.\n{}{}"
+#                               .format(package, req_str, instructions))
 
 
 def setup_package():
@@ -300,9 +300,9 @@ def setup_package():
                 " Python version is %s installed in %s."
                 % (platform.python_version(), sys.executable))
 
-        check_package_status('numpy', NUMPY_MIN_VERSION)
+        #check_package_status('numpy', NUMPY_MIN_VERSION)
 
-        check_package_status('scipy', SCIPY_MIN_VERSION)
+        #check_package_status('scipy', SCIPY_MIN_VERSION)
 
         from numpy.distutils.core import setup
 

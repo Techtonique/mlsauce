@@ -1,3 +1,4 @@
+source("renv/activate.R")
 os <- reticulate::import("os")
 PATH <- os$sys$executable
 
