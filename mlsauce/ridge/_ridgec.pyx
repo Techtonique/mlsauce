@@ -31,10 +31,10 @@ def cbind(x, y, backend="cpu"):
 
 # center... response
 def center_response(y):
-    if (len(y.shape)==1): 
+    if (len(np.asarray(y).shape)==1):
         y_mean = np.mean(y)
         return y_mean, (y - y_mean)
-    y_mean = np.asarray(y).mean(axis=0)    
+    y_mean = np.asarray(y).mean(axis=0)
     return y_mean, (y - y_mean[None, :])
 
 
@@ -177,7 +177,7 @@ def scale_covariates(X, choice="std", training=True, scaler=None):
 
     if choice == "std":
         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
-    
+
     if choice == "minmax":
         assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"
 
@@ -216,7 +216,7 @@ def squared_norm(x, backend="cpu"):
     sys_platform = platform.system()
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = np.ravel(x, order="K")
-        x = device_put(x)        
+        x = device_put(x)
         return jnp.dot(x, x).block_until_ready()
 
     x = np.ravel(x, order="K")
