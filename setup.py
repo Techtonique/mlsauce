@@ -10,6 +10,7 @@ import platform
 import shutil
 from distutils.command.clean import clean as Clean
 #from pkg_resources import parse_version
+from distutils.command.sdist import sdist
 from setuptools import find_packages
 import traceback
 import importlib
@@ -142,6 +143,7 @@ try:
             build_ext.build_extensions(self)
 
     cmdclass['build_ext'] = build_ext_subclass
+    cmdclass['sdist'] = sdist
 
 except ImportError:
     # Numpy should not be a dependency just to be able to introspect
