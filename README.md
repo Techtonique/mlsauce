@@ -44,16 +44,28 @@ pip install git+https://github.com/Techtonique/mlsauce.git
 
 ### R 
 
-- __1st method__: From Github, in R console:
+Only for Linux, for now. Windows users can envisage using [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10), the **Windows Subsystem for Linux**.
 
-```r
-library(devtools)
-devtools::install_github("Techtonique/mlsauce/R-package")
-library(mlsauce)
+**From GitHub**
+
+```bash
+remotes::install_github("Techtonique/mlsauce_r") # the repo is in this organization
 ```
 
-__General rule for using the package in R__:  object accesses with `.`'s are replaced by `$`'s. See also [Quick start](#quick-start).
+**From R-universe**
 
+```bash
+install.packages('mlsauce', repos = c('https://techtonique.r-universe.dev',
+'https://cloud.r-project.org'))
+```
+
+__General rule for using the package in R__:  object accesses with `.`'s are replaced by `$`'s. R Examples can be found in the package, once installed, by typing (in R console):
+
+```R
+?mlsauce::AdaOpt
+```
+
+For a list of available models, visit [https://techtonique.github.io/mlsauce/](https://techtonique.github.io/mlsauce/).
 
 
 ## Package description
