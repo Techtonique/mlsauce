@@ -127,6 +127,8 @@ coverage report -m
 coverage html
 ```
 
+Note to self and developpers: [https://conda-forge.org/docs/maintainer/adding_pkgs.html#step-by-step-instructions](https://conda-forge.org/docs/maintainer/adding_pkgs.html#step-by-step-instructions)
+
 ## API Documentation
 
 - https://techtonique.github.io/mlsauce/
