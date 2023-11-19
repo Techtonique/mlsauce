@@ -245,7 +245,7 @@ def setup_package():
                             'jaxlib'
                             ] if platform.system() in ('Linux', 'Darwin') else []
 
-    other_requirements = ["tqdm==4.48.1", 
+    other_requirements = ["tqdm", 
                           #"pymongo >= 3.10.1", 
                           #"SQLAlchemy >= 1.3.18"
                           ]

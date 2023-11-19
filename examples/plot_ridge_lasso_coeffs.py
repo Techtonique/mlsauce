@@ -1,3 +1,7 @@
+import subprocess
+import sys
+
+subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
 
 import matplotlib.pyplot as plt
 import numpy as np
