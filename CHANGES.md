@@ -1,3 +1,13 @@
+# version 0.8.11
+
+- install `numpy` before `setup`
+- stop using `np.int`
+- update Makefile
+- update examples 
+- no more refs to openmp (for now)
+- update and align with R version
+- submit conda version
+
 # version 0.8.8
 - Avoid division by 0 in scaling
 
