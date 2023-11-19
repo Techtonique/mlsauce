@@ -62,6 +62,7 @@ else:
 
     from .adaopt import AdaOpt
     from .booster import LSBoostClassifier, LSBoostRegressor
+    from .datasets import download
     from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
     from .stump import StumpClassifier
@@ -76,6 +77,7 @@ else:
         "RidgeRegressor",
         # Other imports
         #"corrtarget_encoder",
+        "download",
         # Non-modules:
         "get_config",
         "set_config",

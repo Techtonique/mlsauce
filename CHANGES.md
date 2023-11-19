@@ -1,3 +1,7 @@
+# version 0.9.0
+
+- dowload data from R-universe
+
 # version 0.8.11
 
 - install `numpy` before `setup`
