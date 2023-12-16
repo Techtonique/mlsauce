@@ -7,7 +7,7 @@ mlsauce
 
 Miscellaneous Statistical/Machine learning stuff.  
 
-![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/Techtonique/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce)   [![HitCount](https://hits.dwyl.com/Techtonique/mlsauce.svg?style=flat-square)](http://hits.dwyl.com/Techtonique/mlsauce)
+![PyPI](https://img.shields.io/pypi/v/mlsauce) [![PyPI - License](https://img.shields.io/pypi/l/mlsauce)](https://github.com/Techtonique/mlsauce/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/mlsauce)](https://pepy.tech/project/mlsauce) [![Downloads](https://anaconda.org/conda-forge/mlsauce/badges/downloads.svg)](https://anaconda.org/conda-forge/mlsauce) [![HitCount](https://hits.dwyl.com/Techtonique/mlsauce.svg?style=flat-square)](http://hits.dwyl.com/Techtonique/mlsauce)
 [![CodeFactor](https://www.codefactor.io/repository/github/techtonique/mlsauce/badge)](https://www.codefactor.io/repository/github/techtonique/mlsauce)
 [![Documentation](https://img.shields.io/badge/documentation-is_here-green)](https://techtonique.github.io/mlsauce/)
 
