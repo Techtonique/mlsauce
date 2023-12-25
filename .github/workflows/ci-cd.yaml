@@ -1,0 +1,33 @@
+name: Python CI/CD
+
+on:
+  push:
+    branches: [main] # Modify this to your main branch name
+  pull_request:
+    branches: [main] # Modify this to your main branch name
+
+jobs:
+  build_linux:
+    runs-on: ubuntu-latest
+    name: Build and Test on Linux
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 # Modify this to your Python version
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt  
+
+      - name: Run examples
+        run: |
+          find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;
+
+      - name: Build and package
+        run: |
+          python setup.py sdist bdist_wheel  # Modify this as needed
