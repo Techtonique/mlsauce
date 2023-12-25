@@ -53,20 +53,19 @@ except NameError:
     __MLSAUCE_SETUP__ = False
 
 if __MLSAUCE_SETUP__:
-
     sys.stderr.write("Partial import of mlsauce during the build process.\n")
     # We are not importing the rest of scikit-learn during the build
     # process, as it may not be compiled yet
 
 else:
-
     from .adaopt import AdaOpt
     from .booster import LSBoostClassifier, LSBoostRegressor
     from .datasets import download
     from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
     from .stump import StumpClassifier
-    #from .encoders import corrtarget_encoder
+
+    # from .encoders import corrtarget_encoder
 
     __all__ = [
         "AdaOpt",
@@ -76,7 +75,7 @@ else:
         "LSBoostRegressor",
         "RidgeRegressor",
         # Other imports
-        #"corrtarget_encoder",
+        # "corrtarget_encoder",
         "download",
         # Non-modules:
         "get_config",

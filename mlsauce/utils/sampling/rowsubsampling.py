@@ -6,9 +6,9 @@
 import numpy as np
 from ..misc import misc as mx
 
+
 # stratified subsampling
 def subsample(y, row_sample=0.8, seed=123):
-
     assert (row_sample < 1) & (
         row_sample >= 0
     ), "'row_sample' must be < 1 and >= 0"
@@ -18,14 +18,12 @@ def subsample(y, row_sample=0.8, seed=123):
 
     # preproc -----
     if mx.is_factor(y):
-
         classes, n_elem_classes = np.unique(y, return_counts=True)
         n_classes = len(classes)
         y_as_classes = y.copy()
         freqs_hist = n_elem_classes / n_obs
 
     else:
-
         h = np.histogram(y, bins="auto")
         n_elem_classes = h[0]
         freqs_hist = n_elem_classes / n_obs
@@ -45,14 +43,12 @@ def subsample(y, row_sample=0.8, seed=123):
     np.random.seed(seed)
 
     for i in range(n_classes):
-
         bool_class_i = y_as_classes == classes[i]
 
         # index_class_i = [i for i, e in enumerate(bool_class_i) if e == True]
         index_class_i = np.where(bool_class_i == True)[0].tolist()
 
         if np.sum(bool_class_i) > 1:  # at least 2 elements in class  #i
-
             index.append(
                 np.random.choice(
                     index_class_i,
@@ -62,13 +58,10 @@ def subsample(y, row_sample=0.8, seed=123):
             )
 
         else:  # only one element in class
-
             try:
-
                 index.append(index_class_i[0])
 
             except:
-
                 0
     try:
         return np.asarray(mx.flatten(index))

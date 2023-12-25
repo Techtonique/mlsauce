@@ -25,7 +25,6 @@ def is_float(x):
 
 # check if the response contains only integers
 def is_factor(y):
-
     n = len(y)
     ans = True
     idx = 0
