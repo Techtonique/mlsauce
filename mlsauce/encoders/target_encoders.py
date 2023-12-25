@@ -6,29 +6,29 @@ from tqdm import tqdm
 
 
 def corrtarget_encoder(df, target, rho=0.4, verbose=1, seed=123):
-    """ Encode non-numerical columns using correlations.
-   
-       Parameters
-       ----------
-       df: a data frame
-           a data frame
-       
-       target: str
-           target column a.k.a response
-       
-       rho: float
-           correlation between pseudo target (used for averaging) and target
-           
-       verbose: int
-           currently 0 = nothing printed; 1 = progress bar printed
-       
-       seed: int
-           reproducibility seed
-       
-       Returns
-       --------
-       a tuple: numerical data frame and achieved correlation
-   
+    """Encode non-numerical columns using correlations.
+
+    Parameters
+    ----------
+    df: a data frame
+        a data frame
+
+    target: str
+        target column a.k.a response
+
+    rho: float
+        correlation between pseudo target (used for averaging) and target
+
+    verbose: int
+        currently 0 = nothing printed; 1 = progress bar printed
+
+    seed: int
+        reproducibility seed
+
+    Returns
+    --------
+    a tuple: numerical data frame and achieved correlation
+
     """
 
     target_ = df[target].values
@@ -54,16 +54,13 @@ def corrtarget_encoder(df, target, rho=0.4, verbose=1, seed=123):
     col_iterator = covariates_names if verbose == 0 else tqdm(covariates_names)
 
     for col in col_iterator:
-
         if X_dtypes[col] == np.object:  # something like a character string
-
             X_temp = qr.summarize(
                 df_, req=col + ", avg(pseudo_target)", group_by=col
             )
             levels = np.unique(qr.select(X, col).values)
 
             for l in levels:
-
                 qrobj = qr.Querier(X_temp)
 
                 val = np.float(
@@ -77,7 +74,6 @@ def corrtarget_encoder(df, target, rho=0.4, verbose=1, seed=123):
                 )
 
         else:  # a numeric column
-
             X_numeric[col] = X[col]
 
     return (

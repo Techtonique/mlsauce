@@ -41,7 +41,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.8.11'
+__version__ = '0.9.0'
 
 VERSION = __version__
 
@@ -245,7 +245,8 @@ def setup_package():
                             'jaxlib'
                             ] if platform.system() in ('Linux', 'Darwin') else []
 
-    other_requirements = ["tqdm", 
+    other_requirements = ["requests",
+                          "tqdm", 
                           #"pymongo >= 3.10.1", 
                           #"SQLAlchemy >= 1.3.18"
                           ]

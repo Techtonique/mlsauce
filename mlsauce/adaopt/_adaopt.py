@@ -92,7 +92,6 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         cache=True,
         seed=123,
     ):
-
         assert type_dist in (
             "euclidean",
             "manhattan",
@@ -217,10 +216,11 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_test = X.shape[0]
 
         if self.n_jobs is None:
-
             return adaoptc.predict_proba_adaopt(
                 X_test=np.asarray(X, order="C").astype(np.float64),
-                scaled_X_train=np.asarray(self.scaled_X_train, order="C").astype(np.float64),
+                scaled_X_train=np.asarray(
+                    self.scaled_X_train, order="C"
+                ).astype(np.float64),
                 n_test=n_test,
                 n_train=n_train,
                 probs_train=self.probs_training,
@@ -246,10 +246,13 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             @delayed
             @wrap_non_picklable_objects
             def multiproc_func(i):
-
                 dists_test_i = adaoptc.distance_to_mat_euclidean2(
-                    np.asarray(scaled_X_test.astype(np.float64), order="C")[i, :],
-                    np.asarray(self.scaled_X_train.astype(np.float64), order="C"),
+                    np.asarray(scaled_X_test.astype(np.float64), order="C")[
+                        i, :
+                    ],
+                    np.asarray(
+                        self.scaled_X_train.astype(np.float64), order="C"
+                    ),
                     np.zeros(n_train),
                     n_train,
                     p_train,
@@ -274,10 +277,13 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             @delayed
             @wrap_non_picklable_objects
             def multiproc_func(i):
-
                 dists_test_i = adaoptc.distance_to_mat_manhattan2(
-                    np.asarray(scaled_X_test.astype(np.float64), order="C")[i, :],
-                    np.asarray(self.scaled_X_train.astype(np.float64), order="C"),
+                    np.asarray(scaled_X_test.astype(np.float64), order="C")[
+                        i, :
+                    ],
+                    np.asarray(
+                        self.scaled_X_train.astype(np.float64), order="C"
+                    ),
                     np.zeros(n_train),
                     n_train,
                     p_train,
@@ -302,10 +308,13 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             @delayed
             @wrap_non_picklable_objects
             def multiproc_func(i, *args):
-
                 dists_test_i = adaoptc.distance_to_mat_cosine2(
-                    np.asarray(scaled_X_test.astype(np.float64), order="C")[i, :],
-                    np.asarray(self.scaled_X_train.astype(np.float64), order="C"),
+                    np.asarray(scaled_X_test.astype(np.float64), order="C")[
+                        i, :
+                    ],
+                    np.asarray(
+                        self.scaled_X_train.astype(np.float64), order="C"
+                    ),
                     np.zeros(n_train),
                     n_train,
                     p_train,
@@ -326,13 +335,11 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
                 )
 
         if self.verbose == 1:
-
             res = Parallel(n_jobs=self.n_jobs, prefer="threads")(
                 (multiproc_func)(m) for m in tqdm(range(n_test))
             )
 
         else:
-
             res = Parallel(n_jobs=self.n_jobs, prefer="threads")(
                 (multiproc_func)(m) for m in range(n_test)
             )

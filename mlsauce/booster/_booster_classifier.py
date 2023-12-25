@@ -7,21 +7,21 @@ from . import _boosterc as boosterc
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
-    """ LSBoost classifier.
-        
-    Attributes: 
-    
+    """LSBoost classifier.
+
+    Attributes:
+
         n_estimators: int
             number of boosting iterations.
 
         learning_rate: float
-            controls the learning speed at training time.  
+            controls the learning speed at training time.
 
-        n_hidden_features: int 
+        n_hidden_features: int
             number of nodes in successive hidden layers.
 
         reg_lambda: float
-            L2 regularization parameter for successive errors in the optimizer 
+            L2 regularization parameter for successive errors in the optimizer
             (at training time).
 
         row_sample: float
@@ -31,30 +31,30 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             percentage of columns chosen from the training set.
 
         dropout: float
-            percentage of nodes dropped from the training set. 
+            percentage of nodes dropped from the training set.
 
         tolerance: float
             controls early stopping in gradient descent (at training time).
 
         direct_link: bool
-            indicates whether the original features are included (True) in model's 
+            indicates whether the original features are included (True) in model's
             fitting or not (False).
 
         verbose: int
             progress bar (yes = 1) or not (no = 0) (currently).
 
-        seed: int 
+        seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
 
-        backend: str    
-            type of backend; must be in ('cpu', 'gpu', 'tpu')     
+        backend: str
+            type of backend; must be in ('cpu', 'gpu', 'tpu')
 
         solver: str
-            type of 'weak' learner; currently in ('ridge', 'lasso')     
+            type of 'weak' learner; currently in ('ridge', 'lasso')
 
         activation: str
-            activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'          
-        
+            activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
+
     """
 
     def __init__(
@@ -72,9 +72,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         seed=123,
         backend="cpu",
         solver="ridge",
-        activation="relu"
+        activation="relu",
     ):
-
         assert backend in (
             "cpu",
             "gpu",
@@ -112,20 +111,20 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (classifier) to training data (X, y)
-        
+
         Args:
-        
+
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
+
             y: array-like, shape = [n_samples]
                 Target values.
-    
+
             **kwargs: additional parameters to be passed to self.cook_training_set.
-               
+
         Returns:
-        
+
             self: object.
         """
 
@@ -134,7 +133,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             np.asarray(y, order="C"),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
-            n_hidden_features=self.n_hidden_features,            
+            n_hidden_features=self.n_hidden_features,
             reg_lambda=self.reg_lambda,
             row_sample=self.row_sample,
             col_sample=self.col_sample,
@@ -145,47 +144,47 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             seed=self.seed,
             backend=self.backend,
             solver=self.solver,
-            activation = self.activation,
+            activation=self.activation,
         )
 
-        self.n_estimators = self.obj['n_estimators']
+        self.n_estimators = self.obj["n_estimators"]
 
         return self
 
     def predict(self, X, **kwargs):
         """Predict test data X.
-        
+
         Args:
-        
+
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
+
             **kwargs: additional parameters to be passed to `predict_proba`
-                
-               
+
+
         Returns:
-        
+
             model predictions: {array-like}
         """
 
         return np.argmax(self.predict_proba(X, **kwargs), axis=1)
 
     def predict_proba(self, X, **kwargs):
-        """ Predict probabilities for test data X.
-        
+        """Predict probabilities for test data X.
+
         Args:
-        
+
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
-            **kwargs: additional parameters to be passed to 
+
+            **kwargs: additional parameters to be passed to
                 self.cook_test_set
-               
+
         Returns:
-    
-            probability estimates for test data: {array-like}        
+
+            probability estimates for test data: {array-like}
         """
 
         return boosterc.predict_proba_booster_classifier(

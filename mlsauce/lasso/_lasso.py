@@ -14,26 +14,25 @@ if platform.system() in ("Linux", "Darwin"):
 
 
 class LassoRegressor(BaseEstimator, RegressorMixin):
-    """ Lasso.
-        
+    """Lasso.
+
     Attributes:
-    
+
         reg_lambda: float
             L1 regularization parameter.
 
         max_iter: int
             number of iterations of lasso shooting algorithm.
 
-        tol: float          
+        tol: float
             tolerance for convergence of lasso shooting algorithm.
 
-        backend: str    
+        backend: str
             type of backend; must be in ('cpu', 'gpu', 'tpu').
 
     """
 
     def __init__(self, reg_lambda=0.1, max_iter=10, tol=1e-3, backend="cpu"):
-
         assert backend in (
             "cpu",
             "gpu",
@@ -54,21 +53,21 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         self.backend = backend
 
     def fit(self, X, y, **kwargs):
-        """ Fit matrixops (classifier) to training data (X, y)
-        
-        Args: 
-        
+        """Fit matrixops (classifier) to training data (X, y)
+
+        Args:
+
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-            
+
             y: array-like, shape = [n_samples]
                 Target values.
-        
+
             **kwargs: additional parameters to be passed to self.cook_training_set.
-               
+
         Returns:
-        
+
             self: object.
 
         """
@@ -76,7 +75,9 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         self.ym, centered_y = mo.center_response(y)
         self.xm = X.mean(axis=0)
         self.xsd = X.std(axis=0)
-        assert (0 not in self.xsd), "\nRemove columns having standard deviation equal to 0"
+        assert (
+            0 not in self.xsd
+        ), "\nRemove columns having standard deviation equal to 0"
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
         XX = mo.crossprod(X_, backend=self.backend)
         Xy = mo.crossprod(X_, centered_y, backend=self.backend)
@@ -84,7 +85,6 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         Xy2 = 2 * Xy
 
         if self.backend == "cpu":
-
             invXX = inv(XX + self.reg_lambda * np.eye(X_.shape[1]))
             beta0 = mo.safe_sparse_dot(invXX, Xy)
 
@@ -138,20 +138,20 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
 
     def predict(self, X, **kwargs):
         """Predict test data X.
-        
+
         Args:
-        
+
             X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number 
+                Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-        
+
             **kwargs: additional parameters to be passed to `predict_proba`
-                
-               
+
+
         Returns:
-        
+
             model predictions: {array-like}
-            
+
         """
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
 

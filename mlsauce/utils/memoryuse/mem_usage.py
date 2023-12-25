@@ -7,14 +7,13 @@ from tqdm import tqdm
 
 
 def reduce_mem_usage(df, verbose=True, copy_input=True):
-
     if copy_input is True:
         df_res = copy.deepcopy(df)
     else:
         df_res = df
 
     numerics = ["int16", "int32", "int64", "float16", "float32", "float64"]
-    start_mem = df_res.memory_usage().sum() / 1024 ** 2
+    start_mem = df_res.memory_usage().sum() / 1024**2
 
     for idx, col in tqdm(enumerate(df_res.columns)):
         col_type = df_res[col].dtypes
@@ -58,7 +57,7 @@ def reduce_mem_usage(df, verbose=True, copy_input=True):
 
     pbar.update(len(df_res.columns))
 
-    end_mem = df_res.memory_usage().sum() / 1024 ** 2
+    end_mem = df_res.memory_usage().sum() / 1024**2
     if verbose:
         print(
             "Mem. usage decreased to {:5.2f} Mb ({:.1f}% reduction)".format(
