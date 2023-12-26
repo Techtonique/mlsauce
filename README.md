@@ -42,6 +42,14 @@ pip install mlsauce
 pip install git+https://github.com/Techtonique/mlsauce.git
 ```
 
+- __3rd method__: using `conda`
+
+```bash
+conda install -c conda-forge mlsauce 
+```
+
+(Note to self or developers: https://github.com/conda-forge/mlsauce-feedstock and https://conda-forge.org/docs/maintainer/adding_pkgs.html#step-by-step-instructions)
+
 ### R 
 
 Only for Linux, for now. Windows users can envisage using [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10), the **Windows Subsystem for Linux**.
