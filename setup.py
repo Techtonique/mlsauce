@@ -21,9 +21,10 @@ except ImportError:
     import __builtin__ as builtins
 
 try: 
+    subprocess.run(['pip', 'install', 'Cython>=0.29.21'], check=False)
     subprocess.run(['pip', 'install', 'numpy>= 1.13.0'], check=False)
     subprocess.run(['pip', 'install', 'scipy>= 0.19.0'], check=False)
-    subprocess.run(['pip', 'install', 'Cython>=0.29.21'], check=False)
+    subprocess.run(['pip', 'install', 'requests>=2.31.0'], check=False)
 except Exception:
     pass 
 
@@ -41,7 +42,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.9.0'
+__version__ = '0.9.1'
 
 VERSION = __version__
 
@@ -57,6 +58,7 @@ SKLEARN_MIN_VERSION = '0.18.0'
 THREADPOOLCTL_MIN_VERSION = '2.0.0'
 PANDAS_MIN_VERSION = '0.25.3'
 QUERIER_MIN_VERSION = '0.4.0'
+REQUESTS_MIN_VERSION = '2.31.0'
 if platform.system() in ('Linux', 'Darwin'):
     JAX_MIN_VERSION = '0.1.72'
     JAXLIB_MIN_VERSION = '0.1.51'
@@ -238,6 +240,7 @@ def setup_package():
                         #'threadpoolctl>={}'.format(THREADPOOLCTL_MIN_VERSION),
                         'pandas>={}'.format(PANDAS_MIN_VERSION),
                         #'querier>={}'.format(QUERIER_MIN_VERSION)
+                        'requests>={}'.format(REQUESTS_MIN_VERSION),
                     ]
 
     install_jax_requires = [
@@ -245,7 +248,7 @@ def setup_package():
                             'jaxlib'
                             ] if platform.system() in ('Linux', 'Darwin') else []
 
-    other_requirements = ["requests",
+    other_requirements = [#"requests",
                           "tqdm", 
                           #"pymongo >= 3.10.1", 
                           #"SQLAlchemy >= 1.3.18"

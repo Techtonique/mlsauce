@@ -1,3 +1,8 @@
+import subprocess
+import sys
+
+subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
+
 import mlsauce as ms
 import numpy as np 
 import matplotlib.pyplot as plt
