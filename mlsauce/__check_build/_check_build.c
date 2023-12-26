@@ -4,7 +4,7 @@
 {
     "distutils": {
         "include_dirs": [
-            "/workspaces/mlsauce/venv/lib/python3.10/site-packages/numpy/core/include"
+            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include"
         ],
         "name": "mlsauce.__check_build._check_build",
         "sources": [
