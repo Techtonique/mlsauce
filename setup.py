@@ -10,7 +10,6 @@ import subprocess
 import sys
 
 from distutils.command.clean import clean as Clean
-from distutils.command.sdist import sdist
 from distutils.core import Extension, setup
 
 from setuptools import find_packages
@@ -118,15 +117,13 @@ def configuration(parent_package='', top_path=None):
     if os.path.exists('MANIFEST'):
         os.remove('MANIFEST')
     
-    #from mlsauce._build_utils import _check_cython_version
     print(f"\n ----- parent_package: ----- \n {parent_package}")
     print(f"\n ----- top_path: ----- \n {top_path}")
     config = Extension(None, parent_package, top_path)
     config.set_options(ignore_setup_xxx_py=True,
                        assume_default_configuration=True,
                        delegate_options_to_subpackages=True,
-                       quiet=True)
-    #_check_cython_version()
+                       quiet=True)    
     config.add_subpackage('mlsauce')
     return config
 
