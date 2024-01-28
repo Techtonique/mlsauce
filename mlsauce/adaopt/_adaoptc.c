@@ -13,15 +13,12 @@
         "include_dirs": [
             "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include"
         ],
-        "libraries": [
-            "m"
-        ],
-        "name": "mlsauce.adaopt._adaoptc",
+        "name": "adaopt._adaoptc",
         "sources": [
             "mlsauce/adaopt/_adaoptc.pyx"
         ]
     },
-    "module_name": "mlsauce.adaopt._adaoptc"
+    "module_name": "adaopt._adaoptc"
 }
 END: Cython Metadata */
 
@@ -1206,8 +1203,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__mlsauce__adaopt___adaoptc
-#define __PYX_HAVE_API__mlsauce__adaopt___adaoptc
+#define __PYX_HAVE__adaopt___adaoptc
+#define __PYX_HAVE_API__adaopt___adaoptc
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -1896,7 +1893,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  * cdef inline object PyArray_MultiIterNew1(a):
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
-struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple;
+struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple;
 struct __pyx_defaults;
 typedef struct __pyx_defaults __pyx_defaults;
 struct __pyx_defaults1;
@@ -1906,14 +1903,14 @@ typedef struct __pyx_defaults2 __pyx_defaults2;
 struct __pyx_defaults3;
 typedef struct __pyx_defaults3 __pyx_defaults3;
 
-/* "mlsauce/adaopt/_adaoptc.pyx":35
+/* "adaopt/_adaoptc.pyx":35
  * 
  * # a tuple of doubles
  * cdef struct mydoubletuple:             # <<<<<<<<<<<<<<
  *     double elt1
  *     double elt2
  */
-struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple {
+struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple {
   double elt1;
   double elt2;
 };
@@ -2833,24 +2830,6 @@ static CYTHON_INLINE int __Pyx_ErrOccurredWithGIL(void);
 #define __Pyx_PyObject_Str(obj)\
     (likely(PyString_CheckExact(obj)) ? __Pyx_NewRef(obj) : PyObject_Str(obj))
 
-/* UnicodeConcatInPlace.proto */
-# if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
-    #if CYTHON_REFNANNY
-        #define __Pyx_PyUnicode_ConcatInPlace(left, right) __Pyx_PyUnicode_ConcatInPlaceImpl(&left, right, __pyx_refnanny)
-    #else
-        #define __Pyx_PyUnicode_ConcatInPlace(left, right) __Pyx_PyUnicode_ConcatInPlaceImpl(&left, right)
-    #endif
-    static CYTHON_INLINE PyObject *__Pyx_PyUnicode_ConcatInPlaceImpl(PyObject **p_left, PyObject *right
-        #if CYTHON_REFNANNY
-        , void* __pyx_refnanny
-        #endif
-    );
-#else
-#define __Pyx_PyUnicode_ConcatInPlace __Pyx_PyUnicode_Concat
-#endif
-#define __Pyx_PyUnicode_ConcatInPlaceSafe(left, right) ((unlikely((left) == Py_None) || unlikely((right) == Py_None)) ?\
-    PyNumber_InPlaceAdd(left, right) : __Pyx_PyUnicode_ConcatInPlace(left, right))
-
 /* py_dict_keys.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyDict_Keys(PyObject* d);
 
@@ -3400,8 +3379,8 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__p
 
 /* Module declarations from "libc.math" */
 
-/* Module declarations from "mlsauce.adaopt._adaoptc" */
-static PyObject *__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache = 0;
+/* Module declarations from "adaopt._adaoptc" */
+static PyObject *__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache = 0;
 static PyObject *__pyx_collections_abc_Sequence = 0;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
@@ -3410,21 +3389,21 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double, double); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double, double); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice, long); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice, long); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
-static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double, __Pyx_memviewslice, long); /*proto*/
-static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index(__Pyx_memviewslice, long); /*proto*/
-static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance(__Pyx_memviewslice); /*proto*/
-static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_diff_proba(long, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, double, double, double); /*proto*/
-static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_euclidean(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
-static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manhattan(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
-static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosine(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_max_c(double, double); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_min_c(double, double); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice, long); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice, long); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
+static double __pyx_f_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memviewslice, __Pyx_memviewslice, long); /*proto*/
+static long __pyx_f_6adaopt_8_adaoptc_find_elt_list(double, __Pyx_memviewslice, long); /*proto*/
+static long __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_find_misclassed_index(__Pyx_memviewslice, long); /*proto*/
+static double __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_calculate_tolerance(__Pyx_memviewslice); /*proto*/
+static struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__pyx_f_6adaopt_8_adaoptc_calculate_diff_proba(long, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, double, double, double); /*proto*/
+static __Pyx_memviewslice __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_euclidean(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static __Pyx_memviewslice __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_manhattan(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static __Pyx_memviewslice __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_cosine(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
 static int __pyx_array_allocate_buffer(struct __pyx_array_obj *); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -3464,11 +3443,11 @@ static __Pyx_TypeInfo __Pyx_TypeInfo_PY_LONG_LONG = { "long long", NULL, sizeof(
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 static __Pyx_TypeInfo __Pyx_TypeInfo_long = { "long", NULL, sizeof(long), { 0 }, 0, __PYX_IS_UNSIGNED(long) ? 'U' : 'I', __PYX_IS_UNSIGNED(long), 0 };
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "mlsauce.adaopt._adaoptc"
-extern int __pyx_module_is_main_mlsauce__adaopt___adaoptc;
-int __pyx_module_is_main_mlsauce__adaopt___adaoptc = 0;
+#define __Pyx_MODULE_NAME "adaopt._adaoptc"
+extern int __pyx_module_is_main_adaopt___adaoptc;
+int __pyx_module_is_main_adaopt___adaoptc = 0;
 
-/* Implementation of "mlsauce.adaopt._adaoptc" */
+/* Implementation of "adaopt._adaoptc" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_TypeError;
@@ -3716,6 +3695,7 @@ static const char __pyx_k_scaled_X_train[] = "scaled_X_train";
 static const char __pyx_k_weights_test_i[] = "weights_test_i";
 static const char __pyx_k_MiniBatchKMeans[] = "MiniBatchKMeans";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
+static const char __pyx_k_adaopt__adaoptc[] = "adaopt._adaoptc";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_calculate_probs[] = "calculate_probs";
 static const char __pyx_k_cluster_centers[] = "cluster_centers_";
@@ -3744,7 +3724,6 @@ static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>"
 static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_distance_to_mat_cosine2[] = "distance_to_mat_cosine2";
-static const char __pyx_k_mlsauce_adaopt__adaoptc[] = "mlsauce.adaopt._adaoptc";
 static const char __pyx_k_Dimension_d_is_not_direct[] = "Dimension %d is not direct";
 static const char __pyx_k_Index_out_of_bounds_axis_d[] = "Index out of bounds (axis %d)";
 static const char __pyx_k_distance_to_mat_euclidean2[] = "distance_to_mat_euclidean2";
@@ -3816,23 +3795,23 @@ static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewsl
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_misclass, __Pyx_memviewslice __pyx_v_w_new, __Pyx_memviewslice __pyx_v_w_prev, double __pyx_v_v_prev, double __pyx_v_eta, double __pyx_v_gamma, long __pyx_v_n_obs, CYTHON_UNUSED int __pyx_v_n_classes); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_classes); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_B); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_6distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_30distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_8distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_34distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_10distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_38distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_n_x, PyObject *__pyx_v_k, PyObject *__pyx_v_cache); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_index, __Pyx_memviewslice __pyx_v_probs_train); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_weights); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_weights); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_iterations, long __pyx_v_n_X, CYTHON_UNUSED int __pyx_v_p_X, int __pyx_v_n_classes, double __pyx_v_learning_rate, double __pyx_v_reg_lambda, double __pyx_v_reg_alpha, double __pyx_v_eta, double __pyx_v_gamma, double __pyx_v_tolerance); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache); /* proto */
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_misclass, __Pyx_memviewslice __pyx_v_w_new, __Pyx_memviewslice __pyx_v_w_prev, double __pyx_v_v_prev, double __pyx_v_eta, double __pyx_v_gamma, long __pyx_v_n_obs, CYTHON_UNUSED int __pyx_v_n_classes); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_classes); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_B); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_6distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_30distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_8distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_34distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_10distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_38distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_n_x, PyObject *__pyx_v_k, PyObject *__pyx_v_cache); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_index, __Pyx_memviewslice __pyx_v_probs_train); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_weights); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_18calculate_weights(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_weights); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_iterations, long __pyx_v_n_X, CYTHON_UNUSED int __pyx_v_p_X, int __pyx_v_n_classes, double __pyx_v_learning_rate, double __pyx_v_reg_lambda, double __pyx_v_reg_alpha, double __pyx_v_eta, double __pyx_v_gamma, double __pyx_v_tolerance); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache); /* proto */
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache); /* proto */
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -3974,11 +3953,11 @@ typedef struct {
   PyObject *__pyx_kp_u__7;
   PyObject *__pyx_n_s_abc;
   PyObject *__pyx_n_s_abs;
+  PyObject *__pyx_n_s_adaopt__adaoptc;
   PyObject *__pyx_n_s_add;
   PyObject *__pyx_n_s_allocate_buffer;
   PyObject *__pyx_n_s_alpha_m;
   PyObject *__pyx_n_s_alphas;
-  PyObject *__pyx_n_u_alphas;
   PyObject *__pyx_n_s_alphas_2;
   PyObject *__pyx_kp_u_and;
   PyObject *__pyx_n_s_argmax;
@@ -4007,7 +3986,7 @@ typedef struct {
   PyObject *__pyx_kp_s_collections_abc;
   PyObject *__pyx_kp_s_contiguous_and_direct;
   PyObject *__pyx_kp_s_contiguous_and_indirect;
-  PyObject *__pyx_n_u_cosine;
+  PyObject *__pyx_n_s_cosine;
   PyObject *__pyx_n_s_count;
   PyObject *__pyx_n_s_defaults;
   PyObject *__pyx_n_s_dict;
@@ -4033,8 +4012,8 @@ typedef struct {
   PyObject *__pyx_n_s_err_m;
   PyObject *__pyx_n_s_error;
   PyObject *__pyx_n_s_eta;
-  PyObject *__pyx_n_u_euclidean;
-  PyObject *__pyx_kp_u_euclidean_f;
+  PyObject *__pyx_n_s_euclidean;
+  PyObject *__pyx_kp_s_euclidean_f;
   PyObject *__pyx_n_s_exp;
   PyObject *__pyx_n_s_expit;
   PyObject *__pyx_n_s_find_kmin_x;
@@ -4081,14 +4060,13 @@ typedef struct {
   PyObject *__pyx_n_s_lstsq;
   PyObject *__pyx_n_s_m;
   PyObject *__pyx_n_s_main;
-  PyObject *__pyx_n_u_manhattan;
+  PyObject *__pyx_n_s_manhattan;
   PyObject *__pyx_n_s_maximum;
   PyObject *__pyx_n_s_mean;
   PyObject *__pyx_n_s_memview;
   PyObject *__pyx_n_s_min_index_i;
   PyObject *__pyx_n_s_misclass;
   PyObject *__pyx_n_s_misclass_condition;
-  PyObject *__pyx_n_s_mlsauce_adaopt__adaoptc;
   PyObject *__pyx_kp_s_mlsauce_adaopt__adaoptc_pyx;
   PyObject *__pyx_n_s_mode;
   PyObject *__pyx_n_s_multiprocessing;
@@ -4098,7 +4076,6 @@ typedef struct {
   PyObject *__pyx_n_s_n_classes;
   PyObject *__pyx_n_s_n_clusters;
   PyObject *__pyx_n_s_n_iterations;
-  PyObject *__pyx_n_u_n_iterations;
   PyObject *__pyx_n_s_n_obs;
   PyObject *__pyx_n_s_n_test;
   PyObject *__pyx_n_s_n_train;
@@ -4113,8 +4090,8 @@ typedef struct {
   PyObject *__pyx_n_s_norm;
   PyObject *__pyx_n_s_np;
   PyObject *__pyx_n_s_numpy;
-  PyObject *__pyx_kp_u_numpy_core_multiarray_failed_to;
-  PyObject *__pyx_kp_u_numpy_core_umath_failed_to_impor;
+  PyObject *__pyx_kp_s_numpy_core_multiarray_failed_to;
+  PyObject *__pyx_kp_s_numpy_core_umath_failed_to_impor;
   PyObject *__pyx_n_s_numpy_linalg;
   PyObject *__pyx_n_s_obj;
   PyObject *__pyx_n_s_one_hot_encode;
@@ -4134,7 +4111,6 @@ typedef struct {
   PyObject *__pyx_n_s_preds;
   PyObject *__pyx_n_s_prob;
   PyObject *__pyx_n_s_probs;
-  PyObject *__pyx_n_u_probs;
   PyObject *__pyx_n_s_probs_2;
   PyObject *__pyx_n_s_probs_out;
   PyObject *__pyx_n_s_probs_test_i;
@@ -4147,7 +4123,7 @@ typedef struct {
   PyObject *__pyx_n_s_pyx_type;
   PyObject *__pyx_n_s_pyx_unpickle_Enum;
   PyObject *__pyx_n_s_pyx_vtable;
-  PyObject *__pyx_n_u_quicksort;
+  PyObject *__pyx_n_s_quicksort;
   PyObject *__pyx_n_s_random_state;
   PyObject *__pyx_n_s_range;
   PyObject *__pyx_n_s_rcond;
@@ -4163,7 +4139,6 @@ typedef struct {
   PyObject *__pyx_n_s_scaled_X;
   PyObject *__pyx_n_s_scaled_X_test;
   PyObject *__pyx_n_s_scaled_X_train;
-  PyObject *__pyx_n_u_scaled_X_train;
   PyObject *__pyx_n_s_scipy_special;
   PyObject *__pyx_n_s_seed;
   PyObject *__pyx_n_s_setstate;
@@ -4196,7 +4171,7 @@ typedef struct {
   PyObject *__pyx_n_s_tolerance_2;
   PyObject *__pyx_n_s_tostring;
   PyObject *__pyx_n_s_tqdm;
-  PyObject *__pyx_n_u_training_accuracy;
+  PyObject *__pyx_n_s_training_accuracy;
   PyObject *__pyx_n_s_type_dist;
   PyObject *__pyx_kp_s_unable_to_allocate_array_data;
   PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
@@ -4396,11 +4371,11 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u__7);
   Py_CLEAR(clear_module_state->__pyx_n_s_abc);
   Py_CLEAR(clear_module_state->__pyx_n_s_abs);
+  Py_CLEAR(clear_module_state->__pyx_n_s_adaopt__adaoptc);
   Py_CLEAR(clear_module_state->__pyx_n_s_add);
   Py_CLEAR(clear_module_state->__pyx_n_s_allocate_buffer);
   Py_CLEAR(clear_module_state->__pyx_n_s_alpha_m);
   Py_CLEAR(clear_module_state->__pyx_n_s_alphas);
-  Py_CLEAR(clear_module_state->__pyx_n_u_alphas);
   Py_CLEAR(clear_module_state->__pyx_n_s_alphas_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_and);
   Py_CLEAR(clear_module_state->__pyx_n_s_argmax);
@@ -4429,7 +4404,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_collections_abc);
   Py_CLEAR(clear_module_state->__pyx_kp_s_contiguous_and_direct);
   Py_CLEAR(clear_module_state->__pyx_kp_s_contiguous_and_indirect);
-  Py_CLEAR(clear_module_state->__pyx_n_u_cosine);
+  Py_CLEAR(clear_module_state->__pyx_n_s_cosine);
   Py_CLEAR(clear_module_state->__pyx_n_s_count);
   Py_CLEAR(clear_module_state->__pyx_n_s_defaults);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict);
@@ -4455,8 +4430,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_err_m);
   Py_CLEAR(clear_module_state->__pyx_n_s_error);
   Py_CLEAR(clear_module_state->__pyx_n_s_eta);
-  Py_CLEAR(clear_module_state->__pyx_n_u_euclidean);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_euclidean_f);
+  Py_CLEAR(clear_module_state->__pyx_n_s_euclidean);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_euclidean_f);
   Py_CLEAR(clear_module_state->__pyx_n_s_exp);
   Py_CLEAR(clear_module_state->__pyx_n_s_expit);
   Py_CLEAR(clear_module_state->__pyx_n_s_find_kmin_x);
@@ -4503,14 +4478,13 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_lstsq);
   Py_CLEAR(clear_module_state->__pyx_n_s_m);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
-  Py_CLEAR(clear_module_state->__pyx_n_u_manhattan);
+  Py_CLEAR(clear_module_state->__pyx_n_s_manhattan);
   Py_CLEAR(clear_module_state->__pyx_n_s_maximum);
   Py_CLEAR(clear_module_state->__pyx_n_s_mean);
   Py_CLEAR(clear_module_state->__pyx_n_s_memview);
   Py_CLEAR(clear_module_state->__pyx_n_s_min_index_i);
   Py_CLEAR(clear_module_state->__pyx_n_s_misclass);
   Py_CLEAR(clear_module_state->__pyx_n_s_misclass_condition);
-  Py_CLEAR(clear_module_state->__pyx_n_s_mlsauce_adaopt__adaoptc);
   Py_CLEAR(clear_module_state->__pyx_kp_s_mlsauce_adaopt__adaoptc_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_mode);
   Py_CLEAR(clear_module_state->__pyx_n_s_multiprocessing);
@@ -4520,7 +4494,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_n_classes);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_clusters);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_iterations);
-  Py_CLEAR(clear_module_state->__pyx_n_u_n_iterations);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_obs);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_train);
@@ -4535,8 +4508,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_norm);
   Py_CLEAR(clear_module_state->__pyx_n_s_np);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_numpy_core_multiarray_failed_to);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_numpy_core_umath_failed_to_impor);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy_linalg);
   Py_CLEAR(clear_module_state->__pyx_n_s_obj);
   Py_CLEAR(clear_module_state->__pyx_n_s_one_hot_encode);
@@ -4556,7 +4529,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_preds);
   Py_CLEAR(clear_module_state->__pyx_n_s_prob);
   Py_CLEAR(clear_module_state->__pyx_n_s_probs);
-  Py_CLEAR(clear_module_state->__pyx_n_u_probs);
   Py_CLEAR(clear_module_state->__pyx_n_s_probs_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_probs_out);
   Py_CLEAR(clear_module_state->__pyx_n_s_probs_test_i);
@@ -4569,7 +4541,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_type);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_unpickle_Enum);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_vtable);
-  Py_CLEAR(clear_module_state->__pyx_n_u_quicksort);
+  Py_CLEAR(clear_module_state->__pyx_n_s_quicksort);
   Py_CLEAR(clear_module_state->__pyx_n_s_random_state);
   Py_CLEAR(clear_module_state->__pyx_n_s_range);
   Py_CLEAR(clear_module_state->__pyx_n_s_rcond);
@@ -4585,7 +4557,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_scaled_X);
   Py_CLEAR(clear_module_state->__pyx_n_s_scaled_X_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_scaled_X_train);
-  Py_CLEAR(clear_module_state->__pyx_n_u_scaled_X_train);
   Py_CLEAR(clear_module_state->__pyx_n_s_scipy_special);
   Py_CLEAR(clear_module_state->__pyx_n_s_seed);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate);
@@ -4618,7 +4589,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_tolerance_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_tostring);
   Py_CLEAR(clear_module_state->__pyx_n_s_tqdm);
-  Py_CLEAR(clear_module_state->__pyx_n_u_training_accuracy);
+  Py_CLEAR(clear_module_state->__pyx_n_s_training_accuracy);
   Py_CLEAR(clear_module_state->__pyx_n_s_type_dist);
   Py_CLEAR(clear_module_state->__pyx_kp_s_unable_to_allocate_array_data);
   Py_CLEAR(clear_module_state->__pyx_kp_s_unable_to_allocate_shape_and_str);
@@ -4796,11 +4767,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u__7);
   Py_VISIT(traverse_module_state->__pyx_n_s_abc);
   Py_VISIT(traverse_module_state->__pyx_n_s_abs);
+  Py_VISIT(traverse_module_state->__pyx_n_s_adaopt__adaoptc);
   Py_VISIT(traverse_module_state->__pyx_n_s_add);
   Py_VISIT(traverse_module_state->__pyx_n_s_allocate_buffer);
   Py_VISIT(traverse_module_state->__pyx_n_s_alpha_m);
   Py_VISIT(traverse_module_state->__pyx_n_s_alphas);
-  Py_VISIT(traverse_module_state->__pyx_n_u_alphas);
   Py_VISIT(traverse_module_state->__pyx_n_s_alphas_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_and);
   Py_VISIT(traverse_module_state->__pyx_n_s_argmax);
@@ -4829,7 +4800,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_collections_abc);
   Py_VISIT(traverse_module_state->__pyx_kp_s_contiguous_and_direct);
   Py_VISIT(traverse_module_state->__pyx_kp_s_contiguous_and_indirect);
-  Py_VISIT(traverse_module_state->__pyx_n_u_cosine);
+  Py_VISIT(traverse_module_state->__pyx_n_s_cosine);
   Py_VISIT(traverse_module_state->__pyx_n_s_count);
   Py_VISIT(traverse_module_state->__pyx_n_s_defaults);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict);
@@ -4855,8 +4826,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_err_m);
   Py_VISIT(traverse_module_state->__pyx_n_s_error);
   Py_VISIT(traverse_module_state->__pyx_n_s_eta);
-  Py_VISIT(traverse_module_state->__pyx_n_u_euclidean);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_euclidean_f);
+  Py_VISIT(traverse_module_state->__pyx_n_s_euclidean);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_euclidean_f);
   Py_VISIT(traverse_module_state->__pyx_n_s_exp);
   Py_VISIT(traverse_module_state->__pyx_n_s_expit);
   Py_VISIT(traverse_module_state->__pyx_n_s_find_kmin_x);
@@ -4903,14 +4874,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_lstsq);
   Py_VISIT(traverse_module_state->__pyx_n_s_m);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
-  Py_VISIT(traverse_module_state->__pyx_n_u_manhattan);
+  Py_VISIT(traverse_module_state->__pyx_n_s_manhattan);
   Py_VISIT(traverse_module_state->__pyx_n_s_maximum);
   Py_VISIT(traverse_module_state->__pyx_n_s_mean);
   Py_VISIT(traverse_module_state->__pyx_n_s_memview);
   Py_VISIT(traverse_module_state->__pyx_n_s_min_index_i);
   Py_VISIT(traverse_module_state->__pyx_n_s_misclass);
   Py_VISIT(traverse_module_state->__pyx_n_s_misclass_condition);
-  Py_VISIT(traverse_module_state->__pyx_n_s_mlsauce_adaopt__adaoptc);
   Py_VISIT(traverse_module_state->__pyx_kp_s_mlsauce_adaopt__adaoptc_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_mode);
   Py_VISIT(traverse_module_state->__pyx_n_s_multiprocessing);
@@ -4920,7 +4890,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_n_classes);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_clusters);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_iterations);
-  Py_VISIT(traverse_module_state->__pyx_n_u_n_iterations);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_obs);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_train);
@@ -4935,8 +4904,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_norm);
   Py_VISIT(traverse_module_state->__pyx_n_s_np);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_numpy_core_multiarray_failed_to);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_numpy_core_umath_failed_to_impor);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy_linalg);
   Py_VISIT(traverse_module_state->__pyx_n_s_obj);
   Py_VISIT(traverse_module_state->__pyx_n_s_one_hot_encode);
@@ -4956,7 +4925,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_preds);
   Py_VISIT(traverse_module_state->__pyx_n_s_prob);
   Py_VISIT(traverse_module_state->__pyx_n_s_probs);
-  Py_VISIT(traverse_module_state->__pyx_n_u_probs);
   Py_VISIT(traverse_module_state->__pyx_n_s_probs_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_probs_out);
   Py_VISIT(traverse_module_state->__pyx_n_s_probs_test_i);
@@ -4969,7 +4937,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_type);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_unpickle_Enum);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_vtable);
-  Py_VISIT(traverse_module_state->__pyx_n_u_quicksort);
+  Py_VISIT(traverse_module_state->__pyx_n_s_quicksort);
   Py_VISIT(traverse_module_state->__pyx_n_s_random_state);
   Py_VISIT(traverse_module_state->__pyx_n_s_range);
   Py_VISIT(traverse_module_state->__pyx_n_s_rcond);
@@ -4985,7 +4953,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_scaled_X);
   Py_VISIT(traverse_module_state->__pyx_n_s_scaled_X_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_scaled_X_train);
-  Py_VISIT(traverse_module_state->__pyx_n_u_scaled_X_train);
   Py_VISIT(traverse_module_state->__pyx_n_s_scipy_special);
   Py_VISIT(traverse_module_state->__pyx_n_s_seed);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate);
@@ -5018,7 +4985,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_tolerance_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_tostring);
   Py_VISIT(traverse_module_state->__pyx_n_s_tqdm);
-  Py_VISIT(traverse_module_state->__pyx_n_u_training_accuracy);
+  Py_VISIT(traverse_module_state->__pyx_n_s_training_accuracy);
   Py_VISIT(traverse_module_state->__pyx_n_s_type_dist);
   Py_VISIT(traverse_module_state->__pyx_kp_s_unable_to_allocate_array_data);
   Py_VISIT(traverse_module_state->__pyx_kp_s_unable_to_allocate_shape_and_str);
@@ -5232,11 +5199,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u__7 __pyx_mstate_global->__pyx_kp_u__7
 #define __pyx_n_s_abc __pyx_mstate_global->__pyx_n_s_abc
 #define __pyx_n_s_abs __pyx_mstate_global->__pyx_n_s_abs
+#define __pyx_n_s_adaopt__adaoptc __pyx_mstate_global->__pyx_n_s_adaopt__adaoptc
 #define __pyx_n_s_add __pyx_mstate_global->__pyx_n_s_add
 #define __pyx_n_s_allocate_buffer __pyx_mstate_global->__pyx_n_s_allocate_buffer
 #define __pyx_n_s_alpha_m __pyx_mstate_global->__pyx_n_s_alpha_m
 #define __pyx_n_s_alphas __pyx_mstate_global->__pyx_n_s_alphas
-#define __pyx_n_u_alphas __pyx_mstate_global->__pyx_n_u_alphas
 #define __pyx_n_s_alphas_2 __pyx_mstate_global->__pyx_n_s_alphas_2
 #define __pyx_kp_u_and __pyx_mstate_global->__pyx_kp_u_and
 #define __pyx_n_s_argmax __pyx_mstate_global->__pyx_n_s_argmax
@@ -5265,7 +5232,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_collections_abc __pyx_mstate_global->__pyx_kp_s_collections_abc
 #define __pyx_kp_s_contiguous_and_direct __pyx_mstate_global->__pyx_kp_s_contiguous_and_direct
 #define __pyx_kp_s_contiguous_and_indirect __pyx_mstate_global->__pyx_kp_s_contiguous_and_indirect
-#define __pyx_n_u_cosine __pyx_mstate_global->__pyx_n_u_cosine
+#define __pyx_n_s_cosine __pyx_mstate_global->__pyx_n_s_cosine
 #define __pyx_n_s_count __pyx_mstate_global->__pyx_n_s_count
 #define __pyx_n_s_defaults __pyx_mstate_global->__pyx_n_s_defaults
 #define __pyx_n_s_dict __pyx_mstate_global->__pyx_n_s_dict
@@ -5291,8 +5258,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_err_m __pyx_mstate_global->__pyx_n_s_err_m
 #define __pyx_n_s_error __pyx_mstate_global->__pyx_n_s_error
 #define __pyx_n_s_eta __pyx_mstate_global->__pyx_n_s_eta
-#define __pyx_n_u_euclidean __pyx_mstate_global->__pyx_n_u_euclidean
-#define __pyx_kp_u_euclidean_f __pyx_mstate_global->__pyx_kp_u_euclidean_f
+#define __pyx_n_s_euclidean __pyx_mstate_global->__pyx_n_s_euclidean
+#define __pyx_kp_s_euclidean_f __pyx_mstate_global->__pyx_kp_s_euclidean_f
 #define __pyx_n_s_exp __pyx_mstate_global->__pyx_n_s_exp
 #define __pyx_n_s_expit __pyx_mstate_global->__pyx_n_s_expit
 #define __pyx_n_s_find_kmin_x __pyx_mstate_global->__pyx_n_s_find_kmin_x
@@ -5339,14 +5306,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_lstsq __pyx_mstate_global->__pyx_n_s_lstsq
 #define __pyx_n_s_m __pyx_mstate_global->__pyx_n_s_m
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
-#define __pyx_n_u_manhattan __pyx_mstate_global->__pyx_n_u_manhattan
+#define __pyx_n_s_manhattan __pyx_mstate_global->__pyx_n_s_manhattan
 #define __pyx_n_s_maximum __pyx_mstate_global->__pyx_n_s_maximum
 #define __pyx_n_s_mean __pyx_mstate_global->__pyx_n_s_mean
 #define __pyx_n_s_memview __pyx_mstate_global->__pyx_n_s_memview
 #define __pyx_n_s_min_index_i __pyx_mstate_global->__pyx_n_s_min_index_i
 #define __pyx_n_s_misclass __pyx_mstate_global->__pyx_n_s_misclass
 #define __pyx_n_s_misclass_condition __pyx_mstate_global->__pyx_n_s_misclass_condition
-#define __pyx_n_s_mlsauce_adaopt__adaoptc __pyx_mstate_global->__pyx_n_s_mlsauce_adaopt__adaoptc
 #define __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx __pyx_mstate_global->__pyx_kp_s_mlsauce_adaopt__adaoptc_pyx
 #define __pyx_n_s_mode __pyx_mstate_global->__pyx_n_s_mode
 #define __pyx_n_s_multiprocessing __pyx_mstate_global->__pyx_n_s_multiprocessing
@@ -5356,7 +5322,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_n_classes __pyx_mstate_global->__pyx_n_s_n_classes
 #define __pyx_n_s_n_clusters __pyx_mstate_global->__pyx_n_s_n_clusters
 #define __pyx_n_s_n_iterations __pyx_mstate_global->__pyx_n_s_n_iterations
-#define __pyx_n_u_n_iterations __pyx_mstate_global->__pyx_n_u_n_iterations
 #define __pyx_n_s_n_obs __pyx_mstate_global->__pyx_n_s_n_obs
 #define __pyx_n_s_n_test __pyx_mstate_global->__pyx_n_s_n_test
 #define __pyx_n_s_n_train __pyx_mstate_global->__pyx_n_s_n_train
@@ -5371,8 +5336,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_norm __pyx_mstate_global->__pyx_n_s_norm
 #define __pyx_n_s_np __pyx_mstate_global->__pyx_n_s_np
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
-#define __pyx_kp_u_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_u_numpy_core_multiarray_failed_to
-#define __pyx_kp_u_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_u_numpy_core_umath_failed_to_impor
+#define __pyx_kp_s_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_s_numpy_core_multiarray_failed_to
+#define __pyx_kp_s_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_s_numpy_core_umath_failed_to_impor
 #define __pyx_n_s_numpy_linalg __pyx_mstate_global->__pyx_n_s_numpy_linalg
 #define __pyx_n_s_obj __pyx_mstate_global->__pyx_n_s_obj
 #define __pyx_n_s_one_hot_encode __pyx_mstate_global->__pyx_n_s_one_hot_encode
@@ -5392,7 +5357,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_preds __pyx_mstate_global->__pyx_n_s_preds
 #define __pyx_n_s_prob __pyx_mstate_global->__pyx_n_s_prob
 #define __pyx_n_s_probs __pyx_mstate_global->__pyx_n_s_probs
-#define __pyx_n_u_probs __pyx_mstate_global->__pyx_n_u_probs
 #define __pyx_n_s_probs_2 __pyx_mstate_global->__pyx_n_s_probs_2
 #define __pyx_n_s_probs_out __pyx_mstate_global->__pyx_n_s_probs_out
 #define __pyx_n_s_probs_test_i __pyx_mstate_global->__pyx_n_s_probs_test_i
@@ -5405,7 +5369,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_pyx_type __pyx_mstate_global->__pyx_n_s_pyx_type
 #define __pyx_n_s_pyx_unpickle_Enum __pyx_mstate_global->__pyx_n_s_pyx_unpickle_Enum
 #define __pyx_n_s_pyx_vtable __pyx_mstate_global->__pyx_n_s_pyx_vtable
-#define __pyx_n_u_quicksort __pyx_mstate_global->__pyx_n_u_quicksort
+#define __pyx_n_s_quicksort __pyx_mstate_global->__pyx_n_s_quicksort
 #define __pyx_n_s_random_state __pyx_mstate_global->__pyx_n_s_random_state
 #define __pyx_n_s_range __pyx_mstate_global->__pyx_n_s_range
 #define __pyx_n_s_rcond __pyx_mstate_global->__pyx_n_s_rcond
@@ -5421,7 +5385,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_scaled_X __pyx_mstate_global->__pyx_n_s_scaled_X
 #define __pyx_n_s_scaled_X_test __pyx_mstate_global->__pyx_n_s_scaled_X_test
 #define __pyx_n_s_scaled_X_train __pyx_mstate_global->__pyx_n_s_scaled_X_train
-#define __pyx_n_u_scaled_X_train __pyx_mstate_global->__pyx_n_u_scaled_X_train
 #define __pyx_n_s_scipy_special __pyx_mstate_global->__pyx_n_s_scipy_special
 #define __pyx_n_s_seed __pyx_mstate_global->__pyx_n_s_seed
 #define __pyx_n_s_setstate __pyx_mstate_global->__pyx_n_s_setstate
@@ -5454,7 +5417,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_tolerance_2 __pyx_mstate_global->__pyx_n_s_tolerance_2
 #define __pyx_n_s_tostring __pyx_mstate_global->__pyx_n_s_tostring
 #define __pyx_n_s_tqdm __pyx_mstate_global->__pyx_n_s_tqdm
-#define __pyx_n_u_training_accuracy __pyx_mstate_global->__pyx_n_u_training_accuracy
+#define __pyx_n_s_training_accuracy __pyx_mstate_global->__pyx_n_s_training_accuracy
 #define __pyx_n_s_type_dist __pyx_mstate_global->__pyx_n_s_type_dist
 #define __pyx_kp_s_unable_to_allocate_array_data __pyx_mstate_global->__pyx_kp_s_unable_to_allocate_array_data
 #define __pyx_kp_s_unable_to_allocate_shape_and_str __pyx_mstate_global->__pyx_kp_s_unable_to_allocate_shape_and_str
@@ -20423,7 +20386,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":55
+/* "adaopt/_adaoptc.pyx":55
  * 
  * # returns max(x, y)
  * cdef double max_c(double x, double y):             # <<<<<<<<<<<<<<
@@ -20431,11 +20394,11 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
  *         return x
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double __pyx_v_y) {
+static double __pyx_f_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double __pyx_v_y) {
   double __pyx_r;
   int __pyx_t_1;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":56
+  /* "adaopt/_adaoptc.pyx":56
  * # returns max(x, y)
  * cdef double max_c(double x, double y):
  *     if (x > y):             # <<<<<<<<<<<<<<
@@ -20445,7 +20408,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double 
   __pyx_t_1 = (__pyx_v_x > __pyx_v_y);
   if (__pyx_t_1) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":57
+    /* "adaopt/_adaoptc.pyx":57
  * cdef double max_c(double x, double y):
  *     if (x > y):
  *         return x             # <<<<<<<<<<<<<<
@@ -20455,7 +20418,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double 
     __pyx_r = __pyx_v_x;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":56
+    /* "adaopt/_adaoptc.pyx":56
  * # returns max(x, y)
  * cdef double max_c(double x, double y):
  *     if (x > y):             # <<<<<<<<<<<<<<
@@ -20464,7 +20427,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double 
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":58
+  /* "adaopt/_adaoptc.pyx":58
  *     if (x > y):
  *         return x
  *     return y             # <<<<<<<<<<<<<<
@@ -20474,7 +20437,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double 
   __pyx_r = __pyx_v_y;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":55
+  /* "adaopt/_adaoptc.pyx":55
  * 
  * # returns max(x, y)
  * cdef double max_c(double x, double y):             # <<<<<<<<<<<<<<
@@ -20487,7 +20450,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double 
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":62
+/* "adaopt/_adaoptc.pyx":62
  * 
  * # returns min(x, y)
  * cdef double min_c(double x, double y):             # <<<<<<<<<<<<<<
@@ -20495,11 +20458,11 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(double __pyx_v_x, double 
  *         return x
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double __pyx_v_y) {
+static double __pyx_f_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double __pyx_v_y) {
   double __pyx_r;
   int __pyx_t_1;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":63
+  /* "adaopt/_adaoptc.pyx":63
  * # returns min(x, y)
  * cdef double min_c(double x, double y):
  *     if (x < y):             # <<<<<<<<<<<<<<
@@ -20509,7 +20472,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double 
   __pyx_t_1 = (__pyx_v_x < __pyx_v_y);
   if (__pyx_t_1) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":64
+    /* "adaopt/_adaoptc.pyx":64
  * cdef double min_c(double x, double y):
  *     if (x < y):
  *         return x             # <<<<<<<<<<<<<<
@@ -20519,7 +20482,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double 
     __pyx_r = __pyx_v_x;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":63
+    /* "adaopt/_adaoptc.pyx":63
  * # returns min(x, y)
  * cdef double min_c(double x, double y):
  *     if (x < y):             # <<<<<<<<<<<<<<
@@ -20528,7 +20491,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double 
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":65
+  /* "adaopt/_adaoptc.pyx":65
  *     if (x < y):
  *         return x
  *     return y             # <<<<<<<<<<<<<<
@@ -20538,7 +20501,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double 
   __pyx_r = __pyx_v_y;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":62
+  /* "adaopt/_adaoptc.pyx":62
  * 
  * # returns min(x, y)
  * cdef double min_c(double x, double y):             # <<<<<<<<<<<<<<
@@ -20551,7 +20514,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double 
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":69
+/* "adaopt/_adaoptc.pyx":69
  * 
  * # sum vector
  * cdef double cython_sum(double[:] x, long int n):             # <<<<<<<<<<<<<<
@@ -20559,7 +20522,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(double __pyx_v_x, double 
  *     cdef long int i
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice __pyx_v_x, long __pyx_v_n) {
+static double __pyx_f_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice __pyx_v_x, long __pyx_v_n) {
   double __pyx_v_res;
   long __pyx_v_i;
   double __pyx_r;
@@ -20568,7 +20531,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
   long __pyx_t_3;
   Py_ssize_t __pyx_t_4;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":70
+  /* "adaopt/_adaoptc.pyx":70
  * # sum vector
  * cdef double cython_sum(double[:] x, long int n):
  *     cdef double res = 0             # <<<<<<<<<<<<<<
@@ -20577,7 +20540,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
  */
   __pyx_v_res = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":72
+  /* "adaopt/_adaoptc.pyx":72
  *     cdef double res = 0
  *     cdef long int i
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -20589,7 +20552,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":73
+    /* "adaopt/_adaoptc.pyx":73
  *     cdef long int i
  *     for i in range(n):
  *         res += x[i]             # <<<<<<<<<<<<<<
@@ -20600,7 +20563,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
     __pyx_v_res = (__pyx_v_res + (*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))));
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":74
+  /* "adaopt/_adaoptc.pyx":74
  *     for i in range(n):
  *         res += x[i]
  *     return res             # <<<<<<<<<<<<<<
@@ -20610,7 +20573,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
   __pyx_r = __pyx_v_res;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":69
+  /* "adaopt/_adaoptc.pyx":69
  * 
  * # sum vector
  * cdef double cython_sum(double[:] x, long int n):             # <<<<<<<<<<<<<<
@@ -20623,7 +20586,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":78
+/* "adaopt/_adaoptc.pyx":78
  * 
  * # finds index of a misclassed element
  * cdef long int find_misclassed_index(nparray_long[:] misclass,             # <<<<<<<<<<<<<<
@@ -20631,7 +20594,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__Pyx_memviewslice _
  * 
  */
 
-static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index(__Pyx_memviewslice __pyx_v_misclass, long __pyx_v_n_obs) {
+static long __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_find_misclassed_index(__Pyx_memviewslice __pyx_v_misclass, long __pyx_v_n_obs) {
   long __pyx_v_i;
   long __pyx_r;
   long __pyx_t_1;
@@ -20640,7 +20603,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
   Py_ssize_t __pyx_t_4;
   int __pyx_t_5;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":82
+  /* "adaopt/_adaoptc.pyx":82
  * 
  *     cdef long int i
  *     for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -20652,7 +20615,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":83
+    /* "adaopt/_adaoptc.pyx":83
  *     cdef long int i
  *     for i in range(n_obs):
  *         if (misclass[i] != 1000): # a badly classified example             # <<<<<<<<<<<<<<
@@ -20663,7 +20626,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
     __pyx_t_5 = ((*((PY_LONG_LONG *) ( /* dim=0 */ (__pyx_v_misclass.data + __pyx_t_4 * __pyx_v_misclass.strides[0]) ))) != 0x3E8);
     if (__pyx_t_5) {
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":84
+      /* "adaopt/_adaoptc.pyx":84
  *     for i in range(n_obs):
  *         if (misclass[i] != 1000): # a badly classified example
  *             return i             # <<<<<<<<<<<<<<
@@ -20673,7 +20636,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
       __pyx_r = __pyx_v_i;
       goto __pyx_L0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":83
+      /* "adaopt/_adaoptc.pyx":83
  *     cdef long int i
  *     for i in range(n_obs):
  *         if (misclass[i] != 1000): # a badly classified example             # <<<<<<<<<<<<<<
@@ -20683,7 +20646,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
     }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":85
+  /* "adaopt/_adaoptc.pyx":85
  *         if (misclass[i] != 1000): # a badly classified example
  *             return i
  *     return 100000             # <<<<<<<<<<<<<<
@@ -20693,7 +20656,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
   __pyx_r = 0x186A0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":78
+  /* "adaopt/_adaoptc.pyx":78
  * 
  * # finds index of a misclassed element
  * cdef long int find_misclassed_index(nparray_long[:] misclass,             # <<<<<<<<<<<<<<
@@ -20706,7 +20669,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":89
+/* "adaopt/_adaoptc.pyx":89
  * 
  * # calculates sumproduct or 2 vectors
  * cdef double sum_product(long int[:] x, double[:] y,             # <<<<<<<<<<<<<<
@@ -20714,7 +20677,7 @@ static long __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index
  *     cdef double res = 0
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
+static double __pyx_f_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
   double __pyx_v_res;
   long __pyx_v_i;
   double __pyx_r;
@@ -20725,7 +20688,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
   Py_ssize_t __pyx_t_5;
   int __pyx_t_6;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":91
+  /* "adaopt/_adaoptc.pyx":91
  * cdef double sum_product(long int[:] x, double[:] y,
  *                         long int n):
  *     cdef double res = 0             # <<<<<<<<<<<<<<
@@ -20734,7 +20697,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
  */
   __pyx_v_res = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":93
+  /* "adaopt/_adaoptc.pyx":93
  *     cdef double res = 0
  *     cdef long int i
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -20746,7 +20709,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":94
+    /* "adaopt/_adaoptc.pyx":94
  *     cdef long int i
  *     for i in range(n):
  *         if (x[i] != 0) & (y[i] != 0):             # <<<<<<<<<<<<<<
@@ -20758,7 +20721,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
     __pyx_t_6 = (((*((long *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))) != 0) & ((*((double *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_5 * __pyx_v_y.strides[0]) ))) != 0.0));
     if (__pyx_t_6) {
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":95
+      /* "adaopt/_adaoptc.pyx":95
  *     for i in range(n):
  *         if (x[i] != 0) & (y[i] != 0):
  *             res += x[i]*y[i]             # <<<<<<<<<<<<<<
@@ -20769,7 +20732,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
       __pyx_t_4 = __pyx_v_i;
       __pyx_v_res = (__pyx_v_res + ((*((long *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_5 * __pyx_v_x.strides[0]) ))) * (*((double *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_4 * __pyx_v_y.strides[0]) )))));
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":94
+      /* "adaopt/_adaoptc.pyx":94
  *     cdef long int i
  *     for i in range(n):
  *         if (x[i] != 0) & (y[i] != 0):             # <<<<<<<<<<<<<<
@@ -20779,7 +20742,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
     }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":96
+  /* "adaopt/_adaoptc.pyx":96
  *         if (x[i] != 0) & (y[i] != 0):
  *             res += x[i]*y[i]
  *     return res             # <<<<<<<<<<<<<<
@@ -20789,7 +20752,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
   __pyx_r = __pyx_v_res;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":89
+  /* "adaopt/_adaoptc.pyx":89
  * 
  * # calculates sumproduct or 2 vectors
  * cdef double sum_product(long int[:] x, double[:] y,             # <<<<<<<<<<<<<<
@@ -20802,7 +20765,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":100
+/* "adaopt/_adaoptc.pyx":100
  * 
  * # calculates tolerance for early stopping
  * cdef double calculate_tolerance(nparray_double[:] x):             # <<<<<<<<<<<<<<
@@ -20810,7 +20773,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__Pyx_memviewslice 
  *     cdef long int n
  */
 
-static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance(__Pyx_memviewslice __pyx_v_x) {
+static double __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_calculate_tolerance(__Pyx_memviewslice __pyx_v_x) {
   long __pyx_v_n;
   double __pyx_v_ans;
   __Pyx_memviewslice __pyx_v_temp = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -20835,7 +20798,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0calculate_tolerance", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":106
+  /* "adaopt/_adaoptc.pyx":106
  *     cdef nparray_double[:] temp
  * 
  *     if (len(x) >= 5):             # <<<<<<<<<<<<<<
@@ -20846,7 +20809,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
   __pyx_t_2 = (__pyx_t_1 >= 5);
   if (__pyx_t_2) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":108
+    /* "adaopt/_adaoptc.pyx":108
  *     if (len(x) >= 5):
  * 
  *         x_ = np.asarray(x)             # <<<<<<<<<<<<<<
@@ -20886,7 +20849,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
     __pyx_v_x_ = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":109
+    /* "adaopt/_adaoptc.pyx":109
  * 
  *         x_ = np.asarray(x)
  *         temp = x_[np.where(x_ != 0.0)]             # <<<<<<<<<<<<<<
@@ -20932,7 +20895,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":110
+    /* "adaopt/_adaoptc.pyx":110
  *         x_ = np.asarray(x)
  *         temp = x_[np.where(x_ != 0.0)]
  *         n = len(temp)             # <<<<<<<<<<<<<<
@@ -20942,7 +20905,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
     __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_temp); 
     __pyx_v_n = __pyx_t_1;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":112
+    /* "adaopt/_adaoptc.pyx":112
  *         n = len(temp)
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -20953,7 +20916,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
       (void)__pyx_t_9; (void)__pyx_t_10; (void)__pyx_t_11; /* mark used */
       /*try:*/ {
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":114
+        /* "adaopt/_adaoptc.pyx":114
  *         try:
  * 
  *             ans = (temp[n-1] - temp[(n-2)])             # <<<<<<<<<<<<<<
@@ -20964,7 +20927,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
         __pyx_t_13 = (__pyx_v_n - 2);
         __pyx_v_ans = ((*((double *) ( /* dim=0 */ (__pyx_v_temp.data + __pyx_t_12 * __pyx_v_temp.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_temp.data + __pyx_t_13 * __pyx_v_temp.strides[0]) ))));
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":115
+        /* "adaopt/_adaoptc.pyx":115
  * 
  *             ans = (temp[n-1] - temp[(n-2)])
  *             if (ans > 0):             # <<<<<<<<<<<<<<
@@ -20974,7 +20937,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
         __pyx_t_2 = (__pyx_v_ans > 0.0);
         if (__pyx_t_2) {
 
-          /* "mlsauce/adaopt/_adaoptc.pyx":116
+          /* "adaopt/_adaoptc.pyx":116
  *             ans = (temp[n-1] - temp[(n-2)])
  *             if (ans > 0):
  *                 return ans             # <<<<<<<<<<<<<<
@@ -20984,7 +20947,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
           __pyx_r = __pyx_v_ans;
           goto __pyx_L8_try_return;
 
-          /* "mlsauce/adaopt/_adaoptc.pyx":115
+          /* "adaopt/_adaoptc.pyx":115
  * 
  *             ans = (temp[n-1] - temp[(n-2)])
  *             if (ans > 0):             # <<<<<<<<<<<<<<
@@ -20993,7 +20956,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
  */
         }
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":117
+        /* "adaopt/_adaoptc.pyx":117
  *             if (ans > 0):
  *                 return ans
  *             return -ans             # <<<<<<<<<<<<<<
@@ -21003,7 +20966,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
         __pyx_r = (-__pyx_v_ans);
         goto __pyx_L8_try_return;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":112
+        /* "adaopt/_adaoptc.pyx":112
  *         n = len(temp)
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -21015,7 +20978,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
       goto __pyx_L0;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":106
+    /* "adaopt/_adaoptc.pyx":106
  *     cdef nparray_double[:] temp
  * 
  *     if (len(x) >= 5):             # <<<<<<<<<<<<<<
@@ -21024,7 +20987,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":125
+  /* "adaopt/_adaoptc.pyx":125
  *     else:
  * 
  *         return 1e5             # <<<<<<<<<<<<<<
@@ -21036,7 +20999,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
     goto __pyx_L0;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":100
+  /* "adaopt/_adaoptc.pyx":100
  * 
  * # calculates tolerance for early stopping
  * cdef double calculate_tolerance(nparray_double[:] x):             # <<<<<<<<<<<<<<
@@ -21051,7 +21014,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.calculate_tolerance", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.calculate_tolerance", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_temp, 1);
@@ -21060,7 +21023,7 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":129
+/* "adaopt/_adaoptc.pyx":129
  * 
  * # calculates updating factor for misclassified example prob
  * cdef mydoubletuple calculate_diff_proba(long int n_obs,             # <<<<<<<<<<<<<<
@@ -21068,32 +21031,32 @@ static double __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance
  *                          nparray_double[:] w_new,
  */
 
-static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_diff_proba(long __pyx_v_n_obs, __Pyx_memviewslice __pyx_v_misclass, __Pyx_memviewslice __pyx_v_w_new, __Pyx_memviewslice __pyx_v_w_prev, double __pyx_v_v_prev, double __pyx_v_eta, double __pyx_v_gamma) {
+static struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__pyx_f_6adaopt_8_adaoptc_calculate_diff_proba(long __pyx_v_n_obs, __Pyx_memviewslice __pyx_v_misclass, __Pyx_memviewslice __pyx_v_w_new, __Pyx_memviewslice __pyx_v_w_prev, double __pyx_v_v_prev, double __pyx_v_eta, double __pyx_v_gamma) {
   double __pyx_v_v_new;
   double __pyx_v_w_new_;
   double __pyx_v_w_prev_;
   long __pyx_v_misclass_index;
-  struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_r;
+  struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple __pyx_r;
   long __pyx_t_1;
   int __pyx_t_2;
   Py_ssize_t __pyx_t_3;
   double __pyx_t_4;
-  struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_t_5;
+  struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple __pyx_t_5;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":142
+  /* "adaopt/_adaoptc.pyx":142
  *     cdef long int misclass_index
  * 
  *     misclass_index = find_misclassed_index(misclass,             # <<<<<<<<<<<<<<
  *                                            n_obs)
  * 
  */
-  __pyx_t_1 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_find_misclassed_index(__pyx_v_misclass, __pyx_v_n_obs); if (unlikely(__pyx_t_1 == ((long)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_1 = __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_find_misclassed_index(__pyx_v_misclass, __pyx_v_n_obs); if (unlikely(__pyx_t_1 == ((long)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
   __pyx_v_misclass_index = __pyx_t_1;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":145
+  /* "adaopt/_adaoptc.pyx":145
  *                                            n_obs)
  * 
  *     if misclass_index != 1e5:             # <<<<<<<<<<<<<<
@@ -21103,7 +21066,7 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
   __pyx_t_2 = (__pyx_v_misclass_index != 1e5);
   if (__pyx_t_2) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":147
+    /* "adaopt/_adaoptc.pyx":147
  *     if misclass_index != 1e5:
  * 
  *         w_new_ = max_c(w_new[misclass_index],             # <<<<<<<<<<<<<<
@@ -21111,10 +21074,10 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
  * 
  */
     __pyx_t_3 = __pyx_v_misclass_index;
-    __pyx_t_4 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c((*((double *) ( /* dim=0 */ (__pyx_v_w_new.data + __pyx_t_3 * __pyx_v_w_new.strides[0]) ))), 2.220446049250313e-16); if (unlikely(__pyx_t_4 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_6adaopt_8_adaoptc_max_c((*((double *) ( /* dim=0 */ (__pyx_v_w_new.data + __pyx_t_3 * __pyx_v_w_new.strides[0]) ))), 2.220446049250313e-16); if (unlikely(__pyx_t_4 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
     __pyx_v_w_new_ = __pyx_t_4;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":150
+    /* "adaopt/_adaoptc.pyx":150
  *                        2.220446049250313e-16)
  * 
  *         w_prev_ = w_prev[misclass_index]             # <<<<<<<<<<<<<<
@@ -21124,7 +21087,7 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
     __pyx_t_3 = __pyx_v_misclass_index;
     __pyx_v_w_prev_ = (*((double *) ( /* dim=0 */ (__pyx_v_w_prev.data + __pyx_t_3 * __pyx_v_w_prev.strides[0]) )));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":152
+    /* "adaopt/_adaoptc.pyx":152
  *         w_prev_ = w_prev[misclass_index]
  * 
  *         v_new = (w_new_ - w_prev_)             # <<<<<<<<<<<<<<
@@ -21133,7 +21096,7 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
  */
     __pyx_v_v_new = (__pyx_v_w_new_ - __pyx_v_w_prev_);
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":154
+    /* "adaopt/_adaoptc.pyx":154
  *         v_new = (w_new_ - w_prev_)
  * 
  *         return mydoubletuple(-(v_prev*gamma - v_new)/eta, v_new)             # <<<<<<<<<<<<<<
@@ -21150,7 +21113,7 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
     __pyx_r = __pyx_t_5;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":145
+    /* "adaopt/_adaoptc.pyx":145
  *                                            n_obs)
  * 
  *     if misclass_index != 1e5:             # <<<<<<<<<<<<<<
@@ -21159,7 +21122,7 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":156
+  /* "adaopt/_adaoptc.pyx":156
  *         return mydoubletuple(-(v_prev*gamma - v_new)/eta, v_new)
  * 
  *     return mydoubletuple(0, 0)             # <<<<<<<<<<<<<<
@@ -21171,7 +21134,7 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
   __pyx_r = __pyx_t_5;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":129
+  /* "adaopt/_adaoptc.pyx":129
  * 
  * # calculates updating factor for misclassified example prob
  * cdef mydoubletuple calculate_diff_proba(long int n_obs,             # <<<<<<<<<<<<<<
@@ -21181,13 +21144,13 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.calculate_diff_proba", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.calculate_diff_proba", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_pretend_to_initialize(&__pyx_r);
   __pyx_L0:;
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":160
+/* "adaopt/_adaoptc.pyx":160
  * 
  * # updates probs
  * def update_proba(double[:,::1] probs,             # <<<<<<<<<<<<<<
@@ -21196,9 +21159,9 @@ static struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_fuse_0_0__p
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_1update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_1update_proba = {"update_proba", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_1update_proba, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_1update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_1update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_1update_proba = {"update_proba", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6adaopt_8_adaoptc_1update_proba, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_1update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_signatures = 0;
   PyObject *__pyx_v_args = 0;
   PyObject *__pyx_v_kwargs = 0;
@@ -21320,11 +21283,11 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_1update_proba(PyObject *__p
       __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_update_proba(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
 
   /* function exit code */
   {
@@ -21337,7 +21300,7 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_1update_proba(PyObject *__p
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
   PyObject *__pyx_v_search_list = 0;
   PyObject *__pyx_v_sigindex_node = 0;
   PyObject *__pyx_v_dest_sig = NULL;
@@ -21644,7 +21607,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED 
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_11 = __Pyx_PyErr_ExceptionMatches2(__pyx_builtin_ValueError, __pyx_builtin_TypeError);
       if (__pyx_t_11) {
-        __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+        __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
         if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_1, &__pyx_t_13) < 0) __PYX_ERR(0, 160, __pyx_L22_except_error)
         __Pyx_XGOTREF(__pyx_t_6);
         __Pyx_XGOTREF(__pyx_t_1);
@@ -21897,7 +21860,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED 
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_11 = __Pyx_PyErr_ExceptionMatches2(__pyx_builtin_ValueError, __pyx_builtin_TypeError);
       if (__pyx_t_11) {
-        __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+        __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
         if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_13, &__pyx_t_6) < 0) __PYX_ERR(0, 160, __pyx_L51_except_error)
         __Pyx_XGOTREF(__pyx_t_1);
         __Pyx_XGOTREF(__pyx_t_13);
@@ -22313,7 +22276,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_search_list);
@@ -22343,9 +22306,9 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_update_proba(CYTHON_UNUSED 
 }
 
 /* Python wrapper */
-static PyObject *__pyx_fuse_0_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_27update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_fuse_0_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_27update_proba = {"__pyx_fuse_0_0update_proba", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_27update_proba, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_fuse_0_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_27update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_fuse_0_0__pyx_pw_6adaopt_8_adaoptc_27update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_fuse_0_0__pyx_mdef_6adaopt_8_adaoptc_27update_proba = {"__pyx_fuse_0_0update_proba", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0_0__pyx_pw_6adaopt_8_adaoptc_27update_proba, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_fuse_0_0__pyx_pw_6adaopt_8_adaoptc_27update_proba(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_probs = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_misclass = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_w_new = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -22529,11 +22492,11 @@ static PyObject *__pyx_fuse_0_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_27update_prob
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_misclass, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_w_new, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_w_prev, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.update_proba", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.update_proba", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(__pyx_self, __pyx_v_probs, __pyx_v_misclass, __pyx_v_w_new, __pyx_v_w_prev, __pyx_v_v_prev, __pyx_v_eta, __pyx_v_gamma, __pyx_v_n_obs, __pyx_v_n_classes);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_26update_proba(__pyx_self, __pyx_v_probs, __pyx_v_misclass, __pyx_v_w_new, __pyx_v_w_prev, __pyx_v_v_prev, __pyx_v_eta, __pyx_v_gamma, __pyx_v_n_obs, __pyx_v_n_classes);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs, 1);
@@ -22550,12 +22513,12 @@ static PyObject *__pyx_fuse_0_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_27update_prob
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_misclass, __Pyx_memviewslice __pyx_v_w_new, __Pyx_memviewslice __pyx_v_w_prev, double __pyx_v_v_prev, double __pyx_v_eta, double __pyx_v_gamma, long __pyx_v_n_obs, CYTHON_UNUSED int __pyx_v_n_classes) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_misclass, __Pyx_memviewslice __pyx_v_w_new, __Pyx_memviewslice __pyx_v_w_prev, double __pyx_v_v_prev, double __pyx_v_eta, double __pyx_v_gamma, long __pyx_v_n_obs, CYTHON_UNUSED int __pyx_v_n_classes) {
   __Pyx_memviewslice __pyx_v_new_probs = { 0, 0, { 0 }, { 0 }, { 0 } };
   double __pyx_v_diff_proba;
   long __pyx_v_idx;
   double __pyx_v_v_new;
-  struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_v_res;
+  struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple __pyx_v_res;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -22564,7 +22527,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  struct __pyx_t_7mlsauce_6adaopt_8_adaoptc_mydoubletuple __pyx_t_7;
+  struct __pyx_t_6adaopt_8_adaoptc_mydoubletuple __pyx_t_7;
   double __pyx_t_8;
   long __pyx_t_9;
   long __pyx_t_10;
@@ -22578,7 +22541,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0_0update_proba", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":167
+  /* "adaopt/_adaoptc.pyx":167
  *                  long int n_obs, int n_classes):
  * 
  *     cdef double[:,::1] new_probs = np.asarray(probs) # contains result             # <<<<<<<<<<<<<<
@@ -22621,17 +22584,17 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":174
+  /* "adaopt/_adaoptc.pyx":174
  * 
  * 
  *     res = calculate_diff_proba(n_obs, misclass,             # <<<<<<<<<<<<<<
  *                                w_new, w_prev, v_prev,
  *                                eta, gamma)
  */
-  __pyx_t_7 = __pyx_fuse_0_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_diff_proba(__pyx_v_n_obs, __pyx_v_misclass, __pyx_v_w_new, __pyx_v_w_prev, __pyx_v_v_prev, __pyx_v_eta, __pyx_v_gamma); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_7 = __pyx_fuse_0_0__pyx_f_6adaopt_8_adaoptc_calculate_diff_proba(__pyx_v_n_obs, __pyx_v_misclass, __pyx_v_w_new, __pyx_v_w_prev, __pyx_v_v_prev, __pyx_v_eta, __pyx_v_gamma); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L1_error)
   __pyx_v_res = __pyx_t_7;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":178
+  /* "adaopt/_adaoptc.pyx":178
  *                                eta, gamma)
  * 
  *     diff_proba = res.elt1             # <<<<<<<<<<<<<<
@@ -22641,7 +22604,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   __pyx_t_8 = __pyx_v_res.elt1;
   __pyx_v_diff_proba = __pyx_t_8;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":179
+  /* "adaopt/_adaoptc.pyx":179
  * 
  *     diff_proba = res.elt1
  *     v_new = res.elt2             # <<<<<<<<<<<<<<
@@ -22651,7 +22614,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   __pyx_t_8 = __pyx_v_res.elt2;
   __pyx_v_v_new = __pyx_t_8;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":182
+  /* "adaopt/_adaoptc.pyx":182
  * 
  *     # loop on all examples
  *     for idx in range(n_obs):             # <<<<<<<<<<<<<<
@@ -22663,7 +22626,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_idx = __pyx_t_11;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":184
+    /* "adaopt/_adaoptc.pyx":184
  *     for idx in range(n_obs):
  * 
  *         if misclass[idx] != 1000: # a badly classified example             # <<<<<<<<<<<<<<
@@ -22674,7 +22637,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
     __pyx_t_13 = ((*((PY_LONG_LONG *) ( /* dim=0 */ (__pyx_v_misclass.data + __pyx_t_12 * __pyx_v_misclass.strides[0]) ))) != 0x3E8);
     if (__pyx_t_13) {
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":186
+      /* "adaopt/_adaoptc.pyx":186
  *         if misclass[idx] != 1000: # a badly classified example
  * 
  *             new_probs[idx, misclass[idx]] -= diff_proba # update proba             # <<<<<<<<<<<<<<
@@ -22686,7 +22649,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
       __pyx_t_15 = (*((PY_LONG_LONG *) ( /* dim=0 */ (__pyx_v_misclass.data + __pyx_t_12 * __pyx_v_misclass.strides[0]) )));
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_new_probs.data + __pyx_t_14 * __pyx_v_new_probs.strides[0]) )) + __pyx_t_15)) )) -= __pyx_v_diff_proba;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":184
+      /* "adaopt/_adaoptc.pyx":184
  *     for idx in range(n_obs):
  * 
  *         if misclass[idx] != 1000: # a badly classified example             # <<<<<<<<<<<<<<
@@ -22696,7 +22659,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
     }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":189
+  /* "adaopt/_adaoptc.pyx":189
  *             # DO NOT normalize row (!)
  * 
  *     return tuple((new_probs, v_new))             # <<<<<<<<<<<<<<
@@ -22720,7 +22683,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":160
+  /* "adaopt/_adaoptc.pyx":160
  * 
  * # updates probs
  * def update_proba(double[:,::1] probs,             # <<<<<<<<<<<<<<
@@ -22735,7 +22698,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.update_proba", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.update_proba", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_new_probs, 1);
@@ -22744,7 +22707,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":193
+/* "adaopt/_adaoptc.pyx":193
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -22753,15 +22716,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_26update_proba(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_3one_hot_encode(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_3one_hot_encode(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_3one_hot_encode = {"one_hot_encode", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_3one_hot_encode, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_3one_hot_encode(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_3one_hot_encode = {"one_hot_encode", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_3one_hot_encode, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_3one_hot_encode(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -22847,11 +22810,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
   }
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_y, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(__pyx_self, __pyx_v_y, __pyx_v_n_classes);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_2one_hot_encode(__pyx_self, __pyx_v_y, __pyx_v_n_classes);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_y, 1);
@@ -22865,7 +22828,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_classes) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_classes) {
   long __pyx_v_i;
   long __pyx_v_n_obs;
   __Pyx_memviewslice __pyx_v_res = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -22890,7 +22853,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("one_hot_encode", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":197
+  /* "adaopt/_adaoptc.pyx":197
  * 
  *     cdef long int i
  *     cdef long int n_obs = len(y)             # <<<<<<<<<<<<<<
@@ -22900,7 +22863,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_y); 
   __pyx_v_n_obs = __pyx_t_1;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":198
+  /* "adaopt/_adaoptc.pyx":198
  *     cdef long int i
  *     cdef long int n_obs = len(y)
  *     cdef double[:,::1] res = np.zeros((n_obs, n_classes))             # <<<<<<<<<<<<<<
@@ -22953,7 +22916,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":200
+  /* "adaopt/_adaoptc.pyx":200
  *     cdef double[:,::1] res = np.zeros((n_obs, n_classes))
  * 
  *     for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -22965,7 +22928,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":201
+    /* "adaopt/_adaoptc.pyx":201
  * 
  *     for i in range(n_obs):
  *         res[i, y[i]] = 1             # <<<<<<<<<<<<<<
@@ -22978,7 +22941,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
     *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_res.data + __pyx_t_13 * __pyx_v_res.strides[0]) )) + __pyx_t_14)) )) = 1.0;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":203
+  /* "adaopt/_adaoptc.pyx":203
  *         res[i, y[i]] = 1
  * 
  *     return np.asarray(res)             # <<<<<<<<<<<<<<
@@ -23020,7 +22983,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":193
+  /* "adaopt/_adaoptc.pyx":193
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -23036,7 +22999,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_res, 1);
@@ -23045,7 +23008,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":211
+/* "adaopt/_adaoptc.pyx":211
  * # @Paul Panzer's soln
  * # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi
  * def outer_sum_dot(A, B):             # <<<<<<<<<<<<<<
@@ -23054,15 +23017,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_2one_hot_encode(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_5outer_sum_dot(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_5outer_sum_dot(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_5outer_sum_dot = {"outer_sum_dot", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_5outer_sum_dot, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_5outer_sum_dot(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_5outer_sum_dot = {"outer_sum_dot", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_5outer_sum_dot, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_5outer_sum_dot(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -23147,11 +23110,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.outer_sum_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.outer_sum_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(__pyx_self, __pyx_v_A, __pyx_v_B);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_4outer_sum_dot(__pyx_self, __pyx_v_A, __pyx_v_B);
 
   /* function exit code */
   {
@@ -23164,7 +23127,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_B) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_B) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -23179,7 +23142,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("outer_sum_dot", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":212
+  /* "adaopt/_adaoptc.pyx":212
  * # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi
  * def outer_sum_dot(A, B):
  *     return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*np.dot(A, B.T)             # <<<<<<<<<<<<<<
@@ -23284,7 +23247,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSE
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":211
+  /* "adaopt/_adaoptc.pyx":211
  * # @Paul Panzer's soln
  * # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi
  * def outer_sum_dot(A, B):             # <<<<<<<<<<<<<<
@@ -23300,7 +23263,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.outer_sum_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.outer_sum_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -23308,7 +23271,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":215
+/* "adaopt/_adaoptc.pyx":215
  * 
  * 
  * cdef double norm_c(double[:] x, long int n) nogil:             # <<<<<<<<<<<<<<
@@ -23316,7 +23279,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_4outer_sum_dot(CYTHON_UNUSE
  *     cdef double res = 0
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx_v_x, long __pyx_v_n) {
+static double __pyx_f_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx_v_x, long __pyx_v_n) {
   double __pyx_v_res;
   long __pyx_v_i;
   double __pyx_r;
@@ -23325,7 +23288,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
   long __pyx_t_3;
   Py_ssize_t __pyx_t_4;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":217
+  /* "adaopt/_adaoptc.pyx":217
  * cdef double norm_c(double[:] x, long int n) nogil:
  * 
  *     cdef double res = 0             # <<<<<<<<<<<<<<
@@ -23334,7 +23297,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
  */
   __pyx_v_res = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":219
+  /* "adaopt/_adaoptc.pyx":219
  *     cdef double res = 0
  * 
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -23346,7 +23309,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":220
+    /* "adaopt/_adaoptc.pyx":220
  * 
  *     for i in range(n):
  *         res += x[i]**2             # <<<<<<<<<<<<<<
@@ -23357,7 +23320,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
     __pyx_v_res = (__pyx_v_res + pow((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))), 2.0));
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":222
+  /* "adaopt/_adaoptc.pyx":222
  *         res += x[i]**2
  * 
  *     return(sqrt(res))             # <<<<<<<<<<<<<<
@@ -23367,7 +23330,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
   __pyx_r = sqrt(__pyx_v_res);
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":215
+  /* "adaopt/_adaoptc.pyx":215
  * 
  * 
  * cdef double norm_c(double[:] x, long int n) nogil:             # <<<<<<<<<<<<<<
@@ -23380,7 +23343,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":225
+/* "adaopt/_adaoptc.pyx":225
  * 
  * 
  * cdef double euclidean_distance_c(double[:] x,             # <<<<<<<<<<<<<<
@@ -23388,7 +23351,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__Pyx_memviewslice __pyx
  *                                  long int n) nogil:
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
+static double __pyx_f_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
   double __pyx_v_res;
   long __pyx_v_i;
   double __pyx_r;
@@ -23398,7 +23361,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
   Py_ssize_t __pyx_t_4;
   Py_ssize_t __pyx_t_5;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":229
+  /* "adaopt/_adaoptc.pyx":229
  *                                  long int n) nogil:
  * 
  *     cdef double res = 0             # <<<<<<<<<<<<<<
@@ -23407,7 +23370,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
  */
   __pyx_v_res = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":231
+  /* "adaopt/_adaoptc.pyx":231
  *     cdef double res = 0
  * 
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -23419,7 +23382,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":232
+    /* "adaopt/_adaoptc.pyx":232
  * 
  *     for i in range(n):
  *         res += (x[i] - y[i])**2             # <<<<<<<<<<<<<<
@@ -23431,7 +23394,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
     __pyx_v_res = (__pyx_v_res + pow(((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_5 * __pyx_v_y.strides[0]) )))), 2.0));
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":234
+  /* "adaopt/_adaoptc.pyx":234
  *         res += (x[i] - y[i])**2
  * 
  *     return(sqrt(res))             # <<<<<<<<<<<<<<
@@ -23441,7 +23404,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
   __pyx_r = sqrt(__pyx_v_res);
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":225
+  /* "adaopt/_adaoptc.pyx":225
  * 
  * 
  * cdef double euclidean_distance_c(double[:] x,             # <<<<<<<<<<<<<<
@@ -23454,7 +23417,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":237
+/* "adaopt/_adaoptc.pyx":237
  * 
  * 
  * cdef double cosine_similarity_c(double[:] x,             # <<<<<<<<<<<<<<
@@ -23462,7 +23425,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__Pyx_memv
  *                                 long int n) nogil:
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
+static double __pyx_f_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
   double __pyx_v_dotprod;
   long __pyx_v_i;
   double __pyx_r;
@@ -23481,7 +23444,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
   PyGILState_STATE __pyx_gilstate_save;
   #endif
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":241
+  /* "adaopt/_adaoptc.pyx":241
  *                                 long int n) nogil:
  * 
  *     cdef double dotprod = 0             # <<<<<<<<<<<<<<
@@ -23490,7 +23453,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
  */
   __pyx_v_dotprod = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":243
+  /* "adaopt/_adaoptc.pyx":243
  *     cdef double dotprod = 0
  * 
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -23502,7 +23465,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":244
+    /* "adaopt/_adaoptc.pyx":244
  * 
  *     for i in range(n):
  *         dotprod += (x[i]*y[i])**2             # <<<<<<<<<<<<<<
@@ -23514,15 +23477,15 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
     __pyx_v_dotprod = (__pyx_v_dotprod + pow(((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))) * (*((double *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_5 * __pyx_v_y.strides[0]) )))), 2.0));
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":246
+  /* "adaopt/_adaoptc.pyx":246
  *         dotprod += (x[i]*y[i])**2
  * 
  *     return(1 - dotprod/(norm_c(x, n)*norm_c(y, n)))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_6 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__pyx_v_x, __pyx_v_n); if (unlikely(__pyx_t_6 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 246, __pyx_L1_error)
-  __pyx_t_7 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_norm_c(__pyx_v_y, __pyx_v_n); if (unlikely(__pyx_t_7 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_6 = __pyx_f_6adaopt_8_adaoptc_norm_c(__pyx_v_x, __pyx_v_n); if (unlikely(__pyx_t_6 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_7 = __pyx_f_6adaopt_8_adaoptc_norm_c(__pyx_v_y, __pyx_v_n); if (unlikely(__pyx_t_7 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 246, __pyx_L1_error)
   __pyx_t_8 = (__pyx_t_6 * __pyx_t_7);
   if (unlikely(__pyx_t_8 == 0)) {
     #ifdef WITH_THREAD
@@ -23537,7 +23500,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
   __pyx_r = (1.0 - (__pyx_v_dotprod / __pyx_t_8));
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":237
+  /* "adaopt/_adaoptc.pyx":237
  * 
  * 
  * cdef double cosine_similarity_c(double[:] x,             # <<<<<<<<<<<<<<
@@ -23550,7 +23513,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
   #ifdef WITH_THREAD
   __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
   #endif
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.cosine_similarity_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.cosine_similarity_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   #ifdef WITH_THREAD
   __Pyx_PyGILState_Release(__pyx_gilstate_save);
@@ -23559,7 +23522,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":251
+/* "adaopt/_adaoptc.pyx":251
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef double manhattan_distance_c(double[:] x,             # <<<<<<<<<<<<<<
@@ -23567,7 +23530,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__Pyx_memvi
  *                                  long int n) nogil:
  */
 
-static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
+static double __pyx_f_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, long __pyx_v_n) {
   double __pyx_v_res;
   long __pyx_v_i;
   double __pyx_r;
@@ -23577,7 +23540,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
   Py_ssize_t __pyx_t_4;
   Py_ssize_t __pyx_t_5;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":255
+  /* "adaopt/_adaoptc.pyx":255
  *                                  long int n) nogil:
  * 
  *     cdef double res = 0             # <<<<<<<<<<<<<<
@@ -23586,7 +23549,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
  */
   __pyx_v_res = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":257
+  /* "adaopt/_adaoptc.pyx":257
  *     cdef double res = 0
  * 
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -23598,7 +23561,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":258
+    /* "adaopt/_adaoptc.pyx":258
  * 
  *     for i in range(n):
  *         res += fabs(x[i] - y[i])             # <<<<<<<<<<<<<<
@@ -23610,7 +23573,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
     __pyx_v_res = (__pyx_v_res + fabs(((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_5 * __pyx_v_y.strides[0]) ))))));
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":260
+  /* "adaopt/_adaoptc.pyx":260
  *         res += fabs(x[i] - y[i])
  * 
  *     return(res)             # <<<<<<<<<<<<<<
@@ -23620,7 +23583,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
   __pyx_r = __pyx_v_res;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":251
+  /* "adaopt/_adaoptc.pyx":251
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef double manhattan_distance_c(double[:] x,             # <<<<<<<<<<<<<<
@@ -23633,7 +23596,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":265
+/* "adaopt/_adaoptc.pyx":265
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -23641,7 +23604,7 @@ static double __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__Pyx_memv
  * 
  */
 
-static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_euclidean(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B) {
+static __Pyx_memviewslice __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_euclidean(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B) {
   long __pyx_v_i;
   long __pyx_v_n_B;
   long __pyx_v_p_B;
@@ -23664,7 +23627,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0distance_to_mat_euclidean", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":269
+  /* "adaopt/_adaoptc.pyx":269
  * 
  *     cdef long int i
  *     cdef long int n_B = B.shape[0]             # <<<<<<<<<<<<<<
@@ -23673,7 +23636,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
  */
   __pyx_v_n_B = (__pyx_v_B.shape[0]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":270
+  /* "adaopt/_adaoptc.pyx":270
  *     cdef long int i
  *     cdef long int n_B = B.shape[0]
  *     cdef long int p_B = B.shape[1]             # <<<<<<<<<<<<<<
@@ -23682,7 +23645,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
  */
   __pyx_v_p_B = (__pyx_v_B.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":271
+  /* "adaopt/_adaoptc.pyx":271
  *     cdef long int n_B = B.shape[0]
  *     cdef long int p_B = B.shape[1]
  *     cdef nparray_double[:] res = np.zeros(n_B)             # <<<<<<<<<<<<<<
@@ -23725,7 +23688,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":274
+  /* "adaopt/_adaoptc.pyx":274
  * 
  * 
  *     for i in prange(n_B, nogil=True):             # <<<<<<<<<<<<<<
@@ -23774,7 +23737,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
                         {
                             __pyx_v_i = (long)(0 + 1 * __pyx_t_8);
 
-                            /* "mlsauce/adaopt/_adaoptc.pyx":276
+                            /* "adaopt/_adaoptc.pyx":276
  *     for i in prange(n_B, nogil=True):
  * 
  *         res[i] = euclidean_distance_c(x, B[i, :], p_B)             # <<<<<<<<<<<<<<
@@ -23794,7 +23757,7 @@ __pyx_t_6.shape[0] = __pyx_v_B.shape[1];
 __pyx_t_6.strides[0] = __pyx_v_B.strides[1];
     __pyx_t_6.suboffsets[0] = -1;
 
-__pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, __pyx_t_6, __pyx_v_p_B); if (unlikely(__pyx_t_10 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 276, __pyx_L8_error)
+__pyx_t_10 = __pyx_f_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, __pyx_t_6, __pyx_v_p_B); if (unlikely(__pyx_t_10 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 276, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 0);
                             __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
                             __pyx_t_11 = __pyx_v_i;
@@ -23882,7 +23845,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, 
         #endif
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":274
+      /* "adaopt/_adaoptc.pyx":274
  * 
  * 
  *     for i in prange(n_B, nogil=True):             # <<<<<<<<<<<<<<
@@ -23908,7 +23871,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, 
       }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":278
+  /* "adaopt/_adaoptc.pyx":278
  *         res[i] = euclidean_distance_c(x, B[i, :], p_B)
  * 
  *     return np.asarray(res)             # <<<<<<<<<<<<<<
@@ -23952,7 +23915,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, 
   __pyx_t_6.data = NULL;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":265
+  /* "adaopt/_adaoptc.pyx":265
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef nparray_double[:] distance_to_mat_euclidean(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -23969,7 +23932,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, 
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
   __pyx_r.data = NULL;
   __pyx_r.memview = NULL;
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_euclidean", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_euclidean", __pyx_clineno, __pyx_lineno, __pyx_filename);
   goto __pyx_L2;
   __pyx_L0:;
   if (unlikely(!__pyx_r.memview)) {
@@ -23981,7 +23944,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, 
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":283
+/* "adaopt/_adaoptc.pyx":283
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -23989,7 +23952,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, 
  * 
  */
 
-static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manhattan(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B) {
+static __Pyx_memviewslice __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_manhattan(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B) {
   long __pyx_v_i;
   long __pyx_v_n_B;
   long __pyx_v_p_B;
@@ -24012,7 +23975,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0distance_to_mat_manhattan", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":287
+  /* "adaopt/_adaoptc.pyx":287
  * 
  *     cdef long int i
  *     cdef long int n_B = B.shape[0]             # <<<<<<<<<<<<<<
@@ -24021,7 +23984,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
  */
   __pyx_v_n_B = (__pyx_v_B.shape[0]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":288
+  /* "adaopt/_adaoptc.pyx":288
  *     cdef long int i
  *     cdef long int n_B = B.shape[0]
  *     cdef long int p_B = B.shape[1]             # <<<<<<<<<<<<<<
@@ -24030,7 +23993,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
  */
   __pyx_v_p_B = (__pyx_v_B.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":289
+  /* "adaopt/_adaoptc.pyx":289
  *     cdef long int n_B = B.shape[0]
  *     cdef long int p_B = B.shape[1]
  *     cdef nparray_double[:] res = np.zeros(n_B)             # <<<<<<<<<<<<<<
@@ -24073,7 +24036,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":292
+  /* "adaopt/_adaoptc.pyx":292
  * 
  * 
  *     for i in prange(n_B, nogil=True):             # <<<<<<<<<<<<<<
@@ -24122,7 +24085,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
                         {
                             __pyx_v_i = (long)(0 + 1 * __pyx_t_8);
 
-                            /* "mlsauce/adaopt/_adaoptc.pyx":294
+                            /* "adaopt/_adaoptc.pyx":294
  *     for i in prange(n_B, nogil=True):
  * 
  *         res[i] = manhattan_distance_c(x, B[i, :], p_B)             # <<<<<<<<<<<<<<
@@ -24142,7 +24105,7 @@ __pyx_t_6.shape[0] = __pyx_v_B.shape[1];
 __pyx_t_6.strides[0] = __pyx_v_B.strides[1];
     __pyx_t_6.suboffsets[0] = -1;
 
-__pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, __pyx_t_6, __pyx_v_p_B); if (unlikely(__pyx_t_10 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 294, __pyx_L8_error)
+__pyx_t_10 = __pyx_f_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, __pyx_t_6, __pyx_v_p_B); if (unlikely(__pyx_t_10 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 294, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 0);
                             __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
                             __pyx_t_11 = __pyx_v_i;
@@ -24230,7 +24193,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, 
         #endif
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":292
+      /* "adaopt/_adaoptc.pyx":292
  * 
  * 
  *     for i in prange(n_B, nogil=True):             # <<<<<<<<<<<<<<
@@ -24256,7 +24219,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, 
       }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":296
+  /* "adaopt/_adaoptc.pyx":296
  *         res[i] = manhattan_distance_c(x, B[i, :], p_B)
  * 
  *     return np.asarray(res)             # <<<<<<<<<<<<<<
@@ -24300,7 +24263,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, 
   __pyx_t_6.data = NULL;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":283
+  /* "adaopt/_adaoptc.pyx":283
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef nparray_double[:] distance_to_mat_manhattan(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -24317,7 +24280,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, 
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
   __pyx_r.data = NULL;
   __pyx_r.memview = NULL;
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_manhattan", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_manhattan", __pyx_clineno, __pyx_lineno, __pyx_filename);
   goto __pyx_L2;
   __pyx_L0:;
   if (unlikely(!__pyx_r.memview)) {
@@ -24329,7 +24292,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, 
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":301
+/* "adaopt/_adaoptc.pyx":301
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -24337,7 +24300,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, 
  * 
  */
 
-static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosine(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B) {
+static __Pyx_memviewslice __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_cosine(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B) {
   long __pyx_v_i;
   long __pyx_v_n_B;
   long __pyx_v_p_B;
@@ -24360,7 +24323,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0distance_to_mat_cosine", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":305
+  /* "adaopt/_adaoptc.pyx":305
  * 
  *     cdef long int i
  *     cdef long int n_B = B.shape[0]             # <<<<<<<<<<<<<<
@@ -24369,7 +24332,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
  */
   __pyx_v_n_B = (__pyx_v_B.shape[0]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":306
+  /* "adaopt/_adaoptc.pyx":306
  *     cdef long int i
  *     cdef long int n_B = B.shape[0]
  *     cdef long int p_B = B.shape[1]             # <<<<<<<<<<<<<<
@@ -24378,7 +24341,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
  */
   __pyx_v_p_B = (__pyx_v_B.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":307
+  /* "adaopt/_adaoptc.pyx":307
  *     cdef long int n_B = B.shape[0]
  *     cdef long int p_B = B.shape[1]
  *     cdef nparray_double[:] res = np.zeros(n_B)             # <<<<<<<<<<<<<<
@@ -24421,7 +24384,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":310
+  /* "adaopt/_adaoptc.pyx":310
  * 
  * 
  *     for i in prange(n_B, nogil=True):             # <<<<<<<<<<<<<<
@@ -24470,7 +24433,7 @@ static __Pyx_memviewslice __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distanc
                         {
                             __pyx_v_i = (long)(0 + 1 * __pyx_t_8);
 
-                            /* "mlsauce/adaopt/_adaoptc.pyx":312
+                            /* "adaopt/_adaoptc.pyx":312
  *     for i in prange(n_B, nogil=True):
  * 
  *         res[i] = cosine_similarity_c(x, B[i, :], p_B)             # <<<<<<<<<<<<<<
@@ -24490,7 +24453,7 @@ __pyx_t_6.shape[0] = __pyx_v_B.shape[1];
 __pyx_t_6.strides[0] = __pyx_v_B.strides[1];
     __pyx_t_6.suboffsets[0] = -1;
 
-__pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __pyx_t_6, __pyx_v_p_B); if (unlikely(__pyx_t_10 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 312, __pyx_L8_error)
+__pyx_t_10 = __pyx_f_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __pyx_t_6, __pyx_v_p_B); if (unlikely(__pyx_t_10 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 312, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 0);
                             __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
                             __pyx_t_11 = __pyx_v_i;
@@ -24578,7 +24541,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, _
         #endif
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":310
+      /* "adaopt/_adaoptc.pyx":310
  * 
  * 
  *     for i in prange(n_B, nogil=True):             # <<<<<<<<<<<<<<
@@ -24604,7 +24567,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, _
       }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":314
+  /* "adaopt/_adaoptc.pyx":314
  *         res[i] = cosine_similarity_c(x, B[i, :], p_B)
  * 
  *     return np.asarray(res)             # <<<<<<<<<<<<<<
@@ -24648,7 +24611,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, _
   __pyx_t_6.data = NULL;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":301
+  /* "adaopt/_adaoptc.pyx":301
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * cdef nparray_double[:] distance_to_mat_cosine(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -24665,7 +24628,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, _
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
   __pyx_r.data = NULL;
   __pyx_r.memview = NULL;
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_cosine", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_cosine", __pyx_clineno, __pyx_lineno, __pyx_filename);
   goto __pyx_L2;
   __pyx_L0:;
   if (unlikely(!__pyx_r.memview)) {
@@ -24677,7 +24640,7 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, _
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":319
+/* "adaopt/_adaoptc.pyx":319
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_euclidean2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -24686,9 +24649,9 @@ __pyx_t_10 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2 = {"distance_to_mat_euclidean2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_7distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_7distance_to_mat_euclidean2 = {"distance_to_mat_euclidean2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6adaopt_8_adaoptc_7distance_to_mat_euclidean2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_7distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_signatures = 0;
   PyObject *__pyx_v_args = 0;
   PyObject *__pyx_v_kwargs = 0;
@@ -24810,11 +24773,11 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2
       __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_6distance_to_mat_euclidean2(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_6distance_to_mat_euclidean2(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
 
   /* function exit code */
   {
@@ -24827,7 +24790,7 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_6distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_6distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
   PyObject *__pyx_v_search_list = 0;
   PyObject *__pyx_v_sigindex_node = 0;
   PyObject *__pyx_v_dest_sig = NULL;
@@ -25122,7 +25085,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_6distance_to_mat_euclidean2
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_11 = __Pyx_PyErr_ExceptionMatches2(__pyx_builtin_ValueError, __pyx_builtin_TypeError);
       if (__pyx_t_11) {
-        __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+        __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
         if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_1, &__pyx_t_13) < 0) __PYX_ERR(0, 319, __pyx_L21_except_error)
         __Pyx_XGOTREF(__pyx_t_6);
         __Pyx_XGOTREF(__pyx_t_1);
@@ -25538,7 +25501,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_6distance_to_mat_euclidean2
   __Pyx_XDECREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_search_list);
@@ -25568,9 +25531,9 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_6distance_to_mat_euclidean2
 }
 
 /* Python wrapper */
-static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_31distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_fuse_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_31distance_to_mat_euclidean2 = {"__pyx_fuse_0distance_to_mat_euclidean2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_31distance_to_mat_euclidean2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_31distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_31distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_fuse_0__pyx_mdef_6adaopt_8_adaoptc_31distance_to_mat_euclidean2 = {"__pyx_fuse_0distance_to_mat_euclidean2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_31distance_to_mat_euclidean2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_31distance_to_mat_euclidean2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_x = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_B = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_res = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -25693,11 +25656,11 @@ static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_31distance_to_m
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_B, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_res, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_euclidean2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_euclidean2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_30distance_to_mat_euclidean2(__pyx_self, __pyx_v_x, __pyx_v_B, __pyx_v_res, __pyx_v_n_B, __pyx_v_p_B);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_30distance_to_mat_euclidean2(__pyx_self, __pyx_v_x, __pyx_v_B, __pyx_v_res, __pyx_v_n_B, __pyx_v_p_B);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
@@ -25713,7 +25676,7 @@ static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_31distance_to_m
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_30distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_30distance_to_mat_euclidean2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B) {
   long __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -25729,7 +25692,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_30distance_to_mat_euclidean
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0distance_to_mat_euclidean2", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":325
+  /* "adaopt/_adaoptc.pyx":325
  *     cdef long int i
  * 
  *     for i in range(n_B):             # <<<<<<<<<<<<<<
@@ -25741,7 +25704,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_30distance_to_mat_euclidean
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":327
+    /* "adaopt/_adaoptc.pyx":327
  *     for i in range(n_B):
  * 
  *         res[i] = euclidean_distance_c(x, B[i, :], p_B)             # <<<<<<<<<<<<<<
@@ -25761,14 +25724,14 @@ __pyx_t_4.shape[0] = __pyx_v_B.shape[1];
 __pyx_t_4.strides[0] = __pyx_v_B.strides[1];
     __pyx_t_4.suboffsets[0] = -1;
 
-__pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, __pyx_t_4, __pyx_v_p_B); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 327, __pyx_L1_error)
+__pyx_t_5 = __pyx_f_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, __pyx_t_4, __pyx_v_p_B); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 327, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
     __pyx_t_4.memview = NULL; __pyx_t_4.data = NULL;
     __pyx_t_6 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_res.data + __pyx_t_6 * __pyx_v_res.strides[0]) )) = __pyx_t_5;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":329
+  /* "adaopt/_adaoptc.pyx":329
  *         res[i] = euclidean_distance_c(x, B[i, :], p_B)
  * 
  *     return res             # <<<<<<<<<<<<<<
@@ -25782,7 +25745,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, _
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":319
+  /* "adaopt/_adaoptc.pyx":319
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_euclidean2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -25794,7 +25757,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, _
   __pyx_L1_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_euclidean2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_euclidean2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -25802,7 +25765,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, _
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":334
+/* "adaopt/_adaoptc.pyx":334
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_manhattan2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -25811,9 +25774,9 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_euclidean_distance_c(__pyx_v_x, _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2 = {"distance_to_mat_manhattan2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_9distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_9distance_to_mat_manhattan2 = {"distance_to_mat_manhattan2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6adaopt_8_adaoptc_9distance_to_mat_manhattan2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_9distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_signatures = 0;
   PyObject *__pyx_v_args = 0;
   PyObject *__pyx_v_kwargs = 0;
@@ -25935,11 +25898,11 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2
       __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_8distance_to_mat_manhattan2(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_8distance_to_mat_manhattan2(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
 
   /* function exit code */
   {
@@ -25952,7 +25915,7 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_8distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_8distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
   PyObject *__pyx_v_search_list = 0;
   PyObject *__pyx_v_sigindex_node = 0;
   PyObject *__pyx_v_dest_sig = NULL;
@@ -26247,7 +26210,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_8distance_to_mat_manhattan2
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_11 = __Pyx_PyErr_ExceptionMatches2(__pyx_builtin_ValueError, __pyx_builtin_TypeError);
       if (__pyx_t_11) {
-        __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+        __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
         if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_1, &__pyx_t_13) < 0) __PYX_ERR(0, 334, __pyx_L21_except_error)
         __Pyx_XGOTREF(__pyx_t_6);
         __Pyx_XGOTREF(__pyx_t_1);
@@ -26663,7 +26626,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_8distance_to_mat_manhattan2
   __Pyx_XDECREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_search_list);
@@ -26693,9 +26656,9 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_8distance_to_mat_manhattan2
 }
 
 /* Python wrapper */
-static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_35distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_fuse_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_35distance_to_mat_manhattan2 = {"__pyx_fuse_0distance_to_mat_manhattan2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_35distance_to_mat_manhattan2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_35distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_35distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_fuse_0__pyx_mdef_6adaopt_8_adaoptc_35distance_to_mat_manhattan2 = {"__pyx_fuse_0distance_to_mat_manhattan2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_35distance_to_mat_manhattan2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_35distance_to_mat_manhattan2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_x = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_B = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_res = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -26818,11 +26781,11 @@ static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_35distance_to_m
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_B, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_res, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_manhattan2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_manhattan2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_34distance_to_mat_manhattan2(__pyx_self, __pyx_v_x, __pyx_v_B, __pyx_v_res, __pyx_v_n_B, __pyx_v_p_B);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_34distance_to_mat_manhattan2(__pyx_self, __pyx_v_x, __pyx_v_B, __pyx_v_res, __pyx_v_n_B, __pyx_v_p_B);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
@@ -26838,7 +26801,7 @@ static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_35distance_to_m
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_34distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_34distance_to_mat_manhattan2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B) {
   long __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -26854,7 +26817,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_34distance_to_mat_manhattan
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0distance_to_mat_manhattan2", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":340
+  /* "adaopt/_adaoptc.pyx":340
  *     cdef long int i
  * 
  *     for i in range(n_B):             # <<<<<<<<<<<<<<
@@ -26866,7 +26829,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_34distance_to_mat_manhattan
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":342
+    /* "adaopt/_adaoptc.pyx":342
  *     for i in range(n_B):
  * 
  *         res[i] = manhattan_distance_c(x, B[i, :], p_B)             # <<<<<<<<<<<<<<
@@ -26886,14 +26849,14 @@ __pyx_t_4.shape[0] = __pyx_v_B.shape[1];
 __pyx_t_4.strides[0] = __pyx_v_B.strides[1];
     __pyx_t_4.suboffsets[0] = -1;
 
-__pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, __pyx_t_4, __pyx_v_p_B); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 342, __pyx_L1_error)
+__pyx_t_5 = __pyx_f_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, __pyx_t_4, __pyx_v_p_B); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 342, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
     __pyx_t_4.memview = NULL; __pyx_t_4.data = NULL;
     __pyx_t_6 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_res.data + __pyx_t_6 * __pyx_v_res.strides[0]) )) = __pyx_t_5;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":344
+  /* "adaopt/_adaoptc.pyx":344
  *         res[i] = manhattan_distance_c(x, B[i, :], p_B)
  * 
  *     return res             # <<<<<<<<<<<<<<
@@ -26907,7 +26870,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, _
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":334
+  /* "adaopt/_adaoptc.pyx":334
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_manhattan2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -26919,7 +26882,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, _
   __pyx_L1_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_manhattan2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_manhattan2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -26927,7 +26890,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, _
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":349
+/* "adaopt/_adaoptc.pyx":349
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_cosine2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -26936,9 +26899,9 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_manhattan_distance_c(__pyx_v_x, _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2 = {"distance_to_mat_cosine2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_11distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_11distance_to_mat_cosine2 = {"distance_to_mat_cosine2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6adaopt_8_adaoptc_11distance_to_mat_cosine2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_11distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_signatures = 0;
   PyObject *__pyx_v_args = 0;
   PyObject *__pyx_v_kwargs = 0;
@@ -27060,11 +27023,11 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2(P
       __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_10distance_to_mat_cosine2(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_10distance_to_mat_cosine2(__pyx_self, __pyx_v_signatures, __pyx_v_args, __pyx_v_kwargs, __pyx_v_defaults, __pyx_v__fused_sigindex);
 
   /* function exit code */
   {
@@ -27077,7 +27040,7 @@ static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2(P
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_10distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_10distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults, PyObject *__pyx_v__fused_sigindex) {
   PyObject *__pyx_v_search_list = 0;
   PyObject *__pyx_v_sigindex_node = 0;
   PyObject *__pyx_v_dest_sig = NULL;
@@ -27372,7 +27335,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_10distance_to_mat_cosine2(C
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_11 = __Pyx_PyErr_ExceptionMatches2(__pyx_builtin_ValueError, __pyx_builtin_TypeError);
       if (__pyx_t_11) {
-        __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+        __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
         if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_1, &__pyx_t_13) < 0) __PYX_ERR(0, 349, __pyx_L21_except_error)
         __Pyx_XGOTREF(__pyx_t_6);
         __Pyx_XGOTREF(__pyx_t_1);
@@ -27788,7 +27751,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_10distance_to_mat_cosine2(C
   __Pyx_XDECREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.__pyx_fused_cpdef", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_search_list);
@@ -27818,9 +27781,9 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_10distance_to_mat_cosine2(C
 }
 
 /* Python wrapper */
-static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_39distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_fuse_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_39distance_to_mat_cosine2 = {"__pyx_fuse_0distance_to_mat_cosine2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_39distance_to_mat_cosine2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_39distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_39distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_fuse_0__pyx_mdef_6adaopt_8_adaoptc_39distance_to_mat_cosine2 = {"__pyx_fuse_0distance_to_mat_cosine2", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_39distance_to_mat_cosine2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_fuse_0__pyx_pw_6adaopt_8_adaoptc_39distance_to_mat_cosine2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_x = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_B = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_res = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -27943,11 +27906,11 @@ static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_39distance_to_m
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_B, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_res, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_cosine2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_cosine2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_38distance_to_mat_cosine2(__pyx_self, __pyx_v_x, __pyx_v_B, __pyx_v_res, __pyx_v_n_B, __pyx_v_p_B);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_38distance_to_mat_cosine2(__pyx_self, __pyx_v_x, __pyx_v_B, __pyx_v_res, __pyx_v_n_B, __pyx_v_p_B);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
@@ -27963,7 +27926,7 @@ static PyObject *__pyx_fuse_0__pyx_pw_7mlsauce_6adaopt_8_adaoptc_39distance_to_m
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_38distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_38distance_to_mat_cosine2(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_B, __Pyx_memviewslice __pyx_v_res, long __pyx_v_n_B, long __pyx_v_p_B) {
   long __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -27979,7 +27942,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_38distance_to_mat_cosine2(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pyx_fuse_0distance_to_mat_cosine2", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":355
+  /* "adaopt/_adaoptc.pyx":355
  *     cdef long int i
  * 
  *     for i in range(n_B):             # <<<<<<<<<<<<<<
@@ -27991,7 +27954,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_38distance_to_mat_cosine2(C
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":357
+    /* "adaopt/_adaoptc.pyx":357
  *     for i in range(n_B):
  * 
  *         res[i] = cosine_similarity_c(x, B[i, :], p_B)             # <<<<<<<<<<<<<<
@@ -28011,14 +27974,14 @@ __pyx_t_4.shape[0] = __pyx_v_B.shape[1];
 __pyx_t_4.strides[0] = __pyx_v_B.strides[1];
     __pyx_t_4.suboffsets[0] = -1;
 
-__pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __pyx_t_4, __pyx_v_p_B); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L1_error)
+__pyx_t_5 = __pyx_f_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __pyx_t_4, __pyx_v_p_B); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
     __pyx_t_4.memview = NULL; __pyx_t_4.data = NULL;
     __pyx_t_6 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_res.data + __pyx_t_6 * __pyx_v_res.strides[0]) )) = __pyx_t_5;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":359
+  /* "adaopt/_adaoptc.pyx":359
  *         res[i] = cosine_similarity_c(x, B[i, :], p_B)
  * 
  *     return res             # <<<<<<<<<<<<<<
@@ -28032,7 +27995,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":349
+  /* "adaopt/_adaoptc.pyx":349
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_cosine2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -28044,7 +28007,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __
   __pyx_L1_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.distance_to_mat_cosine2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.distance_to_mat_cosine2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -28052,7 +28015,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":363
+/* "adaopt/_adaoptc.pyx":363
  * 
  * # find elt in list
  * cdef long int find_elt_list(double elt,             # <<<<<<<<<<<<<<
@@ -28060,7 +28023,7 @@ __pyx_t_5 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cosine_similarity_c(__pyx_v_x, __
  *                             long int n_x):
  */
 
-static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt, __Pyx_memviewslice __pyx_v_x, long __pyx_v_n_x) {
+static long __pyx_f_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt, __Pyx_memviewslice __pyx_v_x, long __pyx_v_n_x) {
   long __pyx_v_j;
   long __pyx_r;
   long __pyx_t_1;
@@ -28069,7 +28032,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
   Py_ssize_t __pyx_t_4;
   int __pyx_t_5;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":367
+  /* "adaopt/_adaoptc.pyx":367
  *                             long int n_x):
  * 
  *     cdef long int j = 0             # <<<<<<<<<<<<<<
@@ -28078,7 +28041,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
  */
   __pyx_v_j = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":369
+  /* "adaopt/_adaoptc.pyx":369
  *     cdef long int j = 0
  * 
  *     for j in range(n_x):             # <<<<<<<<<<<<<<
@@ -28090,7 +28053,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_j = __pyx_t_3;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":371
+    /* "adaopt/_adaoptc.pyx":371
  *     for j in range(n_x):
  * 
  *         if x[j] == elt:             # <<<<<<<<<<<<<<
@@ -28101,7 +28064,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
     __pyx_t_5 = ((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_4 * __pyx_v_x.strides[0]) ))) == __pyx_v_elt);
     if (__pyx_t_5) {
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":373
+      /* "adaopt/_adaoptc.pyx":373
  *         if x[j] == elt:
  * 
  *             return j             # <<<<<<<<<<<<<<
@@ -28111,7 +28074,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
       __pyx_r = __pyx_v_j;
       goto __pyx_L0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":371
+      /* "adaopt/_adaoptc.pyx":371
  *     for j in range(n_x):
  * 
  *         if x[j] == elt:             # <<<<<<<<<<<<<<
@@ -28121,7 +28084,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
     }
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":363
+  /* "adaopt/_adaoptc.pyx":363
  * 
  * # find elt in list
  * cdef long int find_elt_list(double elt,             # <<<<<<<<<<<<<<
@@ -28135,7 +28098,7 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":377
+/* "adaopt/_adaoptc.pyx":377
  * 
  * # find_kmin_x
  * def find_kmin_x(x, n_x, k, cache=False):             # <<<<<<<<<<<<<<
@@ -28144,15 +28107,15 @@ static long __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(double __pyx_v_elt,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_13find_kmin_x(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_13find_kmin_x(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_13find_kmin_x = {"find_kmin_x", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_13find_kmin_x, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_13find_kmin_x(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_13find_kmin_x = {"find_kmin_x", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_13find_kmin_x, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_13find_kmin_x(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -28268,11 +28231,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.find_kmin_x", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.find_kmin_x", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(__pyx_self, __pyx_v_x, __pyx_v_n_x, __pyx_v_k, __pyx_v_cache);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_12find_kmin_x(__pyx_self, __pyx_v_x, __pyx_v_n_x, __pyx_v_k, __pyx_v_cache);
 
   /* function exit code */
   {
@@ -28285,7 +28248,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_n_x, PyObject *__pyx_v_k, PyObject *__pyx_v_cache) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_n_x, PyObject *__pyx_v_k, PyObject *__pyx_v_cache) {
   PyObject *__pyx_v_key = 0;
   __Pyx_memviewslice __pyx_v_sorted_x = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_v_res = 0;
@@ -28313,7 +28276,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_kmin_x", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":381
+  /* "adaopt/_adaoptc.pyx":381
  *     cdef str key
  *     cdef double[:] sorted_x
  *     cdef dict res = {}             # <<<<<<<<<<<<<<
@@ -28325,7 +28288,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __pyx_v_res = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":382
+  /* "adaopt/_adaoptc.pyx":382
  *     cdef double[:] sorted_x
  *     cdef dict res = {}
  *     cdef double elt = 0.0             # <<<<<<<<<<<<<<
@@ -28334,7 +28297,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
   __pyx_v_elt = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":383
+  /* "adaopt/_adaoptc.pyx":383
  *     cdef dict res = {}
  *     cdef double elt = 0.0
  *     cdef int i = 0             # <<<<<<<<<<<<<<
@@ -28343,7 +28306,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
   __pyx_v_i = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":387
+  /* "adaopt/_adaoptc.pyx":387
  *     global __find_kmin_x_cache
  * 
  *     if cache:             # <<<<<<<<<<<<<<
@@ -28353,7 +28316,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_cache); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 387, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":389
+    /* "adaopt/_adaoptc.pyx":389
  *     if cache:
  * 
  *         key = str(hash(np.asarray(x).tostring()))             # <<<<<<<<<<<<<<
@@ -28419,10 +28382,11 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __pyx_t_5 = __Pyx_PyObject_Str(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (!(likely(PyString_CheckExact(__pyx_t_5)) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_5))) __PYX_ERR(0, 389, __pyx_L1_error)
     __pyx_v_key = ((PyObject*)__pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":390
+    /* "adaopt/_adaoptc.pyx":390
  * 
  *         key = str(hash(np.asarray(x).tostring()))
  *         key += str(n_x) + str(k)             # <<<<<<<<<<<<<<
@@ -28437,27 +28401,28 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_ConcatInPlace(__pyx_v_key, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_key, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 390, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_key, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":392
+    /* "adaopt/_adaoptc.pyx":392
  *         key += str(n_x) + str(k)
  * 
  *         if key in __find_kmin_x_cache:             # <<<<<<<<<<<<<<
  * 
  *             return __find_kmin_x_cache[key]
  */
-    if (unlikely(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache == Py_None)) {
+    if (unlikely(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
       __PYX_ERR(0, 392, __pyx_L1_error)
     }
-    __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 392, __pyx_L1_error)
+    __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 392, __pyx_L1_error)
     if (__pyx_t_2) {
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":394
+      /* "adaopt/_adaoptc.pyx":394
  *         if key in __find_kmin_x_cache:
  * 
  *             return __find_kmin_x_cache[key]             # <<<<<<<<<<<<<<
@@ -28465,17 +28430,17 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  *         sorted_x = np.sort(x, kind='quicksort')
  */
       __Pyx_XDECREF(__pyx_r);
-      if (unlikely(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache == Py_None)) {
+      if (unlikely(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
         __PYX_ERR(0, 394, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache, __pyx_v_key); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache, __pyx_v_key); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":392
+      /* "adaopt/_adaoptc.pyx":392
  *         key += str(n_x) + str(k)
  * 
  *         if key in __find_kmin_x_cache:             # <<<<<<<<<<<<<<
@@ -28484,7 +28449,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":396
+    /* "adaopt/_adaoptc.pyx":396
  *             return __find_kmin_x_cache[key]
  * 
  *         sorted_x = np.sort(x, kind='quicksort')             # <<<<<<<<<<<<<<
@@ -28503,7 +28468,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_x)) __PYX_ERR(0, 396, __pyx_L1_error);
     __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 396, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_kind, __pyx_n_u_quicksort) < 0) __PYX_ERR(0, 396, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_kind, __pyx_n_s_quicksort) < 0) __PYX_ERR(0, 396, __pyx_L1_error)
     __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 396, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -28515,7 +28480,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":398
+    /* "adaopt/_adaoptc.pyx":398
  *         sorted_x = np.sort(x, kind='quicksort')
  * 
  *         for i in range(k):             # <<<<<<<<<<<<<<
@@ -28527,7 +28492,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_10; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":400
+      /* "adaopt/_adaoptc.pyx":400
  *         for i in range(k):
  * 
  *             elt = sorted_x[i]             # <<<<<<<<<<<<<<
@@ -28537,7 +28502,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
       __pyx_t_11 = __pyx_v_i;
       __pyx_v_elt = (*((double *) ( /* dim=0 */ (__pyx_v_sorted_x.data + __pyx_t_11 * __pyx_v_sorted_x.strides[0]) )));
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":402
+      /* "adaopt/_adaoptc.pyx":402
  *             elt = sorted_x[i]
  * 
  *             idx = find_elt_list(elt, x, n_x)             # <<<<<<<<<<<<<<
@@ -28546,12 +28511,12 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
       __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_v_x, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 402, __pyx_L1_error)
       __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_n_x); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L1_error)
-      __pyx_t_13 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(__pyx_v_elt, __pyx_t_8, __pyx_t_12); if (unlikely(__pyx_t_13 == ((long)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L1_error)
+      __pyx_t_13 = __pyx_f_6adaopt_8_adaoptc_find_elt_list(__pyx_v_elt, __pyx_t_8, __pyx_t_12); if (unlikely(__pyx_t_13 == ((long)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L1_error)
       __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
       __pyx_t_8.memview = NULL; __pyx_t_8.data = NULL;
       __pyx_v_idx = __pyx_t_13;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":404
+      /* "adaopt/_adaoptc.pyx":404
  *             idx = find_elt_list(elt, x, n_x)
  * 
  *             res[idx] = elt             # <<<<<<<<<<<<<<
@@ -28567,7 +28532,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":406
+    /* "adaopt/_adaoptc.pyx":406
  *             res[idx] = elt
  * 
  *         __find_kmin_x_cache[key] = (np.asarray(list(res.values())),             # <<<<<<<<<<<<<<
@@ -28608,7 +28573,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":407
+    /* "adaopt/_adaoptc.pyx":407
  * 
  *         __find_kmin_x_cache[key] = (np.asarray(list(res.values())),
  *                                     np.asarray(list(res.keys()),             # <<<<<<<<<<<<<<
@@ -28631,7 +28596,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5)) __PYX_ERR(0, 407, __pyx_L1_error);
     __pyx_t_5 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":408
+    /* "adaopt/_adaoptc.pyx":408
  *         __find_kmin_x_cache[key] = (np.asarray(list(res.values())),
  *                                     np.asarray(list(res.keys()),
  *                                     dtype=np.integer))             # <<<<<<<<<<<<<<
@@ -28642,7 +28607,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __Pyx_GOTREF(__pyx_t_5);
     if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, ((PyObject *)__pyx_ptype_5numpy_integer)) < 0) __PYX_ERR(0, 408, __pyx_L1_error)
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":407
+    /* "adaopt/_adaoptc.pyx":407
  * 
  *         __find_kmin_x_cache[key] = (np.asarray(list(res.values())),
  *                                     np.asarray(list(res.keys()),             # <<<<<<<<<<<<<<
@@ -28655,7 +28620,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":406
+    /* "adaopt/_adaoptc.pyx":406
  *             res[idx] = elt
  * 
  *         __find_kmin_x_cache[key] = (np.asarray(list(res.values())),             # <<<<<<<<<<<<<<
@@ -28670,14 +28635,14 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_14)) __PYX_ERR(0, 406, __pyx_L1_error);
     __pyx_t_4 = 0;
     __pyx_t_14 = 0;
-    if (unlikely(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache == Py_None)) {
+    if (unlikely(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
       __PYX_ERR(0, 406, __pyx_L1_error)
     }
-    if (unlikely((PyDict_SetItem(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache, __pyx_v_key, __pyx_t_5) < 0))) __PYX_ERR(0, 406, __pyx_L1_error)
+    if (unlikely((PyDict_SetItem(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache, __pyx_v_key, __pyx_t_5) < 0))) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":387
+    /* "adaopt/_adaoptc.pyx":387
  *     global __find_kmin_x_cache
  * 
  *     if cache:             # <<<<<<<<<<<<<<
@@ -28686,7 +28651,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":411
+  /* "adaopt/_adaoptc.pyx":411
  * 
  *     # if cache == False
  *     sorted_x = np.sort(x, kind='quicksort')             # <<<<<<<<<<<<<<
@@ -28705,7 +28670,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_x)) __PYX_ERR(0, 411, __pyx_L1_error);
   __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_kind, __pyx_n_u_quicksort) < 0) __PYX_ERR(0, 411, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_kind, __pyx_n_s_quicksort) < 0) __PYX_ERR(0, 411, __pyx_L1_error)
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -28718,7 +28683,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":413
+  /* "adaopt/_adaoptc.pyx":413
  *     sorted_x = np.sort(x, kind='quicksort')
  * 
  *     for i in range(k):             # <<<<<<<<<<<<<<
@@ -28730,7 +28695,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_10; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":415
+    /* "adaopt/_adaoptc.pyx":415
  *     for i in range(k):
  * 
  *         elt = sorted_x[i]             # <<<<<<<<<<<<<<
@@ -28740,7 +28705,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __pyx_t_11 = __pyx_v_i;
     __pyx_v_elt = (*((double *) ( /* dim=0 */ (__pyx_v_sorted_x.data + __pyx_t_11 * __pyx_v_sorted_x.strides[0]) )));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":417
+    /* "adaopt/_adaoptc.pyx":417
  *         elt = sorted_x[i]
  * 
  *         idx = find_elt_list(elt, x, n_x)             # <<<<<<<<<<<<<<
@@ -28749,12 +28714,12 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
     __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_v_x, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 417, __pyx_L1_error)
     __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_n_x); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L1_error)
-    __pyx_t_12 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_find_elt_list(__pyx_v_elt, __pyx_t_8, __pyx_t_13); if (unlikely(__pyx_t_12 == ((long)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L1_error)
+    __pyx_t_12 = __pyx_f_6adaopt_8_adaoptc_find_elt_list(__pyx_v_elt, __pyx_t_8, __pyx_t_13); if (unlikely(__pyx_t_12 == ((long)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
     __pyx_t_8.memview = NULL; __pyx_t_8.data = NULL;
     __pyx_v_idx = __pyx_t_12;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":419
+    /* "adaopt/_adaoptc.pyx":419
  *         idx = find_elt_list(elt, x, n_x)
  * 
  *         res[idx] = elt             # <<<<<<<<<<<<<<
@@ -28770,7 +28735,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":421
+  /* "adaopt/_adaoptc.pyx":421
  *         res[idx] = elt
  * 
  *     return (np.asarray(list(res.values())),             # <<<<<<<<<<<<<<
@@ -28812,7 +28777,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":422
+  /* "adaopt/_adaoptc.pyx":422
  * 
  *     return (np.asarray(list(res.values())),
  *             np.asarray(list(res.keys()),             # <<<<<<<<<<<<<<
@@ -28835,7 +28800,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4)) __PYX_ERR(0, 422, __pyx_L1_error);
   __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":423
+  /* "adaopt/_adaoptc.pyx":423
  *     return (np.asarray(list(res.values())),
  *             np.asarray(list(res.keys()),
  *             dtype=np.integer))             # <<<<<<<<<<<<<<
@@ -28846,7 +28811,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, ((PyObject *)__pyx_ptype_5numpy_integer)) < 0) __PYX_ERR(0, 423, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":422
+  /* "adaopt/_adaoptc.pyx":422
  * 
  *     return (np.asarray(list(res.values())),
  *             np.asarray(list(res.keys()),             # <<<<<<<<<<<<<<
@@ -28859,7 +28824,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":421
+  /* "adaopt/_adaoptc.pyx":421
  *         res[idx] = elt
  * 
  *     return (np.asarray(list(res.values())),             # <<<<<<<<<<<<<<
@@ -28878,7 +28843,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":377
+  /* "adaopt/_adaoptc.pyx":377
  * 
  * # find_kmin_x
  * def find_kmin_x(x, n_x, k, cache=False):             # <<<<<<<<<<<<<<
@@ -28894,7 +28859,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_XDECREF(__pyx_t_14);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.find_kmin_x", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.find_kmin_x", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_key);
@@ -28905,7 +28870,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":427
+/* "adaopt/_adaoptc.pyx":427
  * 
  * # calculate probs test i
  * def calculate_probs(long int[:] index,             # <<<<<<<<<<<<<<
@@ -28914,15 +28879,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_12find_kmin_x(CYTHON_UNUSED
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_15calculate_probs(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_15calculate_probs(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_15calculate_probs = {"calculate_probs", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_15calculate_probs, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_15calculate_probs(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_15calculate_probs = {"calculate_probs", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_15calculate_probs, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_15calculate_probs(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -29009,11 +28974,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_index, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs_train, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.calculate_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.calculate_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(__pyx_self, __pyx_v_index, __pyx_v_probs_train);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_14calculate_probs(__pyx_self, __pyx_v_index, __pyx_v_probs_train);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_index, 1);
@@ -29028,7 +28993,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_index, __Pyx_memviewslice __pyx_v_probs_train) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_index, __Pyx_memviewslice __pyx_v_probs_train) {
   int __pyx_v_idx;
   int __pyx_v_j;
   long __pyx_v_elt;
@@ -29058,7 +29023,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calculate_probs", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":432
+  /* "adaopt/_adaoptc.pyx":432
  *     cdef int idx, j
  *     cdef long int elt
  *     cdef int n_classes = probs_train.shape[1]             # <<<<<<<<<<<<<<
@@ -29067,7 +29032,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
  */
   __pyx_v_n_classes = (__pyx_v_probs_train.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":433
+  /* "adaopt/_adaoptc.pyx":433
  *     cdef long int elt
  *     cdef int n_classes = probs_train.shape[1]
  *     cdef double[:, ::1] probs_out = np.zeros((len(index), n_classes),             # <<<<<<<<<<<<<<
@@ -29098,7 +29063,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 433, __pyx_L1_error);
   __pyx_t_5 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":434
+  /* "adaopt/_adaoptc.pyx":434
  *     cdef int n_classes = probs_train.shape[1]
  *     cdef double[:, ::1] probs_out = np.zeros((len(index), n_classes),
  *                                               dtype=np.double)             # <<<<<<<<<<<<<<
@@ -29115,7 +29080,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 434, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":433
+  /* "adaopt/_adaoptc.pyx":433
  *     cdef long int elt
  *     cdef int n_classes = probs_train.shape[1]
  *     cdef double[:, ::1] probs_out = np.zeros((len(index), n_classes),             # <<<<<<<<<<<<<<
@@ -29133,7 +29098,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":436
+  /* "adaopt/_adaoptc.pyx":436
  *                                               dtype=np.double)
  * 
  *     idx = 0             # <<<<<<<<<<<<<<
@@ -29142,7 +29107,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
  */
   __pyx_v_idx = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":438
+  /* "adaopt/_adaoptc.pyx":438
  *     idx = 0
  * 
  *     for elt in index:             # <<<<<<<<<<<<<<
@@ -29161,7 +29126,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
     __pyx_t_11 = __pyx_t_9;
     __pyx_v_elt = (*((long *) ( /* dim=0 */ (__pyx_t_8.data + __pyx_t_11 * __pyx_t_8.strides[0]) )));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":440
+    /* "adaopt/_adaoptc.pyx":440
  *     for elt in index:
  * 
  *         for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -29173,7 +29138,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
     for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
       __pyx_v_j = __pyx_t_14;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":442
+      /* "adaopt/_adaoptc.pyx":442
  *         for j in range(n_classes):
  * 
  *             probs_out[idx, j] = probs_train[elt, j]             # <<<<<<<<<<<<<<
@@ -29187,7 +29152,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_probs_out.data + __pyx_t_16 * __pyx_v_probs_out.strides[0]) )) + __pyx_t_17)) )) = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_probs_train.data + __pyx_t_11 * __pyx_v_probs_train.strides[0]) ) + __pyx_t_15 * __pyx_v_probs_train.strides[1]) )));
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":444
+    /* "adaopt/_adaoptc.pyx":444
  *             probs_out[idx, j] = probs_train[elt, j]
  * 
  *         idx += 1             # <<<<<<<<<<<<<<
@@ -29199,7 +29164,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
   __pyx_t_8.memview = NULL; __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":446
+  /* "adaopt/_adaoptc.pyx":446
  *         idx += 1
  * 
  *     return np.asarray(probs_out)             # <<<<<<<<<<<<<<
@@ -29241,7 +29206,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":427
+  /* "adaopt/_adaoptc.pyx":427
  * 
  * # calculate probs test i
  * def calculate_probs(long int[:] index,             # <<<<<<<<<<<<<<
@@ -29258,7 +29223,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_6);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.calculate_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.calculate_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs_out, 1);
@@ -29267,7 +29232,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":450
+/* "adaopt/_adaoptc.pyx":450
  * 
  * # average probs
  * def average_probs(double[:,:] probs, double[:] weights):             # <<<<<<<<<<<<<<
@@ -29276,15 +29241,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_14calculate_probs(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_17average_probs(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_17average_probs(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_17average_probs = {"average_probs", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_17average_probs, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_17average_probs(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_17average_probs = {"average_probs", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_17average_probs, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_17average_probs(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -29371,11 +29336,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_weights, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.average_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.average_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(__pyx_self, __pyx_v_probs, __pyx_v_weights);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_16average_probs(__pyx_self, __pyx_v_probs, __pyx_v_weights);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs, 1);
@@ -29390,7 +29355,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_weights) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_probs, __Pyx_memviewslice __pyx_v_weights) {
   double __pyx_v_sum_probs;
   long __pyx_v_i;
   long __pyx_v_n_obs;
@@ -29418,7 +29383,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("average_probs", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":454
+  /* "adaopt/_adaoptc.pyx":454
  *     cdef double sum_probs
  *     cdef long int i
  *     cdef long int n_obs = probs.shape[0]             # <<<<<<<<<<<<<<
@@ -29427,7 +29392,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
  */
   __pyx_v_n_obs = (__pyx_v_probs.shape[0]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":455
+  /* "adaopt/_adaoptc.pyx":455
  *     cdef long int i
  *     cdef long int n_obs = probs.shape[0]
  *     cdef int n_classes = probs.shape[1]             # <<<<<<<<<<<<<<
@@ -29436,7 +29401,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
  */
   __pyx_v_n_classes = (__pyx_v_probs.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":457
+  /* "adaopt/_adaoptc.pyx":457
  *     cdef int n_classes = probs.shape[1]
  *     #cdef double[:] probs_out = np.zeros(n_classes, dtype=np.double)
  *     cdef double[:] probs_out = np.zeros(n_classes)             # <<<<<<<<<<<<<<
@@ -29479,7 +29444,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":459
+  /* "adaopt/_adaoptc.pyx":459
  *     cdef double[:] probs_out = np.zeros(n_classes)
  * 
  *     for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -29491,7 +29456,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_j = __pyx_t_8;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":460
+    /* "adaopt/_adaoptc.pyx":460
  * 
  *     for j in range(n_classes):
  *         sum_probs = 0             # <<<<<<<<<<<<<<
@@ -29500,7 +29465,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
  */
     __pyx_v_sum_probs = 0.0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":461
+    /* "adaopt/_adaoptc.pyx":461
  *     for j in range(n_classes):
  *         sum_probs = 0
  *         for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -29512,7 +29477,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
       __pyx_v_i = __pyx_t_11;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":462
+      /* "adaopt/_adaoptc.pyx":462
  *         sum_probs = 0
  *         for i in range(n_obs):
  *             sum_probs += probs[i, j]*weights[i]             # <<<<<<<<<<<<<<
@@ -29525,7 +29490,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
       __pyx_v_sum_probs = (__pyx_v_sum_probs + ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_probs.data + __pyx_t_12 * __pyx_v_probs.strides[0]) ) + __pyx_t_13 * __pyx_v_probs.strides[1]) ))) * (*((double *) ( /* dim=0 */ (__pyx_v_weights.data + __pyx_t_14 * __pyx_v_weights.strides[0]) )))));
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":463
+    /* "adaopt/_adaoptc.pyx":463
  *         for i in range(n_obs):
  *             sum_probs += probs[i, j]*weights[i]
  *         probs_out[j] = sum_probs             # <<<<<<<<<<<<<<
@@ -29536,7 +29501,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
     *((double *) ( /* dim=0 */ (__pyx_v_probs_out.data + __pyx_t_14 * __pyx_v_probs_out.strides[0]) )) = __pyx_v_sum_probs;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":465
+  /* "adaopt/_adaoptc.pyx":465
  *         probs_out[j] = sum_probs
  * 
  *     return np.asarray(probs_out)             # <<<<<<<<<<<<<<
@@ -29578,7 +29543,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":450
+  /* "adaopt/_adaoptc.pyx":450
  * 
  * # average probs
  * def average_probs(double[:,:] probs, double[:] weights):             # <<<<<<<<<<<<<<
@@ -29593,7 +29558,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.average_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.average_probs", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs_out, 1);
@@ -29602,7 +29567,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":469
+/* "adaopt/_adaoptc.pyx":469
  * 
  * # calculate weights
  * def calculate_weights(double[:] weights):             # <<<<<<<<<<<<<<
@@ -29611,15 +29576,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_16average_probs(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_19calculate_weights(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_19calculate_weights(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_19calculate_weights = {"calculate_weights", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_19calculate_weights, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_19calculate_weights(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_19calculate_weights = {"calculate_weights", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_19calculate_weights, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_19calculate_weights(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -29690,11 +29655,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
   }
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_weights, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.calculate_weights", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.calculate_weights", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(__pyx_self, __pyx_v_weights);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_18calculate_weights(__pyx_self, __pyx_v_weights);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_weights, 1);
@@ -29708,7 +29673,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_weights) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_18calculate_weights(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_weights) {
   __Pyx_memviewslice __pyx_v_weights_out = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -29726,7 +29691,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("calculate_weights", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":470
+  /* "adaopt/_adaoptc.pyx":470
  * # calculate weights
  * def calculate_weights(double[:] weights):
  *     cdef double[:] weights_out = np.zeros(len(weights))             # <<<<<<<<<<<<<<
@@ -29770,7 +29735,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":471
+  /* "adaopt/_adaoptc.pyx":471
  * def calculate_weights(double[:] weights):
  *     cdef double[:] weights_out = np.zeros(len(weights))
  *     weights_out = 1/np.maximum(weights, np.finfo(float).eps)             # <<<<<<<<<<<<<<
@@ -29848,7 +29813,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":472
+  /* "adaopt/_adaoptc.pyx":472
  *     cdef double[:] weights_out = np.zeros(len(weights))
  *     weights_out = 1/np.maximum(weights, np.finfo(float).eps)
  *     weights_out /= np.sum(weights_out)             # <<<<<<<<<<<<<<
@@ -29898,7 +29863,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":473
+  /* "adaopt/_adaoptc.pyx":473
  *     weights_out = 1/np.maximum(weights, np.finfo(float).eps)
  *     weights_out /= np.sum(weights_out)
  *     return weights_out             # <<<<<<<<<<<<<<
@@ -29912,7 +29877,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":469
+  /* "adaopt/_adaoptc.pyx":469
  * 
  * # calculate weights
  * def calculate_weights(double[:] weights):             # <<<<<<<<<<<<<<
@@ -29929,7 +29894,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_7, 1);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.calculate_weights", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.calculate_weights", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_weights_out, 1);
@@ -29938,7 +29903,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":478
+/* "adaopt/_adaoptc.pyx":478
  * # 1 - model fitting -----
  * 
  * def fit_adaopt(double[:, :] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -29947,15 +29912,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_18calculate_weights(CYTHON_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_21fit_adaopt(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_21fit_adaopt(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_21fit_adaopt = {"fit_adaopt", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_21fit_adaopt, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_21fit_adaopt(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_21fit_adaopt = {"fit_adaopt", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_21fit_adaopt, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_21fit_adaopt(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -30192,11 +30157,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_X, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_y, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.fit_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.fit_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(__pyx_self, __pyx_v_X, __pyx_v_y, __pyx_v_n_iterations, __pyx_v_n_X, __pyx_v_p_X, __pyx_v_n_classes, __pyx_v_learning_rate, __pyx_v_reg_lambda, __pyx_v_reg_alpha, __pyx_v_eta, __pyx_v_gamma, __pyx_v_tolerance);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_20fit_adaopt(__pyx_self, __pyx_v_X, __pyx_v_y, __pyx_v_n_iterations, __pyx_v_n_X, __pyx_v_p_X, __pyx_v_n_classes, __pyx_v_learning_rate, __pyx_v_reg_lambda, __pyx_v_reg_alpha, __pyx_v_eta, __pyx_v_gamma, __pyx_v_tolerance);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_X, 1);
@@ -30211,7 +30176,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_iterations, long __pyx_v_n_X, CYTHON_UNUSED int __pyx_v_p_X, int __pyx_v_n_classes, double __pyx_v_learning_rate, double __pyx_v_reg_lambda, double __pyx_v_reg_alpha, double __pyx_v_eta, double __pyx_v_gamma, double __pyx_v_tolerance) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_y, int __pyx_v_n_iterations, long __pyx_v_n_X, CYTHON_UNUSED int __pyx_v_p_X, int __pyx_v_n_classes, double __pyx_v_learning_rate, double __pyx_v_reg_lambda, double __pyx_v_reg_alpha, double __pyx_v_eta, double __pyx_v_gamma, double __pyx_v_tolerance) {
   __Pyx_memviewslice __pyx_v_Y = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_probs = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_scaled_X = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -30266,7 +30231,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("fit_adaopt", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":501
+  /* "adaopt/_adaoptc.pyx":501
  *     cdef long int[:] misclass_condition
  *     cdef double err_m, alpha_m
  *     cdef int m = 0             # <<<<<<<<<<<<<<
@@ -30275,7 +30240,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
   __pyx_v_m = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":502
+  /* "adaopt/_adaoptc.pyx":502
  *     cdef double err_m, alpha_m
  *     cdef int m = 0
  *     cdef double v_prev = 0             # <<<<<<<<<<<<<<
@@ -30284,7 +30249,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
   __pyx_v_v_prev = 0.0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":504
+  /* "adaopt/_adaoptc.pyx":504
  *     cdef double v_prev = 0
  *     cdef double tolerance_
  *     cdef double[:] alphas = np.zeros(n_iterations)             # <<<<<<<<<<<<<<
@@ -30327,7 +30292,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":505
+  /* "adaopt/_adaoptc.pyx":505
  *     cdef double tolerance_
  *     cdef double[:] alphas = np.zeros(n_iterations)
  *     cdef double err_bound = (1.0-1.0/n_classes)             # <<<<<<<<<<<<<<
@@ -30340,7 +30305,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   }
   __pyx_v_err_bound = (1.0 - (1.0 / ((double)__pyx_v_n_classes)));
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":509
+  /* "adaopt/_adaoptc.pyx":509
  * 
  *     # obtain initial probs for each example
  *     scaled_X = X/norm(X, ord=2, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -30380,7 +30345,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":510
+  /* "adaopt/_adaoptc.pyx":510
  *     # obtain initial probs for each example
  *     scaled_X = X/norm(X, ord=2, axis=1)[:, None]
  *     Y = one_hot_encode(y, n_classes)             # <<<<<<<<<<<<<<
@@ -30423,7 +30388,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":511
+  /* "adaopt/_adaoptc.pyx":511
  *     scaled_X = X/norm(X, ord=2, axis=1)[:, None]
  *     Y = one_hot_encode(y, n_classes)
  *     beta = lstsq(scaled_X, Y, rcond=None)[0]             # <<<<<<<<<<<<<<
@@ -30461,7 +30426,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":512
+  /* "adaopt/_adaoptc.pyx":512
  *     Y = one_hot_encode(y, n_classes)
  *     beta = lstsq(scaled_X, Y, rcond=None)[0]
  *     probs = expit(np.dot(scaled_X, beta))             # <<<<<<<<<<<<<<
@@ -30532,7 +30497,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":513
+  /* "adaopt/_adaoptc.pyx":513
  *     beta = lstsq(scaled_X, Y, rcond=None)[0]
  *     probs = expit(np.dot(scaled_X, beta))
  *     probs /= np.sum(probs, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -30575,7 +30540,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":514
+  /* "adaopt/_adaoptc.pyx":514
  *     probs = expit(np.dot(scaled_X, beta))
  *     probs /= np.sum(probs, axis=1)[:, None]
  *     preds = np.asarray(probs).argmax(axis=1)             # <<<<<<<<<<<<<<
@@ -30628,7 +30593,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":516
+  /* "adaopt/_adaoptc.pyx":516
  *     preds = np.asarray(probs).argmax(axis=1)
  * 
  *     w_prev = np.repeat(1.0/n_X, n_X)             # <<<<<<<<<<<<<<
@@ -30678,7 +30643,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":517
+  /* "adaopt/_adaoptc.pyx":517
  * 
  *     w_prev = np.repeat(1.0/n_X, n_X)
  *     w_new = np.repeat(0.0, n_X)             # <<<<<<<<<<<<<<
@@ -30721,7 +30686,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":518
+  /* "adaopt/_adaoptc.pyx":518
  *     w_prev = np.repeat(1.0/n_X, n_X)
  *     w_new = np.repeat(0.0, n_X)
  *     w_m = np.repeat(1.0/n_X, n_X)             # <<<<<<<<<<<<<<
@@ -30771,7 +30736,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":519
+  /* "adaopt/_adaoptc.pyx":519
  *     w_new = np.repeat(0.0, n_X)
  *     w_m = np.repeat(1.0/n_X, n_X)
  *     misclass = np.repeat(1000, n_X)             # <<<<<<<<<<<<<<
@@ -30814,7 +30779,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":520
+  /* "adaopt/_adaoptc.pyx":520
  *     w_m = np.repeat(1.0/n_X, n_X)
  *     misclass = np.repeat(1000, n_X)
  *     misclass_condition = np.repeat(0, n_X)             # <<<<<<<<<<<<<<
@@ -30857,7 +30822,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":524
+  /* "adaopt/_adaoptc.pyx":524
  * 
  *     # loop update probs -----
  *     for m in range(n_iterations):             # <<<<<<<<<<<<<<
@@ -30869,7 +30834,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
     __pyx_v_m = __pyx_t_13;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":527
+    /* "adaopt/_adaoptc.pyx":527
  * 
  *         # misclassification indicator for this iteration -----
  *         for i in range(n_X):             # <<<<<<<<<<<<<<
@@ -30881,7 +30846,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
       __pyx_v_i = __pyx_t_16;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":528
+      /* "adaopt/_adaoptc.pyx":528
  *         # misclassification indicator for this iteration -----
  *         for i in range(n_X):
  *             if y[i] != preds[i]:             # <<<<<<<<<<<<<<
@@ -30893,7 +30858,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
       __pyx_t_19 = ((*((long *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_17 * __pyx_v_y.strides[0]) ))) != (*((long *) ( /* dim=0 */ (__pyx_v_preds.data + __pyx_t_18 * __pyx_v_preds.strides[0]) ))));
       if (__pyx_t_19) {
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":529
+        /* "adaopt/_adaoptc.pyx":529
  *         for i in range(n_X):
  *             if y[i] != preds[i]:
  *                 misclass[i] = preds[i]             # <<<<<<<<<<<<<<
@@ -30904,7 +30869,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
         __pyx_t_17 = __pyx_v_i;
         *((long *) ( /* dim=0 */ (__pyx_v_misclass.data + __pyx_t_17 * __pyx_v_misclass.strides[0]) )) = (*((long *) ( /* dim=0 */ (__pyx_v_preds.data + __pyx_t_18 * __pyx_v_preds.strides[0]) )));
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":530
+        /* "adaopt/_adaoptc.pyx":530
  *             if y[i] != preds[i]:
  *                 misclass[i] = preds[i]
  *                 misclass_condition[i] = 1             # <<<<<<<<<<<<<<
@@ -30914,7 +30879,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
         __pyx_t_18 = __pyx_v_i;
         *((long *) ( /* dim=0 */ (__pyx_v_misclass_condition.data + __pyx_t_18 * __pyx_v_misclass_condition.strides[0]) )) = 1;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":528
+        /* "adaopt/_adaoptc.pyx":528
  *         # misclassification indicator for this iteration -----
  *         for i in range(n_X):
  *             if y[i] != preds[i]:             # <<<<<<<<<<<<<<
@@ -30924,7 +30889,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
         goto __pyx_L7;
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":532
+      /* "adaopt/_adaoptc.pyx":532
  *                 misclass_condition[i] = 1
  *             else:
  *                 misclass[i] = 1000             # <<<<<<<<<<<<<<
@@ -30935,7 +30900,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
         __pyx_t_18 = __pyx_v_i;
         *((long *) ( /* dim=0 */ (__pyx_v_misclass.data + __pyx_t_18 * __pyx_v_misclass.strides[0]) )) = 0x3E8;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":533
+        /* "adaopt/_adaoptc.pyx":533
  *             else:
  *                 misclass[i] = 1000
  *                 misclass_condition[i] = 0             # <<<<<<<<<<<<<<
@@ -30948,17 +30913,17 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
       __pyx_L7:;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":537
+    /* "adaopt/_adaoptc.pyx":537
  * 
  *         # calculate error -----
  *         err_m = sum_product(misclass_condition, w_m, n_X) # sum(w_m) == 1             # <<<<<<<<<<<<<<
  * 
  *         err_m += reg_lambda*(reg_alpha*cython_sum(np.abs(w_m), n_X) +\
  */
-    __pyx_t_20 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_sum_product(__pyx_v_misclass_condition, __pyx_v_w_m, __pyx_v_n_X); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 537, __pyx_L1_error)
+    __pyx_t_20 = __pyx_f_6adaopt_8_adaoptc_sum_product(__pyx_v_misclass_condition, __pyx_v_w_m, __pyx_v_n_X); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 537, __pyx_L1_error)
     __pyx_v_err_m = __pyx_t_20;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":539
+    /* "adaopt/_adaoptc.pyx":539
  *         err_m = sum_product(misclass_condition, w_m, n_X) # sum(w_m) == 1
  * 
  *         err_m += reg_lambda*(reg_alpha*cython_sum(np.abs(w_m), n_X) +\             # <<<<<<<<<<<<<<
@@ -30997,11 +30962,11 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     }
     __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 539, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_20 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__pyx_t_6, __pyx_v_n_X); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 539, __pyx_L1_error)
+    __pyx_t_20 = __pyx_f_6adaopt_8_adaoptc_cython_sum(__pyx_t_6, __pyx_v_n_X); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 539, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
     __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":540
+    /* "adaopt/_adaoptc.pyx":540
  * 
  *         err_m += reg_lambda*(reg_alpha*cython_sum(np.abs(w_m), n_X) +\
  *                              (1 - reg_alpha)*0.5*cython_sum(np.power(w_m, 2), n_X))             # <<<<<<<<<<<<<<
@@ -31040,11 +31005,11 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     }
     __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 540, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_22 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__pyx_t_6, __pyx_v_n_X); if (unlikely(__pyx_t_22 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 540, __pyx_L1_error)
+    __pyx_t_22 = __pyx_f_6adaopt_8_adaoptc_cython_sum(__pyx_t_6, __pyx_v_n_X); if (unlikely(__pyx_t_22 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 540, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
     __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":539
+    /* "adaopt/_adaoptc.pyx":539
  *         err_m = sum_product(misclass_condition, w_m, n_X) # sum(w_m) == 1
  * 
  *         err_m += reg_lambda*(reg_alpha*cython_sum(np.abs(w_m), n_X) +\             # <<<<<<<<<<<<<<
@@ -31053,26 +31018,26 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
     __pyx_v_err_m = (__pyx_v_err_m + (__pyx_v_reg_lambda * ((__pyx_v_reg_alpha * __pyx_t_20) + (((1.0 - __pyx_v_reg_alpha) * 0.5) * __pyx_t_22))));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":541
+    /* "adaopt/_adaoptc.pyx":541
  *         err_m += reg_lambda*(reg_alpha*cython_sum(np.abs(w_m), n_X) +\
  *                              (1 - reg_alpha)*0.5*cython_sum(np.power(w_m, 2), n_X))
  *         err_m = min_c(max_c(err_m, 2.220446049250313e-16),             # <<<<<<<<<<<<<<
  *                       err_bound)
  * 
  */
-    __pyx_t_22 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_max_c(__pyx_v_err_m, 2.220446049250313e-16); if (unlikely(__pyx_t_22 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 541, __pyx_L1_error)
+    __pyx_t_22 = __pyx_f_6adaopt_8_adaoptc_max_c(__pyx_v_err_m, 2.220446049250313e-16); if (unlikely(__pyx_t_22 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 541, __pyx_L1_error)
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":542
+    /* "adaopt/_adaoptc.pyx":542
  *                              (1 - reg_alpha)*0.5*cython_sum(np.power(w_m, 2), n_X))
  *         err_m = min_c(max_c(err_m, 2.220446049250313e-16),
  *                       err_bound)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_20 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_min_c(__pyx_t_22, __pyx_v_err_bound); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 541, __pyx_L1_error)
+    __pyx_t_20 = __pyx_f_6adaopt_8_adaoptc_min_c(__pyx_t_22, __pyx_v_err_bound); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 541, __pyx_L1_error)
     __pyx_v_err_m = __pyx_t_20;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":546
+    /* "adaopt/_adaoptc.pyx":546
  * 
  *         # update weights based on misclassification error -----
  *         alpha_m = learning_rate*log((n_classes - 1)*(1/err_m - 1))             # <<<<<<<<<<<<<<
@@ -31085,7 +31050,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     }
     __pyx_v_alpha_m = (__pyx_v_learning_rate * log(((__pyx_v_n_classes - 1) * ((1.0 / __pyx_v_err_m) - 1.0))));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":547
+    /* "adaopt/_adaoptc.pyx":547
  *         # update weights based on misclassification error -----
  *         alpha_m = learning_rate*log((n_classes - 1)*(1/err_m - 1))
  *         alphas[m] = alpha_m             # <<<<<<<<<<<<<<
@@ -31095,7 +31060,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_18 = __pyx_v_m;
     *((double *) ( /* dim=0 */ (__pyx_v_alphas.data + __pyx_t_18 * __pyx_v_alphas.strides[0]) )) = __pyx_v_alpha_m;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":548
+    /* "adaopt/_adaoptc.pyx":548
  *         alpha_m = learning_rate*log((n_classes - 1)*(1/err_m - 1))
  *         alphas[m] = alpha_m
  *         w_prev = w_m             # <<<<<<<<<<<<<<
@@ -31106,7 +31071,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __PYX_INC_MEMVIEW(&__pyx_v_w_m, 1);
     __pyx_v_w_prev = __pyx_v_w_m;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":550
+    /* "adaopt/_adaoptc.pyx":550
  *         w_prev = w_m
  * 
  *         w_m *= np.exp(alpha_m*np.asarray(misclass_condition))             # <<<<<<<<<<<<<<
@@ -31190,7 +31155,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_6.memview = NULL;
     __pyx_t_6.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":551
+    /* "adaopt/_adaoptc.pyx":551
  * 
  *         w_m *= np.exp(alpha_m*np.asarray(misclass_condition))
  *         w_m = np.asarray(w_m)/cython_sum(w_m, n_X)             # <<<<<<<<<<<<<<
@@ -31227,7 +31192,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
-    __pyx_t_20 = __pyx_f_7mlsauce_6adaopt_8_adaoptc_cython_sum(__pyx_v_w_m, __pyx_v_n_X); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 551, __pyx_L1_error)
+    __pyx_t_20 = __pyx_f_6adaopt_8_adaoptc_cython_sum(__pyx_v_w_m, __pyx_v_n_X); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 551, __pyx_L1_error)
     __pyx_t_2 = PyFloat_FromDouble(__pyx_t_20); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 551, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 551, __pyx_L1_error)
@@ -31241,7 +31206,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_6.memview = NULL;
     __pyx_t_6.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":552
+    /* "adaopt/_adaoptc.pyx":552
  *         w_m *= np.exp(alpha_m*np.asarray(misclass_condition))
  *         w_m = np.asarray(w_m)/cython_sum(w_m, n_X)
  *         w_new = w_m             # <<<<<<<<<<<<<<
@@ -31252,7 +31217,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __PYX_INC_MEMVIEW(&__pyx_v_w_m, 1);
     __pyx_v_w_new = __pyx_v_w_m;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":555
+    /* "adaopt/_adaoptc.pyx":555
  * 
  *         # update probs based on misclassification error -----
  *         probs, v_prev = update_proba(probs, misclass,             # <<<<<<<<<<<<<<
@@ -31266,7 +31231,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_misclass, 1, (PyObject *(*)(char *)) __pyx_memview_get_long, (int (*)(char *, PyObject *)) __pyx_memview_set_long, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 555, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":556
+    /* "adaopt/_adaoptc.pyx":556
  *         # update probs based on misclassification error -----
  *         probs, v_prev = update_proba(probs, misclass,
  *                             w_new, w_prev,             # <<<<<<<<<<<<<<
@@ -31278,7 +31243,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_9 = __pyx_memoryview_fromslice(__pyx_v_w_prev, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 556, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":557
+    /* "adaopt/_adaoptc.pyx":557
  *         probs, v_prev = update_proba(probs, misclass,
  *                             w_new, w_prev,
  *                             v_prev, eta, gamma,             # <<<<<<<<<<<<<<
@@ -31292,7 +31257,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_24 = PyFloat_FromDouble(__pyx_v_gamma); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 557, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_24);
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":558
+    /* "adaopt/_adaoptc.pyx":558
  *                             w_new, w_prev,
  *                             v_prev, eta, gamma,
  *                             n_X, n_classes)             # <<<<<<<<<<<<<<
@@ -31381,7 +31346,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
       __pyx_L9_unpacking_done:;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":555
+    /* "adaopt/_adaoptc.pyx":555
  * 
  *         # update probs based on misclassification error -----
  *         probs, v_prev = update_proba(probs, misclass,             # <<<<<<<<<<<<<<
@@ -31398,7 +31363,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_8.data = NULL;
     __pyx_v_v_prev = __pyx_t_20;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":562
+    /* "adaopt/_adaoptc.pyx":562
  * 
  *         # recalculate preds -----
  *         preds = np.argmax(probs, axis=1)             # <<<<<<<<<<<<<<
@@ -31432,7 +31397,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __pyx_t_11.memview = NULL;
     __pyx_t_11.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":566
+    /* "adaopt/_adaoptc.pyx":566
  * 
  *         # check tolerance -----
  *         if  calculate_tolerance(np.asarray(alphas)) <= tolerance:             # <<<<<<<<<<<<<<
@@ -31471,13 +31436,13 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     }
     __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_25, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 566, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
-    __pyx_t_20 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_calculate_tolerance(__pyx_t_6); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 566, __pyx_L1_error)
+    __pyx_t_20 = __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_calculate_tolerance(__pyx_t_6); if (unlikely(__pyx_t_20 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 566, __pyx_L1_error)
     __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
     __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
     __pyx_t_19 = (__pyx_t_20 <= __pyx_v_tolerance);
     if (__pyx_t_19) {
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":567
+      /* "adaopt/_adaoptc.pyx":567
  *         # check tolerance -----
  *         if  calculate_tolerance(np.asarray(alphas)) <= tolerance:
  *             n_iterations = m             # <<<<<<<<<<<<<<
@@ -31486,7 +31451,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
       __pyx_v_n_iterations = __pyx_v_m;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":568
+      /* "adaopt/_adaoptc.pyx":568
  *         if  calculate_tolerance(np.asarray(alphas)) <= tolerance:
  *             n_iterations = m
  *             break             # <<<<<<<<<<<<<<
@@ -31495,7 +31460,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
       goto __pyx_L4_break;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":566
+      /* "adaopt/_adaoptc.pyx":566
  * 
  *         # check tolerance -----
  *         if  calculate_tolerance(np.asarray(alphas)) <= tolerance:             # <<<<<<<<<<<<<<
@@ -31506,7 +31471,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   }
   __pyx_L4_break:;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":570
+  /* "adaopt/_adaoptc.pyx":570
  *             break
  * 
  *     alphas_ = np.asarray(alphas)             # <<<<<<<<<<<<<<
@@ -31546,7 +31511,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_v_alphas_ = __pyx_t_25;
   __pyx_t_25 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":571
+  /* "adaopt/_adaoptc.pyx":571
  * 
  *     alphas_ = np.asarray(alphas)
  *     alphas_ = alphas_[np.where(alphas_ != 0)]             # <<<<<<<<<<<<<<
@@ -31589,7 +31554,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __Pyx_DECREF_SET(__pyx_v_alphas_, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":572
+  /* "adaopt/_adaoptc.pyx":572
  *     alphas_ = np.asarray(alphas)
  *     alphas_ = alphas_[np.where(alphas_ != 0)]
  *     probs_ = expit(np.asarray(probs))             # <<<<<<<<<<<<<<
@@ -31654,7 +31619,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __pyx_v_probs_ = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":573
+  /* "adaopt/_adaoptc.pyx":573
  *     alphas_ = alphas_[np.where(alphas_ != 0)]
  *     probs_ = expit(np.asarray(probs))
  *     probs_ /= np.sum(probs_, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -31688,7 +31653,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __Pyx_DECREF_SET(__pyx_v_probs_, __pyx_t_24);
   __pyx_t_24 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":575
+  /* "adaopt/_adaoptc.pyx":575
  *     probs_ /= np.sum(probs_, axis=1)[:, None]
  * 
  *     return {'probs': probs_,             # <<<<<<<<<<<<<<
@@ -31698,9 +31663,9 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_24 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_24);
-  if (PyDict_SetItem(__pyx_t_24, __pyx_n_u_probs, __pyx_v_probs_) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_probs, __pyx_v_probs_) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":576
+  /* "adaopt/_adaoptc.pyx":576
  * 
  *     return {'probs': probs_,
  *             'training_accuracy': np.mean(preds == np.asarray(y)),             # <<<<<<<<<<<<<<
@@ -31770,19 +31735,19 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
   }
-  if (PyDict_SetItem(__pyx_t_24, __pyx_n_u_training_accuracy, __pyx_t_4) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_training_accuracy, __pyx_t_4) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":577
+  /* "adaopt/_adaoptc.pyx":577
  *     return {'probs': probs_,
  *             'training_accuracy': np.mean(preds == np.asarray(y)),
  *             'alphas': alphas_,             # <<<<<<<<<<<<<<
  *             'n_iterations': n_iterations,
  *             'scaled_X_train': scaled_X}
  */
-  if (PyDict_SetItem(__pyx_t_24, __pyx_n_u_alphas, __pyx_v_alphas_) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_alphas, __pyx_v_alphas_) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":578
+  /* "adaopt/_adaoptc.pyx":578
  *             'training_accuracy': np.mean(preds == np.asarray(y)),
  *             'alphas': alphas_,
  *             'n_iterations': n_iterations,             # <<<<<<<<<<<<<<
@@ -31791,10 +31756,10 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
   __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_n_iterations); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_24, __pyx_n_u_n_iterations, __pyx_t_4) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_n_iterations, __pyx_t_4) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":579
+  /* "adaopt/_adaoptc.pyx":579
  *             'alphas': alphas_,
  *             'n_iterations': n_iterations,
  *             'scaled_X_train': scaled_X}             # <<<<<<<<<<<<<<
@@ -31803,13 +31768,13 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
   __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_scaled_X, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 579, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_24, __pyx_n_u_scaled_X_train, __pyx_t_4) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_24, __pyx_n_s_scaled_X_train, __pyx_t_4) < 0) __PYX_ERR(0, 575, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_24;
   __pyx_t_24 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":478
+  /* "adaopt/_adaoptc.pyx":478
  * # 1 - model fitting -----
  * 
  * def fit_adaopt(double[:, :] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -31834,7 +31799,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_t_25);
   __Pyx_XDECREF(__pyx_t_26);
   __Pyx_XDECREF(__pyx_t_27);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.fit_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.fit_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_Y, 1);
@@ -31855,7 +31820,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":584
+/* "adaopt/_adaoptc.pyx":584
  * # 2 - Model predict -----
  * 
  * def predict_proba_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -31864,15 +31829,15 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_20fit_adaopt(CYTHON_UNUSED 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_23predict_proba_adaopt(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_23predict_proba_adaopt(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_23predict_proba_adaopt = {"predict_proba_adaopt", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_23predict_proba_adaopt, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_23predict_proba_adaopt(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_23predict_proba_adaopt = {"predict_proba_adaopt", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_23predict_proba_adaopt, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_23predict_proba_adaopt(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -31911,9 +31876,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X_test,&__pyx_n_s_scaled_X_train,&__pyx_n_s_n_test,&__pyx_n_s_n_train,&__pyx_n_s_probs_train,&__pyx_n_s_k,&__pyx_n_s_n_clusters,&__pyx_n_s_seed,&__pyx_n_s_batch_size,&__pyx_n_s_type_dist,&__pyx_n_s_cache,0};
-    values[9] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_euclidean)));
+    values[9] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_euclidean)));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":591
+    /* "adaopt/_adaoptc.pyx":591
  *                   int batch_size = 100,
  *                   type_dist="euclidean",
  *                   cache=True):             # <<<<<<<<<<<<<<
@@ -32105,13 +32070,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_X_test, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_scaled_X_train, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs_train, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.predict_proba_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.predict_proba_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(__pyx_self, __pyx_v_X_test, __pyx_v_scaled_X_train, __pyx_v_n_test, __pyx_v_n_train, __pyx_v_probs_train, __pyx_v_k, __pyx_v_n_clusters, __pyx_v_seed, __pyx_v_batch_size, __pyx_v_type_dist, __pyx_v_cache);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_22predict_proba_adaopt(__pyx_self, __pyx_v_X_test, __pyx_v_scaled_X_train, __pyx_v_n_test, __pyx_v_n_train, __pyx_v_probs_train, __pyx_v_k, __pyx_v_n_clusters, __pyx_v_seed, __pyx_v_batch_size, __pyx_v_type_dist, __pyx_v_cache);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":584
+  /* "adaopt/_adaoptc.pyx":584
  * # 2 - Model predict -----
  * 
  * def predict_proba_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -32133,7 +32098,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache) {
   int __pyx_v_n_classes;
   CYTHON_UNUSED int __pyx_v_n_X_train;
   CYTHON_UNUSED int __pyx_v_p_X_train;
@@ -32187,7 +32152,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __Pyx_RefNannySetupContext("predict_proba_adaopt", 1);
   __PYX_INC_MEMVIEW(&__pyx_v_scaled_X_train, 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":593
+  /* "adaopt/_adaoptc.pyx":593
  *                   cache=True):
  * 
  *     cdef int n_classes = probs_train.shape[1]             # <<<<<<<<<<<<<<
@@ -32196,7 +32161,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
  */
   __pyx_v_n_classes = (__pyx_v_probs_train.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":594
+  /* "adaopt/_adaoptc.pyx":594
  * 
  *     cdef int n_classes = probs_train.shape[1]
  *     cdef int n_X_train = scaled_X_train.shape[0]             # <<<<<<<<<<<<<<
@@ -32205,7 +32170,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
  */
   __pyx_v_n_X_train = (__pyx_v_scaled_X_train.shape[0]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":595
+  /* "adaopt/_adaoptc.pyx":595
  *     cdef int n_classes = probs_train.shape[1]
  *     cdef int n_X_train = scaled_X_train.shape[0]
  *     cdef int p_X_train = scaled_X_train.shape[1]             # <<<<<<<<<<<<<<
@@ -32214,7 +32179,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
  */
   __pyx_v_p_X_train = (__pyx_v_scaled_X_train.shape[1]);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":596
+  /* "adaopt/_adaoptc.pyx":596
  *     cdef int n_X_train = scaled_X_train.shape[0]
  *     cdef int p_X_train = scaled_X_train.shape[1]
  *     cdef double zero = np.finfo(float).eps             # <<<<<<<<<<<<<<
@@ -32255,7 +32220,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_zero = __pyx_t_5;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":604
+  /* "adaopt/_adaoptc.pyx":604
  * 
  *     cdef double[:,::1] dist_mat
  *     cdef double[:,::1] out_probs = np.zeros((n_test, n_classes),             # <<<<<<<<<<<<<<
@@ -32285,7 +32250,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6)) __PYX_ERR(0, 604, __pyx_L1_error);
   __pyx_t_6 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":605
+  /* "adaopt/_adaoptc.pyx":605
  *     cdef double[:,::1] dist_mat
  *     cdef double[:,::1] out_probs = np.zeros((n_test, n_classes),
  *                                             dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32302,7 +32267,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 605, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":604
+  /* "adaopt/_adaoptc.pyx":604
  * 
  *     cdef double[:,::1] dist_mat
  *     cdef double[:,::1] out_probs = np.zeros((n_test, n_classes),             # <<<<<<<<<<<<<<
@@ -32320,7 +32285,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":606
+  /* "adaopt/_adaoptc.pyx":606
  *     cdef double[:,::1] out_probs = np.zeros((n_test, n_classes),
  *                                             dtype=np.double)
  *     cdef double[:,::1] out_probs_ = np.zeros((n_test, n_classes),             # <<<<<<<<<<<<<<
@@ -32350,7 +32315,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 606, __pyx_L1_error);
   __pyx_t_1 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":607
+  /* "adaopt/_adaoptc.pyx":607
  *                                             dtype=np.double)
  *     cdef double[:,::1] out_probs_ = np.zeros((n_test, n_classes),
  *                                                dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32367,7 +32332,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_3) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":606
+  /* "adaopt/_adaoptc.pyx":606
  *     cdef double[:,::1] out_probs = np.zeros((n_test, n_classes),
  *                                             dtype=np.double)
  *     cdef double[:,::1] out_probs_ = np.zeros((n_test, n_classes),             # <<<<<<<<<<<<<<
@@ -32385,7 +32350,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":608
+  /* "adaopt/_adaoptc.pyx":608
  *     cdef double[:,::1] out_probs_ = np.zeros((n_test, n_classes),
  *                                                dtype=np.double)
  *     cdef double[:,::1] scaled_X_test = X_test/norm(X_test, ord=2, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -32425,7 +32390,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":609
+  /* "adaopt/_adaoptc.pyx":609
  *                                                dtype=np.double)
  *     cdef double[:,::1] scaled_X_test = X_test/norm(X_test, ord=2, axis=1)[:, None]
  *     cdef double[:,::1] probs_test_i = np.zeros((k, n_classes),             # <<<<<<<<<<<<<<
@@ -32455,7 +32420,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6)) __PYX_ERR(0, 609, __pyx_L1_error);
   __pyx_t_6 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":610
+  /* "adaopt/_adaoptc.pyx":610
  *     cdef double[:,::1] scaled_X_test = X_test/norm(X_test, ord=2, axis=1)[:, None]
  *     cdef double[:,::1] probs_test_i = np.zeros((k, n_classes),
  *                                                dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32472,7 +32437,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_1) < 0) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":609
+  /* "adaopt/_adaoptc.pyx":609
  *                                                dtype=np.double)
  *     cdef double[:,::1] scaled_X_test = X_test/norm(X_test, ord=2, axis=1)[:, None]
  *     cdef double[:,::1] probs_test_i = np.zeros((k, n_classes),             # <<<<<<<<<<<<<<
@@ -32490,7 +32455,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":611
+  /* "adaopt/_adaoptc.pyx":611
  *     cdef double[:,::1] probs_test_i = np.zeros((k, n_classes),
  *                                                dtype=np.double)
  *     cdef double[:,::1] probs_train_ = np.zeros((n_train, n_classes),             # <<<<<<<<<<<<<<
@@ -32520,7 +32485,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 611, __pyx_L1_error);
   __pyx_t_2 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":612
+  /* "adaopt/_adaoptc.pyx":612
  *                                                dtype=np.double)
  *     cdef double[:,::1] probs_train_ = np.zeros((n_train, n_classes),
  *                                             dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32537,7 +32502,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 612, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":611
+  /* "adaopt/_adaoptc.pyx":611
  *     cdef double[:,::1] probs_test_i = np.zeros((k, n_classes),
  *                                                dtype=np.double)
  *     cdef double[:,::1] probs_train_ = np.zeros((n_train, n_classes),             # <<<<<<<<<<<<<<
@@ -32555,7 +32520,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":613
+  /* "adaopt/_adaoptc.pyx":613
  *     cdef double[:,::1] probs_train_ = np.zeros((n_train, n_classes),
  *                                             dtype=np.double)
  *     cdef double[:] dists_test_i = np.zeros(n_train, dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32594,7 +32559,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":614
+  /* "adaopt/_adaoptc.pyx":614
  *                                             dtype=np.double)
  *     cdef double[:] dists_test_i = np.zeros(n_train, dtype=np.double)
  *     cdef double[:] avg_probs_i = np.zeros(n_classes, dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32633,7 +32598,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":615
+  /* "adaopt/_adaoptc.pyx":615
  *     cdef double[:] dists_test_i = np.zeros(n_train, dtype=np.double)
  *     cdef double[:] avg_probs_i = np.zeros(n_classes, dtype=np.double)
  *     cdef double[:] avg_probs = np.zeros(n_classes, dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32672,7 +32637,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":620
+  /* "adaopt/_adaoptc.pyx":620
  *     # probabilities on training set -----
  * 
  *     if n_clusters <= 0:             # <<<<<<<<<<<<<<
@@ -32682,7 +32647,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   __pyx_t_10 = (__pyx_v_n_clusters <= 0);
   if (__pyx_t_10) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":623
+    /* "adaopt/_adaoptc.pyx":623
  * 
  *         # whole training set
  *         probs_train_ = probs_train             # <<<<<<<<<<<<<<
@@ -32693,7 +32658,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     __PYX_INC_MEMVIEW(&__pyx_v_probs_train, 1);
     __pyx_v_probs_train_ = __pyx_v_probs_train;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":620
+    /* "adaopt/_adaoptc.pyx":620
  *     # probabilities on training set -----
  * 
  *     if n_clusters <= 0:             # <<<<<<<<<<<<<<
@@ -32703,7 +32668,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     goto __pyx_L3;
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":628
+  /* "adaopt/_adaoptc.pyx":628
  * 
  *         # clustered training set
  *         probs_train_ = np.zeros((n_clusters, n_classes),             # <<<<<<<<<<<<<<
@@ -32734,7 +32699,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(0, 628, __pyx_L1_error);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":629
+    /* "adaopt/_adaoptc.pyx":629
  *         # clustered training set
  *         probs_train_ = np.zeros((n_clusters, n_classes),
  *                                  dtype=np.double)             # <<<<<<<<<<<<<<
@@ -32751,7 +32716,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 629, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":628
+    /* "adaopt/_adaoptc.pyx":628
  * 
  *         # clustered training set
  *         probs_train_ = np.zeros((n_clusters, n_classes),             # <<<<<<<<<<<<<<
@@ -32770,7 +32735,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":631
+    /* "adaopt/_adaoptc.pyx":631
  *                                  dtype=np.double)
  * 
  *         kmeans = MiniBatchKMeans(n_clusters=n_clusters,             # <<<<<<<<<<<<<<
@@ -32786,7 +32751,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_n_clusters, __pyx_t_6) < 0) __PYX_ERR(0, 631, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":632
+    /* "adaopt/_adaoptc.pyx":632
  * 
  *         kmeans = MiniBatchKMeans(n_clusters=n_clusters,
  *                                  batch_size=batch_size,             # <<<<<<<<<<<<<<
@@ -32798,7 +32763,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_batch_size, __pyx_t_6) < 0) __PYX_ERR(0, 631, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":633
+    /* "adaopt/_adaoptc.pyx":633
  *         kmeans = MiniBatchKMeans(n_clusters=n_clusters,
  *                                  batch_size=batch_size,
  *                                  random_state=seed).fit(scaled_X_train)             # <<<<<<<<<<<<<<
@@ -32810,7 +32775,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_random_state, __pyx_t_6) < 0) __PYX_ERR(0, 631, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":631
+    /* "adaopt/_adaoptc.pyx":631
  *                                  dtype=np.double)
  * 
  *         kmeans = MiniBatchKMeans(n_clusters=n_clusters,             # <<<<<<<<<<<<<<
@@ -32822,7 +32787,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":633
+    /* "adaopt/_adaoptc.pyx":633
  *         kmeans = MiniBatchKMeans(n_clusters=n_clusters,
  *                                  batch_size=batch_size,
  *                                  random_state=seed).fit(scaled_X_train)             # <<<<<<<<<<<<<<
@@ -32860,7 +32825,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     __pyx_v_kmeans = __pyx_t_7;
     __pyx_t_7 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":635
+    /* "adaopt/_adaoptc.pyx":635
  *                                  random_state=seed).fit(scaled_X_train)
  * 
  *         scaled_X_train = kmeans.cluster_centers_             # <<<<<<<<<<<<<<
@@ -32876,7 +32841,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":637
+    /* "adaopt/_adaoptc.pyx":637
  *         scaled_X_train = kmeans.cluster_centers_
  * 
  *         for m in range(n_clusters):             # <<<<<<<<<<<<<<
@@ -32888,7 +32853,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
       __pyx_v_m = __pyx_t_12;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":639
+      /* "adaopt/_adaoptc.pyx":639
  *         for m in range(n_clusters):
  * 
  *             index_train = np.where(kmeans.labels_ == m)[0]             # <<<<<<<<<<<<<<
@@ -32940,7 +32905,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
       __pyx_t_14.memview = NULL;
       __pyx_t_14.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":641
+      /* "adaopt/_adaoptc.pyx":641
  *             index_train = np.where(kmeans.labels_ == m)[0]
  * 
  *             avg_probs = np.average(calculate_probs(index_train,             # <<<<<<<<<<<<<<
@@ -32957,7 +32922,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
       __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_index_train, 1, (PyObject *(*)(char *)) __pyx_memview_get_long, (int (*)(char *, PyObject *)) __pyx_memview_set_long, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 641, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":642
+      /* "adaopt/_adaoptc.pyx":642
  * 
  *             avg_probs = np.average(calculate_probs(index_train,
  *                                                    probs_train),             # <<<<<<<<<<<<<<
@@ -32991,7 +32956,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":641
+      /* "adaopt/_adaoptc.pyx":641
  *             index_train = np.where(kmeans.labels_ == m)[0]
  * 
  *             avg_probs = np.average(calculate_probs(index_train,             # <<<<<<<<<<<<<<
@@ -33004,7 +32969,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
       if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6)) __PYX_ERR(0, 641, __pyx_L1_error);
       __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":643
+      /* "adaopt/_adaoptc.pyx":643
  *             avg_probs = np.average(calculate_probs(index_train,
  *                                                    probs_train),
  *                                    axis=0)             # <<<<<<<<<<<<<<
@@ -33015,7 +32980,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
       __Pyx_GOTREF(__pyx_t_6);
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_axis, __pyx_int_0) < 0) __PYX_ERR(0, 643, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":641
+      /* "adaopt/_adaoptc.pyx":641
  *             index_train = np.where(kmeans.labels_ == m)[0]
  * 
  *             avg_probs = np.average(calculate_probs(index_train,             # <<<<<<<<<<<<<<
@@ -33034,7 +32999,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":645
+      /* "adaopt/_adaoptc.pyx":645
  *                                    axis=0)
  * 
  *             for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -33046,7 +33011,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
       for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_16; __pyx_t_17+=1) {
         __pyx_v_j = __pyx_t_17;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":647
+        /* "adaopt/_adaoptc.pyx":647
  *             for j in range(n_classes):
  * 
  *                 probs_train_[m, j] = avg_probs[j]             # <<<<<<<<<<<<<<
@@ -33062,17 +33027,17 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
   }
   __pyx_L3:;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":652
+  /* "adaopt/_adaoptc.pyx":652
  *     # main loops -----
  * 
  *     if type_dist == "euclidean":             # <<<<<<<<<<<<<<
  * 
  *         for i in range(n_test):
  */
-  __pyx_t_10 = (__Pyx_PyUnicode_Equals(__pyx_v_type_dist, __pyx_n_u_euclidean, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 652, __pyx_L1_error)
+  __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_v_type_dist, __pyx_n_s_euclidean, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 652, __pyx_L1_error)
   if (__pyx_t_10) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":654
+    /* "adaopt/_adaoptc.pyx":654
  *     if type_dist == "euclidean":
  * 
  *         for i in range(n_test):             # <<<<<<<<<<<<<<
@@ -33084,7 +33049,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_22predict_proba_adaopt(CYTH
     for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
       __pyx_v_i = __pyx_t_22;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":656
+      /* "adaopt/_adaoptc.pyx":656
  *         for i in range(n_test):
  * 
  *             dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:],             # <<<<<<<<<<<<<<
@@ -33104,9 +33069,9 @@ __pyx_t_23.shape[0] = __pyx_v_scaled_X_test.shape[1];
 __pyx_t_23.strides[0] = __pyx_v_scaled_X_test.strides[1];
     __pyx_t_23.suboffsets[0] = -1;
 
-__pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_euclidean(__pyx_t_23, __pyx_v_scaled_X_train); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 656, __pyx_L1_error)
+__pyx_t_9 = __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_euclidean(__pyx_t_23, __pyx_v_scaled_X_train); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 656, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":657
+      /* "adaopt/_adaoptc.pyx":657
  * 
  *             dists_test_i = distance_to_mat_euclidean(scaled_X_test[i,:],
  *                                            scaled_X_train)             # <<<<<<<<<<<<<<
@@ -33120,7 +33085,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":659
+      /* "adaopt/_adaoptc.pyx":659
  *                                            scaled_X_train)
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -33137,7 +33102,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6)) __PYX_ERR(0, 659, __pyx_L1_error);
       __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":660
+      /* "adaopt/_adaoptc.pyx":660
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,             # <<<<<<<<<<<<<<
@@ -33151,7 +33116,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_n_x, __pyx_t_7) < 0) __PYX_ERR(0, 660, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":661
+      /* "adaopt/_adaoptc.pyx":661
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,
  *                                       k=k, cache=cache)             # <<<<<<<<<<<<<<
@@ -33164,7 +33129,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_cache, __pyx_v_cache) < 0) __PYX_ERR(0, 660, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":659
+      /* "adaopt/_adaoptc.pyx":659
  *                                            scaled_X_train)
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -33180,7 +33145,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       __Pyx_XDECREF_SET(__pyx_v_kmin_test_i, ((PyObject*)__pyx_t_7));
       __pyx_t_7 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":663
+      /* "adaopt/_adaoptc.pyx":663
  *                                       k=k, cache=cache)
  * 
  *             weights_test_i = calculate_weights(kmin_test_i[0])             # <<<<<<<<<<<<<<
@@ -33222,7 +33187,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":665
+      /* "adaopt/_adaoptc.pyx":665
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -33236,7 +33201,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
         __PYX_ERR(0, 665, __pyx_L1_error)
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":666
+      /* "adaopt/_adaoptc.pyx":666
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],
  *                                            probs_train_)             # <<<<<<<<<<<<<<
@@ -33269,7 +33234,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":665
+      /* "adaopt/_adaoptc.pyx":665
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -33283,7 +33248,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       __pyx_t_8.memview = NULL;
       __pyx_t_8.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":668
+      /* "adaopt/_adaoptc.pyx":668
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -33299,7 +33264,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_probs, __pyx_t_2) < 0) __PYX_ERR(0, 668, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":669
+      /* "adaopt/_adaoptc.pyx":669
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,
  *                                         weights=weights_test_i)             # <<<<<<<<<<<<<<
@@ -33311,7 +33276,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_weights, __pyx_t_2) < 0) __PYX_ERR(0, 668, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":668
+      /* "adaopt/_adaoptc.pyx":668
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -33329,7 +33294,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":671
+      /* "adaopt/_adaoptc.pyx":671
  *                                         weights=weights_test_i)
  * 
  *             for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -33341,7 +33306,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       for (__pyx_t_24 = 0; __pyx_t_24 < __pyx_t_11; __pyx_t_24+=1) {
         __pyx_v_j = __pyx_t_24;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":673
+        /* "adaopt/_adaoptc.pyx":673
  *             for j in range(n_classes):
  * 
  *                 out_probs[i, j] = avg_probs_i[j]             # <<<<<<<<<<<<<<
@@ -33355,7 +33320,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
       }
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":675
+    /* "adaopt/_adaoptc.pyx":675
  *                 out_probs[i, j] = avg_probs_i[j]
  * 
  *         out_probs_ = expit(out_probs)             # <<<<<<<<<<<<<<
@@ -33396,7 +33361,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":677
+    /* "adaopt/_adaoptc.pyx":677
  *         out_probs_ = expit(out_probs)
  * 
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -33439,7 +33404,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":679
+    /* "adaopt/_adaoptc.pyx":679
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
  * 
  *         return np.asarray(out_probs_)             # <<<<<<<<<<<<<<
@@ -33481,7 +33446,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":652
+    /* "adaopt/_adaoptc.pyx":652
  *     # main loops -----
  * 
  *     if type_dist == "euclidean":             # <<<<<<<<<<<<<<
@@ -33490,17 +33455,17 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":682
+  /* "adaopt/_adaoptc.pyx":682
  * 
  * 
  *     if type_dist == "cosine":             # <<<<<<<<<<<<<<
  * 
  *         for i in range(n_test):
  */
-  __pyx_t_10 = (__Pyx_PyUnicode_Equals(__pyx_v_type_dist, __pyx_n_u_cosine, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 682, __pyx_L1_error)
+  __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_v_type_dist, __pyx_n_s_cosine, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 682, __pyx_L1_error)
   if (__pyx_t_10) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":684
+    /* "adaopt/_adaoptc.pyx":684
  *     if type_dist == "cosine":
  * 
  *         for i in range(n_test):             # <<<<<<<<<<<<<<
@@ -33512,7 +33477,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_eucli
     for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
       __pyx_v_i = __pyx_t_22;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":686
+      /* "adaopt/_adaoptc.pyx":686
  *         for i in range(n_test):
  * 
  *             dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:],             # <<<<<<<<<<<<<<
@@ -33532,9 +33497,9 @@ __pyx_t_23.shape[0] = __pyx_v_scaled_X_test.shape[1];
 __pyx_t_23.strides[0] = __pyx_v_scaled_X_test.strides[1];
     __pyx_t_23.suboffsets[0] = -1;
 
-__pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosine(__pyx_t_23, __pyx_v_scaled_X_train); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 686, __pyx_L1_error)
+__pyx_t_9 = __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_cosine(__pyx_t_23, __pyx_v_scaled_X_train); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 686, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":687
+      /* "adaopt/_adaoptc.pyx":687
  * 
  *             dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:],
  *                                            scaled_X_train)             # <<<<<<<<<<<<<<
@@ -33548,7 +33513,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":689
+      /* "adaopt/_adaoptc.pyx":689
  *                                            scaled_X_train)
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -33565,7 +33530,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2)) __PYX_ERR(0, 689, __pyx_L1_error);
       __pyx_t_2 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":690
+      /* "adaopt/_adaoptc.pyx":690
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,             # <<<<<<<<<<<<<<
@@ -33579,7 +33544,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_n_x, __pyx_t_3) < 0) __PYX_ERR(0, 690, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":691
+      /* "adaopt/_adaoptc.pyx":691
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,
  *                                       k=k, cache=cache)             # <<<<<<<<<<<<<<
@@ -33592,7 +33557,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache, __pyx_v_cache) < 0) __PYX_ERR(0, 690, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":689
+      /* "adaopt/_adaoptc.pyx":689
  *                                            scaled_X_train)
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -33608,7 +33573,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       __Pyx_XDECREF_SET(__pyx_v_kmin_test_i, ((PyObject*)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":693
+      /* "adaopt/_adaoptc.pyx":693
  *                                       k=k, cache=cache)
  * 
  *             weights_test_i = calculate_weights(kmin_test_i[0])             # <<<<<<<<<<<<<<
@@ -33650,7 +33615,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":695
+      /* "adaopt/_adaoptc.pyx":695
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -33664,7 +33629,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
         __PYX_ERR(0, 695, __pyx_L1_error)
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":696
+      /* "adaopt/_adaoptc.pyx":696
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],
  *                                            probs_train_)             # <<<<<<<<<<<<<<
@@ -33697,7 +33662,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":695
+      /* "adaopt/_adaoptc.pyx":695
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -33711,7 +33676,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       __pyx_t_8.memview = NULL;
       __pyx_t_8.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":698
+      /* "adaopt/_adaoptc.pyx":698
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -33727,7 +33692,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_probs, __pyx_t_6) < 0) __PYX_ERR(0, 698, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":699
+      /* "adaopt/_adaoptc.pyx":699
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,
  *                                         weights=weights_test_i)             # <<<<<<<<<<<<<<
@@ -33739,7 +33704,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_weights, __pyx_t_6) < 0) __PYX_ERR(0, 698, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":698
+      /* "adaopt/_adaoptc.pyx":698
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -33757,7 +33722,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":701
+      /* "adaopt/_adaoptc.pyx":701
  *                                         weights=weights_test_i)
  * 
  *             for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -33769,7 +33734,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       for (__pyx_t_24 = 0; __pyx_t_24 < __pyx_t_11; __pyx_t_24+=1) {
         __pyx_v_j = __pyx_t_24;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":703
+        /* "adaopt/_adaoptc.pyx":703
  *             for j in range(n_classes):
  * 
  *                 out_probs[i, j] = avg_probs_i[j]             # <<<<<<<<<<<<<<
@@ -33783,7 +33748,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
       }
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":705
+    /* "adaopt/_adaoptc.pyx":705
  *                 out_probs[i, j] = avg_probs_i[j]
  * 
  *         out_probs_ = expit(out_probs)             # <<<<<<<<<<<<<<
@@ -33824,7 +33789,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":707
+    /* "adaopt/_adaoptc.pyx":707
  *         out_probs_ = expit(out_probs)
  * 
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -33867,7 +33832,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":709
+    /* "adaopt/_adaoptc.pyx":709
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
  * 
  *         return np.asarray(out_probs_)             # <<<<<<<<<<<<<<
@@ -33909,7 +33874,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
     __pyx_t_7 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":682
+    /* "adaopt/_adaoptc.pyx":682
  * 
  * 
  *     if type_dist == "cosine":             # <<<<<<<<<<<<<<
@@ -33918,17 +33883,17 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":712
+  /* "adaopt/_adaoptc.pyx":712
  * 
  * 
  *     if type_dist == "manhattan":             # <<<<<<<<<<<<<<
  * 
  *         for i in range(n_test):
  */
-  __pyx_t_10 = (__Pyx_PyUnicode_Equals(__pyx_v_type_dist, __pyx_n_u_manhattan, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_v_type_dist, __pyx_n_s_manhattan, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 712, __pyx_L1_error)
   if (__pyx_t_10) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":714
+    /* "adaopt/_adaoptc.pyx":714
  *     if type_dist == "manhattan":
  * 
  *         for i in range(n_test):             # <<<<<<<<<<<<<<
@@ -33940,7 +33905,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_cosin
     for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
       __pyx_v_i = __pyx_t_22;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":716
+      /* "adaopt/_adaoptc.pyx":716
  *         for i in range(n_test):
  * 
  *             dists_test_i = distance_to_mat_manhattan(scaled_X_test[i,:],             # <<<<<<<<<<<<<<
@@ -33960,9 +33925,9 @@ __pyx_t_23.shape[0] = __pyx_v_scaled_X_test.shape[1];
 __pyx_t_23.strides[0] = __pyx_v_scaled_X_test.strides[1];
     __pyx_t_23.suboffsets[0] = -1;
 
-__pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manhattan(__pyx_t_23, __pyx_v_scaled_X_train); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 716, __pyx_L1_error)
+__pyx_t_9 = __pyx_fuse_0__pyx_f_6adaopt_8_adaoptc_distance_to_mat_manhattan(__pyx_t_23, __pyx_v_scaled_X_train); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 716, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":717
+      /* "adaopt/_adaoptc.pyx":717
  * 
  *             dists_test_i = distance_to_mat_manhattan(scaled_X_test[i,:],
  *                                            scaled_X_train)             # <<<<<<<<<<<<<<
@@ -33976,7 +33941,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":719
+      /* "adaopt/_adaoptc.pyx":719
  *                                            scaled_X_train)
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -33993,7 +33958,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6)) __PYX_ERR(0, 719, __pyx_L1_error);
       __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":720
+      /* "adaopt/_adaoptc.pyx":720
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,             # <<<<<<<<<<<<<<
@@ -34007,7 +33972,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_n_x, __pyx_t_1) < 0) __PYX_ERR(0, 720, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":721
+      /* "adaopt/_adaoptc.pyx":721
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,
  *                                       k=k, cache=cache)             # <<<<<<<<<<<<<<
@@ -34020,7 +33985,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_cache, __pyx_v_cache) < 0) __PYX_ERR(0, 720, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":719
+      /* "adaopt/_adaoptc.pyx":719
  *                                            scaled_X_train)
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -34036,7 +34001,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __Pyx_XDECREF_SET(__pyx_v_kmin_test_i, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":723
+      /* "adaopt/_adaoptc.pyx":723
  *                                       k=k, cache=cache)
  * 
  *             weights_test_i = calculate_weights(kmin_test_i[0])             # <<<<<<<<<<<<<<
@@ -34078,7 +34043,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":725
+      /* "adaopt/_adaoptc.pyx":725
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -34092,7 +34057,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
         __PYX_ERR(0, 725, __pyx_L1_error)
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":726
+      /* "adaopt/_adaoptc.pyx":726
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],
  *                                            probs_train_)             # <<<<<<<<<<<<<<
@@ -34125,7 +34090,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":725
+      /* "adaopt/_adaoptc.pyx":725
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -34139,7 +34104,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __pyx_t_8.memview = NULL;
       __pyx_t_8.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":728
+      /* "adaopt/_adaoptc.pyx":728
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -34155,7 +34120,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_probs, __pyx_t_2) < 0) __PYX_ERR(0, 728, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":729
+      /* "adaopt/_adaoptc.pyx":729
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,
  *                                         weights=weights_test_i)             # <<<<<<<<<<<<<<
@@ -34167,7 +34132,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_weights, __pyx_t_2) < 0) __PYX_ERR(0, 728, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":728
+      /* "adaopt/_adaoptc.pyx":728
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -34185,7 +34150,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":731
+      /* "adaopt/_adaoptc.pyx":731
  *                                         weights=weights_test_i)
  * 
  *             for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -34197,7 +34162,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       for (__pyx_t_24 = 0; __pyx_t_24 < __pyx_t_11; __pyx_t_24+=1) {
         __pyx_v_j = __pyx_t_24;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":733
+        /* "adaopt/_adaoptc.pyx":733
  *             for j in range(n_classes):
  * 
  *                 out_probs[i, j] = avg_probs_i[j]             # <<<<<<<<<<<<<<
@@ -34211,7 +34176,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       }
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":735
+    /* "adaopt/_adaoptc.pyx":735
  *                 out_probs[i, j] = avg_probs_i[j]
  * 
  *         out_probs_ = expit(out_probs)             # <<<<<<<<<<<<<<
@@ -34252,7 +34217,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":737
+    /* "adaopt/_adaoptc.pyx":737
  *         out_probs_ = expit(out_probs)
  * 
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -34295,7 +34260,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":739
+    /* "adaopt/_adaoptc.pyx":739
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
  * 
  *         return np.asarray(out_probs_)             # <<<<<<<<<<<<<<
@@ -34337,7 +34302,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":712
+    /* "adaopt/_adaoptc.pyx":712
  * 
  * 
  *     if type_dist == "manhattan":             # <<<<<<<<<<<<<<
@@ -34346,17 +34311,17 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":742
+  /* "adaopt/_adaoptc.pyx":742
  * 
  * 
  *     if type_dist == "euclidean-f":             # <<<<<<<<<<<<<<
  * 
  *         dist_mat = outer_sum_dot(np.asarray(scaled_X_test),
  */
-  __pyx_t_10 = (__Pyx_PyUnicode_Equals(__pyx_v_type_dist, __pyx_kp_u_euclidean_f, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_v_type_dist, __pyx_kp_s_euclidean_f, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 742, __pyx_L1_error)
   if (__pyx_t_10) {
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":744
+    /* "adaopt/_adaoptc.pyx":744
  *     if type_dist == "euclidean-f":
  * 
  *         dist_mat = outer_sum_dot(np.asarray(scaled_X_test),             # <<<<<<<<<<<<<<
@@ -34396,7 +34361,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":745
+    /* "adaopt/_adaoptc.pyx":745
  * 
  *         dist_mat = outer_sum_dot(np.asarray(scaled_X_test),
  *                                  np.asarray(scaled_X_train))             # <<<<<<<<<<<<<<
@@ -34458,7 +34423,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":744
+    /* "adaopt/_adaoptc.pyx":744
  *     if type_dist == "euclidean-f":
  * 
  *         dist_mat = outer_sum_dot(np.asarray(scaled_X_test),             # <<<<<<<<<<<<<<
@@ -34471,7 +34436,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":747
+    /* "adaopt/_adaoptc.pyx":747
  *                                  np.asarray(scaled_X_train))
  * 
  *         for i in range(n_test):             # <<<<<<<<<<<<<<
@@ -34483,7 +34448,7 @@ __pyx_t_9 = __pyx_fuse_0__pyx_f_7mlsauce_6adaopt_8_adaoptc_distance_to_mat_manha
     for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
       __pyx_v_i = __pyx_t_22;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":749
+      /* "adaopt/_adaoptc.pyx":749
  *         for i in range(n_test):
  * 
  *             dists_test_i = dist_mat[i, :]             # <<<<<<<<<<<<<<
@@ -34508,7 +34473,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       __pyx_t_23.memview = NULL;
       __pyx_t_23.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":751
+      /* "adaopt/_adaoptc.pyx":751
  *             dists_test_i = dist_mat[i, :]
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -34525,7 +34490,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 751, __pyx_L1_error);
       __pyx_t_2 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":752
+      /* "adaopt/_adaoptc.pyx":752
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,             # <<<<<<<<<<<<<<
@@ -34539,7 +34504,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_n_x, __pyx_t_6) < 0) __PYX_ERR(0, 752, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":753
+      /* "adaopt/_adaoptc.pyx":753
  *             kmin_test_i = find_kmin_x(dists_test_i,
  *                                       n_x=n_train,
  *                                       k=k, cache=cache)             # <<<<<<<<<<<<<<
@@ -34552,7 +34517,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cache, __pyx_v_cache) < 0) __PYX_ERR(0, 752, __pyx_L1_error)
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":751
+      /* "adaopt/_adaoptc.pyx":751
  *             dists_test_i = dist_mat[i, :]
  * 
  *             kmin_test_i = find_kmin_x(dists_test_i,             # <<<<<<<<<<<<<<
@@ -34568,7 +34533,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       __Pyx_XDECREF_SET(__pyx_v_kmin_test_i, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":755
+      /* "adaopt/_adaoptc.pyx":755
  *                                       k=k, cache=cache)
  * 
  *             weights_test_i = calculate_weights(kmin_test_i[0])             # <<<<<<<<<<<<<<
@@ -34610,7 +34575,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":757
+      /* "adaopt/_adaoptc.pyx":757
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -34624,7 +34589,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
         __PYX_ERR(0, 757, __pyx_L1_error)
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":758
+      /* "adaopt/_adaoptc.pyx":758
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],
  *                                            probs_train_)             # <<<<<<<<<<<<<<
@@ -34657,7 +34622,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":757
+      /* "adaopt/_adaoptc.pyx":757
  *             weights_test_i = calculate_weights(kmin_test_i[0])
  * 
  *             probs_test_i = calculate_probs(kmin_test_i[1],             # <<<<<<<<<<<<<<
@@ -34671,7 +34636,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       __pyx_t_8.memview = NULL;
       __pyx_t_8.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":760
+      /* "adaopt/_adaoptc.pyx":760
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -34687,7 +34652,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_probs, __pyx_t_1) < 0) __PYX_ERR(0, 760, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":761
+      /* "adaopt/_adaoptc.pyx":761
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,
  *                                         weights=weights_test_i)             # <<<<<<<<<<<<<<
@@ -34699,7 +34664,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_weights, __pyx_t_1) < 0) __PYX_ERR(0, 760, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":760
+      /* "adaopt/_adaoptc.pyx":760
  *                                            probs_train_)
  * 
  *             avg_probs_i = average_probs(probs=probs_test_i,             # <<<<<<<<<<<<<<
@@ -34717,7 +34682,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       __pyx_t_9.memview = NULL;
       __pyx_t_9.data = NULL;
 
-      /* "mlsauce/adaopt/_adaoptc.pyx":763
+      /* "adaopt/_adaoptc.pyx":763
  *                                         weights=weights_test_i)
  * 
  *             for j in range(n_classes):             # <<<<<<<<<<<<<<
@@ -34729,7 +34694,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       for (__pyx_t_24 = 0; __pyx_t_24 < __pyx_t_11; __pyx_t_24+=1) {
         __pyx_v_j = __pyx_t_24;
 
-        /* "mlsauce/adaopt/_adaoptc.pyx":765
+        /* "adaopt/_adaoptc.pyx":765
  *             for j in range(n_classes):
  * 
  *                 out_probs[i, j] = avg_probs_i[j]             # <<<<<<<<<<<<<<
@@ -34743,7 +34708,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
       }
     }
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":767
+    /* "adaopt/_adaoptc.pyx":767
  *                 out_probs[i, j] = avg_probs_i[j]
  * 
  *         out_probs_ = expit(out_probs)             # <<<<<<<<<<<<<<
@@ -34784,7 +34749,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":768
+    /* "adaopt/_adaoptc.pyx":768
  * 
  *         out_probs_ = expit(out_probs)
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -34827,7 +34792,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":770
+    /* "adaopt/_adaoptc.pyx":770
  *         out_probs_ /= np.sum(out_probs_, axis=1)[:, None]
  * 
  *         del dist_mat             # <<<<<<<<<<<<<<
@@ -34837,7 +34802,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
     __PYX_XCLEAR_MEMVIEW(&__pyx_v_dist_mat, 1);
     __pyx_v_dist_mat.memview = NULL; __pyx_v_dist_mat.data = NULL;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":771
+    /* "adaopt/_adaoptc.pyx":771
  * 
  *         del dist_mat
  *         gc.collect()             # <<<<<<<<<<<<<<
@@ -34873,7 +34838,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
     }
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":773
+    /* "adaopt/_adaoptc.pyx":773
  *         gc.collect()
  * 
  *         return np.asarray(out_probs_)             # <<<<<<<<<<<<<<
@@ -34915,7 +34880,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
     __pyx_t_15 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":742
+    /* "adaopt/_adaoptc.pyx":742
  * 
  * 
  *     if type_dist == "euclidean-f":             # <<<<<<<<<<<<<<
@@ -34924,7 +34889,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
  */
   }
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":584
+  /* "adaopt/_adaoptc.pyx":584
  * # 2 - Model predict -----
  * 
  * def predict_proba_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -34947,7 +34912,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
   __Pyx_XDECREF(__pyx_t_15);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_23, 1);
   __Pyx_XDECREF(__pyx_t_25);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.predict_proba_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.predict_proba_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_kmin_test_i);
@@ -34969,7 +34934,7 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
   return __pyx_r;
 }
 
-/* "mlsauce/adaopt/_adaoptc.pyx":776
+/* "adaopt/_adaoptc.pyx":776
  * 
  * 
  * def predict_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -34978,15 +34943,15 @@ __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists_test_i, 1);
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_25predict_adaopt(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_25predict_adaopt(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_6adaopt_8_adaoptc_25predict_adaopt = {"predict_adaopt", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_6adaopt_8_adaoptc_25predict_adaopt, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_6adaopt_8_adaoptc_25predict_adaopt(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6adaopt_8_adaoptc_25predict_adaopt = {"predict_adaopt", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6adaopt_8_adaoptc_25predict_adaopt, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6adaopt_8_adaoptc_25predict_adaopt(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -35025,9 +34990,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X_test,&__pyx_n_s_scaled_X_train,&__pyx_n_s_n_test,&__pyx_n_s_n_train,&__pyx_n_s_probs_train,&__pyx_n_s_k,&__pyx_n_s_n_clusters,&__pyx_n_s_seed,&__pyx_n_s_batch_size,&__pyx_n_s_type_dist,&__pyx_n_s_cache,0};
-    values[9] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_euclidean)));
+    values[9] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_euclidean)));
 
-    /* "mlsauce/adaopt/_adaoptc.pyx":783
+    /* "adaopt/_adaoptc.pyx":783
  *             int batch_size = 100,
  *             type_dist="euclidean",
  *             cache=True):             # <<<<<<<<<<<<<<
@@ -35219,13 +35184,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_X_test, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_scaled_X_train, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_probs_train, 1);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.predict_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.predict_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(__pyx_self, __pyx_v_X_test, __pyx_v_scaled_X_train, __pyx_v_n_test, __pyx_v_n_train, __pyx_v_probs_train, __pyx_v_k, __pyx_v_n_clusters, __pyx_v_seed, __pyx_v_batch_size, __pyx_v_type_dist, __pyx_v_cache);
+  __pyx_r = __pyx_pf_6adaopt_8_adaoptc_24predict_adaopt(__pyx_self, __pyx_v_X_test, __pyx_v_scaled_X_train, __pyx_v_n_test, __pyx_v_n_train, __pyx_v_probs_train, __pyx_v_k, __pyx_v_n_clusters, __pyx_v_seed, __pyx_v_batch_size, __pyx_v_type_dist, __pyx_v_cache);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":776
+  /* "adaopt/_adaoptc.pyx":776
  * 
  * 
  * def predict_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -35247,7 +35212,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache) {
+static PyObject *__pyx_pf_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X_test, __Pyx_memviewslice __pyx_v_scaled_X_train, long __pyx_v_n_test, long __pyx_v_n_train, __Pyx_memviewslice __pyx_v_probs_train, int __pyx_v_k, int __pyx_v_n_clusters, int __pyx_v_seed, int __pyx_v_batch_size, PyObject *__pyx_v_type_dist, PyObject *__pyx_v_cache) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -35270,7 +35235,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("predict_adaopt", 1);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":785
+  /* "adaopt/_adaoptc.pyx":785
  *             cache=True):
  * 
  *     return np.asarray(predict_proba_adaopt(X_test, scaled_X_train,             # <<<<<<<<<<<<<<
@@ -35290,7 +35255,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_scaled_X_train, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 785, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":786
+  /* "adaopt/_adaoptc.pyx":786
  * 
  *     return np.asarray(predict_proba_adaopt(X_test, scaled_X_train,
  *                                     n_test, n_train,             # <<<<<<<<<<<<<<
@@ -35302,7 +35267,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __pyx_t_8 = __Pyx_PyInt_From_long(__pyx_v_n_train); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":787
+  /* "adaopt/_adaoptc.pyx":787
  *     return np.asarray(predict_proba_adaopt(X_test, scaled_X_train,
  *                                     n_test, n_train,
  *                                     probs_train, k,             # <<<<<<<<<<<<<<
@@ -35314,7 +35279,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 787, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":788
+  /* "adaopt/_adaoptc.pyx":788
  *                                     n_test, n_train,
  *                                     probs_train, k,
  *                                     n_clusters, seed,             # <<<<<<<<<<<<<<
@@ -35326,7 +35291,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 788, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":789
+  /* "adaopt/_adaoptc.pyx":789
  *                                     probs_train, k,
  *                                     n_clusters, seed,
  *                                     batch_size, type_dist,             # <<<<<<<<<<<<<<
@@ -35336,7 +35301,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_batch_size); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 789, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":790
+  /* "adaopt/_adaoptc.pyx":790
  *                                     n_clusters, seed,
  *                                     batch_size, type_dist,
  *                                     cache)).argmax(axis=1)             # <<<<<<<<<<<<<<
@@ -35410,7 +35375,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":776
+  /* "adaopt/_adaoptc.pyx":776
  * 
  * 
  * def predict_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -35434,7 +35399,7 @@ static PyObject *__pyx_pf_7mlsauce_6adaopt_8_adaoptc_24predict_adaopt(CYTHON_UNU
   __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_14);
-  __Pyx_AddTraceback("mlsauce.adaopt._adaoptc.predict_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("adaopt._adaoptc.predict_adaopt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -35579,7 +35544,7 @@ static PyType_Slot __pyx_type___pyx_array_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_array_spec = {
-  "mlsauce.adaopt._adaoptc.array",
+  "adaopt._adaoptc.array",
   sizeof(struct __pyx_array_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_SEQUENCE,
@@ -35625,7 +35590,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.adaopt._adaoptc.""array", /*tp_name*/
+  "adaopt._adaoptc.""array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -35785,7 +35750,7 @@ static PyType_Slot __pyx_type___pyx_MemviewEnum_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
-  "mlsauce.adaopt._adaoptc.Enum",
+  "adaopt._adaoptc.Enum",
   sizeof(struct __pyx_MemviewEnum_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -35795,7 +35760,7 @@ static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.adaopt._adaoptc.""Enum", /*tp_name*/
+  "adaopt._adaoptc.""Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -36092,7 +36057,7 @@ static PyType_Slot __pyx_type___pyx_memoryview_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryview_spec = {
-  "mlsauce.adaopt._adaoptc.memoryview",
+  "adaopt._adaoptc.memoryview",
   sizeof(struct __pyx_memoryview_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -36138,7 +36103,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.adaopt._adaoptc.""memoryview", /*tp_name*/
+  "adaopt._adaoptc.""memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -36290,7 +36255,7 @@ static PyType_Slot __pyx_type___pyx_memoryviewslice_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
-  "mlsauce.adaopt._adaoptc._memoryviewslice",
+  "adaopt._adaoptc._memoryviewslice",
   sizeof(struct __pyx_memoryviewslice_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_SEQUENCE,
@@ -36300,7 +36265,7 @@ static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.adaopt._adaoptc.""_memoryviewslice", /*tp_name*/
+  "adaopt._adaoptc.""_memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -36459,11 +36424,11 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 1, 0, 0},
     {&__pyx_n_s_abc, __pyx_k_abc, sizeof(__pyx_k_abc), 0, 0, 1, 1},
     {&__pyx_n_s_abs, __pyx_k_abs, sizeof(__pyx_k_abs), 0, 0, 1, 1},
+    {&__pyx_n_s_adaopt__adaoptc, __pyx_k_adaopt__adaoptc, sizeof(__pyx_k_adaopt__adaoptc), 0, 0, 1, 1},
     {&__pyx_n_s_add, __pyx_k_add, sizeof(__pyx_k_add), 0, 0, 1, 1},
     {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
     {&__pyx_n_s_alpha_m, __pyx_k_alpha_m, sizeof(__pyx_k_alpha_m), 0, 0, 1, 1},
     {&__pyx_n_s_alphas, __pyx_k_alphas, sizeof(__pyx_k_alphas), 0, 0, 1, 1},
-    {&__pyx_n_u_alphas, __pyx_k_alphas, sizeof(__pyx_k_alphas), 0, 1, 0, 1},
     {&__pyx_n_s_alphas_2, __pyx_k_alphas_2, sizeof(__pyx_k_alphas_2), 0, 0, 1, 1},
     {&__pyx_kp_u_and, __pyx_k_and, sizeof(__pyx_k_and), 0, 1, 0, 0},
     {&__pyx_n_s_argmax, __pyx_k_argmax, sizeof(__pyx_k_argmax), 0, 0, 1, 1},
@@ -36492,7 +36457,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_collections_abc, __pyx_k_collections_abc, sizeof(__pyx_k_collections_abc), 0, 0, 1, 0},
     {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
     {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-    {&__pyx_n_u_cosine, __pyx_k_cosine, sizeof(__pyx_k_cosine), 0, 1, 0, 1},
+    {&__pyx_n_s_cosine, __pyx_k_cosine, sizeof(__pyx_k_cosine), 0, 0, 1, 1},
     {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
     {&__pyx_n_s_defaults, __pyx_k_defaults, sizeof(__pyx_k_defaults), 0, 0, 1, 1},
     {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
@@ -36518,8 +36483,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_err_m, __pyx_k_err_m, sizeof(__pyx_k_err_m), 0, 0, 1, 1},
     {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
     {&__pyx_n_s_eta, __pyx_k_eta, sizeof(__pyx_k_eta), 0, 0, 1, 1},
-    {&__pyx_n_u_euclidean, __pyx_k_euclidean, sizeof(__pyx_k_euclidean), 0, 1, 0, 1},
-    {&__pyx_kp_u_euclidean_f, __pyx_k_euclidean_f, sizeof(__pyx_k_euclidean_f), 0, 1, 0, 0},
+    {&__pyx_n_s_euclidean, __pyx_k_euclidean, sizeof(__pyx_k_euclidean), 0, 0, 1, 1},
+    {&__pyx_kp_s_euclidean_f, __pyx_k_euclidean_f, sizeof(__pyx_k_euclidean_f), 0, 0, 1, 0},
     {&__pyx_n_s_exp, __pyx_k_exp, sizeof(__pyx_k_exp), 0, 0, 1, 1},
     {&__pyx_n_s_expit, __pyx_k_expit, sizeof(__pyx_k_expit), 0, 0, 1, 1},
     {&__pyx_n_s_find_kmin_x, __pyx_k_find_kmin_x, sizeof(__pyx_k_find_kmin_x), 0, 0, 1, 1},
@@ -36566,14 +36531,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_lstsq, __pyx_k_lstsq, sizeof(__pyx_k_lstsq), 0, 0, 1, 1},
     {&__pyx_n_s_m, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-    {&__pyx_n_u_manhattan, __pyx_k_manhattan, sizeof(__pyx_k_manhattan), 0, 1, 0, 1},
+    {&__pyx_n_s_manhattan, __pyx_k_manhattan, sizeof(__pyx_k_manhattan), 0, 0, 1, 1},
     {&__pyx_n_s_maximum, __pyx_k_maximum, sizeof(__pyx_k_maximum), 0, 0, 1, 1},
     {&__pyx_n_s_mean, __pyx_k_mean, sizeof(__pyx_k_mean), 0, 0, 1, 1},
     {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
     {&__pyx_n_s_min_index_i, __pyx_k_min_index_i, sizeof(__pyx_k_min_index_i), 0, 0, 1, 1},
     {&__pyx_n_s_misclass, __pyx_k_misclass, sizeof(__pyx_k_misclass), 0, 0, 1, 1},
     {&__pyx_n_s_misclass_condition, __pyx_k_misclass_condition, sizeof(__pyx_k_misclass_condition), 0, 0, 1, 1},
-    {&__pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_k_mlsauce_adaopt__adaoptc, sizeof(__pyx_k_mlsauce_adaopt__adaoptc), 0, 0, 1, 1},
     {&__pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_k_mlsauce_adaopt__adaoptc_pyx, sizeof(__pyx_k_mlsauce_adaopt__adaoptc_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
     {&__pyx_n_s_multiprocessing, __pyx_k_multiprocessing, sizeof(__pyx_k_multiprocessing), 0, 0, 1, 1},
@@ -36583,7 +36547,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_n_classes, __pyx_k_n_classes, sizeof(__pyx_k_n_classes), 0, 0, 1, 1},
     {&__pyx_n_s_n_clusters, __pyx_k_n_clusters, sizeof(__pyx_k_n_clusters), 0, 0, 1, 1},
     {&__pyx_n_s_n_iterations, __pyx_k_n_iterations, sizeof(__pyx_k_n_iterations), 0, 0, 1, 1},
-    {&__pyx_n_u_n_iterations, __pyx_k_n_iterations, sizeof(__pyx_k_n_iterations), 0, 1, 0, 1},
     {&__pyx_n_s_n_obs, __pyx_k_n_obs, sizeof(__pyx_k_n_obs), 0, 0, 1, 1},
     {&__pyx_n_s_n_test, __pyx_k_n_test, sizeof(__pyx_k_n_test), 0, 0, 1, 1},
     {&__pyx_n_s_n_train, __pyx_k_n_train, sizeof(__pyx_k_n_train), 0, 0, 1, 1},
@@ -36598,8 +36561,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_norm, __pyx_k_norm, sizeof(__pyx_k_norm), 0, 0, 1, 1},
     {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
-    {&__pyx_kp_u_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 1, 0, 0},
-    {&__pyx_kp_u_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 1, 0, 0},
+    {&__pyx_kp_s_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 0, 1, 0},
+    {&__pyx_kp_s_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 0, 1, 0},
     {&__pyx_n_s_numpy_linalg, __pyx_k_numpy_linalg, sizeof(__pyx_k_numpy_linalg), 0, 0, 1, 1},
     {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
     {&__pyx_n_s_one_hot_encode, __pyx_k_one_hot_encode, sizeof(__pyx_k_one_hot_encode), 0, 0, 1, 1},
@@ -36619,7 +36582,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_preds, __pyx_k_preds, sizeof(__pyx_k_preds), 0, 0, 1, 1},
     {&__pyx_n_s_prob, __pyx_k_prob, sizeof(__pyx_k_prob), 0, 0, 1, 1},
     {&__pyx_n_s_probs, __pyx_k_probs, sizeof(__pyx_k_probs), 0, 0, 1, 1},
-    {&__pyx_n_u_probs, __pyx_k_probs, sizeof(__pyx_k_probs), 0, 1, 0, 1},
     {&__pyx_n_s_probs_2, __pyx_k_probs_2, sizeof(__pyx_k_probs_2), 0, 0, 1, 1},
     {&__pyx_n_s_probs_out, __pyx_k_probs_out, sizeof(__pyx_k_probs_out), 0, 0, 1, 1},
     {&__pyx_n_s_probs_test_i, __pyx_k_probs_test_i, sizeof(__pyx_k_probs_test_i), 0, 0, 1, 1},
@@ -36632,7 +36594,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_pyx_type, __pyx_k_pyx_type, sizeof(__pyx_k_pyx_type), 0, 0, 1, 1},
     {&__pyx_n_s_pyx_unpickle_Enum, __pyx_k_pyx_unpickle_Enum, sizeof(__pyx_k_pyx_unpickle_Enum), 0, 0, 1, 1},
     {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
-    {&__pyx_n_u_quicksort, __pyx_k_quicksort, sizeof(__pyx_k_quicksort), 0, 1, 0, 1},
+    {&__pyx_n_s_quicksort, __pyx_k_quicksort, sizeof(__pyx_k_quicksort), 0, 0, 1, 1},
     {&__pyx_n_s_random_state, __pyx_k_random_state, sizeof(__pyx_k_random_state), 0, 0, 1, 1},
     {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
     {&__pyx_n_s_rcond, __pyx_k_rcond, sizeof(__pyx_k_rcond), 0, 0, 1, 1},
@@ -36648,7 +36610,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_scaled_X, __pyx_k_scaled_X, sizeof(__pyx_k_scaled_X), 0, 0, 1, 1},
     {&__pyx_n_s_scaled_X_test, __pyx_k_scaled_X_test, sizeof(__pyx_k_scaled_X_test), 0, 0, 1, 1},
     {&__pyx_n_s_scaled_X_train, __pyx_k_scaled_X_train, sizeof(__pyx_k_scaled_X_train), 0, 0, 1, 1},
-    {&__pyx_n_u_scaled_X_train, __pyx_k_scaled_X_train, sizeof(__pyx_k_scaled_X_train), 0, 1, 0, 1},
     {&__pyx_n_s_scipy_special, __pyx_k_scipy_special, sizeof(__pyx_k_scipy_special), 0, 0, 1, 1},
     {&__pyx_n_s_seed, __pyx_k_seed, sizeof(__pyx_k_seed), 0, 0, 1, 1},
     {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
@@ -36681,7 +36642,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_tolerance_2, __pyx_k_tolerance_2, sizeof(__pyx_k_tolerance_2), 0, 0, 1, 1},
     {&__pyx_n_s_tostring, __pyx_k_tostring, sizeof(__pyx_k_tostring), 0, 0, 1, 1},
     {&__pyx_n_s_tqdm, __pyx_k_tqdm, sizeof(__pyx_k_tqdm), 0, 0, 1, 1},
-    {&__pyx_n_u_training_accuracy, __pyx_k_training_accuracy, sizeof(__pyx_k_training_accuracy), 0, 1, 0, 1},
+    {&__pyx_n_s_training_accuracy, __pyx_k_training_accuracy, sizeof(__pyx_k_training_accuracy), 0, 0, 1, 1},
     {&__pyx_n_s_type_dist, __pyx_k_type_dist, sizeof(__pyx_k_type_dist), 0, 0, 1, 1},
     {&__pyx_kp_s_unable_to_allocate_array_data, __pyx_k_unable_to_allocate_array_data, sizeof(__pyx_k_unable_to_allocate_array_data), 0, 0, 1, 0},
     {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
@@ -36774,7 +36735,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(2, 984, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(2, 984, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
@@ -36785,11 +36746,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(2, 990, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(2, 990, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":160
+  /* "adaopt/_adaoptc.pyx":160
  * 
  * # updates probs
  * def update_proba(double[:,::1] probs,             # <<<<<<<<<<<<<<
@@ -36803,7 +36764,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":509
+  /* "adaopt/_adaoptc.pyx":509
  * 
  *     # obtain initial probs for each example
  *     scaled_X = X/norm(X, ord=2, axis=1)[:, None]             # <<<<<<<<<<<<<<
@@ -36915,7 +36876,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__25);
   __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(1, 1, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":160
+  /* "adaopt/_adaoptc.pyx":160
  * 
  * # updates probs
  * def update_proba(double[:,::1] probs,             # <<<<<<<<<<<<<<
@@ -36927,7 +36888,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__27);
   __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(9, 0, 0, 17, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_update_proba, 160, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 160, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":193
+  /* "adaopt/_adaoptc.pyx":193
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
@@ -36939,7 +36900,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__29);
   __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_one_hot_encode, 193, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 193, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":211
+  /* "adaopt/_adaoptc.pyx":211
  * # @Paul Panzer's soln
  * # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi
  * def outer_sum_dot(A, B):             # <<<<<<<<<<<<<<
@@ -36951,7 +36912,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__31);
   __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_outer_sum_dot, 211, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 211, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":319
+  /* "adaopt/_adaoptc.pyx":319
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_euclidean2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -36963,7 +36924,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__33);
   __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_distance_to_mat_euclidean2, 319, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 319, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":334
+  /* "adaopt/_adaoptc.pyx":334
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_manhattan2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -36972,7 +36933,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  */
   __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_distance_to_mat_manhattan2, 334, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 334, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":349
+  /* "adaopt/_adaoptc.pyx":349
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_cosine2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -36981,7 +36942,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  */
   __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_distance_to_mat_cosine2, 349, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 349, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":377
+  /* "adaopt/_adaoptc.pyx":377
  * 
  * # find_kmin_x
  * def find_kmin_x(x, n_x, k, cache=False):             # <<<<<<<<<<<<<<
@@ -36996,7 +36957,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":427
+  /* "adaopt/_adaoptc.pyx":427
  * 
  * # calculate probs test i
  * def calculate_probs(long int[:] index,             # <<<<<<<<<<<<<<
@@ -37008,7 +36969,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__40);
   __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_calculate_probs, 427, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 427, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":450
+  /* "adaopt/_adaoptc.pyx":450
  * 
  * # average probs
  * def average_probs(double[:,:] probs, double[:] weights):             # <<<<<<<<<<<<<<
@@ -37020,7 +36981,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__42);
   __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_average_probs, 450, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 450, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":469
+  /* "adaopt/_adaoptc.pyx":469
  * 
  * # calculate weights
  * def calculate_weights(double[:] weights):             # <<<<<<<<<<<<<<
@@ -37032,7 +36993,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__44);
   __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_calculate_weights, 469, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(0, 469, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":478
+  /* "adaopt/_adaoptc.pyx":478
  * # 1 - model fitting -----
  * 
  * def fit_adaopt(double[:, :] X, long int[:] y,             # <<<<<<<<<<<<<<
@@ -37044,7 +37005,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__46);
   __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(12, 0, 0, 32, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_fit_adaopt, 478, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) __PYX_ERR(0, 478, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":584
+  /* "adaopt/_adaoptc.pyx":584
  * # 2 - Model predict -----
  * 
  * def predict_proba_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -37056,7 +37017,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__48);
   __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(11, 0, 0, 32, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_adaopt__adaoptc_pyx, __pyx_n_s_predict_proba_adaopt, 584, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 584, __pyx_L1_error)
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":776
+  /* "adaopt/_adaoptc.pyx":776
  * 
  * 
  * def predict_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -37144,7 +37105,7 @@ static int __Pyx_modinit_global_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_global_init_code", 0);
   /*--- Global init code ---*/
-  __pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  __pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache = ((PyObject*)Py_None); Py_INCREF(Py_None);
   __pyx_collections_abc_Sequence = Py_None; Py_INCREF(Py_None);
   generic = Py_None; Py_INCREF(Py_None);
   strided = Py_None; Py_INCREF(Py_None);
@@ -37645,14 +37606,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_mlsauce__adaopt___adaoptc) {
+  if (__pyx_module_is_main_adaopt___adaoptc) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "mlsauce.adaopt._adaoptc")) {
-      if (unlikely((PyDict_SetItemString(modules, "mlsauce.adaopt._adaoptc", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "adaopt._adaoptc")) {
+      if (unlikely((PyDict_SetItemString(modules, "adaopt._adaoptc", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -38186,7 +38147,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Enum, __pyx_t_7) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":9
+  /* "adaopt/_adaoptc.pyx":9
  * # License: BSD 3
  * 
  * import functools             # <<<<<<<<<<<<<<
@@ -38198,7 +38159,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_functools, __pyx_t_7) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":10
+  /* "adaopt/_adaoptc.pyx":10
  * 
  * import functools
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -38210,7 +38171,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_7) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":13
+  /* "adaopt/_adaoptc.pyx":13
  * cimport numpy as np
  * cimport cython
  * import gc             # <<<<<<<<<<<<<<
@@ -38222,7 +38183,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gc, __pyx_t_7) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":17
+  /* "adaopt/_adaoptc.pyx":17
  * from cython.parallel cimport prange
  * from libc.math cimport log, exp, sqrt, fabs
  * from numpy.linalg import lstsq             # <<<<<<<<<<<<<<
@@ -38243,7 +38204,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":18
+  /* "adaopt/_adaoptc.pyx":18
  * from libc.math cimport log, exp, sqrt, fabs
  * from numpy.linalg import lstsq
  * from numpy.linalg import norm             # <<<<<<<<<<<<<<
@@ -38264,7 +38225,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":19
+  /* "adaopt/_adaoptc.pyx":19
  * from numpy.linalg import lstsq
  * from numpy.linalg import norm
  * from scipy.special import expit             # <<<<<<<<<<<<<<
@@ -38285,7 +38246,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":20
+  /* "adaopt/_adaoptc.pyx":20
  * from numpy.linalg import norm
  * from scipy.special import expit
  * from sklearn.cluster import MiniBatchKMeans             # <<<<<<<<<<<<<<
@@ -38306,7 +38267,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":21
+  /* "adaopt/_adaoptc.pyx":21
  * from scipy.special import expit
  * from sklearn.cluster import MiniBatchKMeans
  * from sklearn.tree import DecisionTreeClassifier             # <<<<<<<<<<<<<<
@@ -38327,7 +38288,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":22
+  /* "adaopt/_adaoptc.pyx":22
  * from sklearn.cluster import MiniBatchKMeans
  * from sklearn.tree import DecisionTreeClassifier
  * from sklearn.preprocessing import StandardScaler             # <<<<<<<<<<<<<<
@@ -38348,7 +38309,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":23
+  /* "adaopt/_adaoptc.pyx":23
  * from sklearn.tree import DecisionTreeClassifier
  * from sklearn.preprocessing import StandardScaler
  * from multiprocessing import Pool             # <<<<<<<<<<<<<<
@@ -38369,7 +38330,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":24
+  /* "adaopt/_adaoptc.pyx":24
  * from sklearn.preprocessing import StandardScaler
  * from multiprocessing import Pool
  * from tqdm import tqdm             # <<<<<<<<<<<<<<
@@ -38390,7 +38351,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":26
+  /* "adaopt/_adaoptc.pyx":26
  * from tqdm import tqdm
  * 
  * from ..utils import subsample             # <<<<<<<<<<<<<<
@@ -38411,7 +38372,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":48
+  /* "adaopt/_adaoptc.pyx":48
  *     long long
  * 
  * cdef dict __find_kmin_x_cache = {}             # <<<<<<<<<<<<<<
@@ -38420,12 +38381,12 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_4 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_XGOTREF(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache);
-  __Pyx_DECREF_SET(__pyx_v_7mlsauce_6adaopt_8_adaoptc___find_kmin_x_cache, ((PyObject*)__pyx_t_4));
+  __Pyx_XGOTREF(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache);
+  __Pyx_DECREF_SET(__pyx_v_6adaopt_8_adaoptc___find_kmin_x_cache, ((PyObject*)__pyx_t_4));
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":160
+  /* "adaopt/_adaoptc.pyx":160
  * 
  * # updates probs
  * def update_proba(double[:,::1] probs,             # <<<<<<<<<<<<<<
@@ -38434,12 +38395,12 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_fuse_0_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_27update_proba, 0, __pyx_n_s_update_proba, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_fuse_0_0__pyx_mdef_6adaopt_8_adaoptc_27update_proba, 0, __pyx_n_s_update_proba, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_empty_tuple);
   if (PyDict_SetItem(__pyx_t_4, __pyx_kp_s_long_long_double, __pyx_t_7) < 0) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_1update_proba, 0, __pyx_n_s_update_proba, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_1update_proba, 0, __pyx_n_s_update_proba, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_7, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 160, __pyx_L1_error)
   __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
@@ -38454,31 +38415,31 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_update_proba, __pyx_t_7) < 0) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":193
+  /* "adaopt/_adaoptc.pyx":193
  * 
  * # one-hot encoder for discrete response
  * def one_hot_encode(long int[:] y,             # <<<<<<<<<<<<<<
  *                    int n_classes):
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_3one_hot_encode, 0, __pyx_n_s_one_hot_encode, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_3one_hot_encode, 0, __pyx_n_s_one_hot_encode, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_one_hot_encode, __pyx_t_7) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":211
+  /* "adaopt/_adaoptc.pyx":211
  * # @Paul Panzer's soln
  * # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi
  * def outer_sum_dot(A, B):             # <<<<<<<<<<<<<<
  *     return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*np.dot(A, B.T)
  * 
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_5outer_sum_dot, 0, __pyx_n_s_outer_sum_dot, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_5outer_sum_dot, 0, __pyx_n_s_outer_sum_dot, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_outer_sum_dot, __pyx_t_7) < 0) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":319
+  /* "adaopt/_adaoptc.pyx":319
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_euclidean2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -38487,12 +38448,12 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_fuse_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_31distance_to_mat_euclidean2, 0, __pyx_n_s_distance_to_mat_euclidean2, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 319, __pyx_L1_error)
+  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_fuse_0__pyx_mdef_6adaopt_8_adaoptc_31distance_to_mat_euclidean2, 0, __pyx_n_s_distance_to_mat_euclidean2, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_empty_tuple);
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_double, __pyx_t_4) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_7distance_to_mat_euclidean2, 0, __pyx_n_s_distance_to_mat_euclidean2, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 319, __pyx_L1_error)
+  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_7distance_to_mat_euclidean2, 0, __pyx_n_s_distance_to_mat_euclidean2, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_4, sizeof(__pyx_defaults1), 1)) __PYX_ERR(0, 319, __pyx_L1_error)
   __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 319, __pyx_L1_error)
@@ -38507,7 +38468,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_distance_to_mat_euclidean2, __pyx_t_4) < 0) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":334
+  /* "adaopt/_adaoptc.pyx":334
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_manhattan2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -38516,12 +38477,12 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_fuse_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_35distance_to_mat_manhattan2, 0, __pyx_n_s_distance_to_mat_manhattan2, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_fuse_0__pyx_mdef_6adaopt_8_adaoptc_35distance_to_mat_manhattan2, 0, __pyx_n_s_distance_to_mat_manhattan2, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_empty_tuple);
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_double, __pyx_t_7) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_9distance_to_mat_manhattan2, 0, __pyx_n_s_distance_to_mat_manhattan2, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_7 = __pyx_FusedFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_9distance_to_mat_manhattan2, 0, __pyx_n_s_distance_to_mat_manhattan2, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_7, sizeof(__pyx_defaults2), 1)) __PYX_ERR(0, 334, __pyx_L1_error)
   __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 334, __pyx_L1_error)
@@ -38536,7 +38497,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_distance_to_mat_manhattan2, __pyx_t_7) < 0) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":349
+  /* "adaopt/_adaoptc.pyx":349
  * # distance of vector to matrix rows
  * # keep numpy arrays x, B
  * def distance_to_mat_cosine2(nparray_double[:] x,             # <<<<<<<<<<<<<<
@@ -38545,12 +38506,12 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_fuse_0__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_39distance_to_mat_cosine2, 0, __pyx_n_s_distance_to_mat_cosine2, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 349, __pyx_L1_error)
+  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_fuse_0__pyx_mdef_6adaopt_8_adaoptc_39distance_to_mat_cosine2, 0, __pyx_n_s_distance_to_mat_cosine2, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_empty_tuple);
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_double, __pyx_t_4) < 0) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_11distance_to_mat_cosine2, 0, __pyx_n_s_distance_to_mat_cosine2, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 349, __pyx_L1_error)
+  __pyx_t_4 = __pyx_FusedFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_11distance_to_mat_cosine2, 0, __pyx_n_s_distance_to_mat_cosine2, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_4, sizeof(__pyx_defaults3), 1)) __PYX_ERR(0, 349, __pyx_L1_error)
   __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 349, __pyx_L1_error)
@@ -38565,68 +38526,68 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_distance_to_mat_cosine2, __pyx_t_4) < 0) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":377
+  /* "adaopt/_adaoptc.pyx":377
  * 
  * # find_kmin_x
  * def find_kmin_x(x, n_x, k, cache=False):             # <<<<<<<<<<<<<<
  * 
  *     cdef str key
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_13find_kmin_x, 0, __pyx_n_s_find_kmin_x, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 377, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_13find_kmin_x, 0, __pyx_n_s_find_kmin_x, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__39);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_kmin_x, __pyx_t_4) < 0) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":427
+  /* "adaopt/_adaoptc.pyx":427
  * 
  * # calculate probs test i
  * def calculate_probs(long int[:] index,             # <<<<<<<<<<<<<<
  *                     double[:,:] probs_train):
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_15calculate_probs, 0, __pyx_n_s_calculate_probs, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 427, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_15calculate_probs, 0, __pyx_n_s_calculate_probs, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_probs, __pyx_t_4) < 0) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":450
+  /* "adaopt/_adaoptc.pyx":450
  * 
  * # average probs
  * def average_probs(double[:,:] probs, double[:] weights):             # <<<<<<<<<<<<<<
  * 
  *     cdef double sum_probs
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_17average_probs, 0, __pyx_n_s_average_probs, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 450, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_17average_probs, 0, __pyx_n_s_average_probs, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_average_probs, __pyx_t_4) < 0) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":469
+  /* "adaopt/_adaoptc.pyx":469
  * 
  * # calculate weights
  * def calculate_weights(double[:] weights):             # <<<<<<<<<<<<<<
  *     cdef double[:] weights_out = np.zeros(len(weights))
  *     weights_out = 1/np.maximum(weights, np.finfo(float).eps)
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_19calculate_weights, 0, __pyx_n_s_calculate_weights, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 469, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_19calculate_weights, 0, __pyx_n_s_calculate_weights, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__45)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 469, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_calculate_weights, __pyx_t_4) < 0) __PYX_ERR(0, 469, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":478
+  /* "adaopt/_adaoptc.pyx":478
  * # 1 - model fitting -----
  * 
  * def fit_adaopt(double[:, :] X, long int[:] y,             # <<<<<<<<<<<<<<
  *         int n_iterations,
  *         long int n_X, int p_X,
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_21fit_adaopt, 0, __pyx_n_s_fit_adaopt, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 478, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_21fit_adaopt, 0, __pyx_n_s_fit_adaopt, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__47)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_fit_adaopt, __pyx_t_4) < 0) __PYX_ERR(0, 478, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":589
+  /* "adaopt/_adaoptc.pyx":589
  *                   double[:,::1] probs_train, int k,
  *                   int n_clusters, int seed,
  *                   int batch_size = 100,             # <<<<<<<<<<<<<<
@@ -38636,7 +38597,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_4 = __Pyx_PyInt_From_int(((int)0x64)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 589, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":584
+  /* "adaopt/_adaoptc.pyx":584
  * # 2 - Model predict -----
  * 
  * def predict_proba_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -38647,21 +38608,21 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_4);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4)) __PYX_ERR(0, 584, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_euclidean));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_euclidean));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, ((PyObject*)__pyx_n_u_euclidean))) __PYX_ERR(0, 584, __pyx_L1_error);
+  __Pyx_INCREF(((PyObject*)__pyx_n_s_euclidean));
+  __Pyx_GIVEREF(((PyObject*)__pyx_n_s_euclidean));
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, ((PyObject*)__pyx_n_s_euclidean))) __PYX_ERR(0, 584, __pyx_L1_error);
   __Pyx_INCREF(((PyObject *)Py_True));
   __Pyx_GIVEREF(((PyObject *)Py_True));
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, ((PyObject *)Py_True))) __PYX_ERR(0, 584, __pyx_L1_error);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_23predict_proba_adaopt, 0, __pyx_n_s_predict_proba_adaopt, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 584, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_23predict_proba_adaopt, 0, __pyx_n_s_predict_proba_adaopt, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_predict_proba_adaopt, __pyx_t_4) < 0) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":781
+  /* "adaopt/_adaoptc.pyx":781
  *             double[:,::1] probs_train, int k,
  *             int n_clusters, int seed,
  *             int batch_size = 100,             # <<<<<<<<<<<<<<
@@ -38671,7 +38632,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_4 = __Pyx_PyInt_From_int(((int)0x64)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 781, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":776
+  /* "adaopt/_adaoptc.pyx":776
  * 
  * 
  * def predict_adaopt(double[:,::1] X_test,             # <<<<<<<<<<<<<<
@@ -38682,21 +38643,21 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_4);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4)) __PYX_ERR(0, 776, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_euclidean));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_euclidean));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, ((PyObject*)__pyx_n_u_euclidean))) __PYX_ERR(0, 776, __pyx_L1_error);
+  __Pyx_INCREF(((PyObject*)__pyx_n_s_euclidean));
+  __Pyx_GIVEREF(((PyObject*)__pyx_n_s_euclidean));
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, ((PyObject*)__pyx_n_s_euclidean))) __PYX_ERR(0, 776, __pyx_L1_error);
   __Pyx_INCREF(((PyObject *)Py_True));
   __Pyx_GIVEREF(((PyObject *)Py_True));
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, ((PyObject *)Py_True))) __PYX_ERR(0, 776, __pyx_L1_error);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_6adaopt_8_adaoptc_25predict_adaopt, 0, __pyx_n_s_predict_adaopt, NULL, __pyx_n_s_mlsauce_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__51)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 776, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6adaopt_8_adaoptc_25predict_adaopt, 0, __pyx_n_s_predict_adaopt, NULL, __pyx_n_s_adaopt__adaoptc, __pyx_d, ((PyObject *)__pyx_codeobj__51)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_predict_adaopt, __pyx_t_4) < 0) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/adaopt/_adaoptc.pyx":1
+  /* "adaopt/_adaoptc.pyx":1
  * # cython: wraparound=False             # <<<<<<<<<<<<<<
  * # cython: boundscheck=False
  * # cython: nonecheck=False
@@ -38715,7 +38676,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_7);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init mlsauce.adaopt._adaoptc", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init adaopt._adaoptc", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -38729,7 +38690,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init mlsauce.adaopt._adaoptc");
+    PyErr_SetString(PyExc_ImportError, "init adaopt._adaoptc");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -42116,70 +42077,6 @@ static CYTHON_INLINE int __Pyx_ErrOccurredWithGIL(void) {
   #endif
   return err;
 }
-
-/* UnicodeConcatInPlace */
-# if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
-static int
-__Pyx_unicode_modifiable(PyObject *unicode)
-{
-    if (Py_REFCNT(unicode) != 1)
-        return 0;
-    if (!PyUnicode_CheckExact(unicode))
-        return 0;
-    if (PyUnicode_CHECK_INTERNED(unicode))
-        return 0;
-    return 1;
-}
-static CYTHON_INLINE PyObject *__Pyx_PyUnicode_ConcatInPlaceImpl(PyObject **p_left, PyObject *right
-        #if CYTHON_REFNANNY
-        , void* __pyx_refnanny
-        #endif
-    ) {
-    PyObject *left = *p_left;
-    Py_ssize_t left_len, right_len, new_len;
-    if (unlikely(__Pyx_PyUnicode_READY(left) == -1))
-        return NULL;
-    if (unlikely(__Pyx_PyUnicode_READY(right) == -1))
-        return NULL;
-    left_len = PyUnicode_GET_LENGTH(left);
-    if (left_len == 0) {
-        Py_INCREF(right);
-        return right;
-    }
-    right_len = PyUnicode_GET_LENGTH(right);
-    if (right_len == 0) {
-        Py_INCREF(left);
-        return left;
-    }
-    if (unlikely(left_len > PY_SSIZE_T_MAX - right_len)) {
-        PyErr_SetString(PyExc_OverflowError,
-                        "strings are too large to concat");
-        return NULL;
-    }
-    new_len = left_len + right_len;
-    if (__Pyx_unicode_modifiable(left)
-            && PyUnicode_CheckExact(right)
-            && PyUnicode_KIND(right) <= PyUnicode_KIND(left)
-            && !(PyUnicode_IS_ASCII(left) && !PyUnicode_IS_ASCII(right))) {
-        int ret;
-        __Pyx_GIVEREF(*p_left);
-        ret = PyUnicode_Resize(p_left, new_len);
-        __Pyx_GOTREF(*p_left);
-        if (unlikely(ret != 0))
-            return NULL;
-        #if PY_VERSION_HEX >= 0x030d0000
-        if (unlikely(PyUnicode_CopyCharacters(*p_left, left_len, right, 0, right_len) < 0)) return NULL;
-        #else
-        _PyUnicode_FastCopyCharacters(*p_left, left_len, right, 0, right_len);
-        #endif
-        __Pyx_INCREF(*p_left);
-        __Pyx_GIVEREF(*p_left);
-        return *p_left;
-    } else {
-        return __Pyx_PyUnicode_Concat(left, right);
-    }
-  }
-#endif
 
 /* py_dict_keys */
 static CYTHON_INLINE PyObject* __Pyx_PyDict_Keys(PyObject* d) {

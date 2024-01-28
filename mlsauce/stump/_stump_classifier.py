@@ -3,7 +3,6 @@ from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from . import _stumpc as stumpc
 
-
 class StumpClassifier(BaseEstimator, ClassifierMixin):
     """Stump classifier.
 

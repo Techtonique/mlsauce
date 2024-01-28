@@ -5,7 +5,6 @@ from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from . import _boosterc as boosterc
 
-
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
     """LSBoost classifier.
 

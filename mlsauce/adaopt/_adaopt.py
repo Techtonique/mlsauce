@@ -7,7 +7,10 @@ from sklearn.base import ClassifierMixin
 from numpy.linalg import norm
 from tqdm import tqdm
 from ..utils import subsample
-from . import _adaoptc as adaoptc
+try:
+    from . import _adaoptc as adaoptc
+except ImportError:
+    pass
 
 
 class AdaOpt(BaseEstimator, ClassifierMixin):

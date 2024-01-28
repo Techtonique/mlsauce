@@ -13,15 +13,12 @@
         "include_dirs": [
             "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include"
         ],
-        "libraries": [
-            "m"
-        ],
-        "name": "mlsauce.lasso._lassoc",
+        "name": "lasso._lassoc",
         "sources": [
             "mlsauce/lasso/_lassoc.pyx"
         ]
     },
-    "module_name": "mlsauce.lasso._lassoc"
+    "module_name": "lasso._lassoc"
 }
 END: Cython Metadata */
 
@@ -1206,8 +1203,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__mlsauce__lasso___lassoc
-#define __PYX_HAVE_API__mlsauce__lasso___lassoc
+#define __PYX_HAVE__lasso___lassoc
+#define __PYX_HAVE_API__lasso___lassoc
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -3173,7 +3170,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__p
 
 /* Module declarations from "cython" */
 
-/* Module declarations from "mlsauce.lasso._lassoc" */
+/* Module declarations from "lasso._lassoc" */
 static PyObject *__pyx_collections_abc_Sequence = 0;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
@@ -3219,11 +3216,11 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, 
 /* #### Code section: typeinfo ### */
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "mlsauce.lasso._lassoc"
-extern int __pyx_module_is_main_mlsauce__lasso___lassoc;
-int __pyx_module_is_main_mlsauce__lasso___lassoc = 0;
+#define __Pyx_MODULE_NAME "lasso._lassoc"
+extern int __pyx_module_is_main_lasso___lassoc;
+int __pyx_module_is_main_lasso___lassoc = 0;
 
-/* Implementation of "mlsauce.lasso._lassoc" */
+/* Implementation of "lasso._lassoc" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_AssertionError;
 static PyObject *__pyx_builtin_range;
@@ -3427,6 +3424,7 @@ static const char __pyx_k_sys_platform[] = "sys_platform";
 static const char __pyx_k_version_info[] = "version_info";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_fit_transform[] = "fit_transform";
+static const char __pyx_k_lasso__lassoc[] = "lasso._lassoc";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_AssertionError[] = "AssertionError";
 static const char __pyx_k_StandardScaler[] = "StandardScaler";
@@ -3454,7 +3452,6 @@ static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_Invalid_shape_in_axis[] = "Invalid shape in axis ";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
-static const char __pyx_k_mlsauce_lasso__lassoc[] = "mlsauce.lasso._lassoc";
 static const char __pyx_k_sklearn_preprocessing[] = "sklearn.preprocessing";
 static const char __pyx_k_Cannot_index_with_type[] = "Cannot index with type '";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
@@ -3529,21 +3526,21 @@ static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewsl
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_drop_prob, PyObject *__pyx_v_seed); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x_clusters, PyObject *__pyx_v_n_clusters); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y, PyObject *__pyx_v_n_classes); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_backend, PyObject *__pyx_v_dense_output); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_choice, PyObject *__pyx_v_training, PyObject *__pyx_v_scaler); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_x, double __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_backend); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_2center_response(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_drop_prob, PyObject *__pyx_v_seed); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x_clusters, PyObject *__pyx_v_n_clusters); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y, PyObject *__pyx_v_n_classes); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_backend, PyObject *__pyx_v_dense_output); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_20scale_covariates(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_choice, PyObject *__pyx_v_training, PyObject *__pyx_v_scaler); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_x, double __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_backend); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend); /* proto */
+static PyObject *__pyx_pf_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X); /* proto */
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -3635,7 +3632,7 @@ typedef struct {
   PyObject *__pyx_kp_s_Cannot_create_writable_memory_vi;
   PyObject *__pyx_kp_u_Cannot_index_with_type;
   PyObject *__pyx_kp_s_Cannot_transpose_memoryview_with;
-  PyObject *__pyx_n_u_Darwin;
+  PyObject *__pyx_n_s_Darwin;
   PyObject *__pyx_kp_s_Dimension_d_is_not_direct;
   PyObject *__pyx_n_s_Ellipsis;
   PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
@@ -3647,10 +3644,10 @@ typedef struct {
   PyObject *__pyx_kp_s_Indirect_dimensions_not_supporte;
   PyObject *__pyx_kp_u_Invalid_mode_expected_c_or_fortr;
   PyObject *__pyx_kp_u_Invalid_shape_in_axis;
-  PyObject *__pyx_n_u_K;
+  PyObject *__pyx_n_s_K;
   PyObject *__pyx_n_s_KMeans;
   PyObject *__pyx_n_s_LA;
-  PyObject *__pyx_n_u_Linux;
+  PyObject *__pyx_n_s_Linux;
   PyObject *__pyx_n_s_MemoryError;
   PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
   PyObject *__pyx_kp_s_MemoryView_of_r_object;
@@ -3658,8 +3655,8 @@ typedef struct {
   PyObject *__pyx_n_b_O;
   PyObject *__pyx_kp_u_Out_of_bounds_on_buffer_access_a;
   PyObject *__pyx_n_s_PickleError;
-  PyObject *__pyx_kp_u_Remove_columns_having_0s_in_max;
-  PyObject *__pyx_kp_u_Remove_columns_having_standard;
+  PyObject *__pyx_kp_s_Remove_columns_having_0s_in_max;
+  PyObject *__pyx_kp_s_Remove_columns_having_standard;
   PyObject *__pyx_n_s_Sequence;
   PyObject *__pyx_n_s_StandardScaler;
   PyObject *__pyx_kp_s_Step_may_not_be_zero_axis_d;
@@ -3715,7 +3712,7 @@ typedef struct {
   PyObject *__pyx_n_s_converged;
   PyObject *__pyx_n_s_copy;
   PyObject *__pyx_n_s_count;
-  PyObject *__pyx_n_u_cpu;
+  PyObject *__pyx_n_s_cpu;
   PyObject *__pyx_n_s_crossprod;
   PyObject *__pyx_n_s_dense_output;
   PyObject *__pyx_n_s_device_put;
@@ -3743,7 +3740,7 @@ typedef struct {
   PyObject *__pyx_n_s_getstate;
   PyObject *__pyx_kp_u_got;
   PyObject *__pyx_kp_u_got_differing_extents_in_dimensi;
-  PyObject *__pyx_n_u_gpu;
+  PyObject *__pyx_n_s_gpu;
   PyObject *__pyx_n_s_i;
   PyObject *__pyx_n_s_id;
   PyObject *__pyx_n_s_imatmul;
@@ -3761,6 +3758,7 @@ typedef struct {
   PyObject *__pyx_n_s_jax_numpy;
   PyObject *__pyx_n_s_jnp;
   PyObject *__pyx_n_s_k;
+  PyObject *__pyx_n_s_lasso__lassoc;
   PyObject *__pyx_n_s_linalg;
   PyObject *__pyx_n_s_loads;
   PyObject *__pyx_n_s_main;
@@ -3770,8 +3768,7 @@ typedef struct {
   PyObject *__pyx_n_s_mean;
   PyObject *__pyx_n_s_memview;
   PyObject *__pyx_n_s_min;
-  PyObject *__pyx_n_u_minmax;
-  PyObject *__pyx_n_s_mlsauce_lasso__lassoc;
+  PyObject *__pyx_n_s_minmax;
   PyObject *__pyx_kp_s_mlsauce_lasso__lassoc_pyx;
   PyObject *__pyx_n_s_mode;
   PyObject *__pyx_n_s_n;
@@ -3786,8 +3783,8 @@ typedef struct {
   PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
   PyObject *__pyx_n_s_np;
   PyObject *__pyx_n_s_numpy;
-  PyObject *__pyx_kp_u_numpy_core_multiarray_failed_to;
-  PyObject *__pyx_kp_u_numpy_core_umath_failed_to_impor;
+  PyObject *__pyx_kp_s_numpy_core_multiarray_failed_to;
+  PyObject *__pyx_kp_s_numpy_core_umath_failed_to_impor;
   PyObject *__pyx_n_s_obj;
   PyObject *__pyx_n_s_one_hot_encode;
   PyObject *__pyx_n_s_one_hot_encode2;
@@ -3842,7 +3839,6 @@ typedef struct {
   PyObject *__pyx_n_s_squared_norm;
   PyObject *__pyx_n_s_start;
   PyObject *__pyx_n_s_std;
-  PyObject *__pyx_n_u_std;
   PyObject *__pyx_n_s_step;
   PyObject *__pyx_n_s_stop;
   PyObject *__pyx_kp_s_strided_and_direct;
@@ -3858,9 +3854,8 @@ typedef struct {
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_to_np_array;
   PyObject *__pyx_n_s_toarray;
-  PyObject *__pyx_n_u_toarray;
   PyObject *__pyx_n_s_tol;
-  PyObject *__pyx_n_u_tpu;
+  PyObject *__pyx_n_s_tpu;
   PyObject *__pyx_n_s_training;
   PyObject *__pyx_n_s_transform;
   PyObject *__pyx_n_s_transpose;
@@ -3875,7 +3870,7 @@ typedef struct {
   PyObject *__pyx_n_s_x_clusters;
   PyObject *__pyx_n_s_y;
   PyObject *__pyx_n_s_y_mean;
-  PyObject *__pyx_kp_u_you_must_have_max_x_clusters_n_c;
+  PyObject *__pyx_kp_s_you_must_have_max_x_clusters_n_c;
   PyObject *__pyx_n_s_zeros;
   PyObject *__pyx_n_s_zeros_like;
   PyObject *__pyx_int_0;
@@ -4016,7 +4011,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_Cannot_create_writable_memory_vi);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Cannot_index_with_type);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Cannot_transpose_memoryview_with);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Darwin);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Darwin);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Dimension_d_is_not_direct);
   Py_CLEAR(clear_module_state->__pyx_n_s_Ellipsis);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Empty_shape_tuple_for_cython_arr);
@@ -4028,10 +4023,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_Indirect_dimensions_not_supporte);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Invalid_mode_expected_c_or_fortr);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Invalid_shape_in_axis);
-  Py_CLEAR(clear_module_state->__pyx_n_u_K);
+  Py_CLEAR(clear_module_state->__pyx_n_s_K);
   Py_CLEAR(clear_module_state->__pyx_n_s_KMeans);
   Py_CLEAR(clear_module_state->__pyx_n_s_LA);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Linux);
+  Py_CLEAR(clear_module_state->__pyx_n_s_Linux);
   Py_CLEAR(clear_module_state->__pyx_n_s_MemoryError);
   Py_CLEAR(clear_module_state->__pyx_kp_s_MemoryView_of_r_at_0x_x);
   Py_CLEAR(clear_module_state->__pyx_kp_s_MemoryView_of_r_object);
@@ -4039,8 +4034,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_b_O);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Out_of_bounds_on_buffer_access_a);
   Py_CLEAR(clear_module_state->__pyx_n_s_PickleError);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Remove_columns_having_0s_in_max);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Remove_columns_having_standard);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Remove_columns_having_0s_in_max);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_Remove_columns_having_standard);
   Py_CLEAR(clear_module_state->__pyx_n_s_Sequence);
   Py_CLEAR(clear_module_state->__pyx_n_s_StandardScaler);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Step_may_not_be_zero_axis_d);
@@ -4096,7 +4091,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_converged);
   Py_CLEAR(clear_module_state->__pyx_n_s_copy);
   Py_CLEAR(clear_module_state->__pyx_n_s_count);
-  Py_CLEAR(clear_module_state->__pyx_n_u_cpu);
+  Py_CLEAR(clear_module_state->__pyx_n_s_cpu);
   Py_CLEAR(clear_module_state->__pyx_n_s_crossprod);
   Py_CLEAR(clear_module_state->__pyx_n_s_dense_output);
   Py_CLEAR(clear_module_state->__pyx_n_s_device_put);
@@ -4124,7 +4119,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_getstate);
   Py_CLEAR(clear_module_state->__pyx_kp_u_got);
   Py_CLEAR(clear_module_state->__pyx_kp_u_got_differing_extents_in_dimensi);
-  Py_CLEAR(clear_module_state->__pyx_n_u_gpu);
+  Py_CLEAR(clear_module_state->__pyx_n_s_gpu);
   Py_CLEAR(clear_module_state->__pyx_n_s_i);
   Py_CLEAR(clear_module_state->__pyx_n_s_id);
   Py_CLEAR(clear_module_state->__pyx_n_s_imatmul);
@@ -4142,6 +4137,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_jax_numpy);
   Py_CLEAR(clear_module_state->__pyx_n_s_jnp);
   Py_CLEAR(clear_module_state->__pyx_n_s_k);
+  Py_CLEAR(clear_module_state->__pyx_n_s_lasso__lassoc);
   Py_CLEAR(clear_module_state->__pyx_n_s_linalg);
   Py_CLEAR(clear_module_state->__pyx_n_s_loads);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
@@ -4151,8 +4147,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_mean);
   Py_CLEAR(clear_module_state->__pyx_n_s_memview);
   Py_CLEAR(clear_module_state->__pyx_n_s_min);
-  Py_CLEAR(clear_module_state->__pyx_n_u_minmax);
-  Py_CLEAR(clear_module_state->__pyx_n_s_mlsauce_lasso__lassoc);
+  Py_CLEAR(clear_module_state->__pyx_n_s_minmax);
   Py_CLEAR(clear_module_state->__pyx_kp_s_mlsauce_lasso__lassoc_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_mode);
   Py_CLEAR(clear_module_state->__pyx_n_s_n);
@@ -4167,8 +4162,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_no_default___reduce___due_to_non);
   Py_CLEAR(clear_module_state->__pyx_n_s_np);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_numpy_core_multiarray_failed_to);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_numpy_core_umath_failed_to_impor);
   Py_CLEAR(clear_module_state->__pyx_n_s_obj);
   Py_CLEAR(clear_module_state->__pyx_n_s_one_hot_encode);
   Py_CLEAR(clear_module_state->__pyx_n_s_one_hot_encode2);
@@ -4223,7 +4218,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_squared_norm);
   Py_CLEAR(clear_module_state->__pyx_n_s_start);
   Py_CLEAR(clear_module_state->__pyx_n_s_std);
-  Py_CLEAR(clear_module_state->__pyx_n_u_std);
   Py_CLEAR(clear_module_state->__pyx_n_s_step);
   Py_CLEAR(clear_module_state->__pyx_n_s_stop);
   Py_CLEAR(clear_module_state->__pyx_kp_s_strided_and_direct);
@@ -4239,9 +4233,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_to_np_array);
   Py_CLEAR(clear_module_state->__pyx_n_s_toarray);
-  Py_CLEAR(clear_module_state->__pyx_n_u_toarray);
   Py_CLEAR(clear_module_state->__pyx_n_s_tol);
-  Py_CLEAR(clear_module_state->__pyx_n_u_tpu);
+  Py_CLEAR(clear_module_state->__pyx_n_s_tpu);
   Py_CLEAR(clear_module_state->__pyx_n_s_training);
   Py_CLEAR(clear_module_state->__pyx_n_s_transform);
   Py_CLEAR(clear_module_state->__pyx_n_s_transpose);
@@ -4256,7 +4249,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_x_clusters);
   Py_CLEAR(clear_module_state->__pyx_n_s_y);
   Py_CLEAR(clear_module_state->__pyx_n_s_y_mean);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_you_must_have_max_x_clusters_n_c);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_you_must_have_max_x_clusters_n_c);
   Py_CLEAR(clear_module_state->__pyx_n_s_zeros);
   Py_CLEAR(clear_module_state->__pyx_n_s_zeros_like);
   Py_CLEAR(clear_module_state->__pyx_int_0);
@@ -4375,7 +4368,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_Cannot_create_writable_memory_vi);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Cannot_index_with_type);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Cannot_transpose_memoryview_with);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Darwin);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Darwin);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Dimension_d_is_not_direct);
   Py_VISIT(traverse_module_state->__pyx_n_s_Ellipsis);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Empty_shape_tuple_for_cython_arr);
@@ -4387,10 +4380,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_Indirect_dimensions_not_supporte);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Invalid_mode_expected_c_or_fortr);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Invalid_shape_in_axis);
-  Py_VISIT(traverse_module_state->__pyx_n_u_K);
+  Py_VISIT(traverse_module_state->__pyx_n_s_K);
   Py_VISIT(traverse_module_state->__pyx_n_s_KMeans);
   Py_VISIT(traverse_module_state->__pyx_n_s_LA);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Linux);
+  Py_VISIT(traverse_module_state->__pyx_n_s_Linux);
   Py_VISIT(traverse_module_state->__pyx_n_s_MemoryError);
   Py_VISIT(traverse_module_state->__pyx_kp_s_MemoryView_of_r_at_0x_x);
   Py_VISIT(traverse_module_state->__pyx_kp_s_MemoryView_of_r_object);
@@ -4398,8 +4391,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_b_O);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Out_of_bounds_on_buffer_access_a);
   Py_VISIT(traverse_module_state->__pyx_n_s_PickleError);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Remove_columns_having_0s_in_max);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Remove_columns_having_standard);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Remove_columns_having_0s_in_max);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_Remove_columns_having_standard);
   Py_VISIT(traverse_module_state->__pyx_n_s_Sequence);
   Py_VISIT(traverse_module_state->__pyx_n_s_StandardScaler);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Step_may_not_be_zero_axis_d);
@@ -4455,7 +4448,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_converged);
   Py_VISIT(traverse_module_state->__pyx_n_s_copy);
   Py_VISIT(traverse_module_state->__pyx_n_s_count);
-  Py_VISIT(traverse_module_state->__pyx_n_u_cpu);
+  Py_VISIT(traverse_module_state->__pyx_n_s_cpu);
   Py_VISIT(traverse_module_state->__pyx_n_s_crossprod);
   Py_VISIT(traverse_module_state->__pyx_n_s_dense_output);
   Py_VISIT(traverse_module_state->__pyx_n_s_device_put);
@@ -4483,7 +4476,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_getstate);
   Py_VISIT(traverse_module_state->__pyx_kp_u_got);
   Py_VISIT(traverse_module_state->__pyx_kp_u_got_differing_extents_in_dimensi);
-  Py_VISIT(traverse_module_state->__pyx_n_u_gpu);
+  Py_VISIT(traverse_module_state->__pyx_n_s_gpu);
   Py_VISIT(traverse_module_state->__pyx_n_s_i);
   Py_VISIT(traverse_module_state->__pyx_n_s_id);
   Py_VISIT(traverse_module_state->__pyx_n_s_imatmul);
@@ -4501,6 +4494,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_jax_numpy);
   Py_VISIT(traverse_module_state->__pyx_n_s_jnp);
   Py_VISIT(traverse_module_state->__pyx_n_s_k);
+  Py_VISIT(traverse_module_state->__pyx_n_s_lasso__lassoc);
   Py_VISIT(traverse_module_state->__pyx_n_s_linalg);
   Py_VISIT(traverse_module_state->__pyx_n_s_loads);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
@@ -4510,8 +4504,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_mean);
   Py_VISIT(traverse_module_state->__pyx_n_s_memview);
   Py_VISIT(traverse_module_state->__pyx_n_s_min);
-  Py_VISIT(traverse_module_state->__pyx_n_u_minmax);
-  Py_VISIT(traverse_module_state->__pyx_n_s_mlsauce_lasso__lassoc);
+  Py_VISIT(traverse_module_state->__pyx_n_s_minmax);
   Py_VISIT(traverse_module_state->__pyx_kp_s_mlsauce_lasso__lassoc_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_mode);
   Py_VISIT(traverse_module_state->__pyx_n_s_n);
@@ -4526,8 +4519,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_no_default___reduce___due_to_non);
   Py_VISIT(traverse_module_state->__pyx_n_s_np);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_numpy_core_multiarray_failed_to);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_numpy_core_umath_failed_to_impor);
   Py_VISIT(traverse_module_state->__pyx_n_s_obj);
   Py_VISIT(traverse_module_state->__pyx_n_s_one_hot_encode);
   Py_VISIT(traverse_module_state->__pyx_n_s_one_hot_encode2);
@@ -4582,7 +4575,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_squared_norm);
   Py_VISIT(traverse_module_state->__pyx_n_s_start);
   Py_VISIT(traverse_module_state->__pyx_n_s_std);
-  Py_VISIT(traverse_module_state->__pyx_n_u_std);
   Py_VISIT(traverse_module_state->__pyx_n_s_step);
   Py_VISIT(traverse_module_state->__pyx_n_s_stop);
   Py_VISIT(traverse_module_state->__pyx_kp_s_strided_and_direct);
@@ -4598,9 +4590,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_to_np_array);
   Py_VISIT(traverse_module_state->__pyx_n_s_toarray);
-  Py_VISIT(traverse_module_state->__pyx_n_u_toarray);
   Py_VISIT(traverse_module_state->__pyx_n_s_tol);
-  Py_VISIT(traverse_module_state->__pyx_n_u_tpu);
+  Py_VISIT(traverse_module_state->__pyx_n_s_tpu);
   Py_VISIT(traverse_module_state->__pyx_n_s_training);
   Py_VISIT(traverse_module_state->__pyx_n_s_transform);
   Py_VISIT(traverse_module_state->__pyx_n_s_transpose);
@@ -4615,7 +4606,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_x_clusters);
   Py_VISIT(traverse_module_state->__pyx_n_s_y);
   Py_VISIT(traverse_module_state->__pyx_n_s_y_mean);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_you_must_have_max_x_clusters_n_c);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_you_must_have_max_x_clusters_n_c);
   Py_VISIT(traverse_module_state->__pyx_n_s_zeros);
   Py_VISIT(traverse_module_state->__pyx_n_s_zeros_like);
   Py_VISIT(traverse_module_state->__pyx_int_0);
@@ -4768,7 +4759,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_Cannot_create_writable_memory_vi __pyx_mstate_global->__pyx_kp_s_Cannot_create_writable_memory_vi
 #define __pyx_kp_u_Cannot_index_with_type __pyx_mstate_global->__pyx_kp_u_Cannot_index_with_type
 #define __pyx_kp_s_Cannot_transpose_memoryview_with __pyx_mstate_global->__pyx_kp_s_Cannot_transpose_memoryview_with
-#define __pyx_n_u_Darwin __pyx_mstate_global->__pyx_n_u_Darwin
+#define __pyx_n_s_Darwin __pyx_mstate_global->__pyx_n_s_Darwin
 #define __pyx_kp_s_Dimension_d_is_not_direct __pyx_mstate_global->__pyx_kp_s_Dimension_d_is_not_direct
 #define __pyx_n_s_Ellipsis __pyx_mstate_global->__pyx_n_s_Ellipsis
 #define __pyx_kp_s_Empty_shape_tuple_for_cython_arr __pyx_mstate_global->__pyx_kp_s_Empty_shape_tuple_for_cython_arr
@@ -4780,10 +4771,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_Indirect_dimensions_not_supporte __pyx_mstate_global->__pyx_kp_s_Indirect_dimensions_not_supporte
 #define __pyx_kp_u_Invalid_mode_expected_c_or_fortr __pyx_mstate_global->__pyx_kp_u_Invalid_mode_expected_c_or_fortr
 #define __pyx_kp_u_Invalid_shape_in_axis __pyx_mstate_global->__pyx_kp_u_Invalid_shape_in_axis
-#define __pyx_n_u_K __pyx_mstate_global->__pyx_n_u_K
+#define __pyx_n_s_K __pyx_mstate_global->__pyx_n_s_K
 #define __pyx_n_s_KMeans __pyx_mstate_global->__pyx_n_s_KMeans
 #define __pyx_n_s_LA __pyx_mstate_global->__pyx_n_s_LA
-#define __pyx_n_u_Linux __pyx_mstate_global->__pyx_n_u_Linux
+#define __pyx_n_s_Linux __pyx_mstate_global->__pyx_n_s_Linux
 #define __pyx_n_s_MemoryError __pyx_mstate_global->__pyx_n_s_MemoryError
 #define __pyx_kp_s_MemoryView_of_r_at_0x_x __pyx_mstate_global->__pyx_kp_s_MemoryView_of_r_at_0x_x
 #define __pyx_kp_s_MemoryView_of_r_object __pyx_mstate_global->__pyx_kp_s_MemoryView_of_r_object
@@ -4791,8 +4782,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_b_O __pyx_mstate_global->__pyx_n_b_O
 #define __pyx_kp_u_Out_of_bounds_on_buffer_access_a __pyx_mstate_global->__pyx_kp_u_Out_of_bounds_on_buffer_access_a
 #define __pyx_n_s_PickleError __pyx_mstate_global->__pyx_n_s_PickleError
-#define __pyx_kp_u_Remove_columns_having_0s_in_max __pyx_mstate_global->__pyx_kp_u_Remove_columns_having_0s_in_max
-#define __pyx_kp_u_Remove_columns_having_standard __pyx_mstate_global->__pyx_kp_u_Remove_columns_having_standard
+#define __pyx_kp_s_Remove_columns_having_0s_in_max __pyx_mstate_global->__pyx_kp_s_Remove_columns_having_0s_in_max
+#define __pyx_kp_s_Remove_columns_having_standard __pyx_mstate_global->__pyx_kp_s_Remove_columns_having_standard
 #define __pyx_n_s_Sequence __pyx_mstate_global->__pyx_n_s_Sequence
 #define __pyx_n_s_StandardScaler __pyx_mstate_global->__pyx_n_s_StandardScaler
 #define __pyx_kp_s_Step_may_not_be_zero_axis_d __pyx_mstate_global->__pyx_kp_s_Step_may_not_be_zero_axis_d
@@ -4848,7 +4839,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_converged __pyx_mstate_global->__pyx_n_s_converged
 #define __pyx_n_s_copy __pyx_mstate_global->__pyx_n_s_copy
 #define __pyx_n_s_count __pyx_mstate_global->__pyx_n_s_count
-#define __pyx_n_u_cpu __pyx_mstate_global->__pyx_n_u_cpu
+#define __pyx_n_s_cpu __pyx_mstate_global->__pyx_n_s_cpu
 #define __pyx_n_s_crossprod __pyx_mstate_global->__pyx_n_s_crossprod
 #define __pyx_n_s_dense_output __pyx_mstate_global->__pyx_n_s_dense_output
 #define __pyx_n_s_device_put __pyx_mstate_global->__pyx_n_s_device_put
@@ -4876,7 +4867,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_getstate __pyx_mstate_global->__pyx_n_s_getstate
 #define __pyx_kp_u_got __pyx_mstate_global->__pyx_kp_u_got
 #define __pyx_kp_u_got_differing_extents_in_dimensi __pyx_mstate_global->__pyx_kp_u_got_differing_extents_in_dimensi
-#define __pyx_n_u_gpu __pyx_mstate_global->__pyx_n_u_gpu
+#define __pyx_n_s_gpu __pyx_mstate_global->__pyx_n_s_gpu
 #define __pyx_n_s_i __pyx_mstate_global->__pyx_n_s_i
 #define __pyx_n_s_id __pyx_mstate_global->__pyx_n_s_id
 #define __pyx_n_s_imatmul __pyx_mstate_global->__pyx_n_s_imatmul
@@ -4894,6 +4885,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_jax_numpy __pyx_mstate_global->__pyx_n_s_jax_numpy
 #define __pyx_n_s_jnp __pyx_mstate_global->__pyx_n_s_jnp
 #define __pyx_n_s_k __pyx_mstate_global->__pyx_n_s_k
+#define __pyx_n_s_lasso__lassoc __pyx_mstate_global->__pyx_n_s_lasso__lassoc
 #define __pyx_n_s_linalg __pyx_mstate_global->__pyx_n_s_linalg
 #define __pyx_n_s_loads __pyx_mstate_global->__pyx_n_s_loads
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
@@ -4903,8 +4895,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_mean __pyx_mstate_global->__pyx_n_s_mean
 #define __pyx_n_s_memview __pyx_mstate_global->__pyx_n_s_memview
 #define __pyx_n_s_min __pyx_mstate_global->__pyx_n_s_min
-#define __pyx_n_u_minmax __pyx_mstate_global->__pyx_n_u_minmax
-#define __pyx_n_s_mlsauce_lasso__lassoc __pyx_mstate_global->__pyx_n_s_mlsauce_lasso__lassoc
+#define __pyx_n_s_minmax __pyx_mstate_global->__pyx_n_s_minmax
 #define __pyx_kp_s_mlsauce_lasso__lassoc_pyx __pyx_mstate_global->__pyx_kp_s_mlsauce_lasso__lassoc_pyx
 #define __pyx_n_s_mode __pyx_mstate_global->__pyx_n_s_mode
 #define __pyx_n_s_n __pyx_mstate_global->__pyx_n_s_n
@@ -4919,8 +4910,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_no_default___reduce___due_to_non __pyx_mstate_global->__pyx_kp_s_no_default___reduce___due_to_non
 #define __pyx_n_s_np __pyx_mstate_global->__pyx_n_s_np
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
-#define __pyx_kp_u_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_u_numpy_core_multiarray_failed_to
-#define __pyx_kp_u_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_u_numpy_core_umath_failed_to_impor
+#define __pyx_kp_s_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_s_numpy_core_multiarray_failed_to
+#define __pyx_kp_s_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_s_numpy_core_umath_failed_to_impor
 #define __pyx_n_s_obj __pyx_mstate_global->__pyx_n_s_obj
 #define __pyx_n_s_one_hot_encode __pyx_mstate_global->__pyx_n_s_one_hot_encode
 #define __pyx_n_s_one_hot_encode2 __pyx_mstate_global->__pyx_n_s_one_hot_encode2
@@ -4975,7 +4966,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_squared_norm __pyx_mstate_global->__pyx_n_s_squared_norm
 #define __pyx_n_s_start __pyx_mstate_global->__pyx_n_s_start
 #define __pyx_n_s_std __pyx_mstate_global->__pyx_n_s_std
-#define __pyx_n_u_std __pyx_mstate_global->__pyx_n_u_std
 #define __pyx_n_s_step __pyx_mstate_global->__pyx_n_s_step
 #define __pyx_n_s_stop __pyx_mstate_global->__pyx_n_s_stop
 #define __pyx_kp_s_strided_and_direct __pyx_mstate_global->__pyx_kp_s_strided_and_direct
@@ -4991,9 +4981,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_to_np_array __pyx_mstate_global->__pyx_n_s_to_np_array
 #define __pyx_n_s_toarray __pyx_mstate_global->__pyx_n_s_toarray
-#define __pyx_n_u_toarray __pyx_mstate_global->__pyx_n_u_toarray
 #define __pyx_n_s_tol __pyx_mstate_global->__pyx_n_s_tol
-#define __pyx_n_u_tpu __pyx_mstate_global->__pyx_n_u_tpu
+#define __pyx_n_s_tpu __pyx_mstate_global->__pyx_n_s_tpu
 #define __pyx_n_s_training __pyx_mstate_global->__pyx_n_s_training
 #define __pyx_n_s_transform __pyx_mstate_global->__pyx_n_s_transform
 #define __pyx_n_s_transpose __pyx_mstate_global->__pyx_n_s_transpose
@@ -5008,7 +4997,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_x_clusters __pyx_mstate_global->__pyx_n_s_x_clusters
 #define __pyx_n_s_y __pyx_mstate_global->__pyx_n_s_y
 #define __pyx_n_s_y_mean __pyx_mstate_global->__pyx_n_s_y_mean
-#define __pyx_kp_u_you_must_have_max_x_clusters_n_c __pyx_mstate_global->__pyx_kp_u_you_must_have_max_x_clusters_n_c
+#define __pyx_kp_s_you_must_have_max_x_clusters_n_c __pyx_mstate_global->__pyx_kp_s_you_must_have_max_x_clusters_n_c
 #define __pyx_n_s_zeros __pyx_mstate_global->__pyx_n_s_zeros
 #define __pyx_n_s_zeros_like __pyx_mstate_global->__pyx_n_s_zeros_like
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
@@ -19963,7 +19952,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":27
+/* "lasso/_lassoc.pyx":27
  * 
  * # column bind
  * def cbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -19972,15 +19961,15 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_1cbind(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_1cbind(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_1cbind = {"cbind", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_1cbind, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_1cbind(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_1cbind = {"cbind", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_1cbind, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_1cbind(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20011,7 +20000,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -20081,11 +20070,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.cbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.cbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_cbind(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
 
   /* function exit code */
   {
@@ -20098,7 +20087,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
   PyObject *__pyx_v_sys_platform = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -20115,7 +20104,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cbind", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":29
+  /* "lasso/_lassoc.pyx":29
  * def cbind(x, y, backend="cpu"):
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
@@ -20152,7 +20141,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":30
+  /* "lasso/_lassoc.pyx":30
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -20161,13 +20150,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -20179,13 +20168,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -20194,7 +20183,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":31
+    /* "lasso/_lassoc.pyx":31
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         return jnp.column_stack((x, y))             # <<<<<<<<<<<<<<
@@ -20242,7 +20231,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":30
+    /* "lasso/_lassoc.pyx":30
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -20251,7 +20240,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":32
+  /* "lasso/_lassoc.pyx":32
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         return jnp.column_stack((x, y))
  *     return np.column_stack((x, y))             # <<<<<<<<<<<<<<
@@ -20299,7 +20288,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":27
+  /* "lasso/_lassoc.pyx":27
  * 
  * # column bind
  * def cbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -20313,7 +20302,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.cbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.cbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sys_platform);
@@ -20322,7 +20311,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":36
+/* "lasso/_lassoc.pyx":36
  * 
  * # center... response
  * def center_response(y):             # <<<<<<<<<<<<<<
@@ -20331,15 +20320,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_cbind(CYTHON_UNUSED PyObject 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_3center_response(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_3center_response(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_3center_response = {"center_response", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_3center_response, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_3center_response(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_3center_response = {"center_response", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_3center_response, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_3center_response(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20409,11 +20398,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.center_response", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.center_response", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(__pyx_self, __pyx_v_y);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_2center_response(__pyx_self, __pyx_v_y);
 
   /* function exit code */
   {
@@ -20426,7 +20415,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_2center_response(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y) {
   PyObject *__pyx_v_y_mean = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -20441,7 +20430,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("center_response", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":37
+  /* "lasso/_lassoc.pyx":37
  * # center... response
  * def center_response(y):
  *     if (len(np.asarray(y).shape)==1):             # <<<<<<<<<<<<<<
@@ -20483,7 +20472,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
   __pyx_t_6 = (__pyx_t_5 == 1);
   if (__pyx_t_6) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":38
+    /* "lasso/_lassoc.pyx":38
  * def center_response(y):
  *     if (len(np.asarray(y).shape)==1):
  *         y_mean = np.mean(y)             # <<<<<<<<<<<<<<
@@ -20520,7 +20509,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
     __pyx_v_y_mean = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":39
+    /* "lasso/_lassoc.pyx":39
  *     if (len(np.asarray(y).shape)==1):
  *         y_mean = np.mean(y)
  *         return y_mean, (y - y_mean)             # <<<<<<<<<<<<<<
@@ -20542,7 +20531,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":37
+    /* "lasso/_lassoc.pyx":37
  * # center... response
  * def center_response(y):
  *     if (len(np.asarray(y).shape)==1):             # <<<<<<<<<<<<<<
@@ -20551,7 +20540,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":40
+  /* "lasso/_lassoc.pyx":40
  *         y_mean = np.mean(y)
  *         return y_mean, (y - y_mean)
  *     y_mean = np.asarray(y).mean(axis=0)             # <<<<<<<<<<<<<<
@@ -20598,7 +20587,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
   __pyx_v_y_mean = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":41
+  /* "lasso/_lassoc.pyx":41
  *         return y_mean, (y - y_mean)
  *     y_mean = np.asarray(y).mean(axis=0)
  *     return y_mean, (y - y_mean[None, :])             # <<<<<<<<<<<<<<
@@ -20623,7 +20612,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":36
+  /* "lasso/_lassoc.pyx":36
  * 
  * # center... response
  * def center_response(y):             # <<<<<<<<<<<<<<
@@ -20636,7 +20625,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.center_response", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.center_response", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_y_mean);
@@ -20645,7 +20634,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":45
+/* "lasso/_lassoc.pyx":45
  * 
  * # computes t(x)%*%y
  * def crossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -20654,15 +20643,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_2center_response(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_5crossprod(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_5crossprod(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_5crossprod = {"crossprod", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_5crossprod, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_5crossprod(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_5crossprod = {"crossprod", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_5crossprod, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_5crossprod(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20694,7 +20683,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -20762,11 +20751,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.crossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.crossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_4crossprod(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
 
   /* function exit code */
   {
@@ -20779,7 +20768,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
   PyObject *__pyx_v_sys_platform = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -20799,7 +20788,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   __Pyx_INCREF(__pyx_v_x);
   __Pyx_INCREF(__pyx_v_y);
 
-  /* "mlsauce/lasso/_lassoc.pyx":47
+  /* "lasso/_lassoc.pyx":47
  * def crossprod(x, y=None, backend="cpu"):
  *     # assert on dimensions
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
@@ -20836,7 +20825,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":48
+  /* "lasso/_lassoc.pyx":48
  *     # assert on dimensions
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -20845,13 +20834,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -20863,13 +20852,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 48, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -20878,7 +20867,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":49
+    /* "lasso/_lassoc.pyx":49
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)             # <<<<<<<<<<<<<<
@@ -20912,7 +20901,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":50
+    /* "lasso/_lassoc.pyx":50
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  *         if y is None:             # <<<<<<<<<<<<<<
@@ -20922,7 +20911,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
     __pyx_t_5 = (__pyx_v_y == Py_None);
     if (__pyx_t_5) {
 
-      /* "mlsauce/lasso/_lassoc.pyx":51
+      /* "lasso/_lassoc.pyx":51
  *         x = device_put(x)
  *         if y is None:
  *             return jnp.dot(x.T, x).block_until_ready()             # <<<<<<<<<<<<<<
@@ -20989,7 +20978,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":50
+      /* "lasso/_lassoc.pyx":50
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  *         if y is None:             # <<<<<<<<<<<<<<
@@ -20998,7 +20987,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
  */
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":52
+    /* "lasso/_lassoc.pyx":52
  *         if y is None:
  *             return jnp.dot(x.T, x).block_until_ready()
  *         y = device_put(y)             # <<<<<<<<<<<<<<
@@ -21032,7 +21021,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
     __Pyx_DECREF_SET(__pyx_v_y, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":53
+    /* "lasso/_lassoc.pyx":53
  *             return jnp.dot(x.T, x).block_until_ready()
  *         y = device_put(y)
  *         return jnp.dot(x.T, y).block_until_ready()             # <<<<<<<<<<<<<<
@@ -21099,7 +21088,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":48
+    /* "lasso/_lassoc.pyx":48
  *     # assert on dimensions
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -21108,7 +21097,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":54
+  /* "lasso/_lassoc.pyx":54
  *         y = device_put(y)
  *         return jnp.dot(x.T, y).block_until_ready()
  *     if y is None:             # <<<<<<<<<<<<<<
@@ -21118,7 +21107,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   __pyx_t_5 = (__pyx_v_y == Py_None);
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":55
+    /* "lasso/_lassoc.pyx":55
  *         return jnp.dot(x.T, y).block_until_ready()
  *     if y is None:
  *         return np.dot(x.transpose(), x)             # <<<<<<<<<<<<<<
@@ -21182,7 +21171,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":54
+    /* "lasso/_lassoc.pyx":54
  *         y = device_put(y)
  *         return jnp.dot(x.T, y).block_until_ready()
  *     if y is None:             # <<<<<<<<<<<<<<
@@ -21191,7 +21180,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":56
+  /* "lasso/_lassoc.pyx":56
  *     if y is None:
  *         return np.dot(x.transpose(), x)
  *     return np.dot(x.transpose(), y)             # <<<<<<<<<<<<<<
@@ -21255,7 +21244,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":45
+  /* "lasso/_lassoc.pyx":45
  * 
  * # computes t(x)%*%y
  * def crossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -21270,7 +21259,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.crossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.crossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sys_platform);
@@ -21281,7 +21270,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":65
+/* "lasso/_lassoc.pyx":65
  * # Obtain this for JAX
  * # dropout
  * def dropout(x, drop_prob=0, seed=123):             # <<<<<<<<<<<<<<
@@ -21290,15 +21279,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_4crossprod(CYTHON_UNUSED PyOb
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_7dropout(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_7dropout(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_7dropout = {"dropout", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_7dropout, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_7dropout(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_7dropout = {"dropout", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_7dropout, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_7dropout(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -21398,11 +21387,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.dropout", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.dropout", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(__pyx_self, __pyx_v_x, __pyx_v_drop_prob, __pyx_v_seed);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_6dropout(__pyx_self, __pyx_v_x, __pyx_v_drop_prob, __pyx_v_seed);
 
   /* function exit code */
   {
@@ -21415,7 +21404,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_drop_prob, PyObject *__pyx_v_seed) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_drop_prob, PyObject *__pyx_v_seed) {
   PyObject *__pyx_v_n = NULL;
   PyObject *__pyx_v_p = NULL;
   PyObject *__pyx_v_dropped_indices = NULL;
@@ -21433,7 +21422,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dropout", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":67
+  /* "lasso/_lassoc.pyx":67
  * def dropout(x, drop_prob=0, seed=123):
  * 
  *     assert 0 <= drop_prob <= 1             # <<<<<<<<<<<<<<
@@ -21458,7 +21447,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   if ((1)); else __PYX_ERR(0, 67, __pyx_L1_error)
   #endif
 
-  /* "mlsauce/lasso/_lassoc.pyx":69
+  /* "lasso/_lassoc.pyx":69
  *     assert 0 <= drop_prob <= 1
  * 
  *     n, p = x.shape             # <<<<<<<<<<<<<<
@@ -21518,7 +21507,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   __pyx_v_p = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":71
+  /* "lasso/_lassoc.pyx":71
  *     n, p = x.shape
  * 
  *     if drop_prob == 0:             # <<<<<<<<<<<<<<
@@ -21528,7 +21517,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_drop_prob, __pyx_int_0, 0, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 71, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":72
+    /* "lasso/_lassoc.pyx":72
  * 
  *     if drop_prob == 0:
  *         return x             # <<<<<<<<<<<<<<
@@ -21540,7 +21529,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
     __pyx_r = __pyx_v_x;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":71
+    /* "lasso/_lassoc.pyx":71
  *     n, p = x.shape
  * 
  *     if drop_prob == 0:             # <<<<<<<<<<<<<<
@@ -21549,7 +21538,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":74
+  /* "lasso/_lassoc.pyx":74
  *         return x
  * 
  *     if drop_prob == 1:             # <<<<<<<<<<<<<<
@@ -21559,7 +21548,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   __pyx_t_2 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_drop_prob, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 74, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":75
+    /* "lasso/_lassoc.pyx":75
  * 
  *     if drop_prob == 1:
  *         return np.zeros_like(x)             # <<<<<<<<<<<<<<
@@ -21598,7 +21587,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":74
+    /* "lasso/_lassoc.pyx":74
  *         return x
  * 
  *     if drop_prob == 1:             # <<<<<<<<<<<<<<
@@ -21607,7 +21596,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":77
+  /* "lasso/_lassoc.pyx":77
  *         return np.zeros_like(x)
  * 
  *     np.random.seed(seed)             # <<<<<<<<<<<<<<
@@ -21646,7 +21635,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":78
+  /* "lasso/_lassoc.pyx":78
  * 
  *     np.random.seed(seed)
  *     dropped_indices = np.random.rand(n, p) > drop_prob             # <<<<<<<<<<<<<<
@@ -21688,7 +21677,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   __pyx_v_dropped_indices = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":80
+  /* "lasso/_lassoc.pyx":80
  *     dropped_indices = np.random.rand(n, p) > drop_prob
  * 
  *     return dropped_indices * x / (1 - drop_prob)             # <<<<<<<<<<<<<<
@@ -21708,7 +21697,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":65
+  /* "lasso/_lassoc.pyx":65
  * # Obtain this for JAX
  * # dropout
  * def dropout(x, drop_prob=0, seed=123):             # <<<<<<<<<<<<<<
@@ -21722,7 +21711,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.dropout", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.dropout", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_n);
@@ -21733,7 +21722,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":86
+/* "lasso/_lassoc.pyx":86
  * # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
  * # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
  * def get_beta_1D(double[:] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -21742,15 +21731,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_6dropout(CYTHON_UNUSED PyObje
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_9get_beta_1D(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_9get_beta_1D(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_9get_beta_1D = {"get_beta_1D", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_9get_beta_1D, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_9get_beta_1D(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_9get_beta_1D = {"get_beta_1D", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_9get_beta_1D, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_9get_beta_1D(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -21904,11 +21893,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_beta0, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_XX2, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_Xy2, 1);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.get_beta_1D", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.get_beta_1D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(__pyx_self, __pyx_v_beta0, __pyx_v_XX2, __pyx_v_Xy2, __pyx_v_reg_lambda, __pyx_v_max_iter, __pyx_v_tol);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_8get_beta_1D(__pyx_self, __pyx_v_beta0, __pyx_v_XX2, __pyx_v_Xy2, __pyx_v_reg_lambda, __pyx_v_max_iter, __pyx_v_tol);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_beta0, 1);
@@ -21924,7 +21913,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol) {
   int __pyx_v_j;
   int __pyx_v_p;
   int __pyx_v_converged;
@@ -21959,7 +21948,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_beta_1D", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":94
+  /* "lasso/_lassoc.pyx":94
  *     cdef double aj, cj, err
  * 
  *     converged = 0             # <<<<<<<<<<<<<<
@@ -21968,7 +21957,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
  */
   __pyx_v_converged = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":95
+  /* "lasso/_lassoc.pyx":95
  * 
  *     converged = 0
  *     err = 10000             # <<<<<<<<<<<<<<
@@ -21977,7 +21966,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
  */
   __pyx_v_err = 10000.0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":96
+  /* "lasso/_lassoc.pyx":96
  *     converged = 0
  *     err = 10000
  *     iteration = 0             # <<<<<<<<<<<<<<
@@ -21986,7 +21975,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
  */
   __pyx_v_iteration = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":97
+  /* "lasso/_lassoc.pyx":97
  *     err = 10000
  *     iteration = 0
  *     p = len(beta0)             # <<<<<<<<<<<<<<
@@ -21996,7 +21985,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_beta0); 
   __pyx_v_p = __pyx_t_1;
 
-  /* "mlsauce/lasso/_lassoc.pyx":98
+  /* "lasso/_lassoc.pyx":98
  *     iteration = 0
  *     p = len(beta0)
  *     beta_opt = np.asarray(beta0)             # <<<<<<<<<<<<<<
@@ -22036,7 +22025,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
   __pyx_v_beta_opt = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":100
+  /* "lasso/_lassoc.pyx":100
  *     beta_opt = np.asarray(beta0)
  * 
  *     while (converged != 1 and iteration < max_iter):             # <<<<<<<<<<<<<<
@@ -22055,7 +22044,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_7) break;
 
-    /* "mlsauce/lasso/_lassoc.pyx":101
+    /* "lasso/_lassoc.pyx":101
  * 
  *     while (converged != 1 and iteration < max_iter):
  *         beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))             # <<<<<<<<<<<<<<
@@ -22120,7 +22109,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_beta_prev, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":102
+    /* "lasso/_lassoc.pyx":102
  *     while (converged != 1 and iteration < max_iter):
  *         beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
  *         for j in range(p):             # <<<<<<<<<<<<<<
@@ -22132,7 +22121,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "mlsauce/lasso/_lassoc.pyx":103
+      /* "lasso/_lassoc.pyx":103
  *         beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
  *         for j in range(p):
  *             aj = XX2[j, j]             # <<<<<<<<<<<<<<
@@ -22143,7 +22132,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
       __pyx_t_13 = __pyx_v_j;
       __pyx_v_aj = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_XX2.data + __pyx_t_12 * __pyx_v_XX2.strides[0]) )) + __pyx_t_13)) )));
 
-      /* "mlsauce/lasso/_lassoc.pyx":104
+      /* "lasso/_lassoc.pyx":104
  *         for j in range(p):
  *             aj = XX2[j, j]
  *             cj = Xy2[j] - np.dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj             # <<<<<<<<<<<<<<
@@ -22301,7 +22290,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_v_cj = __pyx_t_17;
 
-      /* "mlsauce/lasso/_lassoc.pyx":105
+      /* "lasso/_lassoc.pyx":105
  *             aj = XX2[j, j]
  *             cj = Xy2[j] - np.dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj
  *             beta_opt[j] = soft_thres(cj/aj, reg_lambda/aj)             # <<<<<<<<<<<<<<
@@ -22350,7 +22339,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":106
+    /* "lasso/_lassoc.pyx":106
  *             cj = Xy2[j] - np.dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj
  *             beta_opt[j] = soft_thres(cj/aj, reg_lambda/aj)
  *         err = np.sum(np.abs(np.asarray(beta_prev) - np.asarray(beta_opt)))             # <<<<<<<<<<<<<<
@@ -22475,7 +22464,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_err = __pyx_t_17;
 
-    /* "mlsauce/lasso/_lassoc.pyx":107
+    /* "lasso/_lassoc.pyx":107
  *             beta_opt[j] = soft_thres(cj/aj, reg_lambda/aj)
  *         err = np.sum(np.abs(np.asarray(beta_prev) - np.asarray(beta_opt)))
  *         converged = (err <= tol)*1             # <<<<<<<<<<<<<<
@@ -22484,7 +22473,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
  */
     __pyx_v_converged = ((__pyx_v_err <= __pyx_v_tol) * 1);
 
-    /* "mlsauce/lasso/_lassoc.pyx":108
+    /* "lasso/_lassoc.pyx":108
  *         err = np.sum(np.abs(np.asarray(beta_prev) - np.asarray(beta_opt)))
  *         converged = (err <= tol)*1
  *         iteration += 1             # <<<<<<<<<<<<<<
@@ -22494,7 +22483,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
     __pyx_v_iteration = (__pyx_v_iteration + 1);
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":110
+  /* "lasso/_lassoc.pyx":110
  *         iteration += 1
  * 
  *     return np.asarray(beta_opt), iteration, err             # <<<<<<<<<<<<<<
@@ -22548,7 +22537,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
   __pyx_t_14 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":86
+  /* "lasso/_lassoc.pyx":86
  * # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
  * # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
  * def get_beta_1D(double[:] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -22566,7 +22555,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
   __Pyx_XDECREF(__pyx_t_14);
   __Pyx_XDECREF(__pyx_t_15);
   __Pyx_XDECREF(__pyx_t_18);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.get_beta_1D", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.get_beta_1D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_beta_opt);
@@ -22576,7 +22565,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":114
+/* "lasso/_lassoc.pyx":114
  * 
  * # compute coeff in lasso
  * def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -22585,15 +22574,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_8get_beta_1D(CYTHON_UNUSED Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_11get_beta_2D(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_11get_beta_2D(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_11get_beta_2D = {"get_beta_2D", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_11get_beta_2D, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_11get_beta_2D(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_11get_beta_2D = {"get_beta_2D", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_11get_beta_2D, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_11get_beta_2D(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -22747,11 +22736,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_beta0, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_XX2, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_Xy2, 1);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.get_beta_2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.get_beta_2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(__pyx_self, __pyx_v_beta0, __pyx_v_XX2, __pyx_v_Xy2, __pyx_v_reg_lambda, __pyx_v_max_iter, __pyx_v_tol);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_10get_beta_2D(__pyx_self, __pyx_v_beta0, __pyx_v_XX2, __pyx_v_Xy2, __pyx_v_reg_lambda, __pyx_v_max_iter, __pyx_v_tol);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_beta0, 1);
@@ -22767,7 +22756,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_beta0, __Pyx_memviewslice __pyx_v_XX2, __Pyx_memviewslice __pyx_v_Xy2, double __pyx_v_reg_lambda, int __pyx_v_max_iter, double __pyx_v_tol) {
   int __pyx_v_j;
   int __pyx_v_k;
   int __pyx_v_n_classes;
@@ -22812,7 +22801,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_beta_2D", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":123
+  /* "lasso/_lassoc.pyx":123
  *     cdef list ajs
  * 
  *     converged = 0             # <<<<<<<<<<<<<<
@@ -22821,7 +22810,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
  */
   __pyx_v_converged = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":124
+  /* "lasso/_lassoc.pyx":124
  * 
  *     converged = 0
  *     err = 10000             # <<<<<<<<<<<<<<
@@ -22830,7 +22819,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
  */
   __pyx_v_err = 10000.0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":125
+  /* "lasso/_lassoc.pyx":125
  *     converged = 0
  *     err = 10000
  *     iteration = 0             # <<<<<<<<<<<<<<
@@ -22839,7 +22828,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
  */
   __pyx_v_iteration = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":126
+  /* "lasso/_lassoc.pyx":126
  *     err = 10000
  *     iteration = 0
  *     p = len(beta0)             # <<<<<<<<<<<<<<
@@ -22849,7 +22838,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_beta0); 
   __pyx_v_p = __pyx_t_1;
 
-  /* "mlsauce/lasso/_lassoc.pyx":127
+  /* "lasso/_lassoc.pyx":127
  *     iteration = 0
  *     p = len(beta0)
  *     beta_opt = np.asarray(beta0)             # <<<<<<<<<<<<<<
@@ -22889,7 +22878,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   __pyx_v_beta_opt = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":130
+  /* "lasso/_lassoc.pyx":130
  * 
  *     # if len(beta0.shape) > 1: (multitask learner)
  *     n_classes = beta_opt.shape[1]             # <<<<<<<<<<<<<<
@@ -22905,7 +22894,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_n_classes = __pyx_t_6;
 
-  /* "mlsauce/lasso/_lassoc.pyx":131
+  /* "lasso/_lassoc.pyx":131
  *     # if len(beta0.shape) > 1: (multitask learner)
  *     n_classes = beta_opt.shape[1]
  *     ajs = [XX2[j, j] for j in range(p)]             # <<<<<<<<<<<<<<
@@ -22930,7 +22919,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   __pyx_v_ajs = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":132
+  /* "lasso/_lassoc.pyx":132
  *     n_classes = beta_opt.shape[1]
  *     ajs = [XX2[j, j] for j in range(p)]
  *     while (converged != 1 and iteration < max_iter):             # <<<<<<<<<<<<<<
@@ -22949,7 +22938,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
     __pyx_L7_bool_binop_done:;
     if (!__pyx_t_11) break;
 
-    /* "mlsauce/lasso/_lassoc.pyx":133
+    /* "lasso/_lassoc.pyx":133
  *     ajs = [XX2[j, j] for j in range(p)]
  *     while (converged != 1 and iteration < max_iter):
  *         beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))             # <<<<<<<<<<<<<<
@@ -23014,7 +23003,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
     __Pyx_XDECREF_SET(__pyx_v_beta_prev, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":134
+    /* "lasso/_lassoc.pyx":134
  *     while (converged != 1 and iteration < max_iter):
  *         beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
  *         for k in range(n_classes):             # <<<<<<<<<<<<<<
@@ -23026,7 +23015,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
     for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_k = __pyx_t_8;
 
-      /* "mlsauce/lasso/_lassoc.pyx":135
+      /* "lasso/_lassoc.pyx":135
  *         beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
  *         for k in range(n_classes):
  *             beta_opt_k = np.asarray(beta_opt[:,k])             # <<<<<<<<<<<<<<
@@ -23077,7 +23066,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
       __Pyx_XDECREF_SET(__pyx_v_beta_opt_k, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":136
+      /* "lasso/_lassoc.pyx":136
  *         for k in range(n_classes):
  *             beta_opt_k = np.asarray(beta_opt[:,k])
  *             for j in range(p):             # <<<<<<<<<<<<<<
@@ -23089,7 +23078,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
       for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
         __pyx_v_j = __pyx_t_16;
 
-        /* "mlsauce/lasso/_lassoc.pyx":137
+        /* "lasso/_lassoc.pyx":137
  *             beta_opt_k = np.asarray(beta_opt[:,k])
  *             for j in range(p):
  *                 aj = ajs[j]             # <<<<<<<<<<<<<<
@@ -23099,7 +23088,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
         __pyx_t_17 = __pyx_PyFloat_AsDouble(PyList_GET_ITEM(__pyx_v_ajs, __pyx_v_j)); if (unlikely((__pyx_t_17 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L1_error)
         __pyx_v_aj = __pyx_t_17;
 
-        /* "mlsauce/lasso/_lassoc.pyx":138
+        /* "lasso/_lassoc.pyx":138
  *             for j in range(p):
  *                 aj = ajs[j]
  *                 cj = Xy2[j, k] - np.dot(np.asarray(XX2)[j, :], beta_opt_k) + beta_opt_k[j]*aj             # <<<<<<<<<<<<<<
@@ -23202,7 +23191,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_cj = __pyx_t_17;
 
-        /* "mlsauce/lasso/_lassoc.pyx":139
+        /* "lasso/_lassoc.pyx":139
  *                 aj = ajs[j]
  *                 cj = Xy2[j, k] - np.dot(np.asarray(XX2)[j, :], beta_opt_k) + beta_opt_k[j]*aj
  *                 beta_opt[j, k] = soft_thres(cj/aj, reg_lambda/aj)             # <<<<<<<<<<<<<<
@@ -23265,7 +23254,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
       }
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":140
+    /* "lasso/_lassoc.pyx":140
  *                 cj = Xy2[j, k] - np.dot(np.asarray(XX2)[j, :], beta_opt_k) + beta_opt_k[j]*aj
  *                 beta_opt[j, k] = soft_thres(cj/aj, reg_lambda/aj)
  *         err = np.sqrt(np.sum(np.square(np.asarray(beta_prev) - np.asarray(beta_opt))))             # <<<<<<<<<<<<<<
@@ -23418,7 +23407,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_err = __pyx_t_17;
 
-    /* "mlsauce/lasso/_lassoc.pyx":141
+    /* "lasso/_lassoc.pyx":141
  *                 beta_opt[j, k] = soft_thres(cj/aj, reg_lambda/aj)
  *         err = np.sqrt(np.sum(np.square(np.asarray(beta_prev) - np.asarray(beta_opt))))
  *         converged = (err <= tol)*1             # <<<<<<<<<<<<<<
@@ -23427,7 +23416,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
  */
     __pyx_v_converged = ((__pyx_v_err <= __pyx_v_tol) * 1);
 
-    /* "mlsauce/lasso/_lassoc.pyx":142
+    /* "lasso/_lassoc.pyx":142
  *         err = np.sqrt(np.sum(np.square(np.asarray(beta_prev) - np.asarray(beta_opt))))
  *         converged = (err <= tol)*1
  *         iteration += 1             # <<<<<<<<<<<<<<
@@ -23437,7 +23426,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
     __pyx_v_iteration = (__pyx_v_iteration + 1);
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":144
+  /* "lasso/_lassoc.pyx":144
  *         iteration += 1
  * 
  *     return np.asarray(beta_opt), iteration, err             # <<<<<<<<<<<<<<
@@ -23491,7 +23480,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":114
+  /* "lasso/_lassoc.pyx":114
  * 
  * # compute coeff in lasso
  * def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -23511,7 +23500,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   __Pyx_XDECREF(__pyx_t_21);
   __Pyx_XDECREF(__pyx_t_22);
   __Pyx_XDECREF(__pyx_t_23);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.get_beta_2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.get_beta_2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_ajs);
@@ -23523,7 +23512,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":148
+/* "lasso/_lassoc.pyx":148
  * 
  * # one-hot encoding
  * def one_hot_encode(x_clusters, n_clusters):             # <<<<<<<<<<<<<<
@@ -23532,15 +23521,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_10get_beta_2D(CYTHON_UNUSED P
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_13one_hot_encode(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_13one_hot_encode(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_13one_hot_encode = {"one_hot_encode", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_13one_hot_encode, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_13one_hot_encode(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_13one_hot_encode = {"one_hot_encode", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_13one_hot_encode, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_13one_hot_encode(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -23625,11 +23614,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(__pyx_self, __pyx_v_x_clusters, __pyx_v_n_clusters);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_12one_hot_encode(__pyx_self, __pyx_v_x_clusters, __pyx_v_n_clusters);
 
   /* function exit code */
   {
@@ -23642,7 +23631,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x_clusters, PyObject *__pyx_v_n_clusters) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x_clusters, PyObject *__pyx_v_n_clusters) {
   Py_ssize_t __pyx_v_n_obs;
   PyObject *__pyx_v_res = NULL;
   Py_ssize_t __pyx_v_i;
@@ -23662,7 +23651,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("one_hot_encode", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":150
+  /* "lasso/_lassoc.pyx":150
  * def one_hot_encode(x_clusters, n_clusters):
  * 
  *     assert (             # <<<<<<<<<<<<<<
@@ -23672,7 +23661,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(__pyx_assertions_enabled())) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":151
+    /* "lasso/_lassoc.pyx":151
  * 
  *     assert (
  *         max(x_clusters) <= n_clusters             # <<<<<<<<<<<<<<
@@ -23687,14 +23676,14 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (unlikely(!__pyx_t_3)) {
 
-      /* "mlsauce/lasso/_lassoc.pyx":150
+      /* "lasso/_lassoc.pyx":150
  * def one_hot_encode(x_clusters, n_clusters):
  * 
  *     assert (             # <<<<<<<<<<<<<<
  *         max(x_clusters) <= n_clusters
  *     ), "you must have max(x_clusters) <= n_clusters"
  */
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_you_must_have_max_x_clusters_n_c, 0, 0);
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_s_you_must_have_max_x_clusters_n_c, 0, 0);
       __PYX_ERR(0, 150, __pyx_L1_error)
     }
   }
@@ -23702,7 +23691,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   if ((1)); else __PYX_ERR(0, 150, __pyx_L1_error)
   #endif
 
-  /* "mlsauce/lasso/_lassoc.pyx":154
+  /* "lasso/_lassoc.pyx":154
  *     ), "you must have max(x_clusters) <= n_clusters"
  * 
  *     n_obs = len(x_clusters)             # <<<<<<<<<<<<<<
@@ -23712,7 +23701,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   __pyx_t_4 = PyObject_Length(__pyx_v_x_clusters); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 154, __pyx_L1_error)
   __pyx_v_n_obs = __pyx_t_4;
 
-  /* "mlsauce/lasso/_lassoc.pyx":155
+  /* "lasso/_lassoc.pyx":155
  * 
  *     n_obs = len(x_clusters)
  *     res = np.zeros((n_obs, n_clusters))             # <<<<<<<<<<<<<<
@@ -23760,7 +23749,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   __pyx_v_res = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":157
+  /* "lasso/_lassoc.pyx":157
  *     res = np.zeros((n_obs, n_clusters))
  * 
  *     for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -23772,7 +23761,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "mlsauce/lasso/_lassoc.pyx":158
+    /* "lasso/_lassoc.pyx":158
  * 
  *     for i in range(n_obs):
  *         res[i, x_clusters[i]] = 1             # <<<<<<<<<<<<<<
@@ -23795,7 +23784,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":160
+  /* "lasso/_lassoc.pyx":160
  *         res[i, x_clusters[i]] = 1
  * 
  *     return res             # <<<<<<<<<<<<<<
@@ -23807,7 +23796,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   __pyx_r = __pyx_v_res;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":148
+  /* "lasso/_lassoc.pyx":148
  * 
  * # one-hot encoding
  * def one_hot_encode(x_clusters, n_clusters):             # <<<<<<<<<<<<<<
@@ -23821,7 +23810,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.one_hot_encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_res);
@@ -23830,7 +23819,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":164
+/* "lasso/_lassoc.pyx":164
  * 
  * # one-hot encoding
  * def one_hot_encode2(y, n_classes):             # <<<<<<<<<<<<<<
@@ -23839,15 +23828,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_12one_hot_encode(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_15one_hot_encode2(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_15one_hot_encode2(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_15one_hot_encode2 = {"one_hot_encode2", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_15one_hot_encode2, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_15one_hot_encode2(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_15one_hot_encode2 = {"one_hot_encode2", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_15one_hot_encode2, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_15one_hot_encode2(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -23932,11 +23921,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.one_hot_encode2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.one_hot_encode2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(__pyx_self, __pyx_v_y, __pyx_v_n_classes);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_14one_hot_encode2(__pyx_self, __pyx_v_y, __pyx_v_n_classes);
 
   /* function exit code */
   {
@@ -23949,7 +23938,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y, PyObject *__pyx_v_n_classes) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_y, PyObject *__pyx_v_n_classes) {
   Py_ssize_t __pyx_v_n_obs;
   PyObject *__pyx_v_res = NULL;
   Py_ssize_t __pyx_v_i;
@@ -23968,7 +23957,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("one_hot_encode2", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":166
+  /* "lasso/_lassoc.pyx":166
  * def one_hot_encode2(y, n_classes):
  * 
  *     n_obs = len(y)             # <<<<<<<<<<<<<<
@@ -23978,7 +23967,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   __pyx_t_1 = PyObject_Length(__pyx_v_y); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 166, __pyx_L1_error)
   __pyx_v_n_obs = __pyx_t_1;
 
-  /* "mlsauce/lasso/_lassoc.pyx":167
+  /* "lasso/_lassoc.pyx":167
  * 
  *     n_obs = len(y)
  *     res = np.zeros((n_obs, n_classes))             # <<<<<<<<<<<<<<
@@ -24026,7 +24015,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   __pyx_v_res = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":169
+  /* "lasso/_lassoc.pyx":169
  *     res = np.zeros((n_obs, n_classes))
  * 
  *     for i in range(n_obs):             # <<<<<<<<<<<<<<
@@ -24038,7 +24027,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "mlsauce/lasso/_lassoc.pyx":170
+    /* "lasso/_lassoc.pyx":170
  * 
  *     for i in range(n_obs):
  *         res[i, y[i]] = 1             # <<<<<<<<<<<<<<
@@ -24061,7 +24050,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":172
+  /* "lasso/_lassoc.pyx":172
  *         res[i, y[i]] = 1
  * 
  *     return res             # <<<<<<<<<<<<<<
@@ -24073,7 +24062,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   __pyx_r = __pyx_v_res;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":164
+  /* "lasso/_lassoc.pyx":164
  * 
  * # one-hot encoding
  * def one_hot_encode2(y, n_classes):             # <<<<<<<<<<<<<<
@@ -24087,7 +24076,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.one_hot_encode2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.one_hot_encode2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_res);
@@ -24096,7 +24085,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":176
+/* "lasso/_lassoc.pyx":176
  * 
  * # row bind
  * def rbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -24105,15 +24094,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_14one_hot_encode2(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_17rbind(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_17rbind(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_17rbind = {"rbind", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_17rbind, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_17rbind(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_17rbind = {"rbind", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_17rbind, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_17rbind(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -24144,7 +24133,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -24214,11 +24203,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.rbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.rbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_16rbind(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
 
   /* function exit code */
   {
@@ -24231,7 +24220,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
   PyObject *__pyx_v_sys_platform = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -24248,7 +24237,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rbind", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":178
+  /* "lasso/_lassoc.pyx":178
  * def rbind(x, y, backend="cpu"):
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
@@ -24285,7 +24274,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":179
+  /* "lasso/_lassoc.pyx":179
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -24294,13 +24283,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -24312,13 +24301,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 179, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -24327,7 +24316,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":180
+    /* "lasso/_lassoc.pyx":180
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         return jnp.row_stack((x, y))             # <<<<<<<<<<<<<<
@@ -24375,7 +24364,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":179
+    /* "lasso/_lassoc.pyx":179
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -24384,7 +24373,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":181
+  /* "lasso/_lassoc.pyx":181
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         return jnp.row_stack((x, y))
  *     return np.row_stack((x, y))             # <<<<<<<<<<<<<<
@@ -24432,7 +24421,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":176
+  /* "lasso/_lassoc.pyx":176
  * 
  * # row bind
  * def rbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -24446,7 +24435,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.rbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.rbind", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sys_platform);
@@ -24455,7 +24444,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":185
+/* "lasso/_lassoc.pyx":185
  * 
  * # adapted from sklearn.utils.exmath
  * def safe_sparse_dot(a, b, backend="cpu", dense_output=False):             # <<<<<<<<<<<<<<
@@ -24464,16 +24453,16 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_16rbind(CYTHON_UNUSED PyObjec
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_19safe_sparse_dot(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_19safe_sparse_dot(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot, "Dot product that handle the sparse matrix case correctly\n\n    Parameters\n    ----------\n    a : array or sparse matrix\n    b : array or sparse matrix\n    dense_output : boolean, (default=False)\n        When False, ``a`` and ``b`` both being sparse will yield sparse output.\n        When True, output will always be a dense array.\n\n    Returns\n    -------\n    dot_product : array or sparse matrix\n        sparse if ``a`` and ``b`` are sparse and ``dense_output=False``.\n    ");
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_19safe_sparse_dot = {"safe_sparse_dot", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_19safe_sparse_dot, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_19safe_sparse_dot(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_5lasso_7_lassoc_18safe_sparse_dot, "Dot product that handle the sparse matrix case correctly\n\n    Parameters\n    ----------\n    a : array or sparse matrix\n    b : array or sparse matrix\n    dense_output : boolean, (default=False)\n        When False, ``a`` and ``b`` both being sparse will yield sparse output.\n        When True, output will always be a dense array.\n\n    Returns\n    -------\n    dot_product : array or sparse matrix\n        sparse if ``a`` and ``b`` are sparse and ``dense_output=False``.\n    ");
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_19safe_sparse_dot = {"safe_sparse_dot", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_19safe_sparse_dot, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_5lasso_7_lassoc_18safe_sparse_dot};
+static PyObject *__pyx_pw_5lasso_7_lassoc_19safe_sparse_dot(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -24505,7 +24494,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_a,&__pyx_n_s_b,&__pyx_n_s_backend,&__pyx_n_s_dense_output,0};
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_False)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
@@ -24588,11 +24577,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.safe_sparse_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.safe_sparse_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(__pyx_self, __pyx_v_a, __pyx_v_b, __pyx_v_backend, __pyx_v_dense_output);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_18safe_sparse_dot(__pyx_self, __pyx_v_a, __pyx_v_b, __pyx_v_backend, __pyx_v_dense_output);
 
   /* function exit code */
   {
@@ -24605,7 +24594,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_backend, PyObject *__pyx_v_dense_output) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_backend, PyObject *__pyx_v_dense_output) {
   PyObject *__pyx_v_sys_platform = NULL;
   PyObject *__pyx_v_b_ = NULL;
   PyObject *__pyx_v_b_2d = NULL;
@@ -24629,7 +24618,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("safe_sparse_dot", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":201
+  /* "lasso/_lassoc.pyx":201
  *         sparse if ``a`` and ``b`` are sparse and ``dense_output=False``.
  *     """
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
@@ -24666,7 +24655,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":203
+  /* "lasso/_lassoc.pyx":203
  *     sys_platform = platform.system()
  * 
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -24675,13 +24664,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -24693,13 +24682,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -24708,7 +24697,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":205
+    /* "lasso/_lassoc.pyx":205
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         # modif when jax.scipy.sparse available
  *         return jnp.dot(device_put(a), device_put(b)).block_until_ready()             # <<<<<<<<<<<<<<
@@ -24822,7 +24811,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":203
+    /* "lasso/_lassoc.pyx":203
  *     sys_platform = platform.system()
  * 
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -24831,7 +24820,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":208
+  /* "lasso/_lassoc.pyx":208
  * 
  *     #    if backend == "cpu":
  *     if a.ndim > 2 or b.ndim > 2:             # <<<<<<<<<<<<<<
@@ -24859,7 +24848,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   __pyx_L11_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":209
+    /* "lasso/_lassoc.pyx":209
  *     #    if backend == "cpu":
  *     if a.ndim > 2 or b.ndim > 2:
  *         if sparse.issparse(a):             # <<<<<<<<<<<<<<
@@ -24897,7 +24886,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "mlsauce/lasso/_lassoc.pyx":212
+      /* "lasso/_lassoc.pyx":212
  *             # sparse is always 2D. Implies b is 3D+
  *             # [i, j] @ [k, ..., l, m, n] -> [i, k, ..., l, n]
  *             b_ = np.rollaxis(b, -2)             # <<<<<<<<<<<<<<
@@ -24934,7 +24923,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __pyx_v_b_ = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":213
+      /* "lasso/_lassoc.pyx":213
  *             # [i, j] @ [k, ..., l, m, n] -> [i, k, ..., l, n]
  *             b_ = np.rollaxis(b, -2)
  *             b_2d = b_.reshape((b.shape[-2], -1))             # <<<<<<<<<<<<<<
@@ -24982,7 +24971,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __pyx_v_b_2d = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":214
+      /* "lasso/_lassoc.pyx":214
  *             b_ = np.rollaxis(b, -2)
  *             b_2d = b_.reshape((b.shape[-2], -1))
  *             ret = a @ b_2d             # <<<<<<<<<<<<<<
@@ -24994,7 +24983,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __pyx_v_ret = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":215
+      /* "lasso/_lassoc.pyx":215
  *             b_2d = b_.reshape((b.shape[-2], -1))
  *             ret = a @ b_2d
  *             ret = ret.reshape(a.shape[0], *b_.shape[1:])             # <<<<<<<<<<<<<<
@@ -25032,7 +25021,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __Pyx_DECREF_SET(__pyx_v_ret, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":209
+      /* "lasso/_lassoc.pyx":209
  *     #    if backend == "cpu":
  *     if a.ndim > 2 or b.ndim > 2:
  *         if sparse.issparse(a):             # <<<<<<<<<<<<<<
@@ -25042,7 +25031,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       goto __pyx_L13;
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":216
+    /* "lasso/_lassoc.pyx":216
  *             ret = a @ b_2d
  *             ret = ret.reshape(a.shape[0], *b_.shape[1:])
  *         elif sparse.issparse(b):             # <<<<<<<<<<<<<<
@@ -25080,7 +25069,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "mlsauce/lasso/_lassoc.pyx":219
+      /* "lasso/_lassoc.pyx":219
  *             # sparse is always 2D. Implies a is 3D+
  *             # [k, ..., l, m] @ [i, j] -> [k, ..., l, j]
  *             a_2d = a.reshape(-1, a.shape[-1])             # <<<<<<<<<<<<<<
@@ -25120,7 +25109,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __pyx_v_a_2d = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":220
+      /* "lasso/_lassoc.pyx":220
  *             # [k, ..., l, m] @ [i, j] -> [k, ..., l, j]
  *             a_2d = a.reshape(-1, a.shape[-1])
  *             ret = a_2d @ b             # <<<<<<<<<<<<<<
@@ -25132,7 +25121,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __pyx_v_ret = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":221
+      /* "lasso/_lassoc.pyx":221
  *             a_2d = a.reshape(-1, a.shape[-1])
  *             ret = a_2d @ b
  *             ret = ret.reshape(*a.shape[:-1], b.shape[1])             # <<<<<<<<<<<<<<
@@ -25170,7 +25159,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       __Pyx_DECREF_SET(__pyx_v_ret, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":216
+      /* "lasso/_lassoc.pyx":216
  *             ret = a @ b_2d
  *             ret = ret.reshape(a.shape[0], *b_.shape[1:])
  *         elif sparse.issparse(b):             # <<<<<<<<<<<<<<
@@ -25180,7 +25169,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
       goto __pyx_L13;
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":223
+    /* "lasso/_lassoc.pyx":223
  *             ret = ret.reshape(*a.shape[:-1], b.shape[1])
  *         else:
  *             ret = np.dot(a, b)             # <<<<<<<<<<<<<<
@@ -25220,7 +25209,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     }
     __pyx_L13:;
 
-    /* "mlsauce/lasso/_lassoc.pyx":208
+    /* "lasso/_lassoc.pyx":208
  * 
  *     #    if backend == "cpu":
  *     if a.ndim > 2 or b.ndim > 2:             # <<<<<<<<<<<<<<
@@ -25230,7 +25219,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     goto __pyx_L10;
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":225
+  /* "lasso/_lassoc.pyx":225
  *             ret = np.dot(a, b)
  *     else:
  *         ret = a @ b             # <<<<<<<<<<<<<<
@@ -25245,7 +25234,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   }
   __pyx_L10:;
 
-  /* "mlsauce/lasso/_lassoc.pyx":228
+  /* "lasso/_lassoc.pyx":228
  * 
  *     if (
  *         sparse.issparse(a)             # <<<<<<<<<<<<<<
@@ -25287,7 +25276,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     goto __pyx_L15_bool_binop_done;
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":229
+  /* "lasso/_lassoc.pyx":229
  *     if (
  *         sparse.issparse(a)
  *         and sparse.issparse(b)             # <<<<<<<<<<<<<<
@@ -25329,7 +25318,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     goto __pyx_L15_bool_binop_done;
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":230
+  /* "lasso/_lassoc.pyx":230
  *         sparse.issparse(a)
  *         and sparse.issparse(b)
  *         and dense_output             # <<<<<<<<<<<<<<
@@ -25343,18 +25332,18 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     goto __pyx_L15_bool_binop_done;
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":231
+  /* "lasso/_lassoc.pyx":231
  *         and sparse.issparse(b)
  *         and dense_output
  *         and hasattr(ret, "toarray")             # <<<<<<<<<<<<<<
  *     ):
  *         return ret.toarray()
  */
-  __pyx_t_6 = __Pyx_HasAttr(__pyx_v_ret, __pyx_n_u_toarray); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_HasAttr(__pyx_v_ret, __pyx_n_s_toarray); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 231, __pyx_L1_error)
   __pyx_t_5 = __pyx_t_6;
   __pyx_L15_bool_binop_done:;
 
-  /* "mlsauce/lasso/_lassoc.pyx":227
+  /* "lasso/_lassoc.pyx":227
  *         ret = a @ b
  * 
  *     if (             # <<<<<<<<<<<<<<
@@ -25363,7 +25352,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
  */
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":233
+    /* "lasso/_lassoc.pyx":233
  *         and hasattr(ret, "toarray")
  *     ):
  *         return ret.toarray()             # <<<<<<<<<<<<<<
@@ -25399,7 +25388,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
     __pyx_t_8 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":227
+    /* "lasso/_lassoc.pyx":227
  *         ret = a @ b
  * 
  *     if (             # <<<<<<<<<<<<<<
@@ -25408,7 +25397,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":235
+  /* "lasso/_lassoc.pyx":235
  *         return ret.toarray()
  * 
  *     return ret             # <<<<<<<<<<<<<<
@@ -25420,7 +25409,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":185
+  /* "lasso/_lassoc.pyx":185
  * 
  * # adapted from sklearn.utils.exmath
  * def safe_sparse_dot(a, b, backend="cpu", dense_output=False):             # <<<<<<<<<<<<<<
@@ -25437,7 +25426,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.safe_sparse_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.safe_sparse_dot", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sys_platform);
@@ -25450,7 +25439,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":243
+/* "lasso/_lassoc.pyx":243
  * # Obtain this for JAX
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
@@ -25459,15 +25448,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_18safe_sparse_dot(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_21scale_covariates(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_21scale_covariates(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_21scale_covariates = {"scale_covariates", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_21scale_covariates, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_21scale_covariates(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_21scale_covariates = {"scale_covariates", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_21scale_covariates, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_21scale_covariates(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -25499,7 +25488,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_choice,&__pyx_n_s_training,&__pyx_n_s_scaler,0};
-    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_std)));
+    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_std)));
     values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_True)));
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
@@ -25581,11 +25570,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.scale_covariates", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.scale_covariates", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(__pyx_self, __pyx_v_X, __pyx_v_choice, __pyx_v_training, __pyx_v_scaler);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_20scale_covariates(__pyx_self, __pyx_v_X, __pyx_v_choice, __pyx_v_training, __pyx_v_scaler);
 
   /* function exit code */
   {
@@ -25598,7 +25587,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_choice, PyObject *__pyx_v_training, PyObject *__pyx_v_scaler) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_20scale_covariates(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_choice, PyObject *__pyx_v_training, PyObject *__pyx_v_scaler) {
   PyObject *__pyx_v_scaling_options = NULL;
   PyObject *__pyx_v_scaled_X = NULL;
   PyObject *__pyx_r = NULL;
@@ -25616,17 +25605,17 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   __Pyx_RefNannySetupContext("scale_covariates", 0);
   __Pyx_INCREF(__pyx_v_scaler);
 
-  /* "mlsauce/lasso/_lassoc.pyx":245
+  /* "lasso/_lassoc.pyx":245
  * def scale_covariates(X, choice="std", training=True, scaler=None):
  * 
  *     if choice == "std":             # <<<<<<<<<<<<<<
  *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
  * 
  */
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_choice, __pyx_n_u_std, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_choice, __pyx_n_s_std, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 245, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":246
+    /* "lasso/_lassoc.pyx":246
  * 
  *     if choice == "std":
  *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"             # <<<<<<<<<<<<<<
@@ -25656,7 +25645,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
       __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_int_0, __pyx_t_5, Py_NE)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 246, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (unlikely(!__pyx_t_1)) {
-        __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Remove_columns_having_standard, 0, 0);
+        __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_s_Remove_columns_having_standard, 0, 0);
         __PYX_ERR(0, 246, __pyx_L1_error)
       }
     }
@@ -25664,7 +25653,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
     if ((1)); else __PYX_ERR(0, 246, __pyx_L1_error)
     #endif
 
-    /* "mlsauce/lasso/_lassoc.pyx":245
+    /* "lasso/_lassoc.pyx":245
  * def scale_covariates(X, choice="std", training=True, scaler=None):
  * 
  *     if choice == "std":             # <<<<<<<<<<<<<<
@@ -25673,17 +25662,17 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":248
+  /* "lasso/_lassoc.pyx":248
  *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
  * 
  *     if choice == "minmax":             # <<<<<<<<<<<<<<
  *         assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"
  * 
  */
-  __pyx_t_1 = (__Pyx_PyUnicode_Equals(__pyx_v_choice, __pyx_n_u_minmax, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_choice, __pyx_n_s_minmax, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 248, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":249
+    /* "lasso/_lassoc.pyx":249
  * 
  *     if choice == "minmax":
  *         assert (0 not in (np.max(X, axis=0) - np.min(X, axis=0))), "\nRemove columns having 0s in max-min"             # <<<<<<<<<<<<<<
@@ -25735,7 +25724,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
       __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_int_0, __pyx_t_4, Py_NE)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 249, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (unlikely(!__pyx_t_1)) {
-        __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Remove_columns_having_0s_in_max, 0, 0);
+        __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_s_Remove_columns_having_0s_in_max, 0, 0);
         __PYX_ERR(0, 249, __pyx_L1_error)
       }
     }
@@ -25743,7 +25732,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
     if ((1)); else __PYX_ERR(0, 249, __pyx_L1_error)
     #endif
 
-    /* "mlsauce/lasso/_lassoc.pyx":248
+    /* "lasso/_lassoc.pyx":248
  *         assert (0 not in np.std(X, axis=0)), "\nRemove columns having standard deviation equal to 0"
  * 
  *     if choice == "minmax":             # <<<<<<<<<<<<<<
@@ -25752,7 +25741,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":252
+  /* "lasso/_lassoc.pyx":252
  * 
  *     scaling_options = {
  *         "std": StandardScaler(copy=True, with_mean=True, with_std=True),             # <<<<<<<<<<<<<<
@@ -25772,10 +25761,10 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_u_std, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_std, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":253
+  /* "lasso/_lassoc.pyx":253
  *     scaling_options = {
  *         "std": StandardScaler(copy=True, with_mean=True, with_std=True),
  *         "minmax": MinMaxScaler(),             # <<<<<<<<<<<<<<
@@ -25806,12 +25795,12 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_u_minmax, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_minmax, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_scaling_options = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":256
+  /* "lasso/_lassoc.pyx":256
  *     }
  * 
  *     if training == True:             # <<<<<<<<<<<<<<
@@ -25823,7 +25812,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_1) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":258
+    /* "lasso/_lassoc.pyx":258
  *     if training == True:
  *         # scaler must be not None
  *         scaler = scaling_options[choice]             # <<<<<<<<<<<<<<
@@ -25835,7 +25824,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
     __Pyx_DECREF_SET(__pyx_v_scaler, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":259
+    /* "lasso/_lassoc.pyx":259
  *         # scaler must be not None
  *         scaler = scaling_options[choice]
  *         scaled_X = scaler.fit_transform(X)             # <<<<<<<<<<<<<<
@@ -25869,7 +25858,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
     __pyx_v_scaled_X = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":260
+    /* "lasso/_lassoc.pyx":260
  *         scaler = scaling_options[choice]
  *         scaled_X = scaler.fit_transform(X)
  *         return scaler, scaled_X             # <<<<<<<<<<<<<<
@@ -25889,7 +25878,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
     __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":256
+    /* "lasso/_lassoc.pyx":256
  *     }
  * 
  *     if training == True:             # <<<<<<<<<<<<<<
@@ -25898,7 +25887,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":264
+  /* "lasso/_lassoc.pyx":264
  *     # training == False:
  *     # scaler must be not None
  *     return scaler.transform(X)             # <<<<<<<<<<<<<<
@@ -25934,7 +25923,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":243
+  /* "lasso/_lassoc.pyx":243
  * # Obtain this for JAX
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
@@ -25949,7 +25938,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.scale_covariates", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.scale_covariates", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_scaling_options);
@@ -25960,7 +25949,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":266
+/* "lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
@@ -25969,15 +25958,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_20scale_covariates(CYTHON_UNU
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_23soft_thres(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_23soft_thres(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_23soft_thres = {"soft_thres", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_23soft_thres, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_23soft_thres(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_23soft_thres = {"soft_thres", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_23soft_thres, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_23soft_thres(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -26062,11 +26051,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.soft_thres", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.soft_thres", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_22soft_thres(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   {
@@ -26079,7 +26068,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_x, double __pyx_v_y) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_x, double __pyx_v_y) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -26095,7 +26084,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("soft_thres", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":267
+  /* "lasso/_lassoc.pyx":267
  * 
  * def soft_thres(double x, double y):
  *     return np.sign(x)*np.max(np.abs(x) - y, 0)             # <<<<<<<<<<<<<<
@@ -26205,7 +26194,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":266
+  /* "lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
@@ -26222,7 +26211,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.soft_thres", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.soft_thres", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -26230,7 +26219,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":270
+/* "lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -26239,16 +26228,16 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_22soft_thres(CYTHON_UNUSED Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_25squared_norm(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_25squared_norm(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_7mlsauce_5lasso_7_lassoc_24squared_norm, "Squared Euclidean or Frobenius norm of x.\n\n    Faster than norm(x) ** 2.\n\n    Parameters\n    ----------\n    x : array_like\n\n    Returns\n    -------\n    float\n        The Euclidean norm when x is a vector, the Frobenius norm when x\n        is a matrix (2-d array).\n    ");
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_25squared_norm = {"squared_norm", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_25squared_norm, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_7mlsauce_5lasso_7_lassoc_24squared_norm};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_25squared_norm(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_5lasso_7_lassoc_24squared_norm, "Squared Euclidean or Frobenius norm of x.\n\n    Faster than norm(x) ** 2.\n\n    Parameters\n    ----------\n    x : array_like\n\n    Returns\n    -------\n    float\n        The Euclidean norm when x is a vector, the Frobenius norm when x\n        is a matrix (2-d array).\n    ");
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_25squared_norm = {"squared_norm", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_25squared_norm, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_5lasso_7_lassoc_24squared_norm};
+static PyObject *__pyx_pw_5lasso_7_lassoc_25squared_norm(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -26278,7 +26267,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_backend,0};
-    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
+    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -26334,11 +26323,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.squared_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.squared_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(__pyx_self, __pyx_v_x, __pyx_v_backend);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_24squared_norm(__pyx_self, __pyx_v_x, __pyx_v_backend);
 
   /* function exit code */
   {
@@ -26351,7 +26340,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_backend) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_backend) {
   PyObject *__pyx_v_sys_platform = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -26369,7 +26358,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __Pyx_RefNannySetupContext("squared_norm", 0);
   __Pyx_INCREF(__pyx_v_x);
 
-  /* "mlsauce/lasso/_lassoc.pyx":285
+  /* "lasso/_lassoc.pyx":285
  *         is a matrix (2-d array).
  *     """
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
@@ -26406,7 +26395,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":286
+  /* "lasso/_lassoc.pyx":286
  *     """
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -26415,13 +26404,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -26433,13 +26422,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -26448,7 +26437,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":287
+    /* "lasso/_lassoc.pyx":287
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = np.ravel(x, order="K")             # <<<<<<<<<<<<<<
@@ -26467,7 +26456,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_x)) __PYX_ERR(0, 287, __pyx_L1_error);
     __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_s_K) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
     __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -26476,7 +26465,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":288
+    /* "lasso/_lassoc.pyx":288
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = np.ravel(x, order="K")
  *         x = device_put(x)             # <<<<<<<<<<<<<<
@@ -26510,7 +26499,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":289
+    /* "lasso/_lassoc.pyx":289
  *         x = np.ravel(x, order="K")
  *         x = device_put(x)
  *         return jnp.dot(x, x).block_until_ready()             # <<<<<<<<<<<<<<
@@ -26574,7 +26563,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
     __pyx_t_8 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":286
+    /* "lasso/_lassoc.pyx":286
  *     """
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -26583,7 +26572,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":291
+  /* "lasso/_lassoc.pyx":291
  *         return jnp.dot(x, x).block_until_ready()
  * 
  *     x = np.ravel(x, order="K")             # <<<<<<<<<<<<<<
@@ -26602,7 +26591,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_v_x)) __PYX_ERR(0, 291, __pyx_L1_error);
   __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 291, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_s_K) < 0) __PYX_ERR(0, 291, __pyx_L1_error)
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -26611,7 +26600,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":292
+  /* "lasso/_lassoc.pyx":292
  * 
  *     x = np.ravel(x, order="K")
  *     return np.dot(x, x)             # <<<<<<<<<<<<<<
@@ -26650,7 +26639,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":270
+  /* "lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -26664,7 +26653,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.squared_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.squared_norm", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sys_platform);
@@ -26674,7 +26663,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":296
+/* "lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -26683,15 +26672,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_24squared_norm(CYTHON_UNUSED 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_27tcrossprod(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_27tcrossprod(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_27tcrossprod = {"tcrossprod", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_27tcrossprod, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_27tcrossprod(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_27tcrossprod = {"tcrossprod", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_27tcrossprod, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_27tcrossprod(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -26723,7 +26712,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -26791,11 +26780,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.tcrossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.tcrossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_26tcrossprod(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_backend);
 
   /* function exit code */
   {
@@ -26808,7 +26797,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_backend) {
   PyObject *__pyx_v_sys_platform = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -26828,7 +26817,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __Pyx_INCREF(__pyx_v_x);
   __Pyx_INCREF(__pyx_v_y);
 
-  /* "mlsauce/lasso/_lassoc.pyx":298
+  /* "lasso/_lassoc.pyx":298
  * def tcrossprod(x, y=None, backend="cpu"):
  *     # assert on dimensions
  *     sys_platform = platform.system()             # <<<<<<<<<<<<<<
@@ -26865,7 +26854,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_v_sys_platform = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":299
+  /* "lasso/_lassoc.pyx":299
  *     # assert on dimensions
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -26874,13 +26863,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -26892,13 +26881,13 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 299, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -26907,7 +26896,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":300
+    /* "lasso/_lassoc.pyx":300
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)             # <<<<<<<<<<<<<<
@@ -26941,7 +26930,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":301
+    /* "lasso/_lassoc.pyx":301
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  *         if y is None:             # <<<<<<<<<<<<<<
@@ -26951,7 +26940,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __pyx_t_5 = (__pyx_v_y == Py_None);
     if (__pyx_t_5) {
 
-      /* "mlsauce/lasso/_lassoc.pyx":302
+      /* "lasso/_lassoc.pyx":302
  *         x = device_put(x)
  *         if y is None:
  *             return jnp.dot(x, x.T).block_until_ready()             # <<<<<<<<<<<<<<
@@ -27018,7 +27007,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "mlsauce/lasso/_lassoc.pyx":301
+      /* "lasso/_lassoc.pyx":301
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
  *         x = device_put(x)
  *         if y is None:             # <<<<<<<<<<<<<<
@@ -27027,7 +27016,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
     }
 
-    /* "mlsauce/lasso/_lassoc.pyx":303
+    /* "lasso/_lassoc.pyx":303
  *         if y is None:
  *             return jnp.dot(x, x.T).block_until_ready()
  *         y = device_put(y)             # <<<<<<<<<<<<<<
@@ -27061,7 +27050,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __Pyx_DECREF_SET(__pyx_v_y, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":304
+    /* "lasso/_lassoc.pyx":304
  *             return jnp.dot(x, x.T).block_until_ready()
  *         y = device_put(y)
  *         return jnp.dot(x, y.T).block_until_ready()             # <<<<<<<<<<<<<<
@@ -27128,7 +27117,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":299
+    /* "lasso/_lassoc.pyx":299
  *     # assert on dimensions
  *     sys_platform = platform.system()
  *     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):             # <<<<<<<<<<<<<<
@@ -27137,7 +27126,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":305
+  /* "lasso/_lassoc.pyx":305
  *         y = device_put(y)
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:             # <<<<<<<<<<<<<<
@@ -27147,7 +27136,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_t_5 = (__pyx_v_y == Py_None);
   if (__pyx_t_5) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":306
+    /* "lasso/_lassoc.pyx":306
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:
  *         return np.dot(x, x.transpose())             # <<<<<<<<<<<<<<
@@ -27211,7 +27200,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":305
+    /* "lasso/_lassoc.pyx":305
  *         y = device_put(y)
  *         return jnp.dot(x, y.T).block_until_ready()
  *     if y is None:             # <<<<<<<<<<<<<<
@@ -27220,7 +27209,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":307
+  /* "lasso/_lassoc.pyx":307
  *     if y is None:
  *         return np.dot(x, x.transpose())
  *     return np.dot(x, y.transpose())             # <<<<<<<<<<<<<<
@@ -27284,7 +27273,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":296
+  /* "lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -27299,7 +27288,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.tcrossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.tcrossprod", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sys_platform);
@@ -27310,7 +27299,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "mlsauce/lasso/_lassoc.pyx":311
+/* "lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
@@ -27318,15 +27307,15 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_26tcrossprod(CYTHON_UNUSED Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_29to_np_array(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_5lasso_7_lassoc_29to_np_array(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7mlsauce_5lasso_7_lassoc_29to_np_array = {"to_np_array", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7mlsauce_5lasso_7_lassoc_29to_np_array, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7mlsauce_5lasso_7_lassoc_29to_np_array(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_5lasso_7_lassoc_29to_np_array = {"to_np_array", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lasso_7_lassoc_29to_np_array, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_5lasso_7_lassoc_29to_np_array(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -27396,11 +27385,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.to_np_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.to_np_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(__pyx_self, __pyx_v_X);
+  __pyx_r = __pyx_pf_5lasso_7_lassoc_28to_np_array(__pyx_self, __pyx_v_X);
 
   /* function exit code */
   {
@@ -27413,7 +27402,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X) {
+static PyObject *__pyx_pf_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -27426,7 +27415,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_np_array", 1);
 
-  /* "mlsauce/lasso/_lassoc.pyx":312
+  /* "lasso/_lassoc.pyx":312
  * # convert vector to numpy array
  * def to_np_array(X):
  *     return np.array(X.copy(), ndmin=2)             # <<<<<<<<<<<<<<
@@ -27478,7 +27467,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED P
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":311
+  /* "lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
@@ -27491,7 +27480,7 @@ static PyObject *__pyx_pf_7mlsauce_5lasso_7_lassoc_28to_np_array(CYTHON_UNUSED P
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("mlsauce.lasso._lassoc.to_np_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lasso._lassoc.to_np_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -27636,7 +27625,7 @@ static PyType_Slot __pyx_type___pyx_array_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_array_spec = {
-  "mlsauce.lasso._lassoc.array",
+  "lasso._lassoc.array",
   sizeof(struct __pyx_array_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_SEQUENCE,
@@ -27682,7 +27671,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.lasso._lassoc.""array", /*tp_name*/
+  "lasso._lassoc.""array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -27842,7 +27831,7 @@ static PyType_Slot __pyx_type___pyx_MemviewEnum_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
-  "mlsauce.lasso._lassoc.Enum",
+  "lasso._lassoc.Enum",
   sizeof(struct __pyx_MemviewEnum_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -27852,7 +27841,7 @@ static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.lasso._lassoc.""Enum", /*tp_name*/
+  "lasso._lassoc.""Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -28149,7 +28138,7 @@ static PyType_Slot __pyx_type___pyx_memoryview_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryview_spec = {
-  "mlsauce.lasso._lassoc.memoryview",
+  "lasso._lassoc.memoryview",
   sizeof(struct __pyx_memoryview_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -28195,7 +28184,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.lasso._lassoc.""memoryview", /*tp_name*/
+  "lasso._lassoc.""memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -28347,7 +28336,7 @@ static PyType_Slot __pyx_type___pyx_memoryviewslice_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
-  "mlsauce.lasso._lassoc._memoryviewslice",
+  "lasso._lassoc._memoryviewslice",
   sizeof(struct __pyx_memoryviewslice_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_SEQUENCE,
@@ -28357,7 +28346,7 @@ static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "mlsauce.lasso._lassoc.""_memoryviewslice", /*tp_name*/
+  "lasso._lassoc.""_memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -28471,7 +28460,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_Cannot_create_writable_memory_vi, __pyx_k_Cannot_create_writable_memory_vi, sizeof(__pyx_k_Cannot_create_writable_memory_vi), 0, 0, 1, 0},
     {&__pyx_kp_u_Cannot_index_with_type, __pyx_k_Cannot_index_with_type, sizeof(__pyx_k_Cannot_index_with_type), 0, 1, 0, 0},
     {&__pyx_kp_s_Cannot_transpose_memoryview_with, __pyx_k_Cannot_transpose_memoryview_with, sizeof(__pyx_k_Cannot_transpose_memoryview_with), 0, 0, 1, 0},
-    {&__pyx_n_u_Darwin, __pyx_k_Darwin, sizeof(__pyx_k_Darwin), 0, 1, 0, 1},
+    {&__pyx_n_s_Darwin, __pyx_k_Darwin, sizeof(__pyx_k_Darwin), 0, 0, 1, 1},
     {&__pyx_kp_s_Dimension_d_is_not_direct, __pyx_k_Dimension_d_is_not_direct, sizeof(__pyx_k_Dimension_d_is_not_direct), 0, 0, 1, 0},
     {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
     {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
@@ -28483,10 +28472,10 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_Indirect_dimensions_not_supporte, __pyx_k_Indirect_dimensions_not_supporte, sizeof(__pyx_k_Indirect_dimensions_not_supporte), 0, 0, 1, 0},
     {&__pyx_kp_u_Invalid_mode_expected_c_or_fortr, __pyx_k_Invalid_mode_expected_c_or_fortr, sizeof(__pyx_k_Invalid_mode_expected_c_or_fortr), 0, 1, 0, 0},
     {&__pyx_kp_u_Invalid_shape_in_axis, __pyx_k_Invalid_shape_in_axis, sizeof(__pyx_k_Invalid_shape_in_axis), 0, 1, 0, 0},
-    {&__pyx_n_u_K, __pyx_k_K, sizeof(__pyx_k_K), 0, 1, 0, 1},
+    {&__pyx_n_s_K, __pyx_k_K, sizeof(__pyx_k_K), 0, 0, 1, 1},
     {&__pyx_n_s_KMeans, __pyx_k_KMeans, sizeof(__pyx_k_KMeans), 0, 0, 1, 1},
     {&__pyx_n_s_LA, __pyx_k_LA, sizeof(__pyx_k_LA), 0, 0, 1, 1},
-    {&__pyx_n_u_Linux, __pyx_k_Linux, sizeof(__pyx_k_Linux), 0, 1, 0, 1},
+    {&__pyx_n_s_Linux, __pyx_k_Linux, sizeof(__pyx_k_Linux), 0, 0, 1, 1},
     {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
     {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
     {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
@@ -28494,8 +28483,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
     {&__pyx_kp_u_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 1, 0, 0},
     {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
-    {&__pyx_kp_u_Remove_columns_having_0s_in_max, __pyx_k_Remove_columns_having_0s_in_max, sizeof(__pyx_k_Remove_columns_having_0s_in_max), 0, 1, 0, 0},
-    {&__pyx_kp_u_Remove_columns_having_standard, __pyx_k_Remove_columns_having_standard, sizeof(__pyx_k_Remove_columns_having_standard), 0, 1, 0, 0},
+    {&__pyx_kp_s_Remove_columns_having_0s_in_max, __pyx_k_Remove_columns_having_0s_in_max, sizeof(__pyx_k_Remove_columns_having_0s_in_max), 0, 0, 1, 0},
+    {&__pyx_kp_s_Remove_columns_having_standard, __pyx_k_Remove_columns_having_standard, sizeof(__pyx_k_Remove_columns_having_standard), 0, 0, 1, 0},
     {&__pyx_n_s_Sequence, __pyx_k_Sequence, sizeof(__pyx_k_Sequence), 0, 0, 1, 1},
     {&__pyx_n_s_StandardScaler, __pyx_k_StandardScaler, sizeof(__pyx_k_StandardScaler), 0, 0, 1, 1},
     {&__pyx_kp_s_Step_may_not_be_zero_axis_d, __pyx_k_Step_may_not_be_zero_axis_d, sizeof(__pyx_k_Step_may_not_be_zero_axis_d), 0, 0, 1, 0},
@@ -28551,7 +28540,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_converged, __pyx_k_converged, sizeof(__pyx_k_converged), 0, 0, 1, 1},
     {&__pyx_n_s_copy, __pyx_k_copy, sizeof(__pyx_k_copy), 0, 0, 1, 1},
     {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
-    {&__pyx_n_u_cpu, __pyx_k_cpu, sizeof(__pyx_k_cpu), 0, 1, 0, 1},
+    {&__pyx_n_s_cpu, __pyx_k_cpu, sizeof(__pyx_k_cpu), 0, 0, 1, 1},
     {&__pyx_n_s_crossprod, __pyx_k_crossprod, sizeof(__pyx_k_crossprod), 0, 0, 1, 1},
     {&__pyx_n_s_dense_output, __pyx_k_dense_output, sizeof(__pyx_k_dense_output), 0, 0, 1, 1},
     {&__pyx_n_s_device_put, __pyx_k_device_put, sizeof(__pyx_k_device_put), 0, 0, 1, 1},
@@ -28579,7 +28568,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
     {&__pyx_kp_u_got, __pyx_k_got, sizeof(__pyx_k_got), 0, 1, 0, 0},
     {&__pyx_kp_u_got_differing_extents_in_dimensi, __pyx_k_got_differing_extents_in_dimensi, sizeof(__pyx_k_got_differing_extents_in_dimensi), 0, 1, 0, 0},
-    {&__pyx_n_u_gpu, __pyx_k_gpu, sizeof(__pyx_k_gpu), 0, 1, 0, 1},
+    {&__pyx_n_s_gpu, __pyx_k_gpu, sizeof(__pyx_k_gpu), 0, 0, 1, 1},
     {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
     {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
     {&__pyx_n_s_imatmul, __pyx_k_imatmul, sizeof(__pyx_k_imatmul), 0, 0, 1, 1},
@@ -28597,6 +28586,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_jax_numpy, __pyx_k_jax_numpy, sizeof(__pyx_k_jax_numpy), 0, 0, 1, 1},
     {&__pyx_n_s_jnp, __pyx_k_jnp, sizeof(__pyx_k_jnp), 0, 0, 1, 1},
     {&__pyx_n_s_k, __pyx_k_k, sizeof(__pyx_k_k), 0, 0, 1, 1},
+    {&__pyx_n_s_lasso__lassoc, __pyx_k_lasso__lassoc, sizeof(__pyx_k_lasso__lassoc), 0, 0, 1, 1},
     {&__pyx_n_s_linalg, __pyx_k_linalg, sizeof(__pyx_k_linalg), 0, 0, 1, 1},
     {&__pyx_n_s_loads, __pyx_k_loads, sizeof(__pyx_k_loads), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -28606,8 +28596,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_mean, __pyx_k_mean, sizeof(__pyx_k_mean), 0, 0, 1, 1},
     {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
     {&__pyx_n_s_min, __pyx_k_min, sizeof(__pyx_k_min), 0, 0, 1, 1},
-    {&__pyx_n_u_minmax, __pyx_k_minmax, sizeof(__pyx_k_minmax), 0, 1, 0, 1},
-    {&__pyx_n_s_mlsauce_lasso__lassoc, __pyx_k_mlsauce_lasso__lassoc, sizeof(__pyx_k_mlsauce_lasso__lassoc), 0, 0, 1, 1},
+    {&__pyx_n_s_minmax, __pyx_k_minmax, sizeof(__pyx_k_minmax), 0, 0, 1, 1},
     {&__pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_k_mlsauce_lasso__lassoc_pyx, sizeof(__pyx_k_mlsauce_lasso__lassoc_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
     {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
@@ -28622,8 +28611,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
     {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
-    {&__pyx_kp_u_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 1, 0, 0},
-    {&__pyx_kp_u_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 1, 0, 0},
+    {&__pyx_kp_s_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 0, 1, 0},
+    {&__pyx_kp_s_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 0, 1, 0},
     {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
     {&__pyx_n_s_one_hot_encode, __pyx_k_one_hot_encode, sizeof(__pyx_k_one_hot_encode), 0, 0, 1, 1},
     {&__pyx_n_s_one_hot_encode2, __pyx_k_one_hot_encode2, sizeof(__pyx_k_one_hot_encode2), 0, 0, 1, 1},
@@ -28678,7 +28667,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_squared_norm, __pyx_k_squared_norm, sizeof(__pyx_k_squared_norm), 0, 0, 1, 1},
     {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
     {&__pyx_n_s_std, __pyx_k_std, sizeof(__pyx_k_std), 0, 0, 1, 1},
-    {&__pyx_n_u_std, __pyx_k_std, sizeof(__pyx_k_std), 0, 1, 0, 1},
     {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
     {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
     {&__pyx_kp_s_strided_and_direct, __pyx_k_strided_and_direct, sizeof(__pyx_k_strided_and_direct), 0, 0, 1, 0},
@@ -28694,9 +28682,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_to_np_array, __pyx_k_to_np_array, sizeof(__pyx_k_to_np_array), 0, 0, 1, 1},
     {&__pyx_n_s_toarray, __pyx_k_toarray, sizeof(__pyx_k_toarray), 0, 0, 1, 1},
-    {&__pyx_n_u_toarray, __pyx_k_toarray, sizeof(__pyx_k_toarray), 0, 1, 0, 1},
     {&__pyx_n_s_tol, __pyx_k_tol, sizeof(__pyx_k_tol), 0, 0, 1, 1},
-    {&__pyx_n_u_tpu, __pyx_k_tpu, sizeof(__pyx_k_tpu), 0, 1, 0, 1},
+    {&__pyx_n_s_tpu, __pyx_k_tpu, sizeof(__pyx_k_tpu), 0, 0, 1, 1},
     {&__pyx_n_s_training, __pyx_k_training, sizeof(__pyx_k_training), 0, 0, 1, 1},
     {&__pyx_n_s_transform, __pyx_k_transform, sizeof(__pyx_k_transform), 0, 0, 1, 1},
     {&__pyx_n_s_transpose, __pyx_k_transpose, sizeof(__pyx_k_transpose), 0, 0, 1, 1},
@@ -28711,7 +28698,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_x_clusters, __pyx_k_x_clusters, sizeof(__pyx_k_x_clusters), 0, 0, 1, 1},
     {&__pyx_n_s_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
     {&__pyx_n_s_y_mean, __pyx_k_y_mean, sizeof(__pyx_k_y_mean), 0, 0, 1, 1},
-    {&__pyx_kp_u_you_must_have_max_x_clusters_n_c, __pyx_k_you_must_have_max_x_clusters_n_c, sizeof(__pyx_k_you_must_have_max_x_clusters_n_c), 0, 1, 0, 0},
+    {&__pyx_kp_s_you_must_have_max_x_clusters_n_c, __pyx_k_you_must_have_max_x_clusters_n_c, sizeof(__pyx_k_you_must_have_max_x_clusters_n_c), 0, 0, 1, 0},
     {&__pyx_n_s_zeros, __pyx_k_zeros, sizeof(__pyx_k_zeros), 0, 0, 1, 1},
     {&__pyx_n_s_zeros_like, __pyx_k_zeros_like, sizeof(__pyx_k_zeros_like), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
@@ -28785,7 +28772,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(2, 984, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(2, 984, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
@@ -28796,11 +28783,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(2, 990, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(2, 990, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "mlsauce/lasso/_lassoc.pyx":41
+  /* "lasso/_lassoc.pyx":41
  *         return y_mean, (y - y_mean)
  *     y_mean = np.asarray(y).mean(axis=0)
  *     return y_mean, (y - y_mean[None, :])             # <<<<<<<<<<<<<<
@@ -28811,7 +28798,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "mlsauce/lasso/_lassoc.pyx":215
+  /* "lasso/_lassoc.pyx":215
  *             b_2d = b_.reshape((b.shape[-2], -1))
  *             ret = a @ b_2d
  *             ret = ret.reshape(a.shape[0], *b_.shape[1:])             # <<<<<<<<<<<<<<
@@ -28822,7 +28809,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_slice__12);
   __Pyx_GIVEREF(__pyx_slice__12);
 
-  /* "mlsauce/lasso/_lassoc.pyx":221
+  /* "lasso/_lassoc.pyx":221
  *             a_2d = a.reshape(-1, a.shape[-1])
  *             ret = a_2d @ b
  *             ret = ret.reshape(*a.shape[:-1], b.shape[1])             # <<<<<<<<<<<<<<
@@ -28934,7 +28921,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__23);
   __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(1, 1, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":23
+  /* "lasso/_lassoc.pyx":23
  * if platform.system() in ('Linux', 'Darwin'):
  *     from jax import device_put
  *     import jax.numpy as jnp             # <<<<<<<<<<<<<<
@@ -28945,7 +28932,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "mlsauce/lasso/_lassoc.pyx":27
+  /* "lasso/_lassoc.pyx":27
  * 
  * # column bind
  * def cbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -28956,11 +28943,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
   __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_cbind, 27, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_tuple__28 = PyTuple_Pack(1, ((PyObject*)__pyx_n_u_cpu)); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(1, ((PyObject*)__pyx_n_s_cpu)); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
 
-  /* "mlsauce/lasso/_lassoc.pyx":36
+  /* "lasso/_lassoc.pyx":36
  * 
  * # center... response
  * def center_response(y):             # <<<<<<<<<<<<<<
@@ -28972,7 +28959,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__29);
   __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_center_response, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 36, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":45
+  /* "lasso/_lassoc.pyx":45
  * 
  * # computes t(x)%*%y
  * def crossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -28980,11 +28967,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     sys_platform = platform.system()
  */
   __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_crossprod, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 45, __pyx_L1_error)
-  __pyx_tuple__32 = PyTuple_Pack(2, Py_None, ((PyObject*)__pyx_n_u_cpu)); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(2, Py_None, ((PyObject*)__pyx_n_s_cpu)); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
 
-  /* "mlsauce/lasso/_lassoc.pyx":65
+  /* "lasso/_lassoc.pyx":65
  * # Obtain this for JAX
  * # dropout
  * def dropout(x, drop_prob=0, seed=123):             # <<<<<<<<<<<<<<
@@ -28999,7 +28986,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
 
-  /* "mlsauce/lasso/_lassoc.pyx":86
+  /* "lasso/_lassoc.pyx":86
  * # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
  * # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
  * def get_beta_1D(double[:] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -29011,7 +28998,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__36);
   __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(6, 0, 0, 17, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_get_beta_1D, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 86, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":114
+  /* "lasso/_lassoc.pyx":114
  * 
  * # compute coeff in lasso
  * def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -29023,7 +29010,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__38);
   __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(6, 0, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_get_beta_2D, 114, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 114, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":148
+  /* "lasso/_lassoc.pyx":148
  * 
  * # one-hot encoding
  * def one_hot_encode(x_clusters, n_clusters):             # <<<<<<<<<<<<<<
@@ -29035,7 +29022,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__40);
   __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_one_hot_encode, 148, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 148, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":164
+  /* "lasso/_lassoc.pyx":164
  * 
  * # one-hot encoding
  * def one_hot_encode2(y, n_classes):             # <<<<<<<<<<<<<<
@@ -29047,7 +29034,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__42);
   __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_one_hot_encode2, 164, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 164, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":176
+  /* "lasso/_lassoc.pyx":176
  * 
  * # row bind
  * def rbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -29056,7 +29043,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  */
   __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_rbind, 176, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 176, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":185
+  /* "lasso/_lassoc.pyx":185
  * 
  * # adapted from sklearn.utils.exmath
  * def safe_sparse_dot(a, b, backend="cpu", dense_output=False):             # <<<<<<<<<<<<<<
@@ -29067,11 +29054,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
   __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_safe_sparse_dot, 185, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 185, __pyx_L1_error)
-  __pyx_tuple__47 = PyTuple_Pack(2, ((PyObject*)__pyx_n_u_cpu), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(2, ((PyObject*)__pyx_n_s_cpu), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
 
-  /* "mlsauce/lasso/_lassoc.pyx":243
+  /* "lasso/_lassoc.pyx":243
  * # Obtain this for JAX
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
@@ -29082,11 +29069,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
   __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_scale_covariates, 243, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) __PYX_ERR(0, 243, __pyx_L1_error)
-  __pyx_tuple__50 = PyTuple_Pack(3, ((PyObject*)__pyx_n_u_std), ((PyObject *)Py_True), Py_None); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_tuple__50 = PyTuple_Pack(3, ((PyObject*)__pyx_n_s_std), ((PyObject *)Py_True), Py_None); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__50);
   __Pyx_GIVEREF(__pyx_tuple__50);
 
-  /* "mlsauce/lasso/_lassoc.pyx":266
+  /* "lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
@@ -29098,7 +29085,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__51);
   __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_soft_thres, 266, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 266, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":270
+  /* "lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -29110,7 +29097,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__53);
   __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_squared_norm, 270, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 270, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":296
+  /* "lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
@@ -29119,7 +29106,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  */
   __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_lasso__lassoc_pyx, __pyx_n_s_tcrossprod, 296, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) __PYX_ERR(0, 296, __pyx_L1_error)
 
-  /* "mlsauce/lasso/_lassoc.pyx":311
+  /* "lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
@@ -29699,14 +29686,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_mlsauce__lasso___lassoc) {
+  if (__pyx_module_is_main_lasso___lassoc) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "mlsauce.lasso._lassoc")) {
-      if (unlikely((PyDict_SetItemString(modules, "mlsauce.lasso._lassoc", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "lasso._lassoc")) {
+      if (unlikely((PyDict_SetItemString(modules, "lasso._lassoc", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -30240,7 +30227,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Enum, __pyx_t_7) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":9
+  /* "lasso/_lassoc.pyx":9
  * # License: BSD 3 Clause Clear
  * 
  * import copy             # <<<<<<<<<<<<<<
@@ -30252,7 +30239,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy, __pyx_t_7) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":10
+  /* "lasso/_lassoc.pyx":10
  * 
  * import copy
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -30264,7 +30251,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_7) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":14
+  /* "lasso/_lassoc.pyx":14
  * cimport cython
  * 
  * import pickle             # <<<<<<<<<<<<<<
@@ -30276,7 +30263,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pickle, __pyx_t_7) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":15
+  /* "lasso/_lassoc.pyx":15
  * 
  * import pickle
  * import platform             # <<<<<<<<<<<<<<
@@ -30288,7 +30275,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_platform, __pyx_t_7) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":16
+  /* "lasso/_lassoc.pyx":16
  * import pickle
  * import platform
  * from numpy import linalg as LA             # <<<<<<<<<<<<<<
@@ -30309,7 +30296,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":17
+  /* "lasso/_lassoc.pyx":17
  * import platform
  * from numpy import linalg as LA
  * from scipy import sparse             # <<<<<<<<<<<<<<
@@ -30330,7 +30317,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":18
+  /* "lasso/_lassoc.pyx":18
  * from numpy import linalg as LA
  * from scipy import sparse
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler             # <<<<<<<<<<<<<<
@@ -30358,7 +30345,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":19
+  /* "lasso/_lassoc.pyx":19
  * from scipy import sparse
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler
  * from sklearn.cluster import KMeans             # <<<<<<<<<<<<<<
@@ -30379,7 +30366,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":20
+  /* "lasso/_lassoc.pyx":20
  * from sklearn.preprocessing import StandardScaler, MinMaxScaler
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture             # <<<<<<<<<<<<<<
@@ -30400,7 +30387,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":21
+  /* "lasso/_lassoc.pyx":21
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):             # <<<<<<<<<<<<<<
@@ -30415,20 +30402,20 @@ if (!__Pyx_RefNanny) {
   __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_9 = (__Pyx_PyUnicode_Equals(__pyx_t_4, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_9 = (__Pyx_PyString_Equals(__pyx_t_4, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 21, __pyx_L1_error)
   if (!__pyx_t_9) {
   } else {
     __pyx_t_6 = __pyx_t_9;
     goto __pyx_L31_bool_binop_done;
   }
-  __pyx_t_9 = (__Pyx_PyUnicode_Equals(__pyx_t_4, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_9 = (__Pyx_PyString_Equals(__pyx_t_4, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_9;
   __pyx_L31_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_9 = __pyx_t_6;
   if (__pyx_t_9) {
 
-    /* "mlsauce/lasso/_lassoc.pyx":22
+    /* "lasso/_lassoc.pyx":22
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):
  *     from jax import device_put             # <<<<<<<<<<<<<<
@@ -30449,7 +30436,7 @@ if (!__Pyx_RefNanny) {
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":23
+    /* "lasso/_lassoc.pyx":23
  * if platform.system() in ('Linux', 'Darwin'):
  *     from jax import device_put
  *     import jax.numpy as jnp             # <<<<<<<<<<<<<<
@@ -30461,7 +30448,7 @@ if (!__Pyx_RefNanny) {
     if (PyDict_SetItem(__pyx_d, __pyx_n_s_jnp, __pyx_t_7) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "mlsauce/lasso/_lassoc.pyx":21
+    /* "lasso/_lassoc.pyx":21
  * from sklearn.cluster import KMeans
  * from sklearn.mixture import GaussianMixture
  * if platform.system() in ('Linux', 'Darwin'):             # <<<<<<<<<<<<<<
@@ -30470,58 +30457,58 @@ if (!__Pyx_RefNanny) {
  */
   }
 
-  /* "mlsauce/lasso/_lassoc.pyx":27
+  /* "lasso/_lassoc.pyx":27
  * 
  * # column bind
  * def cbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_1cbind, 0, __pyx_n_s_cbind, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_1cbind, 0, __pyx_n_s_cbind, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__28);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_cbind, __pyx_t_7) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":36
+  /* "lasso/_lassoc.pyx":36
  * 
  * # center... response
  * def center_response(y):             # <<<<<<<<<<<<<<
  *     if (len(np.asarray(y).shape)==1):
  *         y_mean = np.mean(y)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_3center_response, 0, __pyx_n_s_center_response, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_3center_response, 0, __pyx_n_s_center_response, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_center_response, __pyx_t_7) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":45
+  /* "lasso/_lassoc.pyx":45
  * 
  * # computes t(x)%*%y
  * def crossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
  *     # assert on dimensions
  *     sys_platform = platform.system()
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_5crossprod, 0, __pyx_n_s_crossprod, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_5crossprod, 0, __pyx_n_s_crossprod, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__32);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_crossprod, __pyx_t_7) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":65
+  /* "lasso/_lassoc.pyx":65
  * # Obtain this for JAX
  * # dropout
  * def dropout(x, drop_prob=0, seed=123):             # <<<<<<<<<<<<<<
  * 
  *     assert 0 <= drop_prob <= 1
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_7dropout, 0, __pyx_n_s_dropout, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_7dropout, 0, __pyx_n_s_dropout, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_tuple__35);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_dropout, __pyx_t_7) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":88
+  /* "lasso/_lassoc.pyx":88
  * def get_beta_1D(double[:] beta0, double[:,::1] XX2,
  *                 double[:] Xy2, double reg_lambda,
  *                 int max_iter = 1000,             # <<<<<<<<<<<<<<
@@ -30531,7 +30518,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_7 = __Pyx_PyInt_From_int(((int)0x3E8)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "mlsauce/lasso/_lassoc.pyx":89
+  /* "lasso/_lassoc.pyx":89
  *                 double[:] Xy2, double reg_lambda,
  *                 int max_iter = 1000,
  *                 double tol = 1e-5):             # <<<<<<<<<<<<<<
@@ -30541,7 +30528,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_4 = PyFloat_FromDouble(((double)1e-5)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "mlsauce/lasso/_lassoc.pyx":86
+  /* "lasso/_lassoc.pyx":86
  * # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
  * # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
  * def get_beta_1D(double[:] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -30556,14 +30543,14 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error);
   __pyx_t_7 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_9get_beta_1D, 0, __pyx_n_s_get_beta_1D, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_9get_beta_1D, 0, __pyx_n_s_get_beta_1D, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_beta_1D, __pyx_t_4) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":116
+  /* "lasso/_lassoc.pyx":116
  * def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,
  *                 double[:,::1] Xy2, double reg_lambda,
  *                 int max_iter = 1000,             # <<<<<<<<<<<<<<
@@ -30573,7 +30560,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_4 = __Pyx_PyInt_From_int(((int)0x3E8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "mlsauce/lasso/_lassoc.pyx":117
+  /* "lasso/_lassoc.pyx":117
  *                 double[:,::1] Xy2, double reg_lambda,
  *                 int max_iter = 1000,
  *                 double tol = 1e-5):             # <<<<<<<<<<<<<<
@@ -30583,7 +30570,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_5 = PyFloat_FromDouble(((double)1e-5)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "mlsauce/lasso/_lassoc.pyx":114
+  /* "lasso/_lassoc.pyx":114
  * 
  * # compute coeff in lasso
  * def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,             # <<<<<<<<<<<<<<
@@ -30598,126 +30585,126 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error);
   __pyx_t_4 = 0;
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_11get_beta_2D, 0, __pyx_n_s_get_beta_2D, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_11get_beta_2D, 0, __pyx_n_s_get_beta_2D, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_t_7);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_beta_2D, __pyx_t_5) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":148
+  /* "lasso/_lassoc.pyx":148
  * 
  * # one-hot encoding
  * def one_hot_encode(x_clusters, n_clusters):             # <<<<<<<<<<<<<<
  * 
  *     assert (
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_13one_hot_encode, 0, __pyx_n_s_one_hot_encode, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_13one_hot_encode, 0, __pyx_n_s_one_hot_encode, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_one_hot_encode, __pyx_t_5) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":164
+  /* "lasso/_lassoc.pyx":164
  * 
  * # one-hot encoding
  * def one_hot_encode2(y, n_classes):             # <<<<<<<<<<<<<<
  * 
  *     n_obs = len(y)
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_15one_hot_encode2, 0, __pyx_n_s_one_hot_encode2, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_15one_hot_encode2, 0, __pyx_n_s_one_hot_encode2, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__43)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_one_hot_encode2, __pyx_t_5) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":176
+  /* "lasso/_lassoc.pyx":176
  * 
  * # row bind
  * def rbind(x, y, backend="cpu"):             # <<<<<<<<<<<<<<
  *     # if len(x.shape) == 1 or len(y.shape) == 1:
  *     sys_platform = platform.system()
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_17rbind, 0, __pyx_n_s_rbind, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_17rbind, 0, __pyx_n_s_rbind, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__28);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rbind, __pyx_t_5) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":185
+  /* "lasso/_lassoc.pyx":185
  * 
  * # adapted from sklearn.utils.exmath
  * def safe_sparse_dot(a, b, backend="cpu", dense_output=False):             # <<<<<<<<<<<<<<
  *     """Dot product that handle the sparse matrix case correctly
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_19safe_sparse_dot, 0, __pyx_n_s_safe_sparse_dot, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_19safe_sparse_dot, 0, __pyx_n_s_safe_sparse_dot, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__47);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_safe_sparse_dot, __pyx_t_5) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":243
+  /* "lasso/_lassoc.pyx":243
  * # Obtain this for JAX
  * # scale... covariates
  * def scale_covariates(X, choice="std", training=True, scaler=None):             # <<<<<<<<<<<<<<
  * 
  *     if choice == "std":
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_21scale_covariates, 0, __pyx_n_s_scale_covariates, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_21scale_covariates, 0, __pyx_n_s_scale_covariates, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__49)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__50);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_scale_covariates, __pyx_t_5) < 0) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":266
+  /* "lasso/_lassoc.pyx":266
  *     return scaler.transform(X)
  * 
  * def soft_thres(double x, double y):             # <<<<<<<<<<<<<<
  *     return np.sign(x)*np.max(np.abs(x) - y, 0)
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_23soft_thres, 0, __pyx_n_s_soft_thres, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_23soft_thres, 0, __pyx_n_s_soft_thres, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_soft_thres, __pyx_t_5) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":270
+  /* "lasso/_lassoc.pyx":270
  * 
  * # from sklearn.utils.exmath
  * def squared_norm(x, backend="cpu"):             # <<<<<<<<<<<<<<
  *     """Squared Euclidean or Frobenius norm of x.
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_25squared_norm, 0, __pyx_n_s_squared_norm, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__54)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_25squared_norm, 0, __pyx_n_s_squared_norm, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__54)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__28);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_squared_norm, __pyx_t_5) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":296
+  /* "lasso/_lassoc.pyx":296
  * 
  * # computes x%*%t(y)
  * def tcrossprod(x, y=None, backend="cpu"):             # <<<<<<<<<<<<<<
  *     # assert on dimensions
  *     sys_platform = platform.system()
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_27tcrossprod, 0, __pyx_n_s_tcrossprod, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_27tcrossprod, 0, __pyx_n_s_tcrossprod, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__55)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__32);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_tcrossprod, __pyx_t_5) < 0) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":311
+  /* "lasso/_lassoc.pyx":311
  * 
  * # convert vector to numpy array
  * def to_np_array(X):             # <<<<<<<<<<<<<<
  *     return np.array(X.copy(), ndmin=2)
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7mlsauce_5lasso_7_lassoc_29to_np_array, 0, __pyx_n_s_to_np_array, NULL, __pyx_n_s_mlsauce_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__57)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_5lasso_7_lassoc_29to_np_array, 0, __pyx_n_s_to_np_array, NULL, __pyx_n_s_lasso__lassoc, __pyx_d, ((PyObject *)__pyx_codeobj__57)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_to_np_array, __pyx_t_5) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "mlsauce/lasso/_lassoc.pyx":1
+  /* "lasso/_lassoc.pyx":1
  * # cython: wraparound=False             # <<<<<<<<<<<<<<
  * # cython: boundscheck=False
  * # cython: nonecheck=False
@@ -30736,7 +30723,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_7);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init mlsauce.lasso._lassoc", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init lasso._lassoc", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -30750,7 +30737,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init mlsauce.lasso._lassoc");
+    PyErr_SetString(PyExc_ImportError, "init lasso._lassoc");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
