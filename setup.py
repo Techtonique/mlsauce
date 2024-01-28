@@ -42,7 +42,7 @@ LICENSE = 'BSD3 Clause Clear'
 # does not need the compiled code
 import mlsauce
 
-__version__ = '0.9.1'
+__version__ = '0.10.0'
 
 VERSION = __version__
 
@@ -124,34 +124,6 @@ class CleanCommand(Clean):
 
 
 cmdclass = {'clean': CleanCommand}
-
-# custom build_ext command to set OpenMP compile flags depending on os and
-# compiler
-# build_ext has to be imported after setuptools
-try:
-    from numpy.distutils.command.build_ext import build_ext  # noqa
-
-    class build_ext_subclass(build_ext):
-        def build_extensions(self):
-            # from mlsauce._build_utils.openmp_helpers import get_openmp_flag
-
-            # if mlsauce._OPENMP_SUPPORTED:
-            #     openmp_flag = get_openmp_flag(self.compiler)
-
-            #     for e in self.extensions:
-            #         e.extra_compile_args += openmp_flag
-            #         e.extra_link_args += openmp_flag
-
-            build_ext.build_extensions(self)
-
-    cmdclass['build_ext'] = build_ext_subclass
-    cmdclass['sdist'] = sdist
-
-except ImportError:
-    # Numpy should not be a dependency just to be able to introspect
-    # that python 3.6 is required.
-    pass
-
 
 # Optional wheelhouse-uploader features
 # To automate release of binary packages for mlsauce we need a tool
