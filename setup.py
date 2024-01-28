@@ -113,20 +113,6 @@ if WHEELHOUSE_UPLOADER_COMMANDS.intersection(sys.argv):
     import wheelhouse_uploader.cmd
     cmdclass.update(vars(wheelhouse_uploader.cmd))
 
-def configuration(parent_package='', top_path=None):
-    if os.path.exists('MANIFEST'):
-        os.remove('MANIFEST')
-    
-    print(f"\n ----- parent_package: ----- \n {parent_package}")
-    print(f"\n ----- top_path: ----- \n {top_path}")
-    config = Extension(None, parent_package, top_path)
-    config.set_options(ignore_setup_xxx_py=True,
-                       assume_default_configuration=True,
-                       delegate_options_to_subpackages=True,
-                       quiet=True)    
-    config.add_subpackage('mlsauce')
-    return config
-
 ext_modules =[
     Extension("mlsauce/adaopt._adaoptc", 
               sources=["mlsauce/adaopt/_adaoptc.pyx"],
@@ -185,8 +171,7 @@ def setup_package():
                     install_requires=install_requires,
                     setup_requires=["numpy>= 1.13.0"],
                     package_data={'': ['*.pxd']},
-                    packages=find_packages(),
-                    #configuration=configuration,
+                    packages=find_packages(),                    
                     ext_modules=cythonize(ext_modules),
                     **extra_setuptools_args)    
 

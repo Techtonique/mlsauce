@@ -1,6 +1,3 @@
-"""
--- adapted from sklearn
-"""
 import sys
 import logging
 import os
