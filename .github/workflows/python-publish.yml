@@ -25,7 +25,7 @@ jobs:
           pip install wheel setuptools twine
 
       - name: Build distribution
-        run: python setup.py sdist bdist_wheel
+        run: python setup.py sdist 
 
       - name: Run examples 
         run: pip install .&&find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;
