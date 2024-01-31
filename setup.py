@@ -5,13 +5,14 @@
 
 import os
 import platform
+import setuptools 
 import shutil
 import subprocess
 import sys
 
 from distutils.command.clean import clean as Clean
 from distutils.core import Extension, setup
-
+from os import path
 from setuptools import find_packages
 
 try:
@@ -36,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.10.0'
+__version__ = '0.10.1'
 
 VERSION = __version__
 
@@ -143,21 +144,22 @@ ext_modules =[
 
 def setup_package():
 
-    install_all_requires = [
-                        'numpy>={}'.format(NUMPY_MIN_VERSION),
-                        'scipy>={}'.format(SCIPY_MIN_VERSION),
-                        'joblib>={}'.format(JOBLIB_MIN_VERSION),
-                        'scikit-learn>={}'.format(SKLEARN_MIN_VERSION),
-                        'pandas>={}'.format(PANDAS_MIN_VERSION),
-                        'requests>={}'.format(REQUESTS_MIN_VERSION),
-                    ]
-    install_jax_requires = [
-                            'jax',
-                            'jaxlib'
-                            ] if platform.system() in ('Linux', 'Darwin') else []
-    other_requirements = ["tqdm"]
+    # get the dependencies and installs
+    here = path.abspath(path.dirname(__file__))
 
-    install_requires = [item for sublist in [install_jax_requires, install_all_requires, other_requirements] for item in sublist]
+    with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
+        all_reqs = f.read().split('\n')
+
+    install_all_requires = [
+        x.strip() for x in all_reqs if "git+" not in x
+    ]
+
+    if platform.system() in ('Linux', 'Darwin'):
+        install_jax_requires = ['jax', 'jaxlib']  
+    else:
+        install_jax_requires = []
+
+    install_requires = [item for sublist in [install_all_requires, install_jax_requires] for item in sublist]
 
     metadata = dict(name=DISTNAME,
                     maintainer=MAINTAINER,
