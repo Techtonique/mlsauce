@@ -5,6 +5,7 @@
 
 import os
 import platform
+import setuptools 
 import shutil
 import subprocess
 import sys
@@ -36,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.10.0'
+__version__ = '0.10.1'
 
 VERSION = __version__
 
