@@ -38,7 +38,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.10.4'
+__version__ = '0.10.5'
 
 VERSION = __version__
 
@@ -145,7 +145,7 @@ ext_modules =[
 
 # Get the absolute path to the directory containing the setup script
 script_dir = Path(__file__).resolve().parent
-print("\n Absolute path to the directory containing the setup script: \n {script_dir} \n")
+print(f"\n Absolute path to the directory containing the setup script: \n {script_dir} \n")
 # Get absolute paths to Cython source files
 adaopt_cython_file = str(script_dir / 'mlsauce' / 'adaopt' / '_adaoptc.pyx')
 booster_cython_file = str(script_dir / 'mlsauce' / 'booster' / '_boosterc.pyx')
