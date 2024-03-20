@@ -180,6 +180,8 @@ def setup_package():
                                  'Programming Language :: Python :: 3.8',
                                  ],
                     cmdclass=cmdclass,
+                    options={'bdist_wheel': {'plat_name': 'linux'}},
+                    platforms=["linux", "macosx", "windows"],
                     python_requires=">=3.5",
                     install_requires=install_requires,
                     setup_requires=["numpy>= 1.13.0"],
