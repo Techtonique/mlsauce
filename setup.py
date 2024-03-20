@@ -13,6 +13,7 @@ import sys
 from distutils.command.clean import clean as Clean
 from distutils.core import Extension, setup
 from os import path
+from pathlib import Path
 from setuptools import find_packages
 
 try:
@@ -142,6 +143,35 @@ ext_modules =[
               include_dirs=[numpy.get_include()]),    
 ]
 
+# Get the absolute path to the directory containing the setup script
+script_dir = Path(__file__).resolve().parent
+print("\n Absolute path to the directory containing the setup script: \n {script_dir} \n")
+# Get absolute paths to Cython source files
+adaopt_cython_file = str(script_dir / 'mlsauce' / 'adaopt' / '_adaoptc.pyx')
+booster_cython_file = str(script_dir / 'mlsauce' / 'booster' / '_boosterc.pyx')
+lasso_cython_file = str(script_dir / 'mlsauce' / 'lasso' / '_lassoc.pyx')
+ridge_cython_file = str(script_dir / 'mlsauce' / 'ridge' / '_ridgec.pyx')
+stump_cython_file = str(script_dir / 'mlsauce' / 'stump' / '_stumpc.pyx')
+# Update Extension definitions with absolute paths
+ext_modules2 = [
+    Extension(name="mlsauce.adaopt._adaoptc", 
+              sources=[adaopt_cython_file],
+              include_dirs=[numpy.get_include()]),
+    Extension(name="mlsauce.booster._boosterc", 
+              sources=[booster_cython_file],
+              include_dirs=[numpy.get_include()]),
+    Extension(name="mlsauce.booster._lassoc", 
+              sources=[booster_cython_file],
+              include_dirs=[numpy.get_include()]),
+    Extension(name="mlsauce.booster._ridgec", 
+              sources=[booster_cython_file],
+              include_dirs=[numpy.get_include()]),
+    Extension(name="mlsauce.booster._stumpc", 
+              sources=[booster_cython_file],
+              include_dirs=[numpy.get_include()]),                            
+]
+
+
 def setup_package():
 
     install_all_requires = [
@@ -189,7 +219,36 @@ def setup_package():
                     ext_modules=cythonize(ext_modules),
                     **extra_setuptools_args)    
 
-    setup(**metadata)
+    metadata2 = dict(name=DISTNAME,
+                    maintainer=MAINTAINER,
+                    maintainer_email=MAINTAINER_EMAIL,
+                    description=DESCRIPTION,
+                    license=LICENSE,
+                    version=VERSION,
+                    long_description=LONG_DESCRIPTION,
+                    classifiers=['Development Status :: 2 - Pre-Alpha',
+                                 'Intended Audience :: Developers',
+                                 'License :: OSI Approved :: BSD License',
+                                 'Natural Language :: English',
+                                 'Programming Language :: Python :: 3',
+                                  'Programming Language :: Python :: 3.5',
+                                 'Programming Language :: Python :: 3.6',
+                                 'Programming Language :: Python :: 3.7',
+                                 'Programming Language :: Python :: 3.8',
+                                 ],
+                    cmdclass=cmdclass,                    
+                    platforms=["linux", "macosx", "windows"],
+                    python_requires=">=3.5",
+                    install_requires=install_requires,
+                    setup_requires=["numpy>= 1.13.0"],
+                    package_data={'': ['*.pxd']},
+                    packages=find_packages(),                    
+                    ext_modules=cythonize(ext_modules2),
+                    **extra_setuptools_args)    
+    try: 
+        setup(**metadata)
+    except:
+        setup(**metadata2)
 
 if __name__ == "__main__":
     setup_package()
