@@ -20,10 +20,10 @@ try:
 except ImportError:    
     import __builtin__ as builtins
 
-subprocess.run(['pip', 'install', 'Cython>=0.29.21'], check=False)
-subprocess.run(['pip', 'install', 'numpy>= 1.13.0'], check=False)
-subprocess.run(['pip', 'install', 'scipy>= 0.19.0'], check=False)
-subprocess.run(['pip', 'install', 'requests>=2.31.0'], check=False)
+subprocess.run(['pip', 'install', 'numpy'], check=False)
+subprocess.run(['pip', 'install', 'scipy'], check=False)
+subprocess.run(['pip', 'install', 'Cython'], check=False)
+subprocess.run(['pip', 'install', 'requests'], check=False)
 
 import numpy
 from Cython.Build import cythonize
@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.10.2'
+__version__ = '0.10.3'
 
 VERSION = __version__
 

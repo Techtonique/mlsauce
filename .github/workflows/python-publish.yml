@@ -24,8 +24,8 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install wheel setuptools twine
 
-      - name: Build distribution
-        run: python3 setup.py sdist
+      #- name: Build distribution
+      #  run: python3 setup.py sdist
 
       - name: Run examples 
         run: pip install .&&find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;
