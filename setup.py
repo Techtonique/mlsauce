@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-# Copyright (C) 2020 T. Moudiki <thierry.moudiki@gmail.com>
+# Copyright (C) 2020-2024 T. Moudiki <thierry.moudiki@gmail.com>
 # License: 3-clause BSD
 
 import os
@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.10.1'
+__version__ = '0.10.2'
 
 VERSION = __version__
 
@@ -144,14 +144,15 @@ ext_modules =[
 
 def setup_package():
 
-    # get the dependencies and installs
-    here = path.abspath(path.dirname(__file__))
-
-    with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
-        all_reqs = f.read().split('\n')
-
     install_all_requires = [
-        x.strip() for x in all_reqs if "git+" not in x
+        "numpy",
+        "Cython",
+        "joblib",
+        "pandas",
+        "requests",
+        "scikit-learn",
+        "scipy",
+        "tqdm"
     ]
 
     if platform.system() in ('Linux', 'Darwin'):
