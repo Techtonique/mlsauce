@@ -246,9 +246,9 @@ def setup_package():
                     ext_modules=cythonize(ext_modules2),
                     **extra_setuptools_args)    
     try: 
-        setup(**metadata)
-    except:
         setup(**metadata2)
+    except:
+        setup(**metadata)
 
 if __name__ == "__main__":
     setup_package()
