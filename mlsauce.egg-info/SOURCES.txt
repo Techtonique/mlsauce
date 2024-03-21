@@ -2,8 +2,6 @@ LICENSE
 README.md
 setup.cfg
 setup.py
-./mlsauce/adaopt/_adaoptc.c
-./mlsauce/booster/_boosterc.c
 mlsauce/__init__.py
 mlsauce/_config.py
 mlsauce/setup.py
@@ -15,10 +13,12 @@ mlsauce.egg-info/requires.txt
 mlsauce.egg-info/top_level.txt
 mlsauce/adaopt/__init__.py
 mlsauce/adaopt/_adaopt.py
+mlsauce/adaopt/_adaoptc.c
 mlsauce/adaopt/setup.py
 mlsauce/booster/__init__.py
 mlsauce/booster/_booster_classifier.py
 mlsauce/booster/_booster_regressor.py
+mlsauce/booster/_boosterc.c
 mlsauce/booster/setup.py
 mlsauce/datasets/__init__.py
 mlsauce/datasets/dowload.py
@@ -26,12 +26,15 @@ mlsauce/encoders/__init__.py
 mlsauce/encoders/target_encoders.py
 mlsauce/lasso/__init__.py
 mlsauce/lasso/_lasso.py
+mlsauce/lasso/_lassoc.c
 mlsauce/lasso/setup.py
 mlsauce/ridge/__init__.py
 mlsauce/ridge/_ridge.py
+mlsauce/ridge/_ridgec.c
 mlsauce/ridge/setup.py
 mlsauce/stump/__init__.py
 mlsauce/stump/_stump_classifier.py
+mlsauce/stump/_stumpc.c
 mlsauce/stump/setup.py
 mlsauce/tests/__init__.py
 mlsauce/tests/test_adaopt.py
