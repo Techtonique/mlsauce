@@ -38,7 +38,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.10.5'
+__version__ = '0.10.6'
 
 VERSION = __version__
 
@@ -144,14 +144,14 @@ ext_modules =[
 ]
 
 # Get the absolute path to the directory containing the setup script
-script_dir = Path(__file__).resolve().parent
+script_dir = "./"
 print(f"\n Absolute path to the directory containing the setup script: \n {script_dir} \n")
 # Get absolute paths to Cython source files
-adaopt_cython_file = str(script_dir / 'mlsauce' / 'adaopt' / '_adaoptc.pyx')
-booster_cython_file = str(script_dir / 'mlsauce' / 'booster' / '_boosterc.pyx')
-lasso_cython_file = str(script_dir / 'mlsauce' / 'lasso' / '_lassoc.pyx')
-ridge_cython_file = str(script_dir / 'mlsauce' / 'ridge' / '_ridgec.pyx')
-stump_cython_file = str(script_dir / 'mlsauce' / 'stump' / '_stumpc.pyx')
+adaopt_cython_file = str(script_dir + 'mlsauce/adaopt/_adaoptc.pyx')
+booster_cython_file = str(script_dir + 'mlsauce/booster/_boosterc.pyx')
+lasso_cython_file = str(script_dir + 'mlsauce/lasso/_lassoc.pyx')
+ridge_cython_file = str(script_dir + 'mlsauce/ridge/_ridgec.pyx')
+stump_cython_file = str(script_dir + 'mlsauce/stump/_stumpc.pyx')
 # Update Extension definitions with absolute paths
 ext_modules2 = [
     Extension(name="mlsauce.adaopt._adaoptc", 
@@ -192,6 +192,10 @@ def setup_package():
 
     install_requires = [item for sublist in [install_all_requires, install_jax_requires] for item in sublist]
 
+    try: 
+        cythonize_ext_modules = cythonize(ext_modules2) 
+    except: 
+        cythonize_ext_modules = cythonize(ext_modules) 
     metadata = dict(name=DISTNAME,
                     maintainer=MAINTAINER,
                     maintainer_email=MAINTAINER_EMAIL,
@@ -216,39 +220,11 @@ def setup_package():
                     setup_requires=["numpy>= 1.13.0"],
                     package_data={'': ['*.pxd']},
                     packages=find_packages(),                    
-                    ext_modules=cythonize(ext_modules),
+                    ext_modules=cythonize_ext_modules,
                     **extra_setuptools_args)    
-
-    metadata2 = dict(name=DISTNAME,
-                    maintainer=MAINTAINER,
-                    maintainer_email=MAINTAINER_EMAIL,
-                    description=DESCRIPTION,
-                    license=LICENSE,
-                    version=VERSION,
-                    long_description=LONG_DESCRIPTION,
-                    classifiers=['Development Status :: 2 - Pre-Alpha',
-                                 'Intended Audience :: Developers',
-                                 'License :: OSI Approved :: BSD License',
-                                 'Natural Language :: English',
-                                 'Programming Language :: Python :: 3',
-                                  'Programming Language :: Python :: 3.5',
-                                 'Programming Language :: Python :: 3.6',
-                                 'Programming Language :: Python :: 3.7',
-                                 'Programming Language :: Python :: 3.8',
-                                 ],
-                    cmdclass=cmdclass,                    
-                    platforms=["linux", "macosx", "windows"],
-                    python_requires=">=3.5",
-                    install_requires=install_requires,
-                    setup_requires=["numpy>= 1.13.0"],
-                    package_data={'': ['*.pxd']},
-                    packages=find_packages(),                    
-                    ext_modules=cythonize(ext_modules2),
-                    **extra_setuptools_args)    
-    try: 
-        setup(**metadata2)
-    except:
-        setup(**metadata)
+    
+    
+    setup(**metadata)
 
 if __name__ == "__main__":
     setup_package()
