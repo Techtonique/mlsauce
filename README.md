@@ -29,20 +29,13 @@ Miscellaneous Statistical/Machine learning stuff.
 
 ### Python 
 
-- __1st method__: by using `pip` at the command line for the stable version
-
-```bash
-pip install mlsauce --verbose
-```
-
-
-- __2nd method__: from Github, for the development version
+- __1st (preferred) method__: from Github, for the development version
 
 ```bash
 pip install git+https://github.com/Techtonique/mlsauce.git --verbose
 ```
 
-- __3rd method__: using `conda`
+- __2nd method__: using `conda`
 
 ```bash
 conda install -c conda-forge mlsauce 
