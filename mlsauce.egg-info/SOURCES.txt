@@ -28,6 +28,8 @@ mlsauce/lasso/__init__.py
 mlsauce/lasso/_lasso.py
 mlsauce/lasso/_lassoc.c
 mlsauce/lasso/setup.py
+mlsauce/predictioninterval/__init__.py
+mlsauce/predictioninterval/predictioninterval.py
 mlsauce/ridge/__init__.py
 mlsauce/ridge/_ridge.py
 mlsauce/ridge/_ridgec.c
