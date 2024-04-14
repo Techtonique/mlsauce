@@ -28,6 +28,16 @@ mlsauce/lasso/__init__.py
 mlsauce/lasso/_lasso.py
 mlsauce/lasso/_lassoc.c
 mlsauce/lasso/setup.py
+mlsauce/nonconformist/__init__.py
+mlsauce/nonconformist/acp.py
+mlsauce/nonconformist/base.py
+mlsauce/nonconformist/cp.py
+mlsauce/nonconformist/evaluation.py
+mlsauce/nonconformist/icp.py
+mlsauce/nonconformist/nc.py
+mlsauce/nonconformist/util.py
+mlsauce/predictioninterval/__init__.py
+mlsauce/predictioninterval/predictioninterval.py
 mlsauce/ridge/__init__.py
 mlsauce/ridge/_ridge.py
 mlsauce/ridge/_ridgec.c
@@ -39,6 +49,7 @@ mlsauce/stump/setup.py
 mlsauce/tests/__init__.py
 mlsauce/tests/test_adaopt.py
 mlsauce/utils/__init__.py
+mlsauce/utils/progress_bar.py
 mlsauce/utils/memoryuse/__init__.py
 mlsauce/utils/memoryuse/mem_usage.py
 mlsauce/utils/misc/__init__.py

@@ -1,3 +1,8 @@
+# version 0.12.0
+
+- add prediction intervals to `LSBoostRegressor` (split conformal prediction, 
+  split conformal prediction with KDE, and split conformal prediction bootstrap)
+
 # version 0.9.0
 
 - dowload data from R-universe
