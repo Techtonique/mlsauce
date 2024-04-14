@@ -6,6 +6,7 @@ from sklearn.base import RegressorMixin
 from . import _boosterc as boosterc
 from ..predictioninterval import PredictionInterval
 
+
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
     """LSBoost regressor.
 
@@ -54,15 +55,15 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         activation: str
             activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
-        
-        type_pi: str.            
+
+        type_pi: str.
             type of prediction interval; currently "kde" (default) or "bootstrap".
-            Used only in `self.predict`, for `self.replications` > 0 and `self.kernel` 
+            Used only in `self.predict`, for `self.replications` > 0 and `self.kernel`
             in ('gaussian', 'tophat'). Default is `None`.
-        
+
         replications: int.
-            number of replications (if needed) for predictive simulation. 
-            Used only in `self.predict`, for `self.kernel` in ('gaussian', 
+            number of replications (if needed) for predictive simulation.
+            Used only in `self.predict`, for `self.kernel` in ('gaussian',
             'tophat') and `self.type_pi = 'kde'`. Default is `None`.
 
 
@@ -84,9 +85,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         backend="cpu",
         solver="ridge",
         activation="relu",
-        type_pi=None,  
+        type_pi=None,
         replications=None,
-        kernel=None
+        kernel=None,
     ):
         assert backend in (
             "cpu",
@@ -122,9 +123,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.obj = None
         self.solver = solver
         self.activation = activation
-        self.type_pi=type_pi
-        self.replications=replications
-        self.kernel=kernel        
+        self.type_pi = type_pi
+        self.replications = replications
+        self.kernel = kernel
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)
@@ -172,10 +173,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         return self
 
-    def predict(self, X, 
-                level=95, 
-                method=None,                 
-                **kwargs):
+    def predict(self, X, level=95, method=None, **kwargs):
         """Predict probabilities for test data X.
 
         Args:
@@ -183,12 +181,12 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             X: {array-like}, shape = [n_samples, n_features]
                 Training vectors, where n_samples is the number
                 of samples and n_features is the number of features.
-            
+
             level: int
                 Level of confidence (default = 95)
-            
+
             method: str
-                `None`, or 'splitconformal', 'localconformal'  
+                `None`, or 'splitconformal', 'localconformal'
                 prediction (if you specify `return_pi = True`)
 
             **kwargs: additional parameters to be passed to
@@ -200,21 +198,24 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         """
 
         if "return_pi" in kwargs:
-            assert method in ('splitconformal', 'localconformal'), \
-                "method must be in ('splitconformal', 'localconformal')"
-            self.pi = PredictionInterval(obj = self, 
-                                         method=method, 
-                                         level=level,
-                                         type_pi=self.type_pi,
-                                         replications=self.replications,   
-                                         kernel=self.kernel,
-                                         )            
+            assert method in (
+                "splitconformal",
+                "localconformal",
+            ), "method must be in ('splitconformal', 'localconformal')"
+            self.pi = PredictionInterval(
+                obj=self,
+                method=method,
+                level=level,
+                type_pi=self.type_pi,
+                replications=self.replications,
+                kernel=self.kernel,
+            )
             self.pi.fit(self.X_, self.y_)
             self.X_ = None
-            self.y_ = None 
+            self.y_ = None
             preds = self.pi.predict(X, return_pi=True)
             return preds
-        
+
         return boosterc.predict_booster_regressor(
             self.obj, np.asarray(X, order="C")
         )

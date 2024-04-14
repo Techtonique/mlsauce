@@ -40,4 +40,5 @@ def is_factor(y):
 
 
 # flatten list of lists
-flatten = lambda l: [item for sublist in l for item in sublist]
+def flatten(l):
+    return [item for sublist in l for item in sublist]

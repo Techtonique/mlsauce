@@ -1,4 +1,4 @@
-try: 
+try:
     from ._adaopt import AdaOpt
 except ImportError:
     pass

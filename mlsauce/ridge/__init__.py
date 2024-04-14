@@ -1,4 +1,4 @@
-try: 
+try:
     from ._ridge import RidgeRegressor
 except ImportError:
     pass

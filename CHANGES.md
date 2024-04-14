@@ -2,6 +2,7 @@
 
 - add prediction intervals to `LSBoostRegressor` (split conformal prediction, 
   split conformal prediction with KDE, and split conformal prediction bootstrap)
+  see `examples/lsboost_regressor_pi.py` for examples
 
 # version 0.9.0
 

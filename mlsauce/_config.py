@@ -1,5 +1,6 @@
 """Global configuration state and functions for management -- adapted from sklearn
 """
+
 import os
 from contextlib import contextmanager as contextmanager
 

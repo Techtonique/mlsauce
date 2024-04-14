@@ -61,14 +61,21 @@ coverage: ## check code coverage quickly with the default Python
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-docs: ## generate mkdocs
-	 rm -rf docs/sources
-	 make install	 
-	 python3 docs/autogen.py	 
+docs: ## generate docs		
+	pip install Cython black pdoc 
+	black mlsauce/* --line-length=80	
+	pdoc -t docs mlsauce/* --output-dir mlsauce-docs
+	find . -name '__pycache__' -exec rm -fr {} +
 
-servedocs: docs ## compile the docs watching for changes
-	cd docs&&mkdocs serve
-	cd ..
+servedocs: ## compile the docs watching for change	 	
+	pip install Cython black pdoc 
+	black mlsauce/* --line-length=80	
+	pdoc -t docs mlsauce/* 
+	find . -name '__pycache__' -exec rm -fr {} +
+
+build-site: docs ## export mkdocs website to a folder		
+	cp -rf mlsauce-docs/* ../../Pro_Website/Techtonique.github.io/mlsauce
+	find . -name '__pycache__' -exec rm -fr {} +
 
 release: dist ## package and upload a release
 	pip install twine --upgrade
@@ -81,11 +88,6 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	python3 -m pip install .
-
-build-site: docs
-	cd docs&&mkdocs build
-	cp -rf docs/site/* ../../Pro_Website/Techtonique.github.io/mlsauce
-	cd ..
 
 run-examples: ## run all examples with one command
 	find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;

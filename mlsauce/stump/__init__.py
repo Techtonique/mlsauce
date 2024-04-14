@@ -1,4 +1,4 @@
-try: 
+try:
     from ._stump_classifier import StumpClassifier
 except ImportError:
     pass
