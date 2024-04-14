@@ -86,8 +86,7 @@ class PredictionInterval(BaseEstimator, RegressorMixin):
                                                                           random_state=self.seed)
 
         if self.method == "splitconformal": 
-
-            n_samples_calibration = X_calibration.shape[0]                        
+                                  
             self.obj.fit(X_train, y_train)
             preds_calibration = self.obj.predict(X_calibration)
             self.calibrated_residuals_ = y_calibration - preds_calibration
@@ -103,14 +102,23 @@ class PredictionInterval(BaseEstimator, RegressorMixin):
                 
 
         if self.method == "localconformal":
-
+            raise NotImplementedError("Method `localconformal` is not implemented yet.")
             mad_estimator = ExtraTreesRegressor()
             normalizer = RegressorNormalizer(self.obj, mad_estimator, AbsErrorErrFunc())
             nc = RegressorNc(self.obj, AbsErrorErrFunc(), normalizer)        
             self.icp_ = IcpRegressor(nc)
             self.icp_.fit(X_train, y_train) 
             self.icp_.calibrate(X_calibration, y_calibration)
-            preds_calibration = self.icp_.predict(X_calibration)            
+            print(f"X_train: {X_train}")
+            print(f"X_train.shape: {X_train.shape}")
+            print(f"y_train: {y_train}")
+            print(f"X_calibration: {X_calibration}")
+            print(f"X_calibration.shape: {X_calibration.shape}")
+            print(f"y_calibration: {y_calibration}")
+            print(f"self.icp_: {self.icp_}")
+            preds_calibration = self.icp_.predict(X_calibration) # it's a tensor   
+            print(f"preds_calibration: {preds_calibration}")        
+            print(f"preds_calibration.shape: {preds_calibration.shape}")        
             self.calibrated_residuals_ = y_calibration - preds_calibration
             absolute_residuals = np.abs(self.calibrated_residuals_)   
             self.calibrated_residuals_scaler_ = StandardScaler(with_mean=True, with_std=True)

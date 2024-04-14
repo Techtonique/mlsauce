@@ -166,6 +166,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         self.n_estimators = self.obj["n_estimators"]
 
+        self.X_ = X
+
+        self.y_ = y
+
         return self
 
     def predict(self, X, 
