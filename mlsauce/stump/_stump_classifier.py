@@ -52,7 +52,7 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
             sample_weight=np.ravel(sample_weight, order="C"),
             bins=self.bins,
         )
-
+        self.n_classes_ = len(np.unique(y)) # for compatibility with sklearn 
         return self
 
     def predict(self, X, **kwargs):

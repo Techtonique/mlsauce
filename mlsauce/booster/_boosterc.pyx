@@ -149,9 +149,10 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   E = Y - Ym
   iterator = tqdm(range(n_estimators)) if verbose else range(n_estimators)
 
-  solvers = {"ridge": RidgeRegressor(reg_lambda = reg_lambda, backend = backend),
-             "lasso": LassoRegressor(reg_lambda = reg_lambda, backend = backend)}
-  fit_obj = solvers[solver]
+  if solver == "ridge":
+    fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
+  else: 
+    fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
 
   for iter in iterator:
       
@@ -293,9 +294,11 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   e = y - np.repeat(ym, n)
   iterator = tqdm(range(n_estimators)) if verbose else range(n_estimators)
 
-  solvers = {"ridge": RidgeRegressor(reg_lambda = reg_lambda, backend = backend),
-             "lasso": LassoRegressor(reg_lambda = reg_lambda, backend = backend)}
-  fit_obj = solvers[solver]
+  if solver == "ridge":
+    fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
+  else: 
+    fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
+
 
   for iter in iterator:
       

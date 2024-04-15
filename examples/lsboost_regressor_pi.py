@@ -1,5 +1,9 @@
 import subprocess
 import sys
+import os 
+
+print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
+
 
 subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
 
@@ -31,7 +35,7 @@ obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, method="splitconformal")
 print(time()-start)
@@ -44,7 +48,7 @@ obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")
@@ -58,7 +62,7 @@ obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")
@@ -78,7 +82,7 @@ obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, method="splitconformal")
 print(time()-start)
@@ -91,7 +95,7 @@ obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")
@@ -105,7 +109,7 @@ obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")
@@ -133,7 +137,7 @@ obj = ms.LSBoostRegressor(n_estimators=50, solver="lasso", col_sample=0.9, row_s
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, method="splitconformal")
 print(time()-start)
@@ -150,7 +154,7 @@ print(time()-start)
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 print(f"splitconformal bootstrap coverage 3: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")   
 
 
@@ -160,7 +164,7 @@ obj = ms.LSBoostRegressor(n_estimators=50, solver="lasso", col_sample=0.9, row_s
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")
@@ -181,7 +185,7 @@ obj = ms.LSBoostRegressor(n_estimators=50, solver="lasso", reg_lambda=0.002,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, method="splitconformal")
 print(time()-start)
@@ -208,7 +212,7 @@ obj = ms.LSBoostRegressor(n_estimators=10, solver="lasso", col_sample=0.9, row_s
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     method="splitconformal")

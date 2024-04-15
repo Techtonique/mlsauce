@@ -4,6 +4,10 @@ from sklearn.model_selection import train_test_split
 from time import time
 from os import chdir
 from sklearn import metrics
+import os 
+
+print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
+
 
 
 #wd="/workspace/mlsauce/mlsauce/examples"
