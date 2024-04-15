@@ -75,17 +75,15 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         self.ym, centered_y = mo.center_response(y)
         self.xm = X.mean(axis=0)
         self.xsd = X.std(axis=0)
-        self.xsd[self.xsd == 0] = 1 # avoid division by zero
+        self.xsd[self.xsd == 0] = 1 
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
         XX = mo.crossprod(X_, backend=self.backend)
         Xy = mo.crossprod(X_, centered_y, backend=self.backend)
         XX2 = 2 * XX
         Xy2 = 2 * Xy
 
-        if self.backend == "cpu":
-            invXX = inv(XX + self.reg_lambda * np.eye(X_.shape[1]))
-            beta0 = mo.safe_sparse_dot(invXX, Xy)
-
+        if self.backend == "cpu":                               
+            beta0, _, _, _ = np.linalg.lstsq(X_, centered_y, rcond=None)            
             if len(np.asarray(y).shape) == 1:
                 res = mo.get_beta_1D(
                     beta0=np.asarray(beta0),
