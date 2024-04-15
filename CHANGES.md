@@ -1,8 +1,9 @@
-# version 0.12.0
+# version 0.12.1
 
 - add prediction intervals to `LSBoostRegressor` (split conformal prediction, 
   split conformal prediction with KDE, and split conformal prediction bootstrap)
-  see `examples/lsboost_regressor_pi.py` for examples
+  see `examples/lsboost_regressor_pi.py` for examples 
+- do not rescale columns with zero variance in `LSBoostRegressor` and `LSBoostClassifier`
 
 # version 0.9.0
 
