@@ -126,7 +126,10 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   
   xm = np.asarray(X).mean(axis=0)
   xsd = np.asarray(X).std(axis=0)
-  assert (0 not in xsd), "\nRemove columns having standard deviation equal to 0"    
+  for i in range(len(xsd)):
+    if xsd[i] == 0:
+      xsd[i] = 1.0 
+
   
   res['direct_link'] = direct_link
   res['xm'] = np.asarray(xm)
@@ -255,7 +258,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            str solver="ridge", str activation="relu"): 
   
   cdef long int n
-  cdef int p
+  cdef int i, p
   cdef int n_classes
   cdef Py_ssize_t iter
   cdef dict res
@@ -272,7 +275,10 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   
   xm = np.asarray(X).mean(axis=0)
   xsd = np.asarray(X).std(axis=0)
-  assert (0 not in xsd), "\nRemove columns having standard deviation equal to 0"
+  for i in range(len(xsd)):
+    if xsd[i] == 0:
+      xsd[i] = 1.0 
+
   
   res['direct_link'] = direct_link
   res['xm'] = np.asarray(xm)

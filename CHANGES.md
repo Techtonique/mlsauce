@@ -1,7 +1,8 @@
-# version 0.12.1
+# version 0.12.2
 
 - add prediction intervals to `LSBoostRegressor` (split conformal prediction, 
-  split conformal prediction with KDE, and split conformal prediction bootstrap)
+  split conformal prediction with Kernel Density Estimation, and split 
+  conformal prediction bootstrap)
   see `examples/lsboost_regressor_pi.py` for examples 
 - do not rescale columns with zero variance in `LSBoostRegressor` and `LSBoostClassifier`
 - faster ridge regression for `LSBoostRegressor`
