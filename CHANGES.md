@@ -4,6 +4,7 @@
   split conformal prediction with KDE, and split conformal prediction bootstrap)
   see `examples/lsboost_regressor_pi.py` for examples 
 - do not rescale columns with zero variance in `LSBoostRegressor` and `LSBoostClassifier`
+- faster ridge regression for `LSBoostRegressor`
 
 # version 0.9.0
 
