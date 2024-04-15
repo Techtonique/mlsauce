@@ -145,10 +145,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             backend=self.backend,
             solver=self.solver,
             activation=self.activation,
-        )
-
+        )        
+        self.n_classes_ = len(np.unique(y)) # for compatibility with sklearn 
         self.n_estimators = self.obj["n_estimators"]
-
         return self
 
     def predict(self, X, **kwargs):

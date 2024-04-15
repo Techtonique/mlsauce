@@ -176,7 +176,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.alphas = res["alphas"]
         self.n_iterations = res["n_iterations"]
         self.scaled_X_train = np.array(res["scaled_X_train"], dtype=np.float64)
-
+        self.n_classes_ = len(np.unique(y)) # for compatibility with sklearn 
         return self
 
     def predict(self, X, **kwargs):

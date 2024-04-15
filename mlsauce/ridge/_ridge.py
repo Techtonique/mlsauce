@@ -71,8 +71,8 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
 
         if self.backend == "cpu":            
             eye_term = self.reg_lambda * np.eye(X.shape[1])
-            X_ = np.vstack([X_, np.sqrt(eye_term)])
-            y_ = np.concatenate([centered_y, np.zeros(X.shape[1])])
+            X_ = np.vstack((X_, np.sqrt(eye_term)))
+            y_ = np.concatenate((centered_y, np.zeros(X.shape[1])))
             self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)            
             return self
 
