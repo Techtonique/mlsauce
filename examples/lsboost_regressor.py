@@ -1,5 +1,9 @@
 import subprocess
 import sys
+import os 
+
+print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
+
 
 subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
 
