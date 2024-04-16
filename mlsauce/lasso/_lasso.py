@@ -6,6 +6,7 @@ from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
 from . import _lassoc as mo
+from ..utils import get_beta
 
 if platform.system() in ("Linux", "Darwin"):
     import jax.numpy as jnp
@@ -83,7 +84,8 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         Xy2 = 2 * Xy
 
         if self.backend == "cpu":                               
-            beta0, _, _, _ = np.linalg.lstsq(X_, centered_y, rcond=None)            
+            #beta0, _, _, _ = np.linalg.lstsq(X_, centered_y, rcond=None)            
+            beta0 = get_beta(X_, centered_y)            
             if len(np.asarray(y).shape) == 1:
                 res = mo.get_beta_1D(
                     beta0=np.asarray(beta0),

@@ -5,6 +5,7 @@ from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
 from . import _ridgec as mo
+from ..utils import get_beta  
 
 if platform.system() in ("Linux", "Darwin"):
     import jax.numpy as jnp
@@ -73,13 +74,15 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
                 eye_term = np.sqrt(self.reg_lambda) * np.eye(X.shape[1])
                 X_ = np.row_stack((X_, eye_term))
                 y_ = np.concatenate((centered_y, np.zeros(X.shape[1])))
-                self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)            
+                #self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)            
+                self.beta = get_beta(X_, y_)            
             else: 
                 try: 
                     eye_term = np.sqrt(self.reg_lambda) * np.eye(X.shape[1])
                     X_ = np.row_stack((X_, eye_term))
                     y_ = np.row_stack((centered_y, np.zeros((eye_term.shape[0], centered_y.shape[1]))))
-                    self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)            
+                    #self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)            
+                    self.beta = get_beta(X_, y_)            
                 except Exception:
                     x = inv(mo.crossprod(X_) + self.reg_lambda * np.eye(X_.shape[1]))
                     hat_matrix = mo.tcrossprod(x, X_)
