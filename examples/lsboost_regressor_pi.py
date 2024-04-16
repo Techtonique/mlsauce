@@ -10,6 +10,7 @@ subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
 import mlsauce as ms
 import numpy as np 
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn.datasets import fetch_california_housing, load_diabetes
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from time import time
@@ -219,3 +220,42 @@ preds = obj.predict(X_test, return_pi=True,
 print(time()-start)
 print(f"splitconformal kde coverage 4: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")
 
+
+
+
+#Load Boston housing dataset
+data_url = "http://lib.stat.cmu.edu/datasets/boston"
+raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)
+
+X = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+y = raw_df.values[1::2, 2]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=23)
+
+
+obj = ms.LSBoostRegressor(n_estimators=50, solver="ridge", reg_lambda=0.002, 
+                          col_sample=0.8, row_sample=0.8)
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(f"Elapsed: {time()-start}")
+start = time()
+preds = obj.predict(X_test, return_pi=True, 
+                    level = 90,
+                    method="splitconformal")
+print(time()-start)
+print(f"splitconformal coverage 5: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")   
+
+
+obj = ms.LSBoostRegressor(n_estimators=50, solver="lasso", reg_lambda=0.002, 
+                          col_sample=0.8, row_sample=0.8)
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+preds = obj.predict(X_test, return_pi=True, 
+                    level = 90, 
+                    method="splitconformal")
+print(time()-start)
+print(f"splitconformal bootstrap coverage 5: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")   
