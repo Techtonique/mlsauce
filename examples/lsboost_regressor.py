@@ -23,6 +23,10 @@ print("ridge -----")
 print("\n")
 
 # data 2
+
+print("\n")
+print("diabetes data -----")
+
 diabetes = load_diabetes()
 X = diabetes.data
 y = diabetes.target
@@ -32,6 +36,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size=0.2)
 
 obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9)
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
+print(time()-start)
+
+print(obj.obj['loss'])
+
+obj = ms.LSBoostRegressor(col_sample=0.9, row_sample=0.9, n_clusters=2)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
@@ -61,6 +76,9 @@ print("lasso -----")
 print("\n")
 
 # data 2
+print("\n")
+print("diabetes data -----")
+
 diabetes = load_diabetes()
 X = diabetes.data
 y = diabetes.target
@@ -70,6 +88,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size=0.2)
 
 obj = ms.LSBoostRegressor(solver="lasso")
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
+print(time()-start)
+
+print(obj.obj['loss'])
+
+obj = ms.LSBoostRegressor(solver="lasso", n_clusters=2)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)

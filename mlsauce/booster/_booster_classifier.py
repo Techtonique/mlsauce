@@ -4,6 +4,7 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from . import _boosterc as boosterc
+from ..utils import cluster 
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
@@ -54,6 +55,15 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         activation: str
             activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
+        
+        n_clusters: int
+            number of clusters for clustering the features
+        
+        clustering_method: str
+            clustering method: currently 'kmeans', 'gmm'
+        
+        cluster_scaling: str
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'
 
     """
 
@@ -73,7 +83,21 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         backend="cpu",
         solver="ridge",
         activation="relu",
+        n_clusters = 0,
+        clustering_method = "kmeans",
+        cluster_scaling = "standard"
     ):
+        if n_clusters > 0: 
+            assert clustering_method in (
+                "kmeans",
+                "gmm",
+            ), "`clustering_method` must be in ('kmeans', 'gmm')"
+            assert cluster_scaling in (
+                "standard",
+                "robust",
+                "minmax",
+            ), "`cluster_scaling` must be in ('standard', 'robust', 'minmax')"
+
         assert backend in (
             "cpu",
             "gpu",
@@ -108,6 +132,10 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         self.obj = None
         self.solver = solver
         self.activation = activation
+        self.n_clusters = n_clusters
+        self.clustering_method = clustering_method
+        self.cluster_scaling = cluster_scaling
+        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None 
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (classifier) to training data (X, y)
@@ -127,6 +155,14 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
             self: object.
         """
+
+        if self.n_clusters > 0: 
+            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = cluster(X, n_clusters=self.n_clusters, 
+                method=self.clustering_method, 
+                type_scaling=self.cluster_scaling,
+                training=True, 
+                seed=self.seed)
+            X = np.column_stack((X.copy(), clustered_X))
 
         self.obj = boosterc.fit_booster_classifier(
             np.asarray(X, order="C"),
@@ -185,7 +221,14 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
             probability estimates for test data: {array-like}
         """
-
+        if self.n_clusters > 0:
+            X = np.column_stack((X.copy(), cluster(
+                X, training=False, 
+                scaler=self.scaler_, 
+                label_encoder=self.label_encoder_, 
+                clusterer=self.clusterer_,
+                seed=self.seed
+            )))
         return boosterc.predict_proba_booster_classifier(
             self.obj, np.asarray(X, order="C")
         )
