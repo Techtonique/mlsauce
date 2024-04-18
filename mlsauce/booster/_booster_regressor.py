@@ -5,7 +5,7 @@ from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from . import _boosterc as boosterc
 from ..predictioninterval import PredictionInterval
-
+from ..utils import cluster 
 
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
     """LSBoost regressor.

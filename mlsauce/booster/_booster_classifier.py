@@ -4,6 +4,7 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from . import _boosterc as boosterc
+from ..utils import cluster 
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):

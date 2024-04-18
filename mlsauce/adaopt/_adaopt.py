@@ -7,6 +7,7 @@ from sklearn.base import ClassifierMixin
 from numpy.linalg import norm
 from tqdm import tqdm
 from ..utils import subsample
+from ..utils import cluster 
 
 try:
     from . import _adaoptc as adaoptc
