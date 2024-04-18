@@ -66,6 +66,14 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             Used only in `self.predict`, for `self.kernel` in ('gaussian',
             'tophat') and `self.type_pi = 'kde'`. Default is `None`.
 
+        n_clusters: int
+            number of clusters for clustering the features
+        
+        clustering_method: str
+            clustering method: currently 'kmeans', 'gmm'
+        
+        cluster_scaling: str
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'    
 
     """
 
@@ -88,7 +96,21 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         type_pi=None,
         replications=None,
         kernel=None,
+        n_clusters = 0,
+        clustering_method = "kmeans",
+        cluster_scaling = "standard"
     ):
+        if n_clusters > 0: 
+            assert clustering_method in (
+                "kmeans",
+                "gmm",
+            ), "`clustering_method` must be in ('kmeans', 'gmm')"
+            assert cluster_scaling in (
+                "standard",
+                "robust",
+                "minmax",
+            ), "`cluster_scaling` must be in ('standard', 'robust', 'minmax')"
+
         assert backend in (
             "cpu",
             "gpu",
@@ -126,6 +148,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.type_pi = type_pi
         self.replications = replications
         self.kernel = kernel
+        self.n_clusters = n_clusters
+        self.clustering_method = clustering_method
+        self.cluster_scaling = cluster_scaling
+        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None 
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)
@@ -145,6 +171,14 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
             self: object.
         """
+
+        if self.n_clusters > 0: 
+            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = cluster(X, n_clusters=self.n_clusters, 
+                method=self.clustering_method, 
+                type_scaling=self.cluster_scaling,
+                training=True, 
+                seed=self.seed)
+            X = np.column_stack((X.copy(), clustered_X))
 
         self.obj = boosterc.fit_booster_regressor(
             X=np.asarray(X, order="C"),
@@ -197,6 +231,14 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             probability estimates for test data: {array-like}
         """
 
+        if self.n_clusters > 0:
+            X = np.column_stack((X.copy(), cluster(
+                X, training=False, 
+                scaler=self.scaler_, 
+                label_encoder=self.label_encoder_, 
+                clusterer=self.clusterer_,
+                seed=self.seed
+            )))
         if "return_pi" in kwargs:
             assert method in (
                 "splitconformal",

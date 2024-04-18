@@ -1,6 +1,12 @@
 # Authors: Thierry Moudiki
 #
 # License: BSD 3
+import numpy as np
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
+
 
 def cluster(X, n_clusters=None, 
             method="kmeans", 

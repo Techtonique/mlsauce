@@ -72,6 +72,15 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         cache: boolean
             if the nearest neighbors are cached or not, for faster retrieval in
             subsequent calls.
+        
+        n_clusters_input: int
+            number of clusters (a priori) for clustering the features
+        
+        clustering_method: str
+            clustering method: currently 'kmeans', 'gmm'
+        
+        cluster_scaling: str
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'    
 
         seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
@@ -95,8 +104,22 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_jobs=None,
         verbose=0,
         cache=True,
+        n_clusters_input = 0,
+        clustering_method = "kmeans",
+        cluster_scaling = "standard",
         seed=123,
     ):
+        if n_clusters_input > 0: 
+            assert clustering_method in (
+                "kmeans",
+                "gmm",
+            ), "`clustering_method` must be in ('kmeans', 'gmm')"
+            assert cluster_scaling in (
+                "standard",
+                "robust",
+                "minmax",
+            ), "`cluster_scaling` must be in ('standard', 'robust', 'minmax')"
+
         assert type_dist in (
             "euclidean",
             "manhattan",
@@ -119,6 +142,10 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.n_jobs = n_jobs
         self.cache = cache
         self.verbose = verbose
+        self.n_clusters_input = n_clusters_input
+        self.clustering_method = clustering_method
+        self.cluster_scaling = cluster_scaling
+        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None 
         self.seed = seed
 
     def fit(self, X, y, **kwargs):
@@ -140,6 +167,14 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             self: object.
 
         """
+
+        if self.n_clusters_input > 0: 
+            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = cluster(X, n_clusters=self.n_clusters_input, 
+                method=self.clustering_method, 
+                type_scaling=self.cluster_scaling,
+                training=True, 
+                seed=self.seed)
+            X = np.column_stack((X.copy(), clustered_X))
 
         if self.row_sample < 1:
             index_subsample = subsample(
@@ -218,6 +253,16 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         """
 
         n_train, p_train = self.scaled_X_train.shape
+
+        if self.n_clusters_input > 0:
+            X = np.column_stack((X.copy(), cluster(
+                X, training=False, 
+                scaler=self.scaler_, 
+                label_encoder=self.label_encoder_, 
+                clusterer=self.clusterer_,
+                seed=self.seed
+            )))
+
         n_test = X.shape[0]
 
         if self.n_jobs is None:

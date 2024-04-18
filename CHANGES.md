@@ -1,3 +1,7 @@
+# version 0.13.0
+
+- add clustering to `LSBoostRegressor`, `LSBoostClassifier`, and `AdaOpt`
+
 # version 0.12.3
 
 - add prediction intervals to `LSBoostRegressor` (split conformal prediction, 
