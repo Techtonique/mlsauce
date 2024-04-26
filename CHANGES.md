@@ -1,6 +1,7 @@
-# version 0.13.0
+# version 0.16.0
 
 - add clustering to `LSBoostRegressor`, `LSBoostClassifier`, and `AdaOpt`
+- add polynomial features to `LSBoostRegressor`, `LSBoostClassifier`
 
 # version 0.12.3
 
