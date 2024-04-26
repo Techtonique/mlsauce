@@ -1,8 +1,10 @@
 import numpy as np
 import platform
 import warnings
+import pandas as pd 
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
+from sklearn.preprocessing import PolynomialFeatures
 from . import _boosterc as boosterc
 from ..predictioninterval import PredictionInterval
 from ..utils import cluster 
@@ -68,12 +70,15 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         n_clusters: int
             number of clusters for clustering the features
-        
+
         clustering_method: str
             clustering method: currently 'kmeans', 'gmm'
-        
+
         cluster_scaling: str
-            scaling method for clustering: currently 'standard', 'robust', 'minmax'    
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'
+
+        degree: int
+            degree of features interactions to include in the model
 
     """
 
@@ -96,11 +101,12 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         type_pi=None,
         replications=None,
         kernel=None,
-        n_clusters = 0,
-        clustering_method = "kmeans",
-        cluster_scaling = "standard"
+        n_clusters=0,
+        clustering_method="kmeans",
+        cluster_scaling="standard",
+        degree=0,
     ):
-        if n_clusters > 0: 
+        if n_clusters > 0:
             assert clustering_method in (
                 "kmeans",
                 "gmm",
@@ -151,7 +157,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.n_clusters = n_clusters
         self.clustering_method = clustering_method
         self.cluster_scaling = cluster_scaling
-        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None 
+        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None
+        self.degree = degree
+        self.poly_ = None
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)
@@ -172,32 +180,66 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             self: object.
         """
 
-        if self.n_clusters > 0: 
-            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = cluster(X, n_clusters=self.n_clusters, 
-                method=self.clustering_method, 
-                type_scaling=self.cluster_scaling,
-                training=True, 
-                seed=self.seed)
-            X = np.column_stack((X.copy(), clustered_X))
+        if isinstance(X, pd.DataFrame):
+            X = X.values
 
-        self.obj = boosterc.fit_booster_regressor(
-            X=np.asarray(X, order="C"),
-            y=np.asarray(y, order="C"),
-            n_estimators=self.n_estimators,
-            learning_rate=self.learning_rate,
-            n_hidden_features=self.n_hidden_features,
-            reg_lambda=self.reg_lambda,
-            row_sample=self.row_sample,
-            col_sample=self.col_sample,
-            dropout=self.dropout,
-            tolerance=self.tolerance,
-            direct_link=self.direct_link,
-            verbose=self.verbose,
-            seed=self.seed,
-            backend=self.backend,
-            solver=self.solver,
-            activation=self.activation,
-        )
+        if self.degree > 1:
+            self.poly_ = PolynomialFeatures(
+                degree=self.degree, interaction_only=True, include_bias=False
+            )
+            X = self.poly_.fit_transform(X)
+
+        if self.n_clusters > 0:
+            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = (
+                cluster(
+                    X,
+                    n_clusters=self.n_clusters,
+                    method=self.clustering_method,
+                    type_scaling=self.cluster_scaling,
+                    training=True,
+                    seed=self.seed,
+                )
+            )
+            X = np.column_stack((X, clustered_X))
+
+        try:
+            self.obj = boosterc.fit_booster_regressor(
+                X=np.asarray(X, order="C"),
+                y=np.asarray(y, order="C"),
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+                backend=self.backend,
+                solver=self.solver,
+                activation=self.activation,
+            )
+        except ValueError:
+            self.obj = _boosterc.fit_booster_regressor(
+                X=np.asarray(X, order="C"),
+                y=np.asarray(y, order="C"),
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+                backend=self.backend,
+                solver=self.solver,
+                activation=self.activation,
+            )
 
         self.n_estimators = self.obj["n_estimators"]
 
@@ -231,14 +273,26 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             probability estimates for test data: {array-like}
         """
 
+        if isinstance(X, pd.DataFrame):
+            X = X.values
+
+        if self.degree > 0:
+            X = self.poly_.transform(X)
+
         if self.n_clusters > 0:
-            X = np.column_stack((X.copy(), cluster(
-                X, training=False, 
-                scaler=self.scaler_, 
-                label_encoder=self.label_encoder_, 
-                clusterer=self.clusterer_,
-                seed=self.seed
-            )))
+            X = np.column_stack(
+                (
+                    X,
+                    cluster(
+                        X,
+                        training=False,
+                        scaler=self.scaler_,
+                        label_encoder=self.label_encoder_,
+                        clusterer=self.clusterer_,
+                        seed=self.seed,
+                    ),
+                )
+            )
         if "return_pi" in kwargs:
             assert method in (
                 "splitconformal",
@@ -258,6 +312,11 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             preds = self.pi.predict(X, return_pi=True)
             return preds
 
-        return boosterc.predict_booster_regressor(
-            self.obj, np.asarray(X, order="C")
-        )
+        try:
+            return boosterc.predict_booster_regressor(
+                self.obj, np.asarray(X, order="C")
+            )
+        except ValueError:
+            return _boosterc.predict_booster_regressor(
+                self.obj, np.asarray(X, order="C")
+            )
