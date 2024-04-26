@@ -247,6 +247,17 @@ start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
 
+obj = ms.LSBoostClassifier(solver="lasso", 
+                           n_clusters=3, degree=2, 
+                           clustering_method="gmm")
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print(time()-start)
+
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
 # obj = ms.LSBoostClassifier(backend="gpu", solver="lasso")
 # print(obj.get_params())
