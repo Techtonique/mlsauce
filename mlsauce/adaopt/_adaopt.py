@@ -8,11 +8,10 @@ from numpy.linalg import norm
 from tqdm import tqdm
 from ..utils import subsample
 from ..utils import cluster 
-
-try:
+try: 
     from . import _adaoptc as adaoptc
 except ImportError:
-    pass
+    import _adaoptc as adaoptc
 
 
 class AdaOpt(BaseEstimator, ClassifierMixin):

@@ -228,3 +228,8 @@ def setup_package():
 
 if __name__ == "__main__":
     setup_package()
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    folders = ['adaopt', 'booster', 'lasso', 'ridge', 'stump']
+    for folder in folders: 
+        filename = os.path.join(dir_path, "mlsauce", folder, 'setup2.py')                
+        subprocess.run(['python3', filename, 'build_ext', '--inplace'])      

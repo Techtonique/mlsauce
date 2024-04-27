@@ -5,7 +5,10 @@ import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from sklearn.preprocessing import PolynomialFeatures
-from . import _boosterc as boosterc
+try: 
+    from . import _boosterc as boosterc
+except ImportError:
+    import _boosterc as boosterc
 from ..utils import cluster 
 
 
@@ -26,6 +29,10 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         reg_lambda: float
             L2 regularization parameter for successive errors in the optimizer
             (at training time).
+        
+        alpha: float
+            compromise between L1 and L2 regularization (must be in [0, 1]), 
+            for `solver` == 'enet'.
 
         row_sample: float
             percentage of rows chosen from the training set.
@@ -53,7 +60,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             type of backend; must be in ('cpu', 'gpu', 'tpu')
 
         solver: str
-            type of 'weak' learner; currently in ('ridge', 'lasso')
+            type of 'weak' learner; currently in ('ridge', 'lasso', 'enet'). 
+            'enet' is a combination of 'ridge' and 'lasso' called Elastic Net.
 
         activation: str
             activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
@@ -78,6 +86,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         learning_rate=0.1,
         n_hidden_features=5,
         reg_lambda=0.1,
+        alpha=0.5,
         row_sample=1,
         col_sample=1,
         dropout=0,
@@ -113,7 +122,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         assert solver in (
             "ridge",
             "lasso",
-        ), "`solver` must be in ('ridge', 'lasso')"
+            "enet",
+        ), "`solver` must be in ('ridge', 'lasso', 'enet')"
 
         sys_platform = platform.system()
 
@@ -127,6 +137,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         self.learning_rate = learning_rate
         self.n_hidden_features = n_hidden_features
         self.reg_lambda = reg_lambda
+        assert (alpha >= 0 and alpha <= 1), "`alpha` must be in [0, 1]"
+        self.alpha = alpha
         self.row_sample = row_sample
         self.col_sample = col_sample
         self.dropout = dropout
@@ -194,6 +206,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 learning_rate=self.learning_rate,
                 n_hidden_features=self.n_hidden_features,
                 reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
                 row_sample=self.row_sample,
                 col_sample=self.col_sample,
                 dropout=self.dropout,
@@ -213,6 +226,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 learning_rate=self.learning_rate,
                 n_hidden_features=self.n_hidden_features,
                 reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
                 row_sample=self.row_sample,
                 col_sample=self.col_sample,
                 dropout=self.dropout,

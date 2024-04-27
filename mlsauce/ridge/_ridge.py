@@ -4,7 +4,10 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-from . import _ridgec as mo
+try: 
+    from . import _ridgec as mo
+except ImportError:
+    import _ridgec as mo
 from ..utils import get_beta  
 
 if platform.system() in ("Linux", "Darwin"):

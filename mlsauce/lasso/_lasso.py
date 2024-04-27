@@ -5,7 +5,10 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-from . import _lassoc as mo
+try: 
+    from . import _lassoc as mo
+except ImportError:
+    import _lassoc as mo
 from ..utils import get_beta
 
 if platform.system() in ("Linux", "Darwin"):

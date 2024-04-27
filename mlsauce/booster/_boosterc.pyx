@@ -251,6 +251,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
 def fit_booster_regressor(double[:,::1] X, double[:] y, 
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
+                           double alpha=0.5, 
                            double row_sample=1, double col_sample=1,
                            double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1, 
@@ -302,8 +303,10 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
 
   if solver == "ridge":
     fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
-  else: 
+  elif solver == "lasso": 
     fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
+  else: 
+    fit_obj = LassoRegressor(reg_lambda = reg_lambda, alpha = alpha, backend = backend)  
 
 
   for iter in iterator:

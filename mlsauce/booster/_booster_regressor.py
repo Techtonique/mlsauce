@@ -26,6 +26,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         reg_lambda: float
             L2 regularization parameter for successive errors in the optimizer
             (at training time).
+        
+        alpha: float
+            compromise between L1 and L2 regularization (must be in [0, 1]), 
+            for `solver` == 'enet'
 
         row_sample: float
             percentage of rows chosen from the training set.
@@ -88,6 +92,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         learning_rate=0.1,
         n_hidden_features=5,
         reg_lambda=0.1,
+        alpha=0.5,
         row_sample=1,
         col_sample=1,
         dropout=0,
@@ -140,6 +145,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.learning_rate = learning_rate
         self.n_hidden_features = n_hidden_features
         self.reg_lambda = reg_lambda
+        assert (alpha >= 0 and alpha <= 1), "`alpha` must be in [0, 1]"
+        self.alpha = alpha
         self.row_sample = row_sample
         self.col_sample = col_sample
         self.dropout = dropout
@@ -210,6 +217,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 learning_rate=self.learning_rate,
                 n_hidden_features=self.n_hidden_features,
                 reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
                 row_sample=self.row_sample,
                 col_sample=self.col_sample,
                 dropout=self.dropout,
@@ -229,6 +237,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 learning_rate=self.learning_rate,
                 n_hidden_features=self.n_hidden_features,
                 reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
                 row_sample=self.row_sample,
                 col_sample=self.col_sample,
                 dropout=self.dropout,
