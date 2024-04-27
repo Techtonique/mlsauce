@@ -1,3 +1,7 @@
+# version 0.17.0
+
+- add `ElasticNetRegressor` `solver` to `LSBoostRegressor` and `LSBoostClassifier`
+
 # version 0.16.0
 
 - add clustering to `LSBoostRegressor`, `LSBoostClassifier`, and `AdaOpt`

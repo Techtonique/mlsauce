@@ -101,6 +101,7 @@ def activation_choice(x):
 def fit_booster_classifier(double[:,::1] X, long int[:] y, 
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
+                           double alpha=0.5, 
                            double row_sample=1, double col_sample=1,
                            double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1,

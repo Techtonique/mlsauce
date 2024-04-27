@@ -4,10 +4,6 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-try: 
-    from . import _elasticnetc as mo
-except ImportError:
-    import _elasticnetc as mo
 from ..utils import get_beta 
 from ._enet import fit_elasticnet, predict_elasticnet
 
@@ -24,6 +20,10 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
 
         reg_lambda: float
             regularization parameter.
+        
+        alpha: float
+            compromise between L1 and L2 regularization (must be in [0, 1]), 
+            for `solver` == 'enet'.
 
         backend: str
             type of backend; must be in ('cpu', 'gpu', 'tpu')
