@@ -22,6 +22,7 @@ License-File: LICENSE
 Requires-Dist: numpy
 Requires-Dist: Cython
 Requires-Dist: joblib
+Requires-Dist: matplotlib
 Requires-Dist: pandas
 Requires-Dist: requests
 Requires-Dist: scikit-learn

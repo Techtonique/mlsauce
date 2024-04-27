@@ -131,7 +131,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         assert solver in (
             "ridge",
             "lasso",
-        ), "`solver` must be in ('ridge', 'lasso')"
+            "enet"
+        ), "`solver` must be in ('ridge', 'lasso', 'enet')"
 
         sys_platform = platform.system()
 
