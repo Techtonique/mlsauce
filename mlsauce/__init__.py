@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 # Dev branch marker is: 'X.Y.dev' or 'X.Y.devN' where N is an integer.
 # 'X.Y.dev0' is the canonical version of 'X.Y.dev'
 #
-__version__ = "0.10.0"
+#__version__ = "0.10.0"
 
 
 # On OSX, we can get a runtime error due to multiple OpenMP libraries loaded
@@ -58,6 +58,7 @@ else:
     from .adaopt import AdaOpt
     from .booster import LSBoostClassifier, LSBoostRegressor
     from .datasets import download
+    from .elasticnet import ElasticNetRegressor
     from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
     from .stump import StumpClassifier
@@ -68,6 +69,7 @@ else:
         "AdaOpt",
         "LSBoostClassifier",
         "StumpClassifier",
+        "ElasticNetRegressor",
         "LassoRegressor",
         "LSBoostRegressor",
         "RidgeRegressor",

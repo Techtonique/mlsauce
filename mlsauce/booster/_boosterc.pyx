@@ -306,7 +306,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   elif solver == "lasso": 
     fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
   else: 
-    fit_obj = LassoRegressor(reg_lambda = reg_lambda, alpha = alpha, backend = backend)  
+    fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, backend = backend)  
 
 
   for iter in iterator:
