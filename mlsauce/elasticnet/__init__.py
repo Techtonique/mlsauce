@@ -1,3 +1,6 @@
-from .enet import ElasticNetRegressor
+try:
+    from .enet import ElasticNetRegressor
+except ImportError:
+    pass
 
 __all__ = ["ElasticNetRegressor"]

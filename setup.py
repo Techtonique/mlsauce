@@ -177,6 +177,7 @@ def setup_package():
         "numpy",
         "Cython",
         "joblib",
+        "matplotlib",
         "pandas",
         "requests",
         "scikit-learn",
