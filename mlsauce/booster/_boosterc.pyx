@@ -15,6 +15,7 @@ import gc
 
 from ..lasso import LassoRegressor
 from ..ridge import RidgeRegressor
+from ..elasticnet import ElasticNetRegressor
 from cython.parallel cimport prange
 from libc.math cimport log, exp, sqrt
 from numpy.linalg import lstsq
