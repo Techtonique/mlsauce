@@ -19,7 +19,7 @@ def l1_norm(x):
 def fit_elasticnet(X_train, y_train, 
                    lam = 1, alpha = 0.5, 
                    tol = 1e-5, 
-                   max_iter = 1000):
+                   max_iter = 100):
   
   lam_alpha = lam*alpha
   
