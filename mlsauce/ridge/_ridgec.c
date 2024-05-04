@@ -3,25 +3,10 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [
-            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include/numpy/arrayobject.h",
-            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include/numpy/arrayscalars.h",
-            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include/numpy/ndarrayobject.h",
-            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include/numpy/ndarraytypes.h",
-            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include/numpy/ufuncobject.h"
-        ],
-        "include_dirs": [
-            "/Users/t/Documents/Python_Packages/mlsauce/venv/lib/python3.11/site-packages/numpy/core/include"
-        ],
-        "library_dirs": [
-            "mlsauce/ridge/"
-        ],
+        "depends": [],
         "name": "mlsauce.ridge._ridgec",
-        "runtime_library_dirs": [
-            "mlsauce/ridge/"
-        ],
         "sources": [
-            "mlsauce/ridge/_ridgec.pyx"
+            "/Users/t/Documents/Python_Packages/mlsauce/mlsauce/ridge/_ridgec.pyx"
         ]
     },
     "module_name": "mlsauce.ridge._ridgec"
@@ -2121,13 +2106,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 #define __Pyx_PyObject_FastCall(func, args, nargs)  __Pyx_PyObject_FastCallDict(func, args, (size_t)(nargs), NULL)
 static CYTHON_INLINE PyObject* __Pyx_PyObject_FastCallDict(PyObject *func, PyObject **args, size_t nargs, PyObject *kwargs);
 
-/* StrEquals.proto */
-#if PY_MAJOR_VERSION >= 3
-#define __Pyx_PyString_Equals __Pyx_PyUnicode_Equals
-#else
-#define __Pyx_PyString_Equals __Pyx_PyBytes_Equals
-#endif
-
 /* GetItemInt.proto */
 #define __Pyx_GetItemInt(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
     (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
@@ -2854,12 +2832,12 @@ typedef struct {
   #if CYTHON_USE_MODULE_STATE
   #endif
   PyObject *__pyx_n_s_AssertionError;
-  PyObject *__pyx_n_s_Darwin;
+  PyObject *__pyx_n_u_Darwin;
   PyObject *__pyx_n_s_GaussianMixture;
   PyObject *__pyx_n_s_ImportError;
-  PyObject *__pyx_n_s_K;
+  PyObject *__pyx_n_u_K;
   PyObject *__pyx_n_s_KMeans;
-  PyObject *__pyx_n_s_Linux;
+  PyObject *__pyx_n_u_Linux;
   PyObject *__pyx_n_s_MinMaxScaler;
   PyObject *__pyx_n_s_StandardScaler;
   PyObject *__pyx_n_s_T;
@@ -2885,7 +2863,7 @@ typedef struct {
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_n_s_column_stack;
   PyObject *__pyx_n_s_copy;
-  PyObject *__pyx_n_s_cpu;
+  PyObject *__pyx_n_u_cpu;
   PyObject *__pyx_n_s_crossprod;
   PyObject *__pyx_n_s_dense_output;
   PyObject *__pyx_n_s_device_put;
@@ -2894,7 +2872,7 @@ typedef struct {
   PyObject *__pyx_n_s_dropout;
   PyObject *__pyx_n_s_dropped_indices;
   PyObject *__pyx_n_s_fit_transform;
-  PyObject *__pyx_n_s_gpu;
+  PyObject *__pyx_n_u_gpu;
   PyObject *__pyx_n_s_i;
   PyObject *__pyx_n_s_imatmul;
   PyObject *__pyx_n_s_import;
@@ -2908,7 +2886,7 @@ typedef struct {
   PyObject *__pyx_n_s_matmul;
   PyObject *__pyx_n_s_max;
   PyObject *__pyx_n_s_mean;
-  PyObject *__pyx_n_s_minmax;
+  PyObject *__pyx_n_u_minmax;
   PyObject *__pyx_n_s_mlsauce_ridge__ridgec;
   PyObject *__pyx_kp_s_mlsauce_ridge__ridgec_pyx;
   PyObject *__pyx_n_s_n;
@@ -2920,8 +2898,8 @@ typedef struct {
   PyObject *__pyx_n_s_ndmin;
   PyObject *__pyx_n_s_np;
   PyObject *__pyx_n_s_numpy;
-  PyObject *__pyx_kp_s_numpy_core_multiarray_failed_to;
-  PyObject *__pyx_kp_s_numpy_core_umath_failed_to_impor;
+  PyObject *__pyx_kp_u_numpy_core_multiarray_failed_to;
+  PyObject *__pyx_kp_u_numpy_core_umath_failed_to_impor;
   PyObject *__pyx_n_s_one_hot_encode;
   PyObject *__pyx_n_s_one_hot_encode2;
   PyObject *__pyx_n_s_order;
@@ -2952,14 +2930,15 @@ typedef struct {
   PyObject *__pyx_n_s_sparse;
   PyObject *__pyx_n_s_spec;
   PyObject *__pyx_n_s_squared_norm;
-  PyObject *__pyx_n_s_std;
+  PyObject *__pyx_n_u_std;
   PyObject *__pyx_n_s_sys_platform;
   PyObject *__pyx_n_s_system;
   PyObject *__pyx_n_s_tcrossprod;
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_to_np_array;
   PyObject *__pyx_n_s_toarray;
-  PyObject *__pyx_n_s_tpu;
+  PyObject *__pyx_n_u_toarray;
+  PyObject *__pyx_n_u_tpu;
   PyObject *__pyx_n_s_training;
   PyObject *__pyx_n_s_transform;
   PyObject *__pyx_n_s_transpose;
@@ -2969,7 +2948,7 @@ typedef struct {
   PyObject *__pyx_n_s_x_clusters;
   PyObject *__pyx_n_s_y;
   PyObject *__pyx_n_s_y_mean;
-  PyObject *__pyx_kp_s_you_must_have_max_x_clusters_n_c;
+  PyObject *__pyx_kp_u_you_must_have_max_x_clusters_n_c;
   PyObject *__pyx_n_s_zeros;
   PyObject *__pyx_n_s_zeros_like;
   PyObject *__pyx_int_0;
@@ -3070,12 +3049,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_character);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
   Py_CLEAR(clear_module_state->__pyx_n_s_AssertionError);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Darwin);
+  Py_CLEAR(clear_module_state->__pyx_n_u_Darwin);
   Py_CLEAR(clear_module_state->__pyx_n_s_GaussianMixture);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
-  Py_CLEAR(clear_module_state->__pyx_n_s_K);
+  Py_CLEAR(clear_module_state->__pyx_n_u_K);
   Py_CLEAR(clear_module_state->__pyx_n_s_KMeans);
-  Py_CLEAR(clear_module_state->__pyx_n_s_Linux);
+  Py_CLEAR(clear_module_state->__pyx_n_u_Linux);
   Py_CLEAR(clear_module_state->__pyx_n_s_MinMaxScaler);
   Py_CLEAR(clear_module_state->__pyx_n_s_StandardScaler);
   Py_CLEAR(clear_module_state->__pyx_n_s_T);
@@ -3101,7 +3080,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_n_s_column_stack);
   Py_CLEAR(clear_module_state->__pyx_n_s_copy);
-  Py_CLEAR(clear_module_state->__pyx_n_s_cpu);
+  Py_CLEAR(clear_module_state->__pyx_n_u_cpu);
   Py_CLEAR(clear_module_state->__pyx_n_s_crossprod);
   Py_CLEAR(clear_module_state->__pyx_n_s_dense_output);
   Py_CLEAR(clear_module_state->__pyx_n_s_device_put);
@@ -3110,7 +3089,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_dropout);
   Py_CLEAR(clear_module_state->__pyx_n_s_dropped_indices);
   Py_CLEAR(clear_module_state->__pyx_n_s_fit_transform);
-  Py_CLEAR(clear_module_state->__pyx_n_s_gpu);
+  Py_CLEAR(clear_module_state->__pyx_n_u_gpu);
   Py_CLEAR(clear_module_state->__pyx_n_s_i);
   Py_CLEAR(clear_module_state->__pyx_n_s_imatmul);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
@@ -3124,7 +3103,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_matmul);
   Py_CLEAR(clear_module_state->__pyx_n_s_max);
   Py_CLEAR(clear_module_state->__pyx_n_s_mean);
-  Py_CLEAR(clear_module_state->__pyx_n_s_minmax);
+  Py_CLEAR(clear_module_state->__pyx_n_u_minmax);
   Py_CLEAR(clear_module_state->__pyx_n_s_mlsauce_ridge__ridgec);
   Py_CLEAR(clear_module_state->__pyx_kp_s_mlsauce_ridge__ridgec_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_n);
@@ -3136,8 +3115,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_ndmin);
   Py_CLEAR(clear_module_state->__pyx_n_s_np);
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_numpy_core_multiarray_failed_to);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_numpy_core_umath_failed_to_impor);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
   Py_CLEAR(clear_module_state->__pyx_n_s_one_hot_encode);
   Py_CLEAR(clear_module_state->__pyx_n_s_one_hot_encode2);
   Py_CLEAR(clear_module_state->__pyx_n_s_order);
@@ -3168,14 +3147,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_sparse);
   Py_CLEAR(clear_module_state->__pyx_n_s_spec);
   Py_CLEAR(clear_module_state->__pyx_n_s_squared_norm);
-  Py_CLEAR(clear_module_state->__pyx_n_s_std);
+  Py_CLEAR(clear_module_state->__pyx_n_u_std);
   Py_CLEAR(clear_module_state->__pyx_n_s_sys_platform);
   Py_CLEAR(clear_module_state->__pyx_n_s_system);
   Py_CLEAR(clear_module_state->__pyx_n_s_tcrossprod);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_to_np_array);
   Py_CLEAR(clear_module_state->__pyx_n_s_toarray);
-  Py_CLEAR(clear_module_state->__pyx_n_s_tpu);
+  Py_CLEAR(clear_module_state->__pyx_n_u_toarray);
+  Py_CLEAR(clear_module_state->__pyx_n_u_tpu);
   Py_CLEAR(clear_module_state->__pyx_n_s_training);
   Py_CLEAR(clear_module_state->__pyx_n_s_transform);
   Py_CLEAR(clear_module_state->__pyx_n_s_transpose);
@@ -3185,7 +3165,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_x_clusters);
   Py_CLEAR(clear_module_state->__pyx_n_s_y);
   Py_CLEAR(clear_module_state->__pyx_n_s_y_mean);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_you_must_have_max_x_clusters_n_c);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_you_must_have_max_x_clusters_n_c);
   Py_CLEAR(clear_module_state->__pyx_n_s_zeros);
   Py_CLEAR(clear_module_state->__pyx_n_s_zeros_like);
   Py_CLEAR(clear_module_state->__pyx_int_0);
@@ -3264,12 +3244,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_character);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
   Py_VISIT(traverse_module_state->__pyx_n_s_AssertionError);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Darwin);
+  Py_VISIT(traverse_module_state->__pyx_n_u_Darwin);
   Py_VISIT(traverse_module_state->__pyx_n_s_GaussianMixture);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
-  Py_VISIT(traverse_module_state->__pyx_n_s_K);
+  Py_VISIT(traverse_module_state->__pyx_n_u_K);
   Py_VISIT(traverse_module_state->__pyx_n_s_KMeans);
-  Py_VISIT(traverse_module_state->__pyx_n_s_Linux);
+  Py_VISIT(traverse_module_state->__pyx_n_u_Linux);
   Py_VISIT(traverse_module_state->__pyx_n_s_MinMaxScaler);
   Py_VISIT(traverse_module_state->__pyx_n_s_StandardScaler);
   Py_VISIT(traverse_module_state->__pyx_n_s_T);
@@ -3295,7 +3275,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_n_s_column_stack);
   Py_VISIT(traverse_module_state->__pyx_n_s_copy);
-  Py_VISIT(traverse_module_state->__pyx_n_s_cpu);
+  Py_VISIT(traverse_module_state->__pyx_n_u_cpu);
   Py_VISIT(traverse_module_state->__pyx_n_s_crossprod);
   Py_VISIT(traverse_module_state->__pyx_n_s_dense_output);
   Py_VISIT(traverse_module_state->__pyx_n_s_device_put);
@@ -3304,7 +3284,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_dropout);
   Py_VISIT(traverse_module_state->__pyx_n_s_dropped_indices);
   Py_VISIT(traverse_module_state->__pyx_n_s_fit_transform);
-  Py_VISIT(traverse_module_state->__pyx_n_s_gpu);
+  Py_VISIT(traverse_module_state->__pyx_n_u_gpu);
   Py_VISIT(traverse_module_state->__pyx_n_s_i);
   Py_VISIT(traverse_module_state->__pyx_n_s_imatmul);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
@@ -3318,7 +3298,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_matmul);
   Py_VISIT(traverse_module_state->__pyx_n_s_max);
   Py_VISIT(traverse_module_state->__pyx_n_s_mean);
-  Py_VISIT(traverse_module_state->__pyx_n_s_minmax);
+  Py_VISIT(traverse_module_state->__pyx_n_u_minmax);
   Py_VISIT(traverse_module_state->__pyx_n_s_mlsauce_ridge__ridgec);
   Py_VISIT(traverse_module_state->__pyx_kp_s_mlsauce_ridge__ridgec_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_n);
@@ -3330,8 +3310,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_ndmin);
   Py_VISIT(traverse_module_state->__pyx_n_s_np);
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_numpy_core_multiarray_failed_to);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_numpy_core_umath_failed_to_impor);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
   Py_VISIT(traverse_module_state->__pyx_n_s_one_hot_encode);
   Py_VISIT(traverse_module_state->__pyx_n_s_one_hot_encode2);
   Py_VISIT(traverse_module_state->__pyx_n_s_order);
@@ -3362,14 +3342,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_sparse);
   Py_VISIT(traverse_module_state->__pyx_n_s_spec);
   Py_VISIT(traverse_module_state->__pyx_n_s_squared_norm);
-  Py_VISIT(traverse_module_state->__pyx_n_s_std);
+  Py_VISIT(traverse_module_state->__pyx_n_u_std);
   Py_VISIT(traverse_module_state->__pyx_n_s_sys_platform);
   Py_VISIT(traverse_module_state->__pyx_n_s_system);
   Py_VISIT(traverse_module_state->__pyx_n_s_tcrossprod);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_to_np_array);
   Py_VISIT(traverse_module_state->__pyx_n_s_toarray);
-  Py_VISIT(traverse_module_state->__pyx_n_s_tpu);
+  Py_VISIT(traverse_module_state->__pyx_n_u_toarray);
+  Py_VISIT(traverse_module_state->__pyx_n_u_tpu);
   Py_VISIT(traverse_module_state->__pyx_n_s_training);
   Py_VISIT(traverse_module_state->__pyx_n_s_transform);
   Py_VISIT(traverse_module_state->__pyx_n_s_transpose);
@@ -3379,7 +3360,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_x_clusters);
   Py_VISIT(traverse_module_state->__pyx_n_s_y);
   Py_VISIT(traverse_module_state->__pyx_n_s_y_mean);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_you_must_have_max_x_clusters_n_c);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_you_must_have_max_x_clusters_n_c);
   Py_VISIT(traverse_module_state->__pyx_n_s_zeros);
   Py_VISIT(traverse_module_state->__pyx_n_s_zeros_like);
   Py_VISIT(traverse_module_state->__pyx_int_0);
@@ -3488,12 +3469,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #if CYTHON_USE_MODULE_STATE
 #endif
 #define __pyx_n_s_AssertionError __pyx_mstate_global->__pyx_n_s_AssertionError
-#define __pyx_n_s_Darwin __pyx_mstate_global->__pyx_n_s_Darwin
+#define __pyx_n_u_Darwin __pyx_mstate_global->__pyx_n_u_Darwin
 #define __pyx_n_s_GaussianMixture __pyx_mstate_global->__pyx_n_s_GaussianMixture
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
-#define __pyx_n_s_K __pyx_mstate_global->__pyx_n_s_K
+#define __pyx_n_u_K __pyx_mstate_global->__pyx_n_u_K
 #define __pyx_n_s_KMeans __pyx_mstate_global->__pyx_n_s_KMeans
-#define __pyx_n_s_Linux __pyx_mstate_global->__pyx_n_s_Linux
+#define __pyx_n_u_Linux __pyx_mstate_global->__pyx_n_u_Linux
 #define __pyx_n_s_MinMaxScaler __pyx_mstate_global->__pyx_n_s_MinMaxScaler
 #define __pyx_n_s_StandardScaler __pyx_mstate_global->__pyx_n_s_StandardScaler
 #define __pyx_n_s_T __pyx_mstate_global->__pyx_n_s_T
@@ -3519,7 +3500,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_n_s_column_stack __pyx_mstate_global->__pyx_n_s_column_stack
 #define __pyx_n_s_copy __pyx_mstate_global->__pyx_n_s_copy
-#define __pyx_n_s_cpu __pyx_mstate_global->__pyx_n_s_cpu
+#define __pyx_n_u_cpu __pyx_mstate_global->__pyx_n_u_cpu
 #define __pyx_n_s_crossprod __pyx_mstate_global->__pyx_n_s_crossprod
 #define __pyx_n_s_dense_output __pyx_mstate_global->__pyx_n_s_dense_output
 #define __pyx_n_s_device_put __pyx_mstate_global->__pyx_n_s_device_put
@@ -3528,7 +3509,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_dropout __pyx_mstate_global->__pyx_n_s_dropout
 #define __pyx_n_s_dropped_indices __pyx_mstate_global->__pyx_n_s_dropped_indices
 #define __pyx_n_s_fit_transform __pyx_mstate_global->__pyx_n_s_fit_transform
-#define __pyx_n_s_gpu __pyx_mstate_global->__pyx_n_s_gpu
+#define __pyx_n_u_gpu __pyx_mstate_global->__pyx_n_u_gpu
 #define __pyx_n_s_i __pyx_mstate_global->__pyx_n_s_i
 #define __pyx_n_s_imatmul __pyx_mstate_global->__pyx_n_s_imatmul
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
@@ -3542,7 +3523,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_matmul __pyx_mstate_global->__pyx_n_s_matmul
 #define __pyx_n_s_max __pyx_mstate_global->__pyx_n_s_max
 #define __pyx_n_s_mean __pyx_mstate_global->__pyx_n_s_mean
-#define __pyx_n_s_minmax __pyx_mstate_global->__pyx_n_s_minmax
+#define __pyx_n_u_minmax __pyx_mstate_global->__pyx_n_u_minmax
 #define __pyx_n_s_mlsauce_ridge__ridgec __pyx_mstate_global->__pyx_n_s_mlsauce_ridge__ridgec
 #define __pyx_kp_s_mlsauce_ridge__ridgec_pyx __pyx_mstate_global->__pyx_kp_s_mlsauce_ridge__ridgec_pyx
 #define __pyx_n_s_n __pyx_mstate_global->__pyx_n_s_n
@@ -3554,8 +3535,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_ndmin __pyx_mstate_global->__pyx_n_s_ndmin
 #define __pyx_n_s_np __pyx_mstate_global->__pyx_n_s_np
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
-#define __pyx_kp_s_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_s_numpy_core_multiarray_failed_to
-#define __pyx_kp_s_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_s_numpy_core_umath_failed_to_impor
+#define __pyx_kp_u_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_u_numpy_core_multiarray_failed_to
+#define __pyx_kp_u_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_u_numpy_core_umath_failed_to_impor
 #define __pyx_n_s_one_hot_encode __pyx_mstate_global->__pyx_n_s_one_hot_encode
 #define __pyx_n_s_one_hot_encode2 __pyx_mstate_global->__pyx_n_s_one_hot_encode2
 #define __pyx_n_s_order __pyx_mstate_global->__pyx_n_s_order
@@ -3586,14 +3567,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_sparse __pyx_mstate_global->__pyx_n_s_sparse
 #define __pyx_n_s_spec __pyx_mstate_global->__pyx_n_s_spec
 #define __pyx_n_s_squared_norm __pyx_mstate_global->__pyx_n_s_squared_norm
-#define __pyx_n_s_std __pyx_mstate_global->__pyx_n_s_std
+#define __pyx_n_u_std __pyx_mstate_global->__pyx_n_u_std
 #define __pyx_n_s_sys_platform __pyx_mstate_global->__pyx_n_s_sys_platform
 #define __pyx_n_s_system __pyx_mstate_global->__pyx_n_s_system
 #define __pyx_n_s_tcrossprod __pyx_mstate_global->__pyx_n_s_tcrossprod
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_to_np_array __pyx_mstate_global->__pyx_n_s_to_np_array
 #define __pyx_n_s_toarray __pyx_mstate_global->__pyx_n_s_toarray
-#define __pyx_n_s_tpu __pyx_mstate_global->__pyx_n_s_tpu
+#define __pyx_n_u_toarray __pyx_mstate_global->__pyx_n_u_toarray
+#define __pyx_n_u_tpu __pyx_mstate_global->__pyx_n_u_tpu
 #define __pyx_n_s_training __pyx_mstate_global->__pyx_n_s_training
 #define __pyx_n_s_transform __pyx_mstate_global->__pyx_n_s_transform
 #define __pyx_n_s_transpose __pyx_mstate_global->__pyx_n_s_transpose
@@ -3603,7 +3585,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_x_clusters __pyx_mstate_global->__pyx_n_s_x_clusters
 #define __pyx_n_s_y __pyx_mstate_global->__pyx_n_s_y
 #define __pyx_n_s_y_mean __pyx_mstate_global->__pyx_n_s_y_mean
-#define __pyx_kp_s_you_must_have_max_x_clusters_n_c __pyx_mstate_global->__pyx_kp_s_you_must_have_max_x_clusters_n_c
+#define __pyx_kp_u_you_must_have_max_x_clusters_n_c __pyx_mstate_global->__pyx_kp_u_you_must_have_max_x_clusters_n_c
 #define __pyx_n_s_zeros __pyx_mstate_global->__pyx_n_s_zeros
 #define __pyx_n_s_zeros_like __pyx_mstate_global->__pyx_n_s_zeros_like
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
@@ -4957,7 +4939,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -5107,13 +5089,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_cbind(CYTHON_UNUSED PyObject 
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5125,13 +5107,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_cbind(CYTHON_UNUSED PyObject 
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 27, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5640,7 +5622,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -5791,13 +5773,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_4crossprod(CYTHON_UNUSED PyOb
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5809,13 +5791,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_4crossprod(CYTHON_UNUSED PyOb
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6850,7 +6832,7 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_8one_hot_encode(CYTHON_UNUSED
  *         max(x_clusters) <= n_clusters
  *     ), "you must have max(x_clusters) <= n_clusters"
  */
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_s_you_must_have_max_x_clusters_n_c, 0, 0);
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_you_must_have_max_x_clusters_n_c, 0, 0);
       __PYX_ERR(0, 83, __pyx_L1_error)
     }
   }
@@ -7300,7 +7282,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -7450,13 +7432,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_12rbind(CYTHON_UNUSED PyObjec
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7468,13 +7450,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_12rbind(CYTHON_UNUSED PyObjec
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 112, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7661,7 +7643,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_a,&__pyx_n_s_b,&__pyx_n_s_backend,&__pyx_n_s_dense_output,0};
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_False)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
@@ -7831,13 +7813,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_14safe_sparse_dot(CYTHON_UNUS
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7849,13 +7831,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_14safe_sparse_dot(CYTHON_UNUS
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 136, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8506,7 +8488,7 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_14safe_sparse_dot(CYTHON_UNUS
  *     ):
  *         return ret.toarray()
  */
-  __pyx_t_6 = __Pyx_HasAttr(__pyx_v_ret, __pyx_n_s_toarray); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_HasAttr(__pyx_v_ret, __pyx_n_u_toarray); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 164, __pyx_L1_error)
   __pyx_t_5 = __pyx_t_6;
   __pyx_L15_bool_binop_done:;
 
@@ -8655,7 +8637,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_choice,&__pyx_n_s_training,&__pyx_n_s_scaler,0};
-    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_std)));
+    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_std)));
     values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)Py_True)));
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
@@ -8791,7 +8773,7 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_16scale_covariates(CYTHON_UNU
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_std, __pyx_t_4) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_std, __pyx_t_4) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "mlsauce/ridge/_ridgec.pyx":180
@@ -8825,7 +8807,7 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_16scale_covariates(CYTHON_UNU
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_minmax, __pyx_t_4) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_minmax, __pyx_t_4) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_scaling_options = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
@@ -9026,7 +9008,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_backend,0};
-    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
+    values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -9163,13 +9145,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_18squared_norm(CYTHON_UNUSED 
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -9181,13 +9163,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_18squared_norm(CYTHON_UNUSED 
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -9215,7 +9197,7 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_18squared_norm(CYTHON_UNUSED 
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_x)) __PYX_ERR(0, 212, __pyx_L1_error);
     __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_s_K) < 0) __PYX_ERR(0, 212, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 212, __pyx_L1_error)
     __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9350,7 +9332,7 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_18squared_norm(CYTHON_UNUSED 
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_v_x)) __PYX_ERR(0, 216, __pyx_L1_error);
   __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_s_K) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_u_K) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9471,7 +9453,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_backend,0};
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
-    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_s_cpu)));
+    values[2] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_cpu)));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -9622,13 +9604,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_20tcrossprod(CYTHON_UNUSED Py
  */
   __Pyx_INCREF(__pyx_v_backend);
   __pyx_t_1 = __pyx_v_backend;
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_gpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L6_bool_binop_done;
   }
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_tpu, Py_EQ)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   __pyx_L6_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -9640,13 +9622,13 @@ static PyObject *__pyx_pf_7mlsauce_5ridge_7_ridgec_20tcrossprod(CYTHON_UNUSED Py
   }
   __Pyx_INCREF(__pyx_v_sys_platform);
   __pyx_t_1 = __pyx_v_sys_platform;
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
   if (!__pyx_t_6) {
   } else {
     __pyx_t_7 = __pyx_t_6;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 224, __pyx_L1_error)
   __pyx_t_7 = __pyx_t_6;
   __pyx_L8_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -10264,12 +10246,12 @@ static PyMethodDef __pyx_methods[] = {
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_n_s_AssertionError, __pyx_k_AssertionError, sizeof(__pyx_k_AssertionError), 0, 0, 1, 1},
-    {&__pyx_n_s_Darwin, __pyx_k_Darwin, sizeof(__pyx_k_Darwin), 0, 0, 1, 1},
+    {&__pyx_n_u_Darwin, __pyx_k_Darwin, sizeof(__pyx_k_Darwin), 0, 1, 0, 1},
     {&__pyx_n_s_GaussianMixture, __pyx_k_GaussianMixture, sizeof(__pyx_k_GaussianMixture), 0, 0, 1, 1},
     {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
-    {&__pyx_n_s_K, __pyx_k_K, sizeof(__pyx_k_K), 0, 0, 1, 1},
+    {&__pyx_n_u_K, __pyx_k_K, sizeof(__pyx_k_K), 0, 1, 0, 1},
     {&__pyx_n_s_KMeans, __pyx_k_KMeans, sizeof(__pyx_k_KMeans), 0, 0, 1, 1},
-    {&__pyx_n_s_Linux, __pyx_k_Linux, sizeof(__pyx_k_Linux), 0, 0, 1, 1},
+    {&__pyx_n_u_Linux, __pyx_k_Linux, sizeof(__pyx_k_Linux), 0, 1, 0, 1},
     {&__pyx_n_s_MinMaxScaler, __pyx_k_MinMaxScaler, sizeof(__pyx_k_MinMaxScaler), 0, 0, 1, 1},
     {&__pyx_n_s_StandardScaler, __pyx_k_StandardScaler, sizeof(__pyx_k_StandardScaler), 0, 0, 1, 1},
     {&__pyx_n_s_T, __pyx_k_T, sizeof(__pyx_k_T), 0, 0, 1, 1},
@@ -10295,7 +10277,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_n_s_column_stack, __pyx_k_column_stack, sizeof(__pyx_k_column_stack), 0, 0, 1, 1},
     {&__pyx_n_s_copy, __pyx_k_copy, sizeof(__pyx_k_copy), 0, 0, 1, 1},
-    {&__pyx_n_s_cpu, __pyx_k_cpu, sizeof(__pyx_k_cpu), 0, 0, 1, 1},
+    {&__pyx_n_u_cpu, __pyx_k_cpu, sizeof(__pyx_k_cpu), 0, 1, 0, 1},
     {&__pyx_n_s_crossprod, __pyx_k_crossprod, sizeof(__pyx_k_crossprod), 0, 0, 1, 1},
     {&__pyx_n_s_dense_output, __pyx_k_dense_output, sizeof(__pyx_k_dense_output), 0, 0, 1, 1},
     {&__pyx_n_s_device_put, __pyx_k_device_put, sizeof(__pyx_k_device_put), 0, 0, 1, 1},
@@ -10304,7 +10286,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_dropout, __pyx_k_dropout, sizeof(__pyx_k_dropout), 0, 0, 1, 1},
     {&__pyx_n_s_dropped_indices, __pyx_k_dropped_indices, sizeof(__pyx_k_dropped_indices), 0, 0, 1, 1},
     {&__pyx_n_s_fit_transform, __pyx_k_fit_transform, sizeof(__pyx_k_fit_transform), 0, 0, 1, 1},
-    {&__pyx_n_s_gpu, __pyx_k_gpu, sizeof(__pyx_k_gpu), 0, 0, 1, 1},
+    {&__pyx_n_u_gpu, __pyx_k_gpu, sizeof(__pyx_k_gpu), 0, 1, 0, 1},
     {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
     {&__pyx_n_s_imatmul, __pyx_k_imatmul, sizeof(__pyx_k_imatmul), 0, 0, 1, 1},
     {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -10318,7 +10300,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_matmul, __pyx_k_matmul, sizeof(__pyx_k_matmul), 0, 0, 1, 1},
     {&__pyx_n_s_max, __pyx_k_max, sizeof(__pyx_k_max), 0, 0, 1, 1},
     {&__pyx_n_s_mean, __pyx_k_mean, sizeof(__pyx_k_mean), 0, 0, 1, 1},
-    {&__pyx_n_s_minmax, __pyx_k_minmax, sizeof(__pyx_k_minmax), 0, 0, 1, 1},
+    {&__pyx_n_u_minmax, __pyx_k_minmax, sizeof(__pyx_k_minmax), 0, 1, 0, 1},
     {&__pyx_n_s_mlsauce_ridge__ridgec, __pyx_k_mlsauce_ridge__ridgec, sizeof(__pyx_k_mlsauce_ridge__ridgec), 0, 0, 1, 1},
     {&__pyx_kp_s_mlsauce_ridge__ridgec_pyx, __pyx_k_mlsauce_ridge__ridgec_pyx, sizeof(__pyx_k_mlsauce_ridge__ridgec_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
@@ -10330,8 +10312,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_ndmin, __pyx_k_ndmin, sizeof(__pyx_k_ndmin), 0, 0, 1, 1},
     {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
-    {&__pyx_kp_s_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 0, 1, 0},
-    {&__pyx_kp_s_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 0, 1, 0},
+    {&__pyx_kp_u_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 1, 0, 0},
+    {&__pyx_kp_u_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 1, 0, 0},
     {&__pyx_n_s_one_hot_encode, __pyx_k_one_hot_encode, sizeof(__pyx_k_one_hot_encode), 0, 0, 1, 1},
     {&__pyx_n_s_one_hot_encode2, __pyx_k_one_hot_encode2, sizeof(__pyx_k_one_hot_encode2), 0, 0, 1, 1},
     {&__pyx_n_s_order, __pyx_k_order, sizeof(__pyx_k_order), 0, 0, 1, 1},
@@ -10362,14 +10344,15 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_sparse, __pyx_k_sparse, sizeof(__pyx_k_sparse), 0, 0, 1, 1},
     {&__pyx_n_s_spec, __pyx_k_spec, sizeof(__pyx_k_spec), 0, 0, 1, 1},
     {&__pyx_n_s_squared_norm, __pyx_k_squared_norm, sizeof(__pyx_k_squared_norm), 0, 0, 1, 1},
-    {&__pyx_n_s_std, __pyx_k_std, sizeof(__pyx_k_std), 0, 0, 1, 1},
+    {&__pyx_n_u_std, __pyx_k_std, sizeof(__pyx_k_std), 0, 1, 0, 1},
     {&__pyx_n_s_sys_platform, __pyx_k_sys_platform, sizeof(__pyx_k_sys_platform), 0, 0, 1, 1},
     {&__pyx_n_s_system, __pyx_k_system, sizeof(__pyx_k_system), 0, 0, 1, 1},
     {&__pyx_n_s_tcrossprod, __pyx_k_tcrossprod, sizeof(__pyx_k_tcrossprod), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_to_np_array, __pyx_k_to_np_array, sizeof(__pyx_k_to_np_array), 0, 0, 1, 1},
     {&__pyx_n_s_toarray, __pyx_k_toarray, sizeof(__pyx_k_toarray), 0, 0, 1, 1},
-    {&__pyx_n_s_tpu, __pyx_k_tpu, sizeof(__pyx_k_tpu), 0, 0, 1, 1},
+    {&__pyx_n_u_toarray, __pyx_k_toarray, sizeof(__pyx_k_toarray), 0, 1, 0, 1},
+    {&__pyx_n_u_tpu, __pyx_k_tpu, sizeof(__pyx_k_tpu), 0, 1, 0, 1},
     {&__pyx_n_s_training, __pyx_k_training, sizeof(__pyx_k_training), 0, 0, 1, 1},
     {&__pyx_n_s_transform, __pyx_k_transform, sizeof(__pyx_k_transform), 0, 0, 1, 1},
     {&__pyx_n_s_transpose, __pyx_k_transpose, sizeof(__pyx_k_transpose), 0, 0, 1, 1},
@@ -10379,7 +10362,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_x_clusters, __pyx_k_x_clusters, sizeof(__pyx_k_x_clusters), 0, 0, 1, 1},
     {&__pyx_n_s_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
     {&__pyx_n_s_y_mean, __pyx_k_y_mean, sizeof(__pyx_k_y_mean), 0, 0, 1, 1},
-    {&__pyx_kp_s_you_must_have_max_x_clusters_n_c, __pyx_k_you_must_have_max_x_clusters_n_c, sizeof(__pyx_k_you_must_have_max_x_clusters_n_c), 0, 0, 1, 0},
+    {&__pyx_kp_u_you_must_have_max_x_clusters_n_c, __pyx_k_you_must_have_max_x_clusters_n_c, sizeof(__pyx_k_you_must_have_max_x_clusters_n_c), 0, 1, 0, 0},
     {&__pyx_n_s_zeros, __pyx_k_zeros, sizeof(__pyx_k_zeros), 0, 0, 1, 1},
     {&__pyx_n_s_zeros_like, __pyx_k_zeros_like, sizeof(__pyx_k_zeros_like), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
@@ -10409,7 +10392,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 984, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 984, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -10420,7 +10403,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 990, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 990, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
@@ -10482,7 +10465,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
   __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_ridge__ridgec_pyx, __pyx_n_s_cbind, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 24, __pyx_L1_error)
-  __pyx_tuple__12 = PyTuple_Pack(1, ((PyObject*)__pyx_n_s_cpu)); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, ((PyObject*)__pyx_n_u_cpu)); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
@@ -10506,7 +10489,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     sys_platform = platform.system()
  */
   __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_ridge__ridgec_pyx, __pyx_n_s_crossprod, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_tuple__16 = PyTuple_Pack(2, Py_None, ((PyObject*)__pyx_n_s_cpu)); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(2, Py_None, ((PyObject*)__pyx_n_u_cpu)); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
@@ -10569,7 +10552,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
   __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_ridge__ridgec_pyx, __pyx_n_s_safe_sparse_dot, 118, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 118, __pyx_L1_error)
-  __pyx_tuple__27 = PyTuple_Pack(2, ((PyObject*)__pyx_n_s_cpu), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(2, ((PyObject*)__pyx_n_u_cpu), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
 
@@ -10584,7 +10567,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
   __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mlsauce_ridge__ridgec_pyx, __pyx_n_s_scale_covariates, 176, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __pyx_tuple__30 = PyTuple_Pack(3, ((PyObject*)__pyx_n_s_std), ((PyObject *)Py_True), Py_None); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(3, ((PyObject*)__pyx_n_u_std), ((PyObject *)Py_True), Py_None); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
   __Pyx_GIVEREF(__pyx_tuple__30);
 
@@ -11185,13 +11168,13 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_t_2, __pyx_n_s_Linux, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_2, __pyx_n_u_Linux, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
   if (!__pyx_t_5) {
   } else {
     __pyx_t_4 = __pyx_t_5;
     goto __pyx_L3_bool_binop_done;
   }
-  __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_t_2, __pyx_n_s_Darwin, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_2, __pyx_n_u_Darwin, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
   __pyx_t_4 = __pyx_t_5;
   __pyx_L3_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
