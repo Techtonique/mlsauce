@@ -11,5 +11,5 @@ __all__ = [
     "is_float",
     "is_factor",
     "Progbar",
-    "get_beta"
+    "get_beta",
 ]

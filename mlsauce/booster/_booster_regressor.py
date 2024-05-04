@@ -1,13 +1,14 @@
 import numpy as np
 import platform
 import warnings
-import pandas as pd 
+import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from sklearn.preprocessing import PolynomialFeatures
 from . import _boosterc as boosterc
 from ..predictioninterval import PredictionInterval
-from ..utils import cluster 
+from ..utils import cluster
+
 
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
     """LSBoost regressor.
@@ -26,9 +27,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         reg_lambda: float
             L2 regularization parameter for successive errors in the optimizer
             (at training time).
-        
+
         alpha: float
-            compromise between L1 and L2 regularization (must be in [0, 1]), 
+            compromise between L1 and L2 regularization (must be in [0, 1]),
             for `solver` == 'enet'
 
         row_sample: float
@@ -131,7 +132,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         assert solver in (
             "ridge",
             "lasso",
-            "enet"
+            "enet",
         ), "`solver` must be in ('ridge', 'lasso', 'enet')"
 
         sys_platform = platform.system()
@@ -146,7 +147,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.learning_rate = learning_rate
         self.n_hidden_features = n_hidden_features
         self.reg_lambda = reg_lambda
-        assert (alpha >= 0 and alpha <= 1), "`alpha` must be in [0, 1]"
+        assert alpha >= 0 and alpha <= 1, "`alpha` must be in [0, 1]"
         self.alpha = alpha
         self.row_sample = row_sample
         self.col_sample = col_sample

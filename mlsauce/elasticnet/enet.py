@@ -4,7 +4,7 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-from ..utils import get_beta 
+from ..utils import get_beta
 from ._enet import fit_elasticnet, predict_elasticnet
 
 if platform.system() in ("Linux", "Darwin"):
@@ -20,9 +20,9 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
 
         reg_lambda: float
             regularization parameter.
-        
+
         alpha: float
-            compromise between L1 and L2 regularization (must be in [0, 1]), 
+            compromise between L1 and L2 regularization (must be in [0, 1]),
             for `solver` == 'enet'.
 
         backend: str
@@ -67,14 +67,12 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
 
             self: object.
 
-        """               
-        fit_result = fit_elasticnet(X, y, 
-                                   lam = self.reg_lambda, 
-                                   alpha = self.alpha)
+        """
+        fit_result = fit_elasticnet(X, y, lam=self.reg_lambda, alpha=self.alpha)
         self.coef_ = fit_result.coef_
         self.y_train_mean = fit_result.y_train_mean
         self.scaler = fit_result.scaler
-        self.converged = fit_result.converged        
+        self.converged = fit_result.converged
         return self
 
     def predict(self, X, **kwargs):
@@ -94,4 +92,3 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
 
         """
         return predict_elasticnet(X, self)
-        

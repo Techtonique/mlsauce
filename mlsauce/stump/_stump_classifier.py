@@ -1,7 +1,8 @@
 import numpy as np
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
-try: 
+
+try:
     from . import _stumpc as stumpc
 except ImportError:
     import _stumpc as stumpc
@@ -55,7 +56,7 @@ class StumpClassifier(BaseEstimator, ClassifierMixin):
             sample_weight=np.ravel(sample_weight, order="C"),
             bins=self.bins,
         )
-        self.n_classes_ = len(np.unique(y)) # for compatibility with sklearn 
+        self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
         return self
 
     def predict(self, X, **kwargs):

@@ -7,8 +7,9 @@ from sklearn.base import ClassifierMixin
 from numpy.linalg import norm
 from tqdm import tqdm
 from ..utils import subsample
-from ..utils import cluster 
-try: 
+from ..utils import cluster
+
+try:
     from . import _adaoptc as adaoptc
 except ImportError:
     import _adaoptc as adaoptc
@@ -71,15 +72,15 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         cache: boolean
             if the nearest neighbors are cached or not, for faster retrieval in
             subsequent calls.
-        
+
         n_clusters_input: int
             number of clusters (a priori) for clustering the features
-        
+
         clustering_method: str
             clustering method: currently 'kmeans', 'gmm'
-        
+
         cluster_scaling: str
-            scaling method for clustering: currently 'standard', 'robust', 'minmax'    
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'
 
         seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
@@ -103,12 +104,12 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_jobs=None,
         verbose=0,
         cache=True,
-        n_clusters_input = 0,
-        clustering_method = "kmeans",
-        cluster_scaling = "standard",
+        n_clusters_input=0,
+        clustering_method="kmeans",
+        cluster_scaling="standard",
         seed=123,
     ):
-        if n_clusters_input > 0: 
+        if n_clusters_input > 0:
             assert clustering_method in (
                 "kmeans",
                 "gmm",
@@ -144,7 +145,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.n_clusters_input = n_clusters_input
         self.clustering_method = clustering_method
         self.cluster_scaling = cluster_scaling
-        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None 
+        self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None
         self.seed = seed
 
     def fit(self, X, y, **kwargs):
@@ -167,12 +168,17 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         """
 
-        if self.n_clusters_input > 0: 
-            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = cluster(X, n_clusters=self.n_clusters_input, 
-                method=self.clustering_method, 
-                type_scaling=self.cluster_scaling,
-                training=True, 
-                seed=self.seed)
+        if self.n_clusters_input > 0:
+            clustered_X, self.scaler_, self.label_encoder_, self.clusterer_ = (
+                cluster(
+                    X,
+                    n_clusters=self.n_clusters_input,
+                    method=self.clustering_method,
+                    type_scaling=self.cluster_scaling,
+                    training=True,
+                    seed=self.seed,
+                )
+            )
             X = np.column_stack((X.copy(), clustered_X))
 
         if self.row_sample < 1:
@@ -211,7 +217,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.alphas = res["alphas"]
         self.n_iterations = res["n_iterations"]
         self.scaled_X_train = np.array(res["scaled_X_train"], dtype=np.float64)
-        self.n_classes_ = len(np.unique(y)) # for compatibility with sklearn 
+        self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
         return self
 
     def predict(self, X, **kwargs):
@@ -254,13 +260,19 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_train, p_train = self.scaled_X_train.shape
 
         if self.n_clusters_input > 0:
-            X = np.column_stack((X.copy(), cluster(
-                X, training=False, 
-                scaler=self.scaler_, 
-                label_encoder=self.label_encoder_, 
-                clusterer=self.clusterer_,
-                seed=self.seed
-            )))
+            X = np.column_stack(
+                (
+                    X.copy(),
+                    cluster(
+                        X,
+                        training=False,
+                        scaler=self.scaler_,
+                        label_encoder=self.label_encoder_,
+                        clusterer=self.clusterer_,
+                        seed=self.seed,
+                    ),
+                )
+            )
 
         n_test = X.shape[0]
 

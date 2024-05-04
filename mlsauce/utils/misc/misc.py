@@ -8,54 +8,79 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 
 
-def cluster(X, n_clusters=None, 
-            method="kmeans", 
-            type_scaling = "standard",
-            training=True, 
-            scaler=None,
-            label_encoder=None,
-            clusterer=None,
-            seed=123):
-    
-    assert method in ("kmeans", "gmm"), "method must be in ('kmeans', 'gmm')"
-    assert type_scaling in ("standard", "minmax", "robust"), "type_scaling must be in ('standard', 'minmax', 'robust')"
+def cluster(
+    X,
+    n_clusters=None,
+    method="kmeans",
+    type_scaling="standard",
+    training=True,
+    scaler=None,
+    label_encoder=None,
+    clusterer=None,
+    seed=123,
+):
 
-    if training: 
-        assert n_clusters is not None, "n_clusters must be provided at training time"
+    assert method in ("kmeans", "gmm"), "method must be in ('kmeans', 'gmm')"
+    assert type_scaling in (
+        "standard",
+        "minmax",
+        "robust",
+    ), "type_scaling must be in ('standard', 'minmax', 'robust')"
+
+    if training:
+        assert (
+            n_clusters is not None
+        ), "n_clusters must be provided at training time"
         if type_scaling == "standard":
-            scaler = StandardScaler()            
+            scaler = StandardScaler()
         elif type_scaling == "minmax":
             scaler = MinMaxScaler()
         elif type_scaling == "robust":
             scaler = RobustScaler()
         else:
-            raise ValueError("type_scaling must be in ('standard', 'minmax', 'robust')")
-        
-        scaled_X = scaler.fit_transform(X)
-        label_encoder = OneHotEncoder(handle_unknown='ignore')
-        
-        if method == "kmeans":            
-            clusterer = KMeans(n_clusters=n_clusters, 
-                               random_state=seed, 
-                               n_init="auto").fit(scaled_X)        
-            res = label_encoder.fit_transform(clusterer.labels_.reshape(-1, 1)).toarray()                
-        elif method == "gmm":            
-            clusterer = GaussianMixture(n_components=n_clusters, 
-                                        random_state=seed).fit(scaled_X)            
-            res = label_encoder.fit_transform(clusterer.predict(scaled_X).reshape(-1, 1)).toarray()
-        else:
-            raise ValueError("method must be in ('kmeans', 'gmm')")            
-        
-        return res, scaler, label_encoder, clusterer
-        
-    else: # @ inference time
+            raise ValueError(
+                "type_scaling must be in ('standard', 'minmax', 'robust')"
+            )
 
-        assert scaler is not None, "scaler must be provided at inferlabel_encodere time"
-        assert label_encoder is not None, "label_encoder must be provided at inferlabel_encodere time"
-        assert clusterer is not None, "clusterer must be provided at inferlabel_encodere time"
-        scaled_X = scaler.transform(X)        
-        
-        return label_encoder.transform(clusterer.predict(scaled_X).reshape(-1, 1)).toarray() 
+        scaled_X = scaler.fit_transform(X)
+        label_encoder = OneHotEncoder(handle_unknown="ignore")
+
+        if method == "kmeans":
+            clusterer = KMeans(
+                n_clusters=n_clusters, random_state=seed, n_init="auto"
+            ).fit(scaled_X)
+            res = label_encoder.fit_transform(
+                clusterer.labels_.reshape(-1, 1)
+            ).toarray()
+        elif method == "gmm":
+            clusterer = GaussianMixture(
+                n_components=n_clusters, random_state=seed
+            ).fit(scaled_X)
+            res = label_encoder.fit_transform(
+                clusterer.predict(scaled_X).reshape(-1, 1)
+            ).toarray()
+        else:
+            raise ValueError("method must be in ('kmeans', 'gmm')")
+
+        return res, scaler, label_encoder, clusterer
+
+    else:  # @ inference time
+
+        assert (
+            scaler is not None
+        ), "scaler must be provided at inferlabel_encodere time"
+        assert (
+            label_encoder is not None
+        ), "label_encoder must be provided at inferlabel_encodere time"
+        assert (
+            clusterer is not None
+        ), "clusterer must be provided at inferlabel_encodere time"
+        scaled_X = scaler.transform(X)
+
+        return label_encoder.transform(
+            clusterer.predict(scaled_X).reshape(-1, 1)
+        ).toarray()
+
 
 # merge two dictionaries
 def merge_two_dicts(x, y):

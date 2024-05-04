@@ -5,7 +5,8 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-try: 
+
+try:
     from . import _lassoc as mo
 except ImportError:
     import _lassoc as mo
@@ -79,16 +80,16 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         self.ym, centered_y = mo.center_response(y)
         self.xm = X.mean(axis=0)
         self.xsd = X.std(axis=0)
-        self.xsd[self.xsd == 0] = 1 
+        self.xsd[self.xsd == 0] = 1
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
         XX = mo.crossprod(X_, backend=self.backend)
         Xy = mo.crossprod(X_, centered_y, backend=self.backend)
         XX2 = 2 * XX
         Xy2 = 2 * Xy
 
-        if self.backend == "cpu":                               
-            #beta0, _, _, _ = np.linalg.lstsq(X_, centered_y, rcond=None)            
-            beta0 = get_beta(X_, centered_y)            
+        if self.backend == "cpu":
+            # beta0, _, _, _ = np.linalg.lstsq(X_, centered_y, rcond=None)
+            beta0 = get_beta(X_, centered_y)
             if len(np.asarray(y).shape) == 1:
                 res = mo.get_beta_1D(
                     beta0=np.asarray(beta0),
