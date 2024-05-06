@@ -55,7 +55,7 @@ def fit_elasticnet(X_train, y_train, lam=1, alpha=0.5, tol=1e-5, max_iter=50):
     iteration = 0
 
     while converged == False and iteration < max_iter:
-        beta_prev = beta.copy()
+        beta_prev = beta
         beta_prevs = np.repeat(beta_prev, repeats=p_train).reshape(
             p_train, p_train
         )

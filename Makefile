@@ -61,14 +61,16 @@ coverage: ## check code coverage quickly with the default Python
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-docs: install ## generate docs		
-	pip install black pdoc 
+docs: install ## compile the docs watching for change	 	
+	pip install black 
+	pip install pdoc
 	black mlsauce/* --line-length=80	
 	pdoc -t docs mlsauce/* --output-dir mlsauce-docs
 	find . -name '__pycache__' -exec rm -fr {} +
 
 servedocs: install ## compile the docs watching for change	 	
-	pip install black pdoc 
+	pip install black 
+	pip install pdoc
 	black mlsauce/* --line-length=80	
 	pdoc -t docs mlsauce/* 
 	find . -name '__pycache__' -exec rm -fr {} +

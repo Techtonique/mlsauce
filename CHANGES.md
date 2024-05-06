@@ -1,3 +1,7 @@
+# version 0.18.0
+
+- Gaussian weights in `LSBoostRegressor` and `LSBoostClassifier` randomized hidden layer
+
 # version 0.17.0
 
 - add `ElasticNetRegressor` `solver` to `LSBoostRegressor` and `LSBoostClassifier`

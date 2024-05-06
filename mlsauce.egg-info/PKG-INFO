@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: mlsauce
+Version: 0.17.0
+Summary: Miscellaneous Statistical/Machine Learning tools
+Maintainer: T. Moudiki
+Maintainer-email: thierry.moudiki@gmail.com
+License: BSD3 Clause Clear
+Platform: linux
+Platform: macosx
+Platform: windows
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.5
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: Cython
+Requires-Dist: joblib
+Requires-Dist: matplotlib
+Requires-Dist: pandas
+Requires-Dist: requests
+Requires-Dist: scikit-learn
+Requires-Dist: scipy
+Requires-Dist: tqdm
+Requires-Dist: jax
+Requires-Dist: jaxlib
+Provides-Extra: alldeps
+Requires-Dist: numpy>=1.13.0; extra == "alldeps"
+Requires-Dist: scipy>=0.19.0; extra == "alldeps"
+
+Miscellaneous Statistical/Machine Learning tools

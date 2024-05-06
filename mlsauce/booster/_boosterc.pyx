@@ -16,7 +16,6 @@ import gc
 from ..lasso import LassoRegressor
 from ..ridge import RidgeRegressor
 from ..elasticnet import ElasticNetRegressor
-from cython.parallel cimport prange
 from libc.math cimport log, exp, sqrt
 from numpy.linalg import lstsq
 from numpy.linalg import norm
@@ -107,7 +106,8 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                            int direct_link=1, int verbose=1,
                            int seed=123, str backend="cpu", 
                            str solver="ridge", 
-                           str activation="relu"
+                           str activation="relu",
+                           str weights_distr = "uniform"
                            ): 
   
   cdef long int n
@@ -143,6 +143,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['col_index_i'] = {}
   res['loss'] = []
   res['activation'] = activation
+  res['weights_distr'] = weights_distr
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
@@ -156,8 +157,11 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
 
   if solver == "ridge":
     fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
-  else: 
+  elif solver == "lasso": 
     fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
+  else: 
+    fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
+    backend = backend)  
 
   for iter in iterator:
       
@@ -169,7 +173,10 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                    kind='quicksort')
       res['col_index_i'][iter] = iy                     
       X_iy = np.asarray(X_)[:, iy] # must be X_!
-      W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+      if res['weights_distr' ]== "uniform":
+        W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+      else: 
+        W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
       hhidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy, W_i)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
@@ -258,7 +265,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            double dropout=0, double tolerance=1e-6, 
                            int direct_link=1, int verbose=1, 
                            int seed=123, str backend="cpu", 
-                           str solver="ridge", str activation="relu"): 
+                           str solver="ridge", str activation="relu", 
+                           str weights_distr = "uniform"): 
   
   cdef long int n
   cdef int i, p
@@ -293,6 +301,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['fit_obj_i'] = {} 
   res['col_index_i'] = {}
   res['loss'] = []
+  res['weights_distr'] = weights_distr
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
@@ -308,7 +317,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   elif solver == "lasso": 
     fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
   else: 
-    fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, backend = backend)  
+    fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
+    backend = backend)  
 
 
   for iter in iterator:
@@ -321,7 +331,10 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                    kind='quicksort')
       res['col_index_i'][iter] = iy                     
       X_iy = np.asarray(X_)[:, iy] # must be X_!
-      W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+      if res['weights_distr' ] == "uniform":
+        W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+      else: 
+        W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
       hhidden_layer_i = dropout_func(x=activation_choice(activation)(np.dot(X_iy, W_i)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
