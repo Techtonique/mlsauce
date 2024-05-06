@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from sklearn.preprocessing import PolynomialFeatures
+
 try:
     from . import _boosterc as boosterc
 except ImportError:
@@ -77,7 +78,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         degree: int
             degree of features interactions to include in the model
-        
+
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             currently 'uniform', 'gaussian'
@@ -105,7 +106,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         clustering_method="kmeans",
         cluster_scaling="standard",
         degree=0,
-        weights_distr="uniform"
+        weights_distr="uniform",
     ):
         if n_clusters > 0:
             assert clustering_method in (

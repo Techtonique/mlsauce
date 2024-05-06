@@ -1,5 +1,5 @@
 import os
-from distutils.core import setup
+from setuptools import setup
 from Cython.Build import cythonize
 
 dir_path = os.path.dirname(os.path.realpath(__file__))

@@ -1,4 +1,4 @@
-# version 0.18.0
+# version 0.18.2
 
 - Gaussian weights in `LSBoostRegressor` and `LSBoostClassifier` randomized hidden layer
 

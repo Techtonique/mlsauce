@@ -270,3 +270,16 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 
+obj = ms.LSBoostClassifier(solver="lasso", 
+                           n_clusters=3, degree=2, 
+                           clustering_method="gmm",
+                           weights_distr="gaussian")
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print(time()-start)
+
+
