@@ -125,6 +125,9 @@ print("\n")
 print("lasso -----")
 print("\n")
 
+print("\n")
+print("california housing -----")
+print("\n")
 
 dataset = fetch_california_housing()
 X = dataset.data
@@ -238,12 +241,10 @@ obj = ms.LSBoostRegressor(n_estimators=50, solver="ridge", reg_lambda=0.002,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(f"Elapsed: {time()-start}")
-start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     level = 90,
                     method="splitconformal")
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 print(f"splitconformal coverage 5: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")   
 
 
@@ -252,24 +253,18 @@ obj = ms.LSBoostRegressor(n_estimators=50, solver="lasso", reg_lambda=0.002,
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     level = 90, 
                     method="splitconformal")
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 print(f"splitconformal bootstrap coverage 5: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")   
 
 
 obj = ms.LSBoostRegressor(n_estimators=50, solver="enet", reg_lambda=0.002, 
                           col_sample=0.8, row_sample=0.8)
-print(obj.get_params())
-start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
 preds = obj.predict(X_test, return_pi=True, 
                     level = 90, 
                     method="splitconformal")
-print(time()-start)
+print(f"Elapsed: {time()-start}")
 print(f"splitconformal bootstrap coverage 6: {np.mean((preds.upper >= y_test)*(preds.lower <= y_test))}")   
