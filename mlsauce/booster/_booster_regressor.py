@@ -5,7 +5,10 @@ import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from sklearn.preprocessing import PolynomialFeatures
-from . import _boosterc as boosterc
+try:
+    from . import _boosterc as boosterc
+except ImportError:
+    import _boosterc as boosterc
 from ..predictioninterval import PredictionInterval
 from ..utils import cluster
 

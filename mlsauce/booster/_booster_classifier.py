@@ -5,7 +5,6 @@ import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from sklearn.preprocessing import PolynomialFeatures
-
 try:
     from . import _boosterc as boosterc
 except ImportError:

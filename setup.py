@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.18.0'
+__version__ = '0.18.1'
 
 VERSION = __version__
 
@@ -114,7 +114,9 @@ ext_modules =[
 ]
 
 # Get the absolute path to the directory containing the setup script
-script_dir = os.path.basename(__file__)
+abs_path = os.path.dirname(__file__)
+rel_path = os.path.relpath(abs_path)
+script_dir = rel_path
 # Get absolute paths to Cython source files
 adaopt_cython_file = str(script_dir + 'mlsauce/adaopt/_adaoptc.pyx')
 booster_cython_file = str(script_dir + 'mlsauce/booster/_boosterc.pyx')
