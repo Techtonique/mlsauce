@@ -84,6 +84,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         degree: int
             degree of features interactions to include in the model
+        
+        weights_distr: str
+            distribution of weights for constructing the model's hidden layer; 
+            either 'uniform' or 'gaussian'
 
     """
 
@@ -111,6 +115,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         clustering_method="kmeans",
         cluster_scaling="standard",
         degree=0,
+        weights_distr="uniform"
     ):
         if n_clusters > 0:
             assert clustering_method in (
@@ -169,6 +174,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None
         self.degree = degree
         self.poly_ = None
+        self.weights_distr = weights_distr
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)

@@ -10,11 +10,10 @@ import shutil
 import subprocess
 import sys
 
-from distutils.command.clean import clean as Clean
-from distutils.core import Extension, setup
+
 from os import path
 from pathlib import Path
-from setuptools import find_packages
+from setuptools import Extension, find_packages, setup
 
 try:
     import builtins
@@ -38,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.17.0'
+__version__ = '0.18.0'
 
 VERSION = __version__
 
@@ -79,35 +78,6 @@ if SETUPTOOLS_COMMANDS.intersection(sys.argv):
     )
 else:
     extra_setuptools_args = dict()
-
-# Custom clean command to remove build artifacts
-class CleanCommand(Clean):
-    description = "Remove build artifacts from the source tree"
-    def run(self):
-        Clean.run(self)
-        # Remove c files if we are not within a sdist package
-        cwd = os.path.abspath(os.path.dirname(__file__))
-        remove_c_files = not os.path.exists(os.path.join(cwd, 'PKG-INFO'))
-        if remove_c_files:
-            print('Will remove generated .c files')
-        if os.path.exists('build'):
-            shutil.rmtree('build')
-        for dirpath, dirnames, filenames in os.walk('mlsauce'):
-            for filename in filenames:
-                if any(filename.endswith(suffix) for suffix in
-                       (".so", ".pyd", ".dll", ".pyc")):
-                    os.unlink(os.path.join(dirpath, filename))
-                    continue
-                extension = os.path.splitext(filename)[1]
-                if remove_c_files and extension in ['.c', '.cpp']:
-                    pyx_file = str.replace(filename, extension, '.pyx')
-                    if os.path.exists(os.path.join(dirpath, pyx_file)):
-                        os.unlink(os.path.join(dirpath, filename))
-            for dirname in dirnames:
-                if dirname == '__pycache__':
-                    shutil.rmtree(os.path.join(dirpath, dirname))
-
-cmdclass = {'clean': CleanCommand}
 
 
 WHEELHOUSE_UPLOADER_COMMANDS = {'fetch_artifacts', 'upload_all'}
@@ -213,8 +183,7 @@ def setup_package():
                                  'Programming Language :: Python :: 3.6',
                                  'Programming Language :: Python :: 3.7',
                                  'Programming Language :: Python :: 3.8',
-                                 ],
-                    cmdclass=cmdclass,                    
+                                 ],                
                     platforms=["linux", "macosx", "windows"],
                     python_requires=">=3.5",
                     install_requires=install_requires,
