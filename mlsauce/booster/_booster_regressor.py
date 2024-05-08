@@ -118,7 +118,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         n_clusters=0,
         clustering_method="kmeans",
         cluster_scaling="standard",
-        degree=0,
+        degree=None,
         weights_distr="uniform",
     ):
         if n_clusters > 0:
@@ -202,7 +202,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         if isinstance(X, pd.DataFrame):
             X = X.values
 
-        if self.degree > 1:
+        if self.degree is not None:
+            assert isinstance(self.degree, int), "`degree` must be an integer"
             self.poly_ = PolynomialFeatures(
                 degree=self.degree, interaction_only=True, include_bias=False
             )
