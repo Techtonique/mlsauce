@@ -290,7 +290,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         if isinstance(X, pd.DataFrame):
             X = X.values
 
-        if self.degree > 0:
+        if self.degree is not None:
             X = self.poly_.transform(X)
 
         if self.n_clusters > 0:
