@@ -3,13 +3,15 @@
 # Copyright (C) 2020-2024 T. Moudiki <thierry.moudiki@gmail.com>
 # License: 3-clause BSD
 
+import subprocess 
+
+subprocess.check_call(['pip', 'install', 'Cython'])
+
 import os
 import platform
 import setuptools 
 import shutil
-import subprocess
 import sys
-
 
 from os import path
 from pathlib import Path
@@ -37,7 +39,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.18.4'
+__version__ = '0.19.0'
 
 VERSION = __version__
 
