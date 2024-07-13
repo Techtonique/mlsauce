@@ -5,7 +5,7 @@
 
 import subprocess 
 
-subprocess.check_call(['pip', 'install', 'Cython'])
+subprocess.check_call(['pip', 'install', 'Cython==3.0.10'])
 
 import os
 import platform
@@ -24,7 +24,6 @@ except ImportError:
 
 subprocess.run(['pip', 'install', 'numpy'], check=False)
 subprocess.run(['pip', 'install', 'scipy'], check=False)
-subprocess.run(['pip', 'install', 'Cython'], check=False)
 subprocess.run(['pip', 'install', 'requests'], check=False)
 
 import numpy
