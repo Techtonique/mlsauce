@@ -3,7 +3,12 @@
 import os
 import platform
 import sys
+import subprocess
 from setuptools import Extension, find_packages, setup
+
+subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", "cython"])
+
 from Cython.Build import cythonize
 import numpy
 
