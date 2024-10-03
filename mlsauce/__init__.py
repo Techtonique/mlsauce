@@ -61,7 +61,8 @@ else:
     from .elasticnet import ElasticNetRegressor
     from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
-    from .stump import StumpClassifier
+    from .shapley import ShapExplainer
+    from .stump import StumpClassifier    
 
     # from .encoders import corrtarget_encoder
 
@@ -73,6 +74,7 @@ else:
         "LassoRegressor",
         "LSBoostRegressor",
         "RidgeRegressor",
+        "ShapExplainer",
         # Other imports
         # "corrtarget_encoder",
         "download",
