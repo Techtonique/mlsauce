@@ -109,7 +109,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         weights_distr="uniform",
         base_model=None,
     ):
-        
+
         self.base_model = base_model
 
         if n_clusters > 0:
@@ -229,7 +229,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 backend=self.backend,
                 solver=self.solver,
                 activation=self.activation,
-                obj = self.base_model
+                obj=self.base_model,
             )
         except ValueError:
             self.obj = _boosterc.fit_booster_classifier(
@@ -250,7 +250,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 backend=self.backend,
                 solver=self.solver,
                 activation=self.activation,
-                obj = self.base_model
+                obj=self.base_model,
             )
 
         self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
@@ -321,6 +321,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             return _boosterc.predict_proba_booster_classifier(
                 self.obj, np.asarray(X, order="C")
             )
+
 
 class GenericBoostingClassifier(LSBoostClassifier):
     """Generic Boosting classifier (using any classifier as base learner).
@@ -421,7 +422,7 @@ class GenericBoostingClassifier(LSBoostClassifier):
         degree=None,
         weights_distr="uniform",
     ):
-        self.base_model = obj  
+        self.base_model = obj
         super().__init__(
             n_estimators=n_estimators,
             learning_rate=learning_rate,
@@ -444,5 +445,4 @@ class GenericBoostingClassifier(LSBoostClassifier):
             degree=degree,
             weights_distr=weights_distr,
             base_model=obj,
-        )  
-        
+        )

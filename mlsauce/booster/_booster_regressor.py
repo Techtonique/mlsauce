@@ -122,7 +122,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         weights_distr="uniform",
         base_model=None,
     ):
-        
+
         self.base_model = base_model
 
         if n_clusters > 0:
@@ -245,7 +245,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 backend=self.backend,
                 solver=self.solver,
                 activation=self.activation,
-                obj = self.base_model
+                obj=self.base_model,
             )
         except ValueError:
             self.obj = _boosterc.fit_booster_regressor(
@@ -266,7 +266,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 backend=self.backend,
                 solver=self.solver,
                 activation=self.activation,
-                obj = self.base_model
+                obj=self.base_model,
             )
 
         self.n_estimators = self.obj["n_estimators"]
@@ -348,6 +348,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             return _boosterc.predict_booster_regressor(
                 self.obj, np.asarray(X, order="C")
             )
+
 
 class GenericBoostingRegressor(LSBoostRegressor):
     """LSBoost regressor.
@@ -484,5 +485,3 @@ class GenericBoostingRegressor(LSBoostRegressor):
             weights_distr=weights_distr,
             base_model=obj,
         )
-        
-
