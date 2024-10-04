@@ -56,7 +56,7 @@ if __MLSAUCE_SETUP__:
 
 else:
     from .adaopt import AdaOpt
-    from .booster import LSBoostClassifier, LSBoostRegressor
+    from .booster import LSBoostClassifier, LSBoostRegressor, GenericBoostingClassifier, GenericBoostingRegressor
     from .datasets import download
     from .elasticnet import ElasticNetRegressor
     from .lasso import LassoRegressor
@@ -68,6 +68,8 @@ else:
     __all__ = [
         "AdaOpt",
         "LSBoostClassifier",
+        "GenericBoostingClassifier",
+        "GenericBoostingRegressor",
         "StumpClassifier",
         "ElasticNetRegressor",
         "LassoRegressor",

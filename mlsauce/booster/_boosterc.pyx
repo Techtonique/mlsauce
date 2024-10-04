@@ -107,7 +107,8 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                            int seed=123, str backend="cpu", 
                            str solver="ridge", 
                            str activation="relu",
-                           str weights_distr = "uniform"
+                           str weights_distr = "uniform",
+                           object obj = None
                            ): 
   
   cdef long int n
@@ -155,13 +156,16 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   E = Y - Ym
   iterator = tqdm(range(n_estimators)) if verbose else range(n_estimators)
 
-  if solver == "ridge":
-    fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
-  elif solver == "lasso": 
-    fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
+  if obj is None: 
+    if solver == "ridge":
+      fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
+    elif solver == "lasso": 
+      fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
+    else: 
+      fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
+      backend = backend)  
   else: 
-    fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
-    backend = backend)  
+      fit_obj = obj 
 
   for iter in iterator:
       
@@ -266,7 +270,8 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                            int direct_link=1, int verbose=1, 
                            int seed=123, str backend="cpu", 
                            str solver="ridge", str activation="relu", 
-                           str weights_distr = "uniform"): 
+                           str weights_distr = "uniform",
+                           object obj = None): 
   
   cdef long int n
   cdef int i, p
@@ -312,14 +317,16 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   e = y - np.repeat(ym, n)
   iterator = tqdm(range(n_estimators)) if verbose else range(n_estimators)
 
-  if solver == "ridge":
-    fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
-  elif solver == "lasso": 
-    fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
-  else: 
-    fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
-    backend = backend)  
-
+  if obj is None: 
+    if solver == "ridge":
+      fit_obj = RidgeRegressor(reg_lambda = reg_lambda, backend = backend)
+    elif solver == "lasso": 
+      fit_obj = LassoRegressor(reg_lambda = reg_lambda, backend = backend)
+    else: 
+      fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
+      backend = backend)  
+  else:
+      fit_obj = obj 
 
   for iter in iterator:
       

@@ -32,7 +32,9 @@ clean-build: ## remove build artifacts
 	rm -fr build/	
 	rm -fr .eggs/
 	find . -name '*.egg-info' -exec rm -fr {} +
-	find . -name '*.egg' -exec rm -f {} +	
+	find . -name '*.egg' -exec rm -f {} +
+	find . -name '*.so' -exec rm -f {} +
+	find . -name '*.c' -exec rm -f {} +	
 
 clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyc' -exec rm -f {} +
@@ -89,7 +91,7 @@ dist: clean ## builds source and wheel package
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
-	python3 -m pip install .
+	python3 -m pip install . --verbose
 
 run-examples: ## run all examples with one command
 	find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;

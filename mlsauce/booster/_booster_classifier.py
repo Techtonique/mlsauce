@@ -107,7 +107,11 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         cluster_scaling="standard",
         degree=None,
         weights_distr="uniform",
+        base_model=None,
     ):
+        
+        self.base_model = base_model
+
         if n_clusters > 0:
             assert clustering_method in (
                 "kmeans",
@@ -225,6 +229,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 backend=self.backend,
                 solver=self.solver,
                 activation=self.activation,
+                obj = self.base_model
             )
         except ValueError:
             self.obj = _boosterc.fit_booster_classifier(
@@ -245,6 +250,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 backend=self.backend,
                 solver=self.solver,
                 activation=self.activation,
+                obj = self.base_model
             )
 
         self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
@@ -315,3 +321,128 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             return _boosterc.predict_proba_booster_classifier(
                 self.obj, np.asarray(X, order="C")
             )
+
+class GenericBoostingClassifier(LSBoostClassifier):
+    """Generic Boosting classifier (using any classifier as base learner).
+
+    Attributes:
+
+        obj: object
+            model object.
+
+        n_estimators: int
+            number of boosting iterations.
+
+        learning_rate: float
+            controls the learning speed at training time.
+
+        n_hidden_features: int
+            number of nodes in successive hidden layers.
+
+        reg_lambda: float
+            L2 regularization parameter for successive errors in the optimizer
+            (at training time).
+
+        alpha: float
+            compromise between L1 and L2 regularization (must be in [0, 1]),
+            for `solver` == 'enet'.
+
+        row_sample: float
+            percentage of rows chosen from the training set.
+
+        col_sample: float
+            percentage of columns chosen from the training set.
+
+        dropout: float
+            percentage of nodes dropped from the training set.
+
+        tolerance: float
+            controls early stopping in gradient descent (at training time).
+
+        direct_link: bool
+            indicates whether the original features are included (True) in model's
+            fitting or not (False).
+
+        verbose: int
+            progress bar (yes = 1) or not (no = 0) (currently).
+
+        seed: int
+            reproducibility seed for nodes_sim=='uniform', clustering and dropout.
+
+        backend: str
+            type of backend; must be in ('cpu', 'gpu', 'tpu')
+
+        solver: str
+            type of 'weak' learner; currently in ('ridge', 'lasso', 'enet').
+            'enet' is a combination of 'ridge' and 'lasso' called Elastic Net.
+
+        activation: str
+            activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
+
+        n_clusters: int
+            number of clusters for clustering the features
+
+        clustering_method: str
+            clustering method: currently 'kmeans', 'gmm'
+
+        cluster_scaling: str
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'
+
+        degree: int
+            degree of features interactions to include in the model
+
+        weights_distr: str
+            distribution of weights for constructing the model's hidden layer;
+            currently 'uniform', 'gaussian'
+
+    """
+
+    def __init__(
+        self,
+        obj,
+        n_estimators=100,
+        learning_rate=0.1,
+        n_hidden_features=5,
+        reg_lambda=0.1,
+        alpha=0.5,
+        row_sample=1,
+        col_sample=1,
+        dropout=0,
+        tolerance=1e-4,
+        direct_link=1,
+        verbose=1,
+        seed=123,
+        backend="cpu",
+        solver="ridge",
+        activation="relu",
+        n_clusters=0,
+        clustering_method="kmeans",
+        cluster_scaling="standard",
+        degree=None,
+        weights_distr="uniform",
+    ):
+        self.base_model = obj  
+        super().__init__(
+            n_estimators=n_estimators,
+            learning_rate=learning_rate,
+            n_hidden_features=n_hidden_features,
+            reg_lambda=reg_lambda,
+            alpha=alpha,
+            row_sample=row_sample,
+            col_sample=col_sample,
+            dropout=dropout,
+            tolerance=tolerance,
+            direct_link=direct_link,
+            verbose=verbose,
+            seed=seed,
+            backend=backend,
+            solver=solver,
+            activation=activation,
+            n_clusters=n_clusters,
+            clustering_method=clustering_method,
+            cluster_scaling=cluster_scaling,
+            degree=degree,
+            weights_distr=weights_distr,
+            base_model=obj,
+        )  
+        
