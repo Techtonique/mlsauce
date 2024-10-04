@@ -4,14 +4,17 @@
 # License: 3-clause BSD
 
 import subprocess 
+import sys
 
-subprocess.check_call(['pip', 'install', 'Cython==3.0.10'])
+subprocess.run(['pip', 'install', 'numpy'], check=False)
+subprocess.run(['pip', 'install', 'scipy'], check=False)
+subprocess.run(['pip', 'install', 'requests'], check=False)
+subprocess.run(['pip', 'install', 'Cython'], check=False)
 
 import os
 import platform
 import setuptools 
 import shutil
-import sys
 
 from os import path
 from pathlib import Path
@@ -21,10 +24,6 @@ try:
     import builtins
 except ImportError:    
     import __builtin__ as builtins
-
-subprocess.run(['pip', 'install', 'numpy'], check=False)
-subprocess.run(['pip', 'install', 'scipy'], check=False)
-subprocess.run(['pip', 'install', 'requests'], check=False)
 
 import numpy
 from Cython.Build import cythonize
