@@ -311,7 +311,7 @@ class LazyBoostingRegressor(RegressorMixin):
             self.regressors = REGRESSORS
         else:
             self.regressors = [
-                ("GBoostRegressor(" + est[0] + ")", est[1](**kwargs)) 
+                ("GenericBooster(" + est[0] + ")", est[1](**kwargs)) 
                 for est in all_estimators()
                 if (
                     issubclass(est[1], RegressorMixin)
