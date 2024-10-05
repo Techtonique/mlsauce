@@ -248,26 +248,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 obj=self.base_model,
             )
         except ValueError:
-            self.obj = _boosterc.fit_booster_regressor(
-                X=np.asarray(X, order="C"),
-                y=np.asarray(y, order="C"),
-                n_estimators=self.n_estimators,
-                learning_rate=self.learning_rate,
-                n_hidden_features=self.n_hidden_features,
-                reg_lambda=self.reg_lambda,
-                alpha=self.alpha,
-                row_sample=self.row_sample,
-                col_sample=self.col_sample,
-                dropout=self.dropout,
-                tolerance=self.tolerance,
-                direct_link=self.direct_link,
-                verbose=self.verbose,
-                seed=self.seed,
-                backend=self.backend,
-                solver=self.solver,
-                activation=self.activation,
-                obj=self.base_model,
-            )
+            pass 
 
         self.n_estimators = self.obj["n_estimators"]
 
@@ -345,9 +326,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 self.obj, np.asarray(X, order="C")
             )
         except ValueError:
-            return _boosterc.predict_booster_regressor(
-                self.obj, np.asarray(X, order="C")
-            )
+            pass 
 
 
 class GenericBoostingRegressor(LSBoostRegressor):

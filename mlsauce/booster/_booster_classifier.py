@@ -232,26 +232,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 obj=self.base_model,
             )
         except ValueError:
-            self.obj = _boosterc.fit_booster_classifier(
-                np.asarray(X, order="C"),
-                np.asarray(y, order="C"),
-                n_estimators=self.n_estimators,
-                learning_rate=self.learning_rate,
-                n_hidden_features=self.n_hidden_features,
-                reg_lambda=self.reg_lambda,
-                alpha=self.alpha,
-                row_sample=self.row_sample,
-                col_sample=self.col_sample,
-                dropout=self.dropout,
-                tolerance=self.tolerance,
-                direct_link=self.direct_link,
-                verbose=self.verbose,
-                seed=self.seed,
-                backend=self.backend,
-                solver=self.solver,
-                activation=self.activation,
-                obj=self.base_model,
-            )
+            pass
 
         self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
         self.n_estimators = self.obj["n_estimators"]
@@ -318,9 +299,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                 self.obj, np.asarray(X, order="C")
             )
         except ValueError:
-            return _boosterc.predict_proba_booster_classifier(
-                self.obj, np.asarray(X, order="C")
-            )
+            pass 
 
 
 class GenericBoostingClassifier(LSBoostClassifier):

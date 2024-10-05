@@ -31,7 +31,7 @@ removed_regressors = [
 
 
 REGRESSORS = [
-    ("GBoostRegressor(" + est[0] + ")", est[1]())
+    ("GBoostRegressor(" + est[0] + ")", est[1])
     for est in all_estimators()
     if (
         issubclass(est[1], RegressorMixin)

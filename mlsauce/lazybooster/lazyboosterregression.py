@@ -262,7 +262,7 @@ class LazyBoostingRegressor(RegressorMixin):
             baseline_models = [RandomForestRegressor(), GradientBoostingRegressor()]
 
         if self.verbose > 0:
-            print("Fitting baseline models...")
+            print("\n Fitting baseline models...")
         for name, model in tqdm(zip(baseline_names, baseline_models)):        
             start = time.time()
             try:
@@ -327,7 +327,7 @@ class LazyBoostingRegressor(RegressorMixin):
 
                 try: 
 
-                    model = GenericBoostingRegressor(obj=regr, **kwargs)
+                    model = GenericBoostingRegressor(obj=regr(), **kwargs)
                 
                     model.fit(X_train, y_train)
 
@@ -338,7 +338,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         ]
                     )
                     if self.verbose > 0:
-                        print("Fitting boosted " + name + " model...")
+                        print("\n Fitting boosted " + name + " model...")
                     pipe.fit(X_train, y_train)
 
                     self.models_[name] = pipe
@@ -389,10 +389,10 @@ class LazyBoostingRegressor(RegressorMixin):
                 start = time.time()
                 try:
 
-                    model = GenericBoostingRegressor(obj=regr, **kwargs)
+                    model = GenericBoostingRegressor(obj=regr(), **kwargs)
 
                     if self.verbose > 0:
-                        print("Fitting boosted " + name + " model...")
+                        print("\n Fitting boosted " + name + " model...")
                     model.fit(X_train, y_train)
 
                     self.models_[name] = model

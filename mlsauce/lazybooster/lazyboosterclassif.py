@@ -260,7 +260,7 @@ class LazyBoostingClassifier(ClassifierMixin):
             baseline_models = [RandomForestClassifier()]
         
         if self.verbose > 0:
-            print("Fitting baseline models...")
+            print("\n Fitting baseline models...")
         for name, model in tqdm(zip(baseline_names, baseline_models)):
             start = time.time()
             try:
@@ -321,7 +321,7 @@ class LazyBoostingClassifier(ClassifierMixin):
             self.classifiers = REGRESSORS
         else:
             self.classifiers = [
-                    ("GBoostClassifier(" + est[0] + ")", est[1])
+                    ("GBoostClassifier(" + est[0] + ")", est[1]())
                     for est in all_estimators()
                     if (
                         issubclass(est[1], RegressorMixin)
@@ -360,7 +360,7 @@ class LazyBoostingClassifier(ClassifierMixin):
                         )
 
                     if self.verbose > 0:
-                        print("Fitting boosted " + name + " model...")
+                        print("\n Fitting boosted " + name + " model...")
                     fitted_clf.fit(X_train, y_train)
                
                     pipe = Pipeline(
@@ -371,7 +371,7 @@ class LazyBoostingClassifier(ClassifierMixin):
                     )
                     
                     if self.verbose > 0:
-                        print("Fitting boosted " + name + " model...")
+                        print("\n Fitting boosted " + name + " model...")
                     pipe.fit(X_train, y_train)
                     self.models_[name] = pipe
                     y_pred = pipe.predict(X_test)
