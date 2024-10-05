@@ -62,6 +62,7 @@ else:
         GenericBoostingClassifier,
         GenericBoostingRegressor,
     )
+    from .lazybooster import LazyBoostingClassifier, LazyBoostingRegressor
     from .datasets import download
     from .elasticnet import ElasticNetRegressor
     from .lasso import LassoRegressor
@@ -80,6 +81,8 @@ else:
         "LassoRegressor",
         "LSBoostRegressor",
         "RidgeRegressor",
+        "LazyBoostingClassifier",
+        "LazyBoostingRegressor",
         # Other imports
         # "corrtarget_encoder",
         "download",

@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.19.1'
+__version__ = '0.20.0'
 
 VERSION = __version__
 
@@ -150,6 +150,7 @@ def setup_package():
         "Cython",
         "joblib",
         "matplotlib",
+        "nnetsauce",
         "pandas",
         "requests",
         "scikit-learn",

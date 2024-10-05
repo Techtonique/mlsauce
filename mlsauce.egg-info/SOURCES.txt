@@ -36,6 +36,10 @@ mlsauce/lasso/_lassoc.c
 mlsauce/lasso/setup.py
 mlsauce/lasso/setup2.py
 mlsauce/lasso/utils_lasso.py
+mlsauce/lazybooster/__init__.py
+mlsauce/lazybooster/config.py
+mlsauce/lazybooster/lazyboosterclassif.py
+mlsauce/lazybooster/lazyboosterregression.py
 mlsauce/nonconformist/__init__.py
 mlsauce/nonconformist/acp.py
 mlsauce/nonconformist/base.py

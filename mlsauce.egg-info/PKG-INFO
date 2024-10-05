@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: mlsauce
-Version: 0.19.1
+Version: 0.20.0
 Summary: Miscellaneous Statistical/Machine Learning tools
 Maintainer: T. Moudiki
 Maintainer-email: thierry.moudiki@gmail.com
@@ -23,6 +23,7 @@ Requires-Dist: numpy
 Requires-Dist: Cython
 Requires-Dist: joblib
 Requires-Dist: matplotlib
+Requires-Dist: nnetsauce
 Requires-Dist: pandas
 Requires-Dist: requests
 Requires-Dist: scikit-learn
