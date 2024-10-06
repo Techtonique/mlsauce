@@ -93,6 +93,58 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
 
+    Examples:
+
+        ```python
+        import subprocess
+        import sys
+        import os
+
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
+
+        import mlsauce as ms
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from sklearn.datasets import load_diabetes
+        from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+        from sklearn.tree import DecisionTreeRegressor
+        from time import time
+        from os import chdir
+        from sklearn import metrics
+
+        regr = DecisionTreeRegressor()
+
+        diabetes = load_diabetes()
+        X = diabetes.data
+        y = diabetes.target
+        # split data into training test and test set
+        np.random.seed(15029)
+        X_train, X_test, y_train, y_test = train_test_split(X, y,
+                                                            test_size=0.2)
+
+        obj = ms.GenericBoostingRegressor(regr, col_sample=0.9, row_sample=0.9)
+        print(obj.get_params())
+        start = time()
+        obj.fit(X_train, y_train)
+        print(time()-start)
+        start = time()
+        print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
+        print(time()-start)
+
+        print(obj.obj['loss'])
+
+        obj = ms.GenericBoostingRegressor(regr, col_sample=0.9, row_sample=0.9, n_clusters=2)
+        print(obj.get_params())
+        start = time()
+        obj.fit(X_train, y_train)
+        print(time()-start)
+        start = time()
+        print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
+        print(time()-start)
+
+        print(obj.obj['loss'])
+        ```
+
     """
 
     def __init__(
@@ -251,7 +303,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 obj=self.base_model,
             )
         except ValueError:
-            pass 
+            pass
 
         self.n_estimators = self.obj["n_estimators"]
 
@@ -329,7 +381,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 self.obj, np.asarray(X, order="C")
             )
         except ValueError:
-            pass 
+            pass
 
 
 class GenericBoostingRegressor(LSBoostRegressor):

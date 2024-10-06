@@ -1,4 +1,4 @@
-import nnetsauce as ns 
+import nnetsauce as ns
 from functools import partial
 from sklearn.base import RegressorMixin
 from sklearn.utils import all_estimators
@@ -15,13 +15,13 @@ removed_regressors = [
     "HistGradientBoostingRegressor",
     "IsotonicRegression",
     "MLPRegressor",
-    #"KernelRidge",
+    # "KernelRidge",
     "MultiOutputRegressor",
     "MultiTaskElasticNet",
     "MultiTaskElasticNetCV",
     "MultiTaskLasso",
     "MultiTaskLassoCV",
-    #"NuSVR",
+    # "NuSVR",
     "OrthogonalMatchingPursuit",
     "OrthogonalMatchingPursuitCV",
     "PLSCanonical",
@@ -30,7 +30,7 @@ removed_regressors = [
     "RandomForestRegressor",
     "RegressorChain",
     "StackingRegressor",
-    #"SVR",
+    # "SVR",
     "VotingRegressor",
 ]
 

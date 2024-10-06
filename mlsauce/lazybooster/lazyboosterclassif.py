@@ -6,6 +6,7 @@ from copy import deepcopy
 from functools import partial
 from tqdm import tqdm
 import time
+
 try:
     import xgboost as xgb
 except ImportError:
@@ -85,7 +86,7 @@ def get_card_split(df, cols, n=11):
 class LazyBoostingClassifier(ClassifierMixin):
     """
 
-    Fitting -- almost -- all the classification algorithms 
+    Fitting -- almost -- all the classification algorithms
     and returning their scores.
 
     Parameters:
@@ -132,22 +133,22 @@ class LazyBoostingClassifier(ClassifierMixin):
         models_: dict-object
             Returns a dictionary with each model pipeline as value
             with key as name of models.
-        
+
         best_model_: object
             Returns the best model pipeline.
 
     Examples
 
         ```python
-        import os 
-        import mlsauce as ms 
+        import os
+        import mlsauce as ms
         from sklearn.datasets import load_breast_cancer, load_iris, load_wine, load_digits
         from sklearn.model_selection import train_test_split
         from time import time
 
-        load_models = [load_breast_cancer, load_iris, load_wine]        
+        load_models = [load_breast_cancer, load_iris, load_wine]
 
-        for model in load_models: 
+        for model in load_models:
 
             data = model()
             X = data.data
@@ -155,7 +156,7 @@ class LazyBoostingClassifier(ClassifierMixin):
 
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 13)
 
-            clf = ms.LazyBoostingClassifier(verbose=1, ignore_warnings=False, 
+            clf = ms.LazyBoostingClassifier(verbose=1, ignore_warnings=False,
                                             custom_metric=None, preprocess=False)
 
             start = time()
@@ -190,7 +191,7 @@ class LazyBoostingClassifier(ClassifierMixin):
         self.estimators = estimators
         self.preprocess = preprocess
         self.n_jobs = n_jobs
-     
+
     def fit(self, X_train, X_test, y_train, y_test, **kwargs):
         """Fit classifiers to X_train and y_train, predict and score on X_test,
         y_test.
@@ -212,7 +213,7 @@ class LazyBoostingClassifier(ClassifierMixin):
             y_test: array-like,
                 Testing vectors, where rows is the number of samples
                 and columns is the number of features.
-            
+
             **kwargs: dict,
                 Additional arguments to be passed to the fit GenericBoostingClassifier.
 
@@ -262,15 +263,15 @@ class LazyBoostingClassifier(ClassifierMixin):
                     ),
                 ]
             )
-        
+
         # baseline models
-        try: 
+        try:
             baseline_names = ["RandomForestClassifier", "XGBClassifier"]
             baseline_models = [RandomForestClassifier(), xgb.XGBClassifier()]
         except Exception as exception:
             baseline_names = ["RandomForestClassifier"]
             baseline_models = [RandomForestClassifier()]
-        
+
         if self.verbose > 0:
             print("\n Fitting baseline models...")
         for name, model in tqdm(zip(baseline_names, baseline_models)):
@@ -333,13 +334,13 @@ class LazyBoostingClassifier(ClassifierMixin):
             self.classifiers = REGRESSORS
         else:
             self.classifiers = [
-                    ("GBoostClassifier(" + est[0] + ")", est[1]())
-                    for est in all_estimators()
-                    if (
-                        issubclass(est[1], RegressorMixin)
-                        and (est[0] in self.estimators)
-                    )
-                ]            
+                ("GBoostClassifier(" + est[0] + ")", est[1]())
+                for est in all_estimators()
+                if (
+                    issubclass(est[1], RegressorMixin)
+                    and (est[0] in self.estimators)
+                )
+            ]
 
         if self.preprocess is True:
 
@@ -364,25 +365,26 @@ class LazyBoostingClassifier(ClassifierMixin):
                         fitted_clf = GenericBoostingClassifier(
                             {**other_args, **kwargs},
                             verbose=self.verbose,
-                            obj=model(random_state=self.random_state), 
-                            )
+                            obj=model(random_state=self.random_state),
+                        )
 
                     else:
                         fitted_clf = GenericBoostingClassifier(
-                            obj=model(**kwargs), verbose=self.verbose,        
+                            obj=model(**kwargs),
+                            verbose=self.verbose,
                         )
 
                     if self.verbose > 0:
                         print("\n Fitting boosted " + name + " model...")
                     fitted_clf.fit(X_train, y_train)
-               
+
                     pipe = Pipeline(
                         [
                             ("preprocessor", preprocessor),
                             ("classifier", fitted_clf),
                         ]
                     )
-                    
+
                     if self.verbose > 0:
                         print("\n Fitting boosted " + name + " model...")
                     pipe.fit(X_train, y_train)
@@ -446,12 +448,14 @@ class LazyBoostingClassifier(ClassifierMixin):
                     if "random_state" in model().get_params().keys():
                         fitted_clf = GenericBoostingClassifier(
                             obj=model(random_state=self.random_state),
-                                      verbose=self.verbose, **kwargs)
+                            verbose=self.verbose,
+                            **kwargs
+                        )
 
                     else:
                         fitted_clf = GenericBoostingClassifier(
-                            obj=model(), verbose=self.verbose,
-                            **kwargs)
+                            obj=model(), verbose=self.verbose, **kwargs
+                        )
 
                     fitted_clf.fit(X_train, y_train)
 
@@ -539,7 +543,6 @@ class LazyBoostingClassifier(ClassifierMixin):
         if self.predictions:
             predictions_df = pd.DataFrame.from_dict(predictions)
         return scores, predictions_df if self.predictions is True else scores
-
 
     def get_best_model(self):
         """

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import time
+
 try:
     import xgboost as xgb
 except ImportError:
@@ -125,20 +126,20 @@ class LazyBoostingRegressor(RegressorMixin):
             Number of layers of CustomRegressors to be used.
 
         All the other parameters are the same as CustomRegressor's.
-    
+
     Attributes:
 
         models_: dict-object
             Returns a dictionary with each model pipeline as value
             with key as name of models.
-        
+
         best_model_: object
-            Returns the best model pipeline based on the sort_by metric.                
+            Returns the best model pipeline based on the sort_by metric.
 
     Examples:
 
         ```python
-        import os 
+        import os
         import mlsauce as ms
         from sklearn.datasets import load_diabetes
         from sklearn.model_selection import train_test_split
@@ -148,7 +149,7 @@ class LazyBoostingRegressor(RegressorMixin):
         y= data.target
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 123)
 
-        regr = ms.LazyBoostingRegressor(verbose=0, ignore_warnings=True, 
+        regr = ms.LazyBoostingRegressor(verbose=0, ignore_warnings=True,
                                         custom_metric=None, preprocess=True)
         models, predictioms = regr.fit(X_train, X_test, y_train, y_test)
         model_dictionary = regr.provide_models(X_train, X_test, y_train, y_test)
@@ -181,7 +182,6 @@ class LazyBoostingRegressor(RegressorMixin):
         self.preprocess = preprocess
         self.n_jobs = n_jobs
 
-
     def fit(self, X_train, X_test, y_train, y_test, **kwargs):
         """Fit Regression algorithms to X_train and y_train, predict and score on X_test, y_test.
 
@@ -202,7 +202,7 @@ class LazyBoostingRegressor(RegressorMixin):
             y_test : array-like,
                 Testing vectors, where rows is the number of samples
                 and columns is the number of features.
-            
+
             **kwargs: dict,
                 Additional parameters to be passed to the GenericBoostingRegressor.
 
@@ -253,18 +253,32 @@ class LazyBoostingRegressor(RegressorMixin):
                     ),
                 ]
             )
-        
+
         # base models
-        try: 
-            baseline_names = ["RandomForestRegressor", "XGBRegressor", "GradientBoostingRegressor"]
-            baseline_models = [RandomForestRegressor(), xgb.XGBRegressor(), GradientBoostingRegressor()]
+        try:
+            baseline_names = [
+                "RandomForestRegressor",
+                "XGBRegressor",
+                "GradientBoostingRegressor",
+            ]
+            baseline_models = [
+                RandomForestRegressor(),
+                xgb.XGBRegressor(),
+                GradientBoostingRegressor(),
+            ]
         except Exception as exception:
-            baseline_names = ["RandomForestRegressor", "GradientBoostingRegressor"]
-            baseline_models = [RandomForestRegressor(), GradientBoostingRegressor()]
+            baseline_names = [
+                "RandomForestRegressor",
+                "GradientBoostingRegressor",
+            ]
+            baseline_models = [
+                RandomForestRegressor(),
+                GradientBoostingRegressor(),
+            ]
 
         if self.verbose > 0:
             print("\n Fitting baseline models...")
-        for name, model in tqdm(zip(baseline_names, baseline_models)):        
+        for name, model in tqdm(zip(baseline_names, baseline_models)):
             start = time.time()
             try:
                 model.fit(X_train, y_train)
@@ -296,9 +310,7 @@ class LazyBoostingRegressor(RegressorMixin):
                     }
 
                     if self.custom_metric:
-                        scores_verbose["Custom metric"] = (
-                            custom_metric
-                        )
+                        scores_verbose["Custom metric"] = custom_metric
 
                     print(scores_verbose)
                 if self.predictions:
@@ -306,13 +318,13 @@ class LazyBoostingRegressor(RegressorMixin):
             except Exception as exception:
                 if self.ignore_warnings is False:
                     print(name + " model failed to execute")
-                    print(exception)                
+                    print(exception)
 
         if self.estimators == "all":
             self.regressors = REGRESSORS
         else:
             self.regressors = [
-                ("GenericBooster(" + est[0] + ")", est[1](**kwargs)) 
+                ("GenericBooster(" + est[0] + ")", est[1](**kwargs))
                 for est in all_estimators()
                 if (
                     issubclass(est[1], RegressorMixin)
@@ -326,12 +338,12 @@ class LazyBoostingRegressor(RegressorMixin):
 
                 start = time.time()
 
-                try: 
+                try:
 
-                    model = GenericBoostingRegressor(obj=regr(), 
-                                                     verbose=self.verbose, 
-                                                     **kwargs)
-                
+                    model = GenericBoostingRegressor(
+                        obj=regr(), verbose=self.verbose, **kwargs
+                    )
+
                     model.fit(X_train, y_train)
 
                     pipe = Pipeline(
@@ -372,9 +384,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         }
 
                         if self.custom_metric:
-                            scores_verbose["Custom metric"] = (
-                                custom_metric
-                            )
+                            scores_verbose["Custom metric"] = custom_metric
 
                         print(scores_verbose)
                     if self.predictions:
@@ -392,9 +402,9 @@ class LazyBoostingRegressor(RegressorMixin):
                 start = time.time()
                 try:
 
-                    model = GenericBoostingRegressor(obj=regr(), 
-                                                     verbose=self.verbose, 
-                                                     **kwargs)
+                    model = GenericBoostingRegressor(
+                        obj=regr(), verbose=self.verbose, **kwargs
+                    )
 
                     if self.verbose > 0:
                         print("\n Fitting boosted " + name + " model...")
@@ -429,9 +439,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         }
 
                         if self.custom_metric:
-                            scores_verbose["Custom metric"] = (
-                                custom_metric
-                            )
+                            scores_verbose["Custom metric"] = custom_metric
 
                         print(scores_verbose)
                     if self.predictions:
@@ -474,7 +482,7 @@ class LazyBoostingRegressor(RegressorMixin):
 
         """
         return self.best_model_
-    
+
     def provide_models(self, X_train, X_test, y_train, y_test):
         """
         This function returns all the model objects trained in fit function.
