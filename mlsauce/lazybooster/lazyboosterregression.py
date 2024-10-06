@@ -137,22 +137,23 @@ class LazyBoostingRegressor(RegressorMixin):
 
     Examples:
 
+        ```python
+        import os 
         import mlsauce as ms
-        import numpy as np
-        from sklearn import datasets
-        from sklearn.utils import shuffle
+        from sklearn.datasets import load_diabetes
+        from sklearn.model_selection import train_test_split
 
-        diabetes = datasets.load_diabetes()
-        X, y = shuffle(diabetes.data, diabetes.target, random_state=13)
-        X = X.astype(np.float32)
+        data = load_diabetes()
+        X = data.data
+        y= data.target
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 123)
 
-        offset = int(X.shape[0] * 0.9)
-        X_train, y_train = X[:offset], y[:offset]
-        X_test, y_test = X[offset:], y[offset:]
-
-        reg = ns.LazyBoostingRegressor(verbose=0, ignore_warnings=False, custom_metric=None)
-        models, predictions = reg.fit(X_train, X_test, y_train, y_test)
+        regr = ms.LazyBoostingRegressor(verbose=0, ignore_warnings=True, 
+                                        custom_metric=None, preprocess=True)
+        models, predictioms = regr.fit(X_train, X_test, y_train, y_test)
+        model_dictionary = regr.provide_models(X_train, X_test, y_train, y_test)
         print(models)
+        ```
 
     """
 
@@ -327,7 +328,9 @@ class LazyBoostingRegressor(RegressorMixin):
 
                 try: 
 
-                    model = GenericBoostingRegressor(obj=regr(), **kwargs)
+                    model = GenericBoostingRegressor(obj=regr(), 
+                                                     verbose=self.verbose, 
+                                                     **kwargs)
                 
                     model.fit(X_train, y_train)
 
@@ -389,7 +392,9 @@ class LazyBoostingRegressor(RegressorMixin):
                 start = time.time()
                 try:
 
-                    model = GenericBoostingRegressor(obj=regr(), **kwargs)
+                    model = GenericBoostingRegressor(obj=regr(), 
+                                                     verbose=self.verbose, 
+                                                     **kwargs)
 
                     if self.verbose > 0:
                         print("\n Fitting boosted " + name + " model...")

@@ -139,18 +139,30 @@ class LazyBoostingClassifier(ClassifierMixin):
     Examples
 
         ```python
-        import mlsauce as ms
-        from sklearn.datasets import load_breast_cancer
+        import os 
+        import mlsauce as ms 
+        from sklearn.datasets import load_breast_cancer, load_iris, load_wine, load_digits
         from sklearn.model_selection import train_test_split
-        data = load_breast_cancer()
-        X = data.data
-        y= data.target
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2,
-            random_state=123)
-        clf = ms.LazyBoostingClassifier(verbose=0, ignore_warnings=True, custom_metric=None)
-        models, predictions = clf.fit(X_train, X_test, y_train, y_test)
-        model_dictionary = clf.provide_models(X_train,X_test,y_train,y_test)
-        print(models)
+        from time import time
+
+        load_models = [load_breast_cancer, load_iris, load_wine]        
+
+        for model in load_models: 
+
+            data = model()
+            X = data.data
+            y= data.target
+
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 13)
+
+            clf = ms.LazyBoostingClassifier(verbose=1, ignore_warnings=False, 
+                                            custom_metric=None, preprocess=False)
+
+            start = time()
+            models, predictioms = clf.fit(X_train, X_test, y_train, y_test)
+            print(f"\nElapsed: {time() - start} seconds\n")
+
+            print(models)
         ```
 
     """
@@ -351,12 +363,13 @@ class LazyBoostingClassifier(ClassifierMixin):
                     if "random_state" in model().get_params().keys():
                         fitted_clf = GenericBoostingClassifier(
                             {**other_args, **kwargs},
+                            verbose=self.verbose,
                             obj=model(random_state=self.random_state), 
                             )
 
                     else:
                         fitted_clf = GenericBoostingClassifier(
-                            obj=model(**kwargs),                            
+                            obj=model(**kwargs), verbose=self.verbose,        
                         )
 
                     if self.verbose > 0:
@@ -433,12 +446,11 @@ class LazyBoostingClassifier(ClassifierMixin):
                     if "random_state" in model().get_params().keys():
                         fitted_clf = GenericBoostingClassifier(
                             obj=model(random_state=self.random_state),
-                            **kwargs
-                        )
+                                      verbose=self.verbose, **kwargs)
 
                     else:
                         fitted_clf = GenericBoostingClassifier(
-                            obj=model(),
+                            obj=model(), verbose=self.verbose,
                             **kwargs)
 
                     fitted_clf.fit(X_train, y_train)
