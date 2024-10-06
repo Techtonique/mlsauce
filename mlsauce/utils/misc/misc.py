@@ -121,3 +121,25 @@ def is_factor(y):
 # flatten list of lists
 def flatten(l):
     return [item for sublist in l for item in sublist]
+
+
+import importlib
+import subprocess
+import sys
+
+def install_package(package_name):
+    """Install a package dynamically using pip."""
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+
+def check_and_install(package_name):
+    """Check if a package is installed; if not, install it."""
+    try:
+        # Check if the package is already installed by importing it
+        importlib.import_module(package_name)
+        print(f"'{package_name}' is already installed.")
+    except ImportError:
+        print(f"'{package_name}' not found. Installing...")
+        install_package(package_name)
+        # Retry importing the package after installation
+        importlib.import_module(package_name)
+        print(f"'{package_name}' has been installed successfully.")

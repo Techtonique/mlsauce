@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.20.2'
+__version__ = '0.20.3'
 
 VERSION = __version__
 
@@ -158,12 +158,14 @@ def setup_package():
         "tqdm"
     ]
 
-    if platform.system() in ('Linux', 'Darwin'):
-        install_jax_requires = ['jax', 'jaxlib']  
-    else:
-        install_jax_requires = []
+    # if platform.system() in ('Linux', 'Darwin'):
+    #     install_jax_requires = ['jax', 'jaxlib']  
+    # else:
+    #     install_jax_requires = []
 
-    install_requires = [item for sublist in [install_all_requires, install_jax_requires] for item in sublist]
+    # install_requires = [item for sublist in [install_all_requires, install_jax_requires] for item in sublist]
+
+    install_requires = install_all_requires
 
     try: 
         cythonize_ext_modules = cythonize(ext_modules2) 

@@ -11,7 +11,7 @@ try:
 except ImportError:
     import _boosterc as boosterc
 from ..predictioninterval import PredictionInterval
-from ..utils import cluster
+from ..utils import cluster, check_and_install
 
 
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
@@ -183,6 +183,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         self.degree = degree
         self.poly_ = None
         self.weights_distr = weights_distr
+        if self.backend in ("gpu", "tpu"):
+            check_and_install("jax")
+            check_and_install("jaxlib")
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)

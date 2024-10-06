@@ -10,12 +10,14 @@ try:
     from . import _lassoc as mo
 except ImportError:
     import _lassoc as mo
-from ..utils import get_beta
+from ..utils import get_beta, check_and_install
 
-if platform.system() in ("Linux", "Darwin"):
+try:
     import jax.numpy as jnp
     from jax import device_put
     from jax.numpy.linalg import inv as jinv
+except ImportError:
+    pass
 
 
 class LassoRegressor(BaseEstimator, RegressorMixin):
@@ -56,6 +58,9 @@ class LassoRegressor(BaseEstimator, RegressorMixin):
         self.max_iter = max_iter
         self.tol = tol
         self.backend = backend
+        if self.backend in ("gpu", "tpu"):
+            check_and_install("jax")
+            check_and_install("jaxlib")
 
     def fit(self, X, y, **kwargs):
         """Fit matrixops (classifier) to training data (X, y)

@@ -15,9 +15,11 @@ from scipy import sparse
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
-if platform.system() in ('Linux', 'Darwin'):
+try:
     from jax import device_put
     import jax.numpy as jnp
+except ImportError:
+    pass 
 
 
 # column bind

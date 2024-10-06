@@ -8,8 +8,6 @@ requests
 scikit-learn
 scipy
 tqdm
-jax
-jaxlib
 
 [alldeps]
 numpy>=1.13.0

@@ -4,13 +4,15 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-from ..utils import get_beta
+from ..utils import get_beta, check_and_install
 from ._enet import fit_elasticnet, predict_elasticnet
 
-if platform.system() in ("Linux", "Darwin"):
+try:
     import jax.numpy as jnp
     from jax import device_put
     from jax.numpy.linalg import inv as jinv
+except ImportError:
+    pass
 
 
 class ElasticNetRegressor(BaseEstimator, RegressorMixin):
@@ -48,6 +50,9 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
         self.reg_lambda = reg_lambda
         self.alpha = alpha
         self.backend = backend
+        if self.backend in ("gpu", "tpu"):
+            check_and_install("jax")
+            check_and_install("jaxlib")
 
     def fit(self, X, y, **kwargs):
         """Fit matrixops (classifier) to training data (X, y)

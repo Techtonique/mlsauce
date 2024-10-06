@@ -10,7 +10,7 @@ try:
     from . import _boosterc as boosterc
 except ImportError:
     import _boosterc as boosterc
-from ..utils import cluster
+from ..utils import cluster, check_and_install
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
@@ -167,6 +167,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         self.degree = degree
         self.poly_ = None
         self.weights_distr = weights_distr
+        if self.backend in ("gpu", "tpu"):
+            check_and_install("jax")
+            check_and_install("jaxlib")
 
     def fit(self, X, y, **kwargs):
         """Fit Booster (classifier) to training data (X, y)

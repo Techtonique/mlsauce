@@ -9,12 +9,14 @@ try:
     from . import _ridgec as mo
 except ImportError:
     import _ridgec as mo
-from ..utils import get_beta
+from ..utils import get_beta, check_and_install
 
-if platform.system() in ("Linux", "Darwin"):
+try:
     import jax.numpy as jnp
     from jax import device_put
     from jax.numpy.linalg import inv as jinv
+except ImportError:
+    pass
 
 
 class RidgeRegressor(BaseEstimator, RegressorMixin):
@@ -47,6 +49,9 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
 
         self.reg_lambda = reg_lambda
         self.backend = backend
+        if self.backend in ("gpu", "tpu"):
+            check_and_install("jax")
+            check_and_install("jaxlib")
 
     def fit(self, X, y, **kwargs):
         """Fit matrixops (classifier) to training data (X, y)
