@@ -8,7 +8,7 @@ print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
 
 #load_models = [load_breast_cancer, load_iris, load_wine, load_digits]
 load_models = [load_breast_cancer, load_iris, load_wine]
-#load_models = [load_breast_cancer]
+#load_models = [load_digits]
 
 for model in load_models: 
 
@@ -18,7 +18,7 @@ for model in load_models:
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 13)
 
-    clf = ms.LazyBoostingClassifier(verbose=1, ignore_warnings=False, 
+    clf = ms.LazyBoostingClassifier(verbose=0, ignore_warnings=True, 
                                     custom_metric=None, preprocess=False)
 
     start = time()
