@@ -403,20 +403,28 @@ def predict_booster_regressor(object obj, double[:,::1] X):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))    
+    hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))        
+    print(f"\n in pyx: hh_i.shape: {np.asarray(hh_i).shape}\n")
+    print(f"\n in pyx: obj['fit_obj_i'][iter]: {obj['fit_obj_i'][iter]}\n")
+    print(f"\n in pyx: obj['fit_obj_i'][iter].coef_: {obj['fit_obj_i'][iter].coef_}\n")
+    print(f"\n in pyx: obj['fit_obj_i'][iter].coef_.shape: {obj['fit_obj_i'][iter].coef_.shape}\n")
+    print(f"in predict.pyx preds_sum: {preds_sum}")
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
+  print(f"in predict.pyx preds_sum: {preds_sum}")
+  print(f"in predict.pyx obj['ym']: {obj['ym']}")
+
   return np.asarray(obj['ym'] + np.asarray(preds_sum))
 
 # 2 - 3 update regressor -----
 
 def update_booster_regressor(object obj, double[:] X, double y, double alpha=0.5):
 
-  cdef int iter, n_estimators, n_classes
-  cdef double learning_rate
-  cdef double[:] residuals_i, xm_old, preds_sum
+  cdef int iter, n_estimators, n_classes, n_obs
+  cdef double learning_rate, preds_sum, residuals_i, centered_y
+  cdef double[:] xm_old
   cdef double[:,::1] hh_i
-  preds_sum = np.zeros(len(X))
+  preds_sum = 0
 
   n_obs = obj['n_obs']
   direct_link = obj['direct_link']
@@ -429,17 +437,24 @@ def update_booster_regressor(object obj, double[:] X, double y, double alpha=0.5
   for iter in range(n_estimators):
   
     iy = obj['col_index_i'][iter]
-    X_iy = X_[:, iy] # must be X_!
+    X_iy = np.asarray(X_[:, iy]).reshape(1, -1) # must be X_!
     W_i = obj['W_i'][iter]
     hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))    
+    print(f"\n in pyx: hh_i.shape: {np.asarray(hh_i).shape}\n")
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
     residuals_i = centered_y - preds_sum
-    obj['fit_obj_i'][iter].coef_ = obj['fit_obj_i'][iter].coef_ + (n_obs**(-alpha))*np.dot(residuals_i, hh_i)
-  
+    obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*np.dot(residuals_i, hh_i).ravel()    
+    
   xm_old = obj['xm']
-  obj['xm'] = (n_obs*xm_old + X)/(n_obs + 1)
+  print(f"\n in update.pyx xm_old: {xm_old} \n")
+  obj['xm'] = (n_obs*np.asarray(xm_old) + X)/(n_obs + 1)
+  print(f"\n in update.pyx obj['xm']: {obj['xm']} \n")
   obj['ym'] = (n_obs*obj['ym'] + y)/(n_obs + 1)
+  print(f"\n in update.pyx obj['ym']: {obj['ym']} \n")
   obj['xsd'] = np.sqrt(((n_obs - 1)*(obj['xsd']**2) + (np.asarray(X) -np.asarray(xm_old))*(np.asarray(X) - obj['xm']))/n_obs)  
+  print(f"\n in update.pyx obj['xsd']: {obj['xsd']} \n")
+  print(f"\n in update.pyx n_obs: {n_obs} \n")
   obj['n_obs'] = n_obs + 1
-
+  print(f"\n in update.pyx obj['n_obs']: {obj['n_obs']} \n")
+  
   return obj

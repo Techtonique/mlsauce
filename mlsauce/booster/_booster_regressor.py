@@ -375,15 +375,16 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             self.y_ = None
             preds = self.pi.predict(X, return_pi=True)
             return preds
+        #print(f"\n in predict self: {self} \n")
+        #print(f"\n in predict self.obj: {self.obj} \n")
+        #try:
+        return boosterc.predict_booster_regressor(
+            self.obj, np.asarray(X, order="C")
+        )
+        #except ValueError:
+        #    pass
 
-        try:
-            return boosterc.predict_booster_regressor(
-                self.obj, np.asarray(X, order="C")
-            )
-        except ValueError:
-            pass
-
-    def update(self, X, y):
+    def update(self, X, y, alpha=0.9):
         """Update model with new data.
 
         Args:
@@ -419,11 +420,11 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                         seed=self.seed,
                     ),
                 )
-            )
+            )                
 
         try:
             self.obj = boosterc.update_booster_regressor(
-                self.obj, np.asarray(X, order="C"), np.asarray(y, order="C")
+                self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), alpha
             )
         except ValueError:
             pass

@@ -34,7 +34,8 @@ clean-build: ## remove build artifacts
 	find . -name '*.egg-info' -exec rm -fr {} +
 	find . -name '*.egg' -exec rm -rf {} +
 	find . -name '*.so' -exec rm -f {} +
-	find . -name '*.c' -exec rm -f {} +	
+	find . -name '*.c' -exec rm -f {} +
+	find . -name '*.html' -exec rm -f {} +	
 
 clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyc' -exec rm -f {} +
