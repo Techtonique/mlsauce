@@ -71,17 +71,12 @@ obj = ms.GenericBoostingRegressor(regr, n_hidden_features=2, n_estimators=10)
 
 
 obj.fit(X_train, y_train)
-print(f"obj.obj['xm']: {obj.obj['xm']}")
-print(f"obj.obj['xsd']: {obj.obj['xsd']}")
 print(f"obj.obj['fit_obj_i'][0]: {obj.obj['fit_obj_i'][0].coef_}")
 print(f"score: {np.sqrt(np.mean(np.square(obj.predict(X_test[3:10,:]) - y_test[3:10])))}")
 
 obj = obj.update(X_test[0,:], y_test[0])
 obj = obj.update(X_test[1,:], y_test[1])
 obj = obj.update(X_test[2,:], y_test[2])
-print(f"obj.obj['xm']: {obj.obj['xm']}")
-print(f"obj.obj['xsd']: {obj.obj['xsd']}")
 print(f"obj.obj['fit_obj_i'][0]: {obj.obj['fit_obj_i'][0].coef_}")
-print(f"obj: {obj}")
 print(f"preds: {obj.predict(X_test[3:10,:])}")
 print(f"score: {np.sqrt(np.mean(np.square(obj.predict(X_test[3:10,:]) - y_test[3:10])))}")
