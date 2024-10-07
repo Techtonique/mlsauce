@@ -275,7 +275,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   
   cdef long int n
   cdef int i, p
-  cdef int n_classes
+  cdef int n_classes 
   cdef Py_ssize_t iter
   cdef dict res
   cdef double ym
@@ -307,6 +307,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['col_index_i'] = {}
   res['loss'] = []
   res['weights_distr'] = weights_distr
+  res['n_obs'] = n 
   
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
@@ -390,7 +391,6 @@ def predict_booster_regressor(object obj, double[:,::1] X):
   cdef double[:] preds_sum
   cdef double[:,::1] hh_i
 
-  n_classes = obj['n_classes']
   direct_link = obj['direct_link']
   n_estimators = obj['n_estimators']
   learning_rate = obj['learning_rate']
@@ -407,3 +407,39 @@ def predict_booster_regressor(object obj, double[:,::1] X):
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
   return np.asarray(obj['ym'] + np.asarray(preds_sum))
+
+# 2 - 3 update regressor -----
+
+def update_booster_regressor(object obj, double[:] X, double y, double alpha=0.5):
+
+  cdef int iter, n_estimators, n_classes
+  cdef double learning_rate
+  cdef double[:] residuals_i, xm_old, preds_sum
+  cdef double[:,::1] hh_i
+  preds_sum = np.zeros(len(X))
+
+  n_obs = obj['n_obs']
+  direct_link = obj['direct_link']
+  n_estimators = obj['n_estimators']
+  learning_rate = obj['learning_rate']
+  activation = obj['activation']
+  X_ = (X - obj['xm'][None, :])/obj['xsd'][None, :]
+  centered_y = y - obj['ym']
+  
+  for iter in range(n_estimators):
+  
+    iy = obj['col_index_i'][iter]
+    X_iy = X_[:, iy] # must be X_!
+    W_i = obj['W_i'][iter]
+    hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))    
+    preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+    residuals_i = centered_y - preds_sum
+    obj['fit_obj_i'][iter].coef_ = obj['fit_obj_i'][iter].coef_ + (n_obs**(-alpha))*np.dot(residuals_i, hh_i)
+  
+  xm_old = obj['xm']
+  obj['xm'] = (n_obs*xm_old + X)/(n_obs + 1)
+  obj['ym'] = (n_obs*obj['ym'] + y)/(n_obs + 1)
+  obj['xsd'] = np.sqrt(((n_obs - 1)*(obj['xsd']**2) + (np.asarray(X) -np.asarray(xm_old))*(np.asarray(X) - obj['xm']))/n_obs)  
+  obj['n_obs'] = n_obs + 1
+
+  return obj

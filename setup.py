@@ -168,9 +168,9 @@ def setup_package():
     install_requires = install_all_requires
 
     try: 
-        cythonize_ext_modules = cythonize(ext_modules2) 
+        cythonize_ext_modules = cythonize(ext_modules2, annotate=True) 
     except: 
-        cythonize_ext_modules = cythonize(ext_modules) 
+        cythonize_ext_modules = cythonize(ext_modules, annotate=True) 
         
     metadata = dict(name=DISTNAME,
                     maintainer=MAINTAINER,

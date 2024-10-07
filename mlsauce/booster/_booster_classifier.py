@@ -508,8 +508,8 @@ class GenericBoostingClassifier(LSBoostClassifier):
 
     Attributes:
 
-        obj: object
-            model object.
+        base_model: object
+            base learner.
 
         n_estimators: int
             number of boosting iterations.
@@ -580,7 +580,7 @@ class GenericBoostingClassifier(LSBoostClassifier):
 
     def __init__(
         self,
-        obj,
+        base_model,
         n_estimators=100,
         learning_rate=0.1,
         n_hidden_features=5,
@@ -602,7 +602,7 @@ class GenericBoostingClassifier(LSBoostClassifier):
         degree=None,
         weights_distr="uniform",
     ):
-        self.base_model = obj
+        self.base_model = base_model
         super().__init__(
             n_estimators=n_estimators,
             learning_rate=learning_rate,
@@ -624,5 +624,5 @@ class GenericBoostingClassifier(LSBoostClassifier):
             cluster_scaling=cluster_scaling,
             degree=degree,
             weights_distr=weights_distr,
-            base_model=obj,
+            base_model=self.base_model,
         )
