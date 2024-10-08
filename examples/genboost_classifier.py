@@ -50,6 +50,8 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
+print(obj.obj['fit_obj_i'])
+
 obj = ms.GenericBoostingClassifier(clf, tolerance=1e-2, n_clusters=2)
 print(obj.get_params())
 start = time()
@@ -61,6 +63,7 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
+print(obj.obj['fit_obj_i'])
 
 # data 2
 print("\n")
@@ -84,6 +87,8 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
+print(obj.obj['fit_obj_i'])
+
 obj = ms.GenericBoostingClassifier(clf, n_clusters=3)
 print(obj.get_params())
 start = time()
@@ -94,6 +99,8 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 print(obj.obj['loss'])
+
+print(obj.obj['fit_obj_i'])
 
 # data 3
 print("\n")
@@ -118,6 +125,8 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
+print(obj.obj['fit_obj_i'])
+
 
 print("\n")
 print("GenericBoosting  KRR -----")
@@ -134,6 +143,8 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
+print(obj.obj['fit_obj_i'])
+
 obj = ms.GenericBoostingClassifier(clf2, tolerance=1e-2, n_clusters=2)
 print(obj.get_params())
 start = time()
@@ -144,6 +155,8 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 print(obj.obj['loss'])
+
+print(obj.obj['fit_obj_i'])
 
 
 # data 2
@@ -167,6 +180,8 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 print(obj.obj['loss'])
+
+print(obj.obj['fit_obj_i'])
 
 obj = ms.GenericBoostingClassifier(clf2, n_clusters=3)
 print(obj.get_params())
@@ -201,4 +216,6 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 print(obj.obj['loss'])
+
+print(obj.obj['fit_obj_i'])
 

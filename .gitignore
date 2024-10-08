@@ -1,4 +1,7 @@
 mlsauce/.DS_Store
+*.html
+*.so 
+*.c
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

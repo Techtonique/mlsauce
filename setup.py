@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.20.3'
+__version__ = '0.21.0'
 
 VERSION = __version__
 
@@ -168,9 +168,9 @@ def setup_package():
     install_requires = install_all_requires
 
     try: 
-        cythonize_ext_modules = cythonize(ext_modules2) 
+        cythonize_ext_modules = cythonize(ext_modules2, annotate=True) 
     except: 
-        cythonize_ext_modules = cythonize(ext_modules) 
+        cythonize_ext_modules = cythonize(ext_modules, annotate=True) 
         
     metadata = dict(name=DISTNAME,
                     maintainer=MAINTAINER,

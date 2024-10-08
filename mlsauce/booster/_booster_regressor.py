@@ -375,19 +375,72 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             self.y_ = None
             preds = self.pi.predict(X, return_pi=True)
             return preds
+        #print(f"\n in predict self: {self} \n")
+        #print(f"\n in predict self.obj: {self.obj} \n")
+        #try:
+        return boosterc.predict_booster_regressor(
+            self.obj, np.asarray(X, order="C")
+        )
+        #except ValueError:
+        #    pass
 
-        try:
-            return boosterc.predict_booster_regressor(
-                self.obj, np.asarray(X, order="C")
-            )
-        except ValueError:
-            pass
+    def update(self, X, y, eta=0.9):
+        """Update model with new data.
+
+        Args:
+
+            X: {array-like}, shape = [n_samples=1, n_features]
+                Training vectors, where n_samples is the number
+                of samples and n_features is the number of features.
+
+            y: float = [n_samples=1]
+               Target value.
+            
+            eta: float
+                Inverse power applied to number of observations 
+                (defines a learning rate).
+
+        Returns:
+
+            self: object.
+        """
+
+        if isinstance(X, pd.DataFrame):
+            X = X.values
+
+        if self.degree is not None:
+            X = self.poly_.transform(X)
+
+        if self.n_clusters > 0:
+            X = np.column_stack(
+                (
+                    X,
+                    cluster(
+                        X,
+                        training=False,
+                        scaler=self.scaler_,
+                        label_encoder=self.label_encoder_,
+                        clusterer=self.clusterer_,
+                        seed=self.seed,
+                    ),
+                )
+            )                
+
+        
+        self.obj = boosterc.update_booster(
+            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta
+        )
+
+        return self
 
 
 class GenericBoostingRegressor(LSBoostRegressor):
     """LSBoost regressor.
 
     Attributes:
+
+        base_model: object
+            base learner.
 
         n_estimators: int
             number of boosting iterations.
@@ -467,7 +520,7 @@ class GenericBoostingRegressor(LSBoostRegressor):
 
     def __init__(
         self,
-        obj,
+        base_model,
         n_estimators=100,
         learning_rate=0.1,
         n_hidden_features=5,
@@ -492,7 +545,7 @@ class GenericBoostingRegressor(LSBoostRegressor):
         degree=None,
         weights_distr="uniform",
     ):
-        self.base_model = obj
+        self.base_model = base_model
         super().__init__(
             n_estimators=n_estimators,
             learning_rate=learning_rate,
@@ -517,5 +570,5 @@ class GenericBoostingRegressor(LSBoostRegressor):
             cluster_scaling=cluster_scaling,
             degree=degree,
             weights_distr=weights_distr,
-            base_model=obj,
+            base_model=self.base_model,
         )

@@ -341,7 +341,7 @@ class LazyBoostingRegressor(RegressorMixin):
                 try:
 
                     model = GenericBoostingRegressor(
-                        obj=regr(), verbose=self.verbose, **kwargs
+                        base_model=regr(), verbose=self.verbose, **kwargs
                     )
 
                     model.fit(X_train, y_train)
@@ -403,7 +403,7 @@ class LazyBoostingRegressor(RegressorMixin):
                 try:
 
                     model = GenericBoostingRegressor(
-                        obj=regr(), verbose=self.verbose, **kwargs
+                        base_model=regr(), verbose=self.verbose, **kwargs
                     )
 
                     if self.verbose > 0:
