@@ -384,7 +384,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         #except ValueError:
         #    pass
 
-    def update(self, X, y, alpha=0.9):
+    def update(self, X, y, eta=0.9):
         """Update model with new data.
 
         Args:
@@ -395,6 +395,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
             y: float = [n_samples=1]
                Target value.
+            
+            eta: float
+                Inverse power applied to number of observations 
+                (defines a learning rate).
 
         Returns:
 
@@ -422,12 +426,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 )
             )                
 
-        try:
-            self.obj = boosterc.update_booster_regressor(
-                self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), alpha
-            )
-        except ValueError:
-            pass
+        
+        self.obj = boosterc.update_booster(
+            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta
+        )
 
         return self
 

@@ -502,6 +502,54 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         except ValueError:
             pass
 
+    def update(self, X, y, eta=0.9):
+        """Update model with new data.
+
+        Args:
+
+            X: {array-like}, shape = [n_samples=1, n_features]
+                Training vectors, where n_samples is the number
+                of samples and n_features is the number of features.
+
+            y: float = [n_samples=1]
+               Target value.
+            
+            eta: float
+                Inverse power applied to number of observations 
+                (defines a learning rate).
+
+        Returns:
+
+            self: object.
+        """
+
+        if isinstance(X, pd.DataFrame):
+            X = X.values
+
+        if self.degree is not None:
+            X = self.poly_.transform(X)
+
+        if self.n_clusters > 0:
+            X = np.column_stack(
+                (
+                    X,
+                    cluster(
+                        X,
+                        training=False,
+                        scaler=self.scaler_,
+                        label_encoder=self.label_encoder_,
+                        clusterer=self.clusterer_,
+                        seed=self.seed,
+                    ),
+                )
+            )                
+        
+        self.obj = boosterc.update_booster(
+            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta 
+        )
+
+        return self
+
 
 class GenericBoostingClassifier(LSBoostClassifier):
     """Generic Boosting classifier (using any classifier as base learner).

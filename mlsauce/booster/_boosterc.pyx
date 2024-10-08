@@ -71,7 +71,12 @@ def one_hot_encode(long int[:] y,
         res[i, y[i]] = 1
 
     return np.asarray(res)
- 
+
+def one_hot_encode2(long int y, int n_classes):
+  cdef double[:] res = np.zeros(n_classes)
+  res[y] = 1
+  return np.asarray(res)
+    
 # 0 - 3 activation functions ----- 
 
 def relu_activation(x):
@@ -149,6 +154,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
   res['n_classes'] = n_classes
+  res['n_obs'] = n 
   
   Y = one_hot_encode(y, n_classes)
   Ym = np.mean(Y, axis=0)
@@ -248,6 +254,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
     hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))
+    # works because the regressor is Multitask 
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
   out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(preds_sum))
@@ -408,15 +415,15 @@ def predict_booster_regressor(object obj, double[:,::1] X):
   
   return np.asarray(obj['ym'] + np.asarray(preds_sum))
 
-# 2 - 3 update regressor -----
+# 2 - 3 update -----
 
-def update_booster_regressor(object obj, double[:] X, double y, double alpha=0.5):
+def update_booster(object obj, double[:] X, y, double alpha=0.5):
 
   cdef int iter, n_estimators, n_classes, n_obs
-  cdef double learning_rate, preds_sum, residuals_i, centered_y
+  cdef double learning_rate
   cdef double[:] xm_old
   cdef double[:,::1] hh_i
-  preds_sum = 0
+  cdef str type_fit   
 
   n_obs = obj['n_obs']
   direct_link = obj['direct_link']
@@ -424,22 +431,92 @@ def update_booster_regressor(object obj, double[:] X, double y, double alpha=0.5
   learning_rate = obj['learning_rate']
   activation = obj['activation']
   X_ = (X - obj['xm'][None, :])/obj['xsd'][None, :]
-  centered_y = y - obj['ym']
   
-  for iter in range(n_estimators):
+  if np.issubdtype(y.dtype, np.integer): # classification
+    n_classes = obj["n_classes"]
+    preds_sum = np.zeros(n_classes)
+    Y = one_hot_encode2(y, n_classes)
+    centered_y = Y - obj['Ym']
+    residuals_i = np.zeros(n_classes)
+    type_fit = "classification"
+  else: # regression
+    preds_sum = 0
+    centered_y = y - obj['ym']
+    residuals_i = 0
+    type_fit = "regression"
   
-    iy = obj['col_index_i'][iter]
-    X_iy = np.asarray(X_[:, iy]).reshape(1, -1) # must be X_!
-    W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))        
-    preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
-    residuals_i = centered_y - preds_sum
-    obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*np.dot(residuals_i, hh_i).ravel()    
-    
+  if type_fit == "regression": 
+    #for iter in range(n_estimators):    
+    #  iy = obj['col_index_i'][iter]
+    #  X_iy = np.asarray(X_[:, iy]).reshape(1, -1) # must be X_!
+    #  W_i = obj['W_i'][iter]
+    #  hh_i = np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(np.dot(X_iy, W_i))            
+    #  preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+    #  residuals_i = centered_y - preds_sum
+    #  obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*np.dot(residuals_i, hh_i).ravel()    
+    # Initialize cumulative sum of coefficients and count of iterations
+    cumulative_coef_ = None
+
+    for iter in range(n_estimators):    
+        iy = obj['col_index_i'][iter]
+        X_iy = np.asarray(X_[:, iy]).reshape(1, -1)  # must be X_!
+        W_i = obj['W_i'][iter]
+        hh_i = (
+            np.hstack((X_iy, activation_choice(activation)(np.dot(X_iy, W_i))))
+            if direct_link
+            else activation_choice(activation)(np.dot(X_iy, W_i))
+        )
+        
+        preds_sum = preds_sum + learning_rate * np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+        residuals_i = centered_y - preds_sum
+        
+        # Update the coefficients as in your original code
+        obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs ** -alpha) * np.dot(residuals_i, hh_i).ravel()
+        
+        # If this is the first iteration, initialize cumulative_coef_ to the current coef_
+        if cumulative_coef_ is None:
+            cumulative_coef_ = obj['fit_obj_i'][iter].coef_.copy()
+        else:
+            cumulative_coef_ += obj['fit_obj_i'][iter].coef_
+
+        # Calculate the running average of the coefficients and update obj['fit_obj_i'][iter].coef_
+        obj['fit_obj_i'][iter].coef_ = cumulative_coef_ / (iter + 1)
+
+  else: # type_fit == "classification": 
+
+    # Initialize a variable to keep track of the cumulative sum of coef_
+    cumulative_coef_sum = np.zeros_like(obj['fit_obj_i'][0].coef_)  # assuming all coef_ have the same shape
+
+    for iter in range(n_estimators):    
+        iy = obj['col_index_i'][iter]
+        X_iy = np.asarray(X_)[:, iy]  # must be X_!  
+        W_i = obj['W_i'][iter]      
+        gXW = np.asarray(activation_choice(activation)(np.dot(X_iy, W_i)))
+        
+        if direct_link:
+            hh_i = np.hstack((np.array(X_iy), np.array(gXW)))  
+        else: 
+            hh_i = gXW      
+
+        preds_sum = preds_sum + learning_rate * np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))            
+        residuals_i = centered_y - preds_sum      
+        
+        # Update cumulative sum of coef_
+        cumulative_coef_sum += np.asarray(obj['fit_obj_i'][iter].coef_) 
+        
+        # Calculate the average of coef_ values so far
+        average_coef = cumulative_coef_sum / (iter + 1)
+        
+        # Update coef_ with the average of all previous coef_ values + (n_obs ** (-alpha)) * np.dot(residuals_i.T, hh_i)
+        obj['fit_obj_i'][iter].coef_ = average_coef 
+
   xm_old = obj['xm']
   obj['xm'] = (n_obs*np.asarray(xm_old) + X)/(n_obs + 1)
-  obj['ym'] = (n_obs*obj['ym'] + y)/(n_obs + 1)
   obj['xsd'] = np.sqrt(((n_obs - 1)*(obj['xsd']**2) + (np.asarray(X) -np.asarray(xm_old))*(np.asarray(X) - obj['xm']))/n_obs)  
   obj['n_obs'] = n_obs + 1
+  if type_fit == "regression":      
+    obj['ym'] = (n_obs*obj['ym'] + y)/(n_obs + 1)    
+  else: # type_fit == "classification"
+    obj['Ym'] = (n_obs*obj['Ym'] + Y)/(n_obs + 1)
   
   return obj
