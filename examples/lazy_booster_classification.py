@@ -16,7 +16,7 @@ for model in load_models:
     X = data.data
     y= data.target
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 13)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .2, random_state = 123)
 
     clf = ms.LazyBoostingClassifier(verbose=0, ignore_warnings=True, #n_jobs=2,
                                     custom_metric=None, preprocess=False)

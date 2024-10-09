@@ -20,16 +20,17 @@ removed_regressors = [
     # "KernelRidge",
    #"MultiOutputRegressor",
     #"MultiTaskElasticNet",
-    #"MultiTaskElasticNetCV",
+    "MultiTaskElasticNetCV",
     #"MultiTaskLasso",
-    #"MultiTaskLassoCV",
-    # "NuSVR",
+    "MultiTaskLassoCV",
+     "NuSVR",
     "OrthogonalMatchingPursuit",
     "OrthogonalMatchingPursuitCV",
     "PLSCanonical",
     "PLSRegression",
     "RadiusNeighborsRegressor",
     "RandomForestRegressor",
+    "RANSACRegressor",
     "RegressorChain",
     "StackingRegressor",
     # "SVR",
@@ -56,6 +57,7 @@ MTASKREGRESSORS = [
         issubclass(est[1], RegressorMixin)
         and (est[0] not in removed_regressors)
         and (est[0][:5] != "Multi")
+        and (est[0][-2:] != "CV")
         and is_multitask_estimator(est[1]()) == False
     )
 ]
