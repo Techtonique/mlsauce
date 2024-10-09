@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from copy import deepcopy
 from functools import partial
+from joblib import Parallel, delayed
 from tqdm import tqdm
 import time
 
@@ -351,173 +352,218 @@ class LazyBoostingClassifier(ClassifierMixin):
             ]
 
         if self.preprocess is True:
+                
+            if self.n_jobs is None:
 
-            for name, model in tqdm(self.classifiers):  # do parallel exec
+                for name, model in tqdm(self.classifiers):  # do parallel exec
 
-                other_args = (
-                    {}
-                )  # use this trick for `random_state` too --> refactor
-                try:
-                    if (
-                        "n_jobs" in model().get_params().keys()
-                        and name.find("LogisticRegression") == -1
-                    ):
-                        other_args["n_jobs"] = self.n_jobs
-                except Exception:
-                    pass
-
-                start = time.time()
-
-                try:
-                    if "random_state" in model().get_params().keys():
-                        fitted_clf = GenericBoostingClassifier(
-                            {**other_args, **kwargs},
-                            verbose=self.verbose,
-                            base_model=model(random_state=self.random_state),
-                        )
-
-                    else:
-                        fitted_clf = GenericBoostingClassifier(
-                            base_model=model(**kwargs),
-                            verbose=self.verbose,
-                        )
-
-                    if self.verbose > 0:
-                        print("\n Fitting boosted " + name + " model...")
-                    fitted_clf.fit(X_train, y_train)
-
-                    pipe = Pipeline(
-                        [
-                            ("preprocessor", preprocessor),
-                            ("classifier", fitted_clf),
-                        ]
-                    )
-
-                    if self.verbose > 0:
-                        print("\n Fitting boosted " + name + " model...")
-                    pipe.fit(X_train, y_train)
-                    self.models_[name] = pipe
-                    y_pred = pipe.predict(X_test)
-                    accuracy = accuracy_score(y_test, y_pred, normalize=True)
-                    b_accuracy = balanced_accuracy_score(y_test, y_pred)
-                    f1 = f1_score(y_test, y_pred, average="weighted")
+                    other_args = (
+                        {}
+                    )  # use this trick for `random_state` too --> refactor
                     try:
-                        roc_auc = roc_auc_score(y_test, y_pred)
-                    except Exception as exception:
-                        roc_auc = None
-                        if self.ignore_warnings is False:
-                            print("ROC AUC couldn't be calculated for " + name)
-                            print(exception)
-                    names.append(name)
-                    Accuracy.append(accuracy)
-                    B_Accuracy.append(b_accuracy)
-                    ROC_AUC.append(roc_auc)
-                    F1.append(f1)
-                    TIME.append(time.time() - start)
-                    if self.custom_metric is not None:
-                        custom_metric = self.custom_metric(y_test, y_pred)
-                        CUSTOM_METRIC.append(custom_metric)
-                    if self.verbose > 0:
-                        if self.custom_metric is not None:
-                            print(
-                                {
-                                    "Model": name,
-                                    "Accuracy": accuracy,
-                                    "Balanced Accuracy": b_accuracy,
-                                    "ROC AUC": roc_auc,
-                                    "F1 Score": f1,
-                                    self.custom_metric.__name__: custom_metric,
-                                    "Time taken": time.time() - start,
-                                }
+                        if (
+                            "n_jobs" in model().get_params().keys()
+                            and name.find("LogisticRegression") == -1
+                        ):
+                            other_args["n_jobs"] = self.n_jobs
+                    except Exception:
+                        pass
+
+                    start = time.time()
+
+                    try:
+                        if "random_state" in model().get_params().keys():
+                            fitted_clf = GenericBoostingClassifier(
+                                {**other_args, **kwargs},
+                                verbose=self.verbose,
+                                base_model=model(random_state=self.random_state),
                             )
+
                         else:
-                            print(
-                                {
-                                    "Model": name,
-                                    "Accuracy": accuracy,
-                                    "Balanced Accuracy": b_accuracy,
-                                    "ROC AUC": roc_auc,
-                                    "F1 Score": f1,
-                                    "Time taken": time.time() - start,
-                                }
+                            fitted_clf = GenericBoostingClassifier(
+                                base_model=model(**kwargs),
+                                verbose=self.verbose,
                             )
-                    if self.predictions:
-                        predictions[name] = y_pred
-                except Exception as exception:
-                    if self.ignore_warnings is False:
-                        print(name + " model failed to execute")
-                        print(exception)
+
+                        if self.verbose > 0:
+                            print("\n Fitting boosted " + name + " model...")
+                        fitted_clf.fit(X_train, y_train)
+
+                        pipe = Pipeline(
+                            [
+                                ("preprocessor", preprocessor),
+                                ("classifier", fitted_clf),
+                            ]
+                        )
+
+                        if self.verbose > 0:
+                            print("\n Fitting boosted " + name + " model...")
+                        pipe.fit(X_train, y_train)
+                        self.models_[name] = pipe
+                        y_pred = pipe.predict(X_test)
+                        accuracy = accuracy_score(y_test, y_pred, normalize=True)
+                        b_accuracy = balanced_accuracy_score(y_test, y_pred)
+                        f1 = f1_score(y_test, y_pred, average="weighted")
+                        try:
+                            roc_auc = roc_auc_score(y_test, y_pred)
+                        except Exception as exception:
+                            roc_auc = None
+                            if self.ignore_warnings is False:
+                                print("ROC AUC couldn't be calculated for " + name)
+                                print(exception)
+                        names.append(name)
+                        Accuracy.append(accuracy)
+                        B_Accuracy.append(b_accuracy)
+                        ROC_AUC.append(roc_auc)
+                        F1.append(f1)
+                        TIME.append(time.time() - start)
+                        if self.custom_metric is not None:
+                            custom_metric = self.custom_metric(y_test, y_pred)
+                            CUSTOM_METRIC.append(custom_metric)
+                        if self.verbose > 0:
+                            if self.custom_metric is not None:
+                                print(
+                                    {
+                                        "Model": name,
+                                        "Accuracy": accuracy,
+                                        "Balanced Accuracy": b_accuracy,
+                                        "ROC AUC": roc_auc,
+                                        "F1 Score": f1,
+                                        self.custom_metric.__name__: custom_metric,
+                                        "Time taken": time.time() - start,
+                                    }
+                                )
+                            else:
+                                print(
+                                    {
+                                        "Model": name,
+                                        "Accuracy": accuracy,
+                                        "Balanced Accuracy": b_accuracy,
+                                        "ROC AUC": roc_auc,
+                                        "F1 Score": f1,
+                                        "Time taken": time.time() - start,
+                                    }
+                                )
+                        if self.predictions:
+                            predictions[name] = y_pred
+                    except Exception as exception:
+                        if self.ignore_warnings is False:
+                            print(name + " model failed to execute")
+                            print(exception)
+
+            else:
+                
+                # train_model(self, name, model, X_train, y_train, X_test, y_test, 
+                #use_preprocessing=False, preprocessor=None, 
+                #    **kwargs):
+                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
+                                name, model, X_train, y_train, X_test, y_test, 
+                                use_preprocessing=True, preprocessor=preprocessor, **kwargs
+                            ) for name, model in tqdm(self.classifiers)
+                        )
+                Accuracy = [res["accuracy"] for res in results]
+                B_Accuracy = [res["balanced_accuracy"] for res in results]
+                ROC_AUC = [res["roc_auc"] for res in results]
+                F1 = [res["f1"] for res in results]
+                names = [res["name"] for res in results]
+                TIME = [res["time"] for res in results]
+                if self.custom_metric is not None:
+                    CUSTOM_METRIC = [res["custom_metric"] for res in results]
+                if self.predictions:
+                    predictions = {res["name"]: res["predictions"] for res in results}
+
 
         else:  # no preprocessing
+                
+            if self.n_jobs is None:
 
-            for name, model in tqdm(self.classifiers):  # do parallel exec
-                start = time.time()
-                try:
-                    if "random_state" in model().get_params().keys():
-                        fitted_clf = GenericBoostingClassifier(
-                            base_model=model(random_state=self.random_state),
-                            verbose=self.verbose,
-                            **kwargs
-                        )
-
-                    else:
-                        fitted_clf = GenericBoostingClassifier(
-                            base_model=model(), verbose=self.verbose, **kwargs
-                        )
-
-                    fitted_clf.fit(X_train, y_train)
-
-                    self.models_[name] = fitted_clf
-                    y_pred = fitted_clf.predict(X_test)
-                    accuracy = accuracy_score(y_test, y_pred, normalize=True)
-                    b_accuracy = balanced_accuracy_score(y_test, y_pred)
-                    f1 = f1_score(y_test, y_pred, average="weighted")
+                for name, model in tqdm(self.classifiers):  # do parallel exec
+                    start = time.time()
                     try:
-                        roc_auc = roc_auc_score(y_test, y_pred)
-                    except Exception as exception:
-                        roc_auc = None
-                        if self.ignore_warnings is False:
-                            print("ROC AUC couldn't be calculated for " + name)
-                            print(exception)
-                    names.append(name)
-                    Accuracy.append(accuracy)
-                    B_Accuracy.append(b_accuracy)
-                    ROC_AUC.append(roc_auc)
-                    F1.append(f1)
-                    TIME.append(time.time() - start)
-                    if self.custom_metric is not None:
-                        custom_metric = self.custom_metric(y_test, y_pred)
-                        CUSTOM_METRIC.append(custom_metric)
-                    if self.verbose > 0:
-                        if self.custom_metric is not None:
-                            print(
-                                {
-                                    "Model": name,
-                                    "Accuracy": accuracy,
-                                    "Balanced Accuracy": b_accuracy,
-                                    "ROC AUC": roc_auc,
-                                    "F1 Score": f1,
-                                    self.custom_metric.__name__: custom_metric,
-                                    "Time taken": time.time() - start,
-                                }
+                        if "random_state" in model().get_params().keys():
+                            fitted_clf = GenericBoostingClassifier(
+                                base_model=model(random_state=self.random_state),
+                                verbose=self.verbose,
+                                **kwargs
                             )
+
                         else:
-                            print(
-                                {
-                                    "Model": name,
-                                    "Accuracy": accuracy,
-                                    "Balanced Accuracy": b_accuracy,
-                                    "ROC AUC": roc_auc,
-                                    "F1 Score": f1,
-                                    "Time taken": time.time() - start,
-                                }
+                            fitted_clf = GenericBoostingClassifier(
+                                base_model=model(), verbose=self.verbose, **kwargs
                             )
-                    if self.predictions:
-                        predictions[name] = y_pred
-                except Exception as exception:
-                    if self.ignore_warnings is False:
-                        print(name + " model failed to execute")
-                        print(exception)
+
+                        fitted_clf.fit(X_train, y_train)
+
+                        self.models_[name] = fitted_clf
+                        y_pred = fitted_clf.predict(X_test)
+                        accuracy = accuracy_score(y_test, y_pred, normalize=True)
+                        b_accuracy = balanced_accuracy_score(y_test, y_pred)
+                        f1 = f1_score(y_test, y_pred, average="weighted")
+                        try:
+                            roc_auc = roc_auc_score(y_test, y_pred)
+                        except Exception as exception:
+                            roc_auc = None
+                            if self.ignore_warnings is False:
+                                print("ROC AUC couldn't be calculated for " + name)
+                                print(exception)
+                        names.append(name)
+                        Accuracy.append(accuracy)
+                        B_Accuracy.append(b_accuracy)
+                        ROC_AUC.append(roc_auc)
+                        F1.append(f1)
+                        TIME.append(time.time() - start)
+                        if self.custom_metric is not None:
+                            custom_metric = self.custom_metric(y_test, y_pred)
+                            CUSTOM_METRIC.append(custom_metric)
+                        if self.verbose > 0:
+                            if self.custom_metric is not None:
+                                print(
+                                    {
+                                        "Model": name,
+                                        "Accuracy": accuracy,
+                                        "Balanced Accuracy": b_accuracy,
+                                        "ROC AUC": roc_auc,
+                                        "F1 Score": f1,
+                                        self.custom_metric.__name__: custom_metric,
+                                        "Time taken": time.time() - start,
+                                    }
+                                )
+                            else:
+                                print(
+                                    {
+                                        "Model": name,
+                                        "Accuracy": accuracy,
+                                        "Balanced Accuracy": b_accuracy,
+                                        "ROC AUC": roc_auc,
+                                        "F1 Score": f1,
+                                        "Time taken": time.time() - start,
+                                    }
+                                )
+                        if self.predictions:
+                            predictions[name] = y_pred
+                    except Exception as exception:
+                        if self.ignore_warnings is False:
+                            print(name + " model failed to execute")
+                            print(exception)
+
+            else: 
+
+                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
+                                            name, model, X_train, y_train, X_test, y_test, 
+                                            use_preprocessing=False, **kwargs
+                                        ) for name, model in tqdm(self.classifiers)
+                                    )
+                Accuracy = [res["accuracy"] for res in results]
+                B_Accuracy = [res["balanced_accuracy"] for res in results]
+                ROC_AUC = [res["roc_auc"] for res in results]
+                F1 = [res["f1"] for res in results]
+                names = [res["name"] for res in results]
+                TIME = [res["time"] for res in results]
+                if self.custom_metric is not None:
+                    CUSTOM_METRIC = [res["custom_metric"] for res in results]
+                if self.predictions:
+                    predictions = {res["name"]: res["predictions"] for res in results}
+                    
 
         if self.custom_metric is None:
             scores = pd.DataFrame(
@@ -596,3 +642,90 @@ class LazyBoostingClassifier(ClassifierMixin):
             self.fit(X_train, X_test, y_train, y_test)
 
         return self.models_
+
+
+    def train_model(self, name, model, X_train, y_train, X_test, y_test, 
+                    use_preprocessing=False, preprocessor=None, 
+                    **kwargs):
+        """
+        Function to train a single model and return its results.
+        """
+        other_args = {}
+
+        # Handle n_jobs parameter
+        try:
+            if "n_jobs" in model().get_params().keys() and "LogisticRegression" not in name:
+                other_args["n_jobs"] = self.n_jobs
+        except Exception:
+            pass
+
+        start = time.time()
+
+        try:
+            # Handle random_state parameter
+            if "random_state" in model().get_params().keys():
+                fitted_clf = GenericBoostingClassifier(
+                    {**other_args, **kwargs},
+                    verbose=self.verbose,
+                    base_model=model(random_state=self.random_state),
+                )
+            else:
+                fitted_clf = GenericBoostingClassifier(
+                    base_model=model(**kwargs),
+                    verbose=self.verbose,
+                )
+
+            if self.verbose > 0:
+                print("\n Fitting boosted " + name + " model...")
+
+            fitted_clf.fit(X_train, y_train)
+
+            if use_preprocessing and preprocessor is not None:
+                pipe = Pipeline(
+                    [
+                        ("preprocessor", preprocessor),
+                        ("classifier", fitted_clf),
+                    ]
+                )
+                if self.verbose > 0:
+                    print("\n Fitting pipeline with preprocessing for " + name + " model...")
+                pipe.fit(X_train, y_train)
+                y_pred = pipe.predict(X_test)
+            else:
+                # Case with no preprocessing
+                if self.verbose > 0:
+                    print("\n Fitting model without preprocessing for " + name + " model...")
+                y_pred = fitted_clf.predict(X_test)
+
+            accuracy = accuracy_score(y_test, y_pred, normalize=True)
+            b_accuracy = balanced_accuracy_score(y_test, y_pred)
+            f1 = f1_score(y_test, y_pred, average="weighted")
+            roc_auc = None
+
+            try:
+                roc_auc = roc_auc_score(y_test, y_pred)
+            except Exception as exception:
+                if self.ignore_warnings is False:
+                    print("ROC AUC couldn't be calculated for " + name)
+                    print(exception)
+
+            custom_metric = None
+            if self.custom_metric is not None:
+                custom_metric = self.custom_metric(y_test, y_pred)
+
+            return {
+                "name": name,
+                "model": fitted_clf if not use_preprocessing else pipe,
+                "accuracy": accuracy,
+                "balanced_accuracy": b_accuracy,
+                "roc_auc": roc_auc,
+                "f1": f1,
+                "custom_metric": custom_metric,
+                "time": time.time() - start,
+                "predictions": y_pred,
+            }
+        except Exception as exception:
+            if self.ignore_warnings is False:
+                print(name + " model failed to execute")
+                print(exception)
+            return None

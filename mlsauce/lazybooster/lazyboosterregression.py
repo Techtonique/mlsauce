@@ -10,6 +10,7 @@ except ImportError:
 from functools import partial
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from copy import deepcopy
+from joblib import Parallel, delayed
 from tqdm import tqdm
 from sklearn.utils import all_estimators
 from sklearn.pipeline import Pipeline
@@ -19,7 +20,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.base import RegressorMixin
 from sklearn.metrics import (
     r2_score,
-    mean_squared_error,
+    root_mean_squared_error,
 )
 from .config import REGRESSORS
 from ..booster import GenericBoostingRegressor
@@ -333,121 +334,170 @@ class LazyBoostingRegressor(RegressorMixin):
             ]
 
         if self.preprocess is True:
+            
+            if self.n_jobs is None:
 
-            for name, regr in tqdm(self.regressors):  # do parallel exec
+                for name, regr in tqdm(self.regressors):  # do parallel exec
 
-                start = time.time()
+                    start = time.time()
 
-                try:
+                    try:
 
-                    model = GenericBoostingRegressor(
-                        base_model=regr(), verbose=self.verbose, **kwargs
-                    )
+                        model = GenericBoostingRegressor(
+                            base_model=regr(), verbose=self.verbose, **kwargs
+                        )
 
-                    model.fit(X_train, y_train)
+                        model.fit(X_train, y_train)
 
-                    pipe = Pipeline(
-                        steps=[
-                            ("preprocessor", preprocessor),
-                            ("regressor", model),
-                        ]
-                    )
-                    if self.verbose > 0:
-                        print("\n Fitting boosted " + name + " model...")
-                    pipe.fit(X_train, y_train)
+                        pipe = Pipeline(
+                            steps=[
+                                ("preprocessor", preprocessor),
+                                ("regressor", model),
+                            ]
+                        )
+                        if self.verbose > 0:
+                            print("\n Fitting boosted " + name + " model...")
+                        pipe.fit(X_train, y_train)
 
-                    self.models_[name] = pipe
-                    y_pred = pipe.predict(X_test)
-                    r_squared = r2_score(y_test, y_pred)
-                    adj_rsquared = adjusted_rsquared(
-                        r_squared, X_test.shape[0], X_test.shape[1]
-                    )
-                    rmse = mean_squared_error(y_test, y_pred, squared=False)
+                        self.models_[name] = pipe
+                        y_pred = pipe.predict(X_test)
+                        r_squared = r2_score(y_test, y_pred)
+                        adj_rsquared = adjusted_rsquared(
+                            r_squared, X_test.shape[0], X_test.shape[1]
+                        )
+                        rmse = root_mean_squared_error(y_test, y_pred)
 
-                    names.append(name)
-                    R2.append(r_squared)
-                    ADJR2.append(adj_rsquared)
-                    RMSE.append(rmse)
-                    TIME.append(time.time() - start)
-
-                    if self.custom_metric:
-                        custom_metric = self.custom_metric(y_test, y_pred)
-                        CUSTOM_METRIC.append(custom_metric)
-
-                    if self.verbose > 0:
-                        scores_verbose = {
-                            "Model": name,
-                            "R-Squared": r_squared,
-                            "Adjusted R-Squared": adj_rsquared,
-                            "RMSE": rmse,
-                            "Time taken": time.time() - start,
-                        }
+                        names.append(name)
+                        R2.append(r_squared)
+                        ADJR2.append(adj_rsquared)
+                        RMSE.append(rmse)
+                        TIME.append(time.time() - start)
 
                         if self.custom_metric:
-                            scores_verbose["Custom metric"] = custom_metric
+                            custom_metric = self.custom_metric(y_test, y_pred)
+                            CUSTOM_METRIC.append(custom_metric)
 
-                        print(scores_verbose)
-                    if self.predictions:
-                        predictions[name] = y_pred
+                        if self.verbose > 0:
+                            scores_verbose = {
+                                "Model": name,
+                                "R-Squared": r_squared,
+                                "Adjusted R-Squared": adj_rsquared,
+                                "RMSE": rmse,
+                                "Time taken": time.time() - start,
+                            }
 
-                except Exception as exception:
+                            if self.custom_metric:
+                                scores_verbose["Custom metric"] = custom_metric
 
-                    if self.ignore_warnings is False:
-                        print(name + " model failed to execute")
-                        print(exception)
+                            print(scores_verbose)
+                        if self.predictions:
+                            predictions[name] = y_pred
+
+                    except Exception as exception:
+
+                        if self.ignore_warnings is False:
+                            print(name + " model failed to execute")
+                            print(exception)
+            
+            else: 
+
+                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
+                                name, model, X_train, y_train, X_test, y_test, 
+                                use_preprocessing=True, preprocessor=preprocessor, **kwargs
+                            ) for name, model in tqdm(self.regressors)
+                        )
+                R2 = [result["r_squared"] for result in results if result is not None]
+                ADJR2 = [result["adj_rsquared"] for result in results if result is not None]
+                RMSE = [result["rmse"] for result in results if result is not None]
+                TIME = [result["time"] for result in results if result is not None]
+                names = [result["name"] for result in results if result is not None]
+                if self.custom_metric:
+                    CUSTOM_METRIC = [
+                        result["custom_metric"] for result in results if result is not None
+                    ]
+                if self.predictions:
+                    predictions = {
+                        result["name"]: result["predictions"] for result in results if result is not None
+                    }
+
+
 
         else:  # self.preprocess is False; no preprocessing
 
-            for name, regr in tqdm(self.regressors):  # do parallel exec
-                start = time.time()
-                try:
+            if self.n_jobs is None:
 
-                    model = GenericBoostingRegressor(
-                        base_model=regr(), verbose=self.verbose, **kwargs
-                    )
+                for name, regr in tqdm(self.regressors):  # do parallel exec
+                    start = time.time()
+                    try:
 
-                    if self.verbose > 0:
-                        print("\n Fitting boosted " + name + " model...")
-                    model.fit(X_train, y_train)
+                        model = GenericBoostingRegressor(
+                            base_model=regr(), verbose=self.verbose, **kwargs
+                        )
 
-                    self.models_[name] = model
-                    y_pred = model.predict(X_test)
+                        if self.verbose > 0:
+                            print("\n Fitting boosted " + name + " model...")
+                        model.fit(X_train, y_train)
 
-                    r_squared = r2_score(y_test, y_pred)
-                    adj_rsquared = adjusted_rsquared(
-                        r_squared, X_test.shape[0], X_test.shape[1]
-                    )
-                    rmse = mean_squared_error(y_test, y_pred, squared=False)
+                        self.models_[name] = model
+                        y_pred = model.predict(X_test)
 
-                    names.append(name)
-                    R2.append(r_squared)
-                    ADJR2.append(adj_rsquared)
-                    RMSE.append(rmse)
-                    TIME.append(time.time() - start)
+                        r_squared = r2_score(y_test, y_pred)
+                        adj_rsquared = adjusted_rsquared(
+                            r_squared, X_test.shape[0], X_test.shape[1]
+                        )
+                        rmse = root_mean_squared_error(y_test, y_pred)
 
-                    if self.custom_metric:
-                        custom_metric = self.custom_metric(y_test, y_pred)
-                        CUSTOM_METRIC.append(custom_metric)
-
-                    if self.verbose > 0:
-                        scores_verbose = {
-                            "Model": name,
-                            "R-Squared": r_squared,
-                            "Adjusted R-Squared": adj_rsquared,
-                            "RMSE": rmse,
-                            "Time taken": time.time() - start,
-                        }
+                        names.append(name)
+                        R2.append(r_squared)
+                        ADJR2.append(adj_rsquared)
+                        RMSE.append(rmse)
+                        TIME.append(time.time() - start)
 
                         if self.custom_metric:
-                            scores_verbose["Custom metric"] = custom_metric
+                            custom_metric = self.custom_metric(y_test, y_pred)
+                            CUSTOM_METRIC.append(custom_metric)
 
-                        print(scores_verbose)
-                    if self.predictions:
-                        predictions[name] = y_pred
-                except Exception as exception:
-                    if self.ignore_warnings is False:
-                        print(name + " model failed to execute")
-                        print(exception)
+                        if self.verbose > 0:
+                            scores_verbose = {
+                                "Model": name,
+                                "R-Squared": r_squared,
+                                "Adjusted R-Squared": adj_rsquared,
+                                "RMSE": rmse,
+                                "Time taken": time.time() - start,
+                            }
+
+                            if self.custom_metric:
+                                scores_verbose["Custom metric"] = custom_metric
+
+                            print(scores_verbose)
+                        if self.predictions:
+                            predictions[name] = y_pred
+                    except Exception as exception:
+                        if self.ignore_warnings is False:
+                            print(name + " model failed to execute")
+                            print(exception)
+            
+            else: 
+
+                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
+                                            name, model, X_train, y_train, X_test, y_test, 
+                                            use_preprocessing=False, **kwargs
+                                        ) for name, model in tqdm(self.regressors)
+                                    )
+                R2 = [result["r_squared"] for result in results if result is not None]
+                ADJR2 = [result["adj_rsquared"] for result in results if result is not None]
+                RMSE = [result["rmse"] for result in results if result is not None]
+                TIME = [result["time"] for result in results if result is not None]
+                names = [result["name"] for result in results if result is not None]
+                if self.custom_metric:
+                    CUSTOM_METRIC = [
+                        result["custom_metric"] for result in results if result is not None
+                    ]
+                if self.predictions:
+                    predictions = {
+                        result["name"]: result["predictions"] for result in results if result is not None
+                    }
+
 
         scores = {
             "Model": names,
@@ -517,3 +567,59 @@ class LazyBoostingRegressor(RegressorMixin):
             self.fit(X_train, X_test, y_train, y_test)
 
         return self.models_
+
+    def train_model(self, name, regr, X_train, y_train, X_test, y_test, 
+                    use_preprocessing=False, preprocessor=None, **kwargs):
+        """
+        Function to train a single regression model and return its results.
+        """
+        start = time.time()
+
+        try:
+            model = GenericBoostingRegressor(base_model=regr(), verbose=self.verbose, **kwargs)
+
+            if use_preprocessing and preprocessor is not None:
+                pipe = Pipeline(
+                    steps=[
+                        ("preprocessor", preprocessor),
+                        ("regressor", model),
+                    ]
+                )
+                if self.verbose > 0:
+                    print("\n Fitting boosted " + name + " model with preprocessing...")
+                pipe.fit(X_train, y_train)
+                y_pred = pipe.predict(X_test)
+                fitted_model = pipe
+            else:
+                # Case with no preprocessing
+                if self.verbose > 0:
+                    print("\n Fitting boosted " + name + " model without preprocessing...")
+                model.fit(X_train, y_train)
+                y_pred = model.predict(X_test)
+                fitted_model = model
+
+            r_squared = r2_score(y_test, y_pred)
+            adj_rsquared = adjusted_rsquared(r_squared, X_test.shape[0], X_test.shape[1])
+            rmse = root_mean_squared_error(y_test, y_pred)
+
+            custom_metric = None
+            if self.custom_metric:
+                custom_metric = self.custom_metric(y_test, y_pred)
+
+            return {
+                "name": name,
+                "model": fitted_model,
+                "r_squared": r_squared,
+                "adj_rsquared": adj_rsquared,
+                "rmse": rmse,
+                "custom_metric": custom_metric,
+                "time": time.time() - start,
+                "predictions": y_pred,
+            }
+
+        except Exception as exception:
+            if self.ignore_warnings is False:
+                print(name + " model failed to execute")
+                print(exception)
+            return None
+
