@@ -17,7 +17,7 @@ removed_regressors = [
     "HistGradientBoostingRegressor",
     "IsotonicRegression",
     "MLPRegressor",
-    # "KernelRidge",
+    "KernelRidge",
    #"MultiOutputRegressor",
     #"MultiTaskElasticNet",
     "MultiTaskElasticNetCV",
@@ -58,6 +58,7 @@ MTASKREGRESSORS = [
         and (est[0] not in removed_regressors)
         and (est[0][:5] != "Multi")
         and (est[0][-2:] != "CV")
+        and (est[0] not in ("SVR", "HuberRegressor", "LassoLarsIC"))
         and is_multitask_estimator(est[1]()) == False
     )
 ]
