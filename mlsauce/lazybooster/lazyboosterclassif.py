@@ -24,8 +24,9 @@ from sklearn.metrics import (
     roc_auc_score,
     f1_score,
 )
-from .config import REGRESSORS
+from .config import REGRESSORS, MTASKREGRESSORS
 from ..booster import GenericBoostingClassifier
+from ..multitaskregressor import MultiTaskRegressor
 
 import warnings
 
@@ -331,10 +332,17 @@ class LazyBoostingClassifier(ClassifierMixin):
                     print(exception)
 
         if self.estimators == "all":
-            self.classifiers = REGRESSORS
+            self.classifiers = REGRESSORS + MTASKREGRESSORS
         else:
             self.classifiers = [
                 ("GBoostClassifier(" + est[0] + ")", est[1]())
+                for est in all_estimators()
+                if (
+                    issubclass(est[1], RegressorMixin)
+                    and (est[0] in self.estimators)
+                )
+            ] + [
+                ("GBoostClassifier(MultiTask(" + est[0] + "))", partial(MultiTaskRegressor, regr=est[1]()))
                 for est in all_estimators()
                 if (
                     issubclass(est[1], RegressorMixin)

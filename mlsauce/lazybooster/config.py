@@ -1,7 +1,9 @@
 import nnetsauce as ns
 from functools import partial
 from sklearn.base import RegressorMixin
+from ..multitaskregressor.mtaskregr import MultiTaskRegressor
 from sklearn.utils import all_estimators
+from ..utils import is_multitask_estimator
 
 removed_regressors = [
     "AdaBoostRegressor",
@@ -16,11 +18,11 @@ removed_regressors = [
     "IsotonicRegression",
     "MLPRegressor",
     # "KernelRidge",
-    "MultiOutputRegressor",
-    "MultiTaskElasticNet",
-    "MultiTaskElasticNetCV",
-    "MultiTaskLasso",
-    "MultiTaskLassoCV",
+   #"MultiOutputRegressor",
+    #"MultiTaskElasticNet",
+    #"MultiTaskElasticNetCV",
+    #"MultiTaskLasso",
+    #"MultiTaskLassoCV",
     # "NuSVR",
     "OrthogonalMatchingPursuit",
     "OrthogonalMatchingPursuitCV",
@@ -41,5 +43,19 @@ REGRESSORS = [
     if (
         issubclass(est[1], RegressorMixin)
         and (est[0] not in removed_regressors)
+    )
+]
+
+MTASKREGRESSORS = [
+    (
+        "GenericBooster(MultiTask(" + est[0] + "))", 
+        partial(MultiTaskRegressor, regr=est[1]()),
+    )
+    for est in all_estimators()
+    if (
+        issubclass(est[1], RegressorMixin)
+        and (est[0] not in removed_regressors)
+        and (est[0][:5] != "Multi")
+        and is_multitask_estimator(est[1]()) == False
     )
 ]
