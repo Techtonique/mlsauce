@@ -289,7 +289,7 @@ class LazyBoostingRegressor(RegressorMixin):
                 adj_rsquared = adjusted_rsquared(
                     r_squared, X_test.shape[0], X_test.shape[1]
                 )
-                rmse = mean_squared_error(y_test, y_pred, squared=False)
+                rmse = root_mean_squared_error(y_test, y_pred)
 
                 names.append(name)
                 R2.append(r_squared)

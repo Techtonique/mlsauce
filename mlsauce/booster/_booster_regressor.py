@@ -4,6 +4,7 @@ import warnings
 import pandas as pd
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
+from sklearn.tree import ExtraTreeRegressor
 from sklearn.preprocessing import PolynomialFeatures
 
 try:
@@ -437,7 +438,7 @@ class GenericBoostingRegressor(LSBoostRegressor):
     Attributes:
 
         base_model: object
-            base learner.
+            base learner (default is ExtraTreeRegressor) to be boosted.
 
         n_estimators: int
             number of boosting iterations.
@@ -517,7 +518,7 @@ class GenericBoostingRegressor(LSBoostRegressor):
 
     def __init__(
         self,
-        base_model,
+        base_model=ExtraTreeRegressor(),
         n_estimators=100,
         learning_rate=0.1,
         n_hidden_features=5,

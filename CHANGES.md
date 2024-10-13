@@ -1,3 +1,8 @@
+# version 0.22.3
+
+- Add `GenericGradientBooster` for regression and classification. See: https://thierrymoudiki.github.io/blog/2024/10/06/python/r/genericboosting
+and `examples/genboost*`
+
 # version 0.18.2
 
 - Gaussian weights in `LSBoostRegressor` and `LSBoostClassifier` randomized hidden layer
