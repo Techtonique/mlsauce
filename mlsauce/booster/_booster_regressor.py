@@ -373,13 +373,13 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             self.y_ = None
             preds = self.pi.predict(X, return_pi=True)
             return preds
-        #print(f"\n in predict self: {self} \n")
-        #print(f"\n in predict self.obj: {self.obj} \n")
-        #try:
+        # print(f"\n in predict self: {self} \n")
+        # print(f"\n in predict self.obj: {self.obj} \n")
+        # try:
         return boosterc.predict_booster_regressor(
             self.obj, np.asarray(X, order="C")
         )
-        #except ValueError:
+        # except ValueError:
         #    pass
 
     def update(self, X, y, eta=0.9):
@@ -393,9 +393,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
             y: float = [n_samples=1]
                Target value.
-            
+
             eta: float
-                Inverse power applied to number of observations 
+                Inverse power applied to number of observations
                 (defines a learning rate).
 
         Returns:
@@ -422,9 +422,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                         seed=self.seed,
                     ),
                 )
-            )                
+            )
 
-        
         self.obj = boosterc.update_booster(
             self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta
         )

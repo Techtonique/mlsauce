@@ -19,8 +19,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.base import RegressorMixin
 from sklearn.metrics import (
-    r2_score,
-    root_mean_squared_error,
+    r2_score
 )
 from .config import REGRESSORS
 from ..booster import GenericBoostingRegressor
@@ -74,7 +73,7 @@ categorical_transformer_high = Pipeline(
 )
 
 
-# Helper function
+# Helper functions
 
 
 def get_card_split(df, cols, n=11):
@@ -86,6 +85,9 @@ def get_card_split(df, cols, n=11):
 
 def adjusted_rsquared(r2, n, p):
     return 1 - (1 - r2) * ((n - 1) / (n - p - 1))
+
+def root_mean_squared_error(y_true, y_pred):
+    return np.sqrt(np.mean((y_true - y_pred) ** 2))
 
 
 class LazyBoostingRegressor(RegressorMixin):
@@ -334,7 +336,7 @@ class LazyBoostingRegressor(RegressorMixin):
             ]
 
         if self.preprocess is True:
-            
+
             if self.n_jobs is None:
 
                 for name, regr in tqdm(self.regressors):  # do parallel exec
@@ -398,29 +400,54 @@ class LazyBoostingRegressor(RegressorMixin):
                         if self.ignore_warnings is False:
                             print(name + " model failed to execute")
                             print(exception)
-            
-            else: 
 
-                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
-                                name, model, X_train, y_train, X_test, y_test, 
-                                use_preprocessing=True, preprocessor=preprocessor, **kwargs
-                            ) for name, model in tqdm(self.regressors)
-                        )
-                R2 = [result["r_squared"] for result in results if result is not None]
-                ADJR2 = [result["adj_rsquared"] for result in results if result is not None]
-                RMSE = [result["rmse"] for result in results if result is not None]
-                TIME = [result["time"] for result in results if result is not None]
-                names = [result["name"] for result in results if result is not None]
+            else:
+
+                results = Parallel(n_jobs=self.n_jobs)(
+                    delayed(self.train_model)(
+                        name,
+                        model,
+                        X_train,
+                        y_train,
+                        X_test,
+                        y_test,
+                        use_preprocessing=True,
+                        preprocessor=preprocessor,
+                        **kwargs
+                    )
+                    for name, model in tqdm(self.regressors)
+                )
+                R2 = [
+                    result["r_squared"]
+                    for result in results
+                    if result is not None
+                ]
+                ADJR2 = [
+                    result["adj_rsquared"]
+                    for result in results
+                    if result is not None
+                ]
+                RMSE = [
+                    result["rmse"] for result in results if result is not None
+                ]
+                TIME = [
+                    result["time"] for result in results if result is not None
+                ]
+                names = [
+                    result["name"] for result in results if result is not None
+                ]
                 if self.custom_metric:
                     CUSTOM_METRIC = [
-                        result["custom_metric"] for result in results if result is not None
+                        result["custom_metric"]
+                        for result in results
+                        if result is not None
                     ]
                 if self.predictions:
                     predictions = {
-                        result["name"]: result["predictions"] for result in results if result is not None
+                        result["name"]: result["predictions"]
+                        for result in results
+                        if result is not None
                     }
-
-
 
         else:  # self.preprocess is False; no preprocessing
 
@@ -476,28 +503,53 @@ class LazyBoostingRegressor(RegressorMixin):
                         if self.ignore_warnings is False:
                             print(name + " model failed to execute")
                             print(exception)
-            
-            else: 
 
-                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
-                                            name, model, X_train, y_train, X_test, y_test, 
-                                            use_preprocessing=False, **kwargs
-                                        ) for name, model in tqdm(self.regressors)
-                                    )
-                R2 = [result["r_squared"] for result in results if result is not None]
-                ADJR2 = [result["adj_rsquared"] for result in results if result is not None]
-                RMSE = [result["rmse"] for result in results if result is not None]
-                TIME = [result["time"] for result in results if result is not None]
-                names = [result["name"] for result in results if result is not None]
+            else:
+
+                results = Parallel(n_jobs=self.n_jobs)(
+                    delayed(self.train_model)(
+                        name,
+                        model,
+                        X_train,
+                        y_train,
+                        X_test,
+                        y_test,
+                        use_preprocessing=False,
+                        **kwargs
+                    )
+                    for name, model in tqdm(self.regressors)
+                )
+                R2 = [
+                    result["r_squared"]
+                    for result in results
+                    if result is not None
+                ]
+                ADJR2 = [
+                    result["adj_rsquared"]
+                    for result in results
+                    if result is not None
+                ]
+                RMSE = [
+                    result["rmse"] for result in results if result is not None
+                ]
+                TIME = [
+                    result["time"] for result in results if result is not None
+                ]
+                names = [
+                    result["name"] for result in results if result is not None
+                ]
                 if self.custom_metric:
                     CUSTOM_METRIC = [
-                        result["custom_metric"] for result in results if result is not None
+                        result["custom_metric"]
+                        for result in results
+                        if result is not None
                     ]
                 if self.predictions:
                     predictions = {
-                        result["name"]: result["predictions"] for result in results if result is not None
+                        result["name"]: result["predictions"]
+                        for result in results
+                        if result is not None
                     }
-
 
         scores = {
             "Model": names,
@@ -568,15 +620,27 @@ class LazyBoostingRegressor(RegressorMixin):
 
         return self.models_
 
-    def train_model(self, name, regr, X_train, y_train, X_test, y_test, 
-                    use_preprocessing=False, preprocessor=None, **kwargs):
+    def train_model(
+        self,
+        name,
+        regr,
+        X_train,
+        y_train,
+        X_test,
+        y_test,
+        use_preprocessing=False,
+        preprocessor=None,
+        **kwargs
+    ):
         """
         Function to train a single regression model and return its results.
         """
         start = time.time()
 
         try:
-            model = GenericBoostingRegressor(base_model=regr(), verbose=self.verbose, **kwargs)
+            model = GenericBoostingRegressor(
+                base_model=regr(), verbose=self.verbose, **kwargs
+            )
 
             if use_preprocessing and preprocessor is not None:
                 pipe = Pipeline(
@@ -586,20 +650,30 @@ class LazyBoostingRegressor(RegressorMixin):
                     ]
                 )
                 if self.verbose > 0:
-                    print("\n Fitting boosted " + name + " model with preprocessing...")
+                    print(
+                        "\n Fitting boosted "
+                        + name
+                        + " model with preprocessing..."
+                    )
                 pipe.fit(X_train, y_train)
                 y_pred = pipe.predict(X_test)
                 fitted_model = pipe
             else:
                 # Case with no preprocessing
                 if self.verbose > 0:
-                    print("\n Fitting boosted " + name + " model without preprocessing...")
+                    print(
+                        "\n Fitting boosted "
+                        + name
+                        + " model without preprocessing..."
+                    )
                 model.fit(X_train, y_train)
                 y_pred = model.predict(X_test)
                 fitted_model = model
 
             r_squared = r2_score(y_test, y_pred)
-            adj_rsquared = adjusted_rsquared(r_squared, X_test.shape[0], X_test.shape[1])
+            adj_rsquared = adjusted_rsquared(
+                r_squared, X_test.shape[0], X_test.shape[1]
+            )
             rmse = root_mean_squared_error(y_test, y_pred)
 
             custom_metric = None
@@ -622,4 +696,3 @@ class LazyBoostingRegressor(RegressorMixin):
                 print(name + " model failed to execute")
                 print(exception)
             return None
-

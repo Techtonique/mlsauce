@@ -4,6 +4,7 @@ from copy import deepcopy
 from sklearn.base import BaseEstimator, RegressorMixin
 from ..utils import is_multitask_estimator
 
+
 class MultiTaskRegressor(BaseEstimator, RegressorMixin):
     """
     A class for multi-task regression
@@ -19,8 +20,11 @@ class MultiTaskRegressor(BaseEstimator, RegressorMixin):
         A list containing the fitted regressor objects
 
     """
+
     def __init__(self, regr):
-        assert is_multitask_estimator(regr) == False, "The regressor is already a multi-task regressor"
+        assert (
+            is_multitask_estimator(regr) == False
+        ), "The regressor is already a multi-task regressor"
         self.regr = regr
         self.objs = []
 
@@ -36,12 +40,12 @@ class MultiTaskRegressor(BaseEstimator, RegressorMixin):
             The target values
 
         """
-        n_tasks = y.shape[1]   
+        n_tasks = y.shape[1]
         assert n_tasks > 1, "The number of columns in y must be greater than 1"
-        self.n_outputs_ = n_tasks     
-        try:  
+        self.n_outputs_ = n_tasks
+        try:
             for i in range(n_tasks):
-                self.regr.fit(X, y.iloc[:, i].values) 
+                self.regr.fit(X, y.iloc[:, i].values)
                 self.objs.append(deepcopy(self.regr))
         except Exception:
             for i in range(n_tasks):

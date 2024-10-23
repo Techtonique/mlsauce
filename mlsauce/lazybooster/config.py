@@ -18,12 +18,12 @@ removed_regressors = [
     "IsotonicRegression",
     "MLPRegressor",
     "KernelRidge",
-   #"MultiOutputRegressor",
-    #"MultiTaskElasticNet",
+    # "MultiOutputRegressor",
+    # "MultiTaskElasticNet",
     "MultiTaskElasticNetCV",
-    #"MultiTaskLasso",
+    # "MultiTaskLasso",
     "MultiTaskLassoCV",
-     "NuSVR",
+    "NuSVR",
     "OrthogonalMatchingPursuit",
     "OrthogonalMatchingPursuitCV",
     "PLSCanonical",
@@ -49,7 +49,7 @@ REGRESSORS = [
 
 MTASKREGRESSORS = [
     (
-        "GenericBooster(MultiTask(" + est[0] + "))", 
+        "GenericBooster(MultiTask(" + est[0] + "))",
         partial(MultiTaskRegressor, regr=est[1]()),
     )
     for est in all_estimators()

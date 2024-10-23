@@ -134,8 +134,10 @@ def install_package(package_name):
         [sys.executable, "-m", "pip", "install", package_name]
     )
 
+
 def is_multitask_estimator(estimator):
-    return estimator._get_tags().get('multioutput', False)
+    return estimator._get_tags().get("multioutput", False)
+
 
 def check_and_install(package_name):
     """Check if a package is installed; if not, install it."""

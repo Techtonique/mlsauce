@@ -343,7 +343,10 @@ class LazyBoostingClassifier(ClassifierMixin):
                     and (est[0] in self.estimators)
                 )
             ] + [
-                ("GBoostClassifier(MultiTask(" + est[0] + "))", partial(MultiTaskRegressor, regr=est[1]()))
+                (
+                    "GBoostClassifier(MultiTask(" + est[0] + "))",
+                    partial(MultiTaskRegressor, regr=est[1]()),
+                )
                 for est in all_estimators()
                 if (
                     issubclass(est[1], RegressorMixin)
@@ -352,7 +355,7 @@ class LazyBoostingClassifier(ClassifierMixin):
             ]
 
         if self.preprocess is True:
-                
+
             if self.n_jobs is None:
 
                 for name, model in tqdm(self.classifiers):  # do parallel exec
@@ -376,7 +379,9 @@ class LazyBoostingClassifier(ClassifierMixin):
                             fitted_clf = GenericBoostingClassifier(
                                 {**other_args, **kwargs},
                                 verbose=self.verbose,
-                                base_model=model(random_state=self.random_state),
+                                base_model=model(
+                                    random_state=self.random_state
+                                ),
                             )
 
                         else:
@@ -401,7 +406,9 @@ class LazyBoostingClassifier(ClassifierMixin):
                         pipe.fit(X_train, y_train)
                         self.models_[name] = pipe
                         y_pred = pipe.predict(X_test)
-                        accuracy = accuracy_score(y_test, y_pred, normalize=True)
+                        accuracy = accuracy_score(
+                            y_test, y_pred, normalize=True
+                        )
                         b_accuracy = balanced_accuracy_score(y_test, y_pred)
                         f1 = f1_score(y_test, y_pred, average="weighted")
                         try:
@@ -409,7 +416,9 @@ class LazyBoostingClassifier(ClassifierMixin):
                         except Exception as exception:
                             roc_auc = None
                             if self.ignore_warnings is False:
-                                print("ROC AUC couldn't be calculated for " + name)
+                                print(
+                                    "ROC AUC couldn't be calculated for " + name
+                                )
                                 print(exception)
                         names.append(name)
                         Accuracy.append(accuracy)
@@ -452,15 +461,24 @@ class LazyBoostingClassifier(ClassifierMixin):
                             print(exception)
 
             else:
-                
-                # train_model(self, name, model, X_train, y_train, X_test, y_test, 
-                #use_preprocessing=False, preprocessor=None, 
+
+                # train_model(self, name, model, X_train, y_train, X_test, y_test,
+                # use_preprocessing=False, preprocessor=None,
                 #    **kwargs):
-                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
-                                name, model, X_train, y_train, X_test, y_test, 
-                                use_preprocessing=True, preprocessor=preprocessor, **kwargs
-                            ) for name, model in tqdm(self.classifiers)
-                        )
+                results = Parallel(n_jobs=self.n_jobs)(
+                    delayed(self.train_model)(
+                        name,
+                        model,
+                        X_train,
+                        y_train,
+                        X_test,
+                        y_test,
+                        use_preprocessing=True,
+                        preprocessor=preprocessor,
+                        **kwargs
+                    )
+                    for name, model in tqdm(self.classifiers)
+                )
                 Accuracy = [res["accuracy"] for res in results]
                 B_Accuracy = [res["balanced_accuracy"] for res in results]
                 ROC_AUC = [res["roc_auc"] for res in results]
@@ -470,11 +488,12 @@ class LazyBoostingClassifier(ClassifierMixin):
                 if self.custom_metric is not None:
                     CUSTOM_METRIC = [res["custom_metric"] for res in results]
                 if self.predictions:
-                    predictions = {res["name"]: res["predictions"] for res in results}
-
+                    predictions = {
+                        res["name"]: res["predictions"] for res in results
+                    }
 
         else:  # no preprocessing
-                
+
             if self.n_jobs is None:
 
                 for name, model in tqdm(self.classifiers):  # do parallel exec
@@ -482,21 +501,27 @@ class LazyBoostingClassifier(ClassifierMixin):
                     try:
                         if "random_state" in model().get_params().keys():
                             fitted_clf = GenericBoostingClassifier(
-                                base_model=model(random_state=self.random_state),
+                                base_model=model(
+                                    random_state=self.random_state
+                                ),
                                 verbose=self.verbose,
                                 **kwargs
                             )
 
                         else:
                             fitted_clf = GenericBoostingClassifier(
-                                base_model=model(), verbose=self.verbose, **kwargs
+                                base_model=model(),
+                                verbose=self.verbose,
+                                **kwargs
                             )
 
                         fitted_clf.fit(X_train, y_train)
 
                         self.models_[name] = fitted_clf
                         y_pred = fitted_clf.predict(X_test)
-                        accuracy = accuracy_score(y_test, y_pred, normalize=True)
+                        accuracy = accuracy_score(
+                            y_test, y_pred, normalize=True
+                        )
                         b_accuracy = balanced_accuracy_score(y_test, y_pred)
                         f1 = f1_score(y_test, y_pred, average="weighted")
                         try:
@@ -504,7 +529,9 @@ class LazyBoostingClassifier(ClassifierMixin):
                         except Exception as exception:
                             roc_auc = None
                             if self.ignore_warnings is False:
-                                print("ROC AUC couldn't be calculated for " + name)
+                                print(
+                                    "ROC AUC couldn't be calculated for " + name
+                                )
                                 print(exception)
                         names.append(name)
                         Accuracy.append(accuracy)
@@ -546,13 +573,21 @@ class LazyBoostingClassifier(ClassifierMixin):
                             print(name + " model failed to execute")
                             print(exception)
 
-            else: 
+            else:
 
-                results = Parallel(n_jobs=self.n_jobs)(delayed(self.train_model)(
-                                            name, model, X_train, y_train, X_test, y_test, 
-                                            use_preprocessing=False, **kwargs
-                                        ) for name, model in tqdm(self.classifiers)
-                                    )
+                results = Parallel(n_jobs=self.n_jobs)(
+                    delayed(self.train_model)(
+                        name,
+                        model,
+                        X_train,
+                        y_train,
+                        X_test,
+                        y_test,
+                        use_preprocessing=False,
+                        **kwargs
+                    )
+                    for name, model in tqdm(self.classifiers)
+                )
                 Accuracy = [res["accuracy"] for res in results]
                 B_Accuracy = [res["balanced_accuracy"] for res in results]
                 ROC_AUC = [res["roc_auc"] for res in results]
@@ -562,8 +597,9 @@ class LazyBoostingClassifier(ClassifierMixin):
                 if self.custom_metric is not None:
                     CUSTOM_METRIC = [res["custom_metric"] for res in results]
                 if self.predictions:
-                    predictions = {res["name"]: res["predictions"] for res in results}
-                    
+                    predictions = {
+                        res["name"]: res["predictions"] for res in results
+                    }
 
         if self.custom_metric is None:
             scores = pd.DataFrame(
@@ -643,10 +679,18 @@ class LazyBoostingClassifier(ClassifierMixin):
 
         return self.models_
 
-
-    def train_model(self, name, model, X_train, y_train, X_test, y_test, 
-                    use_preprocessing=False, preprocessor=None, 
-                    **kwargs):
+    def train_model(
+        self,
+        name,
+        model,
+        X_train,
+        y_train,
+        X_test,
+        y_test,
+        use_preprocessing=False,
+        preprocessor=None,
+        **kwargs
+    ):
         """
         Function to train a single model and return its results.
         """
@@ -654,7 +698,10 @@ class LazyBoostingClassifier(ClassifierMixin):
 
         # Handle n_jobs parameter
         try:
-            if "n_jobs" in model().get_params().keys() and "LogisticRegression" not in name:
+            if (
+                "n_jobs" in model().get_params().keys()
+                and "LogisticRegression" not in name
+            ):
                 other_args["n_jobs"] = self.n_jobs
         except Exception:
             pass
@@ -688,13 +735,21 @@ class LazyBoostingClassifier(ClassifierMixin):
                     ]
                 )
                 if self.verbose > 0:
-                    print("\n Fitting pipeline with preprocessing for " + name + " model...")
+                    print(
+                        "\n Fitting pipeline with preprocessing for "
+                        + name
+                        + " model..."
+                    )
                 pipe.fit(X_train, y_train)
                 y_pred = pipe.predict(X_test)
             else:
                 # Case with no preprocessing
                 if self.verbose > 0:
-                    print("\n Fitting model without preprocessing for " + name + " model...")
+                    print(
+                        "\n Fitting model without preprocessing for "
+                        + name
+                        + " model..."
+                    )
                 y_pred = fitted_clf.predict(X_test)
 
             accuracy = accuracy_score(y_test, y_pred, normalize=True)

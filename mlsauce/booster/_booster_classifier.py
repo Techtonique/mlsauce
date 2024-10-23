@@ -511,9 +511,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
             y: float = [n_samples=1]
                Target value.
-            
+
             eta: float
-                Inverse power applied to number of observations 
+                Inverse power applied to number of observations
                 (defines a learning rate).
 
         Returns:
@@ -540,10 +540,10 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
                         seed=self.seed,
                     ),
                 )
-            )                
-        
+            )
+
         self.obj = boosterc.update_booster(
-            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta 
+            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta
         )
 
         return self
