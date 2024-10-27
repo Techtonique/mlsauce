@@ -11,7 +11,7 @@ try:
     from . import _boosterc as boosterc
 except ImportError:
     import _boosterc as boosterc
-from ..utils import cluster, check_and_install
+from ..utils import cluster, check_and_install, get_histo_features
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
@@ -672,3 +672,198 @@ class GenericBoostingClassifier(LSBoostClassifier):
             weights_distr=weights_distr,
             base_model=self.base_model,
         )
+
+class HistGenericBoostingClassifier(GenericBoostingClassifier):
+    """Histogram-based Generic Boosting classifier (using any classifier as base learner).
+
+    Attributes:
+
+        base_model: object
+            base learner (default is ExtraTreeRegressor) to be boosted.
+
+        n_estimators: int
+            number of boosting iterations.
+
+        learning_rate: float
+            controls the learning speed at training time.
+
+        n_hidden_features: int
+            number of nodes in successive hidden layers.
+
+        reg_lambda: float
+            L2 regularization parameter for successive errors in the optimizer
+            (at training time).
+
+        alpha: float
+            compromise between L1 and L2 regularization (must be in [0, 1]),
+            for `solver` == 'enet'.
+
+        row_sample: float
+            percentage of rows chosen from the training set.
+
+        col_sample: float
+            percentage of columns chosen from the training set.
+
+        dropout: float
+            percentage of nodes dropped from the training set.
+
+        tolerance: float
+            controls early stopping in gradient descent (at training time).
+
+        direct_link: bool
+            indicates whether the original features are included (True) in model's
+            fitting or not (False).
+
+        verbose: int
+            progress bar (yes = 1) or not (no = 0) (currently).
+
+        seed: int
+            reproducibility seed for nodes_sim=='uniform', clustering and dropout.
+
+        backend: str
+            type of backend; must be in ('cpu', 'gpu', 'tpu')
+
+        solver: str
+            type of 'weak' learner; currently in ('ridge', 'lasso', 'enet').
+            'enet' is a combination of 'ridge' and 'lasso' called Elastic Net.
+
+        activation: str
+            activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
+
+        n_clusters: int
+            number of clusters for clustering the features
+
+        clustering_method: str
+            clustering method: currently 'kmeans', 'gmm'
+
+        cluster_scaling: str
+            scaling method for clustering: currently 'standard', 'robust', 'minmax'
+
+        degree: int
+            degree of features interactions to include in the model
+
+        weights_distr: str
+            distribution of weights for constructing the model's hidden layer;
+            currently 'uniform', 'gaussian'
+
+    """
+
+    def __init__(
+        self,
+        base_model=ExtraTreeRegressor(),
+        n_estimators=100,
+        learning_rate=0,
+        n_hidden_features=5,
+        reg_lambda=0.1,
+        alpha=0.5,
+        row_sample=1,
+        col_sample=1,
+        dropout=0,
+        tolerance=1e-4,
+        direct_link=1,
+        verbose=1,
+        seed=123,
+        backend="cpu",
+        solver="ridge",
+        activation="relu",
+        n_clusters=0,
+        clustering_method="kmeans",
+        cluster_scaling="standard",
+        degree=None,
+        weights_distr="uniform",
+    ):
+        super().__init__(
+            base_model=base_model,
+            n_estimators=n_estimators,
+            learning_rate=learning_rate,
+            n_hidden_features=n_hidden_features,
+            reg_lambda=reg_lambda,
+            alpha=alpha,
+            row_sample=row_sample,
+            col_sample=col_sample,
+            dropout=dropout,
+            tolerance=tolerance,
+            direct_link=direct_link,
+            verbose=verbose,
+            seed=seed,
+            backend=backend,
+            solver=solver,
+            activation=activation,
+            n_clusters=n_clusters,
+            clustering_method=clustering_method,
+            cluster_scaling=cluster_scaling,
+            degree=degree,
+            weights_distr=weights_distr,
+        )
+        self.base_model = base_model
+        self.hist_bins = None
+        super().__init__(
+            base_model=base_model,
+            n_estimators=n_estimators,
+            learning_rate=learning_rate,
+            n_hidden_features=n_hidden_features,
+            reg_lambda=reg_lambda,
+            alpha=alpha,
+            row_sample=row_sample,
+            col_sample=col_sample,
+            dropout=dropout,
+            tolerance=tolerance,
+            direct_link=direct_link,
+            verbose=verbose,
+            seed=seed,
+            backend=backend,
+            solver=solver,
+            activation=activation,
+            n_clusters=n_clusters,
+            clustering_method=clustering_method,
+            cluster_scaling=cluster_scaling,
+            degree=degree,
+            weights_distr=weights_distr,
+        )
+    
+    def fit(self, X, y, **kwargs):
+        """Fit Booster (classifier) to training data (X, y)
+
+        Args:
+
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number
+                of samples and n_features is the number of features.
+
+            y: array-like, shape = [n_samples]
+               Target values.
+
+            **kwargs: additional parameters to be passed to self.cook_training_set.
+
+        Returns:
+
+            self: object.
+        """
+        X, self.hist_bins = get_histo_features(X)
+        return super().fit(X, y, **kwargs)
+
+    def predict_proba(self, X, **kwargs):
+        """Predict probabilites for test data X.
+
+        Args:
+
+            X: {array-like}, shape = [n_samples, n_features]
+                Training vectors, where n_samples is the number
+                of samples and n_features is the number of features.
+
+            **kwargs: additional parameters to be passed to
+                self.cook_test_set
+
+        Returns:
+
+            predicted values estimates for test data: {array-like}
+        """
+        assert self.hist_bins is not None, "You must fit the model first"
+        X = get_histo_features(X, self.hist_bins)
+        try: 
+            return super().predict_proba(np.asarray(X, order="C"), 
+                                         **kwargs)
+        except Exception:
+            return super().predict_proba(X, 
+                                  **kwargs)
+

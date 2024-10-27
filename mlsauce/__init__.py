@@ -61,6 +61,9 @@ else:
         LSBoostRegressor,
         GenericBoostingClassifier,
         GenericBoostingRegressor,
+        HistGenericBoostingRegressor,
+        HistGenericBoostingClassifier,
+
     )
     from .lazybooster import LazyBoostingClassifier, LazyBoostingRegressor
     from .multitaskregressor import MultiTaskRegressor
@@ -77,6 +80,8 @@ else:
         "LSBoostClassifier",
         "GenericBoostingClassifier",
         "GenericBoostingRegressor",
+        "HistGenericBoostingClassifier",
+        "HistGenericBoostingRegressor",
         "StumpClassifier",
         "ElasticNetRegressor",
         "LassoRegressor",

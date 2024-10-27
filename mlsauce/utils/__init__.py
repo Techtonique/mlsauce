@@ -10,6 +10,7 @@ from .misc.misc import (
 )
 from .progress_bar import Progbar
 from .get_beta import get_beta
+from .histofeatures.gethistofeatures import get_histo_features
 
 __all__ = [
     "cluster",
@@ -22,4 +23,5 @@ __all__ = [
     "get_beta",
     "check_and_install",
     "is_multitask_estimator",
+    "get_histo_features"
 ]

@@ -22,7 +22,7 @@ from sklearn.metrics import (
     r2_score
 )
 from .config import REGRESSORS
-from ..booster import GenericBoostingRegressor
+from ..booster import GenericBoostingRegressor, HistGenericBoostingRegressor
 
 import warnings
 
@@ -185,7 +185,7 @@ class LazyBoostingRegressor(RegressorMixin):
         self.preprocess = preprocess
         self.n_jobs = n_jobs
 
-    def fit(self, X_train, X_test, y_train, y_test, **kwargs):
+    def fit(self, X_train, X_test, y_train, y_test, hist=False, **kwargs):
         """Fit Regression algorithms to X_train and y_train, predict and score on X_test, y_test.
 
         Parameters:
@@ -205,6 +205,9 @@ class LazyBoostingRegressor(RegressorMixin):
             y_test : array-like,
                 Testing vectors, where rows is the number of samples
                 and columns is the number of features.
+            
+            hist: bool, optional (default=False)
+                When set to True, the model is a HistGenericBoostingRegressor.
 
             **kwargs: dict,
                 Additional parameters to be passed to the GenericBoostingRegressor.
@@ -345,9 +348,17 @@ class LazyBoostingRegressor(RegressorMixin):
 
                     try:
 
-                        model = GenericBoostingRegressor(
-                            base_model=regr(), verbose=self.verbose, **kwargs
-                        )
+                        if hist:
+
+                            model = GenericBoostingRegressor(
+                                base_model=regr(), verbose=self.verbose, **kwargs
+                            )
+                        
+                        else:
+
+                            model = HistGenericBoostingRegressor(
+                                base_model=regr(), verbose=self.verbose, **kwargs
+                            )
 
                         model.fit(X_train, y_train)
 
@@ -456,10 +467,15 @@ class LazyBoostingRegressor(RegressorMixin):
                 for name, regr in tqdm(self.regressors):  # do parallel exec
                     start = time.time()
                     try:
-
-                        model = GenericBoostingRegressor(
-                            base_model=regr(), verbose=self.verbose, **kwargs
-                        )
+                        
+                        if hist:
+                            model = GenericBoostingRegressor(
+                                base_model=regr(), verbose=self.verbose, **kwargs
+                            )
+                        else:
+                            model = HistGenericBoostingRegressor(
+                                base_model=regr(), verbose=self.verbose, **kwargs
+                            )
 
                         if self.verbose > 0:
                             print("\n Fitting boosted " + name + " model...")
@@ -630,6 +646,7 @@ class LazyBoostingRegressor(RegressorMixin):
         y_test,
         use_preprocessing=False,
         preprocessor=None,
+        hist=False,
         **kwargs
     ):
         """
@@ -638,9 +655,14 @@ class LazyBoostingRegressor(RegressorMixin):
         start = time.time()
 
         try:
-            model = GenericBoostingRegressor(
-                base_model=regr(), verbose=self.verbose, **kwargs
-            )
+            if hist:
+                model = GenericBoostingRegressor(
+                    base_model=regr(), verbose=self.verbose, **kwargs
+                )
+            else:
+                model = HistGenericBoostingRegressor(
+                    base_model=regr(), verbose=self.verbose, **kwargs
+                )
 
             if use_preprocessing and preprocessor is not None:
                 pipe = Pipeline(
