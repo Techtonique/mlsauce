@@ -348,7 +348,7 @@ class LazyBoostingRegressor(RegressorMixin):
 
                     try:
 
-                        if hist:
+                        if hist is False:
 
                             model = GenericBoostingRegressor(
                                 base_model=regr(), verbose=self.verbose, **kwargs
@@ -468,7 +468,7 @@ class LazyBoostingRegressor(RegressorMixin):
                     start = time.time()
                     try:
                         
-                        if hist:
+                        if hist is False:
                             model = GenericBoostingRegressor(
                                 base_model=regr(), verbose=self.verbose, **kwargs
                             )
@@ -655,7 +655,7 @@ class LazyBoostingRegressor(RegressorMixin):
         start = time.time()
 
         try:
-            if hist:
+            if hist is False:
                 model = GenericBoostingRegressor(
                     base_model=regr(), verbose=self.verbose, **kwargs
                 )
