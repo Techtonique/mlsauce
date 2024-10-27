@@ -394,6 +394,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         
         if isinstance(y, pd.Series):
             y = y.values.ravel()
+        else:
+            y = y.ravel()
 
         if self.degree is not None:
             assert isinstance(self.degree, int), "`degree` must be an integer"
@@ -845,7 +847,7 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
             self: object.
         """
         X, self.hist_bins = get_histo_features(X)
-        return super().fit(X, y.ravel(), **kwargs)
+        return super().fit(X, y, **kwargs)
 
     def predict_proba(self, X, **kwargs):
         """Predict probabilites for test data X.

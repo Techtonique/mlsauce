@@ -264,6 +264,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         
         if isinstance(y, pd.Series):
             y = y.values.ravel()
+        else:
+            y = y.ravel()
 
         if self.degree is not None:
             assert isinstance(self.degree, int), "`degree` must be an integer"
@@ -736,7 +738,7 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
             self: object.
         """
         X, self.hist_bins = get_histo_features(X)
-        return super().fit(X, y.ravel(), **kwargs)
+        return super().fit(X, y, **kwargs)
 
     def predict(self, X, level=95, method=None, **kwargs):
         """Predict values for test data X.
