@@ -414,7 +414,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         self.obj = boosterc.fit_booster_classifier(
             np.asarray(X, order="C"),
-            np.asarray(y, order="C").ravel(),
+            np.asarray(y, order="C"),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,
@@ -543,7 +543,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             )
 
         self.obj = boosterc.update_booster(
-            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta
+            self.obj, np.asarray(X, order="C"), 
+            np.asarray(y, order="C").ravel(), eta
         )
 
         return self

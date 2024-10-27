@@ -240,7 +240,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             check_and_install("jax")
             check_and_install("jaxlib")
 
-    def fit(self, X, y, histo=False, **kwargs):
+    def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)
 
         Args:
@@ -284,7 +284,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         self.obj = boosterc.fit_booster_regressor(
             X=np.asarray(X, order="C"),
-            y=np.asarray(y, order="C").ravel(),
+            y=np.asarray(y, order="C"),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,
