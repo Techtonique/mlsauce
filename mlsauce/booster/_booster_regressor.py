@@ -737,7 +737,9 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
 
             self: object.
         """
-        X, self.hist_bins = get_histo_features(X)
+        print(f"\n before: {X} \n")
+        X, self.hist_bins = get_histo_features(X)        
+        print(f"\n after: {X} \n")
         return super().fit(X, y, **kwargs)
 
     def predict(self, X, level=95, method=None, **kwargs):

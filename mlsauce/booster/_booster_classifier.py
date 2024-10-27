@@ -846,7 +846,9 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
 
             self: object.
         """
-        X, self.hist_bins = get_histo_features(X)
+        print(f"\n before: {X} \n")
+        X, self.hist_bins = get_histo_features(X)        
+        print(f"\n after: {X} \n")
         return super().fit(X, y, **kwargs)
 
     def predict_proba(self, X, **kwargs):
