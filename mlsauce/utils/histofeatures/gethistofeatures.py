@@ -51,7 +51,7 @@ def assign_values_to_input(new_data, bin_value_dict):
 
         assigned_values.append(assigned)
 
-    return np.asarray(assigned_values)
+    return np.asarray(assigned_values).ravel()
 
 def get_histo_features(X, bin_value_dict=None):
     """
