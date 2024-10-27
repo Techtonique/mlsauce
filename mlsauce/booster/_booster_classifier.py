@@ -414,7 +414,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         self.obj = boosterc.fit_booster_classifier(
             np.asarray(X, order="C"),
-            np.asarray(y, order="C"),
+            np.asarray(y, order="C").ravel(),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,
@@ -840,7 +840,7 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
             self: object.
         """
         X, self.hist_bins = get_histo_features(X)
-        return super().fit(X, y, **kwargs)
+        return super().fit(X, y.ravel(), **kwargs)
 
     def predict_proba(self, X, **kwargs):
         """Predict probabilites for test data X.
