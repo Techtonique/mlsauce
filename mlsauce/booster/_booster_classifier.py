@@ -391,6 +391,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
+        
+        if isinstance(y, pd.Series):
+            y = y.values.ravel()
 
         if self.degree is not None:
             assert isinstance(self.degree, int), "`degree` must be an integer"
@@ -433,7 +436,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             obj=self.base_model,
         )
 
-        self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
+        self.classes_ = np.unique(y)  # for compatibility with sklearn
+        self.n_classes_ = len(self.classes_)  # for compatibility with sklearn
         self.n_estimators = self.obj["n_estimators"]
         return self
 

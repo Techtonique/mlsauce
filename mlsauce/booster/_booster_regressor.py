@@ -261,6 +261,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
+        
+        if isinstance(y, pd.Series):
+            y = y.values.ravel()
 
         if self.degree is not None:
             assert isinstance(self.degree, int), "`degree` must be an integer"

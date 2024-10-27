@@ -287,7 +287,7 @@ class LazyBoostingRegressor(RegressorMixin):
         for name, model in tqdm(zip(baseline_names, baseline_models)):
             start = time.time()
             try:
-                model.fit(X_train, y_train)
+                model.fit(X_train, y_train.ravel())
                 self.models_[name] = model
                 y_pred = model.predict(X_test)
                 r_squared = r2_score(y_test, y_pred)
@@ -360,7 +360,7 @@ class LazyBoostingRegressor(RegressorMixin):
                                 base_model=regr(), verbose=self.verbose, **kwargs
                             )
 
-                        model.fit(X_train, y_train)
+                        model.fit(X_train, y_train.ravel())
 
                         pipe = Pipeline(
                             steps=[
@@ -370,7 +370,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         )
                         if self.verbose > 0:
                             print("\n Fitting boosted " + name + " model...")
-                        pipe.fit(X_train, y_train)
+                        pipe.fit(X_train, y_train.ravel())
 
                         self.models_[name] = pipe
                         y_pred = pipe.predict(X_test)
@@ -479,7 +479,7 @@ class LazyBoostingRegressor(RegressorMixin):
 
                         if self.verbose > 0:
                             print("\n Fitting boosted " + name + " model...")
-                        model.fit(X_train, y_train)
+                        model.fit(X_train, y_train.ravel())
 
                         self.models_[name] = model
                         y_pred = model.predict(X_test)
@@ -632,7 +632,7 @@ class LazyBoostingRegressor(RegressorMixin):
 
         """
         if len(self.models_.keys()) == 0:
-            self.fit(X_train, X_test, y_train, y_test)
+            self.fit(X_train, X_test, y_train.ravel(), y_test.values)
 
         return self.models_
 
@@ -677,7 +677,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         + name
                         + " model with preprocessing..."
                     )
-                pipe.fit(X_train, y_train)
+                pipe.fit(X_train, y_train.ravel())
                 y_pred = pipe.predict(X_test)
                 fitted_model = pipe
             else:
@@ -688,7 +688,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         + name
                         + " model without preprocessing..."
                     )
-                model.fit(X_train, y_train)
+                model.fit(X_train, y_train.ravel())
                 y_pred = model.predict(X_test)
                 fitted_model = model
 
