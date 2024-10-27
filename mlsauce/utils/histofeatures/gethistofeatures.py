@@ -17,14 +17,19 @@ def create_histogram_with_bin_values(x):
     # Compute the histogram
     hist, bin_edges = np.histogram(x, bins="auto")
 
-    bin_edges = np.concatenate([[1e-10], bin_edges, [1e10]]).ravel()
+    bin_edges = np.concatenate([[-1e10], bin_edges, [1e10]]).ravel()
     
     # Create a dict to store bin ranges and assigned values
     bin_value_dict = {}
 
     for i in range(len(bin_edges) - 1):
         bin_range = (bin_edges[i], bin_edges[i + 1])
-        bin_value_dict[i] = (bin_range, np.median(list(bin_range)))
+        if bin_edges[i] == -1e10:
+            bin_value_dict[i] = (bin_range, bin_edges[i + 1])
+        elif bin_edges[i + 1] == 1e10:
+            bin_value_dict[i] = (bin_range, bin_edges[i])
+        else: 
+            bin_value_dict[i] = (bin_range, np.median(list(bin_range)))
         
     return bin_edges, bin_value_dict
 
