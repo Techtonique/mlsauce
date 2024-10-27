@@ -15,7 +15,7 @@ def create_histogram_with_bin_values(x):
     bin_value_dict (dict): A dictionary where keys are the bin ranges (tuples) and values reflect the ordering.
     """
     # Compute the histogram
-    hist, bin_edges = np.histogram(x, bins="auto")
+    hist, bin_edges = np.histogram(x)
 
     bin_edges = np.concatenate([[-1e10], bin_edges, [1e10]]).ravel()
     
