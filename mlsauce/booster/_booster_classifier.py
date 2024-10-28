@@ -11,7 +11,7 @@ try:
     from . import _boosterc as boosterc
 except ImportError:
     import _boosterc as boosterc
-from ..utils import cluster, check_and_install
+from ..utils import cluster, check_and_install, get_histo_features
 
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
@@ -83,6 +83,12 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             currently 'uniform', 'gaussian'
+        
+        hist: bool
+            indicates whether histogram features are used or not (default is False)
+        
+        bins: int or str
+            number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
     Examples:
 
@@ -307,9 +313,14 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         degree=None,
         weights_distr="uniform",
         base_model=None,
+        hist=False,
+        bins="auto",
     ):
 
         self.base_model = base_model
+        self.hist = hist
+        self.bins = bins
+        self.hist_bins_ = None
 
         if n_clusters > 0:
             assert clustering_method in (
@@ -391,6 +402,14 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
+        
+        if self.hist == True:
+            X, self.hist_bins_ = get_histo_features(X)
+        
+        if isinstance(y, pd.Series):
+            y = y.values.ravel()
+        else:
+            y = y.ravel()
 
         if self.degree is not None:
             assert isinstance(self.degree, int), "`degree` must be an integer"
@@ -433,7 +452,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             obj=self.base_model,
         )
 
-        self.n_classes_ = len(np.unique(y))  # for compatibility with sklearn
+        self.classes_ = np.unique(y)  # for compatibility with sklearn
+        self.n_classes_ = len(self.classes_)  # for compatibility with sklearn
         self.n_estimators = self.obj["n_estimators"]
         return self
 
@@ -475,6 +495,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
+
+        if self.hist == True:
+            X = get_histo_features(X, bins=self.hist_bins_)
 
         if self.degree is not None:
             X = self.poly_.transform(X)
@@ -543,7 +566,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             )
 
         self.obj = boosterc.update_booster(
-            self.obj, np.asarray(X, order="C"), np.asarray(y, order="C"), eta
+            self.obj, np.asarray(X, order="C"), 
+            np.asarray(y, order="C").ravel(), eta
         )
 
         return self
@@ -621,6 +645,12 @@ class GenericBoostingClassifier(LSBoostClassifier):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             currently 'uniform', 'gaussian'
+        
+        hist: bool
+            indicates whether histogram features are used or not (default is False)
+        
+        bins: int or str
+            number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
     """
 
@@ -647,8 +677,14 @@ class GenericBoostingClassifier(LSBoostClassifier):
         cluster_scaling="standard",
         degree=None,
         weights_distr="uniform",
+        hist=False,
+        bins="auto",
     ):
         self.base_model = base_model
+        self.hist = hist
+        self.bins = bins
+        self.hist_bins_ = None
+
         super().__init__(
             n_estimators=n_estimators,
             learning_rate=learning_rate,

@@ -194,7 +194,7 @@ class LazyBoostingClassifier(ClassifierMixin):
         self.preprocess = preprocess
         self.n_jobs = n_jobs
 
-    def fit(self, X_train, X_test, y_train, y_test, **kwargs):
+    def fit(self, X_train, X_test, y_train, y_test, hist=False,  **kwargs):
         """Fit classifiers to X_train and y_train, predict and score on X_test,
         y_test.
 
@@ -215,6 +215,9 @@ class LazyBoostingClassifier(ClassifierMixin):
             y_test: array-like,
                 Testing vectors, where rows is the number of samples
                 and columns is the number of features.
+            
+            hist: bool, optional (default=False)
+                When set to True, the model is a GenericBoostingClassifier.
 
             **kwargs: dict,
                 Additional arguments to be passed to the fit GenericBoostingClassifier.
@@ -376,19 +379,36 @@ class LazyBoostingClassifier(ClassifierMixin):
 
                     try:
                         if "random_state" in model().get_params().keys():
-                            fitted_clf = GenericBoostingClassifier(
-                                {**other_args, **kwargs},
-                                verbose=self.verbose,
-                                base_model=model(
-                                    random_state=self.random_state
-                                ),
-                            )
+                            if hist is False:
+                                fitted_clf = GenericBoostingClassifier(
+                                    {**other_args, **kwargs},
+                                    verbose=self.verbose,
+                                    base_model=model(
+                                        random_state=self.random_state
+                                    ),
+                                )
+                            else:
+                                fitted_clf = GenericBoostingClassifier(
+                                    {**other_args, **kwargs},
+                                    verbose=self.verbose,
+                                    base_model=model(
+                                        random_state=self.random_state
+                                    ),
+                                    hist=True,
+                                )
 
                         else:
-                            fitted_clf = GenericBoostingClassifier(
-                                base_model=model(**kwargs),
-                                verbose=self.verbose,
-                            )
+                            if hist is False: 
+                                fitted_clf = GenericBoostingClassifier(
+                                    base_model=model(**kwargs),
+                                    verbose=self.verbose,
+                                )
+                            else:
+                                fitted_clf = GenericBoostingClassifier(
+                                    base_model=model(**kwargs),
+                                    verbose=self.verbose,
+                                    hist=True,
+                                )
 
                         if self.verbose > 0:
                             print("\n Fitting boosted " + name + " model...")
@@ -500,20 +520,38 @@ class LazyBoostingClassifier(ClassifierMixin):
                     start = time.time()
                     try:
                         if "random_state" in model().get_params().keys():
-                            fitted_clf = GenericBoostingClassifier(
-                                base_model=model(
-                                    random_state=self.random_state
-                                ),
-                                verbose=self.verbose,
-                                **kwargs
-                            )
+                            if hist is False:
+                                fitted_clf = GenericBoostingClassifier(
+                                    base_model=model(
+                                        random_state=self.random_state
+                                    ),
+                                    verbose=self.verbose,
+                                    **kwargs
+                                )
+                            else: 
+                                fitted_clf = GenericBoostingClassifier(
+                                    base_model=model(
+                                        random_state=self.random_state
+                                    ),
+                                    verbose=self.verbose,
+                                    hist=True,
+                                    **kwargs
+                                )
 
                         else:
-                            fitted_clf = GenericBoostingClassifier(
-                                base_model=model(),
-                                verbose=self.verbose,
-                                **kwargs
-                            )
+                            if hist is False:
+                                fitted_clf = GenericBoostingClassifier(
+                                    base_model=model(),
+                                    verbose=self.verbose,
+                                    **kwargs
+                                )
+                            else:
+                                fitted_clf = GenericBoostingClassifier(
+                                    base_model=model(),
+                                    verbose=self.verbose,
+                                    hist=True,
+                                    **kwargs
+                                )
 
                         fitted_clf.fit(X_train, y_train)
 
@@ -689,6 +727,7 @@ class LazyBoostingClassifier(ClassifierMixin):
         y_test,
         use_preprocessing=False,
         preprocessor=None,
+        hist=False,
         **kwargs
     ):
         """
@@ -711,16 +750,31 @@ class LazyBoostingClassifier(ClassifierMixin):
         try:
             # Handle random_state parameter
             if "random_state" in model().get_params().keys():
-                fitted_clf = GenericBoostingClassifier(
-                    {**other_args, **kwargs},
-                    verbose=self.verbose,
-                    base_model=model(random_state=self.random_state),
-                )
+                if hist is False:
+                    fitted_clf = GenericBoostingClassifier(
+                        {**other_args, **kwargs},
+                        verbose=self.verbose,
+                        base_model=model(random_state=self.random_state),
+                    )
+                else:
+                    fitted_clf = GenericBoostingClassifier(
+                        {**other_args, **kwargs},
+                        verbose=self.verbose,
+                        base_model=model(random_state=self.random_state),
+                        hist=True,
+                    )
             else:
-                fitted_clf = GenericBoostingClassifier(
-                    base_model=model(**kwargs),
-                    verbose=self.verbose,
-                )
+                if hist is False: 
+                    fitted_clf = GenericBoostingClassifier(
+                        base_model=model(**kwargs),
+                        verbose=self.verbose,
+                    )
+                else:
+                    fitted_clf = GenericBoostingClassifier(
+                        base_model=model(**kwargs),
+                        verbose=self.verbose,
+                        hist=True,
+                    )
 
             if self.verbose > 0:
                 print("\n Fitting boosted " + name + " model...")
