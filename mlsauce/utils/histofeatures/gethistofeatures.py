@@ -46,7 +46,7 @@ def assign_values_to_input(x, bin_value_dict):
         # Find the appropriate bin for each value
         for i, elt in enumerate(bin_value_dict.items()):
             if elt[1][0] < value <= elt[1][1]:
-                assigned = i
+                assigned = float(i)
                 break
 
         assigned_values.append(assigned)
