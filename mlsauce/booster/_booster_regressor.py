@@ -273,7 +273,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         if isinstance(X, pd.DataFrame):
             X = X.values
         
-        if self.hist:
+        if self.hist == True:
             X, self.hist_bins_ = get_histo_features(X)
         
         if isinstance(y, pd.Series):
@@ -360,7 +360,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         if isinstance(X, pd.DataFrame):
             X = X.values
         
-        if self.hist:
+        if self.hist == True:
             X = get_histo_features(X, bins=self.hist_bins_)
 
         if self.degree is not None:
