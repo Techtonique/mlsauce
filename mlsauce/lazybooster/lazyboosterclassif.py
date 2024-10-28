@@ -26,7 +26,7 @@ from sklearn.metrics import (
     f1_score,
 )
 from .config import REGRESSORS, MTASKREGRESSORS
-from ..booster import GenericBoostingClassifier, HistGenericBoostingClassifier
+from ..booster import GenericBoostingClassifier, GenericBoostingClassifier
 from ..multitaskregressor import MultiTaskRegressor
 
 import warnings
@@ -217,7 +217,7 @@ class LazyBoostingClassifier(ClassifierMixin):
                 and columns is the number of features.
             
             hist: bool, optional (default=False)
-                When set to True, the model is a HistGenericBoostingClassifier.
+                When set to True, the model is a GenericBoostingClassifier.
 
             **kwargs: dict,
                 Additional arguments to be passed to the fit GenericBoostingClassifier.
@@ -388,12 +388,13 @@ class LazyBoostingClassifier(ClassifierMixin):
                                     ),
                                 )
                             else:
-                                fitted_clf = HistGenericBoostingClassifier(
+                                fitted_clf = GenericBoostingClassifier(
                                     {**other_args, **kwargs},
                                     verbose=self.verbose,
                                     base_model=model(
                                         random_state=self.random_state
                                     ),
+                                    hist=True,
                                 )
 
                         else:
@@ -403,9 +404,10 @@ class LazyBoostingClassifier(ClassifierMixin):
                                     verbose=self.verbose,
                                 )
                             else:
-                                fitted_clf = HistGenericBoostingClassifier(
+                                fitted_clf = GenericBoostingClassifier(
                                     base_model=model(**kwargs),
                                     verbose=self.verbose,
+                                    hist=True,
                                 )
 
                         if self.verbose > 0:
@@ -527,11 +529,12 @@ class LazyBoostingClassifier(ClassifierMixin):
                                     **kwargs
                                 )
                             else: 
-                                fitted_clf = HistGenericBoostingClassifier(
+                                fitted_clf = GenericBoostingClassifier(
                                     base_model=model(
                                         random_state=self.random_state
                                     ),
                                     verbose=self.verbose,
+                                    hist=True,
                                     **kwargs
                                 )
 
@@ -543,9 +546,10 @@ class LazyBoostingClassifier(ClassifierMixin):
                                     **kwargs
                                 )
                             else:
-                                fitted_clf = HistGenericBoostingClassifier(
+                                fitted_clf = GenericBoostingClassifier(
                                     base_model=model(),
                                     verbose=self.verbose,
+                                    hist=True,
                                     **kwargs
                                 )
 
@@ -753,10 +757,11 @@ class LazyBoostingClassifier(ClassifierMixin):
                         base_model=model(random_state=self.random_state),
                     )
                 else:
-                    fitted_clf = HistGenericBoostingClassifier(
+                    fitted_clf = GenericBoostingClassifier(
                         {**other_args, **kwargs},
                         verbose=self.verbose,
                         base_model=model(random_state=self.random_state),
+                        hist=True,
                     )
             else:
                 if hist is False: 
@@ -765,9 +770,10 @@ class LazyBoostingClassifier(ClassifierMixin):
                         verbose=self.verbose,
                     )
                 else:
-                    fitted_clf = HistGenericBoostingClassifier(
+                    fitted_clf = GenericBoostingClassifier(
                         base_model=model(**kwargs),
                         verbose=self.verbose,
+                        hist=True,
                     )
 
             if self.verbose > 0:
