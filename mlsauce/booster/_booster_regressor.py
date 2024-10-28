@@ -746,7 +746,7 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
         res = get_histo_features(X)        
         self.hist_bins_ = res[1]
         #print(f"\n after: {X} \n")
-        return self.fit(res[0], y, **kwargs)
+        return super().fit(res[0], y, **kwargs)
 
     def predict(self, X, level=95, method=None, **kwargs):
         """Predict values for test data X.
