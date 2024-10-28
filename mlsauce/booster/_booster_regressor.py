@@ -93,6 +93,12 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
+        
+        hist: bool
+            whether to use histogram features or not 
+        
+        bins: int or str
+            number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
     Examples:
 
@@ -174,9 +180,14 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         degree=None,
         weights_distr="uniform",
         base_model=None,
+        hist=False,
+        bins="auto",
     ):
 
         self.base_model = base_model
+        self.hist = hist
+        self.bins = bins
+        self.hist_bins_ = None
 
         if n_clusters > 0:
             assert clustering_method in (
@@ -261,6 +272,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
+        
+        if self.hist:
+            X, self.hist_bins_ = get_histo_features(X)
         
         if isinstance(y, pd.Series):
             y = y.values.ravel()
@@ -520,6 +534,12 @@ class GenericBoostingRegressor(LSBoostRegressor):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
+        
+        hist: bool
+            whether to use histogram features or not
+        
+        bins: int or str
+            number of bins for histogram features (same as numpy.histogram, default is 'auto')                
 
     """
 
@@ -549,151 +569,12 @@ class GenericBoostingRegressor(LSBoostRegressor):
         cluster_scaling="standard",
         degree=None,
         weights_distr="uniform",
+        hist=False,
+        bins="auto",
     ):
         self.base_model = base_model
-        super().__init__(
-            n_estimators=n_estimators,
-            learning_rate=learning_rate,
-            n_hidden_features=n_hidden_features,
-            reg_lambda=reg_lambda,
-            alpha=alpha,
-            row_sample=row_sample,
-            col_sample=col_sample,
-            dropout=dropout,
-            tolerance=tolerance,
-            direct_link=direct_link,
-            verbose=verbose,
-            seed=seed,
-            backend=backend,
-            solver=solver,
-            activation=activation,
-            type_pi=type_pi,
-            replications=replications,
-            kernel=kernel,
-            n_clusters=n_clusters,
-            clustering_method=clustering_method,
-            cluster_scaling=cluster_scaling,
-            degree=degree,
-            weights_distr=weights_distr,
-            base_model=self.base_model,
-        )
-
-class HistGenericBoostingRegressor(GenericBoostingRegressor):
-    """EXPERIMENTAL Generic Boosting regressor with histogram-based features.
-
-    Attributes:
-
-        base_model: object
-            base learner (default is ExtraTreeRegressor) to be boosted.
-
-        n_estimators: int
-            number of boosting iterations.
-
-        learning_rate: float
-            controls the learning speed at training time.
-
-        n_hidden_features: int
-            number of nodes in successive hidden layers.
-
-        reg_lambda: float
-            L2 regularization parameter for successive errors in the optimizer
-            (at training time).
-
-        alpha: float
-            compromise between L1 and L2 regularization (must be in [0, 1]),
-            for `solver` == 'enet'
-
-        row_sample: float
-            percentage of rows chosen from the training set.
-
-        col_sample: float
-            percentage of columns chosen from the training set.
-
-        dropout: float
-            percentage of nodes dropped from the training set.
-
-        tolerance: float
-            controls early stopping in gradient descent (at training time).
-
-        direct_link: bool
-            indicates whether the original features are included (True) in model's
-            fitting or not (False).
-
-        verbose: int
-            progress bar (yes = 1) or not (no = 0) (currently).
-
-        seed: int
-            reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-
-        backend: str
-            type of backend; must be in ('cpu', 'gpu', 'tpu')
-
-        solver: str
-            type of 'weak' learner; currently in ('ridge', 'lasso')
-
-        activation: str
-            activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
-
-        type_pi: str.
-            type of prediction interval; currently "kde" (default) or "bootstrap".
-            Used only in `self.predict`, for `self.replications` > 0 and `self.kernel`
-            in ('gaussian', 'tophat'). Default is `None`.
-
-        replications: int.
-            number of replications (if needed) for predictive simulation.
-            Used only in `self.predict`, for `self.kernel` in ('gaussian',
-            'tophat') and `self.type_pi = 'kde'`. Default is `None`.
-
-        n_clusters: int
-            number of clusters for clustering the features
-
-        clustering_method: str
-            clustering method: currently 'kmeans', 'gmm'
-
-        cluster: bool
-            whether to cluster the features or not
-        
-        cluster_scaling: str
-            scaling method for clustering: currently 'standard', 'robust', 'minmax'
-
-        degree: int
-            degree of features interactions to include in the model
-        
-        weights_distr: str
-            distribution of weights for constructing the model's hidden layer;
-            either 'uniform' or 'gaussian'
-        """ 
-    def __init__(
-        self,
-        base_model=ExtraTreeRegressor(),
-        n_estimators=100,
-        learning_rate=0.1,
-        n_hidden_features=5,
-        reg_lambda=0.1,
-        alpha=0.5,
-        row_sample=1,
-        col_sample=1,
-        dropout=0,
-        tolerance=1e-4,
-        direct_link=1,
-        verbose=1,
-        seed=123,
-        backend="cpu",
-        solver="ridge",
-        activation="relu",
-        type_pi=None,
-        replications=None,
-        kernel=None,
-        n_clusters=0,
-        clustering_method="kmeans",
-        cluster_scaling="standard",
-        degree=None,
-        weights_distr="uniform",
-    ):
-        
-        #warnings.warn("This class is highly experimental", UserWarning)
-
-        self.base_model = base_model
+        self.hist = hist
+        self.bins = bins
         self.hist_bins_ = None
 
         super().__init__(
@@ -721,60 +602,4 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
             degree=degree,
             weights_distr=weights_distr,
             base_model=self.base_model,
-        )   
-
-    
-    def fit(self, X, y, **kwargs):
-        """Fit Booster (regressor) to training data (X, y)
-
-        Args:
-
-            X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number
-                of samples and n_features is the number of features.
-
-            y: array-like, shape = [n_samples]
-               Target values.
-
-            **kwargs: additional parameters to be passed to self.cook_training_set.
-
-        Returns:
-
-            self: object.
-        """
-        #print(f"\n before: {X} \n")
-        res = get_histo_features(X)        
-        self.hist_bins_ = res[1]
-        #print(f"\n after: {X} \n")
-        return super().fit(res[0], y, **kwargs)
-
-    def predict(self, X, level=95, method=None, **kwargs):
-        """Predict values for test data X.
-
-        Args:
-
-            X: {array-like}, shape = [n_samples, n_features]
-                Training vectors, where n_samples is the number
-                of samples and n_features is the number of features.
-
-            level: int
-                Level of confidence (default = 95)
-
-            method: str
-                `None`, or 'splitconformal', 'localconformal'
-                prediction (if you specify `return_pi = True`)
-            
-            histo: bool
-                whether to use histogram features or not
-
-            **kwargs: additional parameters to be passed to
-                self.cook_test_set
-
-        Returns:
-
-            predicted values estimates for test data: {array-like}
-        """
-        assert self.hist_bins_ is not None, "You must fit the model first"
-        X_ = get_histo_features(X, self.hist_bins_)
-        return super().predict(X_, level=level, method=method, **kwargs)
-
+        )
