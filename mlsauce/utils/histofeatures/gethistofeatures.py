@@ -50,7 +50,7 @@ def assign_values_to_input(new_data, bin_value_dict):
         assigned = None
         # Find the appropriate bin for each value
         for elt in bin_value_dict.items():
-            if elt[1][0][0] <= value < elt[1][0][1]:
+            if elt[1][0][0] < value <= elt[1][0][1]:
                 assigned = elt[1][1]
                 break
 

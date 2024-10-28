@@ -738,9 +738,9 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
             self: object.
         """
         #print(f"\n before: {X} \n")
-        X, self.hist_bins = get_histo_features(X)        
+        X_, self.hist_bins = get_histo_features(X)        
         #print(f"\n after: {X} \n")
-        return super().fit(X, y, **kwargs)
+        return super().fit(X_, y, **kwargs)
 
     def predict(self, X, level=95, method=None, **kwargs):
         """Predict values for test data X.
@@ -769,6 +769,6 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
             predicted values estimates for test data: {array-like}
         """
         assert self.hist_bins is not None, "You must fit the model first"
-        X = get_histo_features(X, self.hist_bins)
-        return super().predict(X, level=level, method=method, **kwargs)
+        X_ = get_histo_features(X, self.hist_bins)
+        return super().predict(X_, level=level, method=method, **kwargs)
 
