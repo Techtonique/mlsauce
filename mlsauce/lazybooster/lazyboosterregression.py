@@ -22,7 +22,7 @@ from sklearn.metrics import (
     r2_score
 )
 from .config import REGRESSORS
-from ..booster import GenericBoostingRegressor, HistGenericBoostingRegressor
+from ..booster import GenericBoostingRegressor
 
 import warnings
 

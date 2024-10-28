@@ -26,7 +26,7 @@ from sklearn.metrics import (
     f1_score,
 )
 from .config import REGRESSORS, MTASKREGRESSORS
-from ..booster import GenericBoostingClassifier, GenericBoostingClassifier
+from ..booster import GenericBoostingClassifier
 from ..multitaskregressor import MultiTaskRegressor
 
 import warnings
