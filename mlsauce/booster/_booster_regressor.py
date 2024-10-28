@@ -776,5 +776,5 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
         """
         assert self.hist_bins_ is not None, "You must fit the model first"
         X_ = get_histo_features(X, self.hist_bins_)
-        return self.predict(X_, level=level, method=method, **kwargs)
+        return super().predict(X_, level=level, method=method, **kwargs)
 

@@ -873,5 +873,5 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
             predicted values estimates for test data: {array-like}
         """
         assert self.hist_bins_ is not None, "You must fit the model first"
-        return self.predict_proba(get_histo_features(X, self.hist_bins_))
+        return super().predict_proba(get_histo_features(X, self.hist_bins_))
 
