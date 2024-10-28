@@ -780,7 +780,7 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
         weights_distr="uniform",
     ):
         
-        warnings.warn("This class is highly experimental", UserWarning)
+        #warnings.warn("This class is highly experimental", UserWarning)
 
         super().__init__(
             base_model=base_model,
@@ -806,7 +806,8 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
             weights_distr=weights_distr,
         )
         self.base_model = base_model
-        self.hist_bins = None
+        self.hist_bins_ = None
+        
         super().__init__(
             base_model=base_model,
             n_estimators=n_estimators,
@@ -850,9 +851,10 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
             self: object.
         """
         #print(f"\n before: {X} \n")
-        X, self.hist_bins = get_histo_features(X)        
+        res = get_histo_features(X)        
+        self.hist_bins_ = res[1]
         #print(f"\n after: {X} \n")
-        return super().fit(X, y, **kwargs)
+        return self.fit(res[0], y, **kwargs)
 
     def predict_proba(self, X, **kwargs):
         """Predict probabilites for test data X.
@@ -870,12 +872,6 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
 
             predicted values estimates for test data: {array-like}
         """
-        assert self.hist_bins is not None, "You must fit the model first"
-        X = get_histo_features(X, self.hist_bins)
-        try: 
-            return super().predict_proba(np.asarray(X, order="C"), 
-                                         **kwargs)
-        except Exception:
-            return super().predict_proba(X, 
-                                  **kwargs)
+        assert self.hist_bins_ is not None, "You must fit the model first"
+        return self.predict_proba(get_histo_features(X, self.hist_bins_))
 

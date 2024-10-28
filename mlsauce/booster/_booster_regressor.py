@@ -691,10 +691,11 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
         weights_distr="uniform",
     ):
         
-        warnings.warn("This class is highly experimental", UserWarning)
+        #warnings.warn("This class is highly experimental", UserWarning)
 
         self.base_model = base_model
-        self.hist_bins = None
+        self.hist_bins_ = None
+
         super().__init__(
             n_estimators=n_estimators,
             learning_rate=learning_rate,
@@ -742,9 +743,10 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
             self: object.
         """
         #print(f"\n before: {X} \n")
-        X_, self.hist_bins = get_histo_features(X)        
+        res = get_histo_features(X)        
+        self.hist_bins_ = res[1]
         #print(f"\n after: {X} \n")
-        return super().fit(X_, y, **kwargs)
+        return self.fit(res[0], y, **kwargs)
 
     def predict(self, X, level=95, method=None, **kwargs):
         """Predict values for test data X.
@@ -772,7 +774,7 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
 
             predicted values estimates for test data: {array-like}
         """
-        assert self.hist_bins is not None, "You must fit the model first"
-        X_ = get_histo_features(X, self.hist_bins)
-        return super().predict(X_, level=level, method=method, **kwargs)
+        assert self.hist_bins_ is not None, "You must fit the model first"
+        X_ = get_histo_features(X, self.hist_bins_)
+        return self.predict(X_, level=level, method=method, **kwargs)
 
