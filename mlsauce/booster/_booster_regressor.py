@@ -579,7 +579,7 @@ class GenericBoostingRegressor(LSBoostRegressor):
         )
 
 class HistGenericBoostingRegressor(GenericBoostingRegressor):
-    """Generic Boosting regressor with histogram-based features.
+    """EXPERIMENTAL Generic Boosting regressor with histogram-based features.
 
     Attributes:
 
@@ -690,6 +690,9 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
         degree=None,
         weights_distr="uniform",
     ):
+        
+        warnings.warn("This class is highly experimental", UserWarning)
+
         self.base_model = base_model
         self.hist_bins = None
         super().__init__(
@@ -717,7 +720,8 @@ class HistGenericBoostingRegressor(GenericBoostingRegressor):
             degree=degree,
             weights_distr=weights_distr,
             base_model=self.base_model,
-        )
+        )   
+
     
     def fit(self, X, y, **kwargs):
         """Fit Booster (regressor) to training data (X, y)

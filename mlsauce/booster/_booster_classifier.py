@@ -681,7 +681,7 @@ class GenericBoostingClassifier(LSBoostClassifier):
         )
 
 class HistGenericBoostingClassifier(GenericBoostingClassifier):
-    """Histogram-based Generic Boosting classifier (using any classifier as base learner).
+    """EXPERIMENTAL Histogram-based Generic Boosting classifier (using any classifier as base learner).
 
     Attributes:
 
@@ -779,6 +779,9 @@ class HistGenericBoostingClassifier(GenericBoostingClassifier):
         degree=None,
         weights_distr="uniform",
     ):
+        
+        warnings.warn("This class is highly experimental", UserWarning)
+
         super().__init__(
             base_model=base_model,
             n_estimators=n_estimators,
