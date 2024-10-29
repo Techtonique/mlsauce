@@ -712,4 +712,6 @@ class GenericBoostingClassifier(LSBoostClassifier):
             degree=degree,
             weights_distr=weights_distr,
             base_model=self.base_model,
+            hist=self.hist,
+            bins=self.bins,            
         )
