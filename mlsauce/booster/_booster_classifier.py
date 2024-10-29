@@ -83,10 +83,10 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             currently 'uniform', 'gaussian'
-        
+
         hist: bool
             indicates whether histogram features are used or not (default is False)
-        
+
         bins: int or str
             number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
@@ -402,10 +402,10 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
-        
+
         if self.hist == True:
-            X, self.hist_bins_ = get_histo_features(X)
-        
+            X, self.hist_bins_ = get_histo_features(X, bins=self.bins)
+
         if isinstance(y, pd.Series):
             y = y.values.ravel()
         else:
@@ -497,7 +497,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             X = X.values
 
         if self.hist == True:
-            X = get_histo_features(X, bins=self.hist_bins_)
+            X = get_histo_features(X, bin_value_dict=self.hist_bins_)
 
         if self.degree is not None:
             X = self.poly_.transform(X)
@@ -566,8 +566,10 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             )
 
         self.obj = boosterc.update_booster(
-            self.obj, np.asarray(X, order="C"), 
-            np.asarray(y, order="C").ravel(), eta
+            self.obj,
+            np.asarray(X, order="C"),
+            np.asarray(y, order="C").ravel(),
+            eta,
         )
 
         return self
@@ -645,10 +647,10 @@ class GenericBoostingClassifier(LSBoostClassifier):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             currently 'uniform', 'gaussian'
-        
+
         hist: bool
             indicates whether histogram features are used or not (default is False)
-        
+
         bins: int or str
             number of bins for histogram features (same as numpy.histogram, default is 'auto')
 

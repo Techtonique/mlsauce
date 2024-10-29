@@ -194,7 +194,7 @@ class LazyBoostingClassifier(ClassifierMixin):
         self.preprocess = preprocess
         self.n_jobs = n_jobs
 
-    def fit(self, X_train, X_test, y_train, y_test, hist=False,  **kwargs):
+    def fit(self, X_train, X_test, y_train, y_test, hist=False, **kwargs):
         """Fit classifiers to X_train and y_train, predict and score on X_test,
         y_test.
 
@@ -215,7 +215,7 @@ class LazyBoostingClassifier(ClassifierMixin):
             y_test: array-like,
                 Testing vectors, where rows is the number of samples
                 and columns is the number of features.
-            
+
             hist: bool, optional (default=False)
                 When set to True, the model is a GenericBoostingClassifier.
 
@@ -398,7 +398,7 @@ class LazyBoostingClassifier(ClassifierMixin):
                                 )
 
                         else:
-                            if hist is False: 
+                            if hist is False:
                                 fitted_clf = GenericBoostingClassifier(
                                     base_model=model(**kwargs),
                                     verbose=self.verbose,
@@ -528,7 +528,7 @@ class LazyBoostingClassifier(ClassifierMixin):
                                     verbose=self.verbose,
                                     **kwargs
                                 )
-                            else: 
+                            else:
                                 fitted_clf = GenericBoostingClassifier(
                                     base_model=model(
                                         random_state=self.random_state
@@ -764,7 +764,7 @@ class LazyBoostingClassifier(ClassifierMixin):
                         hist=True,
                     )
             else:
-                if hist is False: 
+                if hist is False:
                     fitted_clf = GenericBoostingClassifier(
                         base_model=model(**kwargs),
                         verbose=self.verbose,

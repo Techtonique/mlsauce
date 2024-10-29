@@ -75,7 +75,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         replications: int.
             number of replications (if needed) for predictive simulation.
-            Used only in `self.predict`, for `self.kernel` in ('gaussian',
+            Used                                                   only in `self.predict`, for `self.kernel` in ('gaussian',
             'tophat') and `self.type_pi = 'kde'`. Default is `None`.
 
         n_clusters: int
@@ -93,10 +93,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
-        
+
         hist: bool
-            whether to use histogram features or not 
-        
+            whether to use histogram features or not
+
         bins: int or str
             number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
@@ -272,10 +272,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
-        
+
         if self.hist == True:
-            X, self.hist_bins_ = get_histo_features(X)
-        
+            X, self.hist_bins_ = get_histo_features(X, bins=self.bins)
+
         if isinstance(y, pd.Series):
             y = y.values.ravel()
         else:
@@ -330,7 +330,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         return self
 
-    def predict(self, X, level=95, method=None, histo=False, **kwargs):
+    def predict(self, X, level=95, method=None, **kwargs):
         """Predict values for test data X.
 
         Args:
@@ -345,7 +345,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             method: str
                 `None`, or 'splitconformal', 'localconformal'
                 prediction (if you specify `return_pi = True`)
-            
+
             histo: bool
                 whether to use histogram features or not
 
@@ -359,9 +359,9 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
-        
+
         if self.hist == True:
-            X = get_histo_features(X, bins=self.hist_bins_)
+            X = get_histo_features(X, bin_value_dict=self.hist_bins_)
 
         if self.degree is not None:
             X = self.poly_.transform(X)
@@ -537,12 +537,12 @@ class GenericBoostingRegressor(LSBoostRegressor):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
-        
+
         hist: bool
             whether to use histogram features or not
-        
+
         bins: int or str
-            number of bins for histogram features (same as numpy.histogram, default is 'auto')                
+            number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
     """
 

@@ -23,5 +23,5 @@ __all__ = [
     "get_beta",
     "check_and_install",
     "is_multitask_estimator",
-    "get_histo_features"
+    "get_histo_features",
 ]
