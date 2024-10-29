@@ -37,7 +37,7 @@ MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD3 Clause Clear'
 
-__version__ = '0.23.0'
+__version__ = '0.23.1'
 
 VERSION = __version__
 
