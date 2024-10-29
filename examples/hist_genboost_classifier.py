@@ -39,8 +39,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 
 clf = ExtraTreeRegressor()
 clf2 = LinearRegression()
+clf3 = DecisionTreeRegressor()
 
-obj = ms.GenericBoostingClassifier(clf, hist=True)
+obj = ms.GenericBoostingClassifier(clf3, n_estimators=500,
+                                   hist=True, bins=50, 
+                                   n_hidden_features=3, 
+                                   n_clusters=2, degree=2,
+                                   tolerance=1e-3)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)

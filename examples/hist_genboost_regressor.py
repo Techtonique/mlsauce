@@ -42,4 +42,3 @@ start = time()
 print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 print(obj.obj['loss'])
-
