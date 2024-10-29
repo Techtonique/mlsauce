@@ -2,6 +2,7 @@ import numpy as np
 import platform
 import warnings
 import pandas as pd
+from copy import deepcopy
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
 from sklearn.tree import ExtraTreeRegressor
@@ -404,7 +405,9 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             X = X.values
 
         if self.hist == True:
-            X, self.hist_bins_ = get_histo_features(X, bins=self.bins)
+            res = get_histo_features(X, bins=self.bins)
+            X = deepcopy(res[0])
+            self.hist_bins_ = res[1]
 
         if isinstance(y, pd.Series):
             y = y.values.ravel()
@@ -497,7 +500,7 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             X = X.values
 
         if self.hist == True:
-            X = get_histo_features(X, bin_value_dict=self.hist_bins_)
+            X = deepcopy(get_histo_features(X, bin_value_dict=self.hist_bins_))
 
         if self.degree is not None:
             X = self.poly_.transform(X)
