@@ -40,7 +40,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 clf = ExtraTreeRegressor()
 clf2 = LinearRegression()
 
-obj = ms.HistGenericBoostingClassifier(clf)
+obj = ms.GenericBoostingClassifier(clf, hist=True)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
