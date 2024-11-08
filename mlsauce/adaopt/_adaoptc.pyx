@@ -23,7 +23,7 @@ from sklearn.preprocessing import StandardScaler
 from multiprocessing import Pool
 from tqdm import tqdm
 
-from ..utils import subsample, safe_sparse_dot
+from ..utils import subsample
 
 
 # 0 - utils -----
@@ -208,8 +208,8 @@ def one_hot_encode(long int[:] y,
 # squared norms
 # @Paul Panzer's soln
 # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi    
-def outer_sum_dot(A, B, backend="cpu"):
-    return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*safe_sparse_dot(A, B.T, backend=backend)
+def outer_sum_dot(A, B):
+    return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*np.dot(A, B.T)
     
 
 cdef double norm_c(double[:] x, long int n) nogil:
@@ -484,8 +484,7 @@ def fit_adaopt(double[:, :] X, long int[:] y,
         double reg_alpha,
         double eta, 
         double gamma, 
-        double tolerance,
-        str backend):
+        double tolerance):
     
     
     cdef double[:, :] Y
@@ -510,7 +509,7 @@ def fit_adaopt(double[:, :] X, long int[:] y,
     scaled_X = X/norm(X, ord=2, axis=1)[:, None]                        
     Y = one_hot_encode(y, n_classes) 
     beta = lstsq(scaled_X, Y, rcond=None)[0]
-    probs = expit(safe_sparse_dot(scaled_X, beta, backend))
+    probs = expit(np.dot(scaled_X, beta))
     probs /= np.sum(probs, axis=1)[:, None] 
     preds = np.asarray(probs).argmax(axis=1)    
     
