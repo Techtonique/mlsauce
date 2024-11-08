@@ -188,7 +188,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
         W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
       else: 
         W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy, W_i)), 
+      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
@@ -199,7 +199,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i)), 
+        hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
         fit_obj.fit(X = np.asarray(h_i), y = np.asarray(E)[ix,:])
@@ -230,7 +230,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   
 # 1 - 2 predict classifier ----- 
 
-def predict_proba_booster_classifier(object obj, double[:,::1] X):
+def predict_proba_booster_classifier(object obj, double[:,::1] X, str backend="cpu"):
 
   cdef int iter, n_estimators, n_classes
   cdef double learning_rate
@@ -254,7 +254,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i))
+    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))
     # works because the regressor is Multitask 
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
@@ -351,7 +351,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
         W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
       else: 
         W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy, W_i)), 
+      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
@@ -362,7 +362,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                                     replace=False), 
                      kind='quicksort')
         X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i)), 
+        hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i        
         fit_obj.fit(X = np.asarray(h_i), y = np.asarray(e)[ix])
@@ -392,7 +392,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   
 # 2 - 2 predict regressor -----
 
-def predict_booster_regressor(object obj, double[:,::1] X):
+def predict_booster_regressor(object obj, double[:,::1] X, str backend):
 
   cdef int iter, n_estimators, n_classes
   cdef double learning_rate
@@ -411,14 +411,14 @@ def predict_booster_regressor(object obj, double[:,::1] X):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i))        
+    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))        
     preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
   
   return np.asarray(obj['ym'] + np.asarray(preds_sum))
 
 # 2 - 3 update -----
 
-def update_booster(object obj, double[:] X, y, double alpha=0.5):
+def update_booster(object obj, double[:] X, y, double alpha=0.5, backend="cpu"):
 
   cdef int iter, n_estimators, n_classes, n_obs
   cdef double learning_rate
@@ -451,10 +451,10 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5):
     #  iy = obj['col_index_i'][iter]
     #  X_iy = np.asarray(X_[:, iy]).reshape(1, -1) # must be X_!
     #  W_i = obj['W_i'][iter]
-    #  hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i))            
+    #  hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))            
     #  preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
     #  residuals_i = centered_y - preds_sum
-    #  obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*safe_sparse_dot(residuals_i, hh_i).ravel()    
+    #  obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*safe_sparse_dot(residuals_i, hh_i, backend).ravel()    
     # Initialize cumulative sum of coefficients and count of iterations
     cumulative_coef_ = None
 
@@ -463,16 +463,16 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5):
         X_iy = np.asarray(X_[:, iy]).reshape(1, -1)  # must be X_!
         W_i = obj['W_i'][iter]
         hh_i = (
-            np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i))))
+            np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))))
             if direct_link
-            else activation_choice(activation)(safe_sparse_dot(X_iy, W_i))
+            else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))
         )
         
         preds_sum = preds_sum + learning_rate * np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
         residuals_i = centered_y - preds_sum
         
         # Update the coefficients as in your original code
-        obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs ** -alpha) * safe_sparse_dot(residuals_i, hh_i).ravel()
+        obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs ** -alpha) * safe_sparse_dot(residuals_i, hh_i, backend).ravel()
         
         # If this is the first iteration, initialize cumulative_coef_ to the current coef_
         if cumulative_coef_ is None:
@@ -492,7 +492,7 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5):
         iy = obj['col_index_i'][iter]
         X_iy = np.asarray(X_)[:, iy]  # must be X_!  
         W_i = obj['W_i'][iter]      
-        gXW = np.asarray(activation_choice(activation)(safe_sparse_dot(X_iy, W_i)))
+        gXW = np.asarray(activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))
         
         if direct_link:
             hh_i = np.hstack((np.array(X_iy), np.array(gXW)))  
@@ -508,7 +508,7 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5):
         # Calculate the average of coef_ values so far
         average_coef = cumulative_coef_sum / (iter + 1)
         
-        # Update coef_ with the average of all previous coef_ values + (n_obs ** (-alpha)) * safe_sparse_dot(residuals_i.T, hh_i)
+        # Update coef_ with the average of all previous coef_ values + (n_obs ** (-alpha)) * safe_sparse_dot(residuals_i.T, hh_i, backend)
         obj['fit_obj_i'][iter].coef_ = average_coef 
 
   xm_old = obj['xm']

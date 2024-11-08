@@ -402,7 +402,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         # print(f"\n in predict self.obj: {self.obj} \n")
         # try:
         return boosterc.predict_booster_regressor(
-            self.obj, np.asarray(X, order="C")
+            self.obj, np.asarray(X, order="C"),
+            backend=self.backend,
         )
         # except ValueError:
         #    pass
