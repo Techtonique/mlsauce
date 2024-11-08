@@ -48,9 +48,9 @@ def crossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return jsafe_sparse_dot(x.T, x).block_until_ready()
+            return safe_sparse_dot(x.T, x).block_until_ready()
         y = device_put(y)
-        return jsafe_sparse_dot(x.T, y).block_until_ready()
+        return safe_sparse_dot(x.T, y).block_until_ready()
     if y is None:
         return safe_sparse_dot(x.transpose(), x)
     return safe_sparse_dot(x.transpose(), y)
@@ -138,7 +138,7 @@ def safe_sparse_dot(a, b, backend="cpu", dense_output=False):
 
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         # modif when jax.scipy.sparse available
-        return jsafe_sparse_dot(device_put(a), device_put(b)).block_until_ready()
+        return safe_sparse_dot(device_put(a), device_put(b)).block_until_ready()
 
     #    if backend == "cpu":
     if a.ndim > 2 or b.ndim > 2:
@@ -214,7 +214,7 @@ def squared_norm(x, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = np.ravel(x, order="K")
         x = device_put(x)
-        return jsafe_sparse_dot(x, x).block_until_ready()
+        return safe_sparse_dot(x, x).block_until_ready()
 
     x = np.ravel(x, order="K")
     return safe_sparse_dot(x, x)
@@ -227,9 +227,9 @@ def tcrossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return jsafe_sparse_dot(x, x.T).block_until_ready()
+            return safe_sparse_dot(x, x.T).block_until_ready()
         y = device_put(y)
-        return jsafe_sparse_dot(x, y.T).block_until_ready()
+        return safe_sparse_dot(x, y.T).block_until_ready()
     if y is None:
         return safe_sparse_dot(x, x.transpose())
     return safe_sparse_dot(x, y.transpose())
