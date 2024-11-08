@@ -58,14 +58,14 @@ print(time()-start)
 print(obj.obj['loss'])
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-obj = ms.LSBoostRegressor(backend="gpu")
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
-print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
-print(time()-start)
+# obj = ms.LSBoostRegressor(backend="gpu")
+# print(obj.get_params())
+# start = time()
+# obj.fit(X_train, y_train)
+# print(time()-start)
+# start = time()
+# print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
+# print(time()-start)
 
 
 
