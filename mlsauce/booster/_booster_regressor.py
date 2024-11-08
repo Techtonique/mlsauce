@@ -473,14 +473,6 @@ class GenericBoostingRegressor(LSBoostRegressor):
         n_hidden_features: int
             number of nodes in successive hidden layers.
 
-        reg_lambda: float
-            L2 regularization parameter for successive errors in the optimizer
-            (at training time).
-
-        alpha: float
-            compromise between L1 and L2 regularization (must be in [0, 1]),
-            for `solver` == 'enet'
-
         row_sample: float
             percentage of rows chosen from the training set.
 
@@ -502,12 +494,6 @@ class GenericBoostingRegressor(LSBoostRegressor):
 
         seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-
-        backend: str
-            type of backend; must be in ('cpu', 'gpu', 'tpu')
-
-        solver: str
-            type of 'weak' learner; currently in ('ridge', 'lasso')
 
         activation: str
             activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
@@ -552,8 +538,6 @@ class GenericBoostingRegressor(LSBoostRegressor):
         n_estimators=100,
         learning_rate=0.1,
         n_hidden_features=5,
-        reg_lambda=0.1,
-        alpha=0.5,
         row_sample=1,
         col_sample=1,
         dropout=0,
@@ -561,8 +545,6 @@ class GenericBoostingRegressor(LSBoostRegressor):
         direct_link=1,
         verbose=1,
         seed=123,
-        backend="cpu",
-        solver="ridge",
         activation="relu",
         type_pi=None,
         replications=None,
@@ -584,8 +566,6 @@ class GenericBoostingRegressor(LSBoostRegressor):
             n_estimators=n_estimators,
             learning_rate=learning_rate,
             n_hidden_features=n_hidden_features,
-            reg_lambda=reg_lambda,
-            alpha=alpha,
             row_sample=row_sample,
             col_sample=col_sample,
             dropout=dropout,
@@ -593,8 +573,6 @@ class GenericBoostingRegressor(LSBoostRegressor):
             direct_link=direct_link,
             verbose=verbose,
             seed=seed,
-            backend=backend,
-            solver=solver,
             activation=activation,
             type_pi=type_pi,
             replications=replications,

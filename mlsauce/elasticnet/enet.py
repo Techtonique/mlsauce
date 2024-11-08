@@ -4,7 +4,7 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-from ..utils import get_beta, check_and_install
+from ..utils import get_beta, check_and_install, safe_sparse_dot
 from ._enet import fit_elasticnet, predict_elasticnet
 
 try:

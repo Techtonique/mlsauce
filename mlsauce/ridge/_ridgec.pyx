@@ -20,6 +20,7 @@ try:
     import jax.numpy as jnp
 except ImportError:
     pass 
+from ..utils import safe_sparse_dot
 
 
 # column bind
@@ -47,12 +48,12 @@ def crossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return jnp.dot(x.T, x).block_until_ready()
+            return jsafe_sparse_dot(x.T, x).block_until_ready()
         y = device_put(y)
-        return jnp.dot(x.T, y).block_until_ready()
+        return jsafe_sparse_dot(x.T, y).block_until_ready()
     if y is None:
-        return np.dot(x.transpose(), x)
-    return np.dot(x.transpose(), y)
+        return safe_sparse_dot(x.transpose(), x)
+    return safe_sparse_dot(x.transpose(), y)
 
 
 # Obtain this for JAX
@@ -137,7 +138,7 @@ def safe_sparse_dot(a, b, backend="cpu", dense_output=False):
 
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         # modif when jax.scipy.sparse available
-        return jnp.dot(device_put(a), device_put(b)).block_until_ready()
+        return jsafe_sparse_dot(device_put(a), device_put(b)).block_until_ready()
 
     #    if backend == "cpu":
     if a.ndim > 2 or b.ndim > 2:
@@ -155,7 +156,7 @@ def safe_sparse_dot(a, b, backend="cpu", dense_output=False):
             ret = a_2d @ b
             ret = ret.reshape(*a.shape[:-1], b.shape[1])
         else:
-            ret = np.dot(a, b)
+            ret = safe_sparse_dot(a, b)
     else:
         ret = a @ b
 
@@ -213,10 +214,10 @@ def squared_norm(x, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = np.ravel(x, order="K")
         x = device_put(x)
-        return jnp.dot(x, x).block_until_ready()
+        return jsafe_sparse_dot(x, x).block_until_ready()
 
     x = np.ravel(x, order="K")
-    return np.dot(x, x)
+    return safe_sparse_dot(x, x)
 
 
 # computes x%*%t(y)
@@ -226,12 +227,12 @@ def tcrossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return jnp.dot(x, x.T).block_until_ready()
+            return jsafe_sparse_dot(x, x.T).block_until_ready()
         y = device_put(y)
-        return jnp.dot(x, y.T).block_until_ready()
+        return jsafe_sparse_dot(x, y.T).block_until_ready()
     if y is None:
-        return np.dot(x, x.transpose())
-    return np.dot(x, y.transpose())
+        return safe_sparse_dot(x, x.transpose())
+    return safe_sparse_dot(x, y.transpose())
 
 
 # convert vector to numpy array

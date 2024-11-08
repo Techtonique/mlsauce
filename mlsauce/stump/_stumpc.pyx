@@ -21,7 +21,7 @@ from libc.math cimport log, exp, sqrt, fabs
 from numpy.linalg import lstsq
 from numpy.linalg import norm
 from scipy.special import expit
-
+from ..utils import safe_sparse_dot
 
 
 # 0 - utils -----
