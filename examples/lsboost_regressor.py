@@ -98,30 +98,3 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
-obj = ms.LSBoostRegressor(solver="lasso", n_clusters=2)
-print(obj.get_params())
-obj.fit(X_train, y_train)
-print(obj.obj['loss'])
-
-obj = ms.LSBoostRegressor(solver="lasso", n_clusters=2, 
-                          degree=2)
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(obj.obj['loss'])
-
-# MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-# obj = ms.LSBoostRegressor(backend="gpu", solver="lasso")
-# print(obj.get_params())
-# start = time()
-# obj.fit(X_train, y_train)
-# print(time()-start)
-# start = time()
-# print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
-# print(time()-start)
-
-
-
-
-
-
