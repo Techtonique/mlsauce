@@ -50,15 +50,15 @@ def dropout_func(x, drop_prob=0, seed=123):
     n, p = x.shape
 
     if drop_prob == 0:
-        return x
+        return np.asarray(x, dtype=np.float64)
 
     if drop_prob == 1:
-        return np.zeros_like(x)
+        return np.asarray(a=np.zeros_like(x), dtype=np.float64)
 
     np.random.seed(seed)
     dropped_indices = np.random.rand(n, p) > drop_prob
 
-    return dropped_indices * x / (1 - drop_prob)
+    return np.asarray(a=dropped_indices * x / (1 - drop_prob), dtype=np.float64)
     
 # one-hot encoder for discrete response
 def one_hot_encode(long int[:] y, 
@@ -71,12 +71,12 @@ def one_hot_encode(long int[:] y,
     for i in range(n_obs):
         res[i, y[i]] = 1
 
-    return np.asarray(res)
+    return np.asarray(dtype=np.float64, a=res)
 
 def one_hot_encode2(long int y, int n_classes):
   cdef double[:] res = np.zeros(n_classes)
   res[y] = 1
-  return np.asarray(res)
+  return np.asarray(dtype=np.float64, a=res)
     
 # 0 - 3 activation functions ----- 
 
@@ -133,16 +133,16 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res = {}
   current_error = 1000000.0
   
-  xm = np.asarray(X).mean(axis=0)
-  xsd = np.asarray(X).std(axis=0)
+  xm = np.asarray(dtype=np.float64, a=X).mean(axis=0)
+  xsd = np.asarray(dtype=np.float64, a=X).std(axis=0)
   for i in range(len(xsd)):
     if xsd[i] == 0:
       xsd[i] = 1.0 
 
   
   res['direct_link'] = direct_link
-  res['xm'] = np.asarray(xm)
-  res['xsd'] = np.asarray(xsd)
+  res['xm'] = np.asarray(dtype=np.float64, a=xm)
+  res['xsd'] = np.asarray(dtype=np.float64, a=xsd)
   res['n_estimators'] = n_estimators
   res['learning_rate'] = learning_rate
   res['W_i'] = {}
@@ -152,7 +152,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   res['activation'] = activation
   res['weights_distr'] = weights_distr
   
-  X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
+  X_ = (np.asarray(dtype=np.float64, a=X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
   res['n_classes'] = n_classes
   res['n_obs'] = n 
@@ -183,12 +183,12 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
                                     replace=False), 
                    kind='quicksort')
       res['col_index_i'][iter] = iy                     
-      X_iy = np.asarray(X_)[:, iy] # must be X_!
+      X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
       if res['weights_distr' ]== "uniform":
         W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
       else: 
         W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)), 
+      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
@@ -202,15 +202,15 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
         hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
-        fit_obj.fit(X = np.asarray(h_i), y = np.asarray(E)[ix,:])
+        fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=E)[ix,:])
                                  
       else:
       
-        fit_obj.fit(X = np.asarray(hh_i), y = np.asarray(E))
+        fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=E))
             
-      E = E - learning_rate*np.asarray(fit_obj.predict(np.asarray(hh_i)))
+      E = E - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
       
-      res['W_i'][iter] = np.asarray(W_i)
+      res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
             
       res['fit_obj_i'][iter] = pickle.loads(pickle.dumps(fit_obj, -1))
 
@@ -254,15 +254,15 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X, str backend="c
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))
+    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))
     # works because the regressor is Multitask 
-    preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+    preds_sum = preds_sum + learning_rate*np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
   
-  out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(preds_sum))
+  out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(dtype=np.float64, a=preds_sum))
   
   out_probs = out_probs/np.sum(out_probs, axis=1)[:, None]
 
-  return np.asarray(out_probs)
+  return np.asarray(dtype=np.float64, a=out_probs)
   
   
 # 2 - regressor -----   
@@ -297,16 +297,16 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res = {}
   current_error = 1000000.0
   
-  xm = np.asarray(X).mean(axis=0)
-  xsd = np.asarray(X).std(axis=0)
+  xm = np.asarray(dtype=np.float64, a=X).mean(axis=0)
+  xsd = np.asarray(dtype=np.float64, a=X).std(axis=0)
   for i in range(len(xsd)):
     if xsd[i] == 0:
       xsd[i] = 1.0 
 
   
   res['direct_link'] = direct_link
-  res['xm'] = np.asarray(xm)
-  res['xsd'] = np.asarray(xsd)
+  res['xm'] = np.asarray(dtype=np.float64, a=xm)
+  res['xsd'] = np.asarray(dtype=np.float64, a=xsd)
   res['n_estimators'] = n_estimators
   res['learning_rate'] = learning_rate
   res['activation'] = activation
@@ -317,7 +317,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
   res['weights_distr'] = weights_distr
   res['n_obs'] = n 
   
-  X_ = (np.asarray(X) - xm[None, :])/xsd[None, :]
+  X_ = (np.asarray(dtype=np.float64, a=X) - xm[None, :])/xsd[None, :]
   n_classes = len(np.unique(y))
   res['n_classes'] = n_classes
   
@@ -346,12 +346,12 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
                                     replace=False), 
                    kind='quicksort')
       res['col_index_i'][iter] = iy                     
-      X_iy = np.asarray(X_)[:, iy] # must be X_!
+      X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
       if res['weights_distr' ] == "uniform":
         W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
       else: 
         W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)), 
+      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)), 
                                      drop_prob=dropout, seed=seed)
       hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
       
@@ -365,15 +365,15 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
         hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
                                       drop_prob=dropout, seed=seed)
         h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i        
-        fit_obj.fit(X = np.asarray(h_i), y = np.asarray(e)[ix])
+        fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=e)[ix])
 
       else:
       
-        fit_obj.fit(X = np.asarray(hh_i), y = np.asarray(e))
+        fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=e))
             
-      e = e - learning_rate*np.asarray(fit_obj.predict(np.asarray(hh_i)))
+      e = e - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
 
-      res['W_i'][iter] = np.asarray(W_i)
+      res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
       
       res['fit_obj_i'][iter] = pickle.loads(pickle.dumps(fit_obj, -1))
 
@@ -411,10 +411,10 @@ def predict_booster_regressor(object obj, double[:,::1] X, str backend):
     iy = obj['col_index_i'][iter]
     X_iy = X_[:, iy] # must be X_!
     W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))        
-    preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))        
+    preds_sum = preds_sum + learning_rate*np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
   
-  return np.asarray(obj['ym'] + np.asarray(preds_sum))
+  return np.asarray(dtype=np.float64, a=obj['ym'] + np.asarray(dtype=np.float64, a=preds_sum))
 
 # 2 - 3 update -----
 
@@ -449,30 +449,30 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5, backend="cpu"):
   if type_fit == "regression": 
     #for iter in range(n_estimators):    
     #  iy = obj['col_index_i'][iter]
-    #  X_iy = np.asarray(X_[:, iy]).reshape(1, -1) # must be X_!
+    #  X_iy = np.asarray(dtype=np.float64, a=X_[:, iy]).reshape(1, -1) # must be X_!
     #  W_i = obj['W_i'][iter]
-    #  hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))            
-    #  preds_sum = preds_sum + learning_rate*np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+    #  hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))            
+    #  preds_sum = preds_sum + learning_rate*np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
     #  residuals_i = centered_y - preds_sum
-    #  obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*safe_sparse_dot(residuals_i, hh_i, backend).ravel()    
+    #  obj['fit_obj_i'][iter].coef_ = np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].coef_).ravel() + (n_obs**(-alpha))*safe_sparse_dot(residuals_i, hh_i, backend).ravel()    
     # Initialize cumulative sum of coefficients and count of iterations
     cumulative_coef_ = None
 
     for iter in range(n_estimators):    
         iy = obj['col_index_i'][iter]
-        X_iy = np.asarray(X_[:, iy]).reshape(1, -1)  # must be X_!
+        X_iy = np.asarray(dtype=np.float64, a=X_[:, iy]).reshape(1, -1)  # must be X_!
         W_i = obj['W_i'][iter]
         hh_i = (
-            np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))))
+            np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))))
             if direct_link
-            else activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend))
+            else activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))
         )
         
-        preds_sum = preds_sum + learning_rate * np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))
+        preds_sum = preds_sum + learning_rate * np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
         residuals_i = centered_y - preds_sum
         
         # Update the coefficients as in your original code
-        obj['fit_obj_i'][iter].coef_ = np.asarray(obj['fit_obj_i'][iter].coef_).ravel() + (n_obs ** -alpha) * safe_sparse_dot(residuals_i, hh_i, backend).ravel()
+        obj['fit_obj_i'][iter].coef_ = np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].coef_).ravel() + (n_obs ** -alpha) * safe_sparse_dot(residuals_i, hh_i, backend).ravel()
         
         # If this is the first iteration, initialize cumulative_coef_ to the current coef_
         if cumulative_coef_ is None:
@@ -490,20 +490,20 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5, backend="cpu"):
 
     for iter in range(n_estimators):    
         iy = obj['col_index_i'][iter]
-        X_iy = np.asarray(X_)[:, iy]  # must be X_!  
+        X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy]  # must be X_!  
         W_i = obj['W_i'][iter]      
-        gXW = np.asarray(activation_choice(activation)(safe_sparse_dot(X_iy, W_i, backend)))
+        gXW = np.asarray(dtype=np.float64, a=activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)))
         
         if direct_link:
             hh_i = np.hstack((np.array(X_iy), np.array(gXW)))  
         else: 
             hh_i = gXW      
 
-        preds_sum = preds_sum + learning_rate * np.asarray(obj['fit_obj_i'][iter].predict(np.asarray(hh_i)))            
+        preds_sum = preds_sum + learning_rate * np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))            
         residuals_i = centered_y - preds_sum      
         
         # Update cumulative sum of coef_
-        cumulative_coef_sum += np.asarray(obj['fit_obj_i'][iter].coef_) 
+        cumulative_coef_sum += np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].coef_) 
         
         # Calculate the average of coef_ values so far
         average_coef = cumulative_coef_sum / (iter + 1)
@@ -512,8 +512,8 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5, backend="cpu"):
         obj['fit_obj_i'][iter].coef_ = average_coef 
 
   xm_old = obj['xm']
-  obj['xm'] = (n_obs*np.asarray(xm_old) + X)/(n_obs + 1)
-  obj['xsd'] = np.sqrt(((n_obs - 1)*(obj['xsd']**2) + (np.asarray(X) -np.asarray(xm_old))*(np.asarray(X) - obj['xm']))/n_obs)  
+  obj['xm'] = (n_obs*np.asarray(dtype=np.float64, a=xm_old) + X)/(n_obs + 1)
+  obj['xsd'] = np.sqrt(((n_obs - 1)*(obj['xsd']**2) + (np.asarray(dtype=np.float64, a=X) -np.asarray(dtype=np.float64, a=xm_old))*(np.asarray(dtype=np.float64, a=X) - obj['xm']))/n_obs)  
   obj['n_obs'] = n_obs + 1
   if type_fit == "regression":      
     obj['ym'] = (n_obs*obj['ym'] + y)/(n_obs + 1)    

@@ -144,10 +144,10 @@ def check_and_install(package_name):
     try:
         # Check if the package is already installed by importing it
         importlib.import_module(package_name)
-        print(f"'{package_name}' is already installed.")
+        #print(f"'{package_name}' is already installed.")
     except ImportError:
-        print(f"'{package_name}' not found. Installing...")
+        #print(f"'{package_name}' not found. Installing...")
         install_package(package_name)
         # Retry importing the package after installation
         importlib.import_module(package_name)
-        print(f"'{package_name}' has been installed successfully.")
+        #print(f"'{package_name}' has been installed successfully.")

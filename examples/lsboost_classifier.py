@@ -57,16 +57,16 @@ print(time()-start)
 print(obj.obj['loss'])
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-obj = ms.LSBoostClassifier(backend="gpu")
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
-print(obj.score(X_test, y_test))
-print(time()-start)
+# obj = ms.LSBoostClassifier(backend="gpu")
+# print(obj.get_params())
+# start = time()
+# obj.fit(X_train, y_train)
+# print(time()-start)
+# start = time()
+# print(obj.score(X_test, y_test))
+# print(time()-start)
 
-print(obj.obj['loss'])
+# print(obj.obj['loss'])
 
 # data 2
 print("\n")
