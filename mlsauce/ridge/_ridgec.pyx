@@ -48,12 +48,12 @@ def crossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return safe_sparse_dot(x.T, x).block_until_ready()
+            return x.T @ x
         y = device_put(y)
-        return safe_sparse_dot(x.T, y).block_until_ready()
+        return x.T @ y
     if y is None:
-        return safe_sparse_dot(x.transpose(), x)
-    return safe_sparse_dot(x.transpose(), y)
+        return x.T @ x
+    return x.T @ y
 
 
 # Obtain this for JAX
