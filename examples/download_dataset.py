@@ -22,9 +22,3 @@ df2 = ms.download(dataset="Insurance")
 print(f"===== df2: \n {df2} \n")
 print(f"===== df2.dtypes: \n {df2.dtypes}")
 
-print("\n====================================================== \n")
-
-# Affairs dataset
-df3 = ms.download(pkgname="AER", dataset="Affairs", source="https://zeileis.r-universe.dev/")
-print(f"===== df3: \n {df3} \n")
-print(f"===== df3.dtypes: \n {df3.dtypes}")
