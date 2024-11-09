@@ -302,8 +302,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             X = np.column_stack((X, clustered_X))
 
         self.obj = boosterc.fit_booster_regressor(
-            X=np.asarray(X, order="C"),
-            y=np.asarray(y, order="C"),
+            X=np.asarray(X, order="C", dtype=np.float64),
+            y=np.asarray(y, order="C", dtype=np.float64),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,

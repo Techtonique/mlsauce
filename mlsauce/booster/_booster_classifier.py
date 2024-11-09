@@ -432,8 +432,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             X = np.column_stack((X, clustered_X))
 
         self.obj = boosterc.fit_booster_classifier(
-            np.asarray(X, order="C"),
-            np.asarray(y, order="C"),
+            np.asarray(X, order="C", dtype=np.float64),
+            np.asarray(y, order="C", dtype=np.int64),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,

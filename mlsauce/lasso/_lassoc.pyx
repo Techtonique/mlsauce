@@ -86,8 +86,8 @@ def dropout(x, drop_prob=0, seed=123):
 # compute coeff in lasso
 # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
 # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
-def get_beta_1D(double[:] beta0, double[:,::1] XX2, 
-                double[:] Xy2, double reg_lambda,
+def get_beta_1D(beta0, XX2, 
+                Xy2, double reg_lambda,
                 int max_iter = 1000, 
                 double tol = 1e-5):
 
@@ -101,7 +101,7 @@ def get_beta_1D(double[:] beta0, double[:,::1] XX2,
     beta_opt = np.asarray(beta0)
 
     while (converged != 1 and iteration < max_iter):
-        beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
+        beta_prev = np.copy(beta_opt)
         for j in range(p):
             aj = XX2[j, j]
             cj = Xy2[j] - safe_sparse_dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj
@@ -114,8 +114,8 @@ def get_beta_1D(double[:] beta0, double[:,::1] XX2,
 
 
 # compute coeff in lasso
-def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2, 
-                double[:,::1] Xy2, double reg_lambda,
+def get_beta_2D(beta0, XX2, 
+                Xy2, double reg_lambda,
                 int max_iter = 1000, 
                 double tol = 1e-5):
 
@@ -127,13 +127,13 @@ def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,
     err = 10000
     iteration = 0 
     p = len(beta0)
-    beta_opt = np.asarray(beta0)
+    beta_opt = np.copy(np.asarray(beta0))
 
     # if len(beta0.shape) > 1: (multitask learner)
     n_classes = beta_opt.shape[1]
     ajs = [XX2[j, j] for j in range(p)]
     while (converged != 1 and iteration < max_iter):
-        beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
+        beta_prev = np.copy(beta_opt)
         for k in range(n_classes):       
             beta_opt_k = np.asarray(beta_opt[:,k])                     
             for j in range(p):  
