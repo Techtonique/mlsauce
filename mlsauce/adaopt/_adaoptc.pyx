@@ -23,6 +23,13 @@ from sklearn.preprocessing import StandardScaler
 from multiprocessing import Pool
 from tqdm import tqdm
 
+try:
+    import jax.numpy as jnp
+    from jax import device_put
+    from jax.numpy.linalg import inv as jinv
+except ImportError:
+    pass
+
 from ..utils import subsample
 
 
@@ -208,8 +215,11 @@ def one_hot_encode(long int[:] y,
 # squared norms
 # @Paul Panzer's soln
 # from https://stackoverflow.com/questions/42991347/how-to-find-the-pairwise-differences-between-rows-of-two-very-large-matrices-usi    
-def outer_sum_dot(A, B):
-    return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*np.dot(A, B.T)
+def outer_sum_dot(A, B, backend="cpu"):
+    if backend != "cpu":
+        device_put(A)
+        device_put(B)
+    return np.add.outer((A*A).sum(axis=-1), (B*B).sum(axis=-1)) - 2*(A @ B.T)
     
 
 cdef double norm_c(double[:] x, long int n) nogil:
@@ -475,7 +485,7 @@ def calculate_weights(double[:] weights):
 
 # 1 - model fitting -----
 
-def fit_adaopt(double[:, :] X, long int[:] y, 
+def fit_adaopt(X, y, 
         int n_iterations,
         long int n_X, int p_X, 
         int n_classes,
@@ -484,7 +494,8 @@ def fit_adaopt(double[:, :] X, long int[:] y,
         double reg_alpha,
         double eta, 
         double gamma, 
-        double tolerance):
+        double tolerance,
+        str backend = "cpu"):
     
     
     cdef double[:, :] Y
@@ -509,7 +520,10 @@ def fit_adaopt(double[:, :] X, long int[:] y,
     scaled_X = X/norm(X, ord=2, axis=1)[:, None]                        
     Y = one_hot_encode(y, n_classes) 
     beta = lstsq(scaled_X, Y, rcond=None)[0]
-    probs = expit(np.dot(scaled_X, beta))
+    if backend != "cpu":
+        device_put(np.asarray(scaled_X, dtype=np.float64))
+        device_put(np.asarray(beta, dtype=np.float64))
+    probs = expit(np.asarray(scaled_X, dtype=np.float64) @ np.asarray(beta, dtype=np.float64))
     probs /= np.sum(probs, axis=1)[:, None] 
     preds = np.asarray(probs).argmax(axis=1)    
     
@@ -581,14 +595,14 @@ def fit_adaopt(double[:, :] X, long int[:] y,
 
 # 2 - Model predict -----
 
-def predict_proba_adaopt(double[:,::1] X_test, 
-                  double[:,::1] scaled_X_train,
+def predict_proba_adaopt(X_test, 
+                  scaled_X_train,
                   long int n_test, long int n_train,
                   double[:,::1] probs_train, int k,
                   int n_clusters, int seed,                   
                   int batch_size = 100,
                   type_dist="euclidean",    
-                  cache=True):
+                  cache=True, backend="cpu"):
     
     cdef int n_classes = probs_train.shape[1]        
     cdef int n_X_train = scaled_X_train.shape[0]
@@ -742,7 +756,8 @@ def predict_proba_adaopt(double[:,::1] X_test,
     if type_dist == "euclidean-f":                
 
         dist_mat = outer_sum_dot(np.asarray(scaled_X_test), 
-                                 np.asarray(scaled_X_train))        
+                                 np.asarray(scaled_X_train), 
+                                 backend)        
 
         for i in range(n_test):        
 

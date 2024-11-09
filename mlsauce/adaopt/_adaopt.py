@@ -81,6 +81,9 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         cluster_scaling: str
             scaling method for clustering: currently 'standard', 'robust', 'minmax'
+        
+        backend: str
+            backend for parallel processing: "cpu" or "gpu" or "tpu"
 
         seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
@@ -107,6 +110,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         n_clusters_input=0,
         clustering_method="kmeans",
         cluster_scaling="standard",
+        backend="cpu",
         seed=123,
     ):
         if n_clusters_input > 0:
@@ -146,6 +150,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
         self.clustering_method = clustering_method
         self.cluster_scaling = cluster_scaling
         self.scaler_, self.label_encoder_, self.clusterer_ = None, None, None
+        self.backend = backend
         self.seed = seed
 
     def fit(self, X, y, **kwargs):
@@ -210,6 +215,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             eta=self.eta,
             gamma=self.gamma,
             tolerance=self.tolerance,
+            backend=self.backend,
         )
 
         self.probs_training = res["probs"]
@@ -291,6 +297,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
                 type_dist=self.type_dist,
                 cache=self.cache,
                 seed=self.seed,
+                backend=self.backend,   
             )
 
         # parallel: self.n_jobs is not None
