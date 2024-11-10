@@ -13,6 +13,7 @@ cimport numpy as np
 cimport cython
 import gc
 
+from copy import deepcopy 
 from ..lasso import LassoRegressor
 from ..ridge import RidgeRegressor
 from ..elasticnet import ElasticNetRegressor
@@ -212,7 +213,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       
       res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
             
-      res['fit_obj_i'][iter] = pickle.loads(pickle.dumps(fit_obj, -1))
+      res['fit_obj_i'][iter] = deepcopy(fit_obj)
 
       current_error = np.linalg.norm(E, ord='fro')
 
@@ -375,7 +376,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
 
       res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
       
-      res['fit_obj_i'][iter] = pickle.loads(pickle.dumps(fit_obj, -1))
+      res['fit_obj_i'][iter] = deepcopy(fit_obj)
 
       current_error = np.linalg.norm(e)
 

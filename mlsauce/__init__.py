@@ -66,6 +66,7 @@ else:
     from .multitaskregressor import MultiTaskRegressor
     from .datasets import download
     from .elasticnet import ElasticNetRegressor
+    from .kernelridge import KRLSRegressor
     from .lasso import LassoRegressor
     from .ridge import RidgeRegressor
     from .stump import StumpClassifier
@@ -79,6 +80,7 @@ else:
         "GenericBoostingRegressor",
         "StumpClassifier",
         "ElasticNetRegressor",
+        "KRLSRegressor",
         "LassoRegressor",
         "LSBoostRegressor",
         "RidgeRegressor",

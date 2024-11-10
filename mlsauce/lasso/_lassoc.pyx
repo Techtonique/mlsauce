@@ -98,7 +98,7 @@ def get_beta_1D(beta0, XX2,
     err = 10000
     iteration = 0 
     p = len(beta0)
-    beta_opt = np.asarray(beta0)
+    beta_opt = np.copy(np.asarray(beta0))
 
     while (converged != 1 and iteration < max_iter):
         beta_prev = np.copy(beta_opt)

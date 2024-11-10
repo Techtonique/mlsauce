@@ -1,5 +1,5 @@
 import numpy as np
-import pickle
+from copy import deepcopy
 from joblib import Parallel, delayed
 from joblib import wrap_non_picklable_objects
 from sklearn.base import BaseEstimator
@@ -193,8 +193,8 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
             y_ = y[index_subsample]
             X_ = X[index_subsample, :]
         else:
-            y_ = pickle.loads(pickle.dumps(y, -1))
-            X_ = pickle.loads(pickle.dumps(X, -1))
+            y_ = deepcopy(y)
+            X_ = deepcopy(X)
 
         n, p = X_.shape
 

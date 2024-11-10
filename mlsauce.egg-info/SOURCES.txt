@@ -30,6 +30,8 @@ mlsauce/elasticnet/__init__.py
 mlsauce/elasticnet/_enet.py
 mlsauce/elasticnet/enet.py
 mlsauce/elasticnet/utils_enet.py
+mlsauce/kernelridge/__init__.py
+mlsauce/kernelridge/krr.py
 mlsauce/lasso/__init__.py
 mlsauce/lasso/_lasso.py
 mlsauce/lasso/_lassoc.c
@@ -39,6 +41,7 @@ mlsauce/lasso/utils_lasso.py
 mlsauce/lazybooster/__init__.py
 mlsauce/lazybooster/config.py
 mlsauce/lazybooster/lazyboosterclassif.py
+mlsauce/lazybooster/lazyboostermts.py
 mlsauce/lazybooster/lazyboosterregression.py
 mlsauce/multitaskregressor/__init__.py
 mlsauce/multitaskregressor/mtaskregr.py

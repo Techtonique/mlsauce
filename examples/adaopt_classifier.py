@@ -15,7 +15,7 @@ import os
 
 print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
 
-
+print("\n breast cancer ---------- \n")
 
 # data 1
 breast_cancer = load_breast_cancer()
@@ -45,6 +45,7 @@ start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
 
+print("\n wine ---------- \n")
 
 # data 2
 wine = load_wine()
@@ -69,6 +70,8 @@ print(time()-start)
 start = time()
 print(obj.score(X_test, y_test))
 print(time()-start)
+
+print("\n iris ---------- \n")
 
 # data 3
 iris = load_iris()
@@ -96,6 +99,8 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 
+print("\n digits ---------- \n")
+
 # data 4
 digits = load_digits()
 Z = digits.data
@@ -116,19 +121,12 @@ obj = ms.AdaOpt(n_iterations=50,
            n_jobs=3, type_dist="euclidean", verbose=1)
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print("Elapsed: ", time()-start)
 start = time()
 print(obj.score(X_test, y_test))
-print(time()-start)
+print("Elapsed: ", time()-start)
 
-# with clustering
-obj = ms.AdaOpt(n_clusters=25, k=1)
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
-print(obj.score(X_test, y_test))
-print(time()-start)
+# ------ 
 
 obj = ms.AdaOpt(n_iterations=50,
            learning_rate=0.3,
@@ -138,22 +136,11 @@ obj = ms.AdaOpt(n_iterations=50,
            gamma=0.01, 
            tolerance=1e-4,
            row_sample=1, 
-           k=1, n_clusters_input=5,
+           k=1, backend="gpu",
            n_jobs=3, type_dist="euclidean", verbose=1)
 start = time()
 obj.fit(X_train, y_train)
-print(time()-start)
+print("Elapsed: ", time()-start)
 start = time()
 print(obj.score(X_test, y_test))
-print(time()-start)
-
-# with clustering
-obj = ms.AdaOpt(n_clusters=25, k=1, 
-                n_clusters_input=3)
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
-print(obj.score(X_test, y_test))
-print(time()-start)
-
+print("Elapsed: ", time()-start)

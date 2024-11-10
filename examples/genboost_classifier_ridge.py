@@ -10,12 +10,6 @@ import os
 
 print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
 
-print(os.path.relpath(os.path.dirname(__file__)))
-
-#wd="/workspace/mlsauce/mlsauce/examples"
-#
-#chdir(wd)
-
 import mlsauce as ms
 
 #ridge
@@ -36,10 +30,10 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-clf = ms.RidgeRegressor(reg_lambda=1)
-clf2 = ms.RidgeRegressor(reg_lambda=1, backend="gpu")
+clf = ms.RidgeRegressor(reg_lambda=0.05)
+clf2 = ms.RidgeRegressor(reg_lambda=0.05, backend="gpu")
 
-obj = ms.GenericBoostingClassifier(clf, tolerance=1e-4)
+obj = ms.GenericBoostingClassifier(clf)
 print(obj.get_params())
 start = time()
 obj.fit(X_train, y_train)
@@ -52,6 +46,7 @@ print(obj.obj['loss'])
 
 print(obj.obj['fit_obj_i'])
 
+# needs more data 
 obj = ms.GenericBoostingClassifier(clf2, backend="gpu")
 print(obj.get_params())
 start = time()
