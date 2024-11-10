@@ -43,7 +43,10 @@ def get_best_beta(X, y, lambdas, backend="cpu"):
     I = np.eye(n_features)
 
     if backend == "gpu":
-        I = device_put(I)
+        device_put(Xt)
+        device_put(XtX)
+        device_put(Xty)
+        device_put(I)
         hat_matrices_diags = [(X @ jinv(XtX + lam * I) @ Xt).diagonal() for lam in lambdas]    
     else:      
         hat_matrices_diags = [(X @ np.linalg.inv(XtX + lam * I) @ Xt).diagonal() for lam in lambdas]   

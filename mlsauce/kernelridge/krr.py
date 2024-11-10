@@ -15,7 +15,7 @@ from sklearn.preprocessing import StandardScaler
 def compute_kernel_matrix(X, kernel_func, X_test=None):
     n = X.shape[0]        
     # Compute the upper triangular part of the kernel matrix
-    if X_test is not None:
+    if X_test is None:
         K = np.zeros((n, n))
         for i in range(n):
             for j in range(i, n):
