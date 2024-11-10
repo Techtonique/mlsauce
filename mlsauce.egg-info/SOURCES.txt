@@ -76,6 +76,8 @@ mlsauce/utils/matrixops/__init__.py
 mlsauce/utils/matrixops/matrixops.py
 mlsauce/utils/memoryuse/__init__.py
 mlsauce/utils/memoryuse/mem_usage.py
+mlsauce/utils/metrics/__init__.py
+mlsauce/utils/metrics/metrics.py
 mlsauce/utils/misc/__init__.py
 mlsauce/utils/misc/misc.py
 mlsauce/utils/sampling/__init__.py

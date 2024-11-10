@@ -62,7 +62,7 @@ else:
         GenericBoostingClassifier,
         GenericBoostingRegressor,
     )
-    from .lazybooster import LazyBoostingClassifier, LazyBoostingRegressor
+    from .lazybooster import LazyBoostingClassifier, LazyBoostingRegressor, LazyBoostingMTS
     from .multitaskregressor import MultiTaskRegressor
     from .datasets import download
     from .elasticnet import ElasticNetRegressor
@@ -85,6 +85,7 @@ else:
         "LSBoostRegressor",
         "RidgeRegressor",
         "LazyBoostingClassifier",
+        "LazyBoostingMTS",
         "LazyBoostingRegressor",
         "MultiTaskRegressor",
         # Other imports

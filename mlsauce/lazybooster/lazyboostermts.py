@@ -20,16 +20,11 @@ except ImportError:
 
 from tqdm import tqdm
 
-from .config import DEEPREGRESSORSMTS, REGRESSORSMTS
-from ..deep import DeepMTS
-from ..mts import ClassicalMTS, MTS
-from ..utils import (
-    convert_df_to_numeric,
-    coverage,
-    dict_to_dataframe_series,
-    mean_errors,
-    winkler_score,
-)
+from .config import REGRESSORS
+
+from ..booster import GenericBoostingRegressor
+
+from ..utils import convert_df_to_numeric, coverage, dict_to_dataframe_series, mean_errors, winkler_score
 
 import warnings
 
@@ -136,9 +131,6 @@ class LazyBoostingMTS(ns.MTS):
 
         preprocess: bool, preprocessing is done when set to True
 
-        n_layers: int, optional (default=1)
-            Number of layers in the network. When set to 1, the model is equivalent to a MTS.
-
         h: int, optional (default=None)
             Number of steps ahead to predict (when used, must be > 0 and < X_test.shape[0]).
 
@@ -169,7 +161,6 @@ class LazyBoostingMTS(ns.MTS):
         random_state=42,
         estimators="all",
         preprocess=False,
-        n_layers=1,
         h=None,
         # MTS attributes
         obj=None,
@@ -204,7 +195,6 @@ class LazyBoostingMTS(ns.MTS):
         self.random_state = random_state
         self.estimators = estimators
         self.preprocess = preprocess
-        self.n_layers = n_layers
         self.h = h
         super().__init__(
             obj=obj,
@@ -328,7 +318,7 @@ class LazyBoostingMTS(ns.MTS):
         for i, name in enumerate(["ARIMA", "ETS", "Theta", "VAR", "VECM"]):           
             try: 
                 start = time.time()
-                regr = ClassicalMTS(model=name)
+                regr = ns.ClassicalMTS(model=name)
                 regr.fit(X_train, **kwargs)
                 self.models_[name] = regr
                 if self.h is None:
@@ -399,29 +389,16 @@ class LazyBoostingMTS(ns.MTS):
             TIME.append(time.time() - start)        
         
         if self.estimators == "all":
-            if self.n_layers <= 1:
-                self.regressors = REGRESSORSMTS
-            else:
-                self.regressors = DEEPREGRESSORSMTS
+            self.regressors = REGRESSORS
         else:
-            if self.n_layers <= 1:
-                self.regressors = [
-                    ("MTS(" + est[0] + ")", est[1])
-                    for est in all_estimators()
-                    if (
-                        issubclass(est[1], RegressorMixin)
-                        and (est[0] in self.estimators)
-                    )
-                ]
-            else:  # self.n_layers > 1
-                self.regressors = [
-                    ("DeepMTS(" + est[0] + ")", est[1])
-                    for est in all_estimators()
-                    if (
-                        issubclass(est[1], RegressorMixin)
-                        and (est[0] in self.estimators)
-                    )
-                ]
+            self.regressors = [
+                ("MTS(" + est[0] + ")", est[1])
+                for est in all_estimators()
+                if (
+                    issubclass(est[1], RegressorMixin)
+                    and (est[0] in self.estimators)
+                )
+            ]
 
         if self.preprocess is True:
             for name, model in tqdm(self.regressors):  # do parallel exec
@@ -433,12 +410,11 @@ class LazyBoostingMTS(ns.MTS):
                                 ("preprocessor", preprocessor),
                                 (
                                     "regressor",
-                                    DeepMTS(
-                                        obj=model(
+                                    ns.MTS(
+                                        obj=GenericBoostingRegressor(model(
                                             random_state=self.random_state,
                                             **kwargs
-                                        ),
-                                        n_layers=self.n_layers,
+                                        )),
                                         n_hidden_features=self.n_hidden_features,
                                         activation_name=self.activation_name,
                                         a=self.a,
@@ -469,9 +445,8 @@ class LazyBoostingMTS(ns.MTS):
                                 ("preprocessor", preprocessor),
                                 (
                                     "regressor",
-                                    DeepMTS(
-                                        obj=model(**kwargs),
-                                        n_layers=self.n_layers,
+                                    ns.MTS(
+                                        obj=GenericBoostingRegressor(model(**kwargs)),                                       
                                         n_hidden_features=self.n_hidden_features,
                                         activation_name=self.activation_name,
                                         a=self.a,
@@ -630,9 +605,8 @@ class LazyBoostingMTS(ns.MTS):
                 start = time.time()
                 try:
                     if "random_state" in model().get_params().keys():
-                        pipe = DeepMTS(
+                        pipe = ns.MTS(
                             obj=model(random_state=self.random_state, **kwargs),
-                            n_layers=self.n_layers,
                             n_hidden_features=self.n_hidden_features,
                             activation_name=self.activation_name,
                             a=self.a,
@@ -655,9 +629,8 @@ class LazyBoostingMTS(ns.MTS):
                             show_progress=self.show_progress,
                         )
                     else:
-                        pipe = DeepMTS(
+                        pipe = ns.MTS(
                             obj=model(**kwargs),
-                            n_layers=self.n_layers,
                             n_hidden_features=self.n_hidden_features,
                             activation_name=self.activation_name,
                             a=self.a,
@@ -1067,125 +1040,3 @@ class LazyBoostingMTS(ns.MTS):
                     self.fit(X_train, X_test[0: self.h, :])
 
         return self.models_
-
-class LazyMTS(LazyDeepMTS):
-    """
-    Fitting -- almost -- all the regression algorithms to multivariate time series
-    and returning their scores (no layers).
-
-    Parameters:
-
-        verbose: int, optional (default=0)
-            Any positive number for verbosity.
-
-        ignore_warnings: bool, optional (default=True)
-            When set to True, the warning related to algorigms that are not
-            able to run are ignored.
-
-        custom_metric: function, optional (default=None)
-            When function is provided, models are evaluated based on the custom
-              evaluation metric provided.
-
-        predictions: bool, optional (default=False)
-            When set to True, the predictions of all the models models are returned as dataframe.
-
-        sort_by: string, optional (default='RMSE')
-            Sort models by a metric. Available options are 'RMSE', 'MAE', 'MPL', 'MPE', 'MAPE',
-            'R-Squared', 'Adjusted R-Squared' or a custom metric identified by its name and
-            provided by custom_metric.
-
-        random_state: int, optional (default=42)
-            Reproducibiility seed.
-
-        estimators: list, optional (default='all')
-            list of Estimators (regression algorithms) names or just 'all' (default='all')
-
-        preprocess: bool, preprocessing is done when set to True
-
-        h: int, optional (default=None)
-            Number of steps ahead to predict (when used, must be > 0 and < X_test.shape[0]).
-
-        All the other parameters are the same as MTS's.
-    
-    Attributes:
-
-        models_: dict-object
-            Returns a dictionary with each model pipeline as value
-            with key as name of models.
-        
-        best_model_: object
-            Returns the best model pipeline based on the sort_by metric.
-
-    Examples:
-
-        See https://thierrymoudiki.github.io/blog/2023/10/29/python/quasirandomizednn/MTS-LazyPredict
-
-    """
-
-    def __init__(
-        self,
-        verbose=0,
-        ignore_warnings=True,
-        custom_metric=None,
-        predictions=False,
-        sort_by=None, # leave it as is 
-        random_state=42,
-        estimators="all",
-        preprocess=False,
-        h=None,
-        # MTS attributes
-        obj=None,
-        n_hidden_features=5,
-        activation_name="relu",
-        a=0.01,
-        nodes_sim="sobol",
-        bias=True,
-        dropout=0,
-        direct_link=True,
-        n_clusters=2,
-        cluster_encode=True,
-        type_clust="kmeans",
-        type_scaling=("std", "std", "std"),
-        lags=15,
-        type_pi="scp2-kde",
-        block_size=None,
-        replications=None,
-        kernel=None,
-        agg="mean",
-        seed=123,
-        backend="cpu",
-        show_progress=False,
-    ):
-        super().__init__(
-            verbose=verbose,
-            ignore_warnings=ignore_warnings,
-            custom_metric=custom_metric,
-            predictions=predictions,
-            sort_by=sort_by,
-            random_state=random_state,
-            estimators=estimators,
-            preprocess=preprocess,
-            n_layers=1,
-            h=h,
-            obj=obj,
-            n_hidden_features=n_hidden_features,
-            activation_name=activation_name,
-            a=a,
-            nodes_sim=nodes_sim,
-            bias=bias,
-            dropout=dropout,
-            direct_link=direct_link,
-            n_clusters=n_clusters,
-            cluster_encode=cluster_encode,
-            type_clust=type_clust,
-            type_scaling=type_scaling,
-            lags=lags,
-            type_pi=type_pi,
-            block_size=block_size,
-            replications=replications,
-            kernel=kernel,
-            agg=agg,
-            seed=seed,
-            backend=backend,
-            show_progress=show_progress,
-        )
