@@ -40,7 +40,7 @@ def fit_adaopt(
     scaled_X = X / norm(X, ord=2, axis=1)[:, None]
     Y = one_hot_encode(y, n_classes)
     beta = lstsq(scaled_X, Y, rcond=None)[0]
-    probs = expit(np.dot(scaled_X, beta))
+    probs = expit(safe_sparse_dot(scaled_X, beta))
     probs /= np.sum(probs, axis=1)[:, None]
     preds = np.argmax(probs, axis=1)
     w_prev = np.repeat(1.0 / len(X), len(X))
@@ -121,7 +121,7 @@ def predict_proba_adaopt(
     dist_mat = (
         np.sum(X_test**2, axis=1)[:, None]
         + np.sum(scaled_X_train**2, axis=1)
-        - 2 * np.dot(X_test, scaled_X_train.T)
+        - 2 * safe_sparse_dot(X_test, scaled_X_train.T)
     )
 
     for i in range(n_test):

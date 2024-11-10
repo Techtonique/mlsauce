@@ -18,6 +18,7 @@ from scipy import sparse
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
+from ..utils import safe_sparse_dot
 try:
     from jax import device_put
     import jax.numpy as jnp
@@ -50,12 +51,12 @@ def crossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return jnp.dot(x.T, x).block_until_ready()
+            return safe_sparse_dot(x.T, x).block_until_ready()
         y = device_put(y)
-        return jnp.dot(x.T, y).block_until_ready()
+        return safe_sparse_dot(x.T, y).block_until_ready()
     if y is None:
-        return np.dot(x.transpose(), x)
-    return np.dot(x.transpose(), y)
+        return safe_sparse_dot(x.transpose(), x)
+    return safe_sparse_dot(x.transpose(), y)
 
 
 # Obtain this for JAX
@@ -85,8 +86,8 @@ def dropout(x, drop_prob=0, seed=123):
 # compute coeff in lasso
 # Lasso via coordinate descent: the "Shooting Algorithm" of Fu (1998). Adapted from FDiTraglia's Github code +
 # pseudocode algorithm 13.1 of Murphy (2012) + matlab code LassoShooting.m by Mark Schmidt.
-def get_beta_1D(double[:] beta0, double[:,::1] XX2, 
-                double[:] Xy2, double reg_lambda,
+def get_beta_1D(beta0, XX2, 
+                Xy2, double reg_lambda,
                 int max_iter = 1000, 
                 double tol = 1e-5):
 
@@ -97,13 +98,13 @@ def get_beta_1D(double[:] beta0, double[:,::1] XX2,
     err = 10000
     iteration = 0 
     p = len(beta0)
-    beta_opt = np.asarray(beta0)
+    beta_opt = np.copy(np.asarray(beta0))
 
     while (converged != 1 and iteration < max_iter):
-        beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
+        beta_prev = np.copy(beta_opt)
         for j in range(p):
             aj = XX2[j, j]
-            cj = Xy2[j] - np.dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj
+            cj = Xy2[j] - safe_sparse_dot(np.asarray(XX2)[j, :], np.asarray(beta_opt)) + np.asarray(beta_opt)[j]*aj
             beta_opt[j] = soft_thres(cj/aj, reg_lambda/aj)
         err = np.sum(np.abs(np.asarray(beta_prev) - np.asarray(beta_opt))) 
         converged = (err <= tol)*1            
@@ -113,8 +114,8 @@ def get_beta_1D(double[:] beta0, double[:,::1] XX2,
 
 
 # compute coeff in lasso
-def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2, 
-                double[:,::1] Xy2, double reg_lambda,
+def get_beta_2D(beta0, XX2, 
+                Xy2, double reg_lambda,
                 int max_iter = 1000, 
                 double tol = 1e-5):
 
@@ -126,18 +127,18 @@ def get_beta_2D(double[:,::1] beta0, double[:,::1] XX2,
     err = 10000
     iteration = 0 
     p = len(beta0)
-    beta_opt = np.asarray(beta0)
+    beta_opt = np.copy(np.asarray(beta0))
 
     # if len(beta0.shape) > 1: (multitask learner)
     n_classes = beta_opt.shape[1]
     ajs = [XX2[j, j] for j in range(p)]
     while (converged != 1 and iteration < max_iter):
-        beta_prev = pickle.loads(pickle.dumps(beta_opt, -1))
+        beta_prev = np.copy(beta_opt)
         for k in range(n_classes):       
             beta_opt_k = np.asarray(beta_opt[:,k])                     
             for j in range(p):  
                 aj = ajs[j]                         
-                cj = Xy2[j, k] - np.dot(np.asarray(XX2)[j, :], beta_opt_k) + beta_opt_k[j]*aj
+                cj = Xy2[j, k] - safe_sparse_dot(np.asarray(XX2)[j, :], beta_opt_k) + beta_opt_k[j]*aj
                 beta_opt[j, k] = soft_thres(cj/aj, reg_lambda/aj)
         err = np.sqrt(np.sum(np.square(np.asarray(beta_prev) - np.asarray(beta_opt))))
         converged = (err <= tol)*1            
@@ -204,7 +205,7 @@ def safe_sparse_dot(a, b, backend="cpu", dense_output=False):
 
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         # modif when jax.scipy.sparse available
-        return jnp.dot(device_put(a), device_put(b)).block_until_ready()
+        return safe_sparse_dot(device_put(a), device_put(b)).block_until_ready()
 
     #    if backend == "cpu":
     if a.ndim > 2 or b.ndim > 2:
@@ -222,7 +223,7 @@ def safe_sparse_dot(a, b, backend="cpu", dense_output=False):
             ret = a_2d @ b
             ret = ret.reshape(*a.shape[:-1], b.shape[1])
         else:
-            ret = np.dot(a, b)
+            ret = safe_sparse_dot(a, b)
     else:
         ret = a @ b
 
@@ -282,10 +283,10 @@ def squared_norm(x, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = np.ravel(x, order="K")
         x = device_put(x)        
-        return jnp.dot(x, x).block_until_ready()
+        return safe_sparse_dot(x, x).block_until_ready()
 
     x = np.ravel(x, order="K")
-    return np.dot(x, x)
+    return safe_sparse_dot(x, x)
 
 
 # computes x%*%t(y)
@@ -295,12 +296,12 @@ def tcrossprod(x, y=None, backend="cpu"):
     if backend in ("gpu", "tpu") and (sys_platform in ('Linux', 'Darwin')):
         x = device_put(x)
         if y is None:
-            return jnp.dot(x, x.T).block_until_ready()
+            return safe_sparse_dot(x, x.T).block_until_ready()
         y = device_put(y)
-        return jnp.dot(x, y.T).block_until_ready()
+        return safe_sparse_dot(x, y.T).block_until_ready()
     if y is None:
-        return np.dot(x, x.transpose())
-    return np.dot(x, y.transpose())
+        return safe_sparse_dot(x, x.transpose())
+    return safe_sparse_dot(x, y.transpose())
 
 
 # convert vector to numpy array

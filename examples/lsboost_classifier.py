@@ -45,6 +45,17 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
+obj = ms.LSBoostClassifier(tolerance=1e-2, backend="gpu")
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print(time()-start)
+
+print(obj.obj['loss'])
+
 obj = ms.LSBoostClassifier(tolerance=1e-2, n_clusters=2)
 print(obj.get_params())
 start = time()
@@ -56,17 +67,6 @@ print(time()-start)
 
 print(obj.obj['loss'])
 
-# MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-obj = ms.LSBoostClassifier(backend="gpu")
-print(obj.get_params())
-start = time()
-obj.fit(X_train, y_train)
-print(time()-start)
-start = time()
-print(obj.score(X_test, y_test))
-print(time()-start)
-
-print(obj.obj['loss'])
 
 # data 2
 print("\n")
@@ -176,14 +176,14 @@ print(time()-start)
 
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-# obj = ms.LSBoostClassifier(backend="gpu", solver="lasso")
-# print(obj.get_params())
-# start = time()
-# obj.fit(X_train, y_train)
-# print(time()-start)
-# start = time()
-# print(obj.score(X_test, y_test))
-# print(time()-start)
+obj = ms.LSBoostClassifier(backend="gpu", solver="lasso")
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print(time()-start)
 
 # data 2
 print("\n")
@@ -206,14 +206,14 @@ print(obj.score(X_test, y_test))
 print(time()-start)
 
 # MORE DATA NEEDED # MORE DATA NEEDED # MORE DATA NEEDED
-# obj = ms.LSBoostClassifier(backend="gpu", solver="lasso")
-# print(obj.get_params())
-# start = time()
-# obj.fit(X_train, y_train)
-# print(time()-start)
-# start = time()
-# print(obj.score(X_test, y_test))
-# print(time()-start)
+obj = ms.LSBoostClassifier(backend="gpu", solver="lasso")
+print(obj.get_params())
+start = time()
+obj.fit(X_train, y_train)
+print(time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print(time()-start)
 
 # data 3
 print("\n")

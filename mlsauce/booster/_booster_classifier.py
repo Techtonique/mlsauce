@@ -432,8 +432,8 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             X = np.column_stack((X, clustered_X))
 
         self.obj = boosterc.fit_booster_classifier(
-            np.asarray(X, order="C"),
-            np.asarray(y, order="C"),
+            np.asarray(X, order="C", dtype=np.float64),
+            np.asarray(y, order="C", dtype=np.int64),
             n_estimators=self.n_estimators,
             learning_rate=self.learning_rate,
             n_hidden_features=self.n_hidden_features,
@@ -590,14 +590,6 @@ class GenericBoostingClassifier(LSBoostClassifier):
         n_hidden_features: int
             number of nodes in successive hidden layers.
 
-        reg_lambda: float
-            L2 regularization parameter for successive errors in the optimizer
-            (at training time).
-
-        alpha: float
-            compromise between L1 and L2 regularization (must be in [0, 1]),
-            for `solver` == 'enet'.
-
         row_sample: float
             percentage of rows chosen from the training set.
 
@@ -619,13 +611,6 @@ class GenericBoostingClassifier(LSBoostClassifier):
 
         seed: int
             reproducibility seed for nodes_sim=='uniform', clustering and dropout.
-
-        backend: str
-            type of backend; must be in ('cpu', 'gpu', 'tpu')
-
-        solver: str
-            type of 'weak' learner; currently in ('ridge', 'lasso', 'enet').
-            'enet' is a combination of 'ridge' and 'lasso' called Elastic Net.
 
         activation: str
             activation function: currently 'relu', 'relu6', 'sigmoid', 'tanh'
@@ -660,17 +645,14 @@ class GenericBoostingClassifier(LSBoostClassifier):
         n_estimators=100,
         learning_rate=0.1,
         n_hidden_features=5,
-        reg_lambda=0.1,
-        alpha=0.5,
         row_sample=1,
         col_sample=1,
         dropout=0,
         tolerance=1e-4,
         direct_link=1,
         verbose=1,
-        seed=123,
         backend="cpu",
-        solver="ridge",
+        seed=123,
         activation="relu",
         n_clusters=0,
         clustering_method="kmeans",
@@ -689,17 +671,14 @@ class GenericBoostingClassifier(LSBoostClassifier):
             n_estimators=n_estimators,
             learning_rate=learning_rate,
             n_hidden_features=n_hidden_features,
-            reg_lambda=reg_lambda,
-            alpha=alpha,
             row_sample=row_sample,
             col_sample=col_sample,
             dropout=dropout,
             tolerance=tolerance,
             direct_link=direct_link,
             verbose=verbose,
-            seed=seed,
             backend=backend,
-            solver=solver,
+            seed=seed,
             activation=activation,
             n_clusters=n_clusters,
             clustering_method=clustering_method,

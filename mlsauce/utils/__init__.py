@@ -7,10 +7,14 @@ from .misc.misc import (
     is_factor,
     check_and_install,
     is_multitask_estimator,
+    convert_df_to_numeric,
+    dict_to_dataframe_series
 )
 from .progress_bar import Progbar
 from .get_beta import get_beta
 from .histofeatures.gethistofeatures import get_histo_features
+from .matrixops import safe_sparse_dot
+from .metrics import mean_errors, winkler_score, coverage
 
 __all__ = [
     "cluster",
@@ -23,5 +27,11 @@ __all__ = [
     "get_beta",
     "check_and_install",
     "is_multitask_estimator",
-    "get_histo_features"
+    "get_histo_features",
+    "safe_sparse_dot",
+    "mean_errors",
+    "winkler_score",
+    "coverage",
+    "convert_df_to_numeric",
+    "dict_to_dataframe_series"
 ]

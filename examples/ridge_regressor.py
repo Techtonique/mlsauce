@@ -37,6 +37,7 @@ print(np.sqrt(np.mean(np.square(obj.predict(X_test) - y_test))))
 print(time()-start)
 print(obj.beta)
 
+# needs more data
 obj = ms.RidgeRegressor(backend="gpu")
 print(obj.get_params())
 start = time()

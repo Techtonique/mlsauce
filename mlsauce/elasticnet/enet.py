@@ -4,7 +4,7 @@ import warnings
 from sklearn.base import BaseEstimator
 from sklearn.base import RegressorMixin
 from numpy.linalg import inv
-from ..utils import get_beta, check_and_install
+from ..utils import get_beta, check_and_install, safe_sparse_dot
 from ._enet import fit_elasticnet, predict_elasticnet
 
 try:
@@ -73,7 +73,7 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
             self: object.
 
         """
-        fit_result = fit_elasticnet(X, y, lam=self.reg_lambda, alpha=self.alpha)
+        fit_result = fit_elasticnet(X, y, lam=self.reg_lambda, alpha=self.alpha, backend=self.backend)
         self.coef_ = fit_result.coef_
         self.y_train_mean = fit_result.y_train_mean
         self.scaler = fit_result.scaler
@@ -96,4 +96,4 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
             model predictions: {array-like}
 
         """
-        return predict_elasticnet(X, self)
+        return predict_elasticnet(X, self, backend=self.backend)

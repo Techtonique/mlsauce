@@ -98,7 +98,7 @@ run-examples: ## run all examples with one command
 	find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;
 
 run-booster: ## run all boosting estimators examples with one command
-	find examples -maxdepth 2 -name "*boost_*.py" -exec  python3 {} \;
+	find examples -maxdepth 2 -name "*boost*.py" -exec  python3 {} \;
 
 run-lazy: ## run all lazy estimators examples with one command
 	find examples -maxdepth 2 -name "*lazy*.py" -exec  python3 {} \;

@@ -2,6 +2,7 @@
 #
 # License: BSD 3
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.cluster import KMeans
@@ -81,6 +82,42 @@ def cluster(
             clusterer.predict(scaled_X).reshape(-1, 1)
         ).toarray()
 
+def convert_df_to_numeric(df):
+    """
+    Convert all columns of DataFrame to numeric type using astype with loop.
+
+    Parameters:
+        df (pd.DataFrame): Input DataFrame with mixed data types.
+
+    Returns:
+        pd.DataFrame: DataFrame with all columns converted to numeric type.
+    """
+    if isinstance(df, pd.DataFrame):
+        for column in df.columns:
+            # Attempt to convert the column to numeric type using astype
+            try:
+                df[column] = df[column].astype(float)
+            except ValueError:
+                print(f"Column '{column}' contains non-numeric values.")
+        return df
+
+
+def dict_to_dataframe_series(data, series_names):
+    df = pd.DataFrame(
+        np.zeros((len(data["Model"]), 2)), columns=["Model", "Time Taken"]
+    )
+    for key, value in data.items():
+        if all(hasattr(elt, "__len__") for elt in value) and key not in (
+            "Model",
+            "Time Taken",
+        ):
+            for i, elt1 in enumerate(value):
+                for j, elt2 in enumerate(elt1):
+                    df.loc[i, f"{key}_{series_names[j]}"] = elt2
+        else:
+            df[key] = value
+    return df
+
 
 # merge two dictionaries
 def merge_two_dicts(x, y):
@@ -144,10 +181,10 @@ def check_and_install(package_name):
     try:
         # Check if the package is already installed by importing it
         importlib.import_module(package_name)
-        print(f"'{package_name}' is already installed.")
+        #print(f"'{package_name}' is already installed.")
     except ImportError:
-        print(f"'{package_name}' not found. Installing...")
+        #print(f"'{package_name}' not found. Installing...")
         install_package(package_name)
         # Retry importing the package after installation
         importlib.import_module(package_name)
-        print(f"'{package_name}' has been installed successfully.")
+        #print(f"'{package_name}' has been installed successfully.")
