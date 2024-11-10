@@ -20,7 +20,7 @@ except ImportError:
 
 from tqdm import tqdm
 
-from .config import REGRESSORS
+from .config import MTSREGRESSORS
 
 from ..booster import GenericBoostingRegressor
 
@@ -389,10 +389,10 @@ class LazyBoostingMTS(ns.MTS):
             TIME.append(time.time() - start)        
         
         if self.estimators == "all":
-            self.regressors = REGRESSORS
+            self.regressors = MTSREGRESSORS
         else:
             self.regressors = [
-                ("MTS(" + est[0] + ")", est[1])
+                ("MTS(GenericBooster(" + est[0] + "))", est[1])
                 for est in all_estimators()
                 if (
                     issubclass(est[1], RegressorMixin)
