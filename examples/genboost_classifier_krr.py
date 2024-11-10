@@ -17,9 +17,9 @@ print("GenericBoosting KernelRidge -----")
 print("\n")
 
 # data 1
-breast_cancer = load_wine() #load_breast_cancer()
-X = breast_cancer.data
-y = breast_cancer.target
+dataset = load_wine() 
+X = dataset.data
+y = dataset.target
 # split data into training test and test set
 np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
