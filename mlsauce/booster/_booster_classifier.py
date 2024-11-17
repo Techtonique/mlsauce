@@ -13,6 +13,12 @@ except ImportError:
     import _boosterc as boosterc
 from ..utils import cluster, check_and_install, get_histo_features
 
+try:
+    import jax.numpy as jnp
+    from jax import device_put
+except ImportError:
+    pass
+
 
 class LSBoostClassifier(BaseEstimator, ClassifierMixin):
     """LSBoost classifier.
@@ -431,26 +437,52 @@ class LSBoostClassifier(BaseEstimator, ClassifierMixin):
             )
             X = np.column_stack((X, clustered_X))
 
-        self.obj = boosterc.fit_booster_classifier(
-            np.asarray(X, order="C", dtype=np.float64),
-            np.asarray(y, order="C", dtype=np.int64),
-            n_estimators=self.n_estimators,
-            learning_rate=self.learning_rate,
-            n_hidden_features=self.n_hidden_features,
-            reg_lambda=self.reg_lambda,
-            alpha=self.alpha,
-            row_sample=self.row_sample,
-            col_sample=self.col_sample,
-            dropout=self.dropout,
-            tolerance=self.tolerance,
-            direct_link=self.direct_link,
-            verbose=self.verbose,
-            seed=self.seed,
-            backend=self.backend,
-            solver=self.solver,
-            activation=self.activation,
-            obj=self.base_model,
-        )
+        if self.backend == "cpu":
+            self.obj = boosterc.fit_booster_classifier(
+                np.asarray(X, order="C", dtype=np.float64),
+                np.asarray(y, order="C", dtype=np.int64),
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+                backend=self.backend,
+                solver=self.solver,
+                activation=self.activation,
+                obj=self.base_model,
+            )
+        else:
+            X = np.asarray(X, order="C", dtype=np.float64)
+            y = np.asarray(y, order="C", dtype=np.int64)
+            X = device_put(X)
+            y = device_put(y)
+            self.obj = boosterc.fit_booster_classifier(
+                X,
+                y,
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+                backend=self.backend,
+                solver=self.solver,
+                activation=self.activation,
+                obj=self.base_model,
+            )
 
         self.classes_ = np.unique(y)  # for compatibility with sklearn
         self.n_classes_ = len(self.classes_)  # for compatibility with sklearn

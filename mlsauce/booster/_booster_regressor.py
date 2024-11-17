@@ -14,6 +14,12 @@ except ImportError:
 from ..predictioninterval import PredictionInterval
 from ..utils import cluster, check_and_install, get_histo_features
 
+try:
+    import jax.numpy as jnp
+    from jax import device_put
+except ImportError:
+    pass
+
 
 class LSBoostRegressor(BaseEstimator, RegressorMixin):
     """LSBoost regressor.
@@ -300,27 +306,52 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
                 )
             )
             X = np.column_stack((X, clustered_X))
-
-        self.obj = boosterc.fit_booster_regressor(
-            X=np.asarray(X, order="C", dtype=np.float64),
-            y=np.asarray(y, order="C", dtype=np.float64),
-            n_estimators=self.n_estimators,
-            learning_rate=self.learning_rate,
-            n_hidden_features=self.n_hidden_features,
-            reg_lambda=self.reg_lambda,
-            alpha=self.alpha,
-            row_sample=self.row_sample,
-            col_sample=self.col_sample,
-            dropout=self.dropout,
-            tolerance=self.tolerance,
-            direct_link=self.direct_link,
-            verbose=self.verbose,
-            seed=self.seed,
-            backend=self.backend,
-            solver=self.solver,
-            activation=self.activation,
-            obj=self.base_model,
-        )
+        if self.backend == "cpu":
+            self.obj = boosterc.fit_booster_regressor(
+                X=np.asarray(X, order="C", dtype=np.float64),
+                y=np.asarray(y, order="C", dtype=np.float64),
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+                backend=self.backend,
+                solver=self.solver,
+                activation=self.activation,
+                obj=self.base_model,
+            )
+        else:
+            X = np.asarray(X, order="C", dtype=np.float64)
+            y = np.asarray(y, order="C", dtype=np.float64)
+            device_put(X)
+            device_put(y)
+            self.obj = boosterc.fit_booster_regressor(
+                X=X,
+                y=y,
+                n_estimators=self.n_estimators,
+                learning_rate=self.learning_rate,
+                n_hidden_features=self.n_hidden_features,
+                reg_lambda=self.reg_lambda,
+                alpha=self.alpha,
+                row_sample=self.row_sample,
+                col_sample=self.col_sample,
+                dropout=self.dropout,
+                tolerance=self.tolerance,
+                direct_link=self.direct_link,
+                verbose=self.verbose,
+                seed=self.seed,
+                backend=self.backend,
+                solver=self.solver,
+                activation=self.activation,
+                obj=self.base_model,
+            )
 
         self.n_estimators = self.obj["n_estimators"]
 

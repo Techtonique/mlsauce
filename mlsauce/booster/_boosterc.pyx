@@ -68,7 +68,7 @@ def dropout_func(x, drop_prob=0, seed=123):
     return np.asarray(a=dropped_indices * x / (1 - drop_prob), dtype=np.float64)
     
 # one-hot encoder for discrete response
-def one_hot_encode(long int[:] y, 
+def one_hot_encode(y, 
                    int n_classes):
     
     cdef long int i 
@@ -110,7 +110,7 @@ def activation_choice(x):
 
 # 1 - 1 fit classifier ----- 
 
-def fit_booster_classifier(double[:,::1] X, long int[:] y, 
+def fit_booster_classifier(X, y, 
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
                            double alpha=0.5, 
@@ -262,7 +262,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
 
         hhidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ @ W_i_), drop_prob=dropout, seed=seed)
 
-        hh_i = jnp.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+        hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
         
         if row_sample < 1:
         
@@ -277,7 +277,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
 
           hidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ix @ W_i), 
                                         drop_prob=dropout, seed=seed)
-          h_i =  jnp.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
+          h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
           fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=E)[ix,:])
                                   
         else:
@@ -356,7 +356,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X, str backend="c
       gXW = np.asarray(dtype=np.float64, a=activation_choice(activation)(X_iy_ @ W_i_))
       
       if direct_link:
-          hh_i = jnp.hstack((np.array(X_iy), np.array(gXW)))  
+          hh_i = np.hstack((np.array(X_iy), np.array(gXW)))  
       else: 
           hh_i = gXW
       
@@ -373,7 +373,7 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X, str backend="c
 
 # 2 - 1 fit regressor -----
   
-def fit_booster_regressor(double[:,::1] X, double[:] y, 
+def fit_booster_regressor(X, y, 
                            int n_estimators=100, double learning_rate=0.1, 
                            int n_hidden_features=5, double reg_lambda=0.1, 
                            double alpha=0.5, 
@@ -521,7 +521,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
 
         hhidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ @ W_i_), drop_prob=dropout, seed=seed)
 
-        hh_i = jnp.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+        hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
         
         if row_sample < 1:
         
@@ -536,7 +536,7 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
 
           hidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ix @ W_i), 
                                         drop_prob=dropout, seed=seed)
-          h_i =  jnp.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
+          h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
           fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=e)[ix,:])
                                   
         else:
