@@ -155,7 +155,7 @@ def setup_package():
         "requests",
         "scikit-learn",
         "scipy",
-        "tqdm"
+        "tqdm",
     ]
 
     # if platform.system() in ('Linux', 'Darwin'):

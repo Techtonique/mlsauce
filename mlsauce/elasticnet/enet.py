@@ -73,7 +73,9 @@ class ElasticNetRegressor(BaseEstimator, RegressorMixin):
             self: object.
 
         """
-        fit_result = fit_elasticnet(X, y, lam=self.reg_lambda, alpha=self.alpha, backend=self.backend)
+        fit_result = fit_elasticnet(
+            X, y, lam=self.reg_lambda, alpha=self.alpha, backend=self.backend
+        )
         self.coef_ = fit_result.coef_
         self.y_train_mean = fit_result.y_train_mean
         self.scaler = fit_result.scaler

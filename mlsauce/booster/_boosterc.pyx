@@ -24,6 +24,12 @@ from scipy.special import expit
 from tqdm import tqdm
 from ..utils import safe_sparse_dot
 
+try:
+    import jax.numpy as jnp
+    from jax import device_put
+except ImportError:
+    pass
+
 
 # 0 - utils -----
 
@@ -175,57 +181,126 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
   else: 
       fit_obj = obj 
 
-  for iter in iterator:
-      
-      np.random.seed(seed + iter*1000)
-    
-      iy = np.sort(np.random.choice(a=range(p), 
-                                    size=np.int32(p*col_sample), 
-                                    replace=False), 
-                   kind='quicksort')
-      res['col_index_i'][iter] = iy                     
-      X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
-      if res['weights_distr' ]== "uniform":
-        W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
-      else: 
-        W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)), 
-                                     drop_prob=dropout, seed=seed)
-      hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
-      
-      if row_sample < 1:
-      
-        ix = np.sort(np.random.choice(a=range(n), 
-                                    size=np.int32(n*row_sample), 
-                                    replace=False), 
-                     kind='quicksort')
-        X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
-                                      drop_prob=dropout, seed=seed)
-        h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
-        fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=E)[ix,:])
-                                 
-      else:
-      
-        fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=E))
-            
-      E = E - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
-      
-      res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
-            
-      res['fit_obj_i'][iter] = deepcopy(fit_obj)
+  if backend == "cpu": 
 
-      current_error = np.linalg.norm(E, ord='fro')
+    for iter in iterator:
+        
+        np.random.seed(seed + iter*1000)
+      
+        iy = np.sort(np.random.choice(a=range(p), 
+                                      size=np.int32(p*col_sample), 
+                                      replace=False), 
+                    kind='quicksort')
+        res['col_index_i'][iter] = iy                     
+        X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
+        if res['weights_distr' ]== "uniform":
+          W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+        else: 
+          W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
 
-      res['loss'].append(current_error)
+        hhidden_layer_i = dropout_func(x=activation_choice(activation)(np.asarray(dtype=np.float64, a=X_iy) @ np.asarray(dtype=np.float64, a=W_i)), drop_prob=dropout, seed=seed)
+
+        hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+        
+        if row_sample < 1:
+        
+          ix = np.sort(np.random.choice(a=range(n), 
+                                      size=np.int32(n*row_sample), 
+                                      replace=False), 
+                      kind='quicksort')
+          X_iy_ix = X_iy[ix,:]       
+          hidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ix @ W_i), 
+                                        drop_prob=dropout, seed=seed)
+          h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=E)[ix,:])
+                                  
+        else:
+        
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=E))
+              
+        E = E - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
+        
+        res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
+              
+        res['fit_obj_i'][iter] = deepcopy(fit_obj)
+
+        current_error = np.linalg.norm(E, ord='fro')
+
+        res['loss'].append(current_error)
+        
+        try:
+          if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
+            res['n_estimators'] = iter
+            break
+        except:
+          pass
+
+  else: # backend == "gpu":
+
+    for iter in iterator:
+        
+        np.random.seed(seed + iter*1000)
       
-      try:
-        if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
-          res['n_estimators'] = iter
-          break
-      except:
-        pass
-      
+        iy = np.sort(np.random.choice(a=range(p), 
+                                      size=np.int32(p*col_sample), 
+                                      replace=False), 
+                    kind='quicksort')
+        res['col_index_i'][iter] = iy                     
+        X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
+        if res['weights_distr' ]== "uniform":
+          W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+        else: 
+          W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
+        
+        X_iy_ = np.asarray(dtype=np.float64, a=X_iy)
+
+        W_i_ = np.asarray(dtype=np.float64, a=W_i)
+
+        device_put(X_iy_)
+
+        device_put(W_i_)
+
+        hhidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ @ W_i_), drop_prob=dropout, seed=seed)
+
+        hh_i = jnp.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+        
+        if row_sample < 1:
+        
+          ix = np.sort(np.random.choice(a=range(n), 
+                                      size=np.int32(n*row_sample), 
+                                      replace=False), 
+                      kind='quicksort')
+          X_iy_ix = X_iy[ix,:]  
+
+          device_put(X_iy_ix)
+          device_put(W_i)     
+
+          hidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ix @ W_i), 
+                                        drop_prob=dropout, seed=seed)
+          h_i =  jnp.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=E)[ix,:])
+                                  
+        else:
+        
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=E))
+              
+        E = E - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
+        
+        res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
+              
+        res['fit_obj_i'][iter] = deepcopy(fit_obj)
+
+        current_error = np.linalg.norm(E, ord='fro')
+
+        res['loss'].append(current_error)
+        
+        try:
+          if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
+            res['n_estimators'] = iter
+            break
+        except:
+          pass
+
   return res
   
   
@@ -249,19 +324,47 @@ def predict_proba_booster_classifier(object obj, double[:,::1] X, str backend="c
   preds_sum = np.zeros((n_row_preds, n_classes))
   out_probs = np.zeros((n_row_preds, n_classes))
   
+  if backend == "cpu":
   
-  for iter in range(n_estimators):
+    for iter in range(n_estimators):
+    
+      iy = obj['col_index_i'][iter]
+      X_iy = X_[:, iy] # must be X_!
+      W_i = obj['W_i'][iter]
+      hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))
+      # works because the regressor is Multitask 
+      preds_sum = preds_sum + learning_rate*np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
+    
+    out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(dtype=np.float64, a=preds_sum))
+    
+    out_probs = out_probs/np.sum(out_probs, axis=1)[:, None]
   
-    iy = obj['col_index_i'][iter]
-    X_iy = X_[:, iy] # must be X_!
-    W_i = obj['W_i'][iter]
-    hh_i = np.hstack((X_iy, activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)))) if direct_link else activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend))
-    # works because the regressor is Multitask 
-    preds_sum = preds_sum + learning_rate*np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
-  
-  out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(dtype=np.float64, a=preds_sum))
-  
-  out_probs = out_probs/np.sum(out_probs, axis=1)[:, None]
+  else: # backend == "gpu":
+
+    for iter in range(n_estimators):
+    
+      iy = obj['col_index_i'][iter]
+      X_iy = X_[:, iy] # must be X_!
+      W_i = obj['W_i'][iter]
+      
+      X_iy_ = np.asarray(dtype=np.float64, a=X_iy)
+      W_i_ = np.asarray(dtype=np.float64, a=W_i)
+      
+      device_put(X_iy_)
+      device_put(W_i_)
+      
+      gXW = np.asarray(dtype=np.float64, a=activation_choice(activation)(X_iy_ @ W_i_))
+      
+      if direct_link:
+          hh_i = jnp.hstack((np.array(X_iy), np.array(gXW)))  
+      else: 
+          hh_i = gXW
+      
+      preds_sum = preds_sum + learning_rate*np.asarray(dtype=np.float64, a=obj['fit_obj_i'][iter].predict(np.asarray(dtype=np.float64, a=hh_i)))
+    
+    out_probs = expit(np.tile(obj['Ym'], n_row_preds).reshape(n_row_preds, n_classes) + np.asarray(dtype=np.float64, a=preds_sum))
+    
+    out_probs = out_probs/np.sum(out_probs, axis=1)[:, None]
 
   return np.asarray(dtype=np.float64, a=out_probs)
   
@@ -337,58 +440,126 @@ def fit_booster_regressor(double[:,::1] X, double[:] y,
       backend = backend)  
   else:
       fit_obj = obj 
-
-  for iter in iterator:
-      
-      np.random.seed(seed + iter*1000)
     
-      iy = np.sort(np.random.choice(a=range(p), 
-                                    size=np.int32(p*col_sample), 
-                                    replace=False), 
-                   kind='quicksort')
-      res['col_index_i'][iter] = iy                     
-      X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
-      if res['weights_distr' ] == "uniform":
-        W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
-      else: 
-        W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
-      hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)), 
-                                     drop_prob=dropout, seed=seed)
-      hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+  if backend == "cpu":
+
+    for iter in iterator:
+        
+        np.random.seed(seed + iter*1000)
       
-      if row_sample < 1:
-      
-        ix = np.sort(np.random.choice(a=range(n), 
-                                    size=np.int32(n*row_sample), 
-                                    replace=False), 
-                     kind='quicksort')
-        X_iy_ix = X_iy[ix,:]       
-        hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
+        iy = np.sort(np.random.choice(a=range(p), 
+                                      size=np.int32(p*col_sample), 
+                                      replace=False), 
+                    kind='quicksort')
+        res['col_index_i'][iter] = iy                     
+        X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
+        if res['weights_distr' ] == "uniform":
+          W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+        else: 
+          W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
+        hhidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(np.asarray(dtype=np.float64, a=X_iy), np.asarray(dtype=np.float64, a=W_i), backend)), 
                                       drop_prob=dropout, seed=seed)
-        h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i        
-        fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=e)[ix])
+        hh_i = np.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+        
+        if row_sample < 1:
+        
+          ix = np.sort(np.random.choice(a=range(n), 
+                                      size=np.int32(n*row_sample), 
+                                      replace=False), 
+                      kind='quicksort')
+          X_iy_ix = X_iy[ix,:]       
+          hidden_layer_i = dropout_func(x=activation_choice(activation)(safe_sparse_dot(X_iy_ix, W_i, backend)), 
+                                        drop_prob=dropout, seed=seed)
+          h_i =  np.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i        
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=e)[ix])
 
-      else:
+        else:
+        
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=e))
+              
+        e = e - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
+
+        res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
+        
+        res['fit_obj_i'][iter] = deepcopy(fit_obj)
+
+        current_error = np.linalg.norm(e)
+
+        res['loss'].append(current_error)      
+
+        try:              
+          if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
+            res['n_estimators'] = iter
+            break      
+        except:
+          pass
+
+  else: # backend == "gpu":
+
+    for iter in iterator:
+        
+        np.random.seed(seed + iter*1000)
       
-        fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=e))
-            
-      e = e - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
+        iy = np.sort(np.random.choice(a=range(p), 
+                                      size=np.int32(p*col_sample), 
+                                      replace=False), 
+                    kind='quicksort')
+        res['col_index_i'][iter] = iy                     
+        X_iy = np.asarray(dtype=np.float64, a=X_)[:, iy] # must be X_!
+        if res['weights_distr' ] == "uniform":
+          W_i = np.random.rand(X_iy.shape[1], n_hidden_features)
+        else: 
+          W_i = np.random.randn(X_iy.shape[1], n_hidden_features)
+        
+        X_iy_ = np.asarray(dtype=np.float64, a=X_iy)
 
-      res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
-      
-      res['fit_obj_i'][iter] = deepcopy(fit_obj)
+        W_i_ = np.asarray(dtype=np.float64, a=W_i)
 
-      current_error = np.linalg.norm(e)
+        device_put(X_iy_)
 
-      res['loss'].append(current_error)      
+        device_put(W_i_)
 
-      try:              
-        if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
-          res['n_estimators'] = iter
-          break      
-      except:
-        pass
-      
+        hhidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ @ W_i_), drop_prob=dropout, seed=seed)
+
+        hh_i = jnp.hstack((X_iy, hhidden_layer_i)) if direct_link else hhidden_layer_i
+        
+        if row_sample < 1:
+        
+          ix = np.sort(np.random.choice(a=range(n), 
+                                      size=np.int32(n*row_sample), 
+                                      replace=False), 
+                      kind='quicksort')
+          X_iy_ix = X_iy[ix,:]  
+
+          device_put(X_iy_ix)
+          device_put(W_i)     
+
+          hidden_layer_i = dropout_func(x=activation_choice(activation)(X_iy_ix @ W_i), 
+                                        drop_prob=dropout, seed=seed)
+          h_i =  jnp.hstack((X_iy_ix, hidden_layer_i)) if direct_link else hidden_layer_i
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=h_i), y = np.asarray(dtype=np.float64, a=e)[ix,:])
+                                  
+        else:
+        
+          fit_obj.fit(X = np.asarray(dtype=np.float64, a=hh_i), y = np.asarray(dtype=np.float64, a=e))
+              
+        e = e - learning_rate*np.asarray(dtype=np.float64, a=fit_obj.predict(np.asarray(dtype=np.float64, a=hh_i)))
+
+        res['W_i'][iter] = np.asarray(dtype=np.float64, a=W_i)
+
+        res['fit_obj_i'][iter] = deepcopy(fit_obj)
+
+        current_error = np.linalg.norm(e)
+
+        res['loss'].append(current_error)      
+
+        try:              
+          if np.abs(np.flip(np.diff(res['loss'])))[0] <= tolerance:
+            res['n_estimators'] = iter
+            break      
+        except:
+          pass
+
   return res
   
 # 2 - 2 predict regressor -----

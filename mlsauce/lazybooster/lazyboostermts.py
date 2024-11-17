@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import time
 
-try: 
+try:
     from sklearn.utils import all_estimators
 except ImportError:
     pass
@@ -12,8 +12,9 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.base import RegressorMixin
-from sklearn.metrics import  mean_absolute_error
-try: 
+from sklearn.metrics import mean_absolute_error
+
+try:
     from sklearn.metrics import mean_pinball_loss
 except ImportError:
     pass
@@ -24,7 +25,13 @@ from .config import MTSREGRESSORS
 
 from ..booster import GenericBoostingRegressor
 
-from ..utils import convert_df_to_numeric, coverage, dict_to_dataframe_series, mean_errors, winkler_score
+from ..utils import (
+    convert_df_to_numeric,
+    coverage,
+    dict_to_dataframe_series,
+    mean_errors,
+    winkler_score,
+)
 
 import warnings
 
@@ -135,13 +142,13 @@ class LazyBoostingMTS(ns.MTS):
             Number of steps ahead to predict (when used, must be > 0 and < X_test.shape[0]).
 
         All the other parameters are the same as MTS's.
-    
+
     Attributes:
 
         models_: dict-object
             Returns a dictionary with each model pipeline as value
             with key as name of models.
-        
+
         best_model_: object
             Returns the best model pipeline based on the sort_by metric.
 
@@ -157,7 +164,7 @@ class LazyBoostingMTS(ns.MTS):
         ignore_warnings=True,
         custom_metric=None,
         predictions=False,
-        sort_by=None, # leave it as is 
+        sort_by=None,  # leave it as is
         random_state=42,
         estimators="all",
         preprocess=False,
@@ -315,8 +322,8 @@ class LazyBoostingMTS(ns.MTS):
             )
 
         # baselines (Classical MTS) ----
-        for i, name in enumerate(["ARIMA", "ETS", "Theta", "VAR", "VECM"]):           
-            try: 
+        for i, name in enumerate(["ARIMA", "ETS", "Theta", "VAR", "VECM"]):
+            try:
                 start = time.time()
                 regr = ns.ClassicalMTS(model=name)
                 regr.fit(X_train, **kwargs)
@@ -327,12 +334,12 @@ class LazyBoostingMTS(ns.MTS):
                     assert self.h > 0, "h must be > 0"
                     X_pred = regr.predict(h=self.h, **kwargs)
                     try:
-                        X_test = X_test[0: self.h, :]
+                        X_test = X_test[0 : self.h, :]
                     except Exception as e:
-                        X_test = X_test.iloc[0: self.h, :]
+                        X_test = X_test.iloc[0 : self.h, :]
 
                 if per_series == False:
-                    rmse = np.sqrt(np.mean((X_test - X_pred.mean)**2))
+                    rmse = np.sqrt(np.mean((X_test - X_pred.mean) ** 2))
                     mae = mean_absolute_error(X_test, X_pred.mean)
                     mpl = mean_pinball_loss(X_test, X_pred.mean)
                 else:
@@ -362,8 +369,8 @@ class LazyBoostingMTS(ns.MTS):
             MAE.append(mae)
             MPL.append(mpl)
 
-            if self.custom_metric is not None:                        
-                try: 
+            if self.custom_metric is not None:
+                try:
                     if self.h is None:
                         custom_metric = self.custom_metric(X_test, X_pred)
                     else:
@@ -379,15 +386,17 @@ class LazyBoostingMTS(ns.MTS):
                         obj=X_pred, actual=X_test, level=95
                     )
                     coveragecalc = coverage(X_pred, X_test, level=95)
-                else: 
+                else:
                     winklerscore = winkler_score(
                         obj=X_pred, actual=X_test, level=95, per_series=True
                     )
-                    coveragecalc = coverage(X_pred, X_test, level=95, per_series=True)
+                    coveragecalc = coverage(
+                        X_pred, X_test, level=95, per_series=True
+                    )
                 WINKLERSCORE.append(winklerscore)
                 COVERAGE.append(coveragecalc)
-            TIME.append(time.time() - start)        
-        
+            TIME.append(time.time() - start)
+
         if self.estimators == "all":
             self.regressors = MTSREGRESSORS
         else:
@@ -411,10 +420,12 @@ class LazyBoostingMTS(ns.MTS):
                                 (
                                     "regressor",
                                     ns.MTS(
-                                        obj=GenericBoostingRegressor(model(
-                                            random_state=self.random_state,
-                                            **kwargs
-                                        )),
+                                        obj=GenericBoostingRegressor(
+                                            model(
+                                                random_state=self.random_state,
+                                                **kwargs
+                                            )
+                                        ),
                                         n_hidden_features=self.n_hidden_features,
                                         activation_name=self.activation_name,
                                         a=self.a,
@@ -446,7 +457,9 @@ class LazyBoostingMTS(ns.MTS):
                                 (
                                     "regressor",
                                     ns.MTS(
-                                        obj=GenericBoostingRegressor(model(**kwargs)),                                       
+                                        obj=GenericBoostingRegressor(
+                                            model(**kwargs)
+                                        ),
                                         n_hidden_features=self.n_hidden_features,
                                         activation_name=self.activation_name,
                                         a=self.a,
@@ -487,7 +500,7 @@ class LazyBoostingMTS(ns.MTS):
                         self.type_pi == "gaussian"
                     ):
                         if per_series == False:
-                            rmse = np.sqrt(np.mean((X_test - X_pred.mean)**2))
+                            rmse = np.sqrt(np.mean((X_test - X_pred.mean) ** 2))
                             mae = mean_absolute_error(X_test, X_pred.mean)
                             mpl = mean_pinball_loss(X_test, X_pred.mean)
                             winklerscore = winkler_score(
@@ -524,7 +537,7 @@ class LazyBoostingMTS(ns.MTS):
                             )
                     else:
                         if per_series == False:
-                            rmse = np.sqrt(np.mean((X_test - X_pred)**2))
+                            rmse = np.sqrt(np.mean((X_test - X_pred) ** 2))
                             mae = mean_absolute_error(X_test, X_pred)
                             mpl = mean_pinball_loss(X_test, X_pred)
                         else:
@@ -559,8 +572,8 @@ class LazyBoostingMTS(ns.MTS):
                         COVERAGE.append(coveragecalc)
                     TIME.append(time.time() - start)
 
-                    if self.custom_metric is not None:                        
-                        try: 
+                    if self.custom_metric is not None:
+                        try:
                             custom_metric = self.custom_metric(X_test, X_pred)
                             CUSTOM_METRIC.append(custom_metric)
                         except Exception as e:
@@ -591,7 +604,7 @@ class LazyBoostingMTS(ns.MTS):
 
                         if self.custom_metric is not None:
                             scores_verbose["Custom metric"] = custom_metric
-                            
+
                     if self.predictions:
                         predictions[name] = X_pred
                 except Exception as exception:
@@ -717,7 +730,9 @@ class LazyBoostingMTS(ns.MTS):
                                     X_pred, X_test, level=95, per_series=True
                                 )
                             else:
-                                rmse = np.sqrt(np.mean((X_test - X_pred.mean)**2))
+                                rmse = np.sqrt(
+                                    np.mean((X_test - X_pred.mean) ** 2)
+                                )
                                 mae = mean_absolute_error(X_test, X_pred.mean)
                                 mpl = mean_pinball_loss(X_test, X_pred.mean)
                                 winklerscore = winkler_score(
@@ -747,7 +762,7 @@ class LazyBoostingMTS(ns.MTS):
                                     per_series=True,
                                 )
                             else:
-                                rmse = np.sqrt(np.mean((X_test - X_pred)**2))
+                                rmse = np.sqrt(np.mean((X_test - X_pred) ** 2))
                                 mae = mean_absolute_error(X_test, X_pred)
                                 mpl = mean_pinball_loss(X_test, X_pred)
                     else:  # self.h is not None
@@ -757,8 +772,10 @@ class LazyBoostingMTS(ns.MTS):
 
                             if per_series == False:
                                 if isinstance(X_test, pd.DataFrame) == False:
-                                    X_test_h = X_test[0: self.h, :]
-                                    rmse = np.sqrt(np.mean((X_test_h - X_pred.mean)**2))
+                                    X_test_h = X_test[0 : self.h, :]
+                                    rmse = np.sqrt(
+                                        np.mean((X_test_h - X_pred.mean) ** 2)
+                                    )
                                     mae = mean_absolute_error(
                                         X_test_h, X_pred.mean
                                     )
@@ -772,8 +789,10 @@ class LazyBoostingMTS(ns.MTS):
                                         X_pred, X_test_h, level=95
                                     )
                                 else:
-                                    X_test_h = X_test.iloc[0: self.h, :]
-                                    rmse = np.sqrt(np.mean((X_test_h - X_pred.mean)**2))
+                                    X_test_h = X_test.iloc[0 : self.h, :]
+                                    rmse = np.sqrt(
+                                        np.mean((X_test_h - X_pred.mean) ** 2)
+                                    )
                                     mae = mean_absolute_error(
                                         X_test_h, X_pred.mean
                                     )
@@ -788,7 +807,7 @@ class LazyBoostingMTS(ns.MTS):
                                     )
                             else:
                                 if isinstance(X_test, pd.DataFrame):
-                                    X_test_h = X_test.iloc[0: self.h, :]
+                                    X_test_h = X_test.iloc[0 : self.h, :]
                                     rmse = mean_errors(
                                         actual=X_test_h,
                                         pred=X_pred,
@@ -820,7 +839,7 @@ class LazyBoostingMTS(ns.MTS):
                                         per_series=True,
                                     )
                                 else:
-                                    X_test_h = X_test[0: self.h, :]
+                                    X_test_h = X_test[0 : self.h, :]
                                     rmse = mean_errors(
                                         actual=X_test_h,
                                         pred=X_pred,
@@ -855,18 +874,22 @@ class LazyBoostingMTS(ns.MTS):
 
                             if per_series == False:
                                 if isinstance(X_test, pd.DataFrame):
-                                    X_test_h = X_test.iloc[0: self.h, :]
-                                    rmse = np.sqrt(np.mean((X_test_h - X_pred)**2))
+                                    X_test_h = X_test.iloc[0 : self.h, :]
+                                    rmse = np.sqrt(
+                                        np.mean((X_test_h - X_pred) ** 2)
+                                    )
                                     mae = mean_absolute_error(X_test_h, X_pred)
                                     mpl = mean_pinball_loss(X_test_h, X_pred)
                                 else:
-                                    X_test_h = X_test[0: self.h, :]
-                                    rmse = np.sqrt(np.mean((X_test_h - X_pred)**2))
+                                    X_test_h = X_test[0 : self.h, :]
+                                    rmse = np.sqrt(
+                                        np.mean((X_test_h - X_pred) ** 2)
+                                    )
                                     mae = mean_absolute_error(X_test_h, X_pred)
                                     mpl = mean_pinball_loss(X_test_h, X_pred)
                             else:
                                 if isinstance(X_test, pd.DataFrame):
-                                    X_test_h = X_test.iloc[0: self.h, :]
+                                    X_test_h = X_test.iloc[0 : self.h, :]
                                     rmse = mean_errors(
                                         actual=X_test_h,
                                         pred=X_pred,
@@ -886,7 +909,7 @@ class LazyBoostingMTS(ns.MTS):
                                         per_series=True,
                                     )
                                 else:
-                                    X_test_h = X_test[0: self.h, :]
+                                    X_test_h = X_test[0 : self.h, :]
                                     rmse = mean_errors(
                                         actual=X_test_h,
                                         pred=X_pred,
@@ -911,12 +934,16 @@ class LazyBoostingMTS(ns.MTS):
                         COVERAGE.append(coveragecalc)
                     TIME.append(time.time() - start)
 
-                    if self.custom_metric is not None:                        
-                        try: 
+                    if self.custom_metric is not None:
+                        try:
                             if self.h is None:
-                                custom_metric = self.custom_metric(X_test, X_pred)
+                                custom_metric = self.custom_metric(
+                                    X_test, X_pred
+                                )
                             else:
-                                custom_metric = self.custom_metric(X_test_h, X_pred)
+                                custom_metric = self.custom_metric(
+                                    X_test_h, X_pred
+                                )
                             CUSTOM_METRIC.append(custom_metric)
                         except Exception as e:
                             custom_metric = np.iinfo(np.float32).max
@@ -945,8 +972,8 @@ class LazyBoostingMTS(ns.MTS):
                             }
 
                         if self.custom_metric is not None:
-                            scores_verbose["Custom metric"] = custom_metric                            
-                       
+                            scores_verbose["Custom metric"] = custom_metric
+
                     if self.predictions:
                         predictions[name] = X_pred
 
@@ -976,23 +1003,25 @@ class LazyBoostingMTS(ns.MTS):
 
         if self.custom_metric is not None:
             scores["Custom metric"] = CUSTOM_METRIC
-        
+
         if per_series:
             scores = dict_to_dataframe_series(scores, self.series_names)
         else:
             scores = pd.DataFrame(scores)
-       
-        try: # case per_series, can't be sorted
-            scores = scores.sort_values(by=self.sort_by, ascending=True).set_index("Model")
-            
+
+        try:  # case per_series, can't be sorted
+            scores = scores.sort_values(
+                by=self.sort_by, ascending=True
+            ).set_index("Model")
+
             self.best_model_ = self.models_[scores.index[0]]
         except Exception as e:
-            pass 
+            pass
 
         if self.predictions is True:
 
             return scores, predictions
-        
+
         return scores
 
     def get_best_model(self):
@@ -1035,8 +1064,8 @@ class LazyBoostingMTS(ns.MTS):
         else:
             if len(self.models_.keys()) == 0:
                 if isinstance(X_test, pd.DataFrame):
-                    self.fit(X_train, X_test.iloc[0: self.h, :])
+                    self.fit(X_train, X_test.iloc[0 : self.h, :])
                 else:
-                    self.fit(X_train, X_test[0: self.h, :])
+                    self.fit(X_train, X_test[0 : self.h, :])
 
         return self.models_
