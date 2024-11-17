@@ -83,9 +83,9 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
                 eye_term = np.sqrt(self.reg_lambda) * np.eye(X.shape[1])
                 X_ = np.row_stack((X_, eye_term))
                 y_ = np.concatenate((centered_y, np.zeros(X.shape[1])))
-                # self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)
-                self.beta = get_beta(X_, y_)
-            else:
+                self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)
+                #self.beta = get_beta(X_, y_)
+            else: # multiple outputs
                 try:
                     eye_term = np.sqrt(self.reg_lambda) * np.eye(X.shape[1])
                     X_ = np.row_stack((X_, eye_term))
@@ -95,24 +95,26 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
                             np.zeros((eye_term.shape[0], centered_y.shape[1])),
                         )
                     )
-                    # self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)
-                    self.beta = get_beta(X_, y_)
+                    self.beta, _, _, _ = np.linalg.lstsq(X_, y_, rcond=None)
+                    #self.beta = get_beta(X_, y_)
                 except Exception:
                     x = inv(
                         mo.crossprod(X_) + self.reg_lambda * np.eye(X_.shape[1])
                     )
                     hat_matrix = mo.tcrossprod(x, X_)
-                    self.beta = mo.safe_sparse_dot(hat_matrix, centered_y)
+                    self.beta = hat_matrix @ centered_y
             return self
 
         x = jinv(
             mo.crossprod(X_, backend=self.backend)
-            + self.reg_lambda * jnp.eye(X_.shape[1])
+            + self.reg_lambda * np.eye(X_.shape[1])
         )
         hat_matrix = mo.tcrossprod(x, X_, backend=self.backend)
-        self.beta = mo.safe_sparse_dot(
-            hat_matrix, centered_y, backend=self.backend
-        )
+        if self.backend in ("gpu", "tpu"):
+            device_put(hat_matrix)
+            device_put(centered_y)
+        self.beta = hat_matrix @ centered_y
+            
         return self
 
     def predict(self, X, **kwargs):
@@ -132,17 +134,11 @@ class RidgeRegressor(BaseEstimator, RegressorMixin):
 
         """
         X_ = (X - self.xm[None, :]) / self.xsd[None, :]
-
-        if self.backend == "cpu":
-            if isinstance(self.ym, float):
-                return self.ym + mo.safe_sparse_dot(X_, self.beta)
-            return self.ym[None, :] + mo.safe_sparse_dot(X_, self.beta)
-
-        # if self.backend in ("gpu", "tpu"):
+        if self.backend in ("gpu", "tpu"):
+            device_put(X_)
+            device_put(self.beta)
+            device_put(self.ym)
         if isinstance(self.ym, float):
-            return self.ym + mo.safe_sparse_dot(
-                X_, self.beta, backend=self.backend
-            )
-        return self.ym[None, :] + mo.safe_sparse_dot(
-            X_, self.beta, backend=self.backend
-        )
+            return self.ym + X_ @ self.beta
+        return self.ym[None, :] + X_ @ self.beta
+
