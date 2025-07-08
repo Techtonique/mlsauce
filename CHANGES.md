@@ -1,3 +1,7 @@
+# version 0.25.0
+
+- Fix setup.py to build extensions in place (at last!)
+
 # version 0.22.3
 
 - Add `GenericGradientBooster` for regression and classification. See: https://thierrymoudiki.github.io/blog/2024/10/06/python/r/genericboosting
