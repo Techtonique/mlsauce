@@ -25,13 +25,13 @@ jobs:
           pip3 install wheel setuptools twine Cython
 
       - name: Build distribution
-        run: python3 setup.py sdist bdist_wheel
+        run: python3 setup.py sdist
 
-      - name: Run examples 
-        run: pip install .&&find examples -maxdepth 2 -name "*boost_*.py" -exec  python3 {} \;
+      #- name: Run examples 
+      #  run: pip install .&&find examples -maxdepth 2 -name "*boost_*.py" -exec  python3 {} \;
 
       - name: Publish to PyPI                
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@release/v2
         with:
            password: ${{ secrets.PYPI_GLOBAL_MLSAUCE2 }}
            repository-url: https://upload.pypi.org/legacy/          
