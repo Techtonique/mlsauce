@@ -85,6 +85,7 @@ if __name__ == "__main__":
             'Development Status :: 3 - Alpha',
             'Intended Audience :: Developers',
             'Natural Language :: English',
+            "License :: OSI Approved :: BSD License",
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
