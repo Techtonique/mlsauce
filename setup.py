@@ -23,7 +23,7 @@ LICENSE = 'BSD-3-Clause'
 VERSION = '0.25.0'
 
 install_requires = [
-    "numpy<2.0.0",
+    "numpy",
     "Cython",
     "joblib",
     "matplotlib",
@@ -37,10 +37,10 @@ install_requires = [
 
 # Ensure Cython and NumPy are installed
 try:
-    subprocess.run(['uv', 'pip', 'install', 'numpy<2.0.0'], check=True)
+    subprocess.run(['uv', 'pip', 'install', 'numpy'], check=True)
     subprocess.run(['uv', 'pip', 'install', 'Cython'], check=True)
 except Exception:
-    subprocess.run(['pip', 'install', 'numpy<2.0.0'])
+    subprocess.run(['pip', 'install', 'numpy'])
     subprocess.run(['pip', 'install', 'Cython'])
 
 import numpy
@@ -69,31 +69,42 @@ ext_modules = [
               include_dirs=[numpy.get_include()])
 ]
 
-setup(
-    name=DISTNAME,
-    maintainer=MAINTAINER,
-    maintainer_email=MAINTAINER_EMAIL,
-    description=DESCRIPTION,
-    license=LICENSE,
-    version=VERSION,
-    long_description=LONG_DESCRIPTION,
-    classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD-3-Clause',
-        'Natural Language :: English',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-    ],
-    platforms=["linux", "macosx", "windows"],
-    python_requires=">=3.5",
-    install_requires=install_requires,
-    setup_requires=["numpy<2.0.0", "Cython"],
-    packages=find_packages(),
-    ext_modules=cythonize(ext_modules, annotate=True),
-    package_data={'': ['*.pxd']}
-)
 
+if __name__ == "__main__":
+    setup(
+        name=DISTNAME,
+        maintainer=MAINTAINER,
+        maintainer_email=MAINTAINER_EMAIL,
+        description=DESCRIPTION,
+        license=LICENSE,
+        version=VERSION,
+        long_description=LONG_DESCRIPTION,
+        classifiers=[
+            'Development Status :: 2 - Pre-Alpha',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: BSD-3-Clause',
+            'Natural Language :: English',
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8',
+        ],
+        platforms=["linux", "macosx", "windows"],
+        python_requires=">=3.5",
+        install_requires=install_requires,
+        setup_requires=["numpy", "Cython"],
+        packages=find_packages(),
+        ext_modules=cythonize(ext_modules, annotate=True),
+        package_data={'': ['*.pxd']}
+    )
+
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    folders = ['adaopt', 'booster', 'lasso', 'ridge', 'stump']
+    for folder in folders: 
+        filename = os.path.join(dir_path, "mlsauce", folder, 'setup2.py')                
+        try: 
+            subprocess.run(['python3', filename, 'build_ext', '--inplace'])  
+        except Exception as e:
+            print(f"Error running setup for {folder}: {e}")
+            subprocess.run(['python', filename, 'build_ext', '--inplace'])  
