@@ -19,7 +19,7 @@ DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
 LONG_DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
 MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
-LICENSE = 'BSD-3-Clause'
+LICENSE = 'BSD'
 VERSION = '0.25.0'
 
 install_requires = [
