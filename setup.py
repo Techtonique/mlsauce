@@ -82,9 +82,8 @@ if __name__ == "__main__":
         version=VERSION,
         long_description=LONG_DESCRIPTION,
         classifiers=[
-            'Development Status :: 2 - Pre-Alpha',
+            'Development Status :: 3 - Alpha',
             'Intended Audience :: Developers',
-            'License :: OSI Approved :: BSD-3-Clause',
             'Natural Language :: English',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.5',
