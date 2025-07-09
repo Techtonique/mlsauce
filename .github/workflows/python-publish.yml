@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip3 install wheel setuptools twine
+          pip3 install wheel setuptools twine Cython
 
       - name: Build distribution
         run: python3 setup.py sdist bdist_wheel
