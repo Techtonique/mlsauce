@@ -68,6 +68,13 @@ __General rule for using the package in R__:  object accesses with `.`'s are rep
 
 For a list of available models, visit [https://techtonique.github.io/mlsauce/](https://techtonique.github.io/mlsauce/).
 
+### Docker
+
+```
+make docker-build ## Build Docker image for mlsauce
+make docker-run-examples  # test thoroughly
+make docker-pypi-release  # Run an interactive shell inside the mlsauce Docker container
+```
 
 ## Package description
 

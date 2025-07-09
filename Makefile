@@ -82,17 +82,13 @@ build-site: docs ## export mkdocs website to a folder
 	cp -rf mlsauce-docs/* ../../Pro_Website/Techtonique.github.io/mlsauce
 	find . -name '__pycache__' -exec rm -fr {} +
 
-release: dist ## package and upload a release
-	pip install twine --upgrade
-	python3 -m twine upload dist/*
-
 dist: clean ## builds source and wheel package
 	python3 setup.py sdist
 	python3 setup.py bdist_wheel
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
-	uv pip install -e . --verbose
+	pip install -e . --verbose
 
 run-examples: ## run all examples with one command
 	find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;
@@ -102,3 +98,20 @@ run-booster: ## run all boosting estimators examples with one command
 
 run-lazy: ## run all lazy estimators examples with one command
 	find examples -maxdepth 2 -name "*lazy*.py" -exec  python3 {} \;
+
+docker-build: ## Build Docker image for mlsauce and create dist artifacts
+	docker build -t mlsauce .
+	docker run --rm -v $(PWD)/dist:/app/dist mlsauce sh -c "python3 setup.py sdist bdist_wheel"
+
+docker-shell: ## Run an interactive shell inside the mlsauce Docker container
+	docker run -it --rm mlsauce bash
+
+docker-run-examples: ## Run all example scripts inside Docker
+	docker run --rm mlsauce sh -c "pip install -e . && find examples -maxdepth 2 -name '*.py' -exec python3 {} \;"
+
+docker-run-booster: ## Run boosting example scripts inside Docker
+	docker run --rm mlsauce sh -c "pip install -e . && find examples -maxdepth 2 -name '*boost*.py' -exec python3 {} \;"
+
+docker-run-lazy: ## Run lazy estimator example scripts inside Docker
+	docker run --rm mlsauce sh -c "pip install -e . && find examples -maxdepth 2 -name '*lazy*.py' -exec python3 {} \;"
+

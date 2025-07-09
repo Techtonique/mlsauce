@@ -25,6 +25,8 @@ VERSION = '0.25.0'
 install_requires = [
     "numpy",
     "Cython",
+    "jax",
+    "jaxlib",
     "joblib",
     "matplotlib",
     "nnetsauce",

@@ -3,6 +3,8 @@ requires = [
     "setuptools>=42",
     "wheel",
     "Cython",
-    "numpy"
+    "numpy",
+    "jax",
+    "jaxlib"
 ]
 build-backend = "setuptools.build_meta"

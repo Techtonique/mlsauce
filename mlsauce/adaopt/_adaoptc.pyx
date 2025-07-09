@@ -396,7 +396,7 @@ def find_kmin_x(x, n_x, k, cache=False):
     
     if cache: 
         
-        key = str(hash(np.asarray(x).tostring())) 
+        key = str(hash(x)) 
         key += str(n_x) + str(k) 
     
         if key in __find_kmin_x_cache:
