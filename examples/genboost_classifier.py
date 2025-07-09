@@ -10,7 +10,7 @@ import os
 
 print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
 
-print(os.path.relpath(os.path.dirname(__file__)))
+#print(os.path.relpath(os.path.dirname(__file__)))
 
 #wd="/workspace/mlsauce/mlsauce/examples"
 #
