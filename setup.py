@@ -20,7 +20,7 @@ LONG_DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
 MAINTAINER = 'T. Moudiki'
 MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
 LICENSE = 'BSD'
-VERSION = '0.25.0'
+VERSION = '0.25.1'
 
 install_requires = [
     "numpy",
