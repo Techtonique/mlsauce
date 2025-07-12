@@ -35,7 +35,7 @@ def assign_values_to_input(x, bin_value_dict):
     assigned_values (list): List of assigned values for the new input data.
     """
 
-    if np.issubdtype(x.dtype, np.integer) or np.issubdtype(x.dtype, np.object_):
+    if np.issubdtype(x.dtype, np.int64) or np.issubdtype(x.dtype, np.object_):
 
         return x
 

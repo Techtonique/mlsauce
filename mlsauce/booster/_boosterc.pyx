@@ -434,7 +434,7 @@ def update_booster(object obj, double[:] X, y, double alpha=0.5, backend="cpu"):
   activation = obj['activation']
   X_ = (X - obj['xm'][None, :])/obj['xsd'][None, :]
   
-  if np.issubdtype(y.dtype, np.integer): # classification
+  if np.issubdtype(y.dtype, np.int64): # classification
     n_classes = obj["n_classes"]
     preds_sum = np.zeros(n_classes)
     Y = one_hot_encode2(y, n_classes)
