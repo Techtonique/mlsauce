@@ -415,7 +415,7 @@ def find_kmin_x(x, n_x, k, cache=False):
         
         __find_kmin_x_cache[key] = (np.asarray(list(res.values())), 
                                     np.asarray(list(res.keys()), 
-                                    dtype=np.integer))                            
+                                    dtype=np.int64))                            
     
     # if cache == False    
     sorted_x = np.sort(x, kind='quicksort')        
