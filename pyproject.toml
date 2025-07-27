@@ -1,10 +1,84 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "wheel",
-    "Cython",
-    "numpy",
-    "jax",
-    "jaxlib"
+    "setuptools>=64",
+    "setuptools-scm>=8",
+    "packaging",
+    "Cython>=3.0.10",
+    "numpy>=2.0.0",
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlsauce"
+description = "Miscellaneous Statistical/Machine Learning tools"
+readme = "README.md"
+authors = [
+    {name = "T. Moudiki", email = "thierry.moudiki@gmail.com"}
+]
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+version = "0.25.3"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Programming Language :: Cython",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering"
+]
+dependencies = [
+    "numpy>=2.0.0",
+    "Cython>=3.0.10",
+    "jax>=0.4.0",
+    "jaxlib>=0.4.0",
+    "joblib>=1.0.0",
+    "matplotlib>=3.0.0",
+    "nnetsauce>=0.15.0",
+    "pandas>=2.0.0",
+    "requests>=2.0.0",
+    "scikit-learn>=1.4.0",
+    "scipy>=1.8.0",
+    "tqdm>=4.50.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Techtonique/mlsauce"
+"Source Code" = "https://github.com/Techtonique/mlsauce"
+"Bug Tracker" = "https://github.com/Techtonique/mlsauce/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black[jupyter]",
+    "build",
+    "Cython>=3.0.10",
+    "pytest",
+    "ruff",
+    "setuptools-scm>=8",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["mlsauce*"]
+
+[tool.setuptools.package-data]
+mlsauce = ["*.pxd", "*.pyx"]
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+select = ["E", "F", "I", "W"]
+
+[tool.setuptools_scm]
