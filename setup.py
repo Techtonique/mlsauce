@@ -6,7 +6,21 @@ from packaging import version
 from pathlib import Path
 from setuptools import Command, Extension, setup
 from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
-import numpy
+
+# --- Ensure Cython and NumPy are installed before importing them ---
+try:
+    import Cython
+    import numpy
+except ImportError as e:
+    print("numpy and Cython are not installed: ", str(e))
+    # Try installing with uv pip (faster) first, fall back to pip if not available
+    try:
+        subprocess.run([sys.executable, "-m", "uv", "pip", "install", "Cython>=3.0.10", "numpy>=2.0.0"], check=True)
+    except (subprocess.SubprocessError, FileNotFoundError):
+        subprocess.run([sys.executable, "-m", "pip", "install", "Cython>=3.0.10", "numpy>=2.0.0"], check=True)
+    # Re-attempt imports
+    import Cython
+    import numpy
 
 class bdist_wheel(_bdist_wheel):
     def finalize_options(self):
