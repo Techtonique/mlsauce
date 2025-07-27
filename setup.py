@@ -1,112 +1,186 @@
-#! /usr/bin/env python
-
 import os
+import platform
+import shutil
 import sys
-import subprocess
+from packaging import version
 from pathlib import Path
-from setuptools import Extension, find_packages, setup
-from Cython.Build import cythonize
-
-try:
-    import builtins
-except ImportError:
-    import __builtin__ as builtins
-
-builtins.__MLSAUCE_SETUP__ = True
-
-DISTNAME = 'mlsauce'
-DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
-LONG_DESCRIPTION = 'Miscellaneous Statistical/Machine Learning tools'
-MAINTAINER = 'T. Moudiki'
-MAINTAINER_EMAIL = 'thierry.moudiki@gmail.com'
-LICENSE = 'BSD'
-VERSION = '0.25.3'
-
-install_requires = [
-    "numpy",
-    "Cython",
-    "jax",
-    "jaxlib",
-    "joblib",
-    "matplotlib",
-    "nnetsauce",
-    "pandas",
-    "requests",
-    "scikit-learn",
-    "scipy",
-    "tqdm"
-]
-
-# Ensure Cython and NumPy are installed
-try:
-    subprocess.run(['uv', 'pip', 'install', 'numpy'], check=True)
-    subprocess.run(['uv', 'pip', 'install', 'Cython'], check=True)
-except Exception:
-    subprocess.run(['pip', 'install', 'numpy'])
-    subprocess.run(['pip', 'install', 'Cython'])
-
+from setuptools import Command, Extension, setup
+from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 import numpy
 
-script_dir = Path(__file__).parent.resolve()
+class bdist_wheel(_bdist_wheel):
+    def finalize_options(self):
+        _bdist_wheel.finalize_options(self)
+        self.root_is_pure = False
+        
+    def get_tag(self):
+        python, abi, plat = _bdist_wheel.get_tag(self)
+        if plat.startswith('linux'):
+            plat = 'manylinux2014_x86_64'
+        return python, abi, plat
 
-ext_modules = [
-    Extension("mlsauce.adaopt._adaoptc",
-              [str(script_dir / "mlsauce/adaopt/_adaoptc.pyx")],
-              include_dirs=[numpy.get_include()]),
+CYTHON_MIN_VERSION = version.parse("3.0.10")
+VERSION = "0.25.3"
 
-    Extension("mlsauce.booster._boosterc",
-              [str(script_dir / "mlsauce/booster/_boosterc.pyx")],
-              include_dirs=[numpy.get_include()]),
+class clean(Command):
+    user_options = [("all", "a", "")]
+    
+    def initialize_options(self):
+        self.all = True
+        self.delete_dirs = []
+        self.delete_files = []
+        
+        for root, dirs, files in os.walk("mlsauce"):
+            root = Path(root)
+            for d in dirs:
+                if d == "__pycache__":
+                    self.delete_dirs.append(root / d)
+            
+            if "__pycache__" in root.name:
+                continue
+                
+            for f in (root / x for x in files):
+                ext = f.suffix
+                if ext == ".pyc" or ext == ".so":
+                    self.delete_files.append(f)
+                if ext in (".c", ".cpp"):
+                    source_file = f.with_suffix(".pyx")
+                    if source_file.exists():
+                        self.delete_files.append(f)
+        
+        build_path = Path("build")
+        if build_path.exists():
+            self.delete_dirs.append(build_path)
+    
+    def finalize_options(self):
+        pass
+    
+    def run(self):
+        for delete_dir in self.delete_dirs:
+            shutil.rmtree(delete_dir)
+        for delete_file in self.delete_files:
+            delete_file.unlink()
 
-    Extension("mlsauce.lasso._lassoc",
-              [str(script_dir / "mlsauce/lasso/_lassoc.pyx")],
-              include_dirs=[numpy.get_include()]),
+EXTENSIONS = {
+    "_adaoptc": {"sources": ["mlsauce/adaopt/_adaoptc.pyx"]},
+    "_boosterc": {"sources": ["mlsauce/booster/_boosterc.pyx"]},
+    "_lassoc": {"sources": ["mlsauce/lasso/_lassoc.pyx"]},
+    "_ridgec": {"sources": ["mlsauce/ridge/_ridgec.pyx"]},
+    "_stumpc": {"sources": ["mlsauce/stump/_stumpc.pyx"]},
+}
 
-    Extension("mlsauce.ridge._ridgec",
-              [str(script_dir / "mlsauce/ridge/_ridgec.pyx")],
-              include_dirs=[numpy.get_include()]),
+def get_module_from_sources(sources):
+    for src_path in map(Path, sources):
+        if src_path.suffix == ".pyx":
+            return ".".join(src_path.parts[:-1] + (src_path.stem,))
+    raise ValueError(f"Could not find module from sources: {sources!r}")
 
-    Extension("mlsauce.stump._stumpc",
-              [str(script_dir / "mlsauce/stump/_stumpc.pyx")],
-              include_dirs=[numpy.get_include()])
-]
+def _check_cython_version():
+    message = f"Please install Cython with a version >= {CYTHON_MIN_VERSION}"
+    try:
+        import Cython
+    except ModuleNotFoundError:
+        raise ModuleNotFoundError(message)
+    
+    if version.parse(Cython.__version__) < CYTHON_MIN_VERSION:
+        message += f" The current version is {Cython.__version__} in {Cython.__path__}."
+        raise ValueError(message)
 
+def cythonize_extensions(extensions):
+    _check_cython_version()
+    from Cython.Build import cythonize
+    
+    directives = {
+        "language_level": "3",
+        "embedsignature": True,
+        "boundscheck": False,
+        "wraparound": False
+    }
+    
+    macros = [("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]
+    
+    for ext in extensions:
+        if ext.define_macros is None:
+            ext.define_macros = macros
+        else:
+            ext.define_macros += macros
+    
+    return cythonize(extensions, compiler_directives=directives)
+
+def get_extensions():
+    numpy_includes = [numpy.get_include()]
+    extensions = []
+    
+    for config in EXTENSIONS.values():
+        name = get_module_from_sources(config["sources"])
+        include_dirs = numpy_includes + config.get("include_dirs", [])
+        
+        extra_compile_args = []
+        if sys.platform == "darwin":
+            extra_compile_args.extend(["-stdlib=libc++", "-mmacosx-version-min=10.15"])
+            if platform.machine() == "arm64":
+                extra_compile_args.extend(["-arch", "arm64"])
+            else:
+                extra_compile_args.extend(["-arch", "x86_64"])
+        elif sys.platform == "win32":
+            extra_compile_args.extend(["/EHsc", "/O2"])
+        
+        ext = Extension(
+            name=name,
+            sources=config["sources"],
+            include_dirs=include_dirs,
+            extra_compile_args=extra_compile_args,
+            language="c",
+        )
+        extensions.append(ext)
+    
+    if "sdist" not in sys.argv and "clean" not in sys.argv:
+        extensions = cythonize_extensions(extensions)
+    
+    return extensions
 
 if __name__ == "__main__":
     setup(
-        name=DISTNAME,
-        maintainer=MAINTAINER,
-        maintainer_email=MAINTAINER_EMAIL,
-        description=DESCRIPTION,
-        license=LICENSE,
+        name="mlsauce",
         version=VERSION,
-        long_description=LONG_DESCRIPTION,
+        description="Miscellaneous Statistical/Machine Learning tools",
+        long_description="Miscellaneous Statistical/Machine Learning tools",
+        author="T. Moudiki",
+        author_email="thierry.moudiki@gmail.com",
+        license="BSD",
         classifiers=[
-            'Development Status :: 3 - Alpha',
-            'Intended Audience :: Developers',
-            'Natural Language :: English',
+            "Development Status :: 3 - Alpha",
+            "Intended Audience :: Developers",
+            "Natural Language :: English",
             "License :: OSI Approved :: BSD License",
-            'Programming Language :: Python :: 3',
-            'Programming Language :: Python :: 3.5',
-            'Programming Language :: Python :: 3.6',
-            'Programming Language :: Python :: 3.7',
-            'Programming Language :: Python :: 3.8',
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.10",
+            "Programming Language :: Python :: 3.11",
+            "Programming Language :: Python :: 3.12",
         ],
         platforms=["linux", "macosx", "windows"],
-        python_requires=">=3.5",
-        install_requires=install_requires,
-        setup_requires=["numpy", "Cython"],
-        packages=find_packages(),
-        ext_modules=cythonize(ext_modules, annotate=True),
-        package_data={'': ['*.pxd']}
+        python_requires=">=3.10",
+        install_requires=[
+            "numpy>=2.0.0",
+            "Cython>=3.0.10",
+            "jax>=0.4.0",
+            "jaxlib>=0.4.0",
+            "joblib>=1.0.0",
+            "matplotlib>=3.0.0",
+            "nnetsauce>=0.15.0",
+            "pandas>=2.0.0",
+            "requests>=2.0.0",
+            "scikit-learn>=1.4.0",
+            "scipy>=1.8.0",
+            "tqdm>=4.50.0",
+        ],
+        ext_modules=get_extensions(),
+        zip_safe=False,
+        cmdclass={"clean": clean, "bdist_wheel": bdist_wheel},
+        options={
+            "bdist_wheel": {
+                "universal": False,
+                "plat_name": "manylinux2014_x86_64" if sys.platform == "linux" else None,
+            }
+        },
     )
-
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    folders = ['adaopt', 'booster', 'lasso', 'ridge', 'stump']
-    for folder in folders: 
-        filename = os.path.join(dir_path, "mlsauce", folder, 'setup2.py')                
-        try: 
-            subprocess.run(['python3', filename, 'build_ext', '--inplace'])  
-        except Exception as e:
-            print(f"Error running setup for {folder}: {e}")
-            subprocess.run(['python', filename, 'build_ext', '--inplace'])  
