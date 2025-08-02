@@ -53,6 +53,11 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
+try:
+    from .isotonicregressor import IsotonicRegressor
+except ImportError as e:
+    print(f"Could not import some modules: {e}")
+
 # from .encoders import corrtarget_encoder
 
 __all__ = [
@@ -70,6 +75,7 @@ __all__ = [
     "LazyBoostingMTS",
     "LazyBoostingRegressor",
     "MultiTaskRegressor",
+    "IsotonicRegressor",
     # Other imports
     # "corrtarget_encoder",
     "download",
