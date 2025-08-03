@@ -58,6 +58,11 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
+try:
+    from .fpca import GenericFunctionalForecaster
+except ImportError as e:
+    print(f"Could not import some modules: {e}")
+
 # from .encoders import corrtarget_encoder
 
 __all__ = [
@@ -76,6 +81,7 @@ __all__ = [
     "LazyBoostingRegressor",
     "MultiTaskRegressor",
     "IsotonicRegressor",
+    "GenericFunctionalForecaster",
     # Other imports
     # "corrtarget_encoder",
     "download",
