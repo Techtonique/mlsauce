@@ -1,9 +1,11 @@
 import numpy as np
+import pandas as pd
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 from sklearn.base import BaseEstimator, RegressorMixin
 from statsmodels.tsa.ar_model import AutoReg
 from sklearn.utils.validation import check_is_fitted, check_array
-from typing import Optional, Literal
+from typing import Optional, Literal, Union
 import matplotlib.pyplot as plt
 
 
@@ -36,13 +38,13 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         self.rolling_window = rolling_window
         self.forecast_method = forecast_method
         
-    def fit(self, X: np.ndarray) -> 'FunctionalForecaster':
+    def fit(self, X: Union[np.ndarray, pd.DataFrame]) -> 'FunctionalForecaster':
         """
         Fit the functional forecaster.
         
         Parameters
         ----------
-        X : np.ndarray, shape (n_samples, n_points)
+        X : np.ndarray or pd.DataFrame, shape (n_samples, n_points)
             Functional time series data.
             
         Returns
@@ -50,21 +52,20 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         self : object
             Fitted forecaster.
         """
-        # Input validation
+        # Input validation and conversion
+        if isinstance(X, pd.DataFrame):
+            X = X.values
         X = check_array(X)
         
         self.X_ = X
         self.n_samples_, self.n_points_ = X.shape
         
         # 1. Reduce dimensionality with PCA
-        self.X_mean_ = X.mean(axis=0)
-        self.X_std_ = X.std(axis=0)
-        self.X_std_[self.X_std_ == 0] = 1  # Avoid division by zero
-        
-        X_centered_scaled = (X - self.X_mean_) / self.X_std_
+        self.scaler_ = StandardScaler()
+        X_scaled = self.scaler_.fit_transform(X)
         
         self.pca_ = PCA(n_components=self.n_components)
-        self.reduced_features_ = self.pca_.fit_transform(X_centered_scaled)  # (n_samples, n_components)
+        self.reduced_features_ = self.pca_.fit_transform(X_scaled)  # (n_samples, n_components)
         self.components_ = self.pca_.components_  # (n_components, n_points) - principal axes
         
         # 2. Run rolling regression on reduced features
@@ -138,7 +139,8 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
                 forecasted_coefs[:, comp] = coef_series[-1, comp]
         
         # Reconstruct using forecasted coefficients and principal components
-        forecasts = self.X_mean_ + forecasted_coefs @ self.components_
+        forecasts_scaled = forecasted_coefs @ self.components_
+        forecasts = self.scaler_.inverse_transform(forecasts_scaled)
         
         return forecasts
     
@@ -161,7 +163,8 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
                 forecasted_features[:, comp] = self.reduced_features_[-1, comp]
         
         # Reconstruct using coefficient matrix
-        forecasts = self.X_mean_ + forecasted_features @ self.coefs_.T
+        forecasts_scaled = forecasted_features @ self.coefs_.T
+        forecasts = self.scaler_.inverse_transform(forecasts_scaled)
         
         return forecasts
     
