@@ -58,10 +58,13 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         
         # 1. Reduce dimensionality with PCA
         self.X_mean_ = X.mean(axis=0)
-        X_centered = X - self.X_mean_
+        self.X_std_ = X.std(axis=0)
+        self.X_std_[self.X_std_ == 0] = 1  # Avoid division by zero
+        
+        X_centered_scaled = (X - self.X_mean_) / self.X_std_
         
         self.pca_ = PCA(n_components=self.n_components)
-        self.reduced_features_ = self.pca_.fit_transform(X_centered)  # (n_samples, n_components)
+        self.reduced_features_ = self.pca_.fit_transform(X_centered_scaled)  # (n_samples, n_components)
         self.components_ = self.pca_.components_  # (n_components, n_points) - principal axes
         
         # 2. Run rolling regression on reduced features
@@ -80,7 +83,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         for i in range(len(self.reduced_features_) - self.rolling_window):
             # Use window of reduced features to predict next time step
             X_window = self.reduced_features_[i:i+self.rolling_window]
-            y_window = self.X_[i+self.rolling_window]  # Predict next functional curve
+            y_window = self.X_[i+self.rolling_window]  # Predict next functional curve (original scale)
             
             # Fit regression: reduced_features -> functional_data
             coefs = np.linalg.lstsq(X_window, y_window, rcond=None)[0]
