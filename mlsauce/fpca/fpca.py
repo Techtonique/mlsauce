@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import PCA, TruncatedSVD, FactorAnalysis, FastICA, NMF, KernelPCA
+from sklearn.decomposition import PCA, TruncatedSVD, FactorAnalysis, FastICA, NMF, KernelPCA, MiniBatchSparsePCA
 from sklearn.manifold import MDS, Isomap, LocallyLinearEmbedding
 from sklearn.preprocessing import StandardScaler
 from sklearn.base import BaseEstimator, RegressorMixin
@@ -31,6 +31,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         - 'factor_analysis': Factor Analysis
         - 'fast_ica': Fast Independent Component Analysis
         - 'nmf': Non-negative Matrix Factorization
+        - 'minibatch_sparse_pca': Mini-batch Sparse PCA
         - 'mds': Multidimensional Scaling
         - 'isomap': Isomap
         - 'lle': Locally Linear Embedding
@@ -64,6 +65,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
             'factor_analysis': FactorAnalysis,
             'fast_ica': FastICA,
             'nmf': NMF,
+            'minibatch_sparse_pca': MiniBatchSparsePCA,
             'mds': MDS,
             'isomap': Isomap,
             'lle': LocallyLinearEmbedding
@@ -101,13 +103,20 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         # Initialize reduction method
         reduction_class = self._reduction_methods[self.reduction_method]
         
-        # Special handling for KernelPCA
+        # Special handling for specific methods
         if self.reduction_method == 'kernel_pca':
             # Set default kernel if not provided
             if 'kernel' not in self.reduction_params:
                 self.reduction_params['kernel'] = 'rbf'
             if 'fit_inverse_transform' not in self.reduction_params:
                 self.reduction_params['fit_inverse_transform'] = True
+        
+        elif self.reduction_method == 'minibatch_sparse_pca':
+            # Set default parameters for MiniBatchSparsePCA
+            if 'alpha' not in self.reduction_params:
+                self.reduction_params['alpha'] = 1.0
+            if 'batch_size' not in self.reduction_params:
+                self.reduction_params['batch_size'] = 3
         
         self.reducer_ = reduction_class(n_components=self.n_components, **self.reduction_params)
         
