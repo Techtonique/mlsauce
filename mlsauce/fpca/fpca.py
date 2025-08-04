@@ -11,17 +11,15 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
     """
     Functional time series forecaster using Functional Principal Component Regression (FPCR).
     
-    Two approaches:
-    1. Use principal components as regressors (method='components')
-    2. Use reduced features at inference (method='features')
+    Core approach:
+    1. Reduce dimensionality with PCA
+    2. Run rolling regression on the reduced features  
+    3. Forecast the rolling regression coefficients
     
     Parameters
     ----------
     n_components : int, default=8
         Number of principal components to extract.
-    method : {'components', 'features'}, default='components'
-        'components': Use principal components as regressors
-        'features': Use reduced features directly for forecasting
     rolling_window : int, optional
         Window size for rolling regression. If None, uses full training set.
     forecast_method : {'ar', 'last_value'}, default='ar'
@@ -31,12 +29,10 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
     def __init__(
         self,
         n_components: int = 8,
-        method: Literal['components', 'features'] = 'components',
         rolling_window: Optional[int] = None,
         forecast_method: Literal['ar', 'last_value'] = 'ar'
     ):
         self.n_components = n_components
-        self.method = method
         self.rolling_window = rolling_window
         self.forecast_method = forecast_method
         
@@ -60,59 +56,25 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         self.X_ = X
         self.n_samples_, self.n_points_ = X.shape
         
-        # Reduce dimensionality with PCA
+        # 1. Reduce dimensionality with PCA
         self.X_mean_ = X.mean(axis=0)
         X_centered = X - self.X_mean_
         
         self.pca_ = PCA(n_components=self.n_components)
         self.reduced_features_ = self.pca_.fit_transform(X_centered)  # (n_samples, n_components)
-        self.components_ = self.pca_.components_.T  # (n_points, n_components)
+        self.components_ = self.pca_.components_  # (n_components, n_points) - principal axes
         
-        # Fit based on method
-        if self.method == 'components':
-            self._fit_components_method()
-        else:  # features
-            self._fit_features_method()
+        # 2. Run rolling regression on reduced features
+        if self.rolling_window is not None:
+            self._fit_rolling_regression()
+        else:
+            self._fit_full_regression()
             
         self.is_fitted_ = True
         return self
     
-    def _fit_components_method(self):
-        """Method 1: Use principal components as regressors."""
-        if self.rolling_window is not None:
-            self._fit_rolling_components()
-        else:
-            self._fit_full_components()
-    
-    def _fit_features_method(self):
-        """Method 2: Use reduced features directly."""
-        if self.rolling_window is not None:
-            self._fit_rolling_features()
-        else:
-            self._fit_full_features()
-    
-    def _fit_rolling_components(self):
-        """Rolling regression using principal components as regressors."""
-        self.rolling_coefs_ = []
-        
-        for i in range(len(self.X_) - self.rolling_window):
-            # Use principal components as regressors to predict next functional curve
-            X_regressors = self.components_.T  # (n_components, n_points) - the basis functions
-            y_target = self.X_[i+self.rolling_window]  # Next functional curve
-            
-            # Fit regression: components -> functional_data
-            coefs = np.linalg.lstsq(X_regressors.T, y_target, rcond=None)[0]
-            self.rolling_coefs_.append(coefs)  # (n_components,)
-    
-    def _fit_full_components(self):
-        """Full regression using principal components as regressors."""
-        # Use principal components as regressors for all functional data
-        X_regressors = self.components_.T  # (n_components, n_points)
-        coefs = np.linalg.lstsq(X_regressors.T, self.X_, rcond=None)[0].T
-        self.coefs_ = coefs  # (n_samples, n_components)
-    
-    def _fit_rolling_features(self):
-        """Rolling regression using reduced features."""
+    def _fit_rolling_regression(self):
+        """Run rolling regression on reduced features."""
         self.rolling_coefs_ = []
         
         for i in range(len(self.reduced_features_) - self.rolling_window):
@@ -124,8 +86,8 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
             coefs = np.linalg.lstsq(X_window, y_window, rcond=None)[0]
             self.rolling_coefs_.append(coefs)  # (n_components,)
     
-    def _fit_full_features(self):
-        """Full regression using reduced features."""
+    def _fit_full_regression(self):
+        """Fit regression using full training set."""
         # Use all reduced features to predict functional data
         coefs = np.linalg.lstsq(self.reduced_features_, self.X_, rcond=None)[0].T
         self.coefs_ = coefs  # (n_points, n_components)
@@ -146,96 +108,57 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         """
         check_is_fitted(self, 'is_fitted_')
         
-        if self.method == 'components':
-            return self._forecast_components(steps)
-        else:  # features
-            return self._forecast_features(steps)
-    
-    def _forecast_components(self, steps: int) -> np.ndarray:
-        """Forecast using principal components method."""
         if self.rolling_window is not None:
-            # Forecast rolling coefficients
-            coef_series = np.array(self.rolling_coefs_)  # (n_windows, n_components)
-            
-            forecasted_coefs = np.zeros((steps, self.n_components))
-            for comp in range(self.n_components):
-                if self.forecast_method == 'ar':
-                    try:
-                        ar_model = AutoReg(coef_series[:, comp], lags=1).fit()
-                        forecasted_coefs[:, comp] = ar_model.predict(
-                            start=len(coef_series),
-                            end=len(coef_series) + steps - 1
-                        )
-                    except:
-                        forecasted_coefs[:, comp] = coef_series[-1, comp]
-                else:  # last_value
-                    forecasted_coefs[:, comp] = coef_series[-1, comp]
-            
-            # Reconstruct: forecasted_coefficients @ components
-            forecasts = self.X_mean_ + forecasted_coefs @ self.components_.T
-            
+            return self._forecast_rolling(steps)
         else:
-            # Forecast full coefficients
-            forecasted_coefs = np.zeros((steps, self.n_components))
-            for comp in range(self.n_components):
-                if self.forecast_method == 'ar':
-                    try:
-                        ar_model = AutoReg(self.coefs_[:, comp], lags=1).fit()
-                        forecasted_coefs[:, comp] = ar_model.predict(
-                            start=len(self.coefs_),
-                            end=len(self.coefs_) + steps - 1
-                        )
-                    except:
-                        forecasted_coefs[:, comp] = self.coefs_[-1, comp]
-                else:  # last_value
-                    forecasted_coefs[:, comp] = self.coefs_[-1, comp]
-            
-            # Reconstruct: forecasted_coefficients @ components
-            forecasts = self.X_mean_ + forecasted_coefs @ self.components_.T
+            return self._forecast_full(steps)
+    
+    def _forecast_rolling(self, steps: int) -> np.ndarray:
+        """3. Forecast the rolling regression coefficients."""
+        # Get coefficient time series for each component
+        coef_series = np.array(self.rolling_coefs_)  # (n_windows, n_components)
+        
+        # Forecast coefficients using AR models
+        forecasted_coefs = np.zeros((steps, self.n_components))
+        
+        for comp in range(self.n_components):
+            if self.forecast_method == 'ar':
+                try:
+                    ar_model = AutoReg(coef_series[:, comp], lags=1).fit()
+                    forecasted_coefs[:, comp] = ar_model.predict(
+                        start=len(coef_series),
+                        end=len(coef_series) + steps - 1
+                    )
+                except:
+                    forecasted_coefs[:, comp] = coef_series[-1, comp]
+            else:  # last_value
+                forecasted_coefs[:, comp] = coef_series[-1, comp]
+        
+        # Reconstruct using forecasted coefficients and principal components
+        forecasts = self.X_mean_ + forecasted_coefs @ self.components_
         
         return forecasts
     
-    def _forecast_features(self, steps: int) -> np.ndarray:
-        """Forecast using reduced features method."""
-        if self.rolling_window is not None:
-            # Forecast rolling coefficients
-            coef_series = np.array(self.rolling_coefs_)  # (n_windows, n_components)
-            
-            forecasted_coefs = np.zeros((steps, self.n_components))
-            for comp in range(self.n_components):
-                if self.forecast_method == 'ar':
-                    try:
-                        ar_model = AutoReg(coef_series[:, comp], lags=1).fit()
-                        forecasted_coefs[:, comp] = ar_model.predict(
-                            start=len(coef_series),
-                            end=len(coef_series) + steps - 1
-                        )
-                    except:
-                        forecasted_coefs[:, comp] = coef_series[-1, comp]
-                else:  # last_value
-                    forecasted_coefs[:, comp] = coef_series[-1, comp]
-            
-            # Reconstruct using forecasted coefficients
-            forecasts = self.X_mean_ + forecasted_coefs @ self.components_.T
-            
-        else:
-            # Forecast reduced features directly
-            forecasted_features = np.zeros((steps, self.n_components))
-            for comp in range(self.n_components):
-                if self.forecast_method == 'ar':
-                    try:
-                        ar_model = AutoReg(self.reduced_features_[:, comp], lags=1).fit()
-                        forecasted_features[:, comp] = ar_model.predict(
-                            start=len(self.reduced_features_),
-                            end=len(self.reduced_features_) + steps - 1
-                        )
-                    except:
-                        forecasted_features[:, comp] = self.reduced_features_[-1, comp]
-                else:  # last_value
+    def _forecast_full(self, steps: int) -> np.ndarray:
+        """Forecast using full training set approach."""
+        # Forecast reduced features using AR models
+        forecasted_features = np.zeros((steps, self.n_components))
+        
+        for comp in range(self.n_components):
+            if self.forecast_method == 'ar':
+                try:
+                    ar_model = AutoReg(self.reduced_features_[:, comp], lags=1).fit()
+                    forecasted_features[:, comp] = ar_model.predict(
+                        start=len(self.reduced_features_),
+                        end=len(self.reduced_features_) + steps - 1
+                    )
+                except:
                     forecasted_features[:, comp] = self.reduced_features_[-1, comp]
-            
-            # Reconstruct using coefficient matrix
-            forecasts = self.X_mean_ + forecasted_features @ self.coefs_.T
+            else:  # last_value
+                forecasted_features[:, comp] = self.reduced_features_[-1, comp]
+        
+        # Reconstruct using coefficient matrix
+        forecasts = self.X_mean_ + forecasted_features @ self.coefs_.T
         
         return forecasts
     
@@ -246,7 +169,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         
         plt.figure(figsize=(12, 6))
         for i in range(min(n_plot, self.n_components)):
-            plt.plot(self.components_[:, i], label=f'Component {i+1}', linewidth=2)
+            plt.plot(self.components_[i], label=f'Component {i+1}', linewidth=2)
         
         plt.title(f'Functional Principal Components (n_components={self.n_components})')
         plt.xlabel('Domain Point')
@@ -287,7 +210,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         for i in range(steps):
             plt.plot(forecasts[i], 'r--', linewidth=2, alpha=0.7, label=f'Forecast {i+1}' if i == 0 else "")
         
-        plt.title(f'Functional Forecast ({self.method} method)')
+        plt.title('Functional Forecast')
         plt.xlabel('Domain Point')
         plt.ylabel('Value')
         if actual is not None:
@@ -299,7 +222,6 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         """Get information about the fitted model."""
         info = {
             'n_components': self.n_components,
-            'method': self.method,
             'rolling_window': self.rolling_window,
             'forecast_method': self.forecast_method,
             'is_fitted': getattr(self, 'is_fitted_', False)
