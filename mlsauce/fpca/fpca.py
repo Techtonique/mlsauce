@@ -1,27 +1,41 @@
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA, TruncatedSVD, FactorAnalysis, FastICA, NMF, KernelPCA
+from sklearn.manifold import MDS, Isomap, LocallyLinearEmbedding
 from sklearn.preprocessing import StandardScaler
 from sklearn.base import BaseEstimator, RegressorMixin
 from statsmodels.tsa.ar_model import AutoReg
 from sklearn.utils.validation import check_is_fitted, check_array
-from typing import Optional, Literal, Union
+from typing import Optional, Literal, Union, Any
 import matplotlib.pyplot as plt
 
 
 class FunctionalForecaster(BaseEstimator, RegressorMixin):
     """
-    Functional time series forecaster using Functional Principal Component Regression (FPCR).
+    Functional time series forecaster using dimensionality reduction and regression.
     
     Core approach:
-    1. Reduce dimensionality with PCA
+    1. Reduce dimensionality with various methods
     2. Run rolling regression on the reduced features  
     3. Forecast the rolling regression coefficients
     
     Parameters
     ----------
     n_components : int, default=8
-        Number of principal components to extract.
+        Number of components to extract.
+    reduction_method : str, default='pca'
+        Dimensionality reduction method. Options:
+        - 'pca': Principal Component Analysis
+        - 'kernel_pca': Kernel Principal Component Analysis
+        - 'truncated_svd': Truncated SVD
+        - 'factor_analysis': Factor Analysis
+        - 'fast_ica': Fast Independent Component Analysis
+        - 'nmf': Non-negative Matrix Factorization
+        - 'mds': Multidimensional Scaling
+        - 'isomap': Isomap
+        - 'lle': Locally Linear Embedding
+    reduction_params : dict, optional
+        Additional parameters for the reduction method.
     rolling_window : int, optional
         Window size for rolling regression. If None, uses full training set.
     forecast_method : {'ar', 'last_value'}, default='ar'
@@ -31,12 +45,32 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
     def __init__(
         self,
         n_components: int = 8,
+        reduction_method: str = 'pca',
+        reduction_params: Optional[dict] = None,
         rolling_window: Optional[int] = None,
         forecast_method: Literal['ar', 'last_value'] = 'ar'
     ):
         self.n_components = n_components
+        self.reduction_method = reduction_method
+        self.reduction_params = reduction_params or {}
         self.rolling_window = rolling_window
         self.forecast_method = forecast_method
+        
+        # Available reduction methods
+        self._reduction_methods = {
+            'pca': PCA,
+            'kernel_pca': KernelPCA,
+            'truncated_svd': TruncatedSVD,
+            'factor_analysis': FactorAnalysis,
+            'fast_ica': FastICA,
+            'nmf': NMF,
+            'mds': MDS,
+            'isomap': Isomap,
+            'lle': LocallyLinearEmbedding
+        }
+        
+        if reduction_method not in self._reduction_methods:
+            raise ValueError(f"reduction_method must be one of {list(self._reduction_methods.keys())}")
         
     def fit(self, X: Union[np.ndarray, pd.DataFrame]) -> 'FunctionalForecaster':
         """
@@ -60,13 +94,37 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         self.X_ = X
         self.n_samples_, self.n_points_ = X.shape
         
-        # 1. Reduce dimensionality with PCA
+        # 1. Reduce dimensionality with chosen method
         self.scaler_ = StandardScaler()
         X_scaled = self.scaler_.fit_transform(X)
         
-        self.pca_ = PCA(n_components=self.n_components)
-        self.reduced_features_ = self.pca_.fit_transform(X_scaled)  # (n_samples, n_components)
-        self.components_ = self.pca_.components_  # (n_components, n_points) - principal axes
+        # Initialize reduction method
+        reduction_class = self._reduction_methods[self.reduction_method]
+        
+        # Special handling for KernelPCA
+        if self.reduction_method == 'kernel_pca':
+            # Set default kernel if not provided
+            if 'kernel' not in self.reduction_params:
+                self.reduction_params['kernel'] = 'rbf'
+            if 'fit_inverse_transform' not in self.reduction_params:
+                self.reduction_params['fit_inverse_transform'] = True
+        
+        self.reducer_ = reduction_class(n_components=self.n_components, **self.reduction_params)
+        
+        # Fit and transform
+        self.reduced_features_ = self.reducer_.fit_transform(X_scaled)
+        
+        # Get components if available (for reconstruction)
+        if hasattr(self.reducer_, 'components_'):
+            self.components_ = self.reducer_.components_
+        elif hasattr(self.reducer_, 'inverse_transform'):
+            # For methods without explicit components, use inverse transform
+            identity_matrix = np.eye(self.n_components)
+            self.components_ = self.reducer_.inverse_transform(identity_matrix).T
+        else:
+            # For methods without reconstruction capability
+            self.components_ = None
+            print(f"Warning: {self.reduction_method} doesn't support reconstruction")
         
         # 2. Run rolling regression on reduced features
         if self.rolling_window is not None:
@@ -138,9 +196,14 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
             else:  # last_value
                 forecasted_coefs[:, comp] = coef_series[-1, comp]
         
-        # Reconstruct using forecasted coefficients and principal components
-        forecasts_scaled = forecasted_coefs @ self.components_
-        forecasts = self.scaler_.inverse_transform(forecasts_scaled)
+        # Reconstruct using forecasted coefficients and components
+        if self.components_ is not None:
+            forecasts_scaled = forecasted_coefs @ self.components_
+            forecasts = self.scaler_.inverse_transform(forecasts_scaled)
+        else:
+            # For methods without reconstruction, use the last known coefficients
+            forecasts = np.tile(self.X_[-1], (steps, 1))
+            print(f"Warning: Using last known values for {self.reduction_method} (no reconstruction)")
         
         return forecasts
     
@@ -163,21 +226,30 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
                 forecasted_features[:, comp] = self.reduced_features_[-1, comp]
         
         # Reconstruct using coefficient matrix
-        forecasts_scaled = forecasted_features @ self.coefs_.T
-        forecasts = self.scaler_.inverse_transform(forecasts_scaled)
+        if self.components_ is not None:
+            forecasts_scaled = forecasted_features @ self.coefs_.T
+            forecasts = self.scaler_.inverse_transform(forecasts_scaled)
+        else:
+            # For methods without reconstruction, use the last known values
+            forecasts = np.tile(self.X_[-1], (steps, 1))
+            print(f"Warning: Using last known values for {self.reduction_method} (no reconstruction)")
         
         return forecasts
     
     def plot_components(self, n_plot: int = 3) -> None:
-        """Plot functional principal components."""
+        """Plot functional components."""
         if not hasattr(self, 'components_'):
             raise ValueError("Model must be fitted before plotting components.")
+        
+        if self.components_ is None:
+            print(f"Components not available for {self.reduction_method}")
+            return
         
         plt.figure(figsize=(12, 6))
         for i in range(min(n_plot, self.n_components)):
             plt.plot(self.components_[i], label=f'Component {i+1}', linewidth=2)
         
-        plt.title(f'Functional Principal Components (n_components={self.n_components})')
+        plt.title(f'{self.reduction_method.upper()} Components (n_components={self.n_components})')
         plt.xlabel('Domain Point')
         plt.ylabel('Component Value')
         plt.legend()
@@ -228,6 +300,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
         """Get information about the fitted model."""
         info = {
             'n_components': self.n_components,
+            'reduction_method': self.reduction_method,
             'rolling_window': self.rolling_window,
             'forecast_method': self.forecast_method,
             'is_fitted': getattr(self, 'is_fitted_', False)
@@ -237,7 +310,7 @@ class FunctionalForecaster(BaseEstimator, RegressorMixin):
             info.update({
                 'n_samples': len(self.reduced_features_),
                 'n_points': self.n_points_,
-                'explained_variance_ratio': self.pca_.explained_variance_ratio_.tolist()
+                'explained_variance_ratio': getattr(self.reducer_, 'explained_variance_ratio_', None)
             })
         
         return info
