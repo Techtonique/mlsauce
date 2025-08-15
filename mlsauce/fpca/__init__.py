@@ -3,4 +3,4 @@ try:
 except ImportError as e:
     print(f"Could not import GenericFunctionalForecaster: {e}")
 
-__all__ = ["GenericFunctionalForecaster"] 
+__all__ = ["GenericFunctionalForecaster"]

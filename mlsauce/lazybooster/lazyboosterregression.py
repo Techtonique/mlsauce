@@ -18,9 +18,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.base import RegressorMixin
-from sklearn.metrics import (
-    r2_score
-)
+from sklearn.metrics import r2_score
 from .config import REGRESSORS
 from ..booster import GenericBoostingRegressor
 
@@ -85,6 +83,7 @@ def get_card_split(df, cols, n=11):
 
 def adjusted_rsquared(r2, n, p):
     return 1 - (1 - r2) * ((n - 1) / (n - p - 1))
+
 
 def root_mean_squared_error(y_true, y_pred):
     return np.sqrt(np.mean((y_true - y_pred) ** 2))
@@ -205,7 +204,7 @@ class LazyBoostingRegressor(RegressorMixin):
             y_test : array-like,
                 Testing vectors, where rows is the number of samples
                 and columns is the number of features.
-            
+
             hist: bool, optional (default=False)
                 When set to True, the model is a HistGenericBoostingRegressor.
 
@@ -351,13 +350,17 @@ class LazyBoostingRegressor(RegressorMixin):
                         if hist is False:
 
                             model = GenericBoostingRegressor(
-                                base_model=regr(), verbose=self.verbose, **kwargs
+                                base_model=regr(),
+                                verbose=self.verbose,
+                                **kwargs,
                             )
-                        
+
                         else:
 
                             model = HistGenericBoostingRegressor(
-                                base_model=regr(), verbose=self.verbose, **kwargs
+                                base_model=regr(),
+                                verbose=self.verbose,
+                                **kwargs,
                             )
 
                         model.fit(X_train, y_train.ravel())
@@ -424,7 +427,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         y_test,
                         use_preprocessing=True,
                         preprocessor=preprocessor,
-                        **kwargs
+                        **kwargs,
                     )
                     for name, model in tqdm(self.regressors)
                 )
@@ -467,14 +470,18 @@ class LazyBoostingRegressor(RegressorMixin):
                 for name, regr in tqdm(self.regressors):  # do parallel exec
                     start = time.time()
                     try:
-                        
+
                         if hist is False:
                             model = GenericBoostingRegressor(
-                                base_model=regr(), verbose=self.verbose, **kwargs
+                                base_model=regr(),
+                                verbose=self.verbose,
+                                **kwargs,
                             )
                         else:
                             model = HistGenericBoostingRegressor(
-                                base_model=regr(), verbose=self.verbose, **kwargs
+                                base_model=regr(),
+                                verbose=self.verbose,
+                                **kwargs,
                             )
 
                         if self.verbose > 0:
@@ -531,7 +538,7 @@ class LazyBoostingRegressor(RegressorMixin):
                         X_test,
                         y_test,
                         use_preprocessing=False,
-                        **kwargs
+                        **kwargs,
                     )
                     for name, model in tqdm(self.regressors)
                 )
@@ -647,7 +654,7 @@ class LazyBoostingRegressor(RegressorMixin):
         use_preprocessing=False,
         preprocessor=None,
         hist=False,
-        **kwargs
+        **kwargs,
     ):
         """
         Function to train a single regression model and return its results.

@@ -93,10 +93,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
-        
+
         hist: bool
-            whether to use histogram features or not 
-        
+            whether to use histogram features or not
+
         bins: int or str
             number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
@@ -272,10 +272,10 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
-        
+
         if self.hist == True:
             X, self.hist_bins_ = get_histo_features(X)
-        
+
         if isinstance(y, pd.Series):
             y = y.values.ravel()
         else:
@@ -345,7 +345,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
             method: str
                 `None`, or 'splitconformal', 'localconformal'
                 prediction (if you specify `return_pi = True`)
-            
+
             histo: bool
                 whether to use histogram features or not
 
@@ -359,7 +359,7 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
 
         if isinstance(X, pd.DataFrame):
             X = X.values
-        
+
         if self.hist == True:
             X = get_histo_features(X, bins=self.hist_bins_)
 
@@ -402,7 +402,8 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         # print(f"\n in predict self.obj: {self.obj} \n")
         # try:
         return boosterc.predict_booster_regressor(
-            self.obj, np.asarray(X, order="C"),
+            self.obj,
+            np.asarray(X, order="C"),
             backend=self.backend,
         )
         # except ValueError:
@@ -524,12 +525,12 @@ class GenericBoostingRegressor(LSBoostRegressor):
         weights_distr: str
             distribution of weights for constructing the model's hidden layer;
             either 'uniform' or 'gaussian'
-        
+
         hist: bool
             whether to use histogram features or not
-        
+
         bins: int or str
-            number of bins for histogram features (same as numpy.histogram, default is 'auto')                
+            number of bins for histogram features (same as numpy.histogram, default is 'auto')
 
     """
 

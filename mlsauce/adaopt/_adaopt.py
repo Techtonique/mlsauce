@@ -81,7 +81,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
 
         cluster_scaling: str
             scaling method for clustering: currently 'standard', 'robust', 'minmax'
-        
+
         backend: str
             backend for parallel processing: "cpu" or "gpu" or "tpu"
 
@@ -297,7 +297,7 @@ class AdaOpt(BaseEstimator, ClassifierMixin):
                 type_dist=self.type_dist,
                 cache=self.cache,
                 seed=self.seed,
-                backend=self.backend,   
+                backend=self.backend,
             )
 
         # parallel: self.n_jobs is not None

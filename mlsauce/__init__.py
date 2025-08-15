@@ -1,4 +1,4 @@
-try: 
+try:
     from .adaopt import AdaOpt
 except ImportError as e:
     print(f"Could not import some modules: {e}")
@@ -14,7 +14,11 @@ except ImportError as e:
     print(f"Could not import some modules: {e}")
 
 try:
-    from .lazybooster import LazyBoostingClassifier, LazyBoostingRegressor, LazyBoostingMTS
+    from .lazybooster import (
+        LazyBoostingClassifier,
+        LazyBoostingRegressor,
+        LazyBoostingMTS,
+    )
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
@@ -23,7 +27,7 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
-try:        
+try:
     from .datasets import download
 except ImportError as e:
     print(f"Could not import some modules: {e}")
@@ -33,7 +37,7 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
-try: 
+try:
     from .kernelridge import KRLSRegressor
 except ImportError as e:
     print(f"Could not import some modules: {e}")
@@ -63,6 +67,10 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
+try: 
+    from .rollingorigin import RollingOriginForecaster
+except ImportError as e:
+    print(f"Could not import RollingOriginForecaster: {e}")
 # from .encoders import corrtarget_encoder
 
 __all__ = [
@@ -82,6 +90,7 @@ __all__ = [
     "MultiTaskRegressor",
     "IsotonicRegressor",
     "GenericFunctionalForecaster",
+    "RollingOriginForecaster",
     # Other imports
     # "corrtarget_encoder",
     "download",
@@ -90,4 +99,3 @@ __all__ = [
     "set_config",
     "config_context",
 ]
-
