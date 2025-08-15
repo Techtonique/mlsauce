@@ -6,11 +6,11 @@
 
 import numpy as np
 import pandas as pd
-try: 
+
+try:
     from sklearn.metrics import mean_pinball_loss
 except ImportError:
     pass
-
 
 
 # (block) bootstrap
@@ -45,7 +45,7 @@ def bootstrap(x, h, block_size=None, seed=123):
             start_index = np.random.randint(
                 0, time_series_length - block_size + 1
             )
-            block_indices = all_indices[start_index: start_index + block_size]
+            block_indices = all_indices[start_index : start_index + block_size]
             indices.extend(block_indices)
 
     else:  # block_size is None
@@ -139,7 +139,7 @@ def create_lags(x, k, n=None):
 
     x_ = x[::-1]
 
-    z = [x_[i: (n_k + i + 1)] for i in range(k_)]
+    z = [x_[i : (n_k + i + 1)] for i in range(k_)]
 
     if n is None:
         return np.column_stack(z)
@@ -155,7 +155,7 @@ def create_lags(x, k, n=None):
 def create_train_inputs(X, k):
     n_k = X.shape[0] - k
 
-    z = [X[i: n_k + i, :] for i in range(1, (k + 1))]
+    z = [X[i : n_k + i, :] for i in range(1, (k + 1))]
 
     return (X[0:n_k, :], np.column_stack(z))
 
@@ -254,4 +254,3 @@ def mean_errors(
             return np.mean(np.square(diff))
         elif scoring == "mean_pinball_loss":
             return mean_pinball_loss(actual, pred)
-

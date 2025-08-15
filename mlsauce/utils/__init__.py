@@ -8,7 +8,7 @@ from .misc.misc import (
     check_and_install,
     is_multitask_estimator,
     convert_df_to_numeric,
-    dict_to_dataframe_series
+    dict_to_dataframe_series,
 )
 from .progress_bar import Progbar
 from .get_beta import get_beta
@@ -33,5 +33,5 @@ __all__ = [
     "winkler_score",
     "coverage",
     "convert_df_to_numeric",
-    "dict_to_dataframe_series"
+    "dict_to_dataframe_series",
 ]

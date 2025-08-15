@@ -5,6 +5,7 @@ from sklearn.datasets import load_diabetes
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from time import time
+
 try:
     import jax.numpy as jnp
     from jax import device_put
@@ -12,6 +13,7 @@ try:
 except ImportError:
     pass
 from ..utils.get_beta import get_beta
+
 
 def soft_thresholding(z, gamma):
     return np.sign(z) * np.maximum(np.abs(z) - gamma, 0)
@@ -21,7 +23,9 @@ def l1_norm(x):
     return np.sum(np.abs(x))
 
 
-def fit_elasticnet(X_train, y_train, lam=1, alpha=0.5, tol=1e-5, max_iter=50, backend="cpu"):
+def fit_elasticnet(
+    X_train, y_train, lam=1, alpha=0.5, tol=1e-5, max_iter=50, backend="cpu"
+):
 
     lam_alpha = lam * alpha
 
@@ -33,7 +37,9 @@ def fit_elasticnet(X_train, y_train, lam=1, alpha=0.5, tol=1e-5, max_iter=50, ba
 
     centered_y_train = y_train - y_train_mean
 
-    beta_prev = get_beta(scaled_X_train, centered_y_train, backend=backend) # /!\ this is key
+    beta_prev = get_beta(
+        scaled_X_train, centered_y_train, backend=backend
+    )  # /!\ this is key
 
     p_train = X_train.shape[1]
     beta_prevs = np.repeat(beta_prev, repeats=X_train.shape[1]).reshape(
@@ -88,9 +94,12 @@ def predict_elasticnet(X_test, fitted_elasticnet, backend="cpu"):
     if backend == "cpu":
         return (
             fitted_elasticnet.y_train_mean
-            + fitted_elasticnet.scaler.transform(X_test) @ fitted_elasticnet.coef_
+            + fitted_elasticnet.scaler.transform(X_test)
+            @ fitted_elasticnet.coef_
         )
     X_test_ = fitted_elasticnet.scaler.transform(X_test)
     device_put(X_test_)
     device_put(fitted_elasticnet.coef_)
-    return (fitted_elasticnet.y_train_mean + jnp.matmul(X_test_, fitted_elasticnet.coef_))
+    return fitted_elasticnet.y_train_mean + jnp.matmul(
+        X_test_, fitted_elasticnet.coef_
+    )

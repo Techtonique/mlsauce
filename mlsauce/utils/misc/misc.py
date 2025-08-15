@@ -82,6 +82,7 @@ def cluster(
             clusterer.predict(scaled_X).reshape(-1, 1)
         ).toarray()
 
+
 def convert_df_to_numeric(df):
     """
     Convert all columns of DataFrame to numeric type using astype with loop.
@@ -177,15 +178,16 @@ def is_multitask_estimator(estimator):
         return estimator._get_tags().get("multioutput", False)
     return False
 
+
 def check_and_install(package_name):
     """Check if a package is installed; if not, install it."""
     try:
         # Check if the package is already installed by importing it
         importlib.import_module(package_name)
-        #print(f"'{package_name}' is already installed.")
+        # print(f"'{package_name}' is already installed.")
     except ImportError:
-        #print(f"'{package_name}' not found. Installing...")
+        # print(f"'{package_name}' not found. Installing...")
         install_package(package_name)
         # Retry importing the package after installation
         importlib.import_module(package_name)
-        #print(f"'{package_name}' has been installed successfully.")
+        # print(f"'{package_name}' has been installed successfully.")

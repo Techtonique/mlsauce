@@ -1,4 +1,4 @@
-try: 
+try:
     from .lazyboosterclassif import LazyBoostingClassifier
     from .lazyboosterregression import LazyBoostingRegressor
     from .lazyboostermts import LazyBoostingMTS

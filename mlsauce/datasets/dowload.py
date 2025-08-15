@@ -6,7 +6,7 @@ def download(
     pkgname="MASS",
     dataset="Boston",
     source="https://cran.r-universe.dev/",
-    **kwargs
+    **kwargs,
 ):
     URL = source + pkgname + "/data/" + dataset + "/json"
     res = requests.get(URL)
