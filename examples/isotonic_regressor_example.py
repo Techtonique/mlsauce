@@ -15,7 +15,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 # Import the IsotonicRegressor from mlsauce
 try:
-    from mlsauce.isotonicregressor import IsotonicRegressor
+    from mlsauce.isotonicregression import IsotonicRegressor
 except ImportError:
     print("Please install mlsauce first: pip install mlsauce")
     exit(1)

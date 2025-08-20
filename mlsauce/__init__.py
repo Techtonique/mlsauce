@@ -58,7 +58,7 @@ except ImportError as e:
     print(f"Could not import some modules: {e}")
 
 try:
-    from .isotonicregressor import IsotonicRegressor
+    from .isotonicregression import IsotonicRegressor
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
@@ -68,10 +68,15 @@ except ImportError as e:
     print(f"Could not import some modules: {e}")
 
 try: 
-    from .rollingorigin import RollingOriginForecaster
+    from .rollingoriginregression import RollingOriginForecaster
 except ImportError as e:
     print(f"Could not import RollingOriginForecaster: {e}")
 # from .encoders import corrtarget_encoder
+
+try: 
+    from .penalizedcv import penalized_cross_val_score
+except ImportError as e:
+    print(f"Could not import penalized_cross_val_score: {e}")
 
 __all__ = [
     "AdaOpt",
@@ -83,6 +88,7 @@ __all__ = [
     "KRLSRegressor",
     "LassoRegressor",
     "LSBoostRegressor",
+    "LSTMRegressor",
     "RidgeRegressor",
     "LazyBoostingClassifier",
     "LazyBoostingMTS",
@@ -98,4 +104,5 @@ __all__ = [
     "get_config",
     "set_config",
     "config_context",
+    "penalized_cross_val_score"
 ]
