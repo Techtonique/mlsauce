@@ -1,6 +1,6 @@
+from sklearn.base import clone
 import numpy as np
 from sklearn.model_selection import cross_val_score
-from sklearn.base import is_classifier
 
 def penalized_cross_val_score(estimator, X, y, param_dict, cv=5,
                               scorer=None, penalty_strength=0.0, penalty_type='std'):
@@ -29,14 +29,15 @@ def penalized_cross_val_score(estimator, X, y, param_dict, cv=5,
     if missing_params:
         raise ValueError(f"Estimator does not have parameters: {', '.join(missing_params)}")
     
-    # Set the parameters on a clone of the estimator to avoid side effects
-    current_estimator = estimator.set_params(**param_dict)
+    # Clone the estimator to avoid side effects
+    current_estimator = clone(estimator)
+    current_estimator.set_params(**param_dict)
     
     # Perform cross-validation
     cv_scores = cross_val_score(current_estimator, X, y, cv=cv, scoring=scorer)
     
     # Check if cv_scores are valid
-    if cv_scores.size == 0:
+    if len(cv_scores) == 0:
         raise ValueError("Cross-validation scores are empty. Please check your dataset or cross-validation setup.")
     
     mean_score = np.mean(cv_scores)
@@ -45,10 +46,13 @@ def penalized_cross_val_score(estimator, X, y, param_dict, cv=5,
     if penalty_type == 'std':
         penalty_term = np.std(cv_scores)
     elif penalty_type == 'max':
-        penalty_term = np.max(cv_scores) # This will be a large positive number for good scores
+        penalty_term = np.max(cv_scores)  # This will penalize high (best) fold scores
     elif penalty_type == 'range':
-        penalty_term = np.ptp(cv_scores) # Peak-to-peak (max - min)
+        penalty_term = np.ptp(cv_scores)  # Peak-to-peak (max - min)
     else:
-        raise ValueError("penalty_type must be 'std', 'max', or 'range'")    
-    # Apply the penalty. 
-    return mean_score - (penalty_strength * penalty_term)
+        raise ValueError("penalty_type must be 'std', 'max', or 'range'")
+    
+    # Apply the penalty (adjusted for strength)
+    penalized_score = mean_score - (penalty_strength * penalty_term)
+    
+    return penalized_score
