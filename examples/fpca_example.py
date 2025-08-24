@@ -1,245 +1,128 @@
-#!/usr/bin/env python3
-"""
-Example demonstrating the use of GenericFunctionalForecaster.
-
-This example shows how to use the GenericFunctionalForecaster class for
-functional time series forecasting with different PCA variants and regression methods.
-"""
-
+# Import required libraries
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression, RidgeCV
-from sklearn.ensemble import RandomForestRegressor
+import mlsauce as ms
+from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import Ridge
 
-# Import the GenericFunctionalForecaster from mlsauce
-try:
-    from mlsauce.fpca import GenericFunctionalForecaster
-except ImportError:
-    print("Please install mlsauce first: pip install mlsauce")
-    exit(1)
+# Create synthetic functional time series data
+np.random.seed(42)
+n_samples = 100
+n_points = 50
 
+# Create time points
+t = np.linspace(0, 10, n_points)
 
-def generate_functional_data(n_samples=100, n_points=50, noise=0.1):
-    """Generate synthetic functional time series data."""
-    np.random.seed(42)
-    
-    # Create time grid
-    grid = np.linspace(0, 10, n_points)
-    
-    # Generate functional data with time-varying patterns
-    X = np.zeros((n_samples, n_points))
-    
-    for i in range(n_samples):
-        # Base pattern with time-varying amplitude and phase
-        amplitude = 1 + 0.5 * np.sin(i * 0.1)  # Time-varying amplitude
-        phase = i * 0.05  # Time-varying phase
-        frequency = 1 + 0.2 * np.sin(i * 0.02)  # Time-varying frequency
-        
-        # Generate functional curve
-        curve = amplitude * np.sin(frequency * grid + phase) + \
-                0.3 * np.sin(2 * frequency * grid + phase) + \
-                0.1 * np.sin(3 * frequency * grid + phase)
-        
-        # Add noise
-        X[i, :] = curve + noise * np.random.randn(n_points)
-    
-    return X, grid
+# Create basis functions
+def create_basis_function(t, center, width):
+    return np.exp(-(t - center)**2 / (2 * width**2))
 
+# Create synthetic functional data with trend and seasonality
+X = np.zeros((n_samples, n_points))
+for i in range(n_samples):
+    # Trend component
+    trend = 0.1 * i * np.sin(0.5 * t)
+    
+    # Seasonal component
+    seasonal = 2 * create_basis_function(t, 3 + 0.05*i, 1.5) + \
+               1.5 * create_basis_function(t, 6 + 0.03*i, 1.2)
+    
+    # Random noise
+    noise = 0.3 * np.random.normal(size=n_points)
+    
+    # Combine components
+    X[i] = trend + seasonal + noise
 
-def plot_functional_data(X, grid, title="Functional Time Series Data"):
-    """Plot functional time series data."""
-    plt.figure(figsize=(12, 6))
-    
-    # Plot all curves
-    for i in range(min(20, len(X))):  # Plot first 20 curves
-        plt.plot(grid, X[i, :], alpha=0.3, linewidth=1)
-    
-    # Plot mean curve
-    mean_curve = X.mean(axis=0)
-    plt.plot(grid, mean_curve, 'r-', linewidth=3, label='Mean Curve')
-    
-    plt.title(title)
-    plt.xlabel('Domain')
-    plt.ylabel('Value')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    plt.show()
+# Split into train and test
+train_size = 80
+X_train, X_test = X[:train_size], X[train_size:]
 
+# Initialize and fit the forecaster
+forecaster = ms.GenericFunctionalForecaster(
+    n_components=5,
+    reduction_method='pca',
+    rolling_window=None,
+    forecast_method='ar',
+    regressor=Ridge(alpha=1.0),
+    regressor_params={'alpha': 0.5}  # This will override the alpha in the regressor
+)
 
-def compare_forecasting_methods(X, grid, n_components=5):
-    """Compare different forecasting methods."""
-    print("Comparing different forecasting methods...")
-    print("=" * 50)
-    
-    # Split data into training and testing
-    train_size = int(0.8 * len(X))
-    X_train, X_test = X[:train_size], X[train_size:]
-    
-    # Test different configurations
-    configurations = [
-        {
-            'name': 'PCA + Ridge',
-            'pca_method': 'pca',
-            'regression_method': 'ridge',
-            'pca_params': {},
-            'regression_params': {'alphas': np.logspace(-3, 3, 10)}
-        },
-        {
-            'name': 'Kernel PCA + Linear',
-            'pca_method': 'kernel_pca',
-            'regression_method': 'linear',
-            'pca_params': {},
-            'regression_params': {},
-            'kernel_params': {'kernel': 'rbf'}
-        },
-        {
-            'name': 'Sparse PCA + Lasso',
-            'pca_method': 'sparse_pca',
-            'regression_method': 'lasso',
-            'pca_params': {'alpha': 0.1},
-            'regression_params': {'alphas': np.logspace(-3, 3, 10)}
-        }
-    ]
-    
-    results = {}
-    
-    for config in configurations:
-        print(f"\nTesting: {config['name']}")
-        print("-" * 30)
-        
-        # Create forecaster
-        forecaster = GenericFunctionalForecaster(
-            n_components=n_components,
-            pca_method=config['pca_method'],
-            regression_method=config['regression_method'],
-            pca_params=config.get('pca_params', {}),
-            regression_params=config.get('regression_params', {}),
-            kernel_params=config.get('kernel_params', {})
-        )
-        
-        # Fit the model
-        forecaster.fit(X_train, grid)
-        
-        # Get model info
-        info = forecaster.get_model_info()
-        print(f"Model info: {info}")
-        
-        # Test both forecasting methods
-        for method in ['ar', 'coef_ar']:
-            try:
-                # Forecast
-                forecast_steps = len(X_test)
-                forecasts = forecaster.forecast(steps=forecast_steps, method=method)
-                
-                # Calculate error
-                mse = np.mean((X_test - forecasts) ** 2)
-                mae = np.mean(np.abs(X_test - forecasts))
-                
-                print(f"  {method.upper()} method - MSE: {mse:.4f}, MAE: {mae:.4f}")
-                
-                # Store results
-                key = f"{config['name']}_{method}"
-                results[key] = {
-                    'forecasts': forecasts,
-                    'mse': mse,
-                    'mae': mae,
-                    'forecaster': forecaster
-                }
-                
-            except Exception as e:
-                print(f"  {method.upper()} method failed: {e}")
-    
-    return results, X_test
+# Fit the model
+forecaster.fit(X_train)
 
+# Get model information
+print("Model Information:")
+info = forecaster.get_model_info()
+for key, value in info.items():
+    print(f"{key}: {value}")
 
-def plot_forecast_comparison(results, X_test, grid):
-    """Plot forecast comparison."""
-    plt.figure(figsize=(15, 10))
-    
-    # Plot actual test data
-    plt.subplot(2, 2, 1)
-    for i in range(min(5, len(X_test))):
-        plt.plot(grid, X_test[i, :], 'k-', alpha=0.7, linewidth=1)
-    plt.title('Actual Test Data')
-    plt.xlabel('Domain')
-    plt.ylabel('Value')
-    plt.grid(True, alpha=0.3)
-    
-    # Plot forecasts for different methods
-    plot_idx = 2
-    for key, result in results.items():
-        if plot_idx <= 4:
-            plt.subplot(2, 2, plot_idx)
-            
-            # Plot actual (first curve)
-            plt.plot(grid, X_test[0, :], 'k-', linewidth=2, label='Actual')
-            
-            # Plot forecast (first curve)
-            plt.plot(grid, result['forecasts'][0, :], 'r--', linewidth=2, label='Forecast')
-            
-            plt.title(f'{key}\nMSE: {result["mse"]:.4f}')
-            plt.xlabel('Domain')
-            plt.ylabel('Value')
-            plt.legend()
-            plt.grid(True, alpha=0.3)
-            plot_idx += 1
-    
-    plt.tight_layout()
-    plt.show()
+# Plot components
+forecaster.plot_components(n_plot=5)
 
+# Plot reduced features
+forecaster.plot_reduced_features(n_plot=4)
 
-def demonstrate_components_and_scores(X, grid):
-    """Demonstrate component and score visualization."""
-    print("\nDemonstrating component and score visualization...")
-    print("=" * 50)
-    
-    # Create forecaster with PCA
-    forecaster = GenericFunctionalForecaster(
-        n_components=6,
-        pca_method='pca',
-        regression_method='ridge'
-    )
-    
-    # Fit the model
-    forecaster.fit(X, grid)
-    
-    # Plot components
-    forecaster.plot_components(n_plot=3)
-    
-    # Plot scores
-    forecaster.plot_scores(n_plot=4)
-    
-    # Get model info
-    info = forecaster.get_model_info()
-    print(f"Model information: {info}")
+# Forecast future curves
+forecast_steps = len(X_test)
+forecasts = forecaster.forecast(steps=forecast_steps)
 
+# Plot forecasts
+forecaster.plot_forecast(actual=X_test, steps=forecast_steps)
 
-def main():
-    """Main function demonstrating GenericFunctionalForecaster usage."""
-    print("GenericFunctionalForecaster Example")
-    print("=" * 50)
-    
-    # Generate functional data
-    X, grid = generate_functional_data(n_samples=100, n_points=50, noise=0.1)
-    
-    print(f"Generated functional data: {X.shape}")
-    print(f"Grid points: {len(grid)}")
-    print()
-    
-    # Plot the data
-    plot_functional_data(X, grid)
-    
-    # Compare forecasting methods
-    results, X_test = compare_forecasting_methods(X, grid, n_components=5)
-    
-    # Plot forecast comparison
-    plot_forecast_comparison(results, X_test, grid)
-    
-    # Demonstrate components and scores
-    demonstrate_components_and_scores(X, grid)
-    
-    print("\nExample completed!")
+# Calculate forecast error
+mse = mean_squared_error(X_test.flatten(), forecasts.flatten())
+print(f"Mean Squared Error: {mse:.4f}")
 
+# Try a different reduction method
+print("\nTrying KPCA reduction...")
+forecaster_nmf = ms.GenericFunctionalForecaster(
+    n_components=5,
+    reduction_method='kernel_pca',
+    rolling_window=None,
+    forecast_method='ar',
+    regressor=Ridge(alpha=0.5)
+)
 
-if __name__ == "__main__":
-    main() 
+forecaster_nmf.fit(X_train)
+forecasts_nmf = forecaster_nmf.forecast(steps=forecast_steps)
+mse_nmf = mean_squared_error(X_test.flatten(), forecasts_nmf.flatten())
+print(f"KPCA Mean Squared Error: {mse_nmf:.4f}")
+
+# Compare with a simple benchmark (last observation)
+last_observation_forecast = np.tile(X_train[-1], (forecast_steps, 1))
+mse_benchmark = mean_squared_error(X_test.flatten(), last_observation_forecast.flatten())
+print(f"Benchmark (last observation) MSE: {mse_benchmark:.4f}")
+
+# Plot comparison
+plt.figure(figsize=(12, 6))
+plt.plot(X_test.flatten(), 'b-', alpha=0.7, label='Actual')
+plt.plot(forecasts.flatten(), 'r--', alpha=0.7, label='PCA Forecast')
+plt.plot(forecasts_nmf.flatten(), 'g-.', alpha=0.7, label='NMF Forecast')
+plt.plot(last_observation_forecast.flatten(), 'm:', alpha=0.7, label='Last Observation')
+plt.title('Forecast Comparison')
+plt.xlabel('Time Point Index')
+plt.ylabel('Value')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+
+# Try a different reduction method
+print("\nTrying KPCA reduction...")
+forecaster_nmf = ms.GenericFunctionalForecaster(
+    n_components=5,
+    reduction_method='kernel_pca',
+    rolling_window=10,
+    forecast_method='ar',
+    regressor=Ridge(alpha=0.5)
+)
+
+forecaster_nmf.fit(X_train)
+forecasts_nmf = forecaster_nmf.forecast(steps=forecast_steps)
+mse_nmf = mean_squared_error(X_test.flatten(), forecasts_nmf.flatten())
+print(f"KPCA Mean Squared Error: {mse_nmf:.4f}")
+
+# Compare with a simple benchmark (last observation)
+last_observation_forecast = np.tile(X_train[-1], (forecast_steps, 1))
+mse_benchmark = mean_squared_error(X_test.flatten(), last_observation_forecast.flatten())
+print(f"Benchmark (last observation) MSE: {mse_benchmark:.4f}")

@@ -1,6 +1,6 @@
-import mlsauce as ms 
 import pandas as pd
 import numpy as np
+import mlsauce as ms
 
 # Training data
 train_data = pd.DataFrame({
@@ -29,14 +29,20 @@ encoder = ms.RankTargetEncoder(
 
 # Step 1: Fit + Transform on training data
 print("Step 1: fit_transform on training data")
+print("train_data", train_data)
 train_encoded = encoder.fit_transform(train_data, y_train)
-print(train_encoded)
+print("train_encoded", train_encoded)
 
 # Step 2: Transform on new (test) data
 print("\nStep 2: transform on test data (unseen examples)")
+print("test_data", test_data)
 test_encoded = encoder.transform(test_data)
-print(test_encoded)
+print("test_encoded", test_encoded)
 
 # Bonus: see how categories were encoded
 print("\nLearned encodings for 'city':")
 print(encoder.get_category_mappings()['city'])
+
+# Show which columns were identified as categorical
+print(f"\nCategorical columns: {encoder.cat_columns_}")
+print(f"Non-categorical columns: {encoder.non_cat_columns_}")

@@ -45,6 +45,7 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
         self.ensemble_size = ensemble_size
         self.aggregate = aggregate
         self.random_state = random_state
+        self.cat_columns_ = []
         
         # Validate inputs
         if correlation_type not in ['spearman', 'kendall']:
@@ -116,6 +117,17 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
             regularized[cat] = (count * stat + self.shrinkage * global_stat) / (count + self.shrinkage)
         return regularized
 
+    def _identify_categorical_columns(self, X):
+        """Identify categorical columns in the DataFrame."""
+        cat_cols = []
+        for col in X.columns:
+            # Check if column is object type or has low cardinality
+            if (X[col].dtype == 'object' or 
+                X[col].dtype.name == 'category' or 
+                X[col].nunique() / len(X) < 0.05):  # heuristic for categorical
+                cat_cols.append(col)
+        return cat_cols
+
     def fit(self, X, y):
         """Fit the encoder using cross-validation to prevent leakage."""
         if not isinstance(X, pd.DataFrame):
@@ -133,11 +145,15 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
         self.feature_names_in_ = list(X.columns)
         self.y_mean_ = np.mean(y) if len(y) > 0 else 0.0
         self.category_mappings_ = {}
+        
+        # Identify categorical columns
+        self.cat_columns_ = self._identify_categorical_columns(X)
+        self.non_cat_columns_ = [col for col in X.columns if col not in self.cat_columns_]
 
         # Set up cross-validation
         kf = KFold(n_splits=self.n_folds, shuffle=True, random_state=self.random_state)
 
-        for col in X.columns:
+        for col in self.cat_columns_:
             if X[col].nunique() <= 1:
                 # Handle constant columns
                 self.category_mappings_[col] = {X[col].iloc[0]: self.y_mean_}
@@ -226,9 +242,11 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
                 X_encoded[col] = self.y_mean_
                 continue
                 
-            # Map categories to encodings, unseen categories get global mean
-            mappings = self.category_mappings_[col]
-            X_encoded[col] = X[col].map(mappings).fillna(self.y_mean_)
+            # Only encode categorical columns, leave others unchanged
+            if col in self.cat_columns_:
+                mappings = self.category_mappings_[col]
+                X_encoded[col] = X[col].map(mappings).fillna(self.y_mean_)
+            # Non-categorical columns are left as-is
 
         return X_encoded
 
