@@ -35,7 +35,7 @@ class bdist_wheel(_bdist_wheel):
         return python, abi, plat
 
 CYTHON_MIN_VERSION = version.parse("3.0.10")
-VERSION = "0.30.0"
+VERSION = "0.31.0"
 
 class clean(Command):
     user_options = [("all", "a", "")]

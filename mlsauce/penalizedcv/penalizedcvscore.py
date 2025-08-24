@@ -2,57 +2,99 @@ from sklearn.base import clone
 import numpy as np
 from sklearn.model_selection import cross_val_score
 
-def penalized_cross_val_score(estimator, X, y, param_dict, cv=5,
-                              scorer=None, penalty_strength=0.0, penalty_type='std'):
+
+def penalized_cross_val_score(
+    estimator,
+    X,
+    y,
+    param_dict,
+    cv=5,
+    scorer=None,
+    penalty_strength=0.1,
+    penalty_type="ci",
+    greater_is_better=False
+):
     """
-    Calculates a penalized cross-validation score.
+    Calculates a penalized cross-validation score that balances mean performance 
+    and result stability (low variability across folds).
 
     Parameters:
-    estimator: The scikit-learn-like estimator.
-    X, y: The training data.
-    param_dict: A dictionary of hyperparameters to set (e.g., {'alpha': 0.1, 'C': 1.0}).
-    cv: Number of cross-validation folds.
-    scorer: A scikit-learn scorer object (default None, uses estimator's default scoring).
-    penalty_strength: The strength of the penalty (e.g., 1.0, 0.5). 
-                      Controls how much to penalize instability or high scores.
-    penalty_type: Type of penalty to apply. 
-                 'std'  : Penalizes the standard deviation of the CV scores.
-                 'max'  : Penalizes the maximum (best) fold score.
-                 'range': Penalizes the range (max - min) of the CV scores.
+    -----------
+    estimator : sklearn estimator
+        Model to evaluate.
+    X, y : array-like
+        Training data.
+    param_dict : dict
+        Hyperparameters to set on the estimator.
+    cv : int, default=5
+        Number of cross-validation folds (must be >= 2).
+    scorer : callable or str, optional
+        Scikit-learn scorer (e.g., from sklearn.metrics.make_scorer).
+    penalty_strength : float, default=0.1
+        Multiplicative factor for the variability penalty.
+        penalty_strength=0.1 = penalize by up to 10% of mean score
+    penalty_type : {'std', 'max', 'range', 'ci'}
+        Type of variability to penalize:
+        - 'std': standard deviation of fold scores
+        - 'max': maximum deviation from mean across folds
+        - 'range': difference between best and worst fold
+        - 'ci': approximate 95% confidence interval width (2 * SEM)
+    greater_is_better : bool
+        Whether higher raw scores are better (e.g., accuracy=True, RMSE=False).
 
     Returns:
-    penalized_score: The mean CV score, adjusted by the chosen penalty.
+    --------
+    penalized_score : float
+        Mean CV score adjusted by penalty. Always "lower is better" in effect,
+        so unstable models are penalized.
     """
     
-    # Ensure that all parameters in the dictionary exist in the estimator
-    missing_params = [key for key in param_dict if not hasattr(estimator, key)]
+    if penalty_strength < 0:
+        raise ValueError("penalty_strength must be non-negative.")
+    
+    if cv < 2:
+        raise ValueError("cv must be at least 2.")
+    
+    # Validate parameters
+    estimator_params = estimator.get_params()
+    missing_params = [key for key in param_dict if key not in estimator_params]
     if missing_params:
         raise ValueError(f"Estimator does not have parameters: {', '.join(missing_params)}")
     
-    # Clone the estimator to avoid side effects
+    # Clone and configure estimator
     current_estimator = clone(estimator)
     current_estimator.set_params(**param_dict)
     
     # Perform cross-validation
     cv_scores = cross_val_score(current_estimator, X, y, cv=cv, scoring=scorer)
     
-    # Check if cv_scores are valid
     if len(cv_scores) == 0:
-        raise ValueError("Cross-validation scores are empty. Please check your dataset or cross-validation setup.")
+        raise ValueError("Cross-validation scores are empty.")
     
     mean_score = np.mean(cv_scores)
     
-    # Calculate the chosen penalty term
-    if penalty_type == 'std':
-        penalty_term = np.std(cv_scores)
-    elif penalty_type == 'max':
-        penalty_term = np.max(cv_scores)  # This will penalize high (best) fold scores
-    elif penalty_type == 'range':
-        penalty_term = np.ptp(cv_scores)  # Peak-to-peak (max - min)
+    # Compute variability measure
+    if penalty_type == "std":
+        variability_measure = np.std(cv_scores)
+    elif penalty_type == "max":
+        variability_measure = np.max(np.abs(cv_scores - mean_score))
+    elif penalty_type == "range":
+        variability_measure = np.ptp(cv_scores)  # max - min
+    elif penalty_type == "ci":
+        # Approximate 95% CI width: 2 * standard error of the mean
+        variability_measure = 2 * (np.std(cv_scores) / np.sqrt(len(cv_scores)))
     else:
-        raise ValueError("penalty_type must be 'std', 'max', or 'range'")
+        raise ValueError("penalty_type must be 'std', 'max', 'range', or 'ci'.")
     
-    # Apply the penalty (adjusted for strength)
-    penalized_score = mean_score - (penalty_strength * penalty_term)
+    # Scale penalty relative to mean score magnitude
+    if abs(mean_score) > 1e-10:  # avoid division by zero
+        normalized_penalty = penalty_strength * (variability_measure / abs(mean_score))
+    else:
+        normalized_penalty = penalty_strength * variability_measure
+        
+    # Apply penalty: make worse for instability
+    if greater_is_better:
+        return mean_score - normalized_penalty  # lower score = penalized
+    else:
+        return mean_score + normalized_penalty  # higher score = penalized
     
-    return penalized_score

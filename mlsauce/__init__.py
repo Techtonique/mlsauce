@@ -67,13 +67,18 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
-try: 
+try:
+    from .catencoder import RankTargetEncoder
+except ImportError as e:
+    print(f"Could not import RankTargetEncoder: {e}")
+
+try:
     from .rollingoriginregression import RollingOriginForecaster
 except ImportError as e:
     print(f"Could not import RollingOriginForecaster: {e}")
 # from .encoders import corrtarget_encoder
 
-try: 
+try:
     from .penalizedcv import penalized_cross_val_score
 except ImportError as e:
     print(f"Could not import penalized_cross_val_score: {e}")
@@ -96,6 +101,7 @@ __all__ = [
     "MultiTaskRegressor",
     "IsotonicRegressor",
     "GenericFunctionalForecaster",
+    "RankTargetEncoder",
     "RollingOriginForecaster",
     # Other imports
     # "corrtarget_encoder",
@@ -104,5 +110,5 @@ __all__ = [
     "get_config",
     "set_config",
     "config_context",
-    "penalized_cross_val_score"
+    "penalized_cross_val_score",
 ]
