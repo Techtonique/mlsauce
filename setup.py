@@ -35,7 +35,7 @@ class bdist_wheel(_bdist_wheel):
         return python, abi, plat
 
 CYTHON_MIN_VERSION = version.parse("3.0.10")
-VERSION = "0.31.0"
+VERSION = "0.31.1"  # also update in pyproject.toml
 
 class clean(Command):
     user_options = [("all", "a", "")]
@@ -188,6 +188,7 @@ if __name__ == "__main__":
             "scikit-learn>=1.4.0",
             "scipy>=1.8.0",
             "tqdm>=4.50.0",
+            
         ],
         ext_modules=get_extensions(),
         zip_safe=False,

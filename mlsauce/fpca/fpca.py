@@ -24,12 +24,12 @@ import warnings
 class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
     """
     Functional time series forecaster using dimensionality reduction and regression.
-    
+
     Following Hyndman-Ullah methodology:
     1. Extract functional components using dimensionality reduction
     2. Model relationships between components and functional data using regression
     3. Forecast future functional curves
-    
+
     Parameters
     ----------
     n_components : int, default=8
@@ -63,7 +63,9 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         self.reduction_params = reduction_params or {}
         self.rolling_window = rolling_window
         self.forecast_method = forecast_method
-        self.regressor = regressor if regressor is not None else LinearRegression()
+        self.regressor = (
+            regressor if regressor is not None else LinearRegression()
+        )
         self.regressor_params = regressor_params or {}
 
         # Available reduction methods
@@ -87,20 +89,23 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
 
     def _create_regressor(self):
         """Create a fresh regressor instance with parameters."""
-        if hasattr(self.regressor, '__class__'):
+        if hasattr(self.regressor, "__class__"):
             # Create new instance from class
             regressor = self.regressor.__class__(**self.regressor_params)
         else:
             # Clone existing instance
             from sklearn.base import clone
+
             regressor = clone(self.regressor)
             # Apply additional parameters
             for param, value in self.regressor_params.items():
                 setattr(regressor, param, value)
-        
+
         return regressor
 
-    def fit(self, X: Union[np.ndarray, pd.DataFrame]) -> "GenericFunctionalForecaster":
+    def fit(
+        self, X: Union[np.ndarray, pd.DataFrame]
+    ) -> "GenericFunctionalForecaster":
         """
         Fit the functional forecaster.
 
@@ -165,7 +170,9 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
 
         # Store components/basis functions for reconstruction
         if hasattr(self.reducer_, "components_"):
-            self.components_ = self.reducer_.components_  # Shape: (n_components, n_points)
+            self.components_ = (
+                self.reducer_.components_
+            )  # Shape: (n_components, n_points)
         elif hasattr(self.reducer_, "inverse_transform"):
             # For methods like KernelPCA, create identity mapping to get components
             try:
@@ -176,16 +183,20 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
                 else:
                     self.components_ = reconstructed.T
             except Exception as e:
-                warnings.warn(f"Could not extract components for {self.reduction_method}: {e}")
+                warnings.warn(
+                    f"Could not extract components for {self.reduction_method}: {e}"
+                )
                 self.components_ = None
         else:
-            warnings.warn(f"No reconstruction available for {self.reduction_method}")
+            warnings.warn(
+                f"No reconstruction available for {self.reduction_method}"
+            )
             self.components_ = None
 
     def _fit_rolling_regression(self, X_scaled):
         """
         Fit rolling regression models.
-        
+
         For each window, fit: reduced_features[window] -> next_scaled_curve
         This maintains scale consistency throughout.
         """
@@ -199,47 +210,59 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         self.rolling_coefs_ = []
 
         n_windows = self.n_samples_ - self.rolling_window
-        
+
         for i in range(n_windows):
             # Input: window of reduced features
-            X_window = self.reduced_features_[i:i + self.rolling_window]  # (window, n_components)
-            
+            X_window = self.reduced_features_[
+                i : i + self.rolling_window
+            ]  # (window, n_components)
+
             # Target: next scaled functional curve
-            y_next_scaled = X_scaled[i:i + self.rolling_window]  # (n_points,)
+            y_next_scaled = X_scaled[i : i + self.rolling_window]  # (n_points,)
 
             # Create and fit regressor
             regressor = self._create_regressor()
-            
+
             try:
                 # Fit regression: reduced_features_window -> scaled_functional_curve
                 regressor.fit(X_window, y_next_scaled)
-                
+
                 # Store model and coefficients
                 self.rolling_models_.append(regressor)
-                
+
                 # Extract coefficients - shape depends on regressor type
-                if hasattr(regressor, 'coef_'):
+                if hasattr(regressor, "coef_"):
                     coef = regressor.coef_
                     # For multioutput: coef shape is (n_outputs, n_features) = (n_points, n_components)
                     # For single output with multiple features: (n_features,) = (n_components,)
                     # We expect multioutput here since y_next_scaled is (n_points,)
                     if coef.ndim == 1:
                         # This shouldn't happen with multioutput, but handle gracefully
-                        warnings.warn(f"Unexpected single output coefficients at window {i}")
+                        warnings.warn(
+                            f"Unexpected single output coefficients at window {i}"
+                        )
                         coef = coef.reshape(1, -1)  # (1, n_components)
                     self.rolling_coefs_.append(coef)  # (n_points, n_components)
                 else:
                     # Fallback: use least squares
-                    warnings.warn(f"Regressor has no coef_ attribute, using least squares at window {i}")
-                    coef = np.linalg.lstsq(X_window, y_next_scaled, rcond=None)[0].T
+                    warnings.warn(
+                        f"Regressor has no coef_ attribute, using least squares at window {i}"
+                    )
+                    coef = np.linalg.lstsq(X_window, y_next_scaled, rcond=None)[
+                        0
+                    ].T
                     if coef.ndim == 1:
                         coef = coef.reshape(1, -1)
                     self.rolling_coefs_.append(coef)
-                    
+
             except Exception as e:
-                warnings.warn(f"Regression failed at window {i}: {e}. Using least squares fallback.")
+                warnings.warn(
+                    f"Regression failed at window {i}: {e}. Using least squares fallback."
+                )
                 # Least squares fallback
-                coef = np.linalg.lstsq(X_window, y_next_scaled, rcond=None)[0].T  # (n_points, n_components)
+                coef = np.linalg.lstsq(X_window, y_next_scaled, rcond=None)[
+                    0
+                ].T  # (n_points, n_components)
                 if coef.ndim == 1:
                     coef = coef.reshape(1, -1)
                 self.rolling_coefs_.append(coef)
@@ -252,29 +275,39 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
     def _fit_full_regression(self, X_scaled):
         """
         Fit regression using full training set.
-        
+
         Fit: reduced_features -> scaled_functional_data
         """
         # Create regressor
         regressor = self._create_regressor()
-        
+
         try:
             # Fit: all reduced features -> all scaled functional curves
             regressor.fit(self.reduced_features_, X_scaled)
             self.full_model_ = regressor
-            
+
             # Store coefficients
-            if hasattr(regressor, 'coef_'):
-                self.coefs_ = regressor.coef_  # (n_points, n_components) for multioutput
+            if hasattr(regressor, "coef_"):
+                self.coefs_ = (
+                    regressor.coef_
+                )  # (n_points, n_components) for multioutput
             else:
                 # Fallback to least squares
-                warnings.warn("Regressor has no coef_ attribute, using least squares")
-                self.coefs_ = np.linalg.lstsq(self.reduced_features_, X_scaled, rcond=None)[0].T
-                
+                warnings.warn(
+                    "Regressor has no coef_ attribute, using least squares"
+                )
+                self.coefs_ = np.linalg.lstsq(
+                    self.reduced_features_, X_scaled, rcond=None
+                )[0].T
+
         except Exception as e:
-            warnings.warn(f"Full regression failed: {e}. Using least squares fallback.")
+            warnings.warn(
+                f"Full regression failed: {e}. Using least squares fallback."
+            )
             # Least squares fallback
-            self.coefs_ = np.linalg.lstsq(self.reduced_features_, X_scaled, rcond=None)[0].T
+            self.coefs_ = np.linalg.lstsq(
+                self.reduced_features_, X_scaled, rcond=None
+            )[0].T
             self.full_model_ = None
 
     def forecast(self, steps: int = 5) -> np.ndarray:
@@ -302,36 +335,44 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         """Forecast using rolling regression approach."""
         # rolling_coefs_ shape: (n_windows, n_points, n_components)
         n_windows, n_points, n_components = self.rolling_coefs_.shape
-        
+
         # Forecast coefficients for each point and component
         forecasted_coefs = np.zeros((steps, n_points, n_components))
-        
+
         for point_idx in range(n_points):
             for comp_idx in range(n_components):
                 # Get time series of coefficients for this (point, component)
                 coef_series = self.rolling_coefs_[:, point_idx, comp_idx]
-                
+
                 # Forecast this coefficient series
                 if self.forecast_method == "ar" and len(coef_series) > 1:
                     try:
                         # Fit AR model to coefficient series
-                        ar_model = AutoReg(coef_series, lags=min(2, len(coef_series)-1)).fit()
+                        ar_model = AutoReg(
+                            coef_series, lags=min(2, len(coef_series) - 1)
+                        ).fit()
                         forecasted_values = ar_model.predict(
                             start=len(coef_series),
-                            end=len(coef_series) + steps - 1
+                            end=len(coef_series) + steps - 1,
                         )
-                        forecasted_coefs[:, point_idx, comp_idx] = forecasted_values
+                        forecasted_coefs[:, point_idx, comp_idx] = (
+                            forecasted_values
+                        )
                     except Exception as e:
-                        warnings.warn(f"AR forecasting failed for point {point_idx}, component {comp_idx}: {e}")
+                        warnings.warn(
+                            f"AR forecasting failed for point {point_idx}, component {comp_idx}: {e}"
+                        )
                         # Use last value
-                        forecasted_coefs[:, point_idx, comp_idx] = coef_series[-1]
+                        forecasted_coefs[:, point_idx, comp_idx] = coef_series[
+                            -1
+                        ]
                 else:
                     # Use last value
                     forecasted_coefs[:, point_idx, comp_idx] = coef_series[-1]
 
         # Reconstruct functional forecasts from predicted coefficients
         forecasts_scaled = np.zeros((steps, n_points))
-        
+
         if self.components_ is not None:
             # Use learned components for reconstruction
             # For each forecast step and each point, sum over components
@@ -341,11 +382,13 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
                     # self.components_[:, point_idx] has shape (n_components,)
                     forecasts_scaled[step, point_idx] = np.dot(
                         forecasted_coefs[step, point_idx, :],
-                        self.components_[:, point_idx]
+                        self.components_[:, point_idx],
                     )
         else:
             # No reconstruction available - use direct prediction
-            warnings.warn(f"No reconstruction available for {self.reduction_method}. Using last known values.")
+            warnings.warn(
+                f"No reconstruction available for {self.reduction_method}. Using last known values."
+            )
             last_scaled = self.scaler_.transform(self.X_[-1:])
             forecasts_scaled = np.tile(last_scaled, (steps, 1))
 
@@ -357,22 +400,26 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         """Forecast using full training set approach."""
         # First, forecast the reduced features themselves
         forecasted_features = np.zeros((steps, self.n_components))
-        
+
         for comp in range(self.n_components):
             # Get time series of this component
             feature_series = self.reduced_features_[:, comp]
-            
+
             if self.forecast_method == "ar" and len(feature_series) > 1:
                 try:
                     # Fit AR model to feature series
-                    ar_model = AutoReg(feature_series, lags=min(2, len(feature_series)-1)).fit()
+                    ar_model = AutoReg(
+                        feature_series, lags=min(2, len(feature_series) - 1)
+                    ).fit()
                     forecasted_values = ar_model.predict(
                         start=len(feature_series),
-                        end=len(feature_series) + steps - 1
+                        end=len(feature_series) + steps - 1,
                     )
                     forecasted_features[:, comp] = forecasted_values
                 except Exception as e:
-                    warnings.warn(f"AR forecasting failed for component {comp}: {e}")
+                    warnings.warn(
+                        f"AR forecasting failed for component {comp}: {e}"
+                    )
                     # Use last value
                     forecasted_features[:, comp] = feature_series[-1]
             else:
@@ -380,7 +427,7 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
                 forecasted_features[:, comp] = feature_series[-1]
 
         # Reconstruct functional data from forecasted features
-        if hasattr(self, 'full_model_') and self.full_model_ is not None:
+        if hasattr(self, "full_model_") and self.full_model_ is not None:
             # Use the fitted model to predict
             try:
                 forecasts_scaled = self.full_model_.predict(forecasted_features)
@@ -398,7 +445,7 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
     def plot_components(self, n_plot: int = 3) -> None:
         """Plot functional components."""
         check_is_fitted(self, "is_fitted_")
-        
+
         if self.components_ is None:
             print(f"Components not available for {self.reduction_method}")
             return
@@ -421,10 +468,12 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         plt.figure(figsize=(12, 8))
         n_subplot_cols = 2
         n_subplot_rows = (min(n_plot, self.n_components) + 1) // 2
-        
+
         for i in range(min(n_plot, self.n_components)):
             plt.subplot(n_subplot_rows, n_subplot_cols, i + 1)
-            plt.plot(self.reduced_features_[:, i], "o-", linewidth=2, markersize=4)
+            plt.plot(
+                self.reduced_features_[:, i], "o-", linewidth=2, markersize=4
+            )
             plt.title(f"Reduced Feature {i+1}")
             plt.xlabel("Time")
             plt.ylabel("Value")
@@ -445,19 +494,34 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         n_history = min(5, len(self.X_))
         for i in range(n_history):
             idx = -(n_history - i)
-            plt.plot(self.X_[idx], "b-", alpha=0.3, linewidth=1, 
-                    label="Historical" if i == 0 else "")
+            plt.plot(
+                self.X_[idx],
+                "b-",
+                alpha=0.3,
+                linewidth=1,
+                label="Historical" if i == 0 else "",
+            )
 
         # Plot actual test data if provided
         if actual is not None:
             for i in range(min(3, len(actual))):
-                plt.plot(actual[i], "k-", alpha=0.7, linewidth=2,
-                        label="Actual" if i == 0 else "")
+                plt.plot(
+                    actual[i],
+                    "k-",
+                    alpha=0.7,
+                    linewidth=2,
+                    label="Actual" if i == 0 else "",
+                )
 
         # Plot forecasts
         for i in range(steps):
-            plt.plot(forecasts[i], "r--", linewidth=2, alpha=0.7,
-                    label="Forecast" if i == 0 else "")
+            plt.plot(
+                forecasts[i],
+                "r--",
+                linewidth=2,
+                alpha=0.7,
+                label="Forecast" if i == 0 else "",
+            )
 
         plt.title("Functional Time Series Forecast")
         plt.xlabel("Domain Point")
@@ -479,14 +543,20 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         }
 
         if hasattr(self, "reduced_features_"):
-            info.update({
-                "n_samples": self.n_samples_,
-                "n_points": self.n_points_,
-                "explained_variance_ratio": getattr(
-                    self.reducer_, "explained_variance_ratio_", None
-                ),
-                "has_components": self.components_ is not None,
-                "coefficient_shape": getattr(self, "rolling_coefs_", np.array([])).shape if hasattr(self, "rolling_coefs_") else getattr(self, "coefs_", np.array([])).shape,
-            })
+            info.update(
+                {
+                    "n_samples": self.n_samples_,
+                    "n_points": self.n_points_,
+                    "explained_variance_ratio": getattr(
+                        self.reducer_, "explained_variance_ratio_", None
+                    ),
+                    "has_components": self.components_ is not None,
+                    "coefficient_shape": (
+                        getattr(self, "rolling_coefs_", np.array([])).shape
+                        if hasattr(self, "rolling_coefs_")
+                        else getattr(self, "coefs_", np.array([])).shape
+                    ),
+                }
+            )
 
         return info

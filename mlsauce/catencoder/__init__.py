@@ -1,3 +1,3 @@
 from .correncoder import RankTargetEncoder
 
-__all__=['RankTargetEncoder']
+__all__ = ["RankTargetEncoder"]

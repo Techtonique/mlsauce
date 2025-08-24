@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import mlsauce as ms
 
+
 # Training data
 train_data = pd.DataFrame({
     'city': ['NYC', 'LA', 'NYC', 'Chicago', 'LA', 'Chicago', 'NYC', 'LA'],
@@ -46,3 +47,7 @@ print(encoder.get_category_mappings()['city'])
 # Show which columns were identified as categorical
 print(f"\nCategorical columns: {encoder.cat_columns_}")
 print(f"Non-categorical columns: {encoder.non_cat_columns_}")
+
+#print(encoder.validate_encoding(train_data, y_train, plot=False))
+
+print(encoder.validate_encoding(train_data, y_train, plot=True))
