@@ -18,7 +18,7 @@ from typing import Optional, Literal, Union, Any
 import matplotlib.pyplot as plt
 
 
-class FunctionalForecaster(BaseEstimator, RegressorMixin):
+class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
     """
     Functional time series forecaster using dimensionality reduction and regression.
 
