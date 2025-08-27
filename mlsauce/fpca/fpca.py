@@ -335,7 +335,6 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
         """Forecast using rolling regression approach."""
         # rolling_coefs_ shape: (n_windows, n_points, n_components)
         n_windows, n_points, n_components = self.rolling_coefs_.shape
-
         # Forecast coefficients for each point and component
         forecasted_coefs = np.zeros((steps, n_points, n_components))
 
@@ -343,7 +342,6 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
             for comp_idx in range(n_components):
                 # Get time series of coefficients for this (point, component)
                 coef_series = self.rolling_coefs_[:, point_idx, comp_idx]
-
                 # Forecast this coefficient series
                 if self.forecast_method == "ar" and len(coef_series) > 1:
                     try:
@@ -391,10 +389,8 @@ class GenericFunctionalForecaster(BaseEstimator, RegressorMixin):
             )
             last_scaled = self.scaler_.transform(self.X_[-1:])
             forecasts_scaled = np.tile(last_scaled, (steps, 1))
-
         # Transform back to original scale
-        forecasts = self.scaler_.inverse_transform(forecasts_scaled)
-        return forecasts
+        return self.scaler_.inverse_transform(forecasts_scaled)
 
     def _forecast_full(self, steps: int) -> np.ndarray:
         """Forecast using full training set approach."""
