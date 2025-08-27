@@ -1,4 +1,5 @@
 import mlsauce as ms 
+import numpy as np 
 
 gen = ms.make_diverse_classification(n_datasets=15, random_state=42)
 

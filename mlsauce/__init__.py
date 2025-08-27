@@ -67,6 +67,14 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
+try: 
+    from .generators import make_diverse_classification,\
+    HealthcareTimeSeriesGenerator,\
+    generate_synthetic_returns,\
+    plot_synthetic_returns
+except ImportError as e:
+    print(f"Could not import generators: {e}")
+
 try:
     from .catencoder import RankTargetEncoder
 except ImportError as e:
@@ -111,4 +119,8 @@ __all__ = [
     "set_config",
     "config_context",
     "penalized_cross_val_score",
+    "make_diverse_classification",
+    "HealthcareTimeSeriesGenerator",
+    "generate_synthetic_returns",
+    "plot_synthetic_returns"
 ]

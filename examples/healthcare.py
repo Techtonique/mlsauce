@@ -1,4 +1,5 @@
 import mlsauce as ms 
+import pandas as pd 
 
 # Initialize generator
 generator = ms.HealthcareTimeSeriesGenerator(seed=42)
@@ -15,7 +16,7 @@ outcomes = generator.generate_outcomes(patients, timeseries)
 
 # Create visualizations
 print("Creating visualizations...")
-create_visualizations(patients, timeseries, outcomes)
+generator.create_visualizations(patients, timeseries, outcomes)
 
 # Display summary statistics
 print("\n=== DATASET SUMMARY ===")
@@ -40,9 +41,9 @@ missing_pct = (timeseries.isnull().sum() / len(timeseries) * 100).round(2)
 print(missing_pct[missing_pct > 0])
 
 # Save datasets
-patients.to_csv('healthcare_patients.csv', index=False)
-timeseries.to_csv('healthcare_timeseries.csv', index=False)
-outcomes.to_csv('healthcare_outcomes.csv', index=False)
+#patients.to_csv('healthcare_patients.csv', index=False)
+#timeseries.to_csv('healthcare_timeseries.csv', index=False)
+#outcomes.to_csv('healthcare_outcomes.csv', index=False)
 
 print("\n=== FILES SAVED ===")
 print("- healthcare_patients.csv")

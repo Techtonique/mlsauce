@@ -503,12 +503,11 @@ class HealthcareTimeSeriesGenerator:
         plt.tight_layout()
         plt.savefig('healthcare_data_visualization.png', dpi=300, bbox_inches='tight')
         print("Visualization saved as: healthcare_data_visualization.png")
-        plt.show()
-        
+        plt.show()        
         # Create additional detailed plots
-        create_detailed_plots(patients, timeseries, outcomes)
+        self.create_detailed_plots(patients, timeseries)
 
-    def create_detailed_plots(patients, timeseries, outcomes):
+    def create_detailed_plots(self, patients, timeseries):
         """Create additional detailed visualizations"""
         
         # Time Series Plot for Multiple Vital Signs
