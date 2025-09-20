@@ -30,7 +30,7 @@ try:
 except ImportError:
     pass
 
-from ..utils import subsample
+from ..utils import subsample, safe_sparse_dot
 
 
 # 0 - utils -----
@@ -692,28 +692,29 @@ def predict_proba_adaopt(X_test,
 
         return np.asarray(out_probs_)
 
-
     if type_dist == "cosine":
-
-        for i in range(n_test):        
-
-            dists_test_i = distance_to_mat_cosine(scaled_X_test[i,:], 
-                                           scaled_X_train)        
-
-            kmin_test_i = find_kmin_x(dists_test_i, 
-                                      n_x=n_train, 
-                                      k=k, cache=cache) 
-
-            weights_test_i = calculate_weights(kmin_test_i[0])
-
-            probs_test_i = calculate_probs(kmin_test_i[1], 
-                                           probs_train_)  
-
-            avg_probs_i = average_probs(probs=probs_test_i, 
-                                        weights=weights_test_i)
-
+        # Precompute the norms (magnitudes) of the training data
+        train_norms = np.linalg.norm(scaled_X_train, axis=1)        
+        # Precompute the norms of the test data (you could also do this in one step)
+        test_norms = np.linalg.norm(scaled_X_test, axis=1)        
+        # Compute the cosine similarity matrix using dot product
+        cosine_sim_matrix = safe_sparse_dot(scaled_X_test, scaled_X_train.T, backend)  # (n_test, n_train)        
+        # Normalize by dividing by the product of the norms
+        cosine_sim_matrix /= (test_norms[:, None] * train_norms)  # Broadcasting norms        
+        # Find k smallest (most similar) distances for each test sample
+        for i in range(n_test):
+            # Get the indices of the k smallest distances (most similar)
+            kmin_test_i = np.argsort(cosine_sim_matrix[i])[:k]  # indices of k most similar            
+            # Retrieve the corresponding distances
+            dists_test_i = cosine_sim_matrix[i, kmin_test_i]        
+            # Find the corresponding weights (could use inverse distance or other methods)
+            weights_test_i = calculate_weights(dists_test_i)
+            # Retrieve the probabilities for the k nearest neighbors
+            probs_test_i = calculate_probs(kmin_test_i, probs_train_)
+            # Average the probabilities
+            avg_probs_i = average_probs(probs=probs_test_i, weights=weights_test_i)
+            # Store the final probabilities for this test sample
             for j in range(n_classes):
-
                 out_probs[i, j] = avg_probs_i[j]
 
         out_probs_ = expit(out_probs)  

@@ -136,8 +136,27 @@ obj = ms.AdaOpt(n_iterations=50,
            gamma=0.01, 
            tolerance=1e-4,
            row_sample=1, 
-           k=1, backend="gpu",
+           k=1, backend="cpu",
            n_jobs=3, type_dist="euclidean", verbose=1)
+start = time()
+obj.fit(X_train, y_train)
+print("Elapsed: ", time()-start)
+start = time()
+print(obj.score(X_test, y_test))
+print("Elapsed: ", time()-start)
+
+# ------ 
+
+obj = ms.AdaOpt(n_iterations=50,
+           learning_rate=0.3,
+           reg_lambda=0.1,            
+           reg_alpha=0.5,
+           eta=0.01,
+           gamma=0.01, 
+           tolerance=1e-4,
+           row_sample=1, 
+           k=1, backend="cpu",
+           n_jobs=3, type_dist="cosine", verbose=1)
 start = time()
 obj.fit(X_train, y_train)
 print("Elapsed: ", time()-start)
