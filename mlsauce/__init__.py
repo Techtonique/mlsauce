@@ -91,8 +91,14 @@ try:
 except ImportError as e:
     print(f"Could not import penalized_cross_val_score: {e}")
 
+try: 
+    from .conformalbayesian import ConformalBayesianRegressor
+except ImportError as e:
+    print(f"Could not import ConformalBayesianRegressor: {e}")
+
 __all__ = [
     "AdaOpt",
+    "ConformalBayesianRegressor",
     "LSBoostClassifier",
     "GenericBoostingClassifier",
     "GenericBoostingRegressor",
