@@ -89,6 +89,9 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	#uv pip install -e . --verbose
+	pip install black 
+	pip install pdoc
+	black mlsauce/* --line-length=80	
 	pip install -e . --verbose 
 
 run-examples: ## run all examples with one command

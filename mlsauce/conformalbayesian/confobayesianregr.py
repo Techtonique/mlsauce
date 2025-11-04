@@ -17,15 +17,21 @@ from tqdm import tqdm
 
 
 class ConformalBayesianRegressor(BaseEstimator, RegressorMixin):
-    def __init__(self, obj=Ridge(), 
-                 level=95,
-                 hyperparameter_bounds=None,
-                 n_samples=20, calibration_fraction=0.2,
-                 scaling_method="standard", random_state=None,
-                 show_progress=False,
-                 verbose=True, n_jobs=-1):
+    def __init__(
+        self,
+        obj=Ridge,
+        level=95,
+        hyperparameter_bounds=None,
+        n_samples=20,
+        calibration_fraction=0.2,
+        scaling_method="standard",
+        random_state=None,
+        show_progress=False,
+        verbose=True,
+        n_jobs=-1,
+    ):
         self.obj = obj
-        self.level = level 
+        self.level = level
         self.alpha_ = 1 - self.level / 100
         self.hyperparameter_bounds = hyperparameter_bounds
         self.n_samples = n_samples
@@ -45,13 +51,19 @@ class ConformalBayesianRegressor(BaseEstimator, RegressorMixin):
             if self.hyperparameter_bounds:
                 cfg = {}
                 for k, v in self.hyperparameter_bounds.items():
-                    if k == 'num_leaves' and isinstance(v, list) and len(v) == 2:
-                         # Handle num_leaves as integer parameter
-                         cfg[k] = np.random.randint(v[0], v[1] + 1)
-                    elif isinstance(v, list) and len(v) == 2:
-                        cfg[k] = np.random.uniform(v[0], v[1])
+                    if isinstance(v, list) and len(v) == 2:
+                        # Always sample as float first
+                        sampled_value = np.random.uniform(v[0], v[1])
+
+                        # If both bounds are integers, assume integer parameter
+                        if isinstance(v[0], (int, np.integer)) and isinstance(
+                            v[1], (int, np.integer)
+                        ):
+                            cfg[k] = int(sampled_value)
+                        else:
+                            cfg[k] = sampled_value
                     else:
-                        # Assume fixed value or other parameter types are handled by obj
+                        # Assume fixed value
                         cfg[k] = v
             else:
                 cfg = {}
@@ -60,12 +72,14 @@ class ConformalBayesianRegressor(BaseEstimator, RegressorMixin):
 
     def _train_models_parallel(self, X, y, configs):
         def train_model(cfg):
-            model = self.obj(**cfg)
-            model.fit(X, y)
-            return model
-        if self.show_progress == False: 
+            self.obj.set_params(**cfg)
+            self.obj.fit(X, y)
+            return self.obj
+
+        if self.show_progress == False:
             models = joblib.Parallel(n_jobs=self.n_jobs)(
-                joblib.delayed(train_model)(cfg) for cfg in tqdm(configs, disable=not self.verbose)
+                joblib.delayed(train_model)(cfg)
+                for cfg in tqdm(configs, disable=not self.verbose)
             )
         else:
             models = joblib.Parallel(n_jobs=self.n_jobs)(
@@ -76,8 +90,10 @@ class ConformalBayesianRegressor(BaseEstimator, RegressorMixin):
     def _predict_models(self, models, X):
         if self.show_progress == False:
             preds = [m.predict(X) for m in models]
-        else: 
-            preds = [m.predict(X) for m in tqdm(models, disable=not self.verbose)]
+        else:
+            preds = [
+                m.predict(X) for m in tqdm(models, disable=not self.verbose)
+            ]
         return np.column_stack(preds)
 
     def fit(self, X, y):
@@ -91,15 +107,19 @@ class ConformalBayesianRegressor(BaseEstimator, RegressorMixin):
         X, y = shuffle(X, y, random_state=rng)
         # 1. Cluster with GMM (full covariance)
         n_clusters = min(10, X.shape[0] // 30)
-        gmm = GaussianMixture(n_components=n_clusters, covariance_type='full',
-                              random_state=self.random_state)
+        gmm = GaussianMixture(
+            n_components=n_clusters,
+            covariance_type="full",
+            random_state=self.random_state,
+        )
         clusters = gmm.fit_predict(X)
         # 2. Stratified train/calibration split
         X_train, X_calib, y_train, y_calib = train_test_split(
-            X, y,
+            X,
+            y,
             test_size=self.calibration_fraction,
             random_state=self.random_state,
-            stratify=clusters
+            stratify=clusters,
         )
         # 3. Scale features
         if self.scaling_method == "standard":
@@ -139,16 +159,13 @@ class ConformalBayesianRegressor(BaseEstimator, RegressorMixin):
         X_s = self.scaler_.transform(X)
         preds = self._predict_models(self.models_, X_s)
         self.mean_ = np.median(preds, axis=1)
-        if return_pi == False: 
-            return self.mean_         
+        if return_pi == False:
+            return self.mean_
         DescribeResult = namedtuple(
-                        "DescribeResult", ("mean", "lower", "upper")
-                    )
-        q = np.quantile(self.calibration_residuals_, 
-                        q=self.alpha_ / 200, axis=1)
-        return DescribeResult(self.mean_, 
-                              self.mean_ - q, 
-                              self.mean_ + q)
+            "DescribeResult", ("mean", "lower", "upper")
+        )
+        q = np.quantile(self.calibration_residuals_, q=self.alpha_ / 200)
+        return DescribeResult(self.mean_, self.mean_ + q, self.mean_ - q)
 
     def get_coverage(self, y_true, lower, upper):
         return np.mean((y_true >= lower) & (y_true <= upper))

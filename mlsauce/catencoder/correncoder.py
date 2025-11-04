@@ -6,11 +6,12 @@ from sklearn.model_selection import KFold
 import pandas as pd
 from sklearn.exceptions import NotFittedError
 from collections import defaultdict
-try: 
+
+try:
     import matplotlib.pyplot as plt
     import seaborn as sns
 except ImportError:
-    pass 
+    pass
 
 
 class RankTargetEncoder(BaseEstimator, TransformerMixin):
@@ -313,7 +314,7 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
         """
         Comprehensive validation of the encoding process, including correlation
         preservation, distribution analysis, and category-level statistics.
-        
+
         Parameters:
         -----------
         X : pandas DataFrame
@@ -322,7 +323,7 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
             True target values
         plot : bool, default=True
             Whether to generate diagnostic plots
-        
+
         Returns:
         --------
         dict
@@ -332,181 +333,206 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
             raise NotFittedError(
                 "This %s instance is not fitted yet." % self.__class__.__name__
             )
-        
+
         if not isinstance(X, pd.DataFrame):
             raise ValueError("X must be a pandas DataFrame")
-        
+
         X = X.reset_index(drop=True)
         y = np.asarray(y)
-        
+
         # Generate multiple pseudo-targets for robust statistics
         pseudo_targets = []
         correlations_achieved = []
-        
+
         for i in range(self.ensemble_size):
             seed = self.random_state + i
             z = self._generate_pseudo_target(y, seed)
             pseudo_targets.append(z)
-            
+
             # Compute achieved correlation
             if self.correlation_type == "spearman":
                 from scipy.stats import spearmanr
+
                 corr, _ = spearmanr(y, z)
             else:  # kendall
                 from scipy.stats import kendalltau
+
                 corr, _ = kendalltau(y, z)
             correlations_achieved.append(corr)
-        
+
         pseudo_targets = np.array(pseudo_targets)
         mean_pseudo_target = np.mean(pseudo_targets, axis=0)
-        
+
         # Transform the data
         X_encoded = self.transform(X)
-        
+
         # Compute overall validation metrics
         validation_results = {
-            'target_correlation': self.correlation_strength,
-            'achieved_correlations': correlations_achieved,
-            'mean_achieved_correlation': np.mean(correlations_achieved),
-            'std_achieved_correlation': np.std(correlations_achieved),
-            'correlation_bias': np.mean(correlations_achieved) - self.correlation_strength,
-            'original_target_stats': {
-                'mean': np.mean(y),
-                'std': np.std(y),
-                'min': np.min(y),
-                'max': np.max(y),
-                'median': np.median(y)
+            "target_correlation": self.correlation_strength,
+            "achieved_correlations": correlations_achieved,
+            "mean_achieved_correlation": np.mean(correlations_achieved),
+            "std_achieved_correlation": np.std(correlations_achieved),
+            "correlation_bias": np.mean(correlations_achieved)
+            - self.correlation_strength,
+            "original_target_stats": {
+                "mean": np.mean(y),
+                "std": np.std(y),
+                "min": np.min(y),
+                "max": np.max(y),
+                "median": np.median(y),
             },
-            'pseudo_target_stats': {
-                'mean': np.mean(mean_pseudo_target),
-                'std': np.std(mean_pseudo_target),
-                'min': np.min(mean_pseudo_target),
-                'max': np.max(mean_pseudo_target),
-                'median': np.median(mean_pseudo_target)
-            }
+            "pseudo_target_stats": {
+                "mean": np.mean(mean_pseudo_target),
+                "std": np.std(mean_pseudo_target),
+                "min": np.min(mean_pseudo_target),
+                "max": np.max(mean_pseudo_target),
+                "median": np.median(mean_pseudo_target),
+            },
         }
-        
+
         # Category-level analysis
         category_correlations = {}
         category_stats = {}
-        
+
         for col in self.cat_columns_:
             if col not in X.columns:
                 continue
-                
+
             unique_categories = X[col].unique()
             cat_corrs = []
             cat_means_original = []
             cat_means_pseudo = []
             cat_counts = []
-            
+
             for category in unique_categories:
                 mask = X[col] == category
-                if np.sum(mask) > 5:  # Only analyze categories with sufficient samples
+                if (
+                    np.sum(mask) > 5
+                ):  # Only analyze categories with sufficient samples
                     if self.correlation_type == "spearman":
                         corr, _ = spearmanr(y[mask], mean_pseudo_target[mask])
                     else:
                         corr, _ = kendalltau(y[mask], mean_pseudo_target[mask])
-                    
+
                     cat_corrs.append(corr)
                     cat_means_original.append(np.mean(y[mask]))
                     cat_means_pseudo.append(np.mean(mean_pseudo_target[mask]))
                     cat_counts.append(np.sum(mask))
-            
+
             category_correlations[col] = {
-                'mean_correlation': np.mean(cat_corrs) if cat_corrs else np.nan,
-                'std_correlation': np.std(cat_corrs) if cat_corrs else np.nan,
-                'min_correlation': np.min(cat_corrs) if cat_corrs else np.nan,
-                'max_correlation': np.max(cat_corrs) if cat_corrs else np.nan
+                "mean_correlation": np.mean(cat_corrs) if cat_corrs else np.nan,
+                "std_correlation": np.std(cat_corrs) if cat_corrs else np.nan,
+                "min_correlation": np.min(cat_corrs) if cat_corrs else np.nan,
+                "max_correlation": np.max(cat_corrs) if cat_corrs else np.nan,
             }
-            
+
             category_stats[col] = {
-                'n_categories': len(unique_categories),
-                'n_analyzed_categories': len(cat_corrs),
-                'category_means_original': cat_means_original,
-                'category_means_pseudo': cat_means_pseudo,
-                'category_counts': cat_counts
+                "n_categories": len(unique_categories),
+                "n_analyzed_categories": len(cat_corrs),
+                "category_means_original": cat_means_original,
+                "category_means_pseudo": cat_means_pseudo,
+                "category_counts": cat_counts,
             }
-        
-        validation_results['category_correlations'] = category_correlations
-        validation_results['category_stats'] = category_stats
-        
+
+        validation_results["category_correlations"] = category_correlations
+        validation_results["category_stats"] = category_stats
+
         # Generate plots if requested
         if plot:
-            try:                
+            try:
                 fig, axes = plt.subplots(2, 2, figsize=(15, 12))
                 axes = axes.flatten()
-                
+
                 # Scatter plot: Original vs Pseudo-targets
                 axes[0].scatter(y, mean_pseudo_target, alpha=0.6, s=20)
-                axes[0].set_xlabel('Original Target')
-                axes[0].set_ylabel('Pseudo Target')
-                axes[0].set_title(f'Original vs Pseudo-targets\n{self.correlation_type.capitalize()} correlation: {validation_results["mean_achieved_correlation"]:.3f}')
-                
+                axes[0].set_xlabel("Original Target")
+                axes[0].set_ylabel("Pseudo Target")
+                axes[0].set_title(
+                    f'Original vs Pseudo-targets\n{self.correlation_type.capitalize()} correlation: {validation_results["mean_achieved_correlation"]:.3f}'
+                )
+
                 # Add correlation line
                 z = np.polyfit(y, mean_pseudo_target, 1)
                 p = np.poly1d(z)
                 axes[0].plot(y, p(y), "r--", alpha=0.8)
-                
+
                 # Distribution comparison
-                axes[1].hist(y, alpha=0.7, bins=30, label='Original', density=True)
-                axes[1].hist(mean_pseudo_target, alpha=0.7, bins=30, label='Pseudo', density=True)
-                axes[1].set_xlabel('Value')
-                axes[1].set_ylabel('Density')
-                axes[1].set_title('Distribution Comparison')
+                axes[1].hist(
+                    y, alpha=0.7, bins=30, label="Original", density=True
+                )
+                axes[1].hist(
+                    mean_pseudo_target,
+                    alpha=0.7,
+                    bins=30,
+                    label="Pseudo",
+                    density=True,
+                )
+                axes[1].set_xlabel("Value")
+                axes[1].set_ylabel("Density")
+                axes[1].set_title("Distribution Comparison")
                 axes[1].legend()
-                
+
                 # Rank comparison
-                original_ranks = rankdata(y, method='average')
-                pseudo_ranks = rankdata(mean_pseudo_target, method='average')
+                original_ranks = rankdata(y, method="average")
+                pseudo_ranks = rankdata(mean_pseudo_target, method="average")
                 axes[2].scatter(original_ranks, pseudo_ranks, alpha=0.6, s=20)
-                axes[2].set_xlabel('Original Ranks')
-                axes[2].set_ylabel('Pseudo Ranks')
-                axes[2].set_title('Rank Preservation')
-                
+                axes[2].set_xlabel("Original Ranks")
+                axes[2].set_ylabel("Pseudo Ranks")
+                axes[2].set_title("Rank Preservation")
+
                 # Category analysis - residual plot
                 residuals = y - mean_pseudo_target
                 # Use first categorical column for coloring if available
                 if self.cat_columns_:
                     cat_col = self.cat_columns_[0]
-                    unique_cats = X[cat_col].unique()[:10]  # Limit to top 10 categories
+                    unique_cats = X[cat_col].unique()[
+                        :10
+                    ]  # Limit to top 10 categories
                     colors = plt.cm.tab10(np.linspace(0, 1, len(unique_cats)))
-                    
+
                     for i, category in enumerate(unique_cats):
                         mask = X[cat_col] == category
                         if np.sum(mask) > 0:
-                            axes[3].scatter(mean_pseudo_target[mask], residuals[mask], 
-                                          alpha=0.6, s=20, color=colors[i], label=str(category))
-                    
-                    axes[3].axhline(y=0, color='r', linestyle='--', alpha=0.8)
-                    axes[3].set_xlabel('Pseudo Target')
-                    axes[3].set_ylabel('Residuals (Original - Pseudo)')
-                    axes[3].set_title('Residuals by Category')
-                    axes[3].legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+                            axes[3].scatter(
+                                mean_pseudo_target[mask],
+                                residuals[mask],
+                                alpha=0.6,
+                                s=20,
+                                color=colors[i],
+                                label=str(category),
+                            )
+
+                    axes[3].axhline(y=0, color="r", linestyle="--", alpha=0.8)
+                    axes[3].set_xlabel("Pseudo Target")
+                    axes[3].set_ylabel("Residuals (Original - Pseudo)")
+                    axes[3].set_title("Residuals by Category")
+                    axes[3].legend(bbox_to_anchor=(1.05, 1), loc="upper left")
                 else:
-                    axes[3].scatter(mean_pseudo_target, residuals, alpha=0.6, s=20)
-                    axes[3].axhline(y=0, color='r', linestyle='--', alpha=0.8)
-                    axes[3].set_xlabel('Pseudo Target')
-                    axes[3].set_ylabel('Residuals (Original - Pseudo)')
-                    axes[3].set_title('Residual Plot')
-                
+                    axes[3].scatter(
+                        mean_pseudo_target, residuals, alpha=0.6, s=20
+                    )
+                    axes[3].axhline(y=0, color="r", linestyle="--", alpha=0.8)
+                    axes[3].set_xlabel("Pseudo Target")
+                    axes[3].set_ylabel("Residuals (Original - Pseudo)")
+                    axes[3].set_title("Residual Plot")
+
                 plt.tight_layout()
                 plt.show()
-                
+
             except ImportError:
                 print("Matplotlib/seaborn not available for plotting")
-        
+
         return validation_results
 
     def get_validation_report(self, validation_results):
         """
         Generate a human-readable validation report from validation results.
-        
+
         Parameters:
         -----------
         validation_results : dict
             Results from validate_encoding method
-        
+
         Returns:
         --------
         str
@@ -516,28 +542,44 @@ class RankTargetEncoder(BaseEstimator, TransformerMixin):
         report.append("=" * 60)
         report.append("RANK TARGET ENCODER VALIDATION REPORT")
         report.append("=" * 60)
-        
+
         report.append(f"\nCORRELATION VALIDATION:")
-        report.append(f"Target {self.correlation_type} correlation: {validation_results['target_correlation']:.3f}")
-        report.append(f"Achieved mean correlation: {validation_results['mean_achieved_correlation']:.3f}")
-        report.append(f"Correlation bias: {validation_results['correlation_bias']:.3f}")
-        report.append(f"Correlation std across ensemble: {validation_results['std_achieved_correlation']:.3f}")
-        
+        report.append(
+            f"Target {self.correlation_type} correlation: {validation_results['target_correlation']:.3f}"
+        )
+        report.append(
+            f"Achieved mean correlation: {validation_results['mean_achieved_correlation']:.3f}"
+        )
+        report.append(
+            f"Correlation bias: {validation_results['correlation_bias']:.3f}"
+        )
+        report.append(
+            f"Correlation std across ensemble: {validation_results['std_achieved_correlation']:.3f}"
+        )
+
         report.append(f"\nDISTRIBUTION COMPARISON:")
-        orig = validation_results['original_target_stats']
-        pseudo = validation_results['pseudo_target_stats']
-        report.append(f"Original target - Mean: {orig['mean']:.3f}, Std: {orig['std']:.3f}")
-        report.append(f"Pseudo target  - Mean: {pseudo['mean']:.3f}, Std: {pseudo['std']:.3f}")
-        
+        orig = validation_results["original_target_stats"]
+        pseudo = validation_results["pseudo_target_stats"]
+        report.append(
+            f"Original target - Mean: {orig['mean']:.3f}, Std: {orig['std']:.3f}"
+        )
+        report.append(
+            f"Pseudo target  - Mean: {pseudo['mean']:.3f}, Std: {pseudo['std']:.3f}"
+        )
+
         report.append(f"\nCATEGORY-LEVEL ANALYSIS:")
-        for col, stats in validation_results['category_correlations'].items():
-            if not np.isnan(stats['mean_correlation']):
-                report.append(f"  {col}: {stats['mean_correlation']:.3f} ± {stats['std_correlation']:.3f} "
-                            f"(min: {stats['min_correlation']:.3f}, max: {stats['max_correlation']:.3f})")
-        
+        for col, stats in validation_results["category_correlations"].items():
+            if not np.isnan(stats["mean_correlation"]):
+                report.append(
+                    f"  {col}: {stats['mean_correlation']:.3f} ± {stats['std_correlation']:.3f} "
+                    f"(min: {stats['min_correlation']:.3f}, max: {stats['max_correlation']:.3f})"
+                )
+
         report.append(f"\nROBUST STATISTICS:")
         report.append(f"Ensemble size: {self.ensemble_size}")
-        report.append(f"Individual correlations: {[f'{c:.3f}' for c in validation_results['achieved_correlations']]}")
-        
+        report.append(
+            f"Individual correlations: {[f'{c:.3f}' for c in validation_results['achieved_correlations']]}"
+        )
+
         report.append("=" * 60)
         return "\n".join(report)

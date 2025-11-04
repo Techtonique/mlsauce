@@ -10,6 +10,7 @@ requests>=2.0.0
 scikit-learn>=1.4.0
 scipy>=1.8.0
 tqdm>=4.50.0
+seaborn
 
 [dev]
 black[jupyter]

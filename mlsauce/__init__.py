@@ -67,11 +67,13 @@ try:
 except ImportError as e:
     print(f"Could not import some modules: {e}")
 
-try: 
-    from .generators import make_diverse_classification,\
-    HealthcareTimeSeriesGenerator,\
-    generate_synthetic_returns,\
-    plot_synthetic_returns
+try:
+    from .generators import (
+        make_diverse_classification,
+        HealthcareTimeSeriesGenerator,
+        generate_synthetic_returns,
+        plot_synthetic_returns,
+    )
 except ImportError as e:
     print(f"Could not import generators: {e}")
 
@@ -91,7 +93,7 @@ try:
 except ImportError as e:
     print(f"Could not import penalized_cross_val_score: {e}")
 
-try: 
+try:
     from .conformalbayesian import ConformalBayesianRegressor
 except ImportError as e:
     print(f"Could not import ConformalBayesianRegressor: {e}")
@@ -128,5 +130,5 @@ __all__ = [
     "make_diverse_classification",
     "HealthcareTimeSeriesGenerator",
     "generate_synthetic_returns",
-    "plot_synthetic_returns"
+    "plot_synthetic_returns",
 ]

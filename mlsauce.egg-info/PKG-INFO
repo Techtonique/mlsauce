@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: mlsauce
-Version: 0.34.0
+Version: 0.35.1
 Summary: Miscellaneous Statistical/Machine Learning tools
 Author: T. Moudiki
 Author-email: "T. Moudiki" <thierry.moudiki@gmail.com>
@@ -70,6 +70,7 @@ Requires-Dist: requests>=2.0.0
 Requires-Dist: scikit-learn>=1.4.0
 Requires-Dist: scipy>=1.8.0
 Requires-Dist: tqdm>=4.50.0
+Requires-Dist: seaborn
 Provides-Extra: dev
 Requires-Dist: black[jupyter]; extra == "dev"
 Requires-Dist: build; extra == "dev"

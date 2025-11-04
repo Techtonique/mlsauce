@@ -17,7 +17,7 @@ authors = [
 ]
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
-version = "0.35.0"
+version = "0.35.1"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -46,6 +46,7 @@ dependencies = [
     "scikit-learn>=1.4.0",
     "scipy>=1.8.0",
     "tqdm>=4.50.0",
+    "seaborn"
 ]
 
 [project.urls]

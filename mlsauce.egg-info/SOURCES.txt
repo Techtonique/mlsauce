@@ -15,6 +15,7 @@ tox.ini
 .github/FUNDING.yml
 .github/workflows/python-publish.yml
 examples/adaopt_classifier.py
+examples/confobayesian.py
 examples/correncoder.py
 examples/download_dataset.py
 examples/fpca_example.py
