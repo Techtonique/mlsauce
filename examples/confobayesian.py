@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_openml, load_iris, load_digits, load_wine, load_breast_cancer
 from sklearn.linear_model import Ridge
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.utils import shuffle
@@ -120,7 +120,7 @@ X_train_iris, X_test_iris, y_train_iris, y_test_iris = train_test_split(
 from mlsauce.conformalbayesian import ConformalBayesianClassifier
 # Conformal Bayesian Classifier with Ridge base estimator
 cb_clf = ConformalBayesianClassifier(
-    obj=RandomForestRegressor(),
+    obj=RandomForestClassifier(),
     hyperparameter_bounds={"n_estimators": [50, 200], "max_depth": [5, 20]},
     n_samples=10,
    # calibration_fraction=0.5,
@@ -143,7 +143,7 @@ X_train_bc, X_test_bc, y_train_bc, y_test_bc = train_test_split(
     X_bc, y_bc, test_size=0.2, random_state=42
 )
 cb_clf_bc = ConformalBayesianClassifier(
-    obj=RandomForestRegressor(),
+    obj=RandomForestClassifier(),
     hyperparameter_bounds={"n_estimators": [50, 200], "max_depth": [5, 20]},
     n_samples=10,
     #calibration_fraction=0.5,
@@ -166,7 +166,7 @@ X_train_wine, X_test_wine, y_train_wine, y_test_wine = train_test_split(
     X_wine, y_wine, test_size=0.2, random_state=42
 )
 cb_clf_wine = ConformalBayesianClassifier(
-    obj=RandomForestRegressor(),
+    obj=RandomForestClassifier(),
     hyperparameter_bounds={"n_estimators": [50, 200], "max_depth": [5, 20]},
     n_samples=10,
     #calibration_fraction=0.5,
@@ -189,7 +189,7 @@ X_train_digits, X_test_digits, y_train_digits, y_test_digits = train_test_split(
     X_digits, y_digits, test_size=0.2, random_state=42
 )
 cb_clf_digits = ConformalBayesianClassifier(
-    obj=RandomForestRegressor(),
+    obj=RandomForestClassifier(),
     hyperparameter_bounds={"n_estimators": [50, 200], "max_depth": [5, 20]},
     n_samples=10,
     #calibration_fraction=0.5,
