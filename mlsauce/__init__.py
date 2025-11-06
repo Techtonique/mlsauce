@@ -98,9 +98,15 @@ try:
 except ImportError as e:
     print(f"Could not import ConformalBayesianRegressor: {e}")
 
+try:
+    from .conformalbayesian import ConformalBayesianClassifier
+except ImportError as e:
+    print(f"Could not import ConformalBayesianClassifier: {e}")
+
 __all__ = [
     "AdaOpt",
     "ConformalBayesianRegressor",
+    "ConformalBayesianClassifier",
     "LSBoostClassifier",
     "GenericBoostingClassifier",
     "GenericBoostingRegressor",
