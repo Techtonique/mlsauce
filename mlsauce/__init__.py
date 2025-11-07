@@ -103,10 +103,16 @@ try:
 except ImportError as e:
     print(f"Could not import ConformalBayesianClassifier: {e}")
 
+try:
+    from .contextawaretheta import ContextAwareThetaForecaster
+except ImportError as e:
+    print(f"Could not import ContextAwareThetaForecaster: {e}")
+
 __all__ = [
     "AdaOpt",
     "ConformalBayesianRegressor",
     "ConformalBayesianClassifier",
+    "ContextAwareThetaForecaster",
     "LSBoostClassifier",
     "GenericBoostingClassifier",
     "GenericBoostingRegressor",

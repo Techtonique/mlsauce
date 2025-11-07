@@ -87,12 +87,12 @@ dist: clean ## builds source and wheel package
 	python3 setup.py bdist_wheel
 	ls -l dist
 
-install: clean ## install the package to the active Python's site-packages
-	#uv pip install -e . --verbose
-	pip install black 
-	pip install pdoc
-	black mlsauce/* --line-length=80	
-	pip install -e . --verbose 
+install: clean ## install the package to the active Python's site-packages	
+	uv pip install black 
+	uv pip install pdoc
+	black mlsauce/* --line-length=80
+	uv pip install -e . --verbose	
+	#pip install -e . --verbose 
 
 run-examples: ## run all examples with one command
 	find examples -maxdepth 2 -name "*.py" -exec  python3 {} \;

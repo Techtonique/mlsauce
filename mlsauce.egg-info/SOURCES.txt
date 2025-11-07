@@ -68,6 +68,8 @@ mlsauce/catencoder/correncoder.py
 mlsauce/conformalbayesian/__init__.py
 mlsauce/conformalbayesian/confobayesianclf.py
 mlsauce/conformalbayesian/confobayesianregr.py
+mlsauce/contextawaretheta/__init__.py
+mlsauce/contextawaretheta/thetawithcontext.py
 mlsauce/datasets/__init__.py
 mlsauce/datasets/dowload.py
 mlsauce/demo/empty.txt
