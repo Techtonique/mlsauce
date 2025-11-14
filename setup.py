@@ -35,7 +35,7 @@ class bdist_wheel(_bdist_wheel):
         return python, abi, plat
 
 CYTHON_MIN_VERSION = version.parse("3.0.10")
-VERSION = "0.36.0"  # also update in pyproject.toml
+VERSION = "0.37.0"  # also update in pyproject.toml
 
 class clean(Command):
     user_options = [("all", "a", "")]
