@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import joblib
 
 from collections import namedtuple
-from sklearn.datasets import fetch_openml
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.linear_model import Ridge, RidgeCV
 from sklearn.ensemble import RandomForestRegressor

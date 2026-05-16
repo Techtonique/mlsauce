@@ -4,7 +4,6 @@ import nnetsauce as ns
 import joblib
 
 from .confobayesianregr import ConformalBayesianRegressor
-from sklearn.datasets import fetch_openml
 from sklearn.base import BaseEstimator, ClassifierMixin, clone, is_classifier
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.linear_model import Ridge, LogisticRegression

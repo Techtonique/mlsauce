@@ -107,8 +107,6 @@ class LSBoostRegressor(BaseEstimator, RegressorMixin):
         import sys
         import os
 
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
-
         import mlsauce as ms
         import numpy as np
         import matplotlib.pyplot as plt

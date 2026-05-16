@@ -14,6 +14,8 @@ cimport cython
 import gc
 
 from copy import deepcopy 
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.base import clone
 from ..lasso import LassoRegressor
 from ..ridge import RidgeRegressor
 from ..elasticnet import ElasticNetRegressor
@@ -99,6 +101,53 @@ def activation_choice(x):
             }
   return activation_options[x]  
 
+# 0 - 4 Multitask adapter -----
+
+def _make_multitask(estimator):
+    """
+    Wraps any sklearn-compatible estimator so it can fit/predict
+    a 2D residual matrix E of shape (n_samples, n_classes).
+
+    Strategy (mirrors nnetsauce.SimpleMultitaskClassifier):
+      1. Try MultiOutputRegressor (single fit call, most efficient).
+      2. Fall back to a per-column loop if that fails (e.g. SVR, GPR).
+
+    The wrapper is transparent: .fit(X, E) and .predict(X) → 2D array.
+    Only activated when obj is not None (custom base learner path).
+    The default ridge/lasso/elasticnet path is completely untouched.
+    """    
+
+    class _MultiTaskWrapper:
+
+        def __init__(self, est):
+            self._est = est
+            self._mor = None      # MultiOutputRegressor instance
+            self._cols = []       # per-column model list (fallback)
+            self._mode = None     # 'mor' | 'loop'
+
+        def fit(self, X, y):
+            # y is always 2D here (n, n_classes)
+            try:
+                self._mor = MultiOutputRegressor(clone(self._est))
+                self._mor.fit(X, y)
+                self._mode = 'mor'
+            except Exception:
+                self._mode = 'loop'
+                self._cols = []
+                for j in range(y.shape[1]):
+                    m = clone(self._est)
+                    m.fit(X, y[:, j])
+                    self._cols.append(m)
+            return self
+
+        def predict(self, X):
+            if self._mode == 'mor':
+                return self._mor.predict(X)          # shape (n, n_classes)
+            return np.column_stack(                  # same shape
+                [m.predict(X) for m in self._cols]
+            )
+
+    return _MultiTaskWrapper(estimator)
 
 # 1 - classifier ----- 
 
@@ -173,7 +222,7 @@ def fit_booster_classifier(double[:,::1] X, long int[:] y,
       fit_obj = ElasticNetRegressor(reg_lambda = reg_lambda, alpha = alpha, 
       backend = backend)  
   else: 
-      fit_obj = obj 
+      fit_obj = _make_multitask(obj) 
 
   for iter in iterator:
       
