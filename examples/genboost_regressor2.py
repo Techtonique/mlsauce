@@ -30,10 +30,11 @@ np.random.seed(15029)
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
                                                     test_size=0.2)
 
-X_train = X_train.astype(np.float64)
-X_test = X_test.astype(np.float64)
-y_train = y_train.astype(np.float64)
-y_test = y_test.astype(np.float64)
+X_train = np.array(X_train, dtype=np.float64, order="C", copy=True)
+y_train = np.array(y_train, dtype=np.float64, order="C", copy=True)
+X_test = np.array(X_test, dtype=np.float64, order="C", copy=True)
+y_test = np.array(y_test, dtype=np.float64, order="C", copy=True)
+
 
 obj = ms.GenericBoostingRegressor(col_sample=0.9, row_sample=0.9)
 print(obj.get_params())

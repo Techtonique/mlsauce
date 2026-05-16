@@ -11,7 +11,7 @@ y = data.target
 estimator = LogisticRegression(max_iter=200)
 
 # Define hyperparameters to tune
-param_dict = {'C': 1.0, 'solver': 'liblinear'}
+param_dict = {'C': 1.0}
 
 # Compute penalized cross-validation score
 penalized_score = ms.penalized_cross_val_score(

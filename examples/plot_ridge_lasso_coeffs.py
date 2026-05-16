@@ -4,8 +4,6 @@ import os
 
 print(f"\n ----- Running: {os.path.basename(__file__)}... ----- \n")
 
-subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
-
 import matplotlib.pyplot as plt
 import numpy as np
 import mlsauce as ms

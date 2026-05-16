@@ -10,7 +10,6 @@ from .misc import (
     dict_to_dataframe_series,
 )
 
-
 __all__ = [
     "cluster",
     "merge_two_dicts",

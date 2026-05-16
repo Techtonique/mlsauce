@@ -21,6 +21,11 @@ X_train_full, X_test, y_train_full, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
+X_train_full = np.array(X_train_full, dtype=np.float64, order="C", copy=True)
+y_train_full = np.array(y_train_full, dtype=np.float64, order="C", copy=True)
+X_test = np.array(X_test, dtype=np.float64, order="C", copy=True)
+y_test = np.array(y_test, dtype=np.float64, order="C", copy=True)
+
 # -------------------------------
 # RandomForest Regressor
 # -------------------------------
