@@ -1,3 +1,7 @@
+# version 0.38.0
+
+- Make the generic boosting classifier work for more regressors (use a multioutput regression)
+
 # version 0.25.0
 
 - Fix setup.py to build extensions in place (at last!)
