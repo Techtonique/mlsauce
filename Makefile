@@ -72,8 +72,8 @@ docs: install ## compile the docs watching for change
 	find . -name '__pycache__' -exec rm -fr {} +
 
 servedocs: install ## compile the docs watching for change	 	
-	pip install black 
-	pip install pdoc
+	uv pip install black 
+	uv pip install pdoc
 	black mlsauce/* --line-length=80	
 	pdoc -t docs mlsauce/* 
 	find . -name '__pycache__' -exec rm -fr {} +
