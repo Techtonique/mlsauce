@@ -14,6 +14,8 @@ setup.py
 tox.ini
 .github/FUNDING.yml
 .github/workflows/python-publish.yml
+dist/mlsauce-0.38.0-cp311-cp311-macosx_10_9_x86_64.whl
+dist/mlsauce-0.38.0.tar.gz
 examples/adaopt_classifier.py
 examples/confobayesian.py
 examples/correncoder.py
@@ -38,6 +40,7 @@ examples/multitask_regressor.py
 examples/penalizedcv.py
 examples/plot_ridge_lasso_coeffs.py
 examples/ridge_regressor.py
+examples/rvfljackknifeplus.py
 examples/stump_classifier.py
 examples/thetawithcontext.py
 mlsauce/__init__.py
