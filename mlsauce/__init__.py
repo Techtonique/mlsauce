@@ -108,6 +108,10 @@ try:
 except ImportError as e:
     print(f"Could not import ContextAwareThetaForecaster: {e}")
 
+try:
+    from .rvfljackknifeplus import RVFLJackknifePlus
+except ImportError as e:
+    print(f"Could not import RVFLJackknifePlus: {e}")
 
 __all__ = [
     "AdaOpt",
@@ -132,6 +136,7 @@ __all__ = [
     "GenericFunctionalForecaster",
     "RankTargetEncoder",
     "RollingOriginForecaster",
+    "RVFLJackknifePlus",
     # Other imports
     # "corrtarget_encoder",
     "download",
