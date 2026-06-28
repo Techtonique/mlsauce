@@ -48,8 +48,6 @@ conda install -c conda-forge mlsauce
 
 ### R 
 
-Only for Linux, for now. Windows users can envisage using [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10), the **Windows Subsystem for Linux**.
-
 **From GitHub**
 
 ```bash
