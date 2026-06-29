@@ -1,14 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd 
 from time import time
 from collections import namedtuple
 from time import time
+from sklearn.base import BaseEstimator, RegressorMixin
 
 # Define the return type
 Prediction = namedtuple("Prediction", ["mean", "lower", "upper"])
 
 
-class RVFLJackknifePlus:
+class RVFLJackknifePlus(BaseEstimator, RegressorMixin):
     """RVFL network with closed-form jackknife+ prediction intervals.
 
     Parameters
@@ -55,20 +57,29 @@ class RVFLJackknifePlus:
         H = self._act(X @ self.W_ + self.b_)
         return np.hstack([X, H])
 
-    def fit(self, X_train, y_train):
-        n, p = X_train.shape
+    def fit(self, X, y):
+        n, p = X.shape
+
+        if isinstance(X, pd.DataFrame):
+            X = X.to_numpy()
+
+        if isinstance(y, (pd.Series, pd.DataFrame)):
+            y = np.asarray(y).ravel()
+
+        X = np.asarray(X, dtype=float)
+        y = np.asarray(y, dtype=float)
 
         # Fixed random hidden layer
         rng = np.random.default_rng(self.random_state)
         self.W_ = rng.normal(scale=1.0 / np.sqrt(p), size=(p, self.n_hidden))
         self.b_ = rng.normal(scale=1.0, size=(self.n_hidden,))
 
-        Z = self._augment(X_train)
+        Z = self._augment(X)
         q = Z.shape[1]
 
         # Center response (intercept not penalized)
-        self.ybar_ = y_train.mean()
-        yc = y_train - self.ybar_
+        self.ybar_ = y.mean()
+        yc = y - self.ybar_
 
         # Ridge solution
         A = Z.T @ Z + self.lambda_ * np.eye(q)
