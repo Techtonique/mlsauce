@@ -113,6 +113,18 @@ try:
 except ImportError as e:
     print(f"Could not import RVFLJackknifePlus: {e}")
 
+
+try:
+    from .glms import (
+        RVFLPoissonRegressor,
+        RVFLGammaRegressor,
+        RVFLTweedieRegressor,
+    )
+except ImportError as e:
+    print(
+        f"Could not import RVFLPoissonRegressor, RVFLGammaRegressor, RVFLTweedieRegressor: {e}"
+    )
+
 __all__ = [
     "AdaOpt",
     "ConformalBayesianRegressor",
@@ -137,6 +149,9 @@ __all__ = [
     "RankTargetEncoder",
     "RollingOriginForecaster",
     "RVFLJackknifePlus",
+    "RVFLPoissonRegressor",
+    "RVFLGammaRegressor",
+    "RVFLTweedieRegressor"
     # Other imports
     # "corrtarget_encoder",
     "download",
